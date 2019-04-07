@@ -1,5 +1,5 @@
 package Models.Card;
 
-public class Effect {
+public class CardEffect {
     //  buff?
 }

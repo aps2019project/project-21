@@ -6,5 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 class Spell extends Card {
-    List<Cell> targetZone = new ArrayList<>();
+    private List<Cell> targetZone = new ArrayList<>();
+    private CardEffect effect = new CardEffect();
+
+    Spell(String name) {
+        super(name);
+    }
 }

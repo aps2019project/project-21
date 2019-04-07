@@ -1,6 +1,10 @@
 package Models.Card;
 
 public class Card {
-    String name;
+    private String name;
+
+    Card(String name){
+        this.name = name;
+    }
 }
 
