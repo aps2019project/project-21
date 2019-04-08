@@ -6,12 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
+    private static List<Player> players = new ArrayList<>();
     private String username;
-    Collection collection;
+    private Collection collection;
     private int drake;
-    List<Match> matchHistory = new ArrayList<>();
-    List<Deck> decks = new ArrayList<>();
-    Deck mainDeck;
+    private List<Match> matchHistory = new ArrayList<>();
+    private List<Deck> decks = new ArrayList<>();
+    private Deck mainDeck;
 
     public Player(String username) {
         this.drake = 15000;
@@ -20,6 +21,10 @@ public class Player {
 
     void showMatchHistory() {
 
+    }
+
+    public void addPlayer(Player player){
+        players.add(player);
     }
 }
 
