@@ -12,7 +12,7 @@ public class AccountMenu {
 
         outerLoop:
         while (true) {
-            showOptions();
+            showMenu();
 
             Request request = new MainMenuRequest();
             request.getNewCommand();
@@ -29,19 +29,31 @@ public class AccountMenu {
         }
     }
 
-    private void showOptions() {
-
-    }
-
     private void login() {
 
     }
 
-    private void newAccount() {
+    private void createAccount() {
 
     }
 
     private void logout() {
+
+    }
+
+    private void showLeaderBoard() {
+
+    }
+
+    private void save() {
+
+    }
+
+    private void help() {
+
+    }
+
+    private void showMenu() {
 
     }
 

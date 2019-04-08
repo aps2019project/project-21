@@ -7,7 +7,8 @@ import java.util.List;
 
 public class Spell extends Card {
     private List<Cell> targetZone = new ArrayList<>();
-    private CardEffect effect = new CardEffect();
+    private Effect effect = new Effect();
+    private String description;
 
     public Spell(String name) {
         super(name);

@@ -1,7 +1,7 @@
 package view;
 
 public enum ErrorMode {
-    INVALID("invalid command");
+    INVALID_DECK("selected deck is invalid");
 
     private String message;
 

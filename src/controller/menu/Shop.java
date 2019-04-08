@@ -20,7 +20,7 @@ public class Shop {
 
         outerLoop:
         while (true) {
-            showOptions();
+            showMenu();
 
             Request request = new ShopMenuRequest();
             request.getNewCommand();
@@ -40,10 +40,6 @@ public class Shop {
                     break;
             }
         }
-    }
-
-    private void showOptions() {
-
     }
 
     private void showCollection(Player player) {
@@ -80,6 +76,10 @@ public class Shop {
     }
 
     private void addItemToShop(Card card) {
+
+    }
+
+    private void showMenu() {
 
     }
 }

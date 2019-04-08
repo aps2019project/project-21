@@ -3,12 +3,12 @@ package models;
 import models.Match.Match;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Player {
     private static List<Player> players = new ArrayList<>();
     private String username;
+    private String password;
     private Collection collection;
     private int drake;
     private List<Match> matchHistory = new ArrayList<>();
@@ -24,7 +24,7 @@ public class Player {
 
     }
 
-    public static void addPlayer(Player player){
+    public static void addPlayer(Player player) {
         players.add(player);
     }
 }

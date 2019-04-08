@@ -12,7 +12,7 @@ public class MainMenu {
 
         outerLoop:
         while (true) {
-            showOptions();
+            showMenu();
 
             Request request = new MainMenuRequest();
             request.getNewCommand();
@@ -43,10 +43,6 @@ public class MainMenu {
         }
     }
 
-    private void showOptions() {
-
-    }
-
     private void help(Request request) {
 
     }
@@ -60,6 +56,10 @@ public class MainMenu {
     }
 
     private void collection(Request request) {
+
+    }
+
+    private void showMenu() {
 
     }
 }

@@ -72,4 +72,8 @@ public class CollectionMenu {
     public void help(){
 
     }
+
+    private void showMenu() {
+
+    }
 }

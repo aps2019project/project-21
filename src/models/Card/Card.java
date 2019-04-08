@@ -1,7 +1,7 @@
 package models.Card;
 
 public class Card {
-    private static int cardCount;
+    private static int cardCount = 0;
     private String name;
     private int id;
     private int price;
@@ -19,4 +19,3 @@ public class Card {
         this.name = name;
     }
 }
-
