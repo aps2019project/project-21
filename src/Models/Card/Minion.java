@@ -1,5 +1,5 @@
 package Models.Card;
 
-class Minion extends Attacker {
+public class Minion extends Attacker {
 
 }
