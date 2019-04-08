@@ -9,7 +9,12 @@ class Spell extends Card {
     private List<Cell> targetZone = new ArrayList<>();
     private CardEffect effect = new CardEffect();
 
-    Spell(String name) {
+    public Spell(String name) {
         super(name);
     }
+
+    public void castSpell() {
+
+    }
+
 }

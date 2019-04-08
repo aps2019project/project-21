@@ -1,5 +1,9 @@
 package Models.Card;
 
+import Models.Match.Cell;
+
 public class CardEffect {
-    //  buff?
+    public void castEffect(Cell cell){
+
+    }
 }
