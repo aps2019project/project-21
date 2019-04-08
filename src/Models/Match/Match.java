@@ -2,12 +2,16 @@ package Models.Match;
 
 import Models.Player;
 
+import java.sql.Time;
+
 public class Match {
     private Player playerOne;
     private Player playerTwo;
     private Battlefield battlefield;
     private GameMode gameMode;
     private int turn;
+    private Time gameTime;
+    private boolean isPlayerOneWinner;
 
     Match(Player playerOne, Player playerTwo, GameMode gameMode) {
         this.gameMode = gameMode;
