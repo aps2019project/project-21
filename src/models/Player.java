@@ -3,6 +3,7 @@ package models;
 import models.Match.Match;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Player {
@@ -23,7 +24,7 @@ public class Player {
 
     }
 
-    public void addPlayer(Player player){
+    public static void addPlayer(Player player){
         players.add(player);
     }
 }

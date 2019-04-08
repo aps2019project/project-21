@@ -5,7 +5,7 @@ import controller.request.Request;
 import controller.request.RequestType;
 import view.View;
 
-public class MainMenu {
+public class AccountMenu {
     private View view = new View();
 
     public void main() {
@@ -23,22 +23,8 @@ public class MainMenu {
                 view.printError(request.getError());
                 continue;
             }
-
             switch (request.getType()) {
-                case MAIN_MENU:
-                    continue outerLoop;
-                case HELP:
-                    help(request);
-                    break;
-                case SHOP:
-                    shop(request);
-                    break;
-                case BATTLE:
-                    battle(request);
-                    break;
-                case COLLECTION:
-                    collection(request);
-                    break;
+
             }
         }
     }
@@ -47,20 +33,16 @@ public class MainMenu {
 
     }
 
-    private void help(Request request) {
+    private void login() {
 
     }
 
-    private void shop(Request request) {
+    private void newAccount() {
 
     }
 
-    private void battle(Request request) {
+    private void logout() {
 
     }
 
-    private void collection(Request request) {
-
-    }
 }
-

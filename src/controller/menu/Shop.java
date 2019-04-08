@@ -18,7 +18,7 @@ public class Shop {
 
     public void main() {
 
-        shopLoop:
+        outerLoop:
         while (true) {
             showOptions();
 
@@ -34,7 +34,7 @@ public class Shop {
 
             switch (request.getType()) {
                 case SHOP_MENU:
-                    continue shopLoop;
+                    continue outerLoop;
                 case HELP:
                     help();
                     break;

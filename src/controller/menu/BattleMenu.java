@@ -10,7 +10,7 @@ public class BattleMenu {
 
     public void main() {
 
-        battleLoop:
+        outerLoop:
         while (true) {
             showOptions();
 

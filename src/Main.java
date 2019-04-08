@@ -1,8 +1,8 @@
-import controller.menu.MainMenu;
+import controller.menu.AccountMenu;
 
 public class Main {
     public static void main(String[] args) {
-        MainMenu mainMenu = new MainMenu();
-        mainMenu.main();
+        AccountMenu accountMenu = new AccountMenu();
+        accountMenu.main();
     }
 }
