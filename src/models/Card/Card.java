@@ -5,6 +5,9 @@ public class Card {
     private String name;
     private int id;
     private int price;
+    private int manaCost; //for hero = -1
+    private int XCoordinate;
+    private int YCoordinate;
 
     {
         id = cardCount;
@@ -17,5 +20,9 @@ public class Card {
 
     Card(String name) {
         this.name = name;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 }
