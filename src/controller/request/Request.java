@@ -34,5 +34,20 @@ public abstract class Request {
         return true;
     }
 
+    public void setType(RequestType type) {
+        this.type = type;
+    }
+
+    public void setError(ErrorMode error) {
+        this.error = error;
+    }
+
+    public String getCommandLine() {
+        return commandLine;
+    }
+
+    public void setCommandLine(String commandLine) {
+        this.commandLine = commandLine;
+    }
 }
 

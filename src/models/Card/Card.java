@@ -26,4 +26,64 @@ public class Card {
     public void setPrice(int price) {
         this.price = price;
     }
+
+    public static int getCardCount() {
+        return cardCount;
+    }
+
+    public static void setCardCount(int cardCount) {
+        Card.cardCount = cardCount;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public int getManaCost() {
+        return manaCost;
+    }
+
+    public void setManaCost(int manaCost) {
+        this.manaCost = manaCost;
+    }
+
+    public int getXCoordinate() {
+        return XCoordinate;
+    }
+
+    public void setXCoordinate(int XCoordinate) {
+        this.XCoordinate = XCoordinate;
+    }
+
+    public int getYCoordinate() {
+        return YCoordinate;
+    }
+
+    public void setYCoordinate(int YCoordinate) {
+        this.YCoordinate = YCoordinate;
+    }
+
+    public String getCardIDInGame() {
+        return cardIDInGame;
+    }
+
+    public void setCardIDInGame(String cardIDInGame) {
+        this.cardIDInGame = cardIDInGame;
+    }
 }

@@ -39,5 +39,53 @@ public class Player {
     }
 
     public static void help(){}
+
+    public static List<Player> getPlayers() {
+        return players;
+    }
+
+    public static void setPlayers(List<Player> players) {
+        Player.players = players;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Collection getCollection() {
+        return collection;
+    }
+
+    public void setCollection(Collection collection) {
+        this.collection = collection;
+    }
+
+    public int getDrake() {
+        return drake;
+    }
+
+    public void setDrake(int drake) {
+        this.drake = drake;
+    }
+
+    public List<Match> getMatchHistory() {
+        return matchHistory;
+    }
+
+    public void setMatchHistory(List<Match> matchHistory) {
+        this.matchHistory = matchHistory;
+    }
 }
 

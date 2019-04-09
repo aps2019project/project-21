@@ -10,4 +10,20 @@ public class AIPlayer {
     private void play() {
 
     }
+
+    public static List<AIPlayer> getAiPlayers() {
+        return aiPlayers;
+    }
+
+    public static void setAiPlayers(List<AIPlayer> aiPlayers) {
+        AIPlayer.aiPlayers = aiPlayers;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

@@ -84,4 +84,164 @@ public class Match {
     private void showMatchResults() {
         //
     }
+
+    public Player getPlayerOne() {
+        return playerOne;
+    }
+
+    public void setPlayerOne(Player playerOne) {
+        this.playerOne = playerOne;
+    }
+
+    public Player getPlayerTwo() {
+        return playerTwo;
+    }
+
+    public void setPlayerTwo(Player playerTwo) {
+        this.playerTwo = playerTwo;
+    }
+
+    public Hand getPlayerOneHand() {
+        return playerOneHand;
+    }
+
+    public void setPlayerOneHand(Hand playerOneHand) {
+        this.playerOneHand = playerOneHand;
+    }
+
+    public Hand getPlayerTwoHand() {
+        return playerTwoHand;
+    }
+
+    public void setPlayerTwoHand(Hand playerTwoHand) {
+        this.playerTwoHand = playerTwoHand;
+    }
+
+    public PlayerMatchInfo getPlayerOneInfo() {
+        return playerOneInfo;
+    }
+
+    public void setPlayerOneInfo(PlayerMatchInfo playerOneInfo) {
+        this.playerOneInfo = playerOneInfo;
+    }
+
+    public PlayerMatchInfo getPlayerTwoInfo() {
+        return playerTwoInfo;
+    }
+
+    public void setPlayerTwoInfo(PlayerMatchInfo playerTwoInfo) {
+        this.playerTwoInfo = playerTwoInfo;
+    }
+
+    public Battlefield getBattlefield() {
+        return battlefield;
+    }
+
+    public void setBattlefield(Battlefield battlefield) {
+        this.battlefield = battlefield;
+    }
+
+    public GameMode getGameMode() {
+        return gameMode;
+    }
+
+    public void setGameMode(GameMode gameMode) {
+        this.gameMode = gameMode;
+    }
+
+    public GoalMode getGoalMode() {
+        return goalMode;
+    }
+
+    public void setGoalMode(GoalMode goalMode) {
+        this.goalMode = goalMode;
+    }
+
+    public GameType getGameType() {
+        return gameType;
+    }
+
+    public void setGameType(GameType gameType) {
+        this.gameType = gameType;
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public void setTurn(int turn) {
+        this.turn = turn;
+    }
+
+    public Time getGameTime() {
+        return gameTime;
+    }
+
+    public void setGameTime(Time gameTime) {
+        this.gameTime = gameTime;
+    }
+
+    public boolean isPlayerOneWinner() {
+        return isPlayerOneWinner;
+    }
+
+    public void setPlayerOneWinner(boolean playerOneWinner) {
+        isPlayerOneWinner = playerOneWinner;
+    }
+
+    public Card getSelectedCard() {
+        return selectedCard;
+    }
+
+    public void setSelectedCard(Card selectedCard) {
+        this.selectedCard = selectedCard;
+    }
+
+    public boolean isDoesAnyCardSelected() {
+        return doesAnyCardSelected;
+    }
+
+    public void setDoesAnyCardSelected(boolean doesAnyCardSelected) {
+        this.doesAnyCardSelected = doesAnyCardSelected;
+    }
+
+    public List<Collectable> getCollectablesPlayerOne() {
+        return collectablesPlayerOne;
+    }
+
+    public void setCollectablesPlayerOne(List<Collectable> collectablesPlayerOne) {
+        this.collectablesPlayerOne = collectablesPlayerOne;
+    }
+
+    public List<Collectable> getCollectablesPlayerTwo() {
+        return collectablesPlayerTwo;
+    }
+
+    public void setCollectablesPlayerTwo(List<Collectable> collectablesPlayerTwo) {
+        this.collectablesPlayerTwo = collectablesPlayerTwo;
+    }
+
+    public Collectable getSelectedCollectable() {
+        return selectedCollectable;
+    }
+
+    public void setSelectedCollectable(Collectable selectedCollectable) {
+        this.selectedCollectable = selectedCollectable;
+    }
+
+    public Graveyard getPlayerOneGraveyard() {
+        return playerOneGraveyard;
+    }
+
+    public void setPlayerOneGraveyard(Graveyard playerOneGraveyard) {
+        this.playerOneGraveyard = playerOneGraveyard;
+    }
+
+    public Graveyard getPlayerTwoGraveyard() {
+        return playerTwoGraveyard;
+    }
+
+    public void setPlayerTwoGraveyard(Graveyard playerTwoGraveyard) {
+        this.playerTwoGraveyard = playerTwoGraveyard;
+    }
 }

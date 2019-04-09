@@ -57,8 +57,6 @@ public enum RequestType {
     SHOW_CARDS,
 
     //  ALL COMMANDS
-
-
 }
 
 // HANDLE SIMILAR TYPES FOR DIFFERENT CLASSES

@@ -37,4 +37,60 @@ public class Attacker extends Card {
     public void counterAttack() {
 
     }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public int getAp() {
+        return ap;
+    }
+
+    public void setAp(int ap) {
+        this.ap = ap;
+    }
+
+    public Cell getCurrentCell() {
+        return currentCell;
+    }
+
+    public void setCurrentCell(Cell currentCell) {
+        this.currentCell = currentCell;
+    }
+
+    public Spell getSpecialPower() {
+        return specialPower;
+    }
+
+    public void setSpecialPower(Spell specialPower) {
+        this.specialPower = specialPower;
+    }
+
+    public List<Effect> getAppliedEffects() {
+        return appliedEffects;
+    }
+
+    public void setAppliedEffects(List<Effect> appliedEffects) {
+        this.appliedEffects = appliedEffects;
+    }
+
+    public int getRange() {
+        return range;
+    }
+
+    public void setRange(int range) {
+        this.range = range;
+    }
+
+    public AttackMode getAttackMode() {
+        return attackMode;
+    }
+
+    public void setAttackMode(AttackMode attackMode) {
+        this.attackMode = attackMode;
+    }
 }

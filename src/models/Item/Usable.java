@@ -12,4 +12,12 @@ public class Usable extends Item {
     public void castUsable() {
 
     }
+
+    public Effect getEffect() {
+        return effect;
+    }
+
+    public void setEffect(Effect effect) {
+        this.effect = effect;
+    }
 }

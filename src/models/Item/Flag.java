@@ -8,4 +8,12 @@ public class Flag extends Item {
     public Flag(String name){
         super(name);
     }
+
+    public Cell getCurrentCell() {
+        return currentCell;
+    }
+
+    public void setCurrentCell(Cell currentCell) {
+        this.currentCell = currentCell;
+    }
 }

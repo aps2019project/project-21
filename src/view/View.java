@@ -13,73 +13,93 @@ public class View {
         this.currentPlayer = currentPlayer;
     }
 
-    public View (){
+    public View() {
 
     }
 
     public void printError(ErrorMode error) {
-        if(error == null)
+        if (error == null)
             return;
         System.out.println(error.getMessage());
     }
 
-    public void scoreBoard(){
+    public void scoreBoard() {
 
     }
 
-    public void help(String menuName){
+    public void help(String menuName) {
 
     }
 
-    public void printCard(String name){
+    public void printCard(String name) {
 
     }
 
-    public void printItem(String name){
+    public void printItem(String name) {
 
     }
 
-    public void printMinion(String name){
+    public void printMinion(String name) {
 
     }
 
-    public void printSpell(String name){
+    public void printSpell(String name) {
 
     }
 
-    public void showMenu(String menuName){
+    public void showMenu(String menuName) {
 
     }
 
-    public void showDeck(String name){
+    public void showDeck(String name) {
 
     }
 
-    public void showCollection(){
+    public void showCollection() {
 
     }
 
-    public void showSearchInShop(String msg){
+    public void showSearchInShop(String msg) {
 
     }
 
-    public void showCollectionSearchInShop(String msg){
+    public void showCollectionSearchInShop(String msg) {
 
     }
 
-    public void showGameInfo(){}
+    public void showGameInfo() {
+    }
 
-    public void showMyMinions(){}
+    public void showMyMinions() {
+    }
 
-    public void showOpponentMinions(){}
+    public void showOpponentMinions() {
+    }
 
-    public void showCardInfo(String  cardID){}
+    public void showCardInfo(String cardID) {
+    }
 
-    public void showHand(){}
+    public void showHand() {
+    }
 
-    public void showCollectables(){}
+    public void showCollectables() {
+    }
 
-    public void showNextCard(){}
+    public void showNextCard() {
+    }
 
-    public void showGeneralThings(String thingName){}
+    public void showGeneralThings(String thingName) {
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public Match getCurrentMatch() {
+        return currentMatch;
+    }
+
+    public void setCurrentMatch(Match currentMatch) {
+        this.currentMatch = currentMatch;
+    }
 }
