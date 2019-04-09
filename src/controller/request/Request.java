@@ -4,7 +4,7 @@ import controller.InputScanner;
 import view.ErrorMode;
 
 public abstract class Request {
-    private RequestType type = RequestType.MAIN_MENU;
+    private RequestType type = null;
     private ErrorMode error = null;
     private String commandLine;
 
@@ -12,10 +12,7 @@ public abstract class Request {
         commandLine = InputScanner.nextLine();
     }
 
-    public RequestType getType() {  //  abstract maybe?
-        //
-        //
-        //
+    public RequestType getType() {
         return type;
     }
 
@@ -23,6 +20,19 @@ public abstract class Request {
         return error;
     }
 
-    public abstract boolean isValid();
+    public abstract void checkSyntax();
+
+    protected boolean helpCheck() {
+        return true;
+    }
+
+    protected boolean exitCheck() {
+        return true;
+    }
+
+    protected boolean showMenuCheck() {
+        return true;
+    }
+
 }
 

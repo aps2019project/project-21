@@ -1,20 +1,40 @@
 package controller.request;
 
 public enum RequestType {
+
+    NULL,
+    INVALID,
+    SHOW_MENU,
+    HELP,
+    SHOW,
+
+    CREATE_ACCOUNT,
+    LOGIN,
+    SHOW_LEADERBOARD,
+    SAVE,
+    LOGOUT,
+
     MAIN_MENU,
     COLLECTION,
     SHOP,
     BATTLE,
     EXIT,
-    HELP,
 
     SHOW_COLLECTION,
     SEARCH,
     SEARCH_COLLECTION,
     BUY,
     SELL,
-    SHOW,
     SHOP_MENU,
+
+    CREATE_DECK,
+    DELETE_DECK,
+    ADD_TO_DECK,
+    REMOVE_FROM_DECK,
+    VALIDATE_DECK,
+    SELECT_DECK,
+    SHOW_ALL_DECKS,
+    SHOW_DECK,
 
     GAME_INFO,
     SHOW_MY_MINIONS,
@@ -29,7 +49,16 @@ public enum RequestType {
     INSERT_IN,
     END_TURN,
     SHOW_COLLECTABLES,
+    SHOW_INFO,
+    USE,
+    SHOW_NEXT_CARD,
+    ENTER_GRAVEYARD,
+    END_GAME,
+    SHOW_CARDS,
+
     //  ALL COMMANDS
 
 
 }
+
+// HANDLE SIMILAR TYPES FOR DIFFERENT CLASSES

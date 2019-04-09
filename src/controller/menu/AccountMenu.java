@@ -1,12 +1,12 @@
 package controller.menu;
 
-import controller.request.MainMenuRequest;
+import controller.request.AccountMenuRequest;
 import controller.request.Request;
-import controller.request.RequestType;
 import view.View;
 
 public class AccountMenu {
     private View view = new View();
+    Request request = new AccountMenuRequest();
 
     public void main() {
 
@@ -14,17 +14,29 @@ public class AccountMenu {
         while (true) {
             showMenu();
 
-            Request request = new MainMenuRequest();
+            request = new AccountMenuRequest();
+
             request.getNewCommand();
 
-            if (request.getType() == RequestType.EXIT)
-                break;
-            if (!request.isValid()) {
-                view.printError(request.getError());
-                continue;
-            }
-            switch (request.getType()) {
+            request.checkSyntax();
 
+            switch (request.getType()) {
+                case CREATE_ACCOUNT:
+                    break;
+                case LOGIN:
+                    break;
+                case SHOW_LEADERBOARD:
+                    break;
+                case SAVE:
+                    break;
+                case LOGOUT:
+                    break;
+                case HELP:
+                    break;
+                case SHOW_MENU:
+                    continue outerLoop;
+                case EXIT:
+                    break outerLoop;
             }
         }
     }
@@ -54,6 +66,10 @@ public class AccountMenu {
     }
 
     private void showMenu() {
+
+    }
+
+    private void gotoMainMenu() {
 
     }
 

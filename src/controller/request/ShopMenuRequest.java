@@ -1,30 +1,32 @@
 package controller.request;
 
 public class ShopMenuRequest extends Request {
-    public boolean isValid() {
-        RequestType type = getType();
-        if (type == null)
-            return false;
-        switch (type) {
-            case EXIT:
-                break;
-            case SHOP_MENU:
-                break;
-            case SHOW_COLLECTION:
-                break;
-            case SEARCH:
-                break;
-            case SEARCH_COLECTION:
-                break;
-            case BUY:
-                break;
-            case SELL:
-                break;
-            case SHOW:
-                break;
-            case HELP:
-                break;
-        }
+    @Override
+    public void checkSyntax() {
+        // set field type in parent class
+    }
+
+    private boolean showCollectionCheck(){
+        return true;
+    }
+
+    private boolean searchCheck(){
+        return true;
+    }
+
+    private boolean searchCollectionCheck(){
+        return true;
+    }
+
+    private boolean buyCheck(){
+        return true;
+    }
+
+    private boolean sellCheck(){
+        return true;
+    }
+
+    private boolean showCheck(){
         return true;
     }
 }

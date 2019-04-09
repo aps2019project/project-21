@@ -1,31 +1,33 @@
 package controller.menu;
 
-import controller.request.MainMenuRequest;
+import controller.request.BattleMenuRequest;
 import controller.request.Request;
-import controller.request.RequestType;
 import models.Item.Collectable;
 import view.View;
 
 public class BattleMenu {
     private View view = new View();
+    private Request request;
 
     public void main() {
-
         outerLoop:
         while (true) {
             showMenu();
 
-            Request request = new MainMenuRequest();
+            request = new BattleMenuRequest();
+
             request.getNewCommand();
 
-            if (request.getType() == RequestType.EXIT)
-                break;
-            if (!request.isValid()) {
-                view.printError(request.getError());
-                continue;
-            }
-            switch (request.getType()) {
+            request.checkSyntax();
 
+            switch (request.getType()) {
+                //  add cases
+                case HELP:
+                    break;
+                case SHOW_MENU:
+                    continue outerLoop;
+                case EXIT:
+                    break outerLoop;
             }
         }
     }
@@ -46,27 +48,27 @@ public class BattleMenu {
 
     }
 
-    private void showCardInfo(int cardID) {
+    private void showCardInfo() {
 
     }
 
-    private void select(int cardID) {
+    private void select() {
 
     }
 
-    private void moveTo(int x, int y) {
+    private void moveTo() {
 
     }
 
-    private void attack(int oppCardID) {
+    private void attack() {
 
     }
 
-    private void attackCombo(int oppCardID, int... myCardID) {
+    private void attackCombo() {
 
     }
 
-    private void useSpecialPower(int x, int y) {
+    private void useSpecialPower() {
 
     }
 
@@ -74,7 +76,7 @@ public class BattleMenu {
 
     }
 
-    private void insertCardIn(int x, int y) {
+    private void insertCardIn() {
 
     }
 
@@ -86,15 +88,11 @@ public class BattleMenu {
 
     }
 
-    private void select(Collectable collectable) {
-
-    }
-
     private void showInfo() {
 
     }
 
-    private void use(int x, int y) {
+    private void use() {
 
     }
 
@@ -103,10 +101,6 @@ public class BattleMenu {
     }
 
     private void enterGraveyard() {
-
-    }
-
-    private void showInfo(int cardID) {
 
     }
 

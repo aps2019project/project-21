@@ -1,7 +1,6 @@
 package models;
 
 import models.Card.Card;
-import models.Card.Hero;
 import models.Item.Item;
 
 import java.util.ArrayList;

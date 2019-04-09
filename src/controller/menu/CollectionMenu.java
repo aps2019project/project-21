@@ -1,75 +1,104 @@
 package controller.menu;
 
+import controller.request.MainMenuRequest;
+import controller.request.Request;
 import models.Player;
+import view.View;
 
 public class CollectionMenu {
+    private View view = new View();
+    private Request request;
+
+    public void main() {
+        outerLoop:
+        while (true) {
+            showMenu();
+
+            request = new MainMenuRequest();
+
+            request.getNewCommand();
+
+            request.checkSyntax();
+
+            switch (request.getType()) {
+                //  add cases
+                case HELP:
+                    break;
+                case SHOW_MENU:
+                    continue outerLoop;
+                case EXIT:
+                    break outerLoop;
+            }
+        }
+    }
+
     private Player currentPlayer;
 
     public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
 
-    public void show(){
+    public void show() {
 
     }
 
-    public void search(){
+    public void search() {
 
     }
 
-    public void save(){
+    public void save() {
 
     }
 
-    public void createDeck(String deckName){
+    public void createDeck() {
 
     }
 
-    public void deleteDeck(String deckName){
+    public void deleteDeck() {
 
     }
 
-    public void addCardToDeck(int cardID, String deckName){
+    public void addCardToDeck() {
 
     }
 
-    public void addItemToDeck(int itemID, String deckName){
+    public void addItemToDeck() {
 
     }
 
-    public void addHeroToDeck(int itemID, String deckName){
+    public void addHeroToDeck() {
 
     }
 
-    public void removeCardToDeck(int cardID, String deckName){
+    public void removeCardToDeck() {
 
     }
 
-    public void removeItemToDeck(int itemID, String deckName){
+    public void removeItemToDeck() {
 
     }
 
-    public void removeHeroToDeck(int itemID, String deckName){
+    public void removeHeroToDeck() {
 
     }
 
-    public boolean isDeckValid(String deckName){
+    public boolean isDeckValid() {
         return true;
     }
 
-    public void selectDeck(String deckName){
+    public void selectDeck() {
 
     }
 
-    public void showAllDecks(){
+    public void showAllDecks() {
 
     }
 
-    public void showDeck(String deckName){
+    public void showDeck() {
 
     }
 
-    public void help(){
+    public void help() {
 
     }
 

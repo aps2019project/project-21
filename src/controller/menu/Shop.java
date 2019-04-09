@@ -1,7 +1,7 @@
 package controller.menu;
 
+import controller.request.AccountMenuRequest;
 import controller.request.Request;
-import controller.request.RequestType;
 import controller.request.ShopMenuRequest;
 import models.Card.Card;
 import models.Item.Item;
@@ -15,29 +15,27 @@ public class Shop {
     private List<Card> cards = new ArrayList<>();
     private List<Item> items = new ArrayList<>();
     private View view = new View();
+    private Request request = new ShopMenuRequest();
 
     public void main() {
-
         outerLoop:
         while (true) {
             showMenu();
 
-            Request request = new ShopMenuRequest();
+            request = new AccountMenuRequest();
+
             request.getNewCommand();
 
-            if (request.getType() == RequestType.EXIT)
-                break;
-            if (!request.isValid()) {
-                view.printError(request.getError());
-                continue;
-            }
+            request.checkSyntax();
 
             switch (request.getType()) {
-                case SHOP_MENU:
-                    continue outerLoop;
+                //  add cases
                 case HELP:
-                    help();
                     break;
+                case SHOW_MENU:
+                    continue outerLoop;
+                case EXIT:
+                    break outerLoop;
             }
         }
     }

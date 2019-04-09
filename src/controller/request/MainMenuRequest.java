@@ -1,25 +1,20 @@
 package controller.request;
 
 public class MainMenuRequest extends Request{
+    @Override
+    public void checkSyntax() {
+        // set field type in parent class
+    }
 
-    public boolean isValid() {
-        RequestType type = getType();
-        if (type == null)
-            return false;
-        switch (type) {
-            case MAIN_MENU:
-                break;
-            case COLLECTION:
-                break;
-            case BATTLE:
-                break;
-            case SHOP:
-                break;
-            case HELP:
-                break;
-            case EXIT:
-                break;
-        }
+    private boolean shopCheck(){
+        return true;
+    }
+
+    private boolean battlecheck(){
+        return true;
+    }
+
+    private boolean collectionCheck(){
         return true;
     }
 }
