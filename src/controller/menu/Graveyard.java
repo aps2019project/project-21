@@ -1,7 +1,9 @@
 package controller.menu;
 
+import models.Match.Match;
+
 public class Graveyard {
-    private void showMenu() {
+    private static void showMenu(Match match) {
 
     }
 }

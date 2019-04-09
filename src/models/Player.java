@@ -12,8 +12,6 @@ public class Player {
     private Collection collection;
     private int drake;
     private List<Match> matchHistory = new ArrayList<>();
-    private List<Deck> decks = new ArrayList<>();
-    private Deck mainDeck;
 
     public Player(String username) {
         this.drake = 15000;
@@ -26,6 +24,14 @@ public class Player {
 
     public static void addPlayer(Player player) {
         players.add(player);
+    }
+
+    public static void login(String username, String password) {
+
+    }
+
+    public void logout(){
+
     }
 }
 

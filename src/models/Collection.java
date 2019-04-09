@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Collection {
+    private List<Deck> decks = new ArrayList<>();
+    private Deck mainDeck;
     private List<Card> cards = new ArrayList<>();
     private List<Item> items = new ArrayList<>();
-    private List<Hero> heroes = new ArrayList<>();
 }
