@@ -41,14 +41,6 @@ public class Match {
         this.turn = 1;
     }
 
-    public void showGameInfo(){}
-
-    public void showMyMinions(){}
-
-    public void showOpponentMinions(){}
-
-    public void showCardInfo(String  cardID){}
-
     public void selectCard(String  cardID){}
 
     public void moveCard(int x, int y){}
@@ -59,21 +51,15 @@ public class Match {
 
     public void useSpecialPower(int x, int y){}
 
-    public void showHand(){}
-
     public void insertCard(String cardName, int x, int y){}
 
     public void swapTurn(){}
-
-    public void showCollectables(){}
 
     public void selectCollectable(int collectableID){}
 
     public void showItemInfo(){}
 
     public void useItem(int x, int y) {}
-
-    public void showNextCard(){}
 
     public void enterGraveyard(){}
 
