@@ -8,6 +8,7 @@ public class Card {
     private int manaCost; //for hero = -1
     private int XCoordinate;
     private int YCoordinate;
+    private String cardIDInGame;
 
     {
         id = cardCount;

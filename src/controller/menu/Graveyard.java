@@ -6,4 +6,8 @@ public class Graveyard {
     private static void showMenu(Match match) {
 
     }
+
+    private void showInfo(String cardID){}
+
+    private void showCards(){}
 }

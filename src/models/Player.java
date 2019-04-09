@@ -22,8 +22,8 @@ public class Player {
 
     }
 
-    public static void addPlayer(Player player) {
-        players.add(player);
+    public static void createAccount(String username){
+
     }
 
     public static void login(String username, String password) {
@@ -33,5 +33,11 @@ public class Player {
     public void logout(){
 
     }
+
+    public static void showLeaderBoard(){
+
+    }
+
+    public static void help(){}
 }
 
