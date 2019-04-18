@@ -7,14 +7,24 @@ public class Cell {
     private int width;
     private int length;
     private Effect effect;
+    private boolean empty;
+
+    public boolean isEmpty() {
+        return empty;
+    }
+
+    public void setEmpty(boolean empty) {
+        this.empty = empty;
+    }
 
     public Cell() {
 
     }
 
-    public Cell(int width, int length) {
+    public Cell(int width, int length, boolean empty) {
         this.width = width;
         this.length = length;
+        this.empty = empty;
     }
 
     public Attacker getAttacker(){

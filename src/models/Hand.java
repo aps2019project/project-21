@@ -10,6 +10,10 @@ public class Hand {
     private List<Card> cards = new ArrayList<>();
     private Card next;
 
+    public void remove(Card card){
+        cards.remove(card);
+    }
+
     public static int getHandCapacity() {
         return HAND_CAPACITY;
     }

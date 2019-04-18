@@ -26,7 +26,7 @@ public class Attacker extends Card {
         this.specialPower = specialPower;
     }
 
-    public void move() {
+    public void move(int x, int y) {
 
     }
 

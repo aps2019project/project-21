@@ -12,38 +12,73 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Match {
-    private Player playerOne;
-    private Player playerTwo;
-    private Hand playerOneHand;
-    private Hand playerTwoHand;
-    private PlayerMatchInfo playerOneInfo = new PlayerMatchInfo();
-    private PlayerMatchInfo playerTwoInfo = new PlayerMatchInfo();
+    private Player[] players = new Player[2];
+    private Hand[] hands = new Hand[2];
+    private List<List<Card>> groundCards = new ArrayList<List<Card>>();
+    private PlayerMatchInfo[] info = new PlayerMatchInfo[2];
     private Battlefield battlefield;
     private GameMode gameMode;
     private GoalMode goalMode;
     private GameType gameType;
-    private int turn; // 0 or 1
+    private int turn; // 0 for player1 and 1 for player 2
     private Time gameTime;
     private boolean isPlayerOneWinner;
     private Card selectedCard;
     private boolean doesAnyCardSelected;
-    private List<Collectable> collectablesPlayerOne = new ArrayList<>();
-    private List<Collectable> collectablesPlayerTwo = new ArrayList<>();
+    private List<Collectable>[] collectables;
     private Collectable selectedCollectable;
-    private Graveyard playerOneGraveyard;
-    private Graveyard playerTwoGraveyard;
+    private Graveyard[] graveyard = new Graveyard[2];
 
-    Match(Player playerOne, Player playerTwo, GameMode gameMode) {
+    Match(Player playerOne, Player playerTwo, GameMode gameMode, GameType gameType, GoalMode goalMode) {
         this.gameMode = gameMode;
-        this.playerOne = playerOne;
-        this.playerTwo = playerTwo;
+        this.players[0] = playerOne;
+        this.players[1] = playerTwo;
         this.battlefield = new Battlefield();
         this.turn = 1;
+        List<Card> groundCards1 = new ArrayList<>();
+        List<Card> groundCards0 = new ArrayList<>();
+        this.groundCards.add(groundCards0);
+        this.groundCards.add(groundCards1);
+        this.gameType = gameType;
+        this.goalMode = goalMode;
     }
 
-    public void selectCard(String  cardID){}
+    public void selectCard(String  cardID){
+        Card card = new Card();
+        for (int i = 0; i < groundCards.get(turn).size();i++){
+            if (groundCards.get(turn).get(i).getCardIDInGame().equals(cardID))
+                card = groundCards.get(turn).get(i);
+        }
+        if (card.getName() == null) {
+            System.out.println("Invalid card name");
+            return;
+        }
+        selectedCard = card;
+        doesAnyCardSelected = true;
+    }
 
-    public void moveCard(int x, int y){}
+    public void moveCard(int x, int y){
+        if(!doesAnyCardSelected) {
+            //error
+            return;
+        }
+        boolean validTarget = true;
+        if(Math.abs(selectedCard.getXCoordinate() - x) + Math.abs(selectedCard.getYCoordinate() - y) > 2)
+            validTarget = false;
+        //if(special) validTarget = true
+        if(!battlefield.getCells()[x][y].isEmpty())
+            validTarget = false;
+        //if(pathisclosed) validTarget = false
+        if(validTarget) {
+            battlefield.getCells()[selectedCard.getXCoordinate()][selectedCard.getYCoordinate()].setEmpty(true);
+            selectedCard.setXCoordinate(x);
+            selectedCard.setYCoordinate(y);
+            battlefield.getCells()[x][y].setEmpty(false);
+            System.out.println(selectedCard.getCardIDInGame() + " moved to " + x + " " + y);
+            return;
+        }
+        System.out.println("Invalid target");;
+    }
 
     public void attack(String opponentCardID){}
 
@@ -51,9 +86,51 @@ public class Match {
 
     public void useSpecialPower(int x, int y){}
 
-    public void insertCard(String cardName, int x, int y){}
+    public void insertCard(String cardName, int x, int y) {
+        Card card = new Card();
+        for (int i = 0; i < hands[turn].getCards().size();i++){
+            if (hands[turn].getCards().get(i).getName().equals(cardName))
+                card = hands[turn].getCards().get(i);
+        }
+        if (card.getName() == null) {
+            System.out.println("Invalid card name");
+            return;
+        }
+        boolean validTarget = false;
+        for (int i = 0; i < groundCards.get(turn).size() && !validTarget; i++) {
+            if (Math.abs(groundCards.get(turn).get(i).getXCoordinate() - x) < 2) {
+                if (Math.abs(groundCards.get(turn).get(i).getYCoordinate() - y) < 2)
+                    validTarget = true;
+            }
+        }
+        //if special power then hastarget = true
+        if (!validTarget) {
+            System.out.println("Invalid Target");
+            return;
+        }
+        if (info[turn].getMana() < card.getManaCost()) {
+            System.out.println("You don't have enough mana");
+            return;
+        }
+        //full???
+        //spell va jame'e hadaf
+        int id = 1;
+        for (int i = 0; i < groundCards.get(turn).size(); i++) {
+            if (groundCards.get(turn).get(i).getName().equals(cardName))
+                id++;
+        }
+        card.setXCoordinate(x);
+        card.setYCoordinate(y);
+        card.setCardIDInGame(players[turn].getUsername() + "_" + card.getName() + "_" + id);
+        groundCards.get(turn).add(card);
+        hands[turn].remove(card);
+        battlefield.getCells()[x][y].setEmpty(false);
+    }
 
-    public void swapTurn(){}
+    public void swapTurn(){
+        turn = 1 - turn;
+        //blah blah blah
+    }
 
     public void selectCollectable(int collectableID){}
 
@@ -85,52 +162,36 @@ public class Match {
         //
     }
 
-    public Player getPlayerOne() {
-        return playerOne;
+    public Player[] getPlayers() {
+        return players;
     }
 
-    public void setPlayerOne(Player playerOne) {
-        this.playerOne = playerOne;
+    public void setPlayers(Player[] players) {
+        this.players = players;
     }
 
-    public Player getPlayerTwo() {
-        return playerTwo;
+    public Hand[] getHands() {
+        return hands;
     }
 
-    public void setPlayerTwo(Player playerTwo) {
-        this.playerTwo = playerTwo;
+    public void setHands(Hand[] hands) {
+        this.hands = hands;
     }
 
-    public Hand getPlayerOneHand() {
-        return playerOneHand;
+    public List<List<Card>> getGroundCards() {
+        return groundCards;
     }
 
-    public void setPlayerOneHand(Hand playerOneHand) {
-        this.playerOneHand = playerOneHand;
+    public void setGroundCards(List<List<Card>> groundCards) {
+        this.groundCards = groundCards;
     }
 
-    public Hand getPlayerTwoHand() {
-        return playerTwoHand;
+    public PlayerMatchInfo[] getInfo() {
+        return info;
     }
 
-    public void setPlayerTwoHand(Hand playerTwoHand) {
-        this.playerTwoHand = playerTwoHand;
-    }
-
-    public PlayerMatchInfo getPlayerOneInfo() {
-        return playerOneInfo;
-    }
-
-    public void setPlayerOneInfo(PlayerMatchInfo playerOneInfo) {
-        this.playerOneInfo = playerOneInfo;
-    }
-
-    public PlayerMatchInfo getPlayerTwoInfo() {
-        return playerTwoInfo;
-    }
-
-    public void setPlayerTwoInfo(PlayerMatchInfo playerTwoInfo) {
-        this.playerTwoInfo = playerTwoInfo;
+    public void setInfo(PlayerMatchInfo[] info) {
+        this.info = info;
     }
 
     public Battlefield getBattlefield() {
@@ -205,20 +266,12 @@ public class Match {
         this.doesAnyCardSelected = doesAnyCardSelected;
     }
 
-    public List<Collectable> getCollectablesPlayerOne() {
-        return collectablesPlayerOne;
+    public List<Collectable>[] getCollectables() {
+        return collectables;
     }
 
-    public void setCollectablesPlayerOne(List<Collectable> collectablesPlayerOne) {
-        this.collectablesPlayerOne = collectablesPlayerOne;
-    }
-
-    public List<Collectable> getCollectablesPlayerTwo() {
-        return collectablesPlayerTwo;
-    }
-
-    public void setCollectablesPlayerTwo(List<Collectable> collectablesPlayerTwo) {
-        this.collectablesPlayerTwo = collectablesPlayerTwo;
+    public void setCollectables(List<Collectable>[] collectables) {
+        this.collectables = collectables;
     }
 
     public Collectable getSelectedCollectable() {
@@ -229,19 +282,11 @@ public class Match {
         this.selectedCollectable = selectedCollectable;
     }
 
-    public Graveyard getPlayerOneGraveyard() {
-        return playerOneGraveyard;
+    public Graveyard[] getGraveyard() {
+        return graveyard;
     }
 
-    public void setPlayerOneGraveyard(Graveyard playerOneGraveyard) {
-        this.playerOneGraveyard = playerOneGraveyard;
-    }
-
-    public Graveyard getPlayerTwoGraveyard() {
-        return playerTwoGraveyard;
-    }
-
-    public void setPlayerTwoGraveyard(Graveyard playerTwoGraveyard) {
-        this.playerTwoGraveyard = playerTwoGraveyard;
+    public void setGraveyard(Graveyard[] graveyard) {
+        this.graveyard = graveyard;
     }
 }

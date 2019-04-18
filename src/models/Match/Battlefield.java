@@ -16,7 +16,7 @@ public class Battlefield {
     private void initializeCells() {
         for (int i = 0; i < width; i++)
             for (int j = 0; j < length; j++)
-                cells[i][j] = new Cell(i, j);
+                cells[i][j] = new Cell(i, j, true);
     }
 
     public int getWidth() {

@@ -15,11 +15,11 @@ public class Card {
         cardCount++;
     }
 
-    Card() {
+    public Card() {
 
     }
 
-    Card(String name) {
+    public Card(String name) {
         this.name = name;
     }
 
