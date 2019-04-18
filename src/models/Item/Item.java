@@ -1,14 +1,18 @@
 package models.Item;
 
+import models.Player;
+
 public class Item {
     private static int itemCount = 0;
     private String name;
     private int id;
     private int price;
+    private int collectionID;
 
-    {
-        id = itemCount;
-        itemCount++;
+    public Item(String name, int id, int price) {
+        this.name = name;
+        this.id = id;
+        this.price = price;
     }
 
     public Item() {
@@ -17,6 +21,13 @@ public class Item {
 
     public Item(String name) {
         this.name = name;
+    }
+
+    public void makeCopyAndAddToCollection(Player player){
+        Item item = new Item(this.name, this.id, this.price);
+        item.setCollectionID(player.getCardCurrentID());
+        player.setCardCurrentID(player.getCardCurrentID() + 1);
+        player.getCollection().addItem(item);
     }
 
     public static int getItemCount() {
@@ -50,4 +61,13 @@ public class Item {
     public void setPrice(int price) {
         this.price = price;
     }
+
+    public int getCollectionID() {
+        return collectionID;
+    }
+
+    public void setCollectionID(int collectionID) {
+        this.collectionID = collectionID;
+    }
+
 }

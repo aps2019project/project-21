@@ -1,7 +1,9 @@
 package view;
 
+import controller.menu.Shop;
 import models.Match.Match;
 import models.Player;
+import models.Collection;
 
 import javax.swing.text.PlainDocument;
 
@@ -55,7 +57,7 @@ public class View {
 
     }
 
-    public void showCollection() {
+    public void showCollection(Collection collection) {
 
     }
 
@@ -90,6 +92,8 @@ public class View {
 
     public void showGeneralThings(String thingName) {
     }
+
+    public void showShop(Shop shop){}
 
     public Player getCurrentPlayer() {
         return currentPlayer;

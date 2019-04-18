@@ -1,5 +1,7 @@
 package models.Card;
 
+import models.Player;
+
 public class Card {
     private static int cardCount = 0;
     private String name;
@@ -9,18 +11,24 @@ public class Card {
     private int XCoordinate;
     private int YCoordinate;
     private String cardIDInGame;
-
-    {
-        id = cardCount;
-        cardCount++;
-    }
+    private int idInCollection;
 
     public Card() {
 
     }
 
-    public Card(String name) {
+    public Card(String name, int id, int price, int manaCost) {
         this.name = name;
+        this.id = id;
+        this.price = price;
+        this.manaCost = manaCost;
+    }
+
+    public void makeCopyAndAddToCollection(Player player){
+        Card card = new Card(this.getName(), this.getId(), this.getPrice(), this.getManaCost());
+        card.setIdInCollection(player.getCardCurrentID());
+        player.setCardCurrentID(player.getCardCurrentID()+1);
+        player.getCollection().addCard(card);
     }
 
     public void setPrice(int price) {
@@ -85,5 +93,13 @@ public class Card {
 
     public void setCardIDInGame(String cardIDInGame) {
         this.cardIDInGame = cardIDInGame;
+    }
+
+    public int getIdInCollection() {
+        return idInCollection;
+    }
+
+    public void setIdInCollection(int idInCollection) {
+        this.idInCollection = idInCollection;
     }
 }

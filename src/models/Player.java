@@ -12,10 +12,20 @@ public class Player {
     private Collection collection;
     private int drake;
     private List<Match> matchHistory = new ArrayList<>();
+    private int cardCurrentID;
+
+    public int getCardCurrentID() {
+        return cardCurrentID;
+    }
+
+    public void setCardCurrentID(int cardCurrentID) {
+        this.cardCurrentID = cardCurrentID;
+    }
 
     public Player(String username) {
         this.drake = 15000;
         this.username = username;
+        this.cardCurrentID = 0;
     }
 
     void showMatchHistory() {
