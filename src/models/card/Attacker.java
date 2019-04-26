@@ -58,9 +58,17 @@ public class Attacker extends Card {
         isDisarmed = false;
     }
 
-    public void changeAP(int changeValue) {
-        this.ap += changeValue;
-        //  what if AP goes negative
+    public void increaseAP(int value) {
+        if (value < 0)
+            return;
+        this.ap += value;
+    }
+
+    public void decreaseAP(int value) {
+        if (value < 0)
+            return;
+        this.ap -= value;
+        //  what if ap goes negative?
     }
 
     public void stun() {
@@ -75,6 +83,7 @@ public class Attacker extends Card {
         if (value < 0)
             return;
         this.hp -= value;
+        //  what if he dies?
     }
 
     public void increaseHP(int value) {
@@ -91,12 +100,24 @@ public class Attacker extends Card {
         hasHolyBuff = false;
     }
 
-    public int getHp() {
+    public int getHP() {
         return hp;
     }
 
-    public void setHp(int hp) {
+    public void setHP(int hp) {
         this.hp = hp;
+    }
+
+    public int getAP() {
+        return ap;
+    }
+
+    public void setAP(int ap) {
+        this.ap = ap;
+    }
+
+    public List<Effect> getAppliedEffects(){
+        return appliedEffects;
     }
 
 }

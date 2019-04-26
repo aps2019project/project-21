@@ -4,11 +4,12 @@ import models.match.Cell;
 
 public abstract class Buff extends Effect {
     protected int duration;
-    private BuffMode buffMode;
+    protected BuffMode buffMode;
 
-    protected Buff(int duration, Cell cell, Attacker attacker, ApplyType applyType) {
+    protected Buff(int duration, Cell cell, Attacker attacker, ApplyType applyType, BuffMode buffMode) {
         super(cell, attacker, applyType);
         this.duration = duration;
+        this.buffMode = buffMode;
     }
 
     @Override

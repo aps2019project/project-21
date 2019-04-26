@@ -4,9 +4,9 @@ import models.card.ApplyType;
 import models.card.Attacker;
 import models.card.Effect;
 
-public class ChangeAP extends Effect {
+public class IncreaseAP extends Effect {
     private int changeValue;
-    public ChangeAP(Attacker attacker, int changeValue) {
+    public IncreaseAP(Attacker attacker, int changeValue) {
         super(null, attacker, ApplyType.ON_ATTACKER);
         this.changeValue = changeValue;
     }
@@ -14,6 +14,6 @@ public class ChangeAP extends Effect {
     public void apply() {
         if(attacker == null)
             return;
-        attacker.changeAP(changeValue);
+        attacker.increaseAP(changeValue);
     }
 }

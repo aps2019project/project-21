@@ -3,15 +3,16 @@ package models.card.buffs;
 import models.card.ApplyType;
 import models.card.Attacker;
 import models.card.Buff;
+import models.card.BuffMode;
 import models.match.Cell;
 
 public class Poison extends Buff {
     public Poison(int duration, Attacker attacker) {
-        super(duration, null, attacker, ApplyType.ON_ATTACKER);
+        super(duration, null, attacker, ApplyType.ON_ATTACKER, BuffMode.EVIL);
     }
 
     public Poison(int duration, Cell cell) {
-        super(duration, cell, null, ApplyType.ON_CELL);
+        super(duration, cell, null, ApplyType.ON_CELL, BuffMode.EVIL);
     }
 
     public void apply() {
