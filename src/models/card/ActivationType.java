@@ -1,10 +1,10 @@
 package models.card;
 
 public enum ActivationType {
-    ONRESPAWN,
+    ON_SPAWN,
     PASSIVE,
-    ONDEATH,
-    ONATTACK,
-    ONDEFEND,
+    ON_DEATH,
+    ON_ATTACK,
+    ON_DEFEND,
     COMBO
 }

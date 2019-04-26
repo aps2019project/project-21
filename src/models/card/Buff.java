@@ -2,20 +2,24 @@ package models.card;
 
 import models.match.Cell;
 
-public class Buff extends Effect {
-    private int durability;
+public abstract class Buff extends Effect {
+    protected int duration;
     private BuffMode buffMode;
 
-    public void castEffect(Cell cell){
-        //  override method in cardEffect
+    protected Buff(int duration, Cell cell, Attacker attacker, ApplyType applyType) {
+        super(cell, attacker, applyType);
+        this.duration = duration;
     }
 
-    public int getDurability() {
-        return durability;
+    @Override
+    public abstract void apply();
+
+    public int getDuration() {
+        return duration;
     }
 
-    public void setDurability(int durability) {
-        this.durability = durability;
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
     public BuffMode getBuffMode() {

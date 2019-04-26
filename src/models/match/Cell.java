@@ -3,10 +3,12 @@ package models.match;
 import models.card.Attacker;
 import models.card.Effect;
 
+import java.util.ArrayList;
+
 public class Cell {
     private int width;
     private int length;
-    private Effect effect;
+    private ArrayList<Effect> effects = new ArrayList<>();
     private boolean empty;
 
     public boolean isEmpty() {
@@ -27,12 +29,12 @@ public class Cell {
         this.empty = empty;
     }
 
-    public Attacker getAttacker(){
+    public Attacker getAttacker() {
         return null;
     }
 
-    public boolean hasEffect(){
-        return effect != null;
+    public boolean hasEffect() {
+        return !effects.isEmpty();
     }
 
     public int getWidth() {
@@ -49,13 +51,5 @@ public class Cell {
 
     public void setLength(int length) {
         this.length = length;
-    }
-
-    public Effect getEffect() {
-        return effect;
-    }
-
-    public void setEffect(Effect effect) {
-        this.effect = effect;
     }
 }

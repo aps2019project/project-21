@@ -2,45 +2,16 @@ package models.card;
 
 import models.match.Cell;
 
-public class Effect {
-    private int changeInAP;
-    private int changeInHP;
-    private boolean isItFreezer;
-    private boolean isItPassive;
+public abstract class Effect {
+    protected ApplyType applyType;
+    protected Cell cell;
+    protected Attacker attacker;
 
-    public void apply(Cell cell){
-
+    protected Effect(Cell cell, Attacker attacker, ApplyType applyType) {
+        this.cell = cell;
+        this.attacker = attacker;
+        this.applyType = applyType;
     }
 
-    public int getChangeInAP() {
-        return changeInAP;
-    }
-
-    public void setChangeInAP(int changeInAP) {
-        this.changeInAP = changeInAP;
-    }
-
-    public int getChangeInHP() {
-        return changeInHP;
-    }
-
-    public void setChangeInHP(int changeInHP) {
-        this.changeInHP = changeInHP;
-    }
-
-    public boolean isItFreezer() {
-        return isItFreezer;
-    }
-
-    public void setItFreezer(boolean itFreezer) {
-        isItFreezer = itFreezer;
-    }
-
-    public boolean isItPassive() {
-        return isItPassive;
-    }
-
-    public void setItPassive(boolean itPassive) {
-        isItPassive = itPassive;
-    }
+    public abstract void apply();
 }
