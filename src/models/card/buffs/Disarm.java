@@ -1,11 +1,12 @@
 package models.card.buffs;
 
+import models.card.ApplyType;
 import models.card.Attacker;
 import models.card.Buff;
 
-public class DisarmBuff extends Buff {
-    public DisarmBuff(int duration, Attacker attacker) {
-        super(duration, null, attacker, null);
+public class Disarm extends Buff {
+    public Disarm(int duration, Attacker attacker) {
+        super(duration, null, attacker, ApplyType.ON_ATTACKER);
     }
 
     public void apply() {

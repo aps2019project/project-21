@@ -15,6 +15,7 @@ public class Attacker extends Card {
     private AttackMode attackMode;
 
     private boolean isDisarmed = false;
+    private boolean isStunned = false;
 
     Attacker() {
 
@@ -55,5 +56,25 @@ public class Attacker extends Card {
     public void unDisarm() {
         isDisarmed = false;
     }
+
+    public void changeAP(int changeValue){
+        this.ap += changeValue;
+        //  what if he dies?
+    }
+
+    public void stun(){
+        isStunned = true;
+    }
+
+    public void unStun(){
+        isStunned = false;
+    }
+
+    public void decreaseHP(int value){
+        if(value < 0)
+            return;
+        this.hp -= value;
+    }
+
 
 }
