@@ -60,7 +60,7 @@ public class Attacker extends Card {
 
     public void changeAP(int changeValue) {
         this.ap += changeValue;
-        //  what if he dies?
+        //  what if AP goes negative
     }
 
     public void stun() {
@@ -75,6 +75,12 @@ public class Attacker extends Card {
         if (value < 0)
             return;
         this.hp -= value;
+    }
+
+    public void increaseHP(int value) {
+        if (value < 0)
+            return;
+        this.hp += value;
     }
 
     public void takeHolyBuff() {
