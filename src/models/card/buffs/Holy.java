@@ -14,7 +14,8 @@ public class Holy extends Buff {
             return;
         if (duration == 0)
             attacker.giveHolyBuff();
-        attacker.takeHolyBuff();
+        else
+            attacker.takeHolyBuff();
         duration--;
     }
 }
