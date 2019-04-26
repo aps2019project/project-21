@@ -1,13 +1,17 @@
 package view;
 
-import controller.menu.Shop;
+import controller.menu.ShopMenu;
 import models.Match.Match;
 import models.Player;
 import models.Collection;
 
-import javax.swing.text.PlainDocument;
-
 public class View {
+    private static View view = new View();
+
+    public static View getInstance() {
+        return view;
+    }
+
     private Player currentPlayer;
     private Match currentMatch;
 
@@ -15,7 +19,7 @@ public class View {
         this.currentPlayer = currentPlayer;
     }
 
-    public View() {
+    private View() {
 
     }
 
@@ -93,7 +97,8 @@ public class View {
     public void showGeneralThings(String thingName) {
     }
 
-    public void showShop(Shop shop){}
+    public void showShop(ShopMenu shopMenu) {
+    }
 
     public Player getCurrentPlayer() {
         return currentPlayer;

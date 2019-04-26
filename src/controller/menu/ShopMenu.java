@@ -2,9 +2,7 @@ package controller.menu;
 
 import controller.request.AccountMenuRequest;
 import controller.request.Request;
-import controller.request.ShopMenuRequest;
 import models.Card.Card;
-import models.Collection;
 import models.Item.Item;
 import models.Player;
 import view.ErrorMode;
@@ -13,32 +11,37 @@ import view.View;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Shop {
+public class ShopMenu extends Menu {
+    private static ShopMenu instance = new ShopMenu();
+
+    static Menu getInstance() {
+        return instance;
+    }
+
+    private ShopMenu() {
+
+    }
+
     private List<Card> cards = new ArrayList<>();
     private List<Item> items = new ArrayList<>();
-    private View view = new View();
-    private Request request = new ShopMenuRequest();
 
     public void main() {
-        outerLoop:
-        while (true) {
-            showMenu();
+        showMenu();
 
-            request = new AccountMenuRequest();
+        request = new AccountMenuRequest();
 
-            request.getNewCommand();
+        request.getNewCommand();
 
-            request.checkSyntax();
+        request.checkSyntax();
 
-            switch (request.getType()) {
-                //  add cases
-                case HELP:
-                    break;
-                case SHOW_MENU:
-                    continue outerLoop;
-                case EXIT:
-                    break outerLoop;
-            }
+        switch (request.getType()) {
+            //  add cases
+            case HELP:
+                break;
+            case SHOW_MENU:
+                break;
+            case EXIT:
+                break;
         }
     }
 
@@ -47,13 +50,13 @@ public class Shop {
     }
 
     private int search(String name) {
-        for(int i = 0; i <cards.size(); i++) {
+        for (int i = 0; i < cards.size(); i++) {
             if (cards.get(i).getName().equals(name)) {
                 System.out.println(cards.get(i).getId());
                 return cards.get(i).getId();
             }
         }
-        for(int i = 0; i <items.size(); i++) {
+        for (int i = 0; i < items.size(); i++) {
             if (items.get(i).getName().equals(name)) {
                 System.out.println(items.get(i).getId());
                 return items.get(i).getId();
@@ -65,19 +68,19 @@ public class Shop {
 
     private int searchCollection(Player player, String name) {
         boolean isItInCollection = false;
-        for(int i = 0; i < player.getCollection().getCards().size(); i++){
-            if(player.getCollection().getCards().get(i).getName().equals(name)) {
+        for (int i = 0; i < player.getCollection().getCards().size(); i++) {
+            if (player.getCollection().getCards().get(i).getName().equals(name)) {
                 System.out.println(player.getCollection().getCards().get(i).getId());
                 isItInCollection = true;
             }
         }
-        for(int i = 0; i < player.getCollection().getItems().size(); i++){
-            if(player.getCollection().getItems().get(i).getName().equals(name)) {
+        for (int i = 0; i < player.getCollection().getItems().size(); i++) {
+            if (player.getCollection().getItems().get(i).getName().equals(name)) {
                 System.out.println(player.getCollection().getItems().get(i).getId());
                 isItInCollection = true;
             }
         }
-        if(!isItInCollection) {
+        if (!isItInCollection) {
             view.printError(ErrorMode.CARD_IS_NOT_IN_COLLECTION);
             return 0;
         }
@@ -88,7 +91,7 @@ public class Shop {
         boolean isItCard = false;
         boolean isItInShop = false;
         Card card = new Card();
-        for(int i = 0; i <cards.size() && !isItCard; i++) {
+        for (int i = 0; i < cards.size() && !isItCard; i++) {
             if (cards.get(i).getName().equals(name)) {
                 card = cards.get(i);
                 isItCard = true;
@@ -96,29 +99,29 @@ public class Shop {
             }
         }
         Item item = new Item();
-        for(int i = 0; i <items.size() && !isItCard; i++) {
+        for (int i = 0; i < items.size() && !isItCard; i++) {
             if (items.get(i).getName().equals(name)) {
                 item = items.get(i);
                 isItInShop = true;
             }
         }
-        if(!isItInShop) {
+        if (!isItInShop) {
             view.printError(ErrorMode.NOT_IN_SHOP);
             return;
         }
-        if(isItCard){
-            if(card.getPrice() > player.getDrake()) {
+        if (isItCard) {
+            if (card.getPrice() > player.getDrake()) {
                 view.printError(ErrorMode.NOT_ENOUGH_MONEY);
                 return;
             }
             card.makeCopyAndAddToCollection(player);
             player.setDrake(player.getDrake() - card.getPrice());
         }
-        if(item.getPrice() > player.getDrake()) {
+        if (item.getPrice() > player.getDrake()) {
             view.printError(ErrorMode.NOT_ENOUGH_MONEY);
             return;
         }
-        if(player.getCollection().getItems().size() == 3){
+        if (player.getCollection().getItems().size() == 3) {
             view.printError(ErrorMode.HAVE_3_ITEMS);
             return;
         }
@@ -131,24 +134,24 @@ public class Shop {
         boolean isItCard = false;
         Card card = new Card();
         Item item = new Item();
-        for(int i = 0; i < player.getCollection().getCards().size() && !isItInCollection; i++){
-            if(player.getCollection().getCards().get(i).getName().equals(name)) {
+        for (int i = 0; i < player.getCollection().getCards().size() && !isItInCollection; i++) {
+            if (player.getCollection().getCards().get(i).getName().equals(name)) {
                 card = player.getCollection().getCards().get(i);
                 isItCard = true;
                 isItInCollection = true;
             }
         }
-        for(int i = 0; i < player.getCollection().getItems().size() && !isItInCollection; i++){
-            if(player.getCollection().getItems().get(i).getName().equals(name)) {
+        for (int i = 0; i < player.getCollection().getItems().size() && !isItInCollection; i++) {
+            if (player.getCollection().getItems().get(i).getName().equals(name)) {
                 item = player.getCollection().getItems().get(i);
                 isItInCollection = true;
             }
         }
-        if(!isItInCollection) {
+        if (!isItInCollection) {
             view.printError(ErrorMode.CARD_IS_NOT_IN_COLLECTION);
             return;
         }
-        if(isItCard){
+        if (isItCard) {
             player.getCollection().removeCard(card);
             player.setDrake(player.getDrake() + card.getPrice());
             return;
@@ -162,21 +165,21 @@ public class Shop {
     }
 
     private void help() {
-        view.help("shop");
+        view.help("shopMenu");
     }
 
     private void addCardToShop(Card card) {
-        if(!this.cards.contains(card))
+        if (!this.cards.contains(card))
             this.cards.add(card);
     }
 
     private void addItemToShop(Item item) {
-        if(!this.items.contains(item))
+        if (!this.items.contains(item))
             this.items.add(item);
     }
 
     private void showMenu() {
-        view.showMenu("shop");
+        view.showMenu("shopMenu");
     }
 
     public List<Card> getCards() {

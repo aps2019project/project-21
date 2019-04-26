@@ -4,30 +4,34 @@ import controller.request.MainMenuRequest;
 import controller.request.Request;
 import view.View;
 
-public class Graveyard {
-    private View view = new View();
-    private Request request;
+public class Graveyard extends Menu {
+    private static Graveyard instance = new Graveyard();
+
+    static Menu getInstance() {
+        return instance;
+    }
+
+    private Graveyard() {
+
+    }
 
     public void main() {
-        outerLoop:
-        while (true) {
-            showMenu();
+        showMenu();
 
-            request = new MainMenuRequest();
+        request = new MainMenuRequest();
 
-            request.getNewCommand();
+        request.getNewCommand();
 
-            request.checkSyntax();
+        request.checkSyntax();
 
-            switch (request.getType()) {
-                //  add cases
-                case HELP:
-                    break;
-                case SHOW_MENU:
-                    continue outerLoop;
-                case EXIT:
-                    break outerLoop;
-            }
+        switch (request.getType()) {
+            //  add cases
+            case HELP:
+                break;
+            case SHOW_MENU:
+                break;
+            case EXIT:
+                break;
         }
     }
 
@@ -35,11 +39,11 @@ public class Graveyard {
 
     }
 
-    private void showInfo(){
+    private void showInfo() {
 
     }
 
-    private void showCards(){
+    private void showCards() {
 
     }
 

@@ -4,40 +4,44 @@ import controller.request.AccountMenuRequest;
 import controller.request.Request;
 import view.View;
 
-public class AccountMenu {
-    private View view = new View();
-    Request request = new AccountMenuRequest();
+public class AccountMenu extends Menu {
+    private static AccountMenu instance = new AccountMenu();
 
-    public void main() {
+    static Menu getInstance() {
+        return instance;
+    }
 
-        outerLoop:
-        while (true) {
-            showMenu();
+    private AccountMenu() {
 
-            request = new AccountMenuRequest();
+    }
 
-            request.getNewCommand();
+    void main() {
 
-            request.checkSyntax();
+        showMenu();
 
-            switch (request.getType()) {
-                case CREATE_ACCOUNT:
-                    break;
-                case LOGIN:
-                    break;
-                case SHOW_LEADERBOARD:
-                    break;
-                case SAVE:
-                    break;
-                case LOGOUT:
-                    break;
-                case HELP:
-                    break;
-                case SHOW_MENU:
-                    continue outerLoop;
-                case EXIT:
-                    break outerLoop;
-            }
+        request = new AccountMenuRequest();
+
+        request.getNewCommand();
+
+        request.checkSyntax();
+
+        switch (request.getType()) {
+            case CREATE_ACCOUNT:
+                break;
+            case LOGIN:
+                break;
+            case SHOW_LEADERBOARD:
+                break;
+            case SAVE:
+                break;
+            case LOGOUT:
+                break;
+            case HELP:
+                break;
+            case SHOW_MENU:
+                break;
+            case EXIT:
+                break;
         }
     }
 

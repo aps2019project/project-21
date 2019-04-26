@@ -8,8 +8,8 @@ import java.util.List;
 public class PlayerMatchInfo {
     private static final int MAX_MANA = 9;
     private List<Card> graveyardOne = new ArrayList<>();
-    private List<Card> garveyardTwo = new ArrayList<>();
-    int mana = 3;
+    private List<Card> graveyardTwo = new ArrayList<>();
+    private int mana = 3;
 
     PlayerMatchInfo() {
 
@@ -27,12 +27,12 @@ public class PlayerMatchInfo {
         this.graveyardOne = graveyardOne;
     }
 
-    public List<Card> getGarveyardTwo() {
-        return garveyardTwo;
+    public List<Card> getGraveyardTwo() {
+        return graveyardTwo;
     }
 
-    public void setGarveyardTwo(List<Card> garveyardTwo) {
-        this.garveyardTwo = garveyardTwo;
+    public void setGraveyardTwo(List<Card> graveyardTwo) {
+        this.graveyardTwo = graveyardTwo;
     }
 
     public int getMana() {

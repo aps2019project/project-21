@@ -4,30 +4,32 @@ import controller.request.MainMenuRequest;
 import controller.request.Request;
 import view.View;
 
-public class MainMenu {
-    private View view = new View();
-    private Request request;
+public class MainMenu extends Menu {
+    private static MainMenu instance = new MainMenu();
+
+    static Menu getInstance() {
+        return instance;
+    }
+
+    private MainMenu() {
+
+    }
 
     public void main() {
-        outerLoop:
-        while (true) {
-            showMenu();
+        showMenu();
 
-            request = new MainMenuRequest();
+        request = new MainMenuRequest();
+        request.getNewCommand();
+        request.checkSyntax();
 
-            request.getNewCommand();
-
-            request.checkSyntax();
-
-            switch (request.getType()) {
-                //  add cases
-                case HELP:
-                    break;
-                case SHOW_MENU:
-                    continue outerLoop;
-                case EXIT:
-                    break outerLoop;
-            }
+        switch (request.getType()) {
+            //  add cases
+            case HELP:
+                break;
+            case SHOW_MENU:
+                break;
+            case EXIT:
+                break;
         }
     }
 

@@ -2,33 +2,36 @@ package controller.menu;
 
 import controller.request.BattleMenuRequest;
 import controller.request.Request;
-import models.Item.Collectable;
 import view.View;
 
-public class BattleMenu {
-    private View view = new View();
-    private Request request;
+public class BattleMenu extends Menu {
+    private static BattleMenu instance = new BattleMenu();
+
+    static Menu getInstance() {
+        return instance;
+    }
+
+    private BattleMenu() {
+
+    }
 
     public void main() {
-        outerLoop:
-        while (true) {
-            showMenu();
+        showMenu();
 
-            request = new BattleMenuRequest();
+        request = new BattleMenuRequest();
 
-            request.getNewCommand();
+        request.getNewCommand();
 
-            request.checkSyntax();
+        request.checkSyntax();
 
-            switch (request.getType()) {
-                //  add cases
-                case HELP:
-                    break;
-                case SHOW_MENU:
-                    continue outerLoop;
-                case EXIT:
-                    break outerLoop;
-            }
+        switch (request.getType()) {
+            //  add cases
+            case HELP:
+                break;
+            case SHOW_MENU:
+                break;
+            case EXIT:
+                break;
         }
     }
 

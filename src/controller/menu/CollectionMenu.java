@@ -5,30 +5,34 @@ import controller.request.Request;
 import models.Player;
 import view.View;
 
-public class CollectionMenu {
-    private View view = new View();
-    private Request request;
+public class CollectionMenu extends Menu {
+    private static CollectionMenu instance = new CollectionMenu();
+
+    static Menu getInstance() {
+        return instance;
+    }
+
+    private CollectionMenu() {
+
+    }
 
     public void main() {
-        outerLoop:
-        while (true) {
-            showMenu();
+        showMenu();
 
-            request = new MainMenuRequest();
+        request = new MainMenuRequest();
 
-            request.getNewCommand();
+        request.getNewCommand();
 
-            request.checkSyntax();
+        request.checkSyntax();
 
-            switch (request.getType()) {
-                //  add cases
-                case HELP:
-                    break;
-                case SHOW_MENU:
-                    continue outerLoop;
-                case EXIT:
-                    break outerLoop;
-            }
+        switch (request.getType()) {
+            //  add cases
+            case HELP:
+                break;
+            case SHOW_MENU:
+                break;
+            case EXIT:
+                break;
         }
     }
 
