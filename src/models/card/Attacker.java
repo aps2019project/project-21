@@ -16,6 +16,7 @@ public class Attacker extends Card {
 
     private boolean isDisarmed = false;
     private boolean isStunned = false;
+    private boolean hasHolyBuff = false;
 
     Attacker() {
 
@@ -57,23 +58,31 @@ public class Attacker extends Card {
         isDisarmed = false;
     }
 
-    public void changeAP(int changeValue){
+    public void changeAP(int changeValue) {
         this.ap += changeValue;
         //  what if he dies?
     }
 
-    public void stun(){
+    public void stun() {
         isStunned = true;
     }
 
-    public void unStun(){
+    public void unStun() {
         isStunned = false;
     }
 
-    public void decreaseHP(int value){
-        if(value < 0)
+    public void decreaseHP(int value) {
+        if (value < 0)
             return;
         this.hp -= value;
+    }
+
+    public void takeHolyBuff() {
+        hasHolyBuff = true;
+    }
+
+    public void giveHolyBuff() {
+        hasHolyBuff = false;
     }
 
 
