@@ -1,4 +1,4 @@
-package models.Card;
+package models.card;
 
 import models.Player;
 
@@ -24,23 +24,15 @@ public class Card {
         this.manaCost = manaCost;
     }
 
-    public void makeCopyAndAddToCollection(Player player){
+    public void makeCopyAndAddToCollection(Player player) {
         Card card = new Card(this.getName(), this.getId(), this.getPrice(), this.getManaCost());
         card.setIdInCollection(player.getCardCurrentID());
-        player.setCardCurrentID(player.getCardCurrentID()+1);
+        player.setCardCurrentID(player.getCardCurrentID() + 1);
         player.getCollection().addCard(card);
     }
 
     public void setPrice(int price) {
         this.price = price;
-    }
-
-    public static int getCardCount() {
-        return cardCount;
-    }
-
-    public static void setCardCount(int cardCount) {
-        Card.cardCount = cardCount;
     }
 
     public String getName() {

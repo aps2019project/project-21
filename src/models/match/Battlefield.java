@@ -1,4 +1,4 @@
-package models.Match;
+package models.match;
 
 public class Battlefield {
     private int width;

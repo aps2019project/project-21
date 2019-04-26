@@ -2,7 +2,7 @@ package controller.request;
 
 public class BattleMenuRequest extends Request {
     @Override
-    public void checkSyntax() {
+    public void extractType() {
         // set field type in parent class
     }
 

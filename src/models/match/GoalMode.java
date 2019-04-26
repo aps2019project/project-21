@@ -1,4 +1,4 @@
-package models.Match;
+package models.match;
 
 public enum GoalMode {
     ELIMINATE_HERO,

@@ -1,4 +1,4 @@
-package models.Card;
+package models.card;
 
 public enum BuffMode {
     HOLY_BUFF,

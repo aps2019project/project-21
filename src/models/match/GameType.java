@@ -1,6 +1,6 @@
-package models.Match;
+package models.match;
 
 public enum GameType {
     STORY,
-    CUSTUM
+    CUSTOM
 }

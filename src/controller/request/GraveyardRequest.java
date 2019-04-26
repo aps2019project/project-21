@@ -2,7 +2,7 @@ package controller.request;
 
 public class GraveyardRequest extends Request {
     @Override
-    public void checkSyntax() {
+    public void extractType() {
         // set field type in parent class
     }
 

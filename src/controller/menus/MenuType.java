@@ -1,6 +1,6 @@
-package controller.menu;
+package controller.menus;
 
-public enum MenuType {
+enum MenuType {
     ACCOUNT_MENU,
     MAIN_MENU,
     BATTLE_MENU,

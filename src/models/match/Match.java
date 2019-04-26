@@ -1,10 +1,9 @@
-package models.Match;
+package models.match;
 
-import controller.menu.Graveyard;
-import models.Card.Card;
+import controller.menus.Graveyard;
+import models.card.Card;
 import models.Hand;
 import models.Item.Collectable;
-import models.Item.Item;
 import models.Player;
 
 import java.sql.Time;
@@ -14,7 +13,7 @@ import java.util.List;
 public class Match {
     private Player[] players = new Player[2];
     private Hand[] hands = new Hand[2];
-    private List<List<Card>> groundCards = new ArrayList<List<Card>>();
+    private List<List<Card>> groundCards = new ArrayList<>();
     private PlayerMatchInfo[] info = new PlayerMatchInfo[2];
     private Battlefield battlefield;
     private GameMode gameMode;
@@ -160,133 +159,5 @@ public class Match {
 
     private void showMatchResults() {
         //
-    }
-
-    public Player[] getPlayers() {
-        return players;
-    }
-
-    public void setPlayers(Player[] players) {
-        this.players = players;
-    }
-
-    public Hand[] getHands() {
-        return hands;
-    }
-
-    public void setHands(Hand[] hands) {
-        this.hands = hands;
-    }
-
-    public List<List<Card>> getGroundCards() {
-        return groundCards;
-    }
-
-    public void setGroundCards(List<List<Card>> groundCards) {
-        this.groundCards = groundCards;
-    }
-
-    public PlayerMatchInfo[] getInfo() {
-        return info;
-    }
-
-    public void setInfo(PlayerMatchInfo[] info) {
-        this.info = info;
-    }
-
-    public Battlefield getBattlefield() {
-        return battlefield;
-    }
-
-    public void setBattlefield(Battlefield battlefield) {
-        this.battlefield = battlefield;
-    }
-
-    public GameMode getGameMode() {
-        return gameMode;
-    }
-
-    public void setGameMode(GameMode gameMode) {
-        this.gameMode = gameMode;
-    }
-
-    public GoalMode getGoalMode() {
-        return goalMode;
-    }
-
-    public void setGoalMode(GoalMode goalMode) {
-        this.goalMode = goalMode;
-    }
-
-    public GameType getGameType() {
-        return gameType;
-    }
-
-    public void setGameType(GameType gameType) {
-        this.gameType = gameType;
-    }
-
-    public int getTurn() {
-        return turn;
-    }
-
-    public void setTurn(int turn) {
-        this.turn = turn;
-    }
-
-    public Time getGameTime() {
-        return gameTime;
-    }
-
-    public void setGameTime(Time gameTime) {
-        this.gameTime = gameTime;
-    }
-
-    public boolean isPlayerOneWinner() {
-        return isPlayerOneWinner;
-    }
-
-    public void setPlayerOneWinner(boolean playerOneWinner) {
-        isPlayerOneWinner = playerOneWinner;
-    }
-
-    public Card getSelectedCard() {
-        return selectedCard;
-    }
-
-    public void setSelectedCard(Card selectedCard) {
-        this.selectedCard = selectedCard;
-    }
-
-    public boolean isDoesAnyCardSelected() {
-        return doesAnyCardSelected;
-    }
-
-    public void setDoesAnyCardSelected(boolean doesAnyCardSelected) {
-        this.doesAnyCardSelected = doesAnyCardSelected;
-    }
-
-    public List<Collectable>[] getCollectables() {
-        return collectables;
-    }
-
-    public void setCollectables(List<Collectable>[] collectables) {
-        this.collectables = collectables;
-    }
-
-    public Collectable getSelectedCollectable() {
-        return selectedCollectable;
-    }
-
-    public void setSelectedCollectable(Collectable selectedCollectable) {
-        this.selectedCollectable = selectedCollectable;
-    }
-
-    public Graveyard[] getGraveyard() {
-        return graveyard;
-    }
-
-    public void setGraveyard(Graveyard[] graveyard) {
-        this.graveyard = graveyard;
     }
 }

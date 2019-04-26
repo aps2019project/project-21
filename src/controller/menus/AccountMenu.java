@@ -1,4 +1,4 @@
-package controller.menu;
+package controller.menus;
 
 import controller.request.AccountMenuRequest;
 import controller.request.Request;
@@ -23,7 +23,7 @@ public class AccountMenu extends Menu {
 
         request.getNewCommand();
 
-        request.checkSyntax();
+        request.extractType();
 
         switch (request.getType()) {
             case CREATE_ACCOUNT:

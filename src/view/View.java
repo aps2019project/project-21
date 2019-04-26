@@ -1,7 +1,7 @@
 package view;
 
-import controller.menu.ShopMenu;
-import models.Match.Match;
+import controller.menus.ShopMenu;
+import models.match.Match;
 import models.Player;
 import models.Collection;
 

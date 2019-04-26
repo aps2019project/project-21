@@ -1,4 +1,4 @@
-package controller.menu;
+package controller.menus;
 
 import controller.request.MainMenuRequest;
 import controller.request.Request;
@@ -23,7 +23,7 @@ public class CollectionMenu extends Menu {
 
         request.getNewCommand();
 
-        request.checkSyntax();
+        request.extractType();
 
         switch (request.getType()) {
             //  add cases

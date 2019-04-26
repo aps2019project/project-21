@@ -1,4 +1,4 @@
-package models.Card;
+package models.card;
 
 public class Hero extends Attacker {
     private boolean canMove = true;

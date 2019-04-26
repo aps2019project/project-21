@@ -1,17 +1,17 @@
-package controller.menu;
+package controller.menus;
 
 import controller.request.MainMenuRequest;
 import controller.request.Request;
 import view.View;
 
-public class MainMenu extends Menu {
-    private static MainMenu instance = new MainMenu();
+public class Graveyard extends Menu {
+    private static Graveyard instance = new Graveyard();
 
     static Menu getInstance() {
         return instance;
     }
 
-    private MainMenu() {
+    private Graveyard() {
 
     }
 
@@ -19,8 +19,10 @@ public class MainMenu extends Menu {
         showMenu();
 
         request = new MainMenuRequest();
+
         request.getNewCommand();
-        request.checkSyntax();
+
+        request.extractType();
 
         switch (request.getType()) {
             //  add cases
@@ -33,23 +35,15 @@ public class MainMenu extends Menu {
         }
     }
 
-    private void help() {
+    private static void showMenu() {
 
     }
 
-    private void shop() {
+    private void showInfo() {
 
     }
 
-    private void battle() {
-
-    }
-
-    private void collection() {
-
-    }
-
-    private void showMenu() {
+    private void showCards() {
 
     }
 

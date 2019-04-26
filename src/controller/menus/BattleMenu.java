@@ -1,4 +1,4 @@
-package controller.menu;
+package controller.menus;
 
 import controller.request.BattleMenuRequest;
 import controller.request.Request;
@@ -22,7 +22,7 @@ public class BattleMenu extends Menu {
 
         request.getNewCommand();
 
-        request.checkSyntax();
+        request.extractType();
 
         switch (request.getType()) {
             //  add cases

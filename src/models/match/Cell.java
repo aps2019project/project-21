@@ -1,7 +1,7 @@
-package models.Match;
+package models.match;
 
-import models.Card.Attacker;
-import models.Card.Effect;
+import models.card.Attacker;
+import models.card.Effect;
 
 public class Cell {
     private int width;

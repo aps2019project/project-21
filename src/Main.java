@@ -1,8 +1,8 @@
-import controller.menu.MenuManager;
+import controller.menus.MenuManager;
 
 public class Main {
     public static void main(String[] args) {
-        MenuManager manager = new MenuManager();
-        manager.main();
+        MenuManager menuManager = new MenuManager();
+        menuManager.main();
     }
 }

@@ -1,14 +1,14 @@
-package models.Card;
+package models.card;
 
-import models.Match.Cell;
+import models.match.Cell;
 
 public class Effect {
     private int changeInAP;
-    private int changeINHP;
-    private boolean isItfreezer;
+    private int changeInHP;
+    private boolean isItFreezer;
     private boolean isItPassive;
 
-    public void cast(Cell cell){
+    public void apply(Cell cell){
 
     }
 
@@ -20,20 +20,20 @@ public class Effect {
         this.changeInAP = changeInAP;
     }
 
-    public int getChangeINHP() {
-        return changeINHP;
+    public int getChangeInHP() {
+        return changeInHP;
     }
 
-    public void setChangeINHP(int changeINHP) {
-        this.changeINHP = changeINHP;
+    public void setChangeInHP(int changeInHP) {
+        this.changeInHP = changeInHP;
     }
 
-    public boolean isItfreezer() {
-        return isItfreezer;
+    public boolean isItFreezer() {
+        return isItFreezer;
     }
 
-    public void setItfreezer(boolean itfreezer) {
-        isItfreezer = itfreezer;
+    public void setItFreezer(boolean itFreezer) {
+        isItFreezer = itFreezer;
     }
 
     public boolean isItPassive() {

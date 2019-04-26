@@ -1,4 +1,4 @@
-package models.Match;
+package models.match;
 
 enum GameMode {
     SINGLE_PLAYER,

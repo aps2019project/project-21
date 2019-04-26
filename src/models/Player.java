@@ -1,6 +1,6 @@
 package models;
 
-import models.Match.Match;
+import models.match.Match;
 
 import java.util.ArrayList;
 import java.util.List;

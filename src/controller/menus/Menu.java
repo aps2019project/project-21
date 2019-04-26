@@ -1,4 +1,4 @@
-package controller.menu;
+package controller.menus;
 
 import controller.request.Request;
 import view.View;

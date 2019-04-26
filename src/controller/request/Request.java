@@ -20,7 +20,7 @@ public abstract class Request {
         return error;
     }
 
-    public abstract void checkSyntax();
+    public abstract void extractType();
 
     protected boolean helpCheck() {
         return true;

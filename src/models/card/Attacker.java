@@ -1,6 +1,6 @@
-package models.Card;
+package models.card;
 
-import models.Match.Cell;
+import models.match.Cell;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class Attacker extends Card {
     }
 
     Attacker(String name, int hp, int ap, Spell specialPower) {
-        super(name);
+//        super(name);
         this.hp = hp;
         this.ap = ap;
         currentCell = new Cell();

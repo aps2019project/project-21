@@ -1,8 +1,8 @@
-package controller.menu;
+package controller.menus;
 
 import controller.request.AccountMenuRequest;
 import controller.request.Request;
-import models.Card.Card;
+import models.card.Card;
 import models.Item.Item;
 import models.Player;
 import view.ErrorMode;
@@ -32,7 +32,7 @@ public class ShopMenu extends Menu {
 
         request.getNewCommand();
 
-        request.checkSyntax();
+        request.extractType();
 
         switch (request.getType()) {
             //  add cases

@@ -1,6 +1,6 @@
 package models.Item;
 
-import models.Match.Cell;
+import models.match.Cell;
 
 public class Collectable extends Item {
     private Cell currentCell;

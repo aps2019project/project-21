@@ -1,10 +1,10 @@
-package models.Card;
+package models.card;
 
-import models.Match.Cell;
+import models.match.Cell;
 
 public class Buff extends Effect {
     private int durability;
-    BuffMode buffMode;
+    private BuffMode buffMode;
 
     public void castEffect(Cell cell){
         //  override method in cardEffect

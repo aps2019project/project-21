@@ -1,6 +1,6 @@
-package models.Match;
+package models.match;
 
-import models.Card.Card;
+import models.card.Card;
 
 import java.util.ArrayList;
 import java.util.List;

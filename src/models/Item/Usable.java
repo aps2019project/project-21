@@ -1,6 +1,6 @@
 package models.Item;
 
-import models.Card.Effect;
+import models.card.Effect;
 
 public class Usable extends Item {
     private Effect effect;

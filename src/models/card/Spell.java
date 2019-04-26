@@ -1,6 +1,6 @@
-package models.Card;
+package models.card;
 
-import models.Match.Cell;
+import models.match.Cell;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +11,9 @@ public class Spell extends Card {
     private Effect effect = new Effect();
     private String description;
 
-    public Spell(String name) {
-        super(name);
-    }
+//    public Spell(String name) {
+//        super(name);
+//    }
 
     public void castSpell() {
 

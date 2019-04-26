@@ -1,13 +1,14 @@
 package models;
 
-import models.Card.Card;
-import models.Card.Hero;
+import models.card.Card;
+import models.card.Hero;
 import models.Item.Item;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Deck {
+    private static final int MAX_SIZE = 20;
     private String name;
     private List<Card> cards = new ArrayList<>();
     private Item item;
