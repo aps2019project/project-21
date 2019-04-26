@@ -31,10 +31,6 @@ public class Card {
         player.getCollection().addCard(card);
     }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
     public String getName() {
         return name;
     }
@@ -47,20 +43,12 @@ public class Card {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getPrice() {
         return price;
     }
 
     public int getManaCost() {
         return manaCost;
-    }
-
-    public void setManaCost(int manaCost) {
-        this.manaCost = manaCost;
     }
 
     public int getXCoordinate() {
@@ -85,10 +73,6 @@ public class Card {
 
     public void setCardIDInGame(String cardIDInGame) {
         this.cardIDInGame = cardIDInGame;
-    }
-
-    public int getIdInCollection() {
-        return idInCollection;
     }
 
     public void setIdInCollection(int idInCollection) {

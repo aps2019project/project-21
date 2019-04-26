@@ -42,4 +42,8 @@ public class Battlefield {
     public void setCells(Cell[][] cells) {
         this.cells = cells;
     }
+
+    public Cell getCell(int x, int y){
+        return cells[x][y];
+    }
 }

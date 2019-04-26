@@ -1,6 +1,7 @@
 package models.match;
 
 import controller.menus.Graveyard;
+import models.card.Attacker;
 import models.card.Card;
 import models.Hand;
 import models.Item.Collectable;
@@ -23,7 +24,6 @@ public class Match {
     private Time gameTime;
     private boolean isPlayerOneWinner;
     private Card selectedCard;
-    private boolean doesAnyCardSelected;
     private List<Collectable>[] collectables;
     private Collectable selectedCollectable;
     private Graveyard[] graveyard = new Graveyard[2];
@@ -42,9 +42,9 @@ public class Match {
         this.goalMode = goalMode;
     }
 
-    public void selectCard(String  cardID){
+    public void selectCard(String cardID) {
         Card card = new Card();
-        for (int i = 0; i < groundCards.get(turn).size();i++){
+        for (int i = 0; i < groundCards.get(turn).size(); i++) {
             if (groundCards.get(turn).get(i).getCardIDInGame().equals(cardID))
                 card = groundCards.get(turn).get(i);
         }
@@ -53,22 +53,21 @@ public class Match {
             return;
         }
         selectedCard = card;
-        doesAnyCardSelected = true;
     }
 
-    public void moveCard(int x, int y){
-        if(!doesAnyCardSelected) {
+    public void moveCard(int x, int y) {
+        if (!isAnyCardSelected()) {
             //error
             return;
         }
         boolean validTarget = true;
-        if(Math.abs(selectedCard.getXCoordinate() - x) + Math.abs(selectedCard.getYCoordinate() - y) > 2)
+        if (Math.abs(selectedCard.getXCoordinate() - x) + Math.abs(selectedCard.getYCoordinate() - y) > 2)
             validTarget = false;
         //if(special) validTarget = true
-        if(!battlefield.getCells()[x][y].isEmpty())
+        if (!battlefield.getCells()[x][y].isEmpty())
             validTarget = false;
         //if(pathisclosed) validTarget = false
-        if(validTarget) {
+        if (validTarget) {
             battlefield.getCells()[selectedCard.getXCoordinate()][selectedCard.getYCoordinate()].setEmpty(true);
             selectedCard.setXCoordinate(x);
             selectedCard.setYCoordinate(y);
@@ -76,18 +75,29 @@ public class Match {
             System.out.println(selectedCard.getCardIDInGame() + " moved to " + x + " " + y);
             return;
         }
-        System.out.println("Invalid target");;
+        System.out.println("Invalid target");
+        ;
     }
 
-    public void attack(String opponentCardID){}
+    public void attack(String opponentCardID) {
+    }
 
-    public void attackCombo(String  opponentCardID, int[] myCardIDs){}
+    public void attackCombo(String opponentCardID, int[] myCardIDs) {
+    }
 
-    public void useSpecialPower(int x, int y){}
+    public void useSpecialPower(int x, int y) {
+        if (!isAnyCardSelected())
+            return;
+        Attacker attacker = (Attacker) selectedCard;
+        Cell target = getCell(x, y);
+        if (!attacker.hasSpecialPower())
+            return;
+        attacker.castSpecialPower(this, target);
+    }
 
     public void insertCard(String cardName, int x, int y) {
         Card card = new Card();
-        for (int i = 0; i < hands[turn].getCards().size();i++){
+        for (int i = 0; i < hands[turn].getCards().size(); i++) {
             if (hands[turn].getCards().get(i).getName().equals(cardName))
                 card = hands[turn].getCards().get(i);
         }
@@ -126,18 +136,22 @@ public class Match {
         battlefield.getCells()[x][y].setEmpty(false);
     }
 
-    public void swapTurn(){
+    public void swapTurn() {
         turn = 1 - turn;
         //blah blah blah
     }
 
-    public void selectCollectable(int collectableID){}
+    public void selectCollectable(int collectableID) {
+    }
 
-    public void showItemInfo(){}
+    public void showItemInfo() {
+    }
 
-    public void useItem(int x, int y) {}
+    public void useItem(int x, int y) {
+    }
 
-    public void enterGraveyard(){}
+    public void enterGraveyard() {
+    }
 
     public void play() {
 
@@ -159,5 +173,23 @@ public class Match {
 
     private void showMatchResults() {
         //
+    }
+
+    private boolean isAnyCardSelected() {
+        return selectedCard != null;
+    }
+
+    public Card getSelectedCard() {
+        return selectedCard;
+    }
+
+    public Cell getCell(int x, int y) {
+        return battlefield.getCell(x, y);
+    }
+
+    public List<Cell> getOppCells(){
+        List<Cell> cells = new ArrayList<>();
+        //  TODO
+        return null;
     }
 }

@@ -1,6 +1,7 @@
 package models.card;
 
 import models.match.Cell;
+import models.match.Match;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +49,12 @@ public class Attacker extends Card {
 
     public void counterAttack() {
 
+    }
+
+    public void castSpecialPower(Match match, Cell target) {
+        //  check if he can use spell
+
+        specialPower.castSpell(match, target);
     }
 
     public void disarm() {
@@ -116,8 +123,12 @@ public class Attacker extends Card {
         this.ap = ap;
     }
 
-    public List<Effect> getAppliedEffects(){
+    public List<Effect> getAppliedEffects() {
         return appliedEffects;
+    }
+
+    public boolean hasSpecialPower() {
+        return specialPower != null;
     }
 
 }
