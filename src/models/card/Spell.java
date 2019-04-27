@@ -30,7 +30,7 @@ public class Spell extends Card {
         List<Cell> cells = new ArrayList<>();
         switch (targetType) {
             case HIMSELF:
-//                cells.add(match.getSelectedCard().getCurrentCell());
+//                cells.add(match.getSelectedAttacker().getCurrentCell());
                 break;
             case SINGLE_OPP:
                 cells.add(target);
@@ -42,7 +42,7 @@ public class Spell extends Card {
                 cells.add(target);
                 break;
             case OPPS_IN_ROW:
-//                cells.addAll(match.getOppCellsInRow(match.getSelectedCard().getCurrentCell()));
+//                cells.addAll(match.getOppCellsInRow(match.getSelectedAttacker().getCurrentCell()));
                 break;
         }
         return cells;

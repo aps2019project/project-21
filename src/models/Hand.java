@@ -15,6 +15,7 @@ public class Hand {
     private List<Card> cards = new ArrayList<>();
 
     public static Hand extractHand(Deck deck){
+
         //  TODO
         return null;
     }

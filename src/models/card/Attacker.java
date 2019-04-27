@@ -7,14 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Attacker extends Card {
-    private int initialHp;
-    private int initialAp;
+    private int maxHp;
+    private int maxAp;
     private int hp;
     private int ap;
     private Cell currentCell;
+
     private Spell specialPower;
     private List<Effect> appliedEffects = new ArrayList<>();
-    private int range;
+    private int attackRange;
     private AttackMode attackMode;
 
     private boolean isDisarmed = false;
@@ -27,8 +28,8 @@ public class Attacker extends Card {
 
     Attacker(String name, int hp, int ap, Spell specialPower) {
 //        super(name);
-        this.initialAp = ap;
-        this.initialHp = hp;
+        this.maxAp = ap;
+        this.maxHp = hp;
         this.hp = hp;
         this.ap = ap;
         currentCell = new Cell();
@@ -133,6 +134,14 @@ public class Attacker extends Card {
 
     public boolean hasSpecialPower() {
         return specialPower != null;
+    }
+
+    public Cell getCurrentCell() {
+        return currentCell;
+    }
+
+    public void setCurrentCell(Cell cell){
+        this.currentCell = cell;
     }
 
 }

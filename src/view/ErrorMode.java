@@ -2,6 +2,8 @@ package view;
 
 public enum ErrorMode {
     INVALID_DECK("selected deck is invalid"),
+    CARD_ID_INVALID("card id is invalid."),
+    NO_CARD_IS_SELECTED("No card is selected."),
     USERNAME_IS_TAKEN(""),
     WRONG_PASSWORD(""),
     SYNTAX(""),

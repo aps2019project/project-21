@@ -3,12 +3,16 @@ package models.match;
 import models.card.Attacker;
 import models.card.Card;
 import models.Player;
+import view.ErrorMode;
+import view.View;
 
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Match {
+    private static final int MOVE_RANGE = 2;
+
     private Player[] players = new Player[2];
     private Battlefield battlefield;
     private PlayerMatchInfo[] info = new PlayerMatchInfo[2];
@@ -16,8 +20,9 @@ public class Match {
     private GoalMode goalMode;
     private GameType gameType;
     private Time gameTime;
-    private int turn;  // 0 for player1 and 1 for player 2
-    private Card selectedCard;
+    private int turn;  // 0 for player1 and 1 for player2
+    private Attacker selectedAttacker;
+    private View view = View.getInstance();
 
     public Match(Player playerOne, Player playerTwo, GameMode gameMode, GameType gameType, GoalMode goalMode) {
         this.players[0] = playerOne;
@@ -32,40 +37,40 @@ public class Match {
     }
 
     public void selectCard(String cardID) {
-        Card Card = new Card();
-        for (int i = 0; i < groundCards.get(turn).size(); i++) {
-            if (groundCards.get(turn).get(i).getCardIDInGame().equals(cardID))
-                Card = groundCards.get(turn).get(i);
-        }
-        if (Card.getName() == null) {
-            System.out.println("Invalid Card name");
-            return;
-        }
-        selectedCard = Card;
+        for (Attacker attacker : info[turn].getGroundedAttackers())
+            if (attacker.getCardIDInGame().equals(cardID)) {
+                selectedAttacker = attacker;
+                return;
+            }
+        view.printError(ErrorMode.CARD_ID_INVALID);
     }
 
     public void moveCard(int x, int y) {
         if (!isAnyCardSelected()) {
-            //error
+            view.printError(ErrorMode.NO_CARD_IS_SELECTED);
             return;
         }
-        boolean validTarget = true;
-        if (Math.abs(selectedCard.getXCoordinate() - x) + Math.abs(selectedCard.getYCoordinate() - y) > 2)
-            validTarget = false;
+        Cell target = getCell(x, y);
+        if (target == null)
+            return;
+        if (!isMoveTargetValid(target))
+            return;
+        //  actually moving the attacker
+        selectedAttacker.getCurrentCell().setEmpty();
+        selectedAttacker.setCurrentCell(target);
+        target.setCurrentAttacker(selectedAttacker);
+        System.out.println(selectedAttacker.getCardIDInGame() + " moved to " + x + " " + y);
+    }
+
+    private boolean isMoveTargetValid(Cell target) {
+        if (Cell.getManhattanDistance(selectedAttacker.getCurrentCell(), target) > MOVE_RANGE)
+            return false;
         //if(special) validTarget = true
-        if (!battlefield.getCells()[x][y].isEmpty())
-            validTarget = false;
+        if (!target.isEmpty())
+            return false;
         //if(pathisclosed) validTarget = false
-        if (validTarget) {
-            battlefield.getCells()[selectedCard.getXCoordinate()][selectedCard.getYCoordinate()].setEmpty(true);
-            selectedCard.setXCoordinate(x);
-            selectedCard.setYCoordinate(y);
-            battlefield.getCells()[x][y].setEmpty(false);
-            System.out.println(selectedCard.getCardIDInGame() + " moved to " + x + " " + y);
-            return;
-        }
-        System.out.println("Invalid target");
-        ;
+        return true;
+        //  error invalid target
     }
 
     public void attack(String opponentCardID) {
@@ -77,11 +82,19 @@ public class Match {
     public void useSpecialPower(int x, int y) {
         if (!isAnyCardSelected())
             return;
-        Attacker attacker = (Attacker) selectedCard;
         Cell target = getCell(x, y);
-        if (!attacker.hasSpecialPower())
+        if(target == null)
             return;
-        attacker.castSpecialPower(this, target);
+        if(!isAttackTargetValid(target))
+            return;
+        if (!selectedAttacker.hasSpecialPower())
+            return;
+        selectedAttacker.castSpecialPower(this, target);
+    }
+
+    private boolean isAttackTargetValid(Cell target){
+        //  TODO
+        return true;
     }
 
     public void insertCard(String cardName, int x, int y) {
@@ -128,6 +141,7 @@ public class Match {
     public void swapTurn() {
         turn = 1 - turn;
         //blah blah blah
+        //  heh heh heh :| :(
     }
 
     public void selectCollectable(int collectableID) {
@@ -165,20 +179,36 @@ public class Match {
     }
 
     private boolean isAnyCardSelected() {
-        return selectedCard != null;
+        return selectedAttacker != null;
     }
 
-    public Card getSelectedCard() {
-        return selectedCard;
+    public Card getSelectedAttacker() {
+        return selectedAttacker;
     }
 
     public Cell getCell(int x, int y) {
         return battlefield.getCell(x, y);
     }
 
-    public List<Cell> getOppCells(){
+    public List<Cell> getOppCells() {
         List<Cell> cells = new ArrayList<>();
         //  TODO
         return null;
+    }
+
+    public void showGameInfo() {
+        System.out.println("-----Game Info:");
+        for (int i = 0; i < 2; i++)
+            System.out.println(players[i].getUsername() + "  mp: " + info[i].getMp());
+        if (goalMode == GoalMode.KILL_HERO) {
+            for (int i = 0; i < 2; i++)
+                System.out.println((i + 1) + "th Hero hp: " + info[i].getDeck().getHero().getHP());
+        } else if (goalMode == GoalMode.HOLD_FLAG) {
+            for (int i = 0; i < 2; i++)
+                System.out.println();
+            //  TODO
+        } else {
+            //  TODO
+        }
     }
 }

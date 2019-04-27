@@ -14,11 +14,26 @@ public class Deck {
     private Item item;
     private Hero hero;
 
+    public Deck(String name, List<Card> cards, Item item, Hero hero) {
+        this.name = name;
+        this.cards = cards;
+        this.item = item;
+        this.hero = hero;
+    }
+
+    public Deck(String name) {
+        this.name = name;
+    }
+
+    public static Deck copyDeck(Deck deck) {
+        return new Deck(deck.name, deck.cards, deck.item, deck.hero);
+    }
+
     public void shuffle() {
 
     }
 
-    public void showLastCard(){
+    public void showLastCard() {
         //  TODO
     }
 

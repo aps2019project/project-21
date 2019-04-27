@@ -13,7 +13,7 @@ import java.util.List;
 public class PlayerMatchInfo {
     private static final int MAX_MANA = 9;
 
-    private int mana = 3;
+    private int mp = 3;
     private Deck deck;
     private Hand hand;
     private List<Card> graveyard = new ArrayList<>();
@@ -21,7 +21,19 @@ public class PlayerMatchInfo {
     private List<Attacker> groundedAttackers = new ArrayList<>();
 
     PlayerMatchInfo(Player player) {
-        this.deck = player.getCollection().getMainDeck();
+        deck = Deck.copyDeck(player.getCollection().getMainDeck());
         hand = Hand.extractHand(deck);
+    }
+
+    public int getMp() {
+        return mp;
+    }
+
+    public Deck getDeck() {
+        return deck;
+    }
+
+    public List<Attacker> getGroundedAttackers() {
+        return groundedAttackers;
     }
 }
