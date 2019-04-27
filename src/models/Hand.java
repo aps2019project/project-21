@@ -38,4 +38,18 @@ public class Hand {
     public void setCards(List<Card> cards) {
         this.cards = cards;
     }
+
+    public boolean hasCard(String cardName) {
+        for (Card card : cards)
+            if (card.getName().equals(cardName))
+                return true;
+        return false;
+    }
+
+    public Card getCard(String cardName) {
+        for (Card card : cards)
+            if (card.getName().equals(cardName))
+                return card;
+        return null;
+    }
 }

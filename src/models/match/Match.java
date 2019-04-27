@@ -83,61 +83,57 @@ public class Match {
         if (!isAnyCardSelected())
             return;
         Cell target = getCell(x, y);
-        if(target == null)
+        if (target == null)
             return;
-        if(!isAttackTargetValid(target))
+        if (!isAttackTargetValid(target))
             return;
         if (!selectedAttacker.hasSpecialPower())
             return;
         selectedAttacker.castSpecialPower(this, target);
     }
 
-    private boolean isAttackTargetValid(Cell target){
+    private boolean isAttackTargetValid(Cell target) {
         //  TODO
         return true;
     }
 
     public void insertCard(String cardName, int x, int y) {
-
-
-        Card Card = new Card();
-        for (int i = 0; i < hands[turn].getCards().size(); i++) {
-            if (hands[turn].getCards().get(i).getName().equals(cardName))
-                Card = hands[turn].getCards().get(i);
-        }
-        if (Card.getName() == null) {
-            System.out.println("Invalid Card name");
+        Card card = info[turn].getHand().getCard(cardName);
+        if (card == null) {
+            System.out.println("invalid card name");
             return;
         }
-        boolean validTarget = false;
-        for (int i = 0; i < groundCards.get(turn).size() && !validTarget; i++) {
-            if (Math.abs(groundCards.get(turn).get(i).getXCoordinate() - x) < 2) {
-                if (Math.abs(groundCards.get(turn).get(i).getYCoordinate() - y) < 2)
-                    validTarget = true;
+        Cell target = getCell(x, y);
+        if (target == null || !target.isEmpty())
+            return;
+
+        boolean isNearOtherAttackers = false;
+        for (Attacker attacker : info[turn].getGroundedAttackers())
+            if (Cell.getManhattanDistance(attacker.getCurrentCell(), target) < 2) {
+                isNearOtherAttackers = true;
+                break;
             }
-        }
-        //if special power then hastarget = true
-        if (!validTarget) {
-            System.out.println("Invalid Target");
+        if (!isNearOtherAttackers)
             return;
-        }
-        if (info[turn].getMana() < Card.getManaCost()) {
+        //if special power then hasTarget = true
+        if (info[turn].getMp() < card.getManaCost()) {
             System.out.println("You don't have enough mana");
             return;
         }
         //full???
         //spell va jame'e hadaf
         int id = 1;
-        for (int i = 0; i < groundCards.get(turn).size(); i++) {
-            if (groundCards.get(turn).get(i).getName().equals(cardName))
+        for (int i = 0; i < info[turn].getGroundedAttackers().size(); i++) {
+            if (info[turn].getGroundedAttackers().get(i).getName().equals(cardName))
                 id++;
         }
-        Card.setXCoordinate(x);
-        Card.setYCoordinate(y);
-        Card.setCardIDInGame(players[turn].getUsername() + "_" + Card.getName() + "_" + id);
-        groundCards.get(turn).add(Card);
-        hands[turn].remove(Card);
-        battlefield.getCells()[x][y].setEmpty(false);
+        card.setXCoordinate(x);
+        card.setYCoordinate(y);
+        card.setCardIDInGame(players[turn].getUsername() + "_" + card.getName() + "_" + id);
+        info[turn].getGroundedAttackers().add((Attacker) card);
+        info[turn].getHand().remove(card);
+        //  handle cells in both cell and attacker
+        //  handle spell case
     }
 
     public void swapTurn() {
