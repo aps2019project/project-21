@@ -2,6 +2,8 @@ package controller.menus;
 
 import controller.request.AccountMenuRequest;
 import controller.request.Request;
+import controller.request.RequestType;
+import jdk.nashorn.api.tree.WhileLoopTree;
 import models.card.Card;
 import models.Item.Item;
 import models.Player;
@@ -26,22 +28,46 @@ public class ShopMenu extends Menu {
     private List<Item> items = new ArrayList<>();
 
     public void main() {
-        showMenu();
+        shopMenuLoop:
+        while(true) {
+            showMenu();
 
-        request = new AccountMenuRequest();
+            request = new AccountMenuRequest();
 
-        request.getNewCommand();
+            request.getNewCommand();
 
-        request.extractType();
+            request.extractType();
 
-        switch (request.getType()) {
-            //  add cases
-            case HELP:
-                break;
-            case SHOW_MENU:
-                break;
-            case EXIT:
-                break;
+            switch (request.getType()) {
+                //  add cases
+                case SEARCH:
+                    search(request.getCommandLine().substring(7));
+                    break;
+                case SEARCH_COLLECTION:
+                    searchCollection(player, request.getCommandLine().substring(18));
+                    break;
+                case SHOW_COLLECTION:
+                    showCollection(player);
+                    break;
+                case SHOW:
+                    show();
+                    break;
+                case SELL:
+                    sell(player, request.getCommandLine().substring(5));
+                    break;
+                case BUY:
+                    buy(player, request.getCommandLine().substring(4));
+                    break;
+                case HELP:
+                    help();
+                    break;
+                case SHOW_MENU:
+                    showMenu();
+                    break;
+                case EXIT:
+                    request.setType(RequestType.MAIN_MENU);
+                    break shopMenuLoop;
+            }
         }
     }
 
