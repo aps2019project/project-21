@@ -28,46 +28,43 @@ public class ShopMenu extends Menu {
     private List<Item> items = new ArrayList<>();
 
     public void main() {
-        shopMenuLoop:
-        while(true) {
-            showMenu();
+        showMenu();
 
-            request = new AccountMenuRequest();
+        request = new AccountMenuRequest();
 
-            request.getNewCommand();
+        request.getNewCommand();
 
-            request.extractType();
+        request.extractType();
 
-            switch (request.getType()) {
-                //  add cases
-                case SEARCH:
-                    search(request.getCommandLine().substring(7));
-                    break;
-                case SEARCH_COLLECTION:
-                    searchCollection(player, request.getCommandLine().substring(18));
-                    break;
-                case SHOW_COLLECTION:
-                    showCollection(player);
-                    break;
-                case SHOW:
-                    show();
-                    break;
-                case SELL:
-                    sell(player, request.getCommandLine().substring(5));
-                    break;
-                case BUY:
-                    buy(player, request.getCommandLine().substring(4));
-                    break;
-                case HELP:
-                    help();
-                    break;
-                case SHOW_MENU:
-                    showMenu();
-                    break;
-                case EXIT:
-                    request.setType(RequestType.MAIN_MENU);
-                    break shopMenuLoop;
-            }
+        switch (request.getType()) {
+            case SEARCH:
+                search(request.getCommandLine().substring(7));
+                break;
+            case SEARCH_COLLECTION:
+                searchCollection(player, request.getCommandLine().substring(18));
+                break;
+            case SHOW_COLLECTION:
+                showCollection(player);
+                break;
+            case SHOW:
+                show();
+                break;
+            case SELL:
+                sell(player, request.getCommandLine().substring(5));
+                break;
+            case BUY:
+                buy(player, request.getCommandLine().substring(4));
+                break;
+            case HELP:
+                help();
+                break;
+            case SHOW_MENU:
+                showMenu();
+                break;
+            case EXIT:
+                request.setType(RequestType.MAIN_MENU);
+                MenuManager.getInstance().changeMenu(MenuType.MAIN_MENU);
+                break;
         }
     }
 
@@ -222,21 +219,5 @@ public class ShopMenu extends Menu {
 
     public void setItems(List<Item> items) {
         this.items = items;
-    }
-
-    public View getView() {
-        return view;
-    }
-
-    public void setView(View view) {
-        this.view = view;
-    }
-
-    public Request getRequest() {
-        return request;
-    }
-
-    public void setRequest(Request request) {
-        this.request = request;
     }
 }
