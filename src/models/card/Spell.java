@@ -11,9 +11,9 @@ public class Spell extends Card {
     private Effect effect;
     private String description;
 
-//    public Spell(String name) {
-//        super(name);
-//    }
+    public Spell(String name) {
+//        super(name, );
+    }
 
     public void castSpell(Match match, Cell targetCell) {
         List<Cell> targetCells = getTargetCells(match, targetCell);

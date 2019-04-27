@@ -11,7 +11,6 @@ public class Attacker extends Card {
     private int maxAp;
     private int hp;
     private int ap;
-    private Cell currentCell;
 
     private Spell specialPower;
     private List<Effect> appliedEffects = new ArrayList<>();
@@ -26,8 +25,8 @@ public class Attacker extends Card {
 
     }
 
-    Attacker(String name, int hp, int ap, Spell specialPower) {
-//        super(name);
+    Attacker(String name, int price, int manaCost, int hp, int ap, Spell specialPower) {
+        super(name, price, manaCost);
         this.maxAp = ap;
         this.maxHp = hp;
         this.hp = hp;
@@ -140,7 +139,7 @@ public class Attacker extends Card {
         return currentCell;
     }
 
-    public void setCurrentCell(Cell cell){
+    public void setCurrentCell(Cell cell) {
         this.currentCell = cell;
     }
 

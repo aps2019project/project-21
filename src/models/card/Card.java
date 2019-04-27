@@ -1,32 +1,36 @@
 package models.card;
 
 import models.Player;
+import models.match.Cell;
 
 public class Card {
     private static int cardCount = 0;
-    private String name;
-    private int id;
-    private int price;
-    private int manaCost; //for hero = -1
-    private int XCoordinate;
-    private int YCoordinate;
-    private String cardIDInGame;
-    private int idInCollection;
+    protected String name;
+    protected int id;
+    protected int price;
+    protected int manaCost; //for hero = -1
+    protected String cardIDInGame;
+    protected int collectionID;
+    protected Cell currentCell;
 
     public Card() {
 
     }
 
-    public Card(String name, int id, int price, int manaCost) {
+    public Card(String name, int price, int manaCost) {
         this.name = name;
-        this.id = id;
         this.price = price;
         this.manaCost = manaCost;
     }
 
+    {
+        this.id = cardCount;
+        cardCount++;
+    }
+
     public void makeCopyAndAddToCollection(Player player) {
-        Card Card = new Card(this.getName(), this.getId(), this.getPrice(), this.getManaCost());
-        Card.setIdInCollection(player.getCardCurrentID());
+        Card Card = new Card(name, price, manaCost);
+        Card.setCollectionID(player.getCardCurrentID());
         player.setCardCurrentID(player.getCardCurrentID() + 1);
         player.getCollection().addCard(Card);
     }
@@ -51,22 +55,6 @@ public class Card {
         return manaCost;
     }
 
-    public int getXCoordinate() {
-        return XCoordinate;
-    }
-
-    public void setXCoordinate(int XCoordinate) {
-        this.XCoordinate = XCoordinate;
-    }
-
-    public int getYCoordinate() {
-        return YCoordinate;
-    }
-
-    public void setYCoordinate(int YCoordinate) {
-        this.YCoordinate = YCoordinate;
-    }
-
     public String getCardIDInGame() {
         return cardIDInGame;
     }
@@ -75,7 +63,7 @@ public class Card {
         this.cardIDInGame = cardIDInGame;
     }
 
-    public void setIdInCollection(int idInCollection) {
-        this.idInCollection = idInCollection;
+    public void setCollectionID(int collectionID) {
+        this.collectionID = collectionID;
     }
 }

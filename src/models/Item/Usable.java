@@ -5,8 +5,8 @@ import models.card.Effect;
 public class Usable extends Item {
     private Effect effect;
 
-    public Usable(String name) {
-        super(name);
+    public Usable(String name, int price) {
+        super(name, price);
     }
 
     public void castUsable() {
