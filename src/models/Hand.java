@@ -7,15 +7,21 @@ import java.util.List;
 
 public class Hand {
     private static final int HAND_CAPACITY = 5;
-    private List<Card> cards = new ArrayList<>();
-    private Card next;
-
-    public void remove(Card card){
-        cards.remove(card);
-    }
 
     public static int getHandCapacity() {
         return HAND_CAPACITY;
+    }
+
+    private List<Card> cards = new ArrayList<>();
+
+    public static Hand extractHand(Deck deck){
+        //  TODO
+        return null;
+    }
+
+
+    public void remove(Card Card) {
+        cards.remove(Card);
     }
 
     public List<Card> getCards() {
@@ -24,13 +30,5 @@ public class Hand {
 
     public void setCards(List<Card> cards) {
         this.cards = cards;
-    }
-
-    public Card getNext() {
-        return next;
-    }
-
-    public void setNext(Card next) {
-        this.next = next;
     }
 }

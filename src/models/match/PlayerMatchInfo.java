@@ -1,5 +1,10 @@
 package models.match;
 
+import models.Deck;
+import models.Hand;
+import models.Item.Collectable;
+import models.Player;
+import models.card.Attacker;
 import models.card.Card;
 
 import java.util.ArrayList;
@@ -7,39 +12,16 @@ import java.util.List;
 
 public class PlayerMatchInfo {
     private static final int MAX_MANA = 9;
-    private List<Card> graveyardOne = new ArrayList<>();
-    private List<Card> graveyardTwo = new ArrayList<>();
+
     private int mana = 3;
+    private Deck deck;
+    private Hand hand;
+    private List<Card> graveyard = new ArrayList<>();
+    private List<Collectable> achievedCollectables = new ArrayList<>();
+    private List<Attacker> groundedAttackers = new ArrayList<>();
 
-    PlayerMatchInfo() {
-
-    }
-
-    public static int getMaxMana() {
-        return MAX_MANA;
-    }
-
-    public List<Card> getGraveyardOne() {
-        return graveyardOne;
-    }
-
-    public void setGraveyardOne(List<Card> graveyardOne) {
-        this.graveyardOne = graveyardOne;
-    }
-
-    public List<Card> getGraveyardTwo() {
-        return graveyardTwo;
-    }
-
-    public void setGraveyardTwo(List<Card> graveyardTwo) {
-        this.graveyardTwo = graveyardTwo;
-    }
-
-    public int getMana() {
-        return mana;
-    }
-
-    public void setMana(int mana) {
-        this.mana = mana;
+    PlayerMatchInfo(Player player) {
+        this.deck = player.getCollection().getMainDeck();
+        hand = Hand.extractHand(deck);
     }
 }

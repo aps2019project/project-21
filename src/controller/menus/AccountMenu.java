@@ -2,7 +2,6 @@ package controller.menus;
 
 import controller.request.AccountMenuRequest;
 import controller.request.Request;
-import view.View;
 
 public class AccountMenu extends Menu {
     private static AccountMenu instance = new AccountMenu();
@@ -75,14 +74,6 @@ public class AccountMenu extends Menu {
 
     private void gotoMainMenu() {
 
-    }
-
-    public View getView() {
-        return view;
-    }
-
-    public void setView(View view) {
-        this.view = view;
     }
 
     public Request getRequest() {

@@ -90,10 +90,10 @@ public class ShopMenu extends Menu {
     private void buy(Player player, String name) {
         boolean isItCard = false;
         boolean isItInShop = false;
-        Card card = new Card();
+        Card Card = new Card();
         for (int i = 0; i < cards.size() && !isItCard; i++) {
             if (cards.get(i).getName().equals(name)) {
-                card = cards.get(i);
+                Card = cards.get(i);
                 isItCard = true;
                 isItInShop = true;
             }
@@ -110,12 +110,12 @@ public class ShopMenu extends Menu {
             return;
         }
         if (isItCard) {
-            if (card.getPrice() > player.getDrake()) {
+            if (Card.getPrice() > player.getDrake()) {
                 view.printError(ErrorMode.NOT_ENOUGH_MONEY);
                 return;
             }
-            card.makeCopyAndAddToCollection(player);
-            player.setDrake(player.getDrake() - card.getPrice());
+            Card.makeCopyAndAddToCollection(player);
+            player.setDrake(player.getDrake() - Card.getPrice());
         }
         if (item.getPrice() > player.getDrake()) {
             view.printError(ErrorMode.NOT_ENOUGH_MONEY);
@@ -132,11 +132,11 @@ public class ShopMenu extends Menu {
     private void sell(Player player, String name) {
         boolean isItInCollection = false;
         boolean isItCard = false;
-        Card card = new Card();
+        Card Card = new Card();
         Item item = new Item();
         for (int i = 0; i < player.getCollection().getCards().size() && !isItInCollection; i++) {
             if (player.getCollection().getCards().get(i).getName().equals(name)) {
-                card = player.getCollection().getCards().get(i);
+                Card = player.getCollection().getCards().get(i);
                 isItCard = true;
                 isItInCollection = true;
             }
@@ -152,8 +152,8 @@ public class ShopMenu extends Menu {
             return;
         }
         if (isItCard) {
-            player.getCollection().removeCard(card);
-            player.setDrake(player.getDrake() + card.getPrice());
+            player.getCollection().removeCard(Card);
+            player.setDrake(player.getDrake() + Card.getPrice());
             return;
         }
         player.getCollection().removeItem(item);
@@ -168,9 +168,9 @@ public class ShopMenu extends Menu {
         view.help("shopMenu");
     }
 
-    private void addCardToShop(Card card) {
-        if (!this.cards.contains(card))
-            this.cards.add(card);
+    private void addCardToShop(Card Card) {
+        if (!this.cards.contains(Card))
+            this.cards.add(Card);
     }
 
     private void addItemToShop(Item item) {

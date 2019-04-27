@@ -12,19 +12,19 @@ public class Collection {
     private List<Card> cards = new ArrayList<>();
     private List<Item> items = new ArrayList<>();
 
-    public void addCard(Card card){
-        this.cards.add(card);
+    public void addCard(Card Card){
+        this.cards.add(Card);
     }
 
     public void addItem(Item item){
         this.items.add(item);
     }
 
-    public void removeCard(Card card){
-        this.cards.remove(card);
+    public void removeCard(Card Card){
+        this.cards.remove(Card);
         for(int i = 0; i < decks.size(); i++) {
             decks.get(i).getCards().remove(i);
-            if(((Card)decks.get(i).getHero()).getId() == card.getId())
+            if(((Card)decks.get(i).getHero()).getId() == Card.getId())
                 decks.get(i).setHero(null);
         }
     }

@@ -1,5 +1,7 @@
 package models.match;
 
+import models.Item.Collectable;
+import models.Item.Flag;
 import models.card.Attacker;
 import models.card.Effect;
 
@@ -9,47 +11,41 @@ public class Cell {
     private int width;
     private int length;
     private ArrayList<Effect> effects = new ArrayList<>();
-    private boolean empty;
+    private Collectable collectable;
+    private Flag flag;
 
+    //  TODO:
     public boolean isEmpty() {
-        return empty;
+        return false;
     }
 
+    //  TODO:
     public void setEmpty(boolean empty) {
-        this.empty = empty;
     }
 
     public Cell() {
 
     }
 
-    public Cell(int width, int length, boolean empty) {
+    public Cell(int width, int length) {
         this.width = width;
         this.length = length;
-        this.empty = empty;
     }
 
     public Attacker getAttacker() {
         return null;
     }
 
-    public boolean hasEffect() {
-        return !effects.isEmpty();
+    public void addEffect(Effect effect) {
+        this.effects.add(effect);
     }
 
-    public int getWidth() {
-        return width;
+    public void setCollectable(Collectable collectable) {
+        this.collectable = collectable;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
+    public void setFlag(Flag flag) {
+        this.flag = flag;
     }
 
-    public int getLength() {
-        return length;
-    }
-
-    public void setLength(int length) {
-        this.length = length;
-    }
 }

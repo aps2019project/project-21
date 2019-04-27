@@ -1,10 +1,7 @@
 package models.match;
 
-import controller.menus.Graveyard;
 import models.card.Attacker;
 import models.card.Card;
-import models.Hand;
-import models.Item.Collectable;
 import models.Player;
 
 import java.sql.Time;
@@ -13,46 +10,38 @@ import java.util.List;
 
 public class Match {
     private Player[] players = new Player[2];
-    private Hand[] hands = new Hand[2];
-    private List<List<Card>> groundCards = new ArrayList<>();
-    private PlayerMatchInfo[] info = new PlayerMatchInfo[2];
     private Battlefield battlefield;
+    private PlayerMatchInfo[] info = new PlayerMatchInfo[2];
     private GameMode gameMode;
     private GoalMode goalMode;
     private GameType gameType;
-    private int turn; // 0 for player1 and 1 for player 2
     private Time gameTime;
-    private boolean isPlayerOneWinner;
+    private int turn;  // 0 for player1 and 1 for player 2
     private Card selectedCard;
-    private List<Collectable>[] collectables;
-    private Collectable selectedCollectable;
-    private Graveyard[] graveyard = new Graveyard[2];
 
-    Match(Player playerOne, Player playerTwo, GameMode gameMode, GameType gameType, GoalMode goalMode) {
-        this.gameMode = gameMode;
+    public Match(Player playerOne, Player playerTwo, GameMode gameMode, GameType gameType, GoalMode goalMode) {
         this.players[0] = playerOne;
         this.players[1] = playerTwo;
         this.battlefield = new Battlefield();
-        this.turn = 1;
-        List<Card> groundCards1 = new ArrayList<>();
-        List<Card> groundCards0 = new ArrayList<>();
-        this.groundCards.add(groundCards0);
-        this.groundCards.add(groundCards1);
+        this.turn = 0;
+        this.info[0] = new PlayerMatchInfo(playerOne);
+        this.info[1] = new PlayerMatchInfo(playerTwo);
+        this.gameMode = gameMode;
         this.gameType = gameType;
         this.goalMode = goalMode;
     }
 
     public void selectCard(String cardID) {
-        Card card = new Card();
+        Card Card = new Card();
         for (int i = 0; i < groundCards.get(turn).size(); i++) {
             if (groundCards.get(turn).get(i).getCardIDInGame().equals(cardID))
-                card = groundCards.get(turn).get(i);
+                Card = groundCards.get(turn).get(i);
         }
-        if (card.getName() == null) {
-            System.out.println("Invalid card name");
+        if (Card.getName() == null) {
+            System.out.println("Invalid Card name");
             return;
         }
-        selectedCard = card;
+        selectedCard = Card;
     }
 
     public void moveCard(int x, int y) {
@@ -96,13 +85,13 @@ public class Match {
     }
 
     public void insertCard(String cardName, int x, int y) {
-        Card card = new Card();
+        Card Card = new Card();
         for (int i = 0; i < hands[turn].getCards().size(); i++) {
             if (hands[turn].getCards().get(i).getName().equals(cardName))
-                card = hands[turn].getCards().get(i);
+                Card = hands[turn].getCards().get(i);
         }
-        if (card.getName() == null) {
-            System.out.println("Invalid card name");
+        if (Card.getName() == null) {
+            System.out.println("Invalid Card name");
             return;
         }
         boolean validTarget = false;
@@ -117,7 +106,7 @@ public class Match {
             System.out.println("Invalid Target");
             return;
         }
-        if (info[turn].getMana() < card.getManaCost()) {
+        if (info[turn].getMana() < Card.getManaCost()) {
             System.out.println("You don't have enough mana");
             return;
         }
@@ -128,11 +117,11 @@ public class Match {
             if (groundCards.get(turn).get(i).getName().equals(cardName))
                 id++;
         }
-        card.setXCoordinate(x);
-        card.setYCoordinate(y);
-        card.setCardIDInGame(players[turn].getUsername() + "_" + card.getName() + "_" + id);
-        groundCards.get(turn).add(card);
-        hands[turn].remove(card);
+        Card.setXCoordinate(x);
+        Card.setYCoordinate(y);
+        Card.setCardIDInGame(players[turn].getUsername() + "_" + Card.getName() + "_" + id);
+        groundCards.get(turn).add(Card);
+        hands[turn].remove(Card);
         battlefield.getCells()[x][y].setEmpty(false);
     }
 

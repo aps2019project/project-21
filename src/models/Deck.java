@@ -18,6 +18,10 @@ public class Deck {
 
     }
 
+    public void showLastCard(){
+        //  TODO
+    }
+
     public String getName() {
         return name;
     }

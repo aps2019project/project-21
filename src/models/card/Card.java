@@ -25,10 +25,10 @@ public class Card {
     }
 
     public void makeCopyAndAddToCollection(Player player) {
-        Card card = new Card(this.getName(), this.getId(), this.getPrice(), this.getManaCost());
-        card.setIdInCollection(player.getCardCurrentID());
+        Card Card = new Card(this.getName(), this.getId(), this.getPrice(), this.getManaCost());
+        Card.setIdInCollection(player.getCardCurrentID());
         player.setCardCurrentID(player.getCardCurrentID() + 1);
-        player.getCollection().addCard(card);
+        player.getCollection().addCard(Card);
     }
 
     public String getName() {
