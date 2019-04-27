@@ -98,6 +98,8 @@ public class Match {
     }
 
     public void insertCard(String cardName, int x, int y) {
+
+
         Card Card = new Card();
         for (int i = 0; i < hands[turn].getCards().size(); i++) {
             if (hands[turn].getCards().get(i).getName().equals(cardName))
@@ -177,8 +179,6 @@ public class Match {
     private void showMatchResults() {
         //
     }
-
-    //fxchgjvhkja
 
     private boolean isAnyCardSelected() {
         return selectedAttacker != null;

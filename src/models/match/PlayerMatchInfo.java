@@ -36,4 +36,8 @@ public class PlayerMatchInfo {
     public List<Attacker> getGroundedAttackers() {
         return groundedAttackers;
     }
+
+    public boolean hasInHand(String cardName){
+        return hand.hasin
+    }
 }

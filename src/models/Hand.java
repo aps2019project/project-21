@@ -8,18 +8,24 @@ import java.util.List;
 public class Hand {
     private static final int HAND_CAPACITY = 5;
 
-    public static int getHandCapacity() {
-        return HAND_CAPACITY;
-    }
-
     private List<Card> cards = new ArrayList<>();
 
-    public static Hand extractHand(Deck deck){
+    public Hand() {
 
-        //  TODO
-        return null;
     }
 
+    public static Hand extractHand(Deck deck) {
+        Hand hand = new Hand();
+        for (int i = 0; i < HAND_CAPACITY; i++)
+            hand.pushToHandFromDeck(deck);
+        return hand;
+    }
+
+    public void pushToHandFromDeck(Deck deck) {
+        if (this.cards.size() >= 5)
+            return;
+        this.cards.add(deck.pop());
+    }
 
     public void remove(Card Card) {
         cards.remove(Card);

@@ -34,7 +34,12 @@ public class Deck {
     }
 
     public void showLastCard() {
+        Card last = cards.get(0);
         //  TODO
+    }
+
+    public Card pop() {
+        return cards.remove(0);
     }
 
     public String getName() {
