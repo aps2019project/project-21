@@ -115,10 +115,6 @@ public class BattleMenu extends Menu {
 
     }
 
-    private void exit() {
-
-    }
-
     protected void showMenu() {
 
     }

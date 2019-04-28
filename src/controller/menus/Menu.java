@@ -12,4 +12,8 @@ abstract class Menu {
     abstract void main();
 
     abstract protected void showMenu();
+
+    protected void exit(){
+        MenuManager.getInstance().changeMenu(MenuType.EXIT);
+    }
 }

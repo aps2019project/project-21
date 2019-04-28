@@ -24,7 +24,10 @@ public enum ErrorMode {
     NOT_IN_SHOP("there is no item or card with this name in shop"),
     NOT_ENOUGH_MONEY("not enough money"),
     HAVE_3_ITEMS("you have 3 items, you can't buy more item"),
-    CUSTOM_ERROR("");
+    CUSTOM_ERROR(""),
+    YOU_MUST_LOG_IN("You must log in to enter the main menu"),
+    LOGIN_FAILED("log in failed");
+    INVALID_USERNAME("invalid username");
 
     private String message;
 

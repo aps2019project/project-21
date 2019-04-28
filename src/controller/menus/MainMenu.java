@@ -1,8 +1,6 @@
 package controller.menus;
 
 import controller.request.MainMenuRequest;
-import controller.request.Request;
-import view.View;
 
 public class MainMenu extends Menu {
     private static MainMenu instance = new MainMenu();
@@ -23,12 +21,26 @@ public class MainMenu extends Menu {
         request.extractType();
 
         switch (request.getType()) {
-            //  add cases
+            case COLLECTION:
+                collection();
+                break;
+            case SHOP:
+                shop();
+                break;
+            case BATTLE:
+                battle();
+                break;
+            case BACK:
+                back();
+                break;
             case HELP:
+                help();
                 break;
             case SHOW_MENU:
+                showMenu();
                 break;
             case EXIT:
+                exit();
                 break;
         }
     }
@@ -38,34 +50,29 @@ public class MainMenu extends Menu {
     }
 
     private void shop() {
-
+        MenuManager.getInstance().changeMenu(MenuType.SHOP_MENU);
     }
 
     private void battle() {
-
+        MenuManager.getInstance().changeMenu(MenuType.BATTLE_MENU);
     }
 
     private void collection() {
-
+        MenuManager.getInstance().changeMenu(MenuType.COLLECTION_MENU);
     }
 
     protected void showMenu() {
-
+        System.out.println("-------MainMenu-------");
+        System.out.println("1. collection");
+        System.out.println("2. shop");
+        System.out.println("3. battle");
+        System.out.println("4. show menu");
+        System.out.println("5. help");
+        System.out.println("6. back");
+        System.out.println("7. exit");
     }
 
-    public View getView() {
-        return view;
-    }
-
-    public void setView(View view) {
-        this.view = view;
-    }
-
-    public Request getRequest() {
-        return request;
-    }
-
-    public void setRequest(Request request) {
-        this.request = request;
+    private void back() {
+        MenuManager.getInstance().gotoAccount();
     }
 }

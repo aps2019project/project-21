@@ -6,6 +6,7 @@ public enum RequestType {
     SHOW_MENU,
     HELP,
     SHOW,
+    BACK,
 
     CREATE_ACCOUNT,
     LOGIN,
@@ -24,7 +25,6 @@ public enum RequestType {
     SEARCH_COLLECTION,
     BUY,
     SELL,
-    SHOP_MENU,
 
     CREATE_DECK,
     DELETE_DECK,

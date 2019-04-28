@@ -38,7 +38,31 @@ public class MenuManager {
         }
     }
 
-    void changeMenu(MenuType menuType) {
+    protected void changeMenu(MenuType menuType) {
         this.menuType = menuType;
+    }
+
+    protected void gotoShop() {
+        menuType = MenuType.SHOP_MENU;
+    }
+
+    protected void gotoCollection() {
+        menuType = MenuType.COLLECTION_MENU;
+    }
+
+    protected void gotoBattle() {
+        menuType = MenuType.BATTLE_MENU;
+    }
+
+    protected void exit() {
+        menuType = MenuType.EXIT;
+    }
+
+    protected void gotoGraveyard() {
+        menuType = MenuType.GRAVEYARD_MENU;
+    }
+
+    protected void gotoAccount() {
+        menuType = MenuType.ACCOUNT_MENU;
     }
 }

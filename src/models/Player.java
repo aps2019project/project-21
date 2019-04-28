@@ -1,6 +1,8 @@
 package models;
 
 import models.match.Match;
+import view.ErrorMode;
+import view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,14 +36,14 @@ public class Player {
 
     }
 
-    public static Player createAccount(String username, String password) {
+    public static void createAccount(String username, String password) {
+        if (hasThisPlayer(username)) {
+            View.getInstance().printError(ErrorMode.USERNAME_IS_TAKEN);
+            return;
+        }
         Player newPlayer = new Player(username, password);
         players.add(newPlayer);
-        return newPlayer;
-    }
-
-    public static void login(String username, String password) {
-
+        setCurrentPlayer(newPlayer);
     }
 
     public void logout() {
@@ -109,6 +111,27 @@ public class Player {
 
     public static Player getCurrentPlayer() {
         return currentPlayer;
+    }
+
+    public static Player getPlayerByUsername(String username) {
+        for (Player player : players)
+            if (player.username.equals(username))
+                return player;
+        return null;
+    }
+
+    public static boolean hasThisPlayer(String username) {
+        return getPlayerByUsername(username) != null;
+    }
+
+    public static boolean login(String username, String password) {
+        Player player = getPlayerByUsername(username);
+        if (player == null)
+            return false;
+        if (!player.password.equals(password))
+            return false;
+        setCurrentPlayer(player);
+        return true;
     }
 }
 

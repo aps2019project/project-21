@@ -1,24 +1,36 @@
 package controller.request;
 
-public class MainMenuRequest extends Request{
+public class MainMenuRequest extends Request {
     @Override
     public void extractType() {
-        // set field type in parent class
+        type = RequestType.INVALID;
+        if (commandLine.contains("collection"))
+            collectionCheck();
+        else if (commandLine.contains("shop"))
+            shopCheck();
+        else if (commandLine.contains("battle"))
+            battleCheck();
+        else if (commandLine.contains("back"))
+            backCheck();
+        else if (commandLine.contains("exit"))
+            exitCheck();
+        else if (commandLine.contains("help"))
+            helpCheck();
     }
 
-    private boolean shopCheck(){
-        return true;
+    private void shopCheck() {
+        type = RequestType.SHOP;
     }
 
-    private boolean battlecheck(){
-        return true;
+    private void battleCheck() {
+        type = RequestType.BATTLE;
     }
 
-    private boolean collectionCheck(){
-        return true;
+    private void collectionCheck() {
+        type = RequestType.COLLECTION;
     }
 
     protected void backCheck() {
-
+        type = RequestType.BACK;
     }
 }
