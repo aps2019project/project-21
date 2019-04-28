@@ -1,22 +1,29 @@
+package json;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import models.card.Card;
-import models.card.Hero;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-public class GsonObjectMaker {
+public class CardMaker {
     public static void main(String[] args) throws IOException {
+        Card card = cardMaker();
+        System.out.println(card.getName());
+        System.out.println(card.getId());
 
     }
 
-    public Hero cardMaker(File file) throws FileNotFoundException {
+    public static Card cardMaker() throws FileNotFoundException {
+        File file = new File("src//arian.json");
         Scanner scanner = new Scanner(file);
-        return null;
+        String json = scanner.nextLine();
+        System.out.println(json);
+        Gson gson = new Gson();
+        Card card = gson.fromJson(json, Card.class);
+        return card;
     }
 
     public static void saveToFile() throws IOException {
@@ -33,10 +40,7 @@ public class GsonObjectMaker {
 
             Card card1 = new Card("arian", 11, 12);
 
-            List<Card> items = new ArrayList<>();
-            items.add(card1);
-
-            gson.toJson(items, isr);
+            gson.toJson(card1, isr);
         }
 
         System.out.println("Items written to file");
