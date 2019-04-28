@@ -26,7 +26,7 @@ public enum ErrorMode {
     HAVE_3_ITEMS("you have 3 items, you can't buy more item"),
     CUSTOM_ERROR(""),
     YOU_MUST_LOG_IN("You must log in to enter the main menu"),
-    LOGIN_FAILED("log in failed");
+    LOGIN_FAILED("log in failed"),
     INVALID_USERNAME("invalid username");
 
     private String message;
