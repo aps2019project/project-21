@@ -77,4 +77,7 @@ public class BattleMenuRequest extends Request {
     private boolean showCardsCheck() {
         return true;
     }
+    protected void backCheck() {
+
+    }
 }

@@ -7,6 +7,7 @@ import java.util.List;
 
 public class Player {
     private static List<Player> players = new ArrayList<>();
+    private static Player currentPlayer;
     private String username;
     private String password;
     private Collection collection;
@@ -22,9 +23,10 @@ public class Player {
         this.cardCurrentID = cardCurrentID;
     }
 
-    public Player(String username) {
+    public Player(String username, String password) {
         this.drake = 15000;
         this.username = username;
+        this.password = password;
         this.cardCurrentID = 0;
     }
 
@@ -32,23 +34,26 @@ public class Player {
 
     }
 
-    public static void createAccount(String username){
-
+    public static Player createAccount(String username, String password) {
+        Player newPlayer = new Player(username, password);
+        players.add(newPlayer);
+        return newPlayer;
     }
 
     public static void login(String username, String password) {
 
     }
 
-    public void logout(){
+    public void logout() {
 
     }
 
-    public static void showLeaderBoard(){
+    public static void showLeaderBoard() {
 
     }
 
-    public static void help(){}
+    public static void help() {
+    }
 
     public static List<Player> getPlayers() {
         return players;
@@ -96,6 +101,14 @@ public class Player {
 
     public void setMatchHistory(List<Match> matchHistory) {
         this.matchHistory = matchHistory;
+    }
+
+    public static void setCurrentPlayer(Player currentPlayer) {
+        Player.currentPlayer = currentPlayer;
+    }
+
+    public static Player getCurrentPlayer() {
+        return currentPlayer;
     }
 }
 

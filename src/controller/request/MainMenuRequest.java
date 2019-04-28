@@ -17,4 +17,8 @@ public class MainMenuRequest extends Request{
     private boolean collectionCheck(){
         return true;
     }
+
+    protected void backCheck() {
+
+    }
 }

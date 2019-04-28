@@ -127,8 +127,8 @@ public class Match {
             if (info[turn].getGroundedAttackers().get(i).getName().equals(cardName))
                 id++;
         }
-        card.setXCoordinate(x);
-        card.setYCoordinate(y);
+//        card.setXCoordinate(x);
+//        card.setYCoordinate(y);
         card.setCardIDInGame(players[turn].getUsername() + "_" + card.getName() + "_" + id);
         info[turn].getGroundedAttackers().add((Attacker) card);
         info[turn].getHand().remove(card);

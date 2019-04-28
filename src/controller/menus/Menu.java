@@ -10,4 +10,6 @@ abstract class Menu {
     protected Player player;
 
     abstract void main();
+
+    abstract protected void showMenu();
 }

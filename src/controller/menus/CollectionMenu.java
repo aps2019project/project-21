@@ -106,7 +106,7 @@ public class CollectionMenu extends Menu {
 
     }
 
-    private void showMenu() {
+    protected void showMenu() {
 
     }
 

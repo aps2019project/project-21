@@ -13,4 +13,8 @@ public class GraveyardRequest extends Request {
     private boolean showCardsCheck() {
         return true;
     }
+
+    protected void backCheck() {
+
+    }
 }

@@ -35,7 +35,7 @@ public class Graveyard extends Menu {
         }
     }
 
-    private static void showMenu() {
+    protected void showMenu() {
 
     }
 

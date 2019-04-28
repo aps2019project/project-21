@@ -42,5 +42,7 @@ public class CollectionMenuRequest extends Request {
         return true;
     }
 
+    protected void backCheck() {
 
+    }
 }

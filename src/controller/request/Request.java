@@ -3,10 +3,14 @@ package controller.request;
 import controller.InputScanner;
 import view.ErrorMode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Request {
-    private RequestType type = null;
-    private ErrorMode error = null;
-    private String commandLine;
+    protected RequestType type = null;
+    protected ErrorMode error = null;
+    protected String commandLine;
+    protected List<String> commandArguments = new ArrayList<>();
 
     public void getNewCommand() {
         commandLine = InputScanner.nextLine();
@@ -16,38 +20,32 @@ public abstract class Request {
         return type;
     }
 
-    public ErrorMode getError() {
-        return error;
-    }
-
     public abstract void extractType();
 
-    protected boolean helpCheck() {
-        return true;
+    protected void helpCheck() {
+        type = RequestType.HELP;
     }
 
-    protected boolean exitCheck() {
-        return true;
+    protected void exitCheck() {
+        type = RequestType.EXIT;
     }
 
-    protected boolean showMenuCheck() {
-        return true;
+    protected void showMenuCheck() {
+        type = RequestType.SHOW_MENU;
     }
+
+    abstract protected void backCheck();
 
     public void setType(RequestType type) {
         this.type = type;
-    }
-
-    public void setError(ErrorMode error) {
-        this.error = error;
     }
 
     public String getCommandLine() {
         return commandLine;
     }
 
-    public void setCommandLine(String commandLine) {
-        this.commandLine = commandLine;
+    public List<String> getCommandArguments() {
+        return commandArguments;
     }
 }
 

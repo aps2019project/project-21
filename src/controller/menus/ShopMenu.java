@@ -201,7 +201,7 @@ public class ShopMenu extends Menu {
             this.items.add(item);
     }
 
-    private void showMenu() {
+    protected void showMenu() {
         view.showMenu("shopMenu");
     }
 

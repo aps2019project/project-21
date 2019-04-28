@@ -1,7 +1,6 @@
 package controller.request;
 
 public enum RequestType {
-
     NULL,
     INVALID,
     SHOW_MENU,
@@ -58,5 +57,6 @@ public enum RequestType {
 
     //  ALL COMMANDS
 }
+
 
 // HANDLE SIMILAR TYPES FOR DIFFERENT CLASSES

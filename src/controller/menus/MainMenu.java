@@ -49,7 +49,7 @@ public class MainMenu extends Menu {
 
     }
 
-    private void showMenu() {
+    protected void showMenu() {
 
     }
 
