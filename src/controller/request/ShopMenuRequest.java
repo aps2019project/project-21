@@ -9,7 +9,7 @@ public class ShopMenuRequest extends Request {
         // set field type in parent class
         String command = this.getCommandLine();
         if (command.equals("exit"))
-            this.setType(RequestType.EXIT);
+            exitCheck();
         else if (command.equals("show collection"))
             showCollectionCheck();
         else if (command.startsWith("search collection"))
@@ -23,7 +23,7 @@ public class ShopMenuRequest extends Request {
         else if (command.equals("show"))
             showCheck();
         else if (command.equals("help"))
-            this.setType(RequestType.HELP);
+            helpCheck();
     }
 
     private void showCollectionCheck() {
