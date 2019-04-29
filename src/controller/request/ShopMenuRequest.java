@@ -1,5 +1,8 @@
 package controller.request;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class ShopMenuRequest extends Request {
     @Override
     public void extractType() {
@@ -8,43 +11,53 @@ public class ShopMenuRequest extends Request {
         if (command.equals("exit"))
             this.setType(RequestType.EXIT);
         else if (command.equals("show collection"))
-            this.setType(RequestType.SHOW_COLLECTION);
+            showCollectionCheck();
         else if (command.startsWith("search collection"))
-            this.setType(RequestType.SEARCH_COLLECTION);
+            searchCollectionCheck();
         else if (command.startsWith("search"))
-            this.setType(RequestType.SEARCH);
+            searchCheck();
         else if (command.equals("buy"))
-            this.setType(RequestType.BUY);
+            buyCheck();
         else if (command.equals("sell"))
-            this.setType(RequestType.SELL);
+            sellCheck();
         else if (command.equals("show"))
-            this.setType(RequestType.SHOW);
+            showCheck();
         else if (command.equals("help"))
             this.setType(RequestType.HELP);
     }
 
-    private boolean showCollectionCheck() {
-        return true;
+    private void showCollectionCheck() {
+        type = RequestType.SHOW_COLLECTION;
     }
 
-    private boolean searchCheck() {
-        return true;
+    private void searchCheck() {
+        String Regex = "search (\\w+)";
+        Matcher matcher = Pattern.compile(Regex).matcher(commandLine);
+        if (matcher.matches()){
+            commandArguments.add(matcher.group(1));
+            type = RequestType.SEARCH;
+        }
     }
 
-    private boolean searchCollectionCheck() {
-        return true;
+    private void searchCollectionCheck() {
+        String Regex = "search collection (\\w+)";
+        Matcher matcher = Pattern.compile(Regex).matcher(commandLine);
+        if (matcher.matches()){
+            commandArguments.add(matcher.group(1));
+            type = RequestType.SEARCH_COLLECTION;
+        }
     }
 
-    private boolean buyCheck() {
-        return true;
+    private void buyCheck() {
+        type = RequestType.BUY;
     }
 
-    private boolean sellCheck() {
-        return true;
+    private void sellCheck() {
+        type = RequestType.SELL;
     }
 
-    private boolean showCheck() {
-        return true;
+    private void showCheck() {
+        type = RequestType.SHOW;
     }
 
     protected void backCheck() {
