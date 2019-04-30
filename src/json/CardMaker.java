@@ -6,16 +6,12 @@ import controller.InputScanner;
 import models.card.Effect;
 import models.card.Spell;
 import models.card.TargetType;
-import models.card.buffs.Disarm;
 import models.card.buffs.Weakness;
 import models.card.buffs.WeaknessMode;
-import models.card.effects.EffectType;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-
-import static models.card.effects.EffectType.WEAKNESS;
 
 
 public class CardMaker {

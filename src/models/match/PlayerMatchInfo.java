@@ -25,6 +25,10 @@ public class PlayerMatchInfo {
         hand = Hand.extractHand(deck);
     }
 
+    public List<Card> getGraveyard() {
+        return graveyard;
+    }
+
     public int getMp() {
         return mp;
     }
