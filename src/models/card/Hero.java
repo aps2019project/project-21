@@ -1,10 +1,18 @@
 package models.card;
 
 public class Hero extends Attacker {
-    private boolean canMove = true;
-    private boolean canAttack = true;
     private int mp;
     private int cooldown;
+
+    public Hero(String name, int price, int manaCost, int maxHp, int maxAp,
+                int attackRange, AttackMode attackMode, Spell specialPower,
+                int cooldown, int mp) {
+        super(name, price, manaCost, maxHp, maxAp, attackRange, attackMode, specialPower);
+        this.mp = mp;
+        this.cooldown = cooldown;
+        super.canAttack = true;
+        super.canMove = true;
+    }
 
     public boolean isCanMove() {
         return canMove;

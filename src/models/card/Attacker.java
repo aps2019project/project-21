@@ -16,7 +16,8 @@ public class Attacker extends Card {
     private List<Effect> appliedEffects = new ArrayList<>();
     private int attackRange;
     private AttackMode attackMode;
-
+    protected boolean canMove;
+    protected boolean canAttack;
     private boolean isDisarmed = false;
     private boolean isStunned = false;
     private boolean hasHolyBuff = false;
@@ -25,14 +26,17 @@ public class Attacker extends Card {
 
     }
 
-    Attacker(String name, int price, int manaCost, int hp, int ap, Spell specialPower) {
+    Attacker(String name, int price, int manaCost, int maxHp, int maxAp,
+             int attackRange, AttackMode attackMode, Spell specialPower) {
         super(name, price, manaCost);
-        this.maxAp = ap;
-        this.maxHp = hp;
-        this.hp = hp;
-        this.ap = ap;
-        currentCell = new Cell();
+        this.maxAp = maxAp;
+        this.maxHp = maxHp;
+        this.hp = maxHp;
+        this.ap = maxAp;
         this.specialPower = specialPower;
+        this.attackRange = attackRange;
+        this.attackMode = attackMode;
+        currentCell = new Cell();
     }
 
     public void manageEffects() {

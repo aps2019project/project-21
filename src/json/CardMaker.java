@@ -2,10 +2,7 @@ package json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import models.card.ApplyType;
-import models.card.Effect;
-import models.card.Spell;
-import models.card.TargetType;
+import models.card.*;
 import models.card.buffs.*;
 import models.card.effects.DecreaseHP;
 import models.card.effects.IncreaseAP;
@@ -19,6 +16,14 @@ import java.util.Scanner;
 
 public class CardMaker {
     public static void main(String[] args) throws IOException {
+
+    }
+
+    public static void heroMaker() throws IOException {
+//        Hero hero = new Hero();
+    }
+
+    public static void spellMaker() throws IOException {
         List<Effect> effects = new ArrayList<>();
         effects.add(new Power(3, 4, PowerMode.AP));
         effects.add(new Disarm(3));
@@ -27,7 +32,7 @@ public class CardMaker {
         saveToFile(spell);
     }
 
-    public static Spell spellMaker() throws FileNotFoundException {
+    public static Spell spellReader() throws FileNotFoundException {
         File file = new File("src//json//test.json");
         Scanner scanner = new Scanner(file);
         String json = scanner.nextLine();

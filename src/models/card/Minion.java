@@ -1,9 +1,13 @@
 package models.card;
 
 public class Minion extends Attacker {
-    private boolean canMove = false;
-    private boolean canAttack = false;
     private ActivationType activationType;
-    //  method for getting canMove and canAttack
 
+    public Minion(String name, int price, int manaCost, int maxHp, int maxAp,
+                  int attackRange, AttackMode attackMode, Spell specialPower, ActivationType activationType) {
+        super(name, price, manaCost, maxHp, maxAp, attackRange, attackMode, specialPower);
+        this.activationType = activationType;
+        super.canAttack = false;
+        super.canMove = false;
+    }
 }

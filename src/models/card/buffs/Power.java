@@ -35,5 +35,13 @@ public class Power extends Buff {
             attacker.increaseHP(value);
         duration--;
     }
+
+    public int getValue() {
+        return value;
+    }
+
+    public PowerMode getPowerMode() {
+        return powerMode;
+    }
 }
 
