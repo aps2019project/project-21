@@ -17,14 +17,7 @@ import java.util.List;
 
 public class CardMaker {
     public static void main(String[] args) throws IOException {
-        Hero hero = heroReader();
-        System.out.println(hero.getName());
-        System.out.println(hero.getCooldown());
-        System.out.println(hero.getSpecialPower().getEffects().get(0).getApplyType());
-        System.out.println(hero.getSpecialPower().getEffects().get(0).getEffectArguments());
-        System.out.println(hero.getSpecialPower().getEffects().get(0).getEffectType());
-        Power power = (Power) hero.getSpecialPower().getEffects().get(0);
-        System.out.println(power.getPowerMode());
+        minionMaker();
     }
 
     public static void heroMaker() throws IOException {
@@ -32,7 +25,7 @@ public class CardMaker {
         Spell specialPower = new Spell("Dive Sefid's Spell", 0, 1,
                 TargetType.HIMSELF, effect, "casts power buff 4 on himself forever");
         Hero hero = new Hero("Dive Sefid", 8000, 50, 4, -1, AttackMode.MELEE, specialPower, 2);
-        saveToFile(hero);
+        saveToFile(hero, "src//json//heroes//divesefid.json");
     }
 
     public static void spellMaker() throws IOException {
@@ -41,17 +34,24 @@ public class CardMaker {
         effects.add(new Disarm(3));
         Spell spell = new Spell("Madness", 650, 0, TargetType.SINGLE_ALLY, effects,
                 "Increase ap of an ally 4 units for 3 turns but disarmed as well.");
-        saveToFile(spell);
+        saveToFile(spell, "src//json//spells//madness.json");
+    }
+
+    public static void minionMaker() throws IOException {
+        Effect effect = new Stun(1);
+        Spell specialPower = new Spell("shamshirzane fars spell", 0, 0,
+                TargetType.SINGLE_OPP, effect, "Stuns the attacked opp for one turn.");
+        Minion minion = new Minion("Shamshirzane Fars", 400, 2, 6, 4,
+                0, AttackMode.MELEE, specialPower, ActivationType.ON_ATTACK);
+        saveToFile(minion, "src//json//minions//shmshirzanefarsi.json");
     }
 
     private static Hero heroReader() throws IOException {
         String json = new String(Files.readAllBytes(Paths.get("src//json//heroes//divesefid.json")), StandardCharsets.UTF_8);
         Gson gson = new Gson();
         Hero hero = gson.fromJson(json, Hero.class);
-
         Spell spell = hero.getSpecialPower();
         initSpell(spell);
-
         return hero;
     }
 
@@ -61,6 +61,14 @@ public class CardMaker {
         Spell spell = gson.fromJson(json, Spell.class);
         initSpell(spell);
         return spell;
+    }
+
+    public static Minion minionReader() throws IOException {
+        String json = new String(Files.readAllBytes(Paths.get("src//json//minions//shamshirzanefarsi.json")), StandardCharsets.UTF_8);
+        Gson gson = new Gson();
+        Minion minion = gson.fromJson(json, Minion.class);
+        initSpell(minion.getSpecialPower());
+        return minion;
     }
 
     private static void initSpell(Spell spell) {
@@ -106,9 +114,7 @@ public class CardMaker {
         }
     }
 
-    public static void saveToFile(Spell spell) throws IOException {
-        String fileName = "src//json//spells/madness.json";
-
+    private static void saveToFile(Spell spell, String fileName) throws IOException {
         try (FileOutputStream fos = new FileOutputStream(fileName);
              OutputStreamWriter isr = new OutputStreamWriter(fos,
                      StandardCharsets.UTF_8)) {
@@ -124,9 +130,7 @@ public class CardMaker {
         System.out.println("Items written to file");
     }
 
-    public static void saveToFile(Hero hero) throws IOException {
-        String fileName = "src//json//heroes//divesefid.json";
-
+    private static void saveToFile(Hero hero, String fileName) throws IOException {
         try (FileOutputStream fos = new FileOutputStream(fileName);
              OutputStreamWriter isr = new OutputStreamWriter(fos,
                      StandardCharsets.UTF_8)) {
@@ -137,6 +141,22 @@ public class CardMaker {
             Gson gson = gsonBuilder.setPrettyPrinting().create();
 
             gson.toJson(hero, isr);
+        }
+
+        System.out.println("Items written to file");
+    }
+
+    private static void saveToFile(Minion minion, String fileName) throws IOException {
+        try (FileOutputStream fos = new FileOutputStream(fileName);
+             OutputStreamWriter isr = new OutputStreamWriter(fos,
+                     StandardCharsets.UTF_8)) {
+
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            gsonBuilder.serializeNulls();
+
+            Gson gson = gsonBuilder.setPrettyPrinting().create();
+
+            gson.toJson(minion, isr);
         }
 
         System.out.println("Items written to file");

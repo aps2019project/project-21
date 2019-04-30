@@ -1,0 +1,53 @@
+{
+  "activationType": "ON_ATTACK",
+  "maxHp": 6,
+  "maxAp": 4,
+  "hp": 6,
+  "ap": 4,
+  "specialPower": {
+    "targetType": "SINGLE_OPP",
+    "effects": [
+      {
+        "duration": 1,
+        "buffMode": "EVIL",
+        "applyType": "ON_ATTACKER",
+        "effectType": "STUN",
+        "effectArguments": [
+          "1"
+        ],
+        "cell": null,
+        "attacker": null
+      }
+    ],
+    "desc": "Stuns the attacked opp for one turn.",
+    "name": "shamshirzane fars spell",
+    "id": 0,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 0,
+    "manaCost": 0,
+    "currentCell": null
+  },
+  "appliedEffects": [],
+  "attackRange": 0,
+  "attackMode": "MELEE",
+  "canMove": false,
+  "canAttack": false,
+  "isDisarmed": false,
+  "isStunned": false,
+  "hasHolyBuff": false,
+  "name": "Shamshirzane Fars",
+  "id": 1,
+  "collectionID": 0,
+  "cardIDInGame": null,
+  "price": 400,
+  "manaCost": 2,
+  "currentCell": {
+    "x": 0,
+    "y": 0,
+    "effects": [],
+    "collectable": null,
+    "flag": null,
+    "currentAttacker": null
+  }
+}
