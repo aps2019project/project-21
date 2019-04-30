@@ -10,7 +10,7 @@ public class Power extends Buff {
     private int value;
     private PowerMode powerMode;
 
-    public Power(int value, int duration, PowerMode powerMode) {
+    public Power(int duration, int value, PowerMode powerMode) {
         super(duration, ApplyType.ON_ATTACKER, BuffMode.GOOD, EffectType.POWER);
         this.value = value;
         super.effectArguments.add(Integer.toString(value));
@@ -18,7 +18,7 @@ public class Power extends Buff {
         super.effectArguments.add(powerMode.toString());
     }
 
-    public Power(int value, int duration, Attacker attacker, PowerMode mode) {
+    public Power(int duration, int value, Attacker attacker, PowerMode mode) {
         super(duration, null, attacker, ApplyType.ON_ATTACKER, BuffMode.GOOD, EffectType.POWER);
         this.value = value;
         super.effectArguments.add(Integer.toString(value));

@@ -43,7 +43,7 @@ public class Spell extends Card {
     private List<Cell> getTargetCells(Match match, Cell target) {
         List<Cell> cells = new ArrayList<>();
         switch (targetType) {
-            case HIMSELF:
+            case SINGLE_ALLY:
 //                cells.add(match.getSelectedAttacker().getCurrentCell());
                 break;
             case SINGLE_OPP:

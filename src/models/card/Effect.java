@@ -1,5 +1,7 @@
 package models.card;
 
+import models.card.buffs.Weakness;
+import models.card.buffs.WeaknessMode;
 import models.card.effects.EffectType;
 import models.match.Cell;
 
@@ -13,7 +15,7 @@ public class Effect {
     protected Cell cell;
     protected Attacker attacker;
 
-    public Effect(){
+    public Effect() {
 
     }
 
@@ -29,7 +31,7 @@ public class Effect {
         this.effectType = effectType;
     }
 
-    public void apply(){
+    public void apply() {
 
     }
 
@@ -44,4 +46,5 @@ public class Effect {
     public List<String> getEffectArguments() {
         return effectArguments;
     }
+
 }
