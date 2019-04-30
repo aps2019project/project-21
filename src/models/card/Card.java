@@ -66,4 +66,5 @@ public class Card {
     public void setCollectionID(int collectionID) {
         this.collectionID = collectionID;
     }
+
 }

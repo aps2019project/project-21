@@ -16,7 +16,7 @@ public class Weakness extends Buff {
         super();
     }
 
-    public Weakness(int value, int duration, WeaknessMode weaknessMode) {
+    public Weakness(int duration, int value, WeaknessMode weaknessMode) {
         super(duration, ApplyType.ON_ATTACKER, BuffMode.EVIL, EffectType.WEAKNESS);
         this.value = value;
         super.effectArguments.add(Integer.toString(value));
@@ -24,7 +24,7 @@ public class Weakness extends Buff {
         super.effectArguments.add(weaknessMode.toString());
     }
 
-    public Weakness(int value, int duration, Attacker attacker, WeaknessMode mode) {
+    public Weakness(int duration, int value, Attacker attacker, WeaknessMode mode) {
         super(duration, null, attacker, ApplyType.ON_ATTACKER, BuffMode.EVIL, EffectType.WEAKNESS);
         this.value = value;
         super.effectArguments.add(Integer.toString(value));
