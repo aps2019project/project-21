@@ -43,6 +43,10 @@ public class Attacker extends Card {
         appliedEffects.add(effect);
     }
 
+    public void addEffect(List<Effect> effects) {
+        appliedEffects.addAll(effects);
+    }
+
     public void move(int x, int y) {
 
     }

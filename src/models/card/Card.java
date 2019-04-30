@@ -7,10 +7,10 @@ public class Card {
     private static int cardCount = 0;
     protected String name;
     protected int id;
+    protected int collectionID;
+    protected String cardIDInGame;
     protected int price;
     protected int manaCost; //for hero = -1
-    protected String cardIDInGame;
-    protected int collectionID;
     protected Cell currentCell;
 
     public Card() {

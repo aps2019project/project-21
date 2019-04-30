@@ -60,3 +60,5 @@ fabric.properties
 
 /.idea/uiDesigner.xml
 /Duelyst.iml
+/.idea/
+/libraries/

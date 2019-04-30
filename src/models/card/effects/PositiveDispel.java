@@ -8,12 +8,16 @@ import models.match.Cell;
 import java.util.List;
 
 public class PositiveDispel extends Effect {
+    public PositiveDispel(ApplyType applyType) {
+        super(applyType, EffectType.POSITIVE_DISPEL);
+    }
+
     public PositiveDispel(Cell cell, ApplyType applyType) {
-        super(cell, null, applyType);
+        super(cell, null, applyType, EffectType.POSITIVE_DISPEL);
     }
 
     public PositiveDispel(Attacker attacker, ApplyType applyType) {
-        super(null, attacker, applyType);
+        super(null, attacker, applyType, EffectType.POSITIVE_DISPEL);
     }
 
     public void apply() {

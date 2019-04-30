@@ -4,21 +4,32 @@ import models.card.ApplyType;
 import models.card.Attacker;
 import models.card.Buff;
 import models.card.BuffMode;
+import models.card.effects.EffectType;
 
 public class Power extends Buff {
     private int value;
-    private PowerMode mode;
+    private PowerMode powerMode;
+
+    public Power(int value, int duration, PowerMode powerMode) {
+        super(duration, ApplyType.ON_ATTACKER, BuffMode.GOOD, EffectType.POWER);
+        this.value = value;
+        super.effectArguments.add(Integer.toString(value));
+        this.powerMode = powerMode;
+        super.effectArguments.add(powerMode.toString());
+    }
 
     public Power(int value, int duration, Attacker attacker, PowerMode mode) {
-        super(duration, null, attacker, ApplyType.ON_ATTACKER, BuffMode.GOOD);
+        super(duration, null, attacker, ApplyType.ON_ATTACKER, BuffMode.GOOD, EffectType.POWER);
         this.value = value;
-        this.mode = mode;
+        super.effectArguments.add(Integer.toString(value));
+        this.powerMode = mode;
+        super.effectArguments.add(powerMode.toString());
     }
 
     public void apply() {
         if (duration < 0 || attacker == null)
             return;
-        if (mode == PowerMode.AP)
+        if (powerMode == PowerMode.AP)
             attacker.increaseAP(value);
         else
             attacker.increaseHP(value);
@@ -26,7 +37,3 @@ public class Power extends Buff {
     }
 }
 
-enum PowerMode {
-    AP,
-    HP
-}

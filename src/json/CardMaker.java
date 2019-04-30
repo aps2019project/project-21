@@ -2,32 +2,69 @@ package json;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import models.card.Card;
+import controller.InputScanner;
+import models.card.Effect;
+import models.card.Spell;
+import models.card.TargetType;
+import models.card.buffs.Disarm;
+import models.card.buffs.Weakness;
+import models.card.buffs.WeaknessMode;
+import models.card.effects.EffectType;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
+import java.util.List;
+
+import static models.card.effects.EffectType.WEAKNESS;
+
 
 public class CardMaker {
     public static void main(String[] args) throws IOException {
-        Card card = cardMaker();
-        System.out.println(card.getName());
-        System.out.println(card.getId());
-
+        Effect effect = new Weakness(10, 3, WeaknessMode.HP);
+        Spell spell = new Spell("Total Disarm", 1000, 0, TargetType.SINGLE_OPP, effect, "Disarm forever.");
+        saveToFile(spell);
+        spell = spellMaker();
     }
 
-    public static Card cardMaker() throws FileNotFoundException {
-        File file = new File("src//arian.json");
-        Scanner scanner = new Scanner(file);
-        String json = scanner.nextLine();
-        System.out.println(json);
+    public static Spell spellMaker() throws FileNotFoundException {
+        File file = new File("src//json//test.json");
+        String json = InputScanner.nextLine();
         Gson gson = new Gson();
-        Card card = gson.fromJson(json, Card.class);
-        return card;
+        Spell spell = gson.fromJson(json, Spell.class);
+        for (int i = 0; i < spell.getEffects().size(); i++) {
+            Effect effect = spell.getEffects().get(i);
+            List<String> args = effect.getEffectArguments();
+            switch (effect.getEffectType()) {
+                case DISARM:
+                    break;
+                case FLAME:
+                    break;
+                case HOLY:
+                    break;
+                case POISON:
+                    break;
+                case POWER:
+                    break;
+                case STUN:
+                    break;
+                case WEAKNESS:
+                    Weakness weakness = new Weakness(Integer.parseInt(args.get(0)),
+                            Integer.parseInt(args.get(1)), WeaknessMode.valueOf(args.get(2)));
+                    spell.getEffects().set(i, weakness);
+                    break;
+                case DECREASE_HP:
+                    break;
+                case INCREASE_AP:
+                    break;
+                case POSITIVE_DISPEL:
+                    break;
+            }
+        }
+        return spell;
     }
 
-    public static void saveToFile() throws IOException {
-        String fileName = "src/arian.json";
+    public static void saveToFile(Spell obj) throws IOException {
+        String fileName = "src//json//test.json";
 
         try (FileOutputStream fos = new FileOutputStream(fileName);
              OutputStreamWriter isr = new OutputStreamWriter(fos,
@@ -36,11 +73,10 @@ public class CardMaker {
             GsonBuilder gsonBuilder = new GsonBuilder();
             gsonBuilder.serializeNulls();
 
+//            Gson gson = gsonBuilder.setPrettyPrinting().create();
             Gson gson = gsonBuilder.create();
 
-            Card card1 = new Card("arian", 11, 12);
-
-            gson.toJson(card1, isr);
+            gson.toJson(obj, isr);
         }
 
         System.out.println("Items written to file");

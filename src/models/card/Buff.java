@@ -1,19 +1,34 @@
 package models.card;
 
+import models.card.effects.EffectType;
 import models.match.Cell;
 
-public abstract class Buff extends Effect {
+public class Buff extends Effect {
     protected int duration;
     protected BuffMode buffMode;
 
-    protected Buff(int duration, Cell cell, Attacker attacker, ApplyType applyType, BuffMode buffMode) {
-        super(cell, attacker, applyType);
+    public Buff(){
+        super();
+    }
+
+    public Buff(int duration, ApplyType applyType, BuffMode buffMode, EffectType effectType) {
+        super(applyType, effectType);
         this.duration = duration;
         this.buffMode = buffMode;
+        super.effectArguments.add(Integer.toString(duration));
+    }
+
+    protected Buff(int duration, Cell cell, Attacker attacker, ApplyType applyType, BuffMode buffMode, EffectType effectType) {
+        super(cell, attacker, applyType, effectType);
+        this.duration = duration;
+        this.buffMode = buffMode;
+        super.effectArguments.add(Integer.toString(duration));
     }
 
     @Override
-    public abstract void apply();
+    public void apply(){
+
+    }
 
     public int getDuration() {
         return duration;

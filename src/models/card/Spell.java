@@ -8,11 +8,25 @@ import java.util.List;
 
 public class Spell extends Card {
     private TargetType targetType;
-    private Effect effect;
-    private String description;
+    private List<Effect> effects = new ArrayList<>();
+    private String desc;
 
-    public Spell(String name) {
-//        super(name, );
+    Spell(){
+        super();
+    }
+
+    public Spell(String name, int price, int manaCost, TargetType targetType, List<Effect> effects, String desc) {
+        super(name, price, manaCost);
+        this.targetType = targetType;
+        this.effects = effects;
+        this.desc = desc;
+    }
+
+    public Spell(String name, int price, int manaCost, TargetType targetType, Effect effect, String desc) {
+        super(name, price, manaCost);
+        this.targetType = targetType;
+        this.effects.add(effect);
+        this.desc = desc;
     }
 
     public void castSpell(Match match, Cell targetCell) {
@@ -22,7 +36,7 @@ public class Spell extends Card {
         for (Cell cell : targetCells) {
             Attacker target = cell.getAttacker();
             if (target != null)
-                target.addEffect(effect);
+                target.addEffect(effects);
         }
     }
 
@@ -46,5 +60,17 @@ public class Spell extends Card {
                 break;
         }
         return cells;
+    }
+
+    public List<Effect> getEffects() {
+        return effects;
+    }
+
+    public TargetType getTargetType() {
+        return targetType;
+    }
+
+    public String getDesc() {
+        return desc;
     }
 }
