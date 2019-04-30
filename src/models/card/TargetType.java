@@ -5,5 +5,6 @@ public enum TargetType {
     ALL_OPPS,
     SINGLE_ALLY,
     SINGLE_CELL,
-    OPPS_IN_ROW
+    OPPS_IN_ROW,
+    HIMSELF
 }

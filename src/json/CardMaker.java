@@ -10,17 +10,24 @@ import models.card.effects.PositiveDispel;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class CardMaker {
     public static void main(String[] args) throws IOException {
-
+        spellMaker();
+        Spell spell = spellReader();
+        System.out.println(spell.getEffects().get(0).getApplyType());
     }
 
     public static void heroMaker() throws IOException {
-//        Hero hero = new Hero();
+        Effect effect = new Power(Integer.MAX_VALUE, 4, PowerMode.AP);
+        Spell specialPower = new Spell("Dive Sefid's Spell", 0, 1,
+                TargetType.HIMSELF, effect, "casts power buff 4 on himself forever");
+        Hero hero = new Hero("Dive Sefid", 8000, 50, 4, -1, AttackMode.MELEE, specialPower, 2);
+        saveToFile(hero);
     }
 
     public static void spellMaker() throws IOException {
@@ -32,10 +39,8 @@ public class CardMaker {
         saveToFile(spell);
     }
 
-    public static Spell spellReader() throws FileNotFoundException {
-        File file = new File("src//json//test.json");
-        Scanner scanner = new Scanner(file);
-        String json = scanner.nextLine();
+    public static Spell spellReader() throws IOException {
+        String json = new String(Files.readAllBytes(Paths.get("src//json//spells//madness.json")), StandardCharsets.UTF_8);
         Gson gson = new Gson();
         Spell spell = gson.fromJson(json, Spell.class);
 
@@ -82,7 +87,25 @@ public class CardMaker {
         return spell;
     }
 
-    public static void saveToFile(Spell obj) throws IOException {
+    public static void saveToFile(Spell spell) throws IOException {
+        String fileName = "src//json//spells/madness.json";
+
+        try (FileOutputStream fos = new FileOutputStream(fileName);
+             OutputStreamWriter isr = new OutputStreamWriter(fos,
+                     StandardCharsets.UTF_8)) {
+
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            gsonBuilder.serializeNulls();
+
+            Gson gson = gsonBuilder.setPrettyPrinting().create();
+
+            gson.toJson(spell, isr);
+        }
+
+        System.out.println("Items written to file");
+    }
+
+    public static void saveToFile(Hero hero) throws IOException {
         String fileName = "src//json//test.json";
 
         try (FileOutputStream fos = new FileOutputStream(fileName);
@@ -93,9 +116,8 @@ public class CardMaker {
             gsonBuilder.serializeNulls();
 
             Gson gson = gsonBuilder.setPrettyPrinting().create();
-//            Gson gson = gsonBuilder.create();
 
-            gson.toJson(obj, isr);
+            gson.toJson(hero, isr);
         }
 
         System.out.println("Items written to file");

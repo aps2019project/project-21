@@ -1,7 +1,5 @@
 package models.card;
 
-import models.card.buffs.Weakness;
-import models.card.buffs.WeaknessMode;
 import models.card.effects.EffectType;
 import models.match.Cell;
 

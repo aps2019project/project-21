@@ -1,14 +1,12 @@
 package models.card;
 
 public class Hero extends Attacker {
-    private int mp;
     private int cooldown;
 
-    public Hero(String name, int price, int manaCost, int maxHp, int maxAp,
+    public Hero(String name, int price, int maxHp, int maxAp,
                 int attackRange, AttackMode attackMode, Spell specialPower,
-                int cooldown, int mp) {
-        super(name, price, manaCost, maxHp, maxAp, attackRange, attackMode, specialPower);
-        this.mp = mp;
+                int cooldown) {
+        super(name, price, -1, maxHp, maxAp, attackRange, attackMode, specialPower);
         this.cooldown = cooldown;
         super.canAttack = true;
         super.canMove = true;
@@ -28,14 +26,6 @@ public class Hero extends Attacker {
 
     public void setCanAttack(boolean canAttack) {
         this.canAttack = canAttack;
-    }
-
-    public int getMp() {
-        return mp;
-    }
-
-    public void setMp(int mp) {
-        this.mp = mp;
     }
 
     public int getCooldown() {
