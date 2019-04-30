@@ -12,6 +12,8 @@ import java.util.List;
 
 public class Match {
     private static final int MOVE_RANGE = 2;
+    private static Match currentMatch;
+// functions should be handled with currentMatch
 
     private Player[] players = new Player[2];
     private Battlefield battlefield;
@@ -23,6 +25,14 @@ public class Match {
     private int turn;  // 0 for player1 and 1 for player2
     private Attacker selectedAttacker;
     private View view = View.getInstance();
+
+    public static Match getCurrentMatch(){
+        return currentMatch;
+    }
+
+    public PlayerMatchInfo[] getPlayersMatchInfo(){
+        return this.info;
+    }
 
     public Match(Player playerOne, Player playerTwo, GameMode gameMode, GameType gameType, GoalMode goalMode) {
         this.players[0] = playerOne;

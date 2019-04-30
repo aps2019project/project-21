@@ -67,4 +67,8 @@ public class Card {
         this.collectionID = collectionID;
     }
 
+    public static Card getCardByID(String ID){
+        //bulshet zadam
+        return Card.getCardByID("10");
+    }
 }

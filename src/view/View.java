@@ -1,9 +1,10 @@
 package view;
 
 import controller.menus.ShopMenu;
-import models.match.Match;
-import models.Player;
 import models.Collection;
+import models.Player;
+import models.card.Card;
+import models.match.Match;
 
 public class View {
     private static View view = new View();
@@ -37,7 +38,7 @@ public class View {
 
     }
 
-    public void printCard(String name) {
+    public void printCardGraveyard(Card card) {
 
     }
 
