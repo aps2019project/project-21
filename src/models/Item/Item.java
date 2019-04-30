@@ -2,10 +2,14 @@ package models.Item;
 
 import models.Player;
 import models.card.Card;
+import models.card.Effect;
 
 public class Item extends Card {
-    public Item(String name, int price) {
+    protected Effect effect;
+
+    public Item(String name, int price, Effect effect) {
         super(name, price, 0);
+        this.effect = effect;
     }
 
     public Item() {
@@ -13,10 +17,10 @@ public class Item extends Card {
     }
 
     public void makeCopyAndAddToCollection(Player player) {
-        Item item = new Item(name, price);
-        item.setCollectionID(player.getCardCurrentID());
-        player.setCardCurrentID(player.getCardCurrentID() + 1);
-        player.getCollection().addItem(item);
+//        Item item = new Item(name, price);
+//        item.setCollectionID(player.getCardCurrentID());
+//        player.setCardCurrentID(player.getCardCurrentID() + 1);
+//        player.getCollection().addItem(item);
     }
 
     public String getName() {
