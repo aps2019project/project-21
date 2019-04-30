@@ -151,4 +151,7 @@ public class Attacker extends Card {
         this.currentCell = cell;
     }
 
+    public Spell getSpecialPower() {
+        return specialPower;
+    }
 }

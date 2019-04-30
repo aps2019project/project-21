@@ -17,9 +17,14 @@ import java.util.List;
 
 public class CardMaker {
     public static void main(String[] args) throws IOException {
-        spellMaker();
-        Spell spell = spellReader();
-        System.out.println(spell.getEffects().get(0).getApplyType());
+        Hero hero = heroReader();
+        System.out.println(hero.getName());
+        System.out.println(hero.getCooldown());
+        System.out.println(hero.getSpecialPower().getEffects().get(0).getApplyType());
+        System.out.println(hero.getSpecialPower().getEffects().get(0).getEffectArguments());
+        System.out.println(hero.getSpecialPower().getEffects().get(0).getEffectType());
+        Power power = (Power) hero.getSpecialPower().getEffects().get(0);
+        System.out.println(power.getPowerMode());
     }
 
     public static void heroMaker() throws IOException {
@@ -39,11 +44,26 @@ public class CardMaker {
         saveToFile(spell);
     }
 
+    private static Hero heroReader() throws IOException {
+        String json = new String(Files.readAllBytes(Paths.get("src//json//heroes//divesefid.json")), StandardCharsets.UTF_8);
+        Gson gson = new Gson();
+        Hero hero = gson.fromJson(json, Hero.class);
+
+        Spell spell = hero.getSpecialPower();
+        initSpell(spell);
+
+        return hero;
+    }
+
     public static Spell spellReader() throws IOException {
         String json = new String(Files.readAllBytes(Paths.get("src//json//spells//madness.json")), StandardCharsets.UTF_8);
         Gson gson = new Gson();
         Spell spell = gson.fromJson(json, Spell.class);
+        initSpell(spell);
+        return spell;
+    }
 
+    private static void initSpell(Spell spell) {
         for (int i = 0; i < spell.getEffects().size(); i++) {
             Effect effect = spell.getEffects().get(i);
             List<String> args = effect.getEffectArguments();
@@ -84,7 +104,6 @@ public class CardMaker {
             }
             spell.getEffects().set(i, newEffect);
         }
-        return spell;
     }
 
     public static void saveToFile(Spell spell) throws IOException {
@@ -106,7 +125,7 @@ public class CardMaker {
     }
 
     public static void saveToFile(Hero hero) throws IOException {
-        String fileName = "src//json//test.json";
+        String fileName = "src//json//heroes//divesefid.json";
 
         try (FileOutputStream fos = new FileOutputStream(fileName);
              OutputStreamWriter isr = new OutputStreamWriter(fos,
