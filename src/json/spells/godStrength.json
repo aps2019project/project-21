@@ -1,0 +1,28 @@
+{
+  "targetType": "ALLY_HERO",
+  "effects": [
+    {
+      "value": 4,
+      "powerMode": "AP",
+      "duration": 2147483647,
+      "buffMode": "GOOD",
+      "applyType": "ON_ATTACKER",
+      "effectType": "POWER",
+      "effectArguments": [
+        "2147483647",
+        "4",
+        "AP"
+      ],
+      "cell": null,
+      "attacker": null
+    }
+  ],
+  "desc": "add 4 ap to hero",
+  "name": "God Strength",
+  "id": 0,
+  "collectionID": 0,
+  "cardIDInGame": null,
+  "price": 450,
+  "manaCost": 2,
+  "currentCell": null
+}

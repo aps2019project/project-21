@@ -6,5 +6,8 @@ public enum TargetType {
     SINGLE_ALLY,
     SINGLE_CELL,
     OPPS_IN_ROW,
-    HIMSELF
+    HIMSELF,
+    SQUARE_2_2,
+    ALLY_HERO,
+    OPP,HERO
 }

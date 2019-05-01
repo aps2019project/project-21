@@ -6,5 +6,6 @@ public enum ApplyType {
     ON_HERO,
     ON_MINION,
     ON_ALLY,
-    ON_OPP
+    ON_OPP,
+    ON_BOTH
 }

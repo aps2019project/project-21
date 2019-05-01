@@ -1,0 +1,28 @@
+{
+  "targetType": "SINGLE_ALLY",
+  "effects": [
+    {
+      "value": 2,
+      "powerMode": "AP",
+      "duration": 2147483647,
+      "buffMode": "GOOD",
+      "applyType": "ON_ATTACKER",
+      "effectType": "POWER",
+      "effectArguments": [
+        "2147483647",
+        "2",
+        "AP"
+      ],
+      "cell": null,
+      "attacker": null
+    }
+  ],
+  "desc": "add 2 ap",
+  "name": "Empower",
+  "id": 0,
+  "collectionID": 0,
+  "cardIDInGame": null,
+  "price": 250,
+  "manaCost": 1,
+  "currentCell": null
+}

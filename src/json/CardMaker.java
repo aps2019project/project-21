@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import models.card.*;
 import models.card.buffs.*;
 import models.card.effects.DecreaseHP;
+import models.card.effects.EffectType;
 import models.card.effects.IncreaseAP;
 import models.card.effects.PositiveDispel;
 
@@ -17,7 +18,7 @@ import java.util.List;
 
 public class CardMaker {
     public static void main(String[] args) throws IOException {
-        minionMaker();
+        spellMaker();
     }
 
     public static void heroMaker() throws IOException {
@@ -30,11 +31,13 @@ public class CardMaker {
 
     public static void spellMaker() throws IOException {
         List<Effect> effects = new ArrayList<>();
-        effects.add(new Power(3, 4, PowerMode.AP));
-        effects.add(new Disarm(3));
-        Spell spell = new Spell("Madness", 650, 0, TargetType.SINGLE_ALLY, effects,
-                "Increase ap of an ally 4 units for 3 turns but disarmed as well.");
-        saveToFile(spell, "src//json//spells//madness.json");
+        //effects.add(new Power(Integer.MAX_VALUE, 4, PowerMode.AP));
+        //effects.add(new Disarm(Integer.MAX_VALUE, ApplyType.ON_OPP));
+        //effects.add(new Effect(ApplyType.ON_BOTH, EffectType.POSITIVE_DISPEL));
+        effects.add(new Flame(2));
+        Spell spell = new Spell("HellFire", 600, 3, TargetType.SQUARE_2_2, effects,
+                "put flame on squeare");
+        saveToFile(spell, "src//json//spells//hellFire.json");
     }
 
     public static void minionMaker() throws IOException {

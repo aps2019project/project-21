@@ -13,6 +13,8 @@
 .idea/encodings.xml
 .idea/vcs.xml
 src/project-21.iml
+*.iml
+gson-2.8.2.jar
 
 # Sensitive or high-churn files
 .idea/**/dataSources/

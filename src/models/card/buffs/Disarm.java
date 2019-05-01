@@ -11,6 +11,10 @@ public class Disarm extends Buff {
         super(duration, ApplyType.ON_ATTACKER, BuffMode.EVIL, EffectType.DISARM);
     }
 
+    public Disarm(int duration, ApplyType applyType){
+        super(duration, applyType, BuffMode.EVIL, EffectType.DISARM);
+    }
+
     public Disarm(int duration, Attacker attacker) {
         super(duration, null, attacker, ApplyType.ON_ATTACKER, BuffMode.EVIL, EffectType.DISARM);
     }
