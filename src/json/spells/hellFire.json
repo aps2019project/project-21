@@ -1,0 +1,24 @@
+{
+  "targetType": "SQUARE_2_2",
+  "effects": [
+    {
+      "duration": 2,
+      "buffMode": "EVIL",
+      "applyType": "ON_CELL",
+      "effectType": "FLAME",
+      "effectArguments": [
+        "2"
+      ],
+      "cell": null,
+      "attacker": null
+    }
+  ],
+  "desc": "put flame for 2 round",
+  "name": "HellFire",
+  "id": 0,
+  "collectionID": 0,
+  "cardIDInGame": null,
+  "price": 600,
+  "manaCost": 3,
+  "currentCell": null
+}

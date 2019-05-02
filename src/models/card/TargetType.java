@@ -9,5 +9,6 @@ public enum TargetType {
     HIMSELF,
     SQUARE_2_2,
     ALLY_HERO,
-    OPP,HERO
+    OPP_HERO,
+    SQUARE_3_3
 }

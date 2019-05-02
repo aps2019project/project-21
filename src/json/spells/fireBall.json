@@ -1,0 +1,23 @@
+{
+  "targetType": "SINGLE_OPP",
+  "effects": [
+    {
+      "value": 4,
+      "applyType": "ON_OPP",
+      "effectType": "DECREASE_HP",
+      "effectArguments": [
+        "4"
+      ],
+      "cell": null,
+      "attacker": null
+    }
+  ],
+  "desc": "decrease 4 hp from opp.",
+  "name": "Fire Ball",
+  "id": 0,
+  "collectionID": 0,
+  "cardIDInGame": null,
+  "price": 400,
+  "manaCost": 1,
+  "currentCell": null
+}
