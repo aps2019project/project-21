@@ -4,6 +4,7 @@ import controller.menus.ShopMenu;
 import models.Collection;
 import models.Deck;
 import models.Player;
+import models.card.Attacker;
 import models.card.Card;
 import models.match.Match;
 
@@ -78,13 +79,13 @@ public class View {
     public void showGameInfo() {
     }
 
-    public void showMyMinions() {
+    public void showMyMinions(Attacker attacker) {
     }
 
     public void showOpponentMinions() {
     }
 
-    public void showCardInfo(String cardID) {
+    public void showCardInfo(Card card) {
     }
 
     public void showHand() {
