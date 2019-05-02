@@ -4,8 +4,6 @@ import models.card.ApplyType;
 import models.card.Attacker;
 import models.card.Effect;
 
-import java.util.ArrayList;
-
 public class DecreaseHP extends Effect {
     private int value;
 
