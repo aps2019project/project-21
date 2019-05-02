@@ -71,4 +71,9 @@ public class Card {
         //bulshet zadam
         return Card.getCardByID("10");
     }
+
+    public boolean TwoCardAreSame(Card card){
+        return true;
+    }
+
 }

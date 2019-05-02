@@ -30,4 +30,13 @@ public class Item extends Card {
     public void setName(String name) {
         this.name = name;
     }
+
+    public static Item getItemByName(String name){
+        //bayad por shavad
+        return null;
+    }
+
+    public boolean twoItemAreSame(Item item){
+        return true;
+    }
 }
