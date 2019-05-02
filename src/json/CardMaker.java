@@ -2,6 +2,7 @@ package json;
 
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
+import models.Item.Item;
 import models.card.*;
 import models.card.buffs.*;
 import models.card.effects.DecreaseHP;
@@ -18,7 +19,7 @@ import java.util.List;
 
 public class CardMaker {
     public static void main(String[] args) throws IOException {
-        heroMaker();
+//        heroMaker();
     }
 
     public static void heroMaker() throws IOException {
@@ -55,7 +56,7 @@ public class CardMaker {
         saveToFile(minion);
     }
 
-    private static Hero heroReader(String path) throws IOException {
+    public static Hero heroReader(String path) throws IOException {
         String json = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
         YaGson yaGson = new YaGson();
         return yaGson.fromJson(json, Hero.class);
@@ -84,8 +85,10 @@ public class CardMaker {
         else
             folder = "items";
 
-        try (FileOutputStream fos = new FileOutputStream("src//json//" + folder
-                + "//" + card.getName().toLowerCase().replace(" ", "") + ".json");
+        String path = "src//json//" + folder + "//"
+                + card.getName().toLowerCase().replace(" ", "") + ".json";
+
+        try (FileOutputStream fos = new FileOutputStream(path);
              OutputStreamWriter isr = new OutputStreamWriter(fos,
                      StandardCharsets.UTF_8)) {
 

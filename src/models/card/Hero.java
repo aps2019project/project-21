@@ -1,6 +1,11 @@
 package models.card;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Hero extends Attacker {
+    private static List<Hero> heroes = new ArrayList<>();
+
     private int cooldown;
 
     public Hero(String name, int price, int maxHp, int maxAp,
@@ -34,5 +39,20 @@ public class Hero extends Attacker {
 
     public void setCooldown(int cooldown) {
         this.cooldown = cooldown;
+    }
+
+    public static List<Hero> getHeroes() {
+        return heroes;
+    }
+
+    public static void addHero(Hero hero) {
+        if (hero == null)
+            return;
+        heroes.add(hero);
+    }
+
+    public static void addHero(List<Hero> heroes) {
+        for (Hero hero : heroes)
+            addHero(hero);
     }
 }
