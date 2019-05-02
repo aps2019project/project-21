@@ -1,0 +1,53 @@
+{
+  "cooldown": 0,
+  "maxHp": 35,
+  "maxAp": 3,
+  "hp": 35,
+  "ap": 3,
+  "specialPower": {
+    "targetType": "HIMSELF",
+    "effects": [
+      {
+        "duration": 2147483647,
+        "buffMode": "GOOD",
+        "applyType": "ON_ATTACKER",
+        "effectType": "HOLY",
+        "effectArguments": [
+          "2147483647"
+        ],
+        "cell": null,
+        "attacker": null
+      }
+    ],
+    "desc": "3 continuous holy buff",
+    "name": "Esfandiar\u0027s spell ",
+    "id": 0,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 0,
+    "manaCost": 0,
+    "currentCell": null
+  },
+  "appliedEffects": [],
+  "attackRange": 3,
+  "attackMode": "HYBRID",
+  "canMove": true,
+  "canAttack": true,
+  "isDisarmed": false,
+  "isStunned": false,
+  "hasHolyBuff": false,
+  "name": "Esfandiar",
+  "id": 1,
+  "collectionID": 0,
+  "cardIDInGame": null,
+  "price": 12000,
+  "manaCost": -1,
+  "currentCell": {
+    "x": 0,
+    "y": 0,
+    "effects": [],
+    "collectable": null,
+    "flag": null,
+    "currentAttacker": null
+  }
+}

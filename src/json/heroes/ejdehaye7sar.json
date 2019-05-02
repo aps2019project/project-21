@@ -1,0 +1,53 @@
+{
+  "cooldown": 1,
+  "maxHp": 50,
+  "maxAp": 4,
+  "hp": 50,
+  "ap": 4,
+  "specialPower": {
+    "targetType": "SINGLE_OPP",
+    "effects": [
+      {
+        "duration": 2147483647,
+        "buffMode": "EVIL",
+        "applyType": "ON_OPP",
+        "effectType": "DISARM",
+        "effectArguments": [
+          "2147483647"
+        ],
+        "cell": null,
+        "attacker": null
+      }
+    ],
+    "desc": "disarm 1 opp",
+    "name": "Ejdehaye7sar\u0027s spell ",
+    "id": 0,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 0,
+    "manaCost": 0,
+    "currentCell": null
+  },
+  "appliedEffects": [],
+  "attackRange": -1,
+  "attackMode": "MELEE",
+  "canMove": true,
+  "canAttack": true,
+  "isDisarmed": false,
+  "isStunned": false,
+  "hasHolyBuff": false,
+  "name": "Ejdehaye 7 sar",
+  "id": 1,
+  "collectionID": 0,
+  "cardIDInGame": null,
+  "price": 8000,
+  "manaCost": -1,
+  "currentCell": {
+    "x": 0,
+    "y": 0,
+    "effects": [],
+    "collectable": null,
+    "flag": null,
+    "currentAttacker": null
+  }
+}

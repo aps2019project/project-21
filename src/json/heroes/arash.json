@@ -1,0 +1,59 @@
+{
+  "cooldown": 2,
+  "maxHp": 30,
+  "maxAp": 2,
+  "hp": 30,
+  "ap": 2,
+  "specialPower": {
+    "targetType": "OPPS_IN_ROW",
+    "effects": [
+      {
+        "value": 4,
+        "initialHP": 0,
+        "initialAP": 0,
+        "weaknessMode": "HP",
+        "duration": 2147483647,
+        "buffMode": "EVIL",
+        "applyType": "ON_OPP",
+        "effectType": "WEAKNESS",
+        "effectArguments": [
+          "2147483647",
+          "4",
+          "HP"
+        ],
+        "cell": null,
+        "attacker": null
+      }
+    ],
+    "desc": "attack 4 on row of the hero",
+    "name": "Arash\u0027s spell ",
+    "id": 0,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 0,
+    "manaCost": 2,
+    "currentCell": null
+  },
+  "appliedEffects": [],
+  "attackRange": 6,
+  "attackMode": "RANGED",
+  "canMove": true,
+  "canAttack": true,
+  "isDisarmed": false,
+  "isStunned": false,
+  "hasHolyBuff": false,
+  "name": "Arash",
+  "id": 1,
+  "collectionID": 0,
+  "cardIDInGame": null,
+  "price": 10000,
+  "manaCost": -1,
+  "currentCell": {
+    "x": 0,
+    "y": 0,
+    "effects": [],
+    "collectable": null,
+    "flag": null,
+    "currentAttacker": null
+  }
+}
