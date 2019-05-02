@@ -6,4 +6,8 @@ public class Collectable extends Item {
     public Collectable(String name, Effect effect) {
         super(name, 0, effect);
     }
+
+    public void castItem() {
+
+    }
 }

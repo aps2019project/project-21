@@ -1,0 +1,49 @@
+{
+  "cooldown": 2,
+  "maxHp": 40,
+  "maxAp": 3,
+  "hp": 40,
+  "ap": 3,
+  "specialPower": {
+    "targetType": "SINGLE_OPP",
+    "effects": [
+      {
+        "applyType": "ON_OPP",
+        "effectType": "POSITIVE_DISPEL",
+        "effectArguments": [],
+        "cell": null,
+        "attacker": null
+      }
+    ],
+    "desc": "disarm opp",
+    "name": "Afsane\u0027s spell ",
+    "id": 0,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 0,
+    "manaCost": 1,
+    "currentCell": null
+  },
+  "appliedEffects": [],
+  "attackRange": 3,
+  "attackMode": "RANGED",
+  "canMove": true,
+  "canAttack": true,
+  "isDisarmed": false,
+  "isStunned": false,
+  "hasHolyBuff": false,
+  "name": "Afsane",
+  "id": 1,
+  "collectionID": 0,
+  "cardIDInGame": null,
+  "price": 11000,
+  "manaCost": -1,
+  "currentCell": {
+    "x": 0,
+    "y": 0,
+    "effects": [],
+    "collectable": null,
+    "flag": null,
+    "currentAttacker": null
+  }
+}

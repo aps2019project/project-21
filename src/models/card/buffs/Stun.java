@@ -4,15 +4,14 @@ import models.card.ApplyType;
 import models.card.Attacker;
 import models.card.Buff;
 import models.card.BuffMode;
-import models.card.effects.EffectType;
 
 public class Stun extends Buff {
     public Stun(int duration) {
-        super(duration, ApplyType.ON_ATTACKER, BuffMode.EVIL, EffectType.STUN);
+        super(duration, ApplyType.ON_ATTACKER, BuffMode.EVIL);
     }
 
     public Stun(int duration, Attacker attacker) {
-        super(duration, null, attacker, ApplyType.ON_ATTACKER, BuffMode.EVIL, EffectType.STUN);
+        super(duration, null, attacker, ApplyType.ON_ATTACKER, BuffMode.EVIL);
     }
 
     public void apply() {

@@ -7,11 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Spell extends Card {
+    private static List<Spell> spells = new ArrayList<>();
     private TargetType targetType;
     private List<Effect> effects = new ArrayList<>();
     private String desc;
 
-    Spell(){
+    Spell() {
         super();
     }
 
@@ -60,6 +61,21 @@ public class Spell extends Card {
                 break;
         }
         return cells;
+    }
+
+    public static List<Spell> getSpells() {
+        return spells;
+    }
+
+    public static void addSpell(Spell spell) {
+        if (spell == null)
+            return;
+        spells.add(spell);
+    }
+
+    public static void addSpell(List<Spell> spells) {
+        for (Spell spell : spells)
+            addSpell(spell);
     }
 
     public List<Effect> getEffects() {

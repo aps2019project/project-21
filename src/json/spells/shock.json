@@ -1,24 +1,26 @@
 {
-  "targetType": "SINGLE_OPP",
-  "effects": [
-    {
-      "duration": 2,
-      "buffMode": "EVIL",
-      "applyType": "ON_ATTACKER",
-      "effectType": "STUN",
-      "effectArguments": [
-        "2"
-      ],
-      "cell": null,
-      "attacker": null
-    }
-  ],
-  "desc": "stun an opp",
-  "name": "Shock",
-  "id": 0,
-  "collectionID": 0,
-  "cardIDInGame": null,
-  "price": 1200,
-  "manaCost": 1,
-  "currentCell": null
+  "@type": "models.card.Spell",
+  "@val": {
+    "targetType": "SINGLE_OPP",
+    "effects": [
+      {
+        "@type": "models.card.buffs.Stun",
+        "@val": {
+          "duration": 2,
+          "buffMode": "EVIL",
+          "applyType": "ON_ATTACKER",
+          "cell": null,
+          "attacker": null
+        }
+      }
+    ],
+    "desc": "stun an opp",
+    "name": "Shock",
+    "id": 0,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 1200,
+    "manaCost": 1,
+    "currentCell": null
+  }
 }
