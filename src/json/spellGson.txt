@@ -46,6 +46,6 @@ public static void spellMaker() throws IOException {
         //effects.add(new Effect(ApplyType.ON_BOTH, EffectType.POSITIVE_DISPEL));
         effects.add(new Flame(2));
         Spell spell = new Spell("HellFire", 600, 3, TargetType.SQUARE_2_2, effects,
-                "put flame on squeare");
+                "put flame on square");
         saveToFile(spell, "src//json//spells//hellFire.json");
     }

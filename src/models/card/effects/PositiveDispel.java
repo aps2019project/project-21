@@ -9,15 +9,15 @@ import java.util.List;
 
 public class PositiveDispel extends Effect {
     public PositiveDispel(ApplyType applyType) {
-        super(applyType, EffectType.POSITIVE_DISPEL);
+        super(applyType);
     }
 
     public PositiveDispel(Cell cell, ApplyType applyType) {
-        super(cell, null, applyType, EffectType.POSITIVE_DISPEL);
+        super(cell, null, applyType);
     }
 
     public PositiveDispel(Attacker attacker, ApplyType applyType) {
-        super(null, attacker, applyType, EffectType.POSITIVE_DISPEL);
+        super(null, attacker, applyType);
     }
 
     public void apply() {

@@ -1,13 +1,13 @@
 package json;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.gilecode.yagson.YaGson;
+import com.gilecode.yagson.YaGsonBuilder;
 import models.card.*;
 import models.card.buffs.*;
 import models.card.effects.DecreaseHP;
-import models.card.effects.EffectType;
 import models.card.effects.IncreaseAP;
 import models.card.effects.PositiveDispel;
+import models.match.Cell;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -26,6 +26,8 @@ public class CardMaker {
         Spell specialPower = new Spell("Dive Sefid's Spell", 0, 1,
                 TargetType.HIMSELF, effect, "casts power buff 4 on himself forever");
         Hero hero = new Hero("Dive Sefid", 8000, 50, 4, -1, AttackMode.MELEE, specialPower, 2);
+        Cell cell = new Cell(hero);
+        hero.setCurrentCell(cell);
         saveToFile(hero, "src//json//heroes//divesefid.json");
     }
 
@@ -53,117 +55,35 @@ public class CardMaker {
         saveToFile(minion, "src//json//minions//shmshirzanefarsi.json");
     }
 
-    private static Hero heroReader() throws IOException {
-        String json = new String(Files.readAllBytes(Paths.get("src//json//heroes//divesefid.json")), StandardCharsets.UTF_8);
-        Gson gson = new Gson();
-        Hero hero = gson.fromJson(json, Hero.class);
-        Spell spell = hero.getSpecialPower();
-        initSpell(spell);
-        return hero;
+    private static Hero heroReader(String path) throws IOException {
+        String json = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
+        YaGson yaGson = new YaGson();
+        return yaGson.fromJson(json, Hero.class);
     }
 
-    public static Spell spellReader() throws IOException {
-        String json = new String(Files.readAllBytes(Paths.get("src//json//spells//madness.json")), StandardCharsets.UTF_8);
-        Gson gson = new Gson();
-        Spell spell = gson.fromJson(json, Spell.class);
-        initSpell(spell);
-        return spell;
+    public static Spell spellReader(String path) throws IOException {
+        String json = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
+        YaGson gson = new YaGson();
+        return gson.fromJson(json, Spell.class);
     }
 
-    public static Minion minionReader() throws IOException {
-        String json = new String(Files.readAllBytes(Paths.get("src//json//minions//shamshirzanefarsi.json")), StandardCharsets.UTF_8);
-        Gson gson = new Gson();
-        Minion minion = gson.fromJson(json, Minion.class);
-        initSpell(minion.getSpecialPower());
-        return minion;
+    public static Minion minionReader(String path) throws IOException {
+        String json = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
+        YaGson gson = new YaGson();
+        return gson.fromJson(json, Minion.class);
     }
 
-    private static void initSpell(Spell spell) {
-        for (int i = 0; i < spell.getEffects().size(); i++) {
-            Effect effect = spell.getEffects().get(i);
-            List<String> args = effect.getEffectArguments();
-            Effect newEffect = new Effect();
-            switch (effect.getEffectType()) {
-                case DISARM:
-                    newEffect = new Disarm(Integer.parseInt(args.get(0)));
-                    break;
-                case FLAME:
-                    newEffect = new Flame(Integer.parseInt(args.get(0)));
-                    break;
-                case HOLY:
-                    newEffect = new Holy(Integer.parseInt(args.get(0)));
-                    break;
-                case POISON:
-                    newEffect = new Poison(Integer.parseInt(args.get(0)));
-                    break;
-                case POWER:
-                    newEffect = new Power(Integer.parseInt(args.get(0)),
-                            Integer.parseInt(args.get(1)), PowerMode.valueOf(args.get(2)));
-                    break;
-                case STUN:
-                    newEffect = new Stun(Integer.parseInt(args.get(0)));
-                    break;
-                case WEAKNESS:
-                    newEffect = new Weakness(Integer.parseInt(args.get(0)),
-                            Integer.parseInt(args.get(1)), WeaknessMode.valueOf(args.get(2)));
-                    break;
-                case DECREASE_HP:
-                    newEffect = new DecreaseHP(Integer.parseInt(args.get(0)));
-                    break;
-                case INCREASE_AP:
-                    newEffect = new IncreaseAP((Integer.parseInt(args.get(0))));
-                    break;
-                case POSITIVE_DISPEL:
-                    newEffect = new PositiveDispel(ApplyType.valueOf(args.get(0)));
-                    break;
-            }
-            spell.getEffects().set(i, newEffect);
-        }
-    }
-
-    private static void saveToFile(Spell spell, String fileName) throws IOException {
-        try (FileOutputStream fos = new FileOutputStream(fileName);
+    private static void saveToFile(Object object, String path) throws IOException {
+        try (FileOutputStream fos = new FileOutputStream(path);
              OutputStreamWriter isr = new OutputStreamWriter(fos,
                      StandardCharsets.UTF_8)) {
 
-            GsonBuilder gsonBuilder = new GsonBuilder();
-            gsonBuilder.serializeNulls();
+            YaGsonBuilder yaGsonBuilder = new YaGsonBuilder();
+            yaGsonBuilder.serializeNulls();
 
-            Gson gson = gsonBuilder.setPrettyPrinting().create();
+            YaGson yaGson = yaGsonBuilder.setPrettyPrinting().create();
 
-            gson.toJson(spell, isr);
-        }
-
-        System.out.println("Items written to file");
-    }
-
-    private static void saveToFile(Hero hero, String fileName) throws IOException {
-        try (FileOutputStream fos = new FileOutputStream(fileName);
-             OutputStreamWriter isr = new OutputStreamWriter(fos,
-                     StandardCharsets.UTF_8)) {
-
-            GsonBuilder gsonBuilder = new GsonBuilder();
-            gsonBuilder.serializeNulls();
-
-            Gson gson = gsonBuilder.setPrettyPrinting().create();
-
-            gson.toJson(hero, isr);
-        }
-
-        System.out.println("Items written to file");
-    }
-
-    private static void saveToFile(Minion minion, String fileName) throws IOException {
-        try (FileOutputStream fos = new FileOutputStream(fileName);
-             OutputStreamWriter isr = new OutputStreamWriter(fos,
-                     StandardCharsets.UTF_8)) {
-
-            GsonBuilder gsonBuilder = new GsonBuilder();
-            gsonBuilder.serializeNulls();
-
-            Gson gson = gsonBuilder.setPrettyPrinting().create();
-
-            gson.toJson(minion, isr);
+            yaGson.toJson(object, isr);
         }
 
         System.out.println("Items written to file");

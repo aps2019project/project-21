@@ -8,15 +8,13 @@ public class IncreaseAP extends Effect {
     private int changeValue;
 
     public IncreaseAP(int changeValue) {
-        super(null, EffectType.INCREASE_AP);
+        super(null);
         this.changeValue = changeValue;
-        super.effectArguments.add(Integer.toString(changeValue));
     }
 
     public IncreaseAP(Attacker attacker, int changeValue) {
-        super(null, attacker, ApplyType.ON_ATTACKER, EffectType.INCREASE_AP);
+        super(null, attacker, ApplyType.ON_ATTACKER);
         this.changeValue = changeValue;
-        super.effectArguments.add(Integer.toString(changeValue));
     }
 
     public void apply() {

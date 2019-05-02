@@ -1,57 +1,30 @@
 {
-  "cooldown": 2,
-  "maxHp": 50,
-  "maxAp": 4,
-  "hp": 50,
-  "ap": 4,
-  "specialPower": {
-    "targetType": "HIMSELF",
+  "@type": "models.card.Spell",
+  "@val": {
+    "targetType": "SINGLE_OPP",
     "effects": [
       {
-        "value": 4,
-        "powerMode": "AP",
-        "duration": 2147483647,
-        "buffMode": "GOOD",
-        "applyType": "ON_ATTACKER",
-        "effectType": "POWER",
-        "effectArguments": [
-          "2147483647",
-          "4",
-          "AP"
-        ],
-        "cell": null,
-        "attacker": null
+        "@type": "models.card.buffs.Stun",
+        "@val": {
+          "duration": 2,
+          "buffMode": "EVIL",
+          "applyType": "ON_ATTACKER",
+          "effectType": "STUN",
+          "effectArguments": [
+            "2"
+          ],
+          "cell": null,
+          "attacker": null
+        }
       }
     ],
-    "desc": "casts power buff 4 on himself forever",
-    "name": "Dive Sefid\u0027s Spell",
+    "desc": "stun an opp",
+    "name": "Shock",
     "id": 0,
     "collectionID": 0,
     "cardIDInGame": null,
-    "price": 0,
+    "price": 1200,
     "manaCost": 1,
     "currentCell": null
-  },
-  "appliedEffects": [],
-  "attackRange": -1,
-  "attackMode": "MELEE",
-  "canMove": true,
-  "canAttack": true,
-  "isDisarmed": false,
-  "isStunned": false,
-  "hasHolyBuff": false,
-  "name": "Dive Sefid",
-  "id": 1,
-  "collectionID": 0,
-  "cardIDInGame": null,
-  "price": 8000,
-  "manaCost": -1,
-  "currentCell": {
-    "x": 0,
-    "y": 0,
-    "effects": [],
-    "collectable": null,
-    "flag": null,
-    "currentAttacker": null
   }
 }

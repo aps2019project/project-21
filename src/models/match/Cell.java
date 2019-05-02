@@ -2,6 +2,7 @@ package models.match;
 
 import models.Item.Collectable;
 import models.Item.Flag;
+import models.card.AttackMode;
 import models.card.Attacker;
 import models.card.Effect;
 
@@ -14,6 +15,10 @@ public class Cell {
     private Collectable collectable;
     private Flag flag;
     private Attacker currentAttacker;
+
+    public Cell(Attacker attacker) {
+        this.currentAttacker = attacker;
+    }
 
     public static int getManhattanDistance(Cell first, Cell second) {
         return Math.abs(first.x - second.x) + Math.abs(first.y - second.y);
@@ -52,7 +57,7 @@ public class Cell {
         this.flag = flag;
     }
 
-    public void setCurrentAttacker(Attacker attacker){
+    public void setCurrentAttacker(Attacker attacker) {
         this.currentAttacker = attacker;
     }
 

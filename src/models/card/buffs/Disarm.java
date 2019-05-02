@@ -4,19 +4,18 @@ import models.card.ApplyType;
 import models.card.Attacker;
 import models.card.Buff;
 import models.card.BuffMode;
-import models.card.effects.EffectType;
 
 public class Disarm extends Buff {
     public Disarm(int duration) {
-        super(duration, ApplyType.ON_ATTACKER, BuffMode.EVIL, EffectType.DISARM);
+        super(duration, ApplyType.ON_ATTACKER, BuffMode.EVIL);
     }
 
-    public Disarm(int duration, ApplyType applyType){
-        super(duration, applyType, BuffMode.EVIL, EffectType.DISARM);
+    public Disarm(int duration, ApplyType applyType) {
+        super(duration, applyType, BuffMode.EVIL);
     }
 
     public Disarm(int duration, Attacker attacker) {
-        super(duration, null, attacker, ApplyType.ON_ATTACKER, BuffMode.EVIL, EffectType.DISARM);
+        super(duration, null, attacker, ApplyType.ON_ATTACKER, BuffMode.EVIL);
     }
 
     public void apply() {

@@ -1,57 +1,63 @@
 {
-  "cooldown": 2,
-  "maxHp": 50,
-  "maxAp": 4,
-  "hp": 50,
-  "ap": 4,
-  "specialPower": {
-    "targetType": "HIMSELF",
-    "effects": [
-      {
-        "value": 4,
-        "powerMode": "AP",
-        "duration": 2147483647,
-        "buffMode": "GOOD",
-        "applyType": "ON_ATTACKER",
-        "effectType": "POWER",
-        "effectArguments": [
-          "2147483647",
-          "4",
-          "AP"
-        ],
-        "cell": null,
-        "attacker": null
-      }
-    ],
-    "desc": "casts power buff 4 on himself forever",
-    "name": "Dive Sefid\u0027s Spell",
-    "id": 0,
+  "@type": "models.card.Hero",
+  "@val": {
+    "cooldown": 2,
+    "maxHp": 50,
+    "maxAp": 4,
+    "hp": 50,
+    "ap": 4,
+    "specialPower": {
+      "targetType": "HIMSELF",
+      "effects": [
+        {
+          "@type": "models.card.buffs.Power",
+          "@val": {
+            "value": 4,
+            "powerMode": "AP",
+            "duration": 2147483647,
+            "buffMode": "GOOD",
+            "applyType": "ON_ATTACKER",
+            "effectType": "POWER",
+            "effectArguments": [
+              "2147483647",
+              "4",
+              "AP"
+            ],
+            "cell": null,
+            "attacker": null
+          }
+        }
+      ],
+      "desc": "casts power buff 4 on himself forever",
+      "name": "Dive Sefid's Spell",
+      "id": 0,
+      "collectionID": 0,
+      "cardIDInGame": null,
+      "price": 0,
+      "manaCost": 1,
+      "currentCell": null
+    },
+    "appliedEffects": [],
+    "attackRange": -1,
+    "attackMode": "MELEE",
+    "canMove": true,
+    "canAttack": true,
+    "isDisarmed": false,
+    "isStunned": false,
+    "hasHolyBuff": false,
+    "name": "Dive Sefid",
+    "id": 1,
     "collectionID": 0,
     "cardIDInGame": null,
-    "price": 0,
-    "manaCost": 1,
-    "currentCell": null
-  },
-  "appliedEffects": [],
-  "attackRange": -1,
-  "attackMode": "MELEE",
-  "canMove": true,
-  "canAttack": true,
-  "isDisarmed": false,
-  "isStunned": false,
-  "hasHolyBuff": false,
-  "name": "Dive Sefid",
-  "id": 1,
-  "collectionID": 0,
-  "cardIDInGame": null,
-  "price": 8000,
-  "manaCost": -1,
-  "currentCell": {
-    "x": 0,
-    "y": 0,
-    "effects": [],
-    "collectable": null,
-    "flag": null,
-    "currentAttacker": null
+    "price": 8000,
+    "manaCost": -1,
+    "currentCell": {
+      "x": 0,
+      "y": 0,
+      "effects": [],
+      "collectable": null,
+      "flag": null,
+      "currentAttacker": "@root"
+    }
   }
 }

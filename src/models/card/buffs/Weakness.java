@@ -4,7 +4,6 @@ import models.card.ApplyType;
 import models.card.Attacker;
 import models.card.Buff;
 import models.card.BuffMode;
-import models.card.effects.EffectType;
 
 public class Weakness extends Buff {
     private int value;
@@ -12,32 +11,26 @@ public class Weakness extends Buff {
     private int initialAP;
     private WeaknessMode weaknessMode;
 
-    public Weakness(){
+    public Weakness() {
         super();
     }
 
     public Weakness(int duration, int value, WeaknessMode weaknessMode) {
-        super(duration, ApplyType.ON_ATTACKER, BuffMode.EVIL, EffectType.WEAKNESS);
+        super(duration, ApplyType.ON_ATTACKER, BuffMode.EVIL);
         this.value = value;
-        super.effectArguments.add(Integer.toString(value));
         this.weaknessMode = weaknessMode;
-        super.effectArguments.add(weaknessMode.toString());
     }
 
     public Weakness(int duration, int value, WeaknessMode weaknessMode, ApplyType applyType) {
-        super(duration, applyType, BuffMode.EVIL, EffectType.WEAKNESS);
+        super(duration, applyType, BuffMode.EVIL);
         this.value = value;
-        super.effectArguments.add(Integer.toString(value));
         this.weaknessMode = weaknessMode;
-        super.effectArguments.add(weaknessMode.toString());
     }
 
     public Weakness(int duration, int value, Attacker attacker, WeaknessMode mode) {
-        super(duration, null, attacker, ApplyType.ON_ATTACKER, BuffMode.EVIL, EffectType.WEAKNESS);
+        super(duration, null, attacker, ApplyType.ON_ATTACKER, BuffMode.EVIL);
         this.value = value;
-        super.effectArguments.add(Integer.toString(value));
         this.weaknessMode = mode;
-        super.effectArguments.add(weaknessMode.toString());
         initialHP = attacker.getHP();
         initialAP = attacker.getAP();
     }

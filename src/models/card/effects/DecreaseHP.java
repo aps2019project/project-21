@@ -10,21 +10,18 @@ public class DecreaseHP extends Effect {
     private int value;
 
     public DecreaseHP(int value) {
-        super(ApplyType.ON_ATTACKER, EffectType.DECREASE_HP);
+        super(ApplyType.ON_ATTACKER);
         this.value = value;
-        super.effectArguments.add(Integer.toString(value));
     }
 
     public DecreaseHP(int value, ApplyType applyType) {
-        super(applyType, EffectType.DECREASE_HP);
+        super(applyType);
         this.value = value;
-        super.effectArguments.add(Integer.toString(value));
     }
 
     public DecreaseHP(Attacker attacker, int value) {
-        super(null, attacker, ApplyType.ON_ATTACKER, EffectType.DECREASE_HP);
+        super(null, attacker, ApplyType.ON_ATTACKER);
         this.value = value;
-        super.effectArguments.add(Integer.toString(value));
     }
 
     public void apply() {
