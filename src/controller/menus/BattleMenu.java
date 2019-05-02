@@ -1,9 +1,11 @@
 package controller.menus;
 
 import controller.request.BattleMenuRequest;
+import models.Item.Collectable;
 import models.card.Attacker;
 import models.card.Card;
 import models.match.Match;
+import models.match.PlayerMatchInfo;
 import view.View;
 
 public class BattleMenu extends Menu {
@@ -94,10 +96,6 @@ public class BattleMenu extends Menu {
         }
     }
 
-    private boolean isDeckValid() {
-        return true;
-    }
-
     private void showGameInfo() {
         view.showGameInfo();
     }
@@ -111,7 +109,7 @@ public class BattleMenu extends Menu {
 
     private void showOpponentMinions() {
         Match match = Match.getCurrentMatch();
-        for (Attacker attacker : match.getPlayersMatchInfo()[1].getGroundedAttackers()){
+        for (Attacker attacker : match.getPlayersMatchInfo()[1].getGroundedAttackers()) {
             view.showMyMinions(attacker);
         }
     }
@@ -122,59 +120,87 @@ public class BattleMenu extends Menu {
     }
 
     private void select() {
-
+        Attacker attacker = Attacker.getAttackerById(request.getCommandArguments().get(0));
+        Match.getCurrentMatch().setSelectedAttacker(attacker);
     }
 
     private void moveTo() {
-
+        int x = Integer.parseInt(request.getCommandArguments().get(0));
+        int y = Integer.parseInt(request.getCommandArguments().get(1));
+        Match.getCurrentMatch().moveCard(x, y);
     }
 
     private void attack() {
-
+        Match.getCurrentMatch().attack(request.getCommandArguments().get(0));
     }
 
     private void attackCombo() {
-
+        String opponentMinion = request.getCommandArguments().get(0);
+        int[] myMinion = new int[request.getCommandArguments().size() - 1];
+        for (int i = 1; i < request.getCommandArguments().size(); i++) {
+            myMinion[i - 1] = Integer.parseInt(request.getCommandArguments().get(i));
+        }
+        Match.getCurrentMatch().attackCombo(opponentMinion, myMinion);
     }
 
     private void useSpecialPower() {
-
+        int x = Integer.parseInt(request.getCommandArguments().get(0));
+        int y = Integer.parseInt(request.getCommandArguments().get(1));
+        Match.getCurrentMatch().useSpecialPower(x, y);
     }
 
     private void showHand() {
-
+        Match match = Match.getCurrentMatch();
+        PlayerMatchInfo currentPlayer = match.getPlayersMatchInfo()[match.getTurn()];
+        for (Card card : currentPlayer.getHand().getCards()) {
+            view.showCardInfo(card);
+        }
+        System.out.println("next card:\n");
+        Card nextCard = currentPlayer.getDeck().getCards().get(0);
+        view.showCardInfo(nextCard);
     }
 
     private void insertCardIn() {
-
+        String name = request.getCommandArguments().get(0);
+        int x = Integer.parseInt(request.getCommandArguments().get(1));
+        int y = Integer.parseInt(request.getCommandArguments().get(2));
+        Match.getCurrentMatch().insertCard(name, x, y);
     }
 
     private void endturn() {
-
+        Match.getCurrentMatch().swapTurn();
     }
 
     private void showCollectables() {
-
+        PlayerMatchInfo info = Match.getCurrentMatch().getPlayersMatchInfo()[Match.getCurrentMatch().getTurn()];
+        for (Collectable collectable : info.getAchievedCollectables()) {
+            view.showCollectables(collectable);
+        }
     }
 
     private void showInfo() {
-
+        Collectable selected = Match.getCurrentMatch().getSelectedCollectable();
+        view.showCollectables(selected);
     }
 
     private void use() {
-
+        int x = Integer.parseInt(request.getCommandArguments().get(0));
+        int y = Integer.parseInt(request.getCommandArguments().get(1));
+        Match.getCurrentMatch().useItem(x, y);
     }
 
     private void showNextCard() {
-
+        PlayerMatchInfo info = Match.getCurrentMatch().getPlayersMatchInfo()[Match.getCurrentMatch().getTurn()];
+        Card card = info.getDeck().getCards().get(0);
+        view.showCardInfo(card);
     }
 
     private void enterGraveyard() {
-
+        MenuManager.getInstance().changeMenu(MenuType.GRAVEYARD_MENU);
     }
 
     private void endGame() {
-
+        Match.getCurrentMatch().endMatch();
     }
 
     protected void showMenu() {

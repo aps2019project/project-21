@@ -3,6 +3,7 @@ package view;
 import controller.menus.ShopMenu;
 import models.Collection;
 import models.Deck;
+import models.Item.Collectable;
 import models.Player;
 import models.card.Attacker;
 import models.card.Card;
@@ -91,7 +92,7 @@ public class View {
     public void showHand() {
     }
 
-    public void showCollectables() {
+    public void showCollectables(Collectable collectable) {
     }
 
     public void showNextCard() {
@@ -113,5 +114,9 @@ public class View {
 
     public void setCurrentMatch(Match currentMatch) {
         this.currentMatch = currentMatch;
+    }
+
+    public void showItemInfo() {
+
     }
 }

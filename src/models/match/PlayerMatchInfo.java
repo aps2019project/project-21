@@ -29,6 +29,10 @@ public class PlayerMatchInfo {
         return graveyard;
     }
 
+    public List<Collectable> getAchievedCollectables(){
+        return getAchievedCollectables();
+    }
+
     public int getMp() {
         return mp;
     }
