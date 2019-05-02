@@ -1,6 +1,6 @@
 package models.card.buffs;
 
-import models.card.ApplyType;
+import models.card.EffectApplyInfo;
 import models.card.Attacker;
 import models.card.Buff;
 import models.card.BuffMode;
@@ -16,19 +16,19 @@ public class Weakness extends Buff {
     }
 
     public Weakness(int duration, int value, WeaknessMode weaknessMode) {
-        super(duration, ApplyType.ON_ATTACKER, BuffMode.EVIL);
+        super(duration, EffectApplyInfo.ON_ATTACKER, BuffMode.EVIL);
         this.value = value;
         this.weaknessMode = weaknessMode;
     }
 
-    public Weakness(int duration, int value, WeaknessMode weaknessMode, ApplyType applyType) {
-        super(duration, applyType, BuffMode.EVIL);
+    public Weakness(int duration, int value, WeaknessMode weaknessMode, EffectApplyInfo effectApplyInfo) {
+        super(duration, effectApplyInfo, BuffMode.EVIL);
         this.value = value;
         this.weaknessMode = weaknessMode;
     }
 
     public Weakness(int duration, int value, Attacker attacker, WeaknessMode mode) {
-        super(duration, null, attacker, ApplyType.ON_ATTACKER, BuffMode.EVIL);
+        super(duration, null, attacker, EffectApplyInfo.ON_ATTACKER, BuffMode.EVIL);
         this.value = value;
         this.weaknessMode = mode;
         initialHP = attacker.getHP();

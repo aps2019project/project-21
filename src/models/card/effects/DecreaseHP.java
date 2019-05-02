@@ -1,26 +1,24 @@
 package models.card.effects;
 
-import models.card.ApplyType;
+import models.card.EffectApplyInfo;
 import models.card.Attacker;
 import models.card.Effect;
-
-import java.util.ArrayList;
 
 public class DecreaseHP extends Effect {
     private int value;
 
     public DecreaseHP(int value) {
-        super(ApplyType.ON_ATTACKER);
+        super(EffectApplyInfo.ON_ATTACKER);
         this.value = value;
     }
 
-    public DecreaseHP(int value, ApplyType applyType) {
-        super(applyType);
+    public DecreaseHP(int value, EffectApplyInfo effectApplyInfo) {
+        super(effectApplyInfo);
         this.value = value;
     }
 
     public DecreaseHP(Attacker attacker, int value) {
-        super(null, attacker, ApplyType.ON_ATTACKER);
+        super(null, attacker, EffectApplyInfo.ON_ATTACKER);
         this.value = value;
     }
 

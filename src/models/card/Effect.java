@@ -3,29 +3,30 @@ package models.card;
 import models.match.Cell;
 
 public class Effect {
-    protected ApplyType applyType;
+    protected EffectApplyInfo effectApplyInfo;
     protected Cell cell;
     protected Attacker attacker;
+    protected ActivationType activationType = ActivationType.NONE;
 
     public Effect() {
 
     }
 
-    public Effect(ApplyType applyType) {
-        this.applyType = applyType;
+    public Effect(EffectApplyInfo effectApplyInfo) {
+        this.effectApplyInfo = effectApplyInfo;
     }
 
-    protected Effect(Cell cell, Attacker attacker, ApplyType applyType) {
+    protected Effect(Cell cell, Attacker attacker, EffectApplyInfo effectApplyInfo) {
         this.cell = cell;
         this.attacker = attacker;
-        this.applyType = applyType;
+        this.effectApplyInfo = effectApplyInfo;
     }
 
     public void apply() {
 
     }
 
-    public ApplyType getApplyType() {
-        return applyType;
+    public EffectApplyInfo getEffectApplyInfo() {
+        return effectApplyInfo;
     }
 }

@@ -119,12 +119,4 @@ public class AccountMenu extends Menu {
         }
         MenuManager.getInstance().changeMenu(MenuType.MAIN_MENU);
     }
-
-    public Request getRequest() {
-        return request;
-    }
-
-    public void setRequest(Request request) {
-        this.request = request;
-    }
 }

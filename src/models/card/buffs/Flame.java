@@ -1,17 +1,17 @@
 package models.card.buffs;
 
-import models.card.ApplyType;
+import models.card.EffectApplyInfo;
 import models.card.Buff;
 import models.card.BuffMode;
 import models.match.Cell;
 
 public class Flame extends Buff {
     public Flame(int duration) {
-        super(duration, ApplyType.ON_CELL, BuffMode.EVIL);
+        super(duration, EffectApplyInfo.ON_CELL, BuffMode.EVIL);
     }
 
     public Flame(int duration, Cell cell) {
-        super(duration, cell, null, ApplyType.ON_CELL, BuffMode.EVIL);
+        super(duration, cell, null, EffectApplyInfo.ON_CELL, BuffMode.EVIL);
     }
 
     public void apply() {

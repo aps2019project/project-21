@@ -19,10 +19,10 @@ import java.util.List;
 
 public class CardMaker {
     public static void main(String[] args) throws IOException {
-//        heroMaker();
+        heroMaker();
     }
 
-    public static void heroMaker() throws IOException {
+    private static void heroMaker() throws IOException {
         Effect effect = new Power(Integer.MAX_VALUE, 4, PowerMode.AP);
         Spell specialPower = new Spell("Dive Sefid's Spell", 0, 1,
                 TargetType.HIMSELF, effect, "casts power buff 4 on himself forever");
@@ -32,43 +32,43 @@ public class CardMaker {
         saveToFile(hero);
     }
 
-    public static void spellMaker() throws IOException {
+    private static void spellMaker() throws IOException {
         List<Effect> effects = new ArrayList<>();
-        //effects.add(new Power(Integer.MAX_VALUE, 8, PowerMode.AP, ApplyType.ON_ALLY));
-        //effects.add(new Disarm(Integer.MAX_VALUE, ApplyType.ON_OPP));
-        //effects.add(new Effect(ApplyType.ON_BOTH, EffectType.POSITIVE_DISPEL));
-        //effects.add(new DecreaseHP(8,ApplyType.ON_OPP_HERO));
+        //effects.add(new Power(Integer.MAX_VALUE, 8, PowerMode.AP, EffectApplyInfo.ON_ALLY));
+        //effects.add(new Disarm(Integer.MAX_VALUE, EffectApplyInfo.ON_OPP));
+        //effects.add(new Effect(EffectApplyInfo.ON_BOTH, EffectType.POSITIVE_DISPEL));
+        //effects.add(new DecreaseHP(8,EffectApplyInfo.ON_OPP_HERO));
         //effects.add(new Flame(2));
-        //effects.add(new Poison(4, ApplyType.ON_OPP));
-        //effects.add(new Weakness(Integer.MAX_VALUE, Integer.MAX_VALUE, WeaknessMode.AP, ApplyType.ON_OPP));
+        //effects.add(new Poison(4, EffectApplyInfo.ON_OPP));
+        //effects.add(new Weakness(Integer.MAX_VALUE, Integer.MAX_VALUE, WeaknessMode.AP, EffectApplyInfo.ON_OPP));
         effects.add(new Stun(2));
         Spell spell = new Spell("Shock", 1200, 1, TargetType.SINGLE_OPP, effects,
                 "stun an opp");
         saveToFile(spell);
     }
 
-    public static void minionMaker() throws IOException {
+    private static void minionMaker() throws IOException {
         Effect effect = new Stun(1);
         Spell specialPower = new Spell("shamshirzane fars spell", 0, 0,
                 TargetType.SINGLE_OPP, effect, "Stuns the attacked opp for one turn.");
         Minion minion = new Minion("Shamshirzane Fars", 400, 2, 6, 4,
-                0, AttackMode.MELEE, specialPower, ActivationType.ON_ATTACK);
+                0, AttackMode.MELEE, specialPower);
         saveToFile(minion);
     }
 
-    public static Hero heroReader(String path) throws IOException {
+    static Hero heroReader(String path) throws IOException {
         String json = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
         YaGson yaGson = new YaGson();
         return yaGson.fromJson(json, Hero.class);
     }
 
-    public static Spell spellReader(String path) throws IOException {
+    static Spell spellReader(String path) throws IOException {
         String json = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
         YaGson gson = new YaGson();
         return gson.fromJson(json, Spell.class);
     }
 
-    public static Minion minionReader(String path) throws IOException {
+    static Minion minionReader(String path) throws IOException {
         String json = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
         YaGson gson = new YaGson();
         return gson.fromJson(json, Minion.class);
@@ -86,7 +86,7 @@ public class CardMaker {
             folder = "items";
 
         String path = "src//json//" + folder + "//"
-                + card.getName().toLowerCase().replace(" ", "") + ".json";
+                + card.getName().toLowerCase().replaceAll("\\s+", "") + ".json";
 
         try (FileOutputStream fos = new FileOutputStream(path);
              OutputStreamWriter isr = new OutputStreamWriter(fos,

@@ -204,20 +204,4 @@ public class ShopMenu extends Menu {
     protected void showMenu() {
         view.showMenu("shopMenu");
     }
-
-    public List<Card> getCards() {
-        return cards;
-    }
-
-    public void setCards(List<Card> cards) {
-        this.cards = cards;
-    }
-
-    public List<Item> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Item> items) {
-        this.items = items;
-    }
 }

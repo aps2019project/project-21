@@ -1,6 +1,6 @@
 package models.card.buffs;
 
-import models.card.ApplyType;
+import models.card.EffectApplyInfo;
 import models.card.Attacker;
 import models.card.Buff;
 import models.card.BuffMode;
@@ -10,19 +10,19 @@ public class Power extends Buff {
     private PowerMode powerMode;
 
     public Power(int duration, int value, PowerMode powerMode) {
-        super(duration, ApplyType.ON_ATTACKER, BuffMode.GOOD);
+        super(duration, EffectApplyInfo.ON_ATTACKER, BuffMode.GOOD);
         this.value = value;
         this.powerMode = powerMode;
     }
 
-    public Power(int duration, int value, PowerMode powerMode, ApplyType applyType) {
-        super(duration, applyType, BuffMode.GOOD);
+    public Power(int duration, int value, PowerMode powerMode, EffectApplyInfo effectApplyInfo) {
+        super(duration, effectApplyInfo, BuffMode.GOOD);
         this.value = value;
         this.powerMode = powerMode;
     }
 
     public Power(int duration, int value, Attacker attacker, PowerMode mode) {
-        super(duration, null, attacker, ApplyType.ON_ATTACKER, BuffMode.GOOD);
+        super(duration, null, attacker, EffectApplyInfo.ON_ATTACKER, BuffMode.GOOD);
         this.value = value;
         this.powerMode = mode;
     }
