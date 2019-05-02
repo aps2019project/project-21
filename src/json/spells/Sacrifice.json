@@ -1,0 +1,45 @@
+{
+  "targetType": "SINGLE_ALLY",
+  "effects": [
+    {
+      "value": 8,
+      "powerMode": "AP",
+      "duration": 2147483647,
+      "buffMode": "GOOD",
+      "applyType": "ON_ALLY",
+      "effectType": "POWER",
+      "effectArguments": [
+        "2147483647",
+        "8",
+        "AP"
+      ],
+      "cell": null,
+      "attacker": null
+    },
+    {
+      "value": 6,
+      "initialHP": 0,
+      "initialAP": 0,
+      "weaknessMode": "HP",
+      "duration": 2147483647,
+      "buffMode": "EVIL",
+      "applyType": "ON_ALLY",
+      "effectType": "WEAKNESS",
+      "effectArguments": [
+        "2147483647",
+        "6",
+        "HP"
+      ],
+      "cell": null,
+      "attacker": null
+    }
+  ],
+  "desc": "Apply Weakness in hp and power in ap",
+  "name": "Sacrifice",
+  "id": 0,
+  "collectionID": 0,
+  "cardIDInGame": null,
+  "price": 1600,
+  "manaCost": 2,
+  "currentCell": null
+}

@@ -16,6 +16,10 @@ public class Poison extends Buff {
         super(duration, null, attacker, ApplyType.ON_ATTACKER, BuffMode.EVIL, EffectType.POISON);
     }
 
+    public Poison(int duration, ApplyType applyType) {
+        super(duration, applyType, BuffMode.EVIL, EffectType.POISON);
+    }
+
     public Poison(int duration, Cell cell) {
         super(duration, cell, null, ApplyType.ON_CELL, BuffMode.EVIL, EffectType.POISON);
     }

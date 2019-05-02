@@ -1,0 +1,20 @@
+{
+  "targetType": "SINGLE_ATTACKER",
+  "effects": [
+    {
+      "applyType": "ON_BOTH",
+      "effectType": "POSITIVE_DISPEL",
+      "effectArguments": [],
+      "cell": null,
+      "attacker": null
+    }
+  ],
+  "desc": "remove buff",
+  "name": "Dispel",
+  "id": 0,
+  "collectionID": 0,
+  "cardIDInGame": null,
+  "price": 2100,
+  "manaCost": 0,
+  "currentCell": null
+}

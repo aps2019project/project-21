@@ -18,6 +18,14 @@ public class Power extends Buff {
         super.effectArguments.add(powerMode.toString());
     }
 
+    public Power(int duration, int value, PowerMode powerMode, ApplyType applyType) {
+        super(duration, applyType, BuffMode.GOOD, EffectType.POWER);
+        this.value = value;
+        super.effectArguments.add(Integer.toString(value));
+        this.powerMode = powerMode;
+        super.effectArguments.add(powerMode.toString());
+    }
+
     public Power(int duration, int value, Attacker attacker, PowerMode mode) {
         super(duration, null, attacker, ApplyType.ON_ATTACKER, BuffMode.GOOD, EffectType.POWER);
         this.value = value;

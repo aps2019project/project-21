@@ -1,0 +1,28 @@
+{
+  "targetType": "ALL_ALLY",
+  "effects": [
+    {
+      "value": 2,
+      "powerMode": "AP",
+      "duration": 2147483647,
+      "buffMode": "GOOD",
+      "applyType": "ON_ALL_ALLY",
+      "effectType": "POWER",
+      "effectArguments": [
+        "2147483647",
+        "2",
+        "AP"
+      ],
+      "cell": null,
+      "attacker": null
+    }
+  ],
+  "desc": "powerUp all ally",
+  "name": "All Power",
+  "id": 0,
+  "collectionID": 0,
+  "cardIDInGame": null,
+  "price": 2000,
+  "manaCost": 4,
+  "currentCell": null
+}

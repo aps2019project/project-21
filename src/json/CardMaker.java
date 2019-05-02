@@ -31,14 +31,17 @@ public class CardMaker {
 
     public static void spellMaker() throws IOException {
         List<Effect> effects = new ArrayList<>();
-        //effects.add(new Power(Integer.MAX_VALUE, 4, PowerMode.AP));
+        //effects.add(new Power(Integer.MAX_VALUE, 8, PowerMode.AP, ApplyType.ON_ALLY));
         //effects.add(new Disarm(Integer.MAX_VALUE, ApplyType.ON_OPP));
         //effects.add(new Effect(ApplyType.ON_BOTH, EffectType.POSITIVE_DISPEL));
-        effects.add(new DecreaseHP(8,ApplyType.ON_OPP_HERO));
+        //effects.add(new DecreaseHP(8,ApplyType.ON_OPP_HERO));
         //effects.add(new Flame(2));
-        Spell spell = new Spell("Lighting Bolt", 1250, 2, TargetType.OPP_HERO, effects,
-                "decrease 8 hp, opp hero");
-        saveToFile(spell, "src//json//spells//lightingBolt.json");
+        //effects.add(new Poison(4, ApplyType.ON_OPP));
+        //effects.add(new Weakness(Integer.MAX_VALUE, Integer.MAX_VALUE, WeaknessMode.AP, ApplyType.ON_OPP));
+        effects.add(new Stun(2));
+        Spell spell = new Spell("Shock", 1200, 1, TargetType.SINGLE_OPP, effects,
+                "stun an opp");
+        saveToFile(spell, "src//json//spells//shock.json");
     }
 
     public static void minionMaker() throws IOException {

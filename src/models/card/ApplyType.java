@@ -8,5 +8,7 @@ public enum ApplyType {
     ON_ALLY,
     ON_OPP,
     ON_BOTH,
-    ON_OPP_HERO
+    ON_OPP_HERO,
+    ON_ALL_ALLY,
+    ON_ALL_OPP
 }

@@ -1,0 +1,30 @@
+{
+  "targetType": "SINGLE_OPP",
+  "effects": [
+    {
+      "value": 4,
+      "initialHP": 0,
+      "initialAP": 0,
+      "weaknessMode": "AP",
+      "duration": 2147483647,
+      "buffMode": "EVIL",
+      "applyType": "ON_OPP",
+      "effectType": "WEAKNESS",
+      "effectArguments": [
+        "2147483647",
+        "4",
+        "AP"
+      ],
+      "cell": null,
+      "attacker": null
+    }
+  ],
+  "desc": "Weakening a minion",
+  "name": "Weakening",
+  "id": 0,
+  "collectionID": 0,
+  "cardIDInGame": null,
+  "price": 1000,
+  "manaCost": 1,
+  "currentCell": null
+}

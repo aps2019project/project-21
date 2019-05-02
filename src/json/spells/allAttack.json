@@ -1,0 +1,30 @@
+{
+  "targetType": "OPPS_IN_COLUMN",
+  "effects": [
+    {
+      "value": 6,
+      "initialHP": 0,
+      "initialAP": 0,
+      "weaknessMode": "HP",
+      "duration": 2147483647,
+      "buffMode": "EVIL",
+      "applyType": "ON_OPP",
+      "effectType": "WEAKNESS",
+      "effectArguments": [
+        "2147483647",
+        "6",
+        "HP"
+      ],
+      "cell": null,
+      "attacker": null
+    }
+  ],
+  "desc": "Attack a column",
+  "name": "All Attack",
+  "id": 0,
+  "collectionID": 0,
+  "cardIDInGame": null,
+  "price": 1500,
+  "manaCost": 4,
+  "currentCell": null
+}
