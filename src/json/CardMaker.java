@@ -18,7 +18,7 @@ import java.util.List;
 
 public class CardMaker {
     public static void main(String[] args) throws IOException {
-        spellMaker();
+        heroMaker();
     }
 
     public static void heroMaker() throws IOException {
@@ -28,7 +28,7 @@ public class CardMaker {
         Hero hero = new Hero("Dive Sefid", 8000, 50, 4, -1, AttackMode.MELEE, specialPower, 2);
         Cell cell = new Cell(hero);
         hero.setCurrentCell(cell);
-        saveToFile(hero, "src//json//heroes//divesefid.json");
+        saveToFile(hero);
     }
 
     public static void spellMaker() throws IOException {
@@ -43,7 +43,7 @@ public class CardMaker {
         effects.add(new Stun(2));
         Spell spell = new Spell("Shock", 1200, 1, TargetType.SINGLE_OPP, effects,
                 "stun an opp");
-        saveToFile(spell, "src//json//spells//shock.json");
+        saveToFile(spell);
     }
 
     public static void minionMaker() throws IOException {
@@ -52,7 +52,7 @@ public class CardMaker {
                 TargetType.SINGLE_OPP, effect, "Stuns the attacked opp for one turn.");
         Minion minion = new Minion("Shamshirzane Fars", 400, 2, 6, 4,
                 0, AttackMode.MELEE, specialPower, ActivationType.ON_ATTACK);
-        saveToFile(minion, "src//json//minions//shmshirzanefarsi.json");
+        saveToFile(minion);
     }
 
     private static Hero heroReader(String path) throws IOException {
@@ -73,8 +73,19 @@ public class CardMaker {
         return gson.fromJson(json, Minion.class);
     }
 
-    private static void saveToFile(Object object, String path) throws IOException {
-        try (FileOutputStream fos = new FileOutputStream(path);
+    private static void saveToFile(Card card) throws IOException {
+        String folder;
+        if (card.getClass().equals(Spell.class))
+            folder = "spells";
+        else if (card.getClass().equals(Hero.class))
+            folder = "heroes";
+        else if (card.getClass().equals(Minion.class))
+            folder = "minions";
+        else
+            folder = "items";
+
+        try (FileOutputStream fos = new FileOutputStream("src//json//" + folder
+                + "//" + card.getName().toLowerCase().replace(" ", "") + ".json");
              OutputStreamWriter isr = new OutputStreamWriter(fos,
                      StandardCharsets.UTF_8)) {
 
@@ -83,7 +94,7 @@ public class CardMaker {
 
             YaGson yaGson = yaGsonBuilder.setPrettyPrinting().create();
 
-            yaGson.toJson(object, isr);
+            yaGson.toJson(card, isr);
         }
 
         System.out.println("Items written to file");

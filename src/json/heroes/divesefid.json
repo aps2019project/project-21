@@ -17,12 +17,6 @@
             "duration": 2147483647,
             "buffMode": "GOOD",
             "applyType": "ON_ATTACKER",
-            "effectType": "POWER",
-            "effectArguments": [
-              "2147483647",
-              "4",
-              "AP"
-            ],
             "cell": null,
             "attacker": null
           }
