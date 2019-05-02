@@ -73,4 +73,19 @@ public class Deck {
     public void setHero(Hero hero) {
         this.hero = hero;
     }
+
+    public void addObject(Object object){
+
+    }
+
+    public void deleteObject(Object object){
+
+    }
+
+    public boolean deckIsValid(){
+        if (cards.size() == 20 && hero!=null){
+            return true;
+        }
+        return false;
+    }
 }

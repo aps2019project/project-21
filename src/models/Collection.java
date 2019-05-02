@@ -1,7 +1,7 @@
 package models;
 
-import models.card.Card;
 import models.Item.Item;
+import models.card.Card;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +45,32 @@ public class Collection {
         this.decks = decks;
     }
 
+    public void addDeck(Deck deck){
+        boolean found=true;
+        for (Deck deck1 : this.decks){
+            if (deck1.getName().equals(deck.getName())){
+                found = false;
+                System.out.println("Deck name is not available");
+            }
+        }
+        if (found) {
+            decks.add(deck);
+        }
+    }
+
+    public void deleteDeck(Deck deck){
+        boolean found = true;
+        for (Deck deck1: this.decks){
+            if (deck1.getName().equals(deck.getName())){
+                this.decks.remove(deck1);
+                found = false;
+            }
+        }
+        if (found){
+            System.out.println("Deck isn't exist");
+        }
+    }
+
     public Deck getMainDeck() {
         return mainDeck;
     }
@@ -67,5 +93,10 @@ public class Collection {
 
     public void setItems(List<Item> items) {
         this.items = items;
+    }
+
+    public Deck searchDeck(String name){
+        // error mode should handled
+        return null;
     }
 }

@@ -69,6 +69,7 @@ public class Card {
 
     public static Card getCardByID(String ID){
         //bulshet zadam
+        // peyda nakrd bayad null bede
         return Card.getCardByID("10");
     }
 

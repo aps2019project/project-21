@@ -36,6 +36,11 @@ public class Item extends Card {
         return null;
     }
 
+    public static Item getItemById(String Id){
+        //bayad por shavad
+        return null;
+    }
+
     public boolean twoItemAreSame(Item item){
         return true;
     }

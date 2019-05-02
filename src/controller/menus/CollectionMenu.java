@@ -2,9 +2,11 @@ package controller.menus;
 
 import controller.request.MainMenuRequest;
 import controller.request.Request;
+import models.Deck;
 import models.Item.Item;
 import models.Player;
 import models.card.Card;
+import models.card.Hero;
 import view.View;
 
 public class CollectionMenu extends Menu {
@@ -75,13 +77,13 @@ public class CollectionMenu extends Menu {
     }
 
     public void show() {
-        view.showCollection(Player.getCurrentPlayer().getCollection());
+        view.showCollection(currentPlayer.getCollection());
     }
 
     public void search() {
         Item search=Item.getItemByName(request.getCommandArguments().get(0));
         boolean found = true;
-        for (Item item: Player.getCurrentPlayer().getCollection().getItems()){
+        for (Item item: currentPlayer.getCollection().getItems()){
             if (item.twoItemAreSame(search)){
                 found = false;
                 System.out.println("Item founded!");
@@ -90,7 +92,7 @@ public class CollectionMenu extends Menu {
         }
         Card originalCard= Card.getCardByID(request.getCommandArguments().get(0));
         if (found){
-            for (Card card: Player.getCurrentPlayer().getCollection().getCards()){
+            for (Card card: currentPlayer.getCollection().getCards()){
                 if (card.TwoCardAreSame(originalCard)){
                     System.out.println("Card founded!");
                     System.out.println(originalCard.getId());
@@ -104,36 +106,78 @@ public class CollectionMenu extends Menu {
     }
 
     public void createDeck() {
-
+        Deck deck = new Deck(request.getCommandArguments().get(0));
+        currentPlayer.getCollection().addDeck(deck);
     }
 
     public void deleteDeck() {
-
+        Deck deck = new Deck(request.getCommandArguments().get(0));
+        currentPlayer.getCollection().deleteDeck(deck);
     }
 
     public void addCardToDeck() {
-
+        Card card = Card.getCardByID(request.getCommandArguments().get(0));
+        Object object = card;
+        if (card == null){
+            Item item = Item.getItemByName(request.getCommandArguments().get(0));
+            object = item;
+            if (item == null){
+                Hero hero = Hero.getHeroByID(request.getCommandArguments().get(0));
+                object = hero;
+                if (hero == null){
+                    System.out.println();
+                }
+            }
+        }
+        if (object != null) {
+            currentPlayer.getCollection().searchDeck(request.getCommandArguments().get(1)).addObject(object);
+        }
     }
 
     public void removeCardToDeck() {
-
+        Card card = Card.getCardByID(request.getCommandArguments().get(0));
+        Object object = card;
+        if (card == null){
+            Item item = Item.getItemByName(request.getCommandArguments().get(0));
+            object = item;
+            if (item == null){
+                Hero hero = Hero.getHeroByID(request.getCommandArguments().get(0));
+                object = hero;
+                if (hero == null){
+                    System.out.println();
+                }
+            }
+        }
+        if (object != null) {
+            currentPlayer.getCollection().searchDeck(request.getCommandArguments().get(1)).deleteObject(object);
+        }
     }
 
 
     public boolean isDeckValid() {
-        return true;
+        Deck deck = currentPlayer.getCollection().searchDeck(request.getCommandArguments().get(0));
+        if (deck != null){
+            return deck.deckIsValid();
+        }
+        return false;
     }
 
     public void selectDeck() {
-
+        Deck deck = currentPlayer.getCollection().searchDeck(request.getCommandArguments().get(0));
+        currentPlayer.getCollection().setMainDeck(deck);
     }
 
     public void showAllDecks() {
-
+        for (Deck deck: currentPlayer.getCollection().getDecks()){
+            view.showDeck(deck);
+        }
     }
 
     public void showDeck() {
-
+        Deck deck = currentPlayer.getCollection().searchDeck(request.getCommandArguments().get(0));
+        if (deck != null){
+            view.showDeck(deck);
+        }
     }
 
     protected void showMenu() {

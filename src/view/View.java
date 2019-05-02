@@ -2,6 +2,7 @@ package view;
 
 import controller.menus.ShopMenu;
 import models.Collection;
+import models.Deck;
 import models.Player;
 import models.card.Card;
 import models.match.Match;
@@ -58,7 +59,7 @@ public class View {
 
     }
 
-    public void showDeck(String name) {
+    public void showDeck(Deck deck) {
 
     }
 
