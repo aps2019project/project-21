@@ -18,15 +18,16 @@ import java.util.List;
 
 public class CardMaker {
     public static void main(String[] args) throws IOException {
-        spellMaker();
+        heroMaker();
     }
 
     public static void heroMaker() throws IOException {
-        Effect effect = new Power(Integer.MAX_VALUE, 4, PowerMode.AP);
-        Spell specialPower = new Spell("Dive Sefid's Spell", 0, 1,
-                TargetType.HIMSELF, effect, "casts power buff 4 on himself forever");
-        Hero hero = new Hero("Dive Sefid", 8000, 50, 4, -1, AttackMode.MELEE, specialPower, 2);
-        saveToFile(hero, "src//json//heroes//divesefid.json");
+//        Effect effect = new Holy(Integer.MAX_VALUE);
+//        Spell specialPower = new Spell("Rostam's spell ", 0, 0,
+//                TargetType.HIMSELF, effect, "3 continuous holy buff");
+        Hero hero = new Hero("Rostam", 8000, 55, 7, 4,
+                AttackMode.HYBRID, null, 0);
+        saveToFile(hero, "src//json//heroes//rostam.json");
     }
 
     public static void spellMaker() throws IOException {

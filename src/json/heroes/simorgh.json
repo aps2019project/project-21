@@ -1,0 +1,53 @@
+{
+  "cooldown": 8,
+  "maxHp": 50,
+  "maxAp": 4,
+  "hp": 50,
+  "ap": 4,
+  "specialPower": {
+    "targetType": "ALL_OPPS",
+    "effects": [
+      {
+        "duration": 1,
+        "buffMode": "EVIL",
+        "applyType": "ON_ATTACKER",
+        "effectType": "STUN",
+        "effectArguments": [
+          "1"
+        ],
+        "cell": null,
+        "attacker": null
+      }
+    ],
+    "desc": "stun opps for 1 round",
+    "name": "Simorgh\u0027s spell ",
+    "id": 0,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 0,
+    "manaCost": 5,
+    "currentCell": null
+  },
+  "appliedEffects": [],
+  "attackRange": -1,
+  "attackMode": "MELEE",
+  "canMove": true,
+  "canAttack": true,
+  "isDisarmed": false,
+  "isStunned": false,
+  "hasHolyBuff": false,
+  "name": "Simorgh",
+  "id": 1,
+  "collectionID": 0,
+  "cardIDInGame": null,
+  "price": 9000,
+  "manaCost": -1,
+  "currentCell": {
+    "x": 0,
+    "y": 0,
+    "effects": [],
+    "collectable": null,
+    "flag": null,
+    "currentAttacker": null
+  }
+}

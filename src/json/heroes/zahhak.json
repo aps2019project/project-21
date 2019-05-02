@@ -1,0 +1,53 @@
+{
+  "cooldown": 0,
+  "maxHp": 50,
+  "maxAp": 2,
+  "hp": 50,
+  "ap": 2,
+  "specialPower": {
+    "targetType": "SINGLE_OPP",
+    "effects": [
+      {
+        "duration": 3,
+        "buffMode": "EVIL",
+        "applyType": "ON_OPP",
+        "effectType": "POISON",
+        "effectArguments": [
+          "3"
+        ],
+        "cell": null,
+        "attacker": null
+      }
+    ],
+    "desc": "poison opp while attacking for 3 round",
+    "name": "Zahhak\u0027s spell ",
+    "id": 0,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 0,
+    "manaCost": 0,
+    "currentCell": null
+  },
+  "appliedEffects": [],
+  "attackRange": -1,
+  "attackMode": "MELEE",
+  "canMove": true,
+  "canAttack": true,
+  "isDisarmed": false,
+  "isStunned": false,
+  "hasHolyBuff": false,
+  "name": "Zahhak",
+  "id": 1,
+  "collectionID": 0,
+  "cardIDInGame": null,
+  "price": 10000,
+  "manaCost": -1,
+  "currentCell": {
+    "x": 0,
+    "y": 0,
+    "effects": [],
+    "collectable": null,
+    "flag": null,
+    "currentAttacker": null
+  }
+}
