@@ -1,6 +1,6 @@
 package models.card.buffs;
 
-import models.card.ApplyType;
+import models.card.EffectApplyInfo;
 import models.card.Attacker;
 import models.card.Buff;
 import models.card.BuffMode;
@@ -8,19 +8,19 @@ import models.match.Cell;
 
 public class Poison extends Buff {
     public Poison(int duration) {
-        super(duration, ApplyType.ON_ATTACKER, BuffMode.EVIL);
+        super(duration, EffectApplyInfo.ON_ATTACKER, BuffMode.EVIL);
     }
 
     public Poison(int duration, Attacker attacker) {
-        super(duration, null, attacker, ApplyType.ON_ATTACKER, BuffMode.EVIL);
+        super(duration, null, attacker, EffectApplyInfo.ON_ATTACKER, BuffMode.EVIL);
     }
 
-    public Poison(int duration, ApplyType applyType) {
-        super(duration, applyType, BuffMode.EVIL);
+    public Poison(int duration, EffectApplyInfo effectApplyInfo) {
+        super(duration, effectApplyInfo, BuffMode.EVIL);
     }
 
     public Poison(int duration, Cell cell) {
-        super(duration, cell, null, ApplyType.ON_CELL, BuffMode.EVIL);
+        super(duration, cell, null, EffectApplyInfo.ON_CELL, BuffMode.EVIL);
     }
 
     public void apply() {

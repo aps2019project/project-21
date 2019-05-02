@@ -10,14 +10,14 @@ public class Buff extends Effect {
         super();
     }
 
-    public Buff(int duration, ApplyType applyType, BuffMode buffMode) {
-        super(applyType);
+    public Buff(int duration, EffectApplyInfo effectApplyInfo, BuffMode buffMode) {
+        super(effectApplyInfo);
         this.duration = duration;
         this.buffMode = buffMode;
     }
 
-    protected Buff(int duration, Cell cell, Attacker attacker, ApplyType applyType, BuffMode buffMode) {
-        super(cell, attacker, applyType);
+    protected Buff(int duration, Cell cell, Attacker attacker, EffectApplyInfo effectApplyInfo, BuffMode buffMode) {
+        super(cell, attacker, effectApplyInfo);
         this.duration = duration;
         this.buffMode = buffMode;
     }

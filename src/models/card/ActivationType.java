@@ -1,6 +1,7 @@
 package models.card;
 
 public enum ActivationType {
+    NONE,
     ON_SPAWN,
     PASSIVE,
     ON_DEATH,

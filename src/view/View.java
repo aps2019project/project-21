@@ -9,13 +9,13 @@ import models.match.Match;
 
 public class View {
     private static View view = new View();
+    private Player currentPlayer;
+    private Match currentMatch;
+
 
     public static View getInstance() {
         return view;
     }
-
-    private Player currentPlayer;
-    private Match currentMatch;
 
     public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;

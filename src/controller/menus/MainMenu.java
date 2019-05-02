@@ -17,7 +17,9 @@ public class MainMenu extends Menu {
         showMenu();
 
         request = new MainMenuRequest();
+
         request.getNewCommand();
+
         request.extractType();
 
         switch (request.getType()) {

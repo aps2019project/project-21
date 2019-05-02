@@ -1,6 +1,6 @@
 package models.card.effects;
 
-import models.card.ApplyType;
+import models.card.EffectApplyInfo;
 import models.card.Attacker;
 import models.card.Effect;
 
@@ -13,7 +13,7 @@ public class IncreaseAP extends Effect {
     }
 
     public IncreaseAP(Attacker attacker, int changeValue) {
-        super(null, attacker, ApplyType.ON_ATTACKER);
+        super(null, attacker, EffectApplyInfo.ON_ATTACKER);
         this.changeValue = changeValue;
     }
 

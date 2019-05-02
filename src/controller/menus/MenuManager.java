@@ -1,13 +1,13 @@
 package controller.menus;
 
 public class MenuManager {
-    private MenuType menuType = MenuType.ACCOUNT_MENU;
-
     private static MenuManager instance = new MenuManager();
 
     public static MenuManager getInstance() {
         return instance;
     }
+
+    private MenuType menuType = MenuType.ACCOUNT_MENU;
 
     public void main() {
 

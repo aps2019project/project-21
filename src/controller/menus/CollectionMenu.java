@@ -70,12 +70,6 @@ public class CollectionMenu extends Menu {
         }
     }
 
-    private Player currentPlayer;
-
-    public void setCurrentPlayer(Player currentPlayer) {
-        this.currentPlayer = currentPlayer;
-    }
-
     public void show() {
         view.showCollection(currentPlayer.getCollection());
     }
@@ -204,17 +198,5 @@ public class CollectionMenu extends Menu {
 
     public void setView(View view) {
         this.view = view;
-    }
-
-    public Request getRequest() {
-        return request;
-    }
-
-    public void setRequest(Request request) {
-        this.request = request;
-    }
-
-    public Player getCurrentPlayer() {
-        return currentPlayer;
     }
 }

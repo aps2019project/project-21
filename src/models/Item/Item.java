@@ -4,8 +4,13 @@ import models.Player;
 import models.card.Card;
 import models.card.Effect;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Item extends Card {
+    private static List<Item> items = new ArrayList<>();
     protected Effect effect;
+    private String desc;
 
     public Item(String name, int price, Effect effect) {
         super(name, price, 0);
