@@ -1,22 +1,32 @@
 {
   "@type": "models.card.Spell",
   "@val": {
-    "targetType": "SINGLE_OPP",
+    "targetType": {
+      "randomOrNot": "NOT_RANDOM",
+      "targetAttackerRange": "ALL_THREE",
+      "cellType": "SINGLE_CELL",
+      "heroOrMinion": "BOTH",
+      "oppOrAlly": "OPP",
+      "chooseType": "HIMSELF"
+    },
     "effects": [
       {
         "@type": "models.card.buffs.Stun",
         "@val": {
           "duration": 2,
           "buffMode": "EVIL",
-          "applyType": "ON_ATTACKER",
+          "effectApplyInfo": "ON_ATTACKER",
           "cell": null,
-          "attacker": null
+          "attacker": null,
+          "player": null,
+          "match": null,
+          "activationType": "NONE"
         }
       }
     ],
     "desc": "stun an opp",
     "name": "Shock",
-    "id": 0,
+    "id": 19,
     "collectionID": 0,
     "cardIDInGame": null,
     "price": 1200,

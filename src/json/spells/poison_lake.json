@@ -25,12 +25,12 @@
       }
     ],
     "desc": "stun an opp",
-    "name": "Dispel",
-    "id": 11,
+    "name": "Poison Lake",
+    "id": 7,
     "collectionID": 0,
     "cardIDInGame": null,
-    "price": 2100,
-    "manaCost": 0,
+    "price": 900,
+    "manaCost": 5,
     "currentCell": null
   }
 }

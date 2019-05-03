@@ -25,12 +25,12 @@
       }
     ],
     "desc": "stun an opp",
-    "name": "Dispel",
-    "id": 11,
+    "name": "All Attack",
+    "id": 15,
     "collectionID": 0,
     "cardIDInGame": null,
-    "price": 2100,
-    "manaCost": 0,
+    "price": 1500,
+    "manaCost": 4,
     "currentCell": null
   }
 }

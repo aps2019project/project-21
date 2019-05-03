@@ -1,39 +1,36 @@
 {
-  "targetType": "SINGLE_ALLY",
-  "effects": [
-    {
-      "value": 4,
-      "powerMode": "AP",
-      "duration": 3,
-      "buffMode": "GOOD",
-      "applyType": "ON_ATTACKER",
-      "effectType": "POWER",
-      "effectArguments": [
-        "3",
-        "4",
-        "AP"
-      ],
-      "cell": null,
-      "attacker": null
+  "@type": "models.card.Spell",
+  "@val": {
+    "targetType": {
+      "randomOrNot": "NOT_RANDOM",
+      "targetAttackerRange": "ALL_THREE",
+      "cellType": "SINGLE_CELL",
+      "heroOrMinion": "BOTH",
+      "oppOrAlly": "OPP",
+      "chooseType": "HIMSELF"
     },
-    {
-      "duration": 3,
-      "buffMode": "EVIL",
-      "applyType": "ON_ATTACKER",
-      "effectType": "DISARM",
-      "effectArguments": [
-        "3"
-      ],
-      "cell": null,
-      "attacker": null
-    }
-  ],
-  "desc": "Increase ap of an ally 4 units for 3 turns but disarmed as well.",
-  "name": "Madness",
-  "id": 0,
-  "collectionID": 0,
-  "cardIDInGame": null,
-  "price": 650,
-  "manaCost": 0,
-  "currentCell": null
+    "effects": [
+      {
+        "@type": "models.card.buffs.Stun",
+        "@val": {
+          "duration": 2,
+          "buffMode": "EVIL",
+          "effectApplyInfo": "ON_ATTACKER",
+          "cell": null,
+          "attacker": null,
+          "player": null,
+          "match": null,
+          "activationType": "NONE"
+        }
+      }
+    ],
+    "desc": "stun an opp",
+    "name": "Madness",
+    "id": 8,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 650,
+    "manaCost": 0,
+    "currentCell": null
+  }
 }

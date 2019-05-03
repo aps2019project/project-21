@@ -1,10 +1,10 @@
 {
   "@type": "models.card.Hero",
   "@val": {
-    "cooldown": 0,
-    "maxHp": 35,
+    "cooldown": 2,
+    "maxHp": 40,
     "maxAp": 3,
-    "hp": 35,
+    "hp": 40,
     "ap": 3,
     "specialPower": {
       "targetType": {
@@ -19,9 +19,9 @@
         {
           "@type": "models.card.effects.GiveEffect",
           "@val": {
-            "duration": 2147483647,
+            "duration": 0,
             "value": 0,
-            "effectName": "HOLY",
+            "effectName": "POSITIVE_DISPEL",
             "effectApplyInfo": null,
             "cell": null,
             "attacker": null,
@@ -31,28 +31,28 @@
           }
         }
       ],
-      "desc": "Has 3 holy buffs continuously.",
-      "name": "Esfandiar's Spell",
-      "id": 16,
+      "desc": "Dispels an opponent attacker.",
+      "name": "Afsaneh's Spell",
+      "id": 14,
       "collectionID": 0,
       "cardIDInGame": null,
       "price": 0,
-      "manaCost": 0,
+      "manaCost": 1,
       "currentCell": null
     },
     "appliedEffects": [],
     "attackRange": 3,
-    "attackMode": "HYBRID",
+    "attackMode": "RANGED",
     "canMove": true,
     "canAttack": true,
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
-    "name": "Esfandiar",
-    "id": 17,
+    "name": "Afsaneh",
+    "id": 15,
     "collectionID": 0,
     "cardIDInGame": null,
-    "price": 12000,
+    "price": 11000,
     "manaCost": -1,
     "currentCell": {
       "x": 0,

@@ -22,10 +22,10 @@ public class CardMaker {
     }
 
     private static void usableMaker() throws IOException {
-        Effect effect = new GiveEffect(12, EffectName.HOLY);
-        Usable usable = new Usable("Kamane Demool", 30000, TargetType.NOT_MELEE_HERO, effect,
-                "disarms the enemy for one turn on attack.(only for ranged and hybrid hero.)");
-        saveToFile(usable);
+//        Effect effect = new GiveEffect(12, EffectName.HOLY);
+//        Usable usable = new Usable("Kamane Demool", 30000, TargetType.NOT_MELEE_HERO, effect,
+//                "disarms the enemy for one turn on attack.(only for ranged and hybrid hero.)");
+//        saveToFile(usable);
     }
 
     private static void collectableMaker() throws IOException {
@@ -33,11 +33,11 @@ public class CardMaker {
     }
 
     private static void heroMaker() throws IOException {
-        Effect effect = new Power(Integer.MAX_VALUE, 4, PowerMode.AP);
-        Spell specialPower = new Spell("Dive Sefid's Spell", 0, 1,
-                TargetType.HIMSELF, effect, "casts power buff 4 on himself forever");
-        Hero hero = new Hero("Dive Sefid", 8000, 50, 4, -1, AttackMode.MELEE, specialPower, 2);
-        saveToFile(hero);
+//        Effect effect = new Power(Integer.MAX_VALUE, 4, PowerMode.AP);
+//        Spell specialPower = new Spell("Dive Sefid's Spell", 0, 1,
+//                TargetType.HIMSELF, effect, "casts power buff 4 on himself forever");
+//        Hero hero = new Hero("Dive Sefid", 8000, 50, 4, -1, AttackMode.MELEE, specialPower, 2);
+//        saveToFile(hero);
     }
 
     private static void spellMaker() throws IOException {
@@ -49,21 +49,21 @@ public class CardMaker {
         //effects.add(new Flame(2));
         //effects.add(new Poison(4, EffectApplyInfo.ON_OPP));
         //effects.add(new Weakness(Integer.MAX_VALUE, Integer.MAX_VALUE, WeaknessMode.AP, EffectApplyInfo.ON_OPP));
-        effects.add(new Stun(2));
-        TargetType targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
-                CellType.SINGLE_CELL, HeroOrMinion.BOTH, OppOrAlly.OPP);
-        Spell spell = new Spell("Shock", 1200, 1, targetType, effects,
-                "stun an opp");
-        saveToFile(spell);
+//        effects.add(new Stun(2));
+//        TargetType targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
+//                CellType.SINGLE_CELL, HeroOrMinion.BOTH, OppOrAlly.OPP);
+//        Spell spell = new Spell("Shock", 1200, 1, targetType, effects,
+//                "stun an opp");
+//        saveToFile(spell);
     }
 
     private static void minionMaker() throws IOException {
-        Effect effect = new Stun(1);
-        Spell specialPower = new Spell("shamshirzane fars spell", 0, 0,
-                TargetType.SINGLE_OPP, effect, "Stuns the attacked opp for one turn.");
-        Minion minion = new Minion("Shamshirzane Fars", 400, 2, 6, 4,
-                0, AttackMode.MELEE, specialPower);
-        saveToFile(minion);
+//        Effect effect = new Stun(1);
+//        Spell specialPower = new Spell("shamshirzane fars spell", 0, 0,
+//                TargetType.SINGLE_OPP, effect, "Stuns the attacked opp for one turn.");
+//        Minion minion = new Minion("Shamshirzane Fars", 400, 2, 6, 4,
+//                0, AttackMode.MELEE, specialPower);
+//        saveToFile(minion);
     }
 
     static Hero heroReader(String path) throws IOException {

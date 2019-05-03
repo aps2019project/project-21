@@ -17,9 +17,9 @@ public class HeroMaker {
         Effect effect = new GiveEffect(Integer.MAX_VALUE, 4, EffectName.POWER);
         TargetType targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
                 CellType.SINGLE_CELL, HeroOrMinion.HERO, OppOrAlly.ALLY, ChooseType.HIMSELF);
-        Spell specialPower = new Spell("Div_e_Sefid's Spell", 0, 1,
+        Spell specialPower = new Spell("Dive Sefid's Spell", 0, 1,
                 targetType, effect, "Casts one power buff with 4 ap increase on himself forever");
-        Hero hero = new Hero("Div_e_Sefid", 8000, 50,
+        Hero hero = new Hero("Dive Sefid", 8000, 50,
                 4, 1, AttackMode.MELEE, specialPower, 2);
         saveToFile(hero);
 

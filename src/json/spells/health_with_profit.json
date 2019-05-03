@@ -25,11 +25,11 @@
       }
     ],
     "desc": "stun an opp",
-    "name": "Dispel",
-    "id": 11,
+    "name": "Health With Profit",
+    "id": 12,
     "collectionID": 0,
     "cardIDInGame": null,
-    "price": 2100,
+    "price": 2250,
     "manaCost": 0,
     "currentCell": null
   }

@@ -25,12 +25,12 @@
       }
     ],
     "desc": "stun an opp",
-    "name": "Dispel",
-    "id": 11,
+    "name": "Kings Guard",
+    "id": 18,
     "collectionID": 0,
     "cardIDInGame": null,
-    "price": 2100,
-    "manaCost": 0,
+    "price": 1750,
+    "manaCost": 9,
     "currentCell": null
   }
 }
