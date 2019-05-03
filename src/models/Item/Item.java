@@ -32,6 +32,10 @@ public class Item extends Card {
 
     }
 
+    public String getDesc() {
+        return desc;
+    }
+
     public void makeCopyAndAddToCollection(Player player) {
 //        Item item = new Item(name, price);
 //        item.setCollectionID(player.getCardCurrentID());

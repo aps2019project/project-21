@@ -141,6 +141,10 @@ public class Attacker extends Card {
         return appliedEffects;
     }
 
+    public AttackMode getAttackMode() {
+        return attackMode;
+    }
+
     public boolean hasSpecialPower() {
         return specialPower != null;
     }

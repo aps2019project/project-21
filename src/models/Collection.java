@@ -112,10 +112,6 @@ public class Collection {
         this.mainDeck = mainDeck;
     }
 
-    public List<Card> getCards() {
-        return cards;
-    }
-
     public void setHero(List<Hero> hero) {
         this.hero = hero;
     }

@@ -15,10 +15,19 @@ public class Player {
     private Collection collection;
     private int drake;
     private List<Match> matchHistory = new ArrayList<>();
+    private int wins;
     private int cardCurrentID;
 
     public int getCardCurrentID() {
         return cardCurrentID;
+    }
+
+    public void setWins(){
+
+    }
+
+    public int getWins() {
+        return wins;
     }
 
     public void setCardCurrentID(int cardCurrentID) {
@@ -26,6 +35,7 @@ public class Player {
     }
 
     public Player(String username, String password) {
+        this.wins = 0;
         this.drake = 15000;
         this.username = username;
         this.password = password;
@@ -133,5 +143,18 @@ public class Player {
         setCurrentPlayer(player);
         return true;
     }
+
+    public boolean compareTwoPlayer(Player player){
+        //after run should check
+        if (player.getWins() > this.wins){
+            return true;
+        } else if (player.getWins() < this.wins){
+            return false;
+        } else if (this.username.compareTo(player.getUsername()) < 0){
+            return true;
+        }
+        return false;
+    }
+
 }
 
