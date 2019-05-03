@@ -1,0 +1,35 @@
+{
+  "@type": "models.Item.Collectable",
+  "@val": {
+    "applyType": null,
+    "effects": [
+      {
+        "@type": "models.card.effects.IncreaseAP",
+        "@val": {
+          "changeValue": 2,
+          "cell": null,
+          "attacker": null,
+          "player": null,
+          "match": null,
+          "activationType": "NONE"
+        }
+      }
+    ],
+    "targetType": {
+      "randomOrNot": "RANDOM",
+      "targetAttackerRange": "RANGED_OR_HYBRID",
+      "cellType": "NONE",
+      "heroOrMinion": "BOTH",
+      "oppOrAlly": "ALLY",
+      "chooseType": "NONE"
+    },
+    "desc": "Increase AP of a random ranged_or_hybrid ally 2 units.",
+    "name": "Tire Doshakh",
+    "id": 1,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 0,
+    "manaCost": 0,
+    "currentCell": null
+  }
+}

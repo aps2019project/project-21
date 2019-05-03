@@ -19,26 +19,26 @@ public class Collection {
     private List<Spell> spells = new ArrayList<>();
     private List<Item> items = new ArrayList<>();
 
-    public void addCard(Card card){
-        if (card.getClass().equals(Hero.class)){
-            hero.add((Hero)card);
-        } else if (card.getClass().equals(Spell.class)){
-            spells.add((Spell)card);
+    public void addCard(Card card) {
+        if (card.getClass().equals(Hero.class)) {
+            hero.add((Hero) card);
+        } else if (card.getClass().equals(Spell.class)) {
+            spells.add((Spell) card);
         } else {
-            minions.add((Minion)card);
+            minions.add((Minion) card);
         }
     }
 
-    public void addItem(Item item){
+    public void addItem(Item item) {
         this.items.add(item);
     }
 
-    public void removeCard(Card card){
+    public void removeCard(Card card) {
         if (cards.getClass().equals(Minion.class)) {
             this.minions.remove(card);
             for (int i = 0; i < decks.size(); i++) {
                 Deck deck = decks.get(i);
-                for (int  j=0 ; j<deck.getCards().size(); j++) {
+                for (int j = 0; j < deck.getCards().size(); j++) {
                     if (deck.getCards().get(j).TwoCardAreSame(card))
                         deck.getCards().remove(j);
                 }
@@ -47,14 +47,14 @@ public class Collection {
             this.spells.remove(card);
             for (int i = 0; i < decks.size(); i++) {
                 Deck deck = decks.get(i);
-                for (int  j=0 ; j<deck.getCards().size(); j++) {
+                for (int j = 0; j < deck.getCards().size(); j++) {
                     if (deck.getCards().get(j).TwoCardAreSame(card))
                         deck.getCards().remove(j);
                 }
             }
         } else {
             this.hero.remove(card);
-            for (int i=0;i<decks.size() ; i++){
+            for (int i = 0; i < decks.size(); i++) {
                 Deck deck = decks.get(i);
                 if (deck.getHero().getId() == card.getId())
                     deck.setHero(null);
@@ -62,10 +62,10 @@ public class Collection {
         }
     }
 
-    public void removeItem(Item item){
+    public void removeItem(Item item) {
         this.items.remove(item);
-        for(int i = 0; i < decks.size(); i++) {
-            if(decks.get(i).getItem().getId() == item.getId())
+        for (int i = 0; i < decks.size(); i++) {
+            if (decks.get(i).getItem().getId() == item.getId())
                 decks.get(i).setItem(null);
         }
     }
@@ -78,10 +78,10 @@ public class Collection {
         this.decks = decks;
     }
 
-    public void addDeck(Deck deck){
-        boolean found=true;
-        for (Deck deck1 : this.decks){
-            if (deck1.getName().equals(deck.getName())){
+    public void addDeck(Deck deck) {
+        boolean found = true;
+        for (Deck deck1 : this.decks) {
+            if (deck1.getName().equals(deck.getName())) {
                 found = false;
                 System.out.println("Deck name is not available");
             }
@@ -91,15 +91,15 @@ public class Collection {
         }
     }
 
-    public void deleteDeck(Deck deck){
+    public void deleteDeck(Deck deck) {
         boolean found = true;
-        for (Deck deck1: this.decks){
-            if (deck1.getName().equals(deck.getName())){
+        for (Deck deck1 : this.decks) {
+            if (deck1.getName().equals(deck.getName())) {
                 this.decks.remove(deck1);
                 found = false;
             }
         }
-        if (found){
+        if (found) {
             System.out.println("Deck isn't exist");
         }
     }
@@ -144,8 +144,12 @@ public class Collection {
         this.items = items;
     }
 
-    public Deck searchDeck(String name){
+    public Deck searchDeck(String name) {
         // error mode should handled
+        return null;
+    }
+
+    public List<Card> getCards() {
         return null;
     }
 }

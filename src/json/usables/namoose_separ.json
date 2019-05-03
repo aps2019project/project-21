@@ -1,0 +1,38 @@
+{
+  "@type": "models.Item.Usable",
+  "@val": {
+    "applyType": null,
+    "effects": [
+      {
+        "@type": "models.card.effects.GiveEffect",
+        "@val": {
+          "duration": 12,
+          "num": 0,
+          "value": 0,
+          "effectName": "HOLY",
+          "cell": null,
+          "attacker": null,
+          "player": null,
+          "match": null,
+          "activationType": "NONE"
+        }
+      }
+    ],
+    "targetType": {
+      "randomOrNot": "NOT_RANDOM",
+      "targetAttackerRange": "ALL_THREE",
+      "cellType": "NONE",
+      "heroOrMinion": "HERO",
+      "oppOrAlly": "ALLY",
+      "chooseType": "NONE"
+    },
+    "desc": "Gives ally hero 12 holu buffs.",
+    "name": "Namoose Separ",
+    "id": 1,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 4000,
+    "manaCost": 0,
+    "currentCell": null
+  }
+}
