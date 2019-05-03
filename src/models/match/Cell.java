@@ -2,7 +2,6 @@ package models.match;
 
 import models.Item.Collectable;
 import models.Item.Flag;
-import models.card.AttackMode;
 import models.card.Attacker;
 import models.card.Effect;
 
@@ -11,6 +10,15 @@ import java.util.ArrayList;
 public class Cell {
     private int x;
     private int y;
+
+    public int getY() {
+        return y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
     private ArrayList<Effect> effects = new ArrayList<>();
     private Collectable collectable;
     private Flag flag;

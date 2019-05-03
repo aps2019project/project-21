@@ -15,6 +15,11 @@ public class Attacker extends Card {
 
     private Spell specialPower;
     private List<Effect> appliedEffects = new ArrayList<>();
+
+    public int getAttackRange() {
+        return attackRange;
+    }
+
     private int attackRange;
     private AttackMode attackMode;
     protected boolean canMove;
