@@ -1,9 +1,25 @@
 package models.card.buffs;
 
-public class IncreaseMana {
+import models.card.Buff;
+import models.card.BuffMode;
+import models.card.EffectApplyInfo;
+import models.match.PlayerMatchInfo;
+
+public class IncreaseMana extends Buff {
     int value;
 
-    public IncreaseMana() {
+    public IncreaseMana(int duration, int value) {
+        super(duration, EffectApplyInfo.NONE, BuffMode.GOOD);
+        this.value = value;
+    }
 
+    public void apply() {
+        if (duration <= 0 || match == null)
+            return;
+        PlayerMatchInfo info = match.getInfo(player);
+        if (info == null)
+            return;
+        info.increaseMana(value);
+        duration--;
     }
 }

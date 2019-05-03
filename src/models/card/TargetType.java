@@ -19,5 +19,6 @@ public enum TargetType {
     SINGLE_ATTACKER,
     RANDOM_ALLY,
     RANDOM_OPP,
+    RANDOM_NEAREST_OPP,
 
 }

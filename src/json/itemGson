@@ -1,0 +1,4 @@
+Effect effect = new IncreaseMana(3, 1);
+        Usable usable = new Usable("Taje Danaee", 300, effect,
+                "increases manaPoint in first three turns.");
+        saveToFile(usable);

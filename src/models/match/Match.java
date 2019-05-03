@@ -219,4 +219,8 @@ public class Match {
             //  TODO
         }
     }
+
+    public PlayerMatchInfo getInfo(Player player){
+        return null;
+    }
 }

@@ -41,7 +41,11 @@ public class PlayerMatchInfo {
         return groundedAttackers;
     }
 
-    public Hand getHand(){
+    public Hand getHand() {
         return hand;
+    }
+
+    public void increaseMana(int value) {
+        this.mp += value;
     }
 }

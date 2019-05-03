@@ -3,6 +3,7 @@ package json;
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
 import models.Item.Item;
+import models.Item.Usable;
 import models.card.*;
 import models.card.buffs.*;
 import models.card.effects.DecreaseHP;
@@ -19,7 +20,18 @@ import java.util.List;
 
 public class CardMaker {
     public static void main(String[] args) throws IOException {
-        heroMaker();
+        usableMaker();
+    }
+
+    private static void usableMaker() throws IOException {
+        Effect effect = new IncreaseMana(3, 1);
+        Usable usable = new Usable("Taje Danaee", 300, effect,
+                "increases manaPoint in first three turns.");
+        saveToFile(usable);
+    }
+
+    private static void collectableMaker() throws IOException {
+
     }
 
     private static void heroMaker() throws IOException {
@@ -27,8 +39,6 @@ public class CardMaker {
         Spell specialPower = new Spell("Dive Sefid's Spell", 0, 1,
                 TargetType.HIMSELF, effect, "casts power buff 4 on himself forever");
         Hero hero = new Hero("Dive Sefid", 8000, 50, 4, -1, AttackMode.MELEE, specialPower, 2);
-        Cell cell = new Cell(hero);
-        hero.setCurrentCell(cell);
         saveToFile(hero);
     }
 
