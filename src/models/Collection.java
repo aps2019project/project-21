@@ -9,17 +9,17 @@ import models.card.Spell;
 import java.util.ArrayList;
 import java.util.List;
 
-import static models.card.Card.cards;
-
 public class Collection {
     private List<Deck> decks = new ArrayList<>();
     private Deck mainDeck;
+    private List<Card> cards = new ArrayList<>();
     private List<Hero> hero = new ArrayList<>();
     private List<Minion> minions = new ArrayList<>();
     private List<Spell> spells = new ArrayList<>();
     private List<Item> items = new ArrayList<>();
 
     public void addCard(Card card){
+        cards.add(card);
         if (card.getClass().equals(Hero.class)){
             hero.add((Hero)card);
         } else if (card.getClass().equals(Spell.class)){
@@ -34,6 +34,7 @@ public class Collection {
     }
 
     public void removeCard(Card card){
+        cards.remove(card);
         if (cards.getClass().equals(Minion.class)) {
             this.minions.remove(card);
             for (int i = 0; i < decks.size(); i++) {
@@ -63,6 +64,7 @@ public class Collection {
     }
 
     public void removeItem(Item item){
+        cards.remove(item);
         this.items.remove(item);
         for(int i = 0; i < decks.size(); i++) {
             if(decks.get(i).getItem().getId() == item.getId())
@@ -110,6 +112,14 @@ public class Collection {
 
     public void setMainDeck(Deck mainDeck) {
         this.mainDeck = mainDeck;
+    }
+
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
+    }
+
+    public List<Card> getCards() {
+        return cards;
     }
 
     public void setHero(List<Hero> hero) {

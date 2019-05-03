@@ -271,17 +271,16 @@ public class View {
                     "?????" +
                     "\nCost : "+
                     card.getPrice());
+        } else if (card.getClass().equals(Item.class)){
+            System.out.println("Name : " +
+                    card.getName() +
+                    " , Desc : " +
+                        "???????");
         }
     }
 
-    public void showHand() {
-
-    }
-
     public void showCollectables(Collectable collectable) {
-    }
-
-    public void showNextCard() {
+        showCardInfo(collectable);
     }
 
     public void showGeneralThings(String thingName) {
