@@ -2,7 +2,6 @@ package controller.menus;
 
 import controller.InputScanner;
 import controller.request.AccountMenuRequest;
-import controller.request.Request;
 import models.Player;
 import view.ErrorMode;
 import view.View;
@@ -36,7 +35,7 @@ public class AccountMenu extends Menu {
                 login();
                 break;
             case SHOW_LEADERBOARD:
-                showLeaderBoard();
+                view.scoreBoard();
                 break;
             case SAVE:
                 save();
@@ -48,7 +47,7 @@ public class AccountMenu extends Menu {
                 gotoMainMenu();
                 break;
             case HELP:
-                help();
+                showMenu();
                 break;
             case SHOW_MENU:
                 showMenu();
@@ -85,15 +84,7 @@ public class AccountMenu extends Menu {
         Player.setCurrentPlayer(null);
     }
 
-    private void showLeaderBoard() {
-
-    }
-
     private void save() {
-
-    }
-
-    private void help() {
 
     }
 

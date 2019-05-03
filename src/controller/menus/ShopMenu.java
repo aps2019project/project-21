@@ -1,14 +1,11 @@
 package controller.menus;
 
 import controller.request.AccountMenuRequest;
-import controller.request.Request;
 import controller.request.RequestType;
-import jdk.nashorn.api.tree.WhileLoopTree;
-import models.card.Card;
 import models.Item.Item;
 import models.Player;
+import models.card.Card;
 import view.ErrorMode;
-import view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +53,7 @@ public class ShopMenu extends Menu {
                 buy(player, request.getCommandLine().substring(4));
                 break;
             case HELP:
-                help();
+                showMenu();
                 break;
             case SHOW_MENU:
                 showMenu();
@@ -185,10 +182,6 @@ public class ShopMenu extends Menu {
 
     private void show() {
         view.showShop(this);
-    }
-
-    private void help() {
-        view.help("shopMenu");
     }
 
     private void addCardToShop(Card Card) {

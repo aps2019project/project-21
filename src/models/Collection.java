@@ -2,30 +2,63 @@ package models;
 
 import models.Item.Item;
 import models.card.Card;
+import models.card.Hero;
+import models.card.Minion;
+import models.card.Spell;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static models.card.Card.cards;
+
 public class Collection {
     private List<Deck> decks = new ArrayList<>();
     private Deck mainDeck;
-    private List<Card> cards = new ArrayList<>();
+    private List<Hero> hero = new ArrayList<>();
+    private List<Minion> minions = new ArrayList<>();
+    private List<Spell> spells = new ArrayList<>();
     private List<Item> items = new ArrayList<>();
 
-    public void addCard(Card Card){
-        this.cards.add(Card);
+    public void addCard(Card card){
+        if (card.getClass().equals(Hero.class)){
+            hero.add((Hero)card);
+        } else if (card.getClass().equals(Spell.class)){
+            spells.add((Spell)card);
+        } else {
+            minions.add((Minion)card);
+        }
     }
 
     public void addItem(Item item){
         this.items.add(item);
     }
 
-    public void removeCard(Card Card){
-        this.cards.remove(Card);
-        for(int i = 0; i < decks.size(); i++) {
-            decks.get(i).getCards().remove(i);
-            if(((Card)decks.get(i).getHero()).getId() == Card.getId())
-                decks.get(i).setHero(null);
+    public void removeCard(Card card){
+        if (cards.getClass().equals(Minion.class)) {
+            this.minions.remove(card);
+            for (int i = 0; i < decks.size(); i++) {
+                Deck deck = decks.get(i);
+                for (int  j=0 ; j<deck.getCards().size(); j++) {
+                    if (deck.getCards().get(j).TwoCardAreSame(card))
+                        deck.getCards().remove(j);
+                }
+            }
+        } else if (cards.getClass().equals(Spell.class)) {
+            this.spells.remove(card);
+            for (int i = 0; i < decks.size(); i++) {
+                Deck deck = decks.get(i);
+                for (int  j=0 ; j<deck.getCards().size(); j++) {
+                    if (deck.getCards().get(j).TwoCardAreSame(card))
+                        deck.getCards().remove(j);
+                }
+            }
+        } else {
+            this.hero.remove(card);
+            for (int i=0;i<decks.size() ; i++){
+                Deck deck = decks.get(i);
+                if (deck.getHero().getId() == card.getId())
+                    deck.setHero(null);
+            }
         }
     }
 
@@ -79,12 +112,28 @@ public class Collection {
         this.mainDeck = mainDeck;
     }
 
-    public List<Card> getCards() {
-        return cards;
+    public void setHero(List<Hero> hero) {
+        this.hero = hero;
     }
 
-    public void setCards(List<Card> cards) {
-        this.cards = cards;
+    public List<Spell> getSpells() {
+        return spells;
+    }
+
+    public List<Hero> getHero() {
+        return hero;
+    }
+
+    public List<Minion> getMinions() {
+        return minions;
+    }
+
+    public void setSpells(List<Spell> spells) {
+        this.spells = spells;
+    }
+
+    public void setMinions(List<Minion> minions) {
+        this.minions = minions;
     }
 
     public List<Item> getItems() {
