@@ -37,10 +37,6 @@ public class View {
 
     }
 
-    public void help(String menuName) {
-
-    }
-
     public void printCardGraveyard(Card card) {
 
     }
@@ -66,7 +62,10 @@ public class View {
     }
 
     public void showCollection(Collection collection) {
+        System.out.println("Heroes:\n");
+        for (Card card : collection.getCards()){
 
+        }
     }
 
     public void showSearchInShop(String msg) {
@@ -87,9 +86,11 @@ public class View {
     }
 
     public void showCardInfo(Card card) {
+
     }
 
     public void showHand() {
+
     }
 
     public void showCollectables(Collectable collectable) {
