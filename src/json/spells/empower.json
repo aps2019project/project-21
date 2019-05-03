@@ -1,28 +1,36 @@
 {
-  "targetType": "SINGLE_ALLY",
-  "effects": [
-    {
-      "value": 2,
-      "powerMode": "AP",
-      "duration": 2147483647,
-      "buffMode": "GOOD",
-      "applyType": "ON_ATTACKER",
-      "effectType": "POWER",
-      "effectArguments": [
-        "2147483647",
-        "2",
-        "AP"
-      ],
-      "cell": null,
-      "attacker": null
-    }
-  ],
-  "desc": "add 2 ap",
-  "name": "Empower",
-  "id": 0,
-  "collectionID": 0,
-  "cardIDInGame": null,
-  "price": 250,
-  "manaCost": 1,
-  "currentCell": null
+  "@type": "models.card.Spell",
+  "@val": {
+    "targetType": {
+      "randomOrNot": "NOT_RANDOM",
+      "targetAttackerRange": "ALL_THREE",
+      "cellType": "SINGLE_CELL",
+      "heroOrMinion": "BOTH",
+      "oppOrAlly": "OPP",
+      "chooseType": "HIMSELF"
+    },
+    "effects": [
+      {
+        "@type": "models.card.buffs.Stun",
+        "@val": {
+          "duration": 2,
+          "buffMode": "EVIL",
+          "effectApplyInfo": "ON_ATTACKER",
+          "cell": null,
+          "attacker": null,
+          "player": null,
+          "match": null,
+          "activationType": "NONE"
+        }
+      }
+    ],
+    "desc": "stun an opp",
+    "name": "Empower",
+    "id": 2,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 250,
+    "manaCost": 1,
+    "currentCell": null
+  }
 }

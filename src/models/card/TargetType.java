@@ -1,23 +1,43 @@
 package models.card;
 
-public enum TargetType {
-    NONE,
-    SINGLE_OPP,
-    ALL_OPPS,
-    ALL_ALLY,
-    SINGLE_ALLY,
-    SINGLE_CELL,
-    OPPS_IN_ROW,
-    OPPS_IN_COLUMN,
-    HIMSELF,
-    SQUARE_2_2,
-    ALLY_HERO,
-    NOT_MELEE_HERO,
-    OPP_HERO,
-    NOT_MELEE_OPP_HERO,
-    SQUARE_3_3,
-    SINGLE_ATTACKER,
-    RANDOM_ALLY,
-    RANDOM_OPP,
+import models.card.target_enums.*;
 
+public class TargetType {
+    private RandomOrNot randomOrNot;
+    private TargetAttackerRange targetAttackerRange;
+    private CellType cellType;
+    private HeroOrMinion heroOrMinion;
+    private OppOrAlly oppOrAlly;
+    private ChooseType chooseType;
+
+    public TargetType(RandomOrNot randomOrNot, TargetAttackerRange targetAttackerRange,
+                      CellType cellType, HeroOrMinion heroOrMinion, OppOrAlly oppOrAlly,
+                      ChooseType chooseType) {
+        this.randomOrNot = randomOrNot;
+        this.targetAttackerRange = targetAttackerRange;
+        this.cellType = cellType;
+        this.heroOrMinion = heroOrMinion;
+        this.oppOrAlly = oppOrAlly;
+        this.chooseType = chooseType;
+    }
+
+    public RandomOrNot getRandomOrNot() {
+        return randomOrNot;
+    }
+
+    public TargetAttackerRange getTargetAttackerRange() {
+        return targetAttackerRange;
+    }
+
+    public CellType getCellType() {
+        return cellType;
+    }
+
+    public HeroOrMinion getHeroOrMinion() {
+        return heroOrMinion;
+    }
+
+    public OppOrAlly getOppOrAlly() {
+        return oppOrAlly;
+    }
 }

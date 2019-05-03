@@ -1,30 +1,38 @@
 {
   "@type": "models.card.Hero",
   "@val": {
-    "cooldown": 2,
+    "cooldown": 3,
     "maxHp": 50,
     "maxAp": 4,
     "hp": 50,
     "ap": 4,
     "specialPower": {
-      "targetType": "HIMSELF",
+      "targetType": {
+        "randomOrNot": "NOT_RANDOM",
+        "targetAttackerRange": "ALL_THREE",
+        "cellType": "NONE",
+        "heroOrMinion": "BOTH",
+        "oppOrAlly": "OPP",
+        "chooseType": "SELECTED_OPP"
+      },
       "effects": [
         {
-          "@type": "models.card.buffs.Power",
+          "@type": "models.card.buffs.Poison",
           "@val": {
-            "value": 4,
-            "powerMode": "AP",
-            "duration": 2147483647,
-            "buffMode": "GOOD",
-            "applyType": "ON_ATTACKER",
+            "duration": 1,
+            "buffMode": "EVIL",
+            "effectApplyInfo": "ON_ATTACKER",
             "cell": null,
-            "attacker": null
+            "attacker": null,
+            "player": null,
+            "match": null,
+            "activationType": "ON_ATTACK"
           }
         }
       ],
-      "desc": "casts power buff 4 on himself forever",
-      "name": "Dive Sefid's Spell",
-      "id": 0,
+      "desc": "Gives a selected cell holy buff for 3 turns.",
+      "name": "Kaveh's Spell",
+      "id": 10,
       "collectionID": 0,
       "cardIDInGame": null,
       "price": 0,
@@ -32,15 +40,15 @@
       "currentCell": null
     },
     "appliedEffects": [],
-    "attackRange": -1,
+    "attackRange": 1,
     "attackMode": "MELEE",
     "canMove": true,
     "canAttack": true,
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
-    "name": "Dive Sefid",
-    "id": 1,
+    "name": "Kaveh",
+    "id": 11,
     "collectionID": 0,
     "cardIDInGame": null,
     "price": 8000,
@@ -51,7 +59,7 @@
       "effects": [],
       "collectable": null,
       "flag": null,
-      "currentAttacker": "@root"
+      "currentAttacker": null
     }
   }
 }

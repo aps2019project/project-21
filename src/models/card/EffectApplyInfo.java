@@ -1,6 +1,7 @@
 package models.card;
 
 public enum EffectApplyInfo {
+    NONE,
     ON_CELL,
     ON_ATTACKER,
     ON_HERO,

@@ -1,0 +1,10 @@
+Effect effect = new IncreaseMana(3, 1);
+        Usable usable = new Usable("Taje Danaee", 300, effect,
+                "increases manaPoint in first three turns.");
+        saveToFile(usable);
+
+Effect effect = new GiveEffect(12, EffectName.HOLY);
+        Usable usable = new Usable("Namoose Separ", 4000, TargetType.ALLY_HERO, effect,
+                "increases manaPoint in first three turns.");
+        saveToFile(usable);
+

@@ -2,10 +2,10 @@
   "@type": "models.card.Hero",
   "@val": {
     "cooldown": 0,
-    "maxHp": 35,
-    "maxAp": 3,
-    "hp": 35,
-    "ap": 3,
+    "maxHp": 50,
+    "maxAp": 2,
+    "hp": 50,
+    "ap": 2,
     "specialPower": {
       "targetType": {
         "randomOrNot": "NOT_RANDOM",
@@ -17,23 +17,22 @@
       },
       "effects": [
         {
-          "@type": "models.card.effects.GiveEffect",
+          "@type": "models.card.buffs.Poison",
           "@val": {
-            "duration": 2147483647,
-            "value": 0,
-            "effectName": "HOLY",
-            "effectApplyInfo": null,
+            "duration": 1,
+            "buffMode": "EVIL",
+            "effectApplyInfo": "ON_ATTACKER",
             "cell": null,
             "attacker": null,
             "player": null,
             "match": null,
-            "activationType": "NONE"
+            "activationType": "ON_ATTACK"
           }
         }
       ],
-      "desc": "Has 3 holy buffs continuously.",
-      "name": "Esfandiar's Spell",
-      "id": 16,
+      "desc": "Poisons an opponent on attack for 3 turns.",
+      "name": "Zahak's Spell",
+      "id": 8,
       "collectionID": 0,
       "cardIDInGame": null,
       "price": 0,
@@ -41,18 +40,18 @@
       "currentCell": null
     },
     "appliedEffects": [],
-    "attackRange": 3,
-    "attackMode": "HYBRID",
+    "attackRange": 1,
+    "attackMode": "MELEE",
     "canMove": true,
     "canAttack": true,
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
-    "name": "Esfandiar",
-    "id": 17,
+    "name": "Zahak",
+    "id": 9,
     "collectionID": 0,
     "cardIDInGame": null,
-    "price": 12000,
+    "price": 10000,
     "manaCost": -1,
     "currentCell": {
       "x": 0,

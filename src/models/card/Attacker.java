@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Attacker extends Card {
-    public static ArrayList<Attacker> attakers = new ArrayList<>();
+    public static ArrayList<Attacker> attackers = new ArrayList<>();
     private int maxHp;
     private int maxAp;
     private int hp;
@@ -38,7 +38,7 @@ public class Attacker extends Card {
         this.attackRange = attackRange;
         this.attackMode = attackMode;
         currentCell = new Cell();
-        attakers.add(this);
+        attackers.add(this);
     }
 
     public void manageEffects() {

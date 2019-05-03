@@ -25,12 +25,12 @@
       }
     ],
     "desc": "stun an opp",
-    "name": "Dispel",
-    "id": 11,
+    "name": "Area Dispel",
+    "id": 1,
     "collectionID": 0,
     "cardIDInGame": null,
-    "price": 2100,
-    "manaCost": 0,
+    "price": 1500,
+    "manaCost": 2,
     "currentCell": null
   }
 }

@@ -6,6 +6,7 @@ import models.Item.Collectable;
 import models.Player;
 import models.card.Attacker;
 import models.card.Card;
+import models.card.Hero;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +46,18 @@ public class PlayerMatchInfo {
         return groundedAttackers;
     }
 
-    public Hand getHand(){
+    public Hand getHand() {
         return hand;
+    }
+
+    public void increaseMana(int value) {
+        this.mp += value;
+    }
+
+    public Hero getHero() {
+        for (Attacker attacker : groundedAttackers)
+            if (attacker.getClass().equals(Hero.class))
+                return (Hero) attacker;
+        return null;
     }
 }

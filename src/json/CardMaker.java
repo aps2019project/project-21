@@ -2,13 +2,12 @@ package json;
 
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
-import models.Item.Item;
+import models.Item.Usable;
 import models.card.*;
 import models.card.buffs.*;
-import models.card.effects.DecreaseHP;
-import models.card.effects.IncreaseAP;
-import models.card.effects.PositiveDispel;
-import models.match.Cell;
+import models.card.effects.*;
+import models.card.TargetType;
+import models.card.target_enums.*;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -19,17 +18,26 @@ import java.util.List;
 
 public class CardMaker {
     public static void main(String[] args) throws IOException {
-        heroMaker();
+        usableMaker();
+    }
+
+    private static void usableMaker() throws IOException {
+//        Effect effect = new GiveEffect(12, EffectName.HOLY);
+//        Usable usable = new Usable("Kamane Demool", 30000, TargetType.NOT_MELEE_HERO, effect,
+//                "disarms the enemy for one turn on attack.(only for ranged and hybrid hero.)");
+//        saveToFile(usable);
+    }
+
+    private static void collectableMaker() throws IOException {
+
     }
 
     private static void heroMaker() throws IOException {
-        Effect effect = new Power(Integer.MAX_VALUE, 4, PowerMode.AP);
-        Spell specialPower = new Spell("Dive Sefid's Spell", 0, 1,
-                TargetType.HIMSELF, effect, "casts power buff 4 on himself forever");
-        Hero hero = new Hero("Dive Sefid", 8000, 50, 4, -1, AttackMode.MELEE, specialPower, 2);
-        Cell cell = new Cell(hero);
-        hero.setCurrentCell(cell);
-        saveToFile(hero);
+//        Effect effect = new Power(Integer.MAX_VALUE, 4, PowerMode.AP);
+//        Spell specialPower = new Spell("Dive Sefid's Spell", 0, 1,
+//                TargetType.HIMSELF, effect, "casts power buff 4 on himself forever");
+//        Hero hero = new Hero("Dive Sefid", 8000, 50, 4, -1, AttackMode.MELEE, specialPower, 2);
+//        saveToFile(hero);
     }
 
     private static void spellMaker() throws IOException {
@@ -41,19 +49,21 @@ public class CardMaker {
         //effects.add(new Flame(2));
         //effects.add(new Poison(4, EffectApplyInfo.ON_OPP));
         //effects.add(new Weakness(Integer.MAX_VALUE, Integer.MAX_VALUE, WeaknessMode.AP, EffectApplyInfo.ON_OPP));
-        effects.add(new Stun(2));
-        Spell spell = new Spell("Shock", 1200, 1, TargetType.SINGLE_OPP, effects,
-                "stun an opp");
-        saveToFile(spell);
+//        effects.add(new Stun(2));
+//        TargetType targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
+//                CellType.SINGLE_CELL, HeroOrMinion.BOTH, OppOrAlly.OPP);
+//        Spell spell = new Spell("Shock", 1200, 1, targetType, effects,
+//                "stun an opp");
+//        saveToFile(spell);
     }
 
     private static void minionMaker() throws IOException {
-        Effect effect = new Stun(1);
-        Spell specialPower = new Spell("shamshirzane fars spell", 0, 0,
-                TargetType.SINGLE_OPP, effect, "Stuns the attacked opp for one turn.");
-        Minion minion = new Minion("Shamshirzane Fars", 400, 2, 6, 4,
-                0, AttackMode.MELEE, specialPower);
-        saveToFile(minion);
+//        Effect effect = new Stun(1);
+//        Spell specialPower = new Spell("shamshirzane fars spell", 0, 0,
+//                TargetType.SINGLE_OPP, effect, "Stuns the attacked opp for one turn.");
+//        Minion minion = new Minion("Shamshirzane Fars", 400, 2, 6, 4,
+//                0, AttackMode.MELEE, specialPower);
+//        saveToFile(minion);
     }
 
     static Hero heroReader(String path) throws IOException {
@@ -74,7 +84,7 @@ public class CardMaker {
         return gson.fromJson(json, Minion.class);
     }
 
-    private static void saveToFile(Card card) throws IOException {
+    static void saveToFile(Card card) throws IOException {
         String folder;
         if (card.getClass().equals(Spell.class))
             folder = "spells";
@@ -86,7 +96,7 @@ public class CardMaker {
             folder = "items";
 
         String path = "src//json//" + folder + "//"
-                + card.getName().toLowerCase().replaceAll("\\s+", "") + ".json";
+                + card.getName().toLowerCase().replaceAll("\\s+", "_") + ".json";
 
         try (FileOutputStream fos = new FileOutputStream(path);
              OutputStreamWriter isr = new OutputStreamWriter(fos,

@@ -25,12 +25,12 @@
       }
     ],
     "desc": "stun an opp",
-    "name": "Dispel",
-    "id": 11,
+    "name": "Hell Fire",
+    "id": 5,
     "collectionID": 0,
     "cardIDInGame": null,
-    "price": 2100,
-    "manaCost": 0,
+    "price": 600,
+    "manaCost": 3,
     "currentCell": null
   }
 }

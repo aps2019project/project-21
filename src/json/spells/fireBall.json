@@ -1,23 +1,36 @@
 {
-  "targetType": "SINGLE_OPP",
-  "effects": [
-    {
-      "value": 4,
-      "applyType": "ON_OPP",
-      "effectType": "DECREASE_HP",
-      "effectArguments": [
-        "4"
-      ],
-      "cell": null,
-      "attacker": null
-    }
-  ],
-  "desc": "decrease 4 hp from opp.",
-  "name": "Fire Ball",
-  "id": 0,
-  "collectionID": 0,
-  "cardIDInGame": null,
-  "price": 400,
-  "manaCost": 1,
-  "currentCell": null
+  "@type": "models.card.Spell",
+  "@val": {
+    "targetType": {
+      "randomOrNot": "NOT_RANDOM",
+      "targetAttackerRange": "ALL_THREE",
+      "cellType": "SINGLE_CELL",
+      "heroOrMinion": "BOTH",
+      "oppOrAlly": "OPP",
+      "chooseType": "HIMSELF"
+    },
+    "effects": [
+      {
+        "@type": "models.card.buffs.Stun",
+        "@val": {
+          "duration": 2,
+          "buffMode": "EVIL",
+          "effectApplyInfo": "ON_ATTACKER",
+          "cell": null,
+          "attacker": null,
+          "player": null,
+          "match": null,
+          "activationType": "NONE"
+        }
+      }
+    ],
+    "desc": "stun an opp",
+    "name": "Fireball",
+    "id": 3,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 400,
+    "manaCost": 1,
+    "currentCell": null
+  }
 }

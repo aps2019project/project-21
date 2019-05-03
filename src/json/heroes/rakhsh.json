@@ -1,53 +1,65 @@
 {
-  "cooldown": 2,
-  "maxHp": 50,
-  "maxAp": 4,
-  "hp": 50,
-  "ap": 4,
-  "specialPower": {
-    "targetType": "SINGLE_OPP",
-    "effects": [
-      {
-        "duration": 1,
-        "buffMode": "EVIL",
-        "applyType": "ON_ATTACKER",
-        "effectType": "STUN",
-        "effectArguments": [
-          "1"
-        ],
-        "cell": null,
-        "attacker": null
-      }
-    ],
-    "desc": "stun 1 opp for 1 round",
-    "name": "Rakhsh\u0027s spell ",
-    "id": 0,
+  "@type": "models.card.Hero",
+  "@val": {
+    "cooldown": 2,
+    "maxHp": 50,
+    "maxAp": 4,
+    "hp": 50,
+    "ap": 4,
+    "specialPower": {
+      "targetType": {
+        "randomOrNot": "NOT_RANDOM",
+        "targetAttackerRange": "ALL_THREE",
+        "cellType": "NONE",
+        "heroOrMinion": "BOTH",
+        "oppOrAlly": "OPP",
+        "chooseType": "SELECTED_OPP"
+      },
+      "effects": [
+        {
+          "@type": "models.card.buffs.Stun",
+          "@val": {
+            "duration": 1,
+            "buffMode": "EVIL",
+            "effectApplyInfo": "ON_ATTACKER",
+            "cell": null,
+            "attacker": null,
+            "player": null,
+            "match": null,
+            "activationType": "NONE"
+          }
+        }
+      ],
+      "desc": "Stuns one opponent attacker for one turn.",
+      "name": "Rakhsh's Spell",
+      "id": 6,
+      "collectionID": 0,
+      "cardIDInGame": null,
+      "price": 0,
+      "manaCost": 1,
+      "currentCell": null
+    },
+    "appliedEffects": [],
+    "attackRange": 1,
+    "attackMode": "MELEE",
+    "canMove": true,
+    "canAttack": true,
+    "isDisarmed": false,
+    "isStunned": false,
+    "hasHolyBuff": false,
+    "name": "Rakhsh",
+    "id": 7,
     "collectionID": 0,
     "cardIDInGame": null,
-    "price": 0,
-    "manaCost": 1,
-    "currentCell": null
-  },
-  "appliedEffects": [],
-  "attackRange": -1,
-  "attackMode": "MELEE",
-  "canMove": true,
-  "canAttack": true,
-  "isDisarmed": false,
-  "isStunned": false,
-  "hasHolyBuff": false,
-  "name": "Rakhsh",
-  "id": 1,
-  "collectionID": 0,
-  "cardIDInGame": null,
-  "price": 8000,
-  "manaCost": -1,
-  "currentCell": {
-    "x": 0,
-    "y": 0,
-    "effects": [],
-    "collectable": null,
-    "flag": null,
-    "currentAttacker": null
+    "price": 8000,
+    "manaCost": -1,
+    "currentCell": {
+      "x": 0,
+      "y": 0,
+      "effects": [],
+      "collectable": null,
+      "flag": null,
+      "currentAttacker": null
+    }
   }
 }

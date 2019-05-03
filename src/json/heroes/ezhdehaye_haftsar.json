@@ -1,28 +1,27 @@
 {
   "@type": "models.card.Hero",
   "@val": {
-    "cooldown": 0,
-    "maxHp": 35,
-    "maxAp": 3,
-    "hp": 35,
-    "ap": 3,
+    "cooldown": 1,
+    "maxHp": 50,
+    "maxAp": 4,
+    "hp": 50,
+    "ap": 4,
     "specialPower": {
       "targetType": {
         "randomOrNot": "NOT_RANDOM",
         "targetAttackerRange": "ALL_THREE",
         "cellType": "NONE",
         "heroOrMinion": "BOTH",
-        "oppOrAlly": "OPP",
+        "oppOrAlly": "BOTH",
         "chooseType": "SELECTED_OPP"
       },
       "effects": [
         {
-          "@type": "models.card.effects.GiveEffect",
+          "@type": "models.card.buffs.Disarm",
           "@val": {
-            "duration": 2147483647,
-            "value": 0,
-            "effectName": "HOLY",
-            "effectApplyInfo": null,
+            "duration": 1,
+            "buffMode": "EVIL",
+            "effectApplyInfo": "ON_ATTACKER",
             "cell": null,
             "attacker": null,
             "player": null,
@@ -31,9 +30,9 @@
           }
         }
       ],
-      "desc": "Has 3 holy buffs continuously.",
-      "name": "Esfandiar's Spell",
-      "id": 16,
+      "desc": "Disarms one selected attacker.",
+      "name": "Ezhdehaye Haftsar's Spell",
+      "id": 4,
       "collectionID": 0,
       "cardIDInGame": null,
       "price": 0,
@@ -41,18 +40,18 @@
       "currentCell": null
     },
     "appliedEffects": [],
-    "attackRange": 3,
-    "attackMode": "HYBRID",
+    "attackRange": 1,
+    "attackMode": "MELEE",
     "canMove": true,
     "canAttack": true,
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
-    "name": "Esfandiar",
-    "id": 17,
+    "name": "Ezhdehaye Haftsar",
+    "id": 5,
     "collectionID": 0,
     "cardIDInGame": null,
-    "price": 12000,
+    "price": 8000,
     "manaCost": -1,
     "currentCell": {
       "x": 0,

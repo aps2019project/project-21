@@ -1,53 +1,65 @@
 {
-  "cooldown": 8,
-  "maxHp": 50,
-  "maxAp": 4,
-  "hp": 50,
-  "ap": 4,
-  "specialPower": {
-    "targetType": "ALL_OPPS",
-    "effects": [
-      {
-        "duration": 1,
-        "buffMode": "EVIL",
-        "applyType": "ON_ATTACKER",
-        "effectType": "STUN",
-        "effectArguments": [
-          "1"
-        ],
-        "cell": null,
-        "attacker": null
-      }
-    ],
-    "desc": "stun opps for 1 round",
-    "name": "Simorgh\u0027s spell ",
-    "id": 0,
+  "@type": "models.card.Hero",
+  "@val": {
+    "cooldown": 8,
+    "maxHp": 50,
+    "maxAp": 4,
+    "hp": 50,
+    "ap": 4,
+    "specialPower": {
+      "targetType": {
+        "randomOrNot": "NOT_RANDOM",
+        "targetAttackerRange": "ALL_THREE",
+        "cellType": "NONE",
+        "heroOrMinion": "BOTH",
+        "oppOrAlly": "OPP",
+        "chooseType": "NONE"
+      },
+      "effects": [
+        {
+          "@type": "models.card.buffs.Stun",
+          "@val": {
+            "duration": 1,
+            "buffMode": "EVIL",
+            "effectApplyInfo": "ON_ATTACKER",
+            "cell": null,
+            "attacker": null,
+            "player": null,
+            "match": null,
+            "activationType": "NONE"
+          }
+        }
+      ],
+      "desc": "Stuns all opp attackers for one turn.",
+      "name": "Simorgh's Spell",
+      "id": 2,
+      "collectionID": 0,
+      "cardIDInGame": null,
+      "price": 0,
+      "manaCost": 5,
+      "currentCell": null
+    },
+    "appliedEffects": [],
+    "attackRange": 1,
+    "attackMode": "MELEE",
+    "canMove": true,
+    "canAttack": true,
+    "isDisarmed": false,
+    "isStunned": false,
+    "hasHolyBuff": false,
+    "name": "Simorgh",
+    "id": 3,
     "collectionID": 0,
     "cardIDInGame": null,
-    "price": 0,
-    "manaCost": 5,
-    "currentCell": null
-  },
-  "appliedEffects": [],
-  "attackRange": -1,
-  "attackMode": "MELEE",
-  "canMove": true,
-  "canAttack": true,
-  "isDisarmed": false,
-  "isStunned": false,
-  "hasHolyBuff": false,
-  "name": "Simorgh",
-  "id": 1,
-  "collectionID": 0,
-  "cardIDInGame": null,
-  "price": 9000,
-  "manaCost": -1,
-  "currentCell": {
-    "x": 0,
-    "y": 0,
-    "effects": [],
-    "collectable": null,
-    "flag": null,
-    "currentAttacker": null
+    "price": 9000,
+    "manaCost": -1,
+    "currentCell": {
+      "x": 0,
+      "y": 0,
+      "effects": [],
+      "collectable": null,
+      "flag": null,
+      "currentAttacker": null
+    }
   }
 }

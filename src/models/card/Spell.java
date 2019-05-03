@@ -43,23 +43,23 @@ public class Spell extends Card {
 
     private List<Cell> getTargetCells(Match match, Cell target) {
         List<Cell> cells = new ArrayList<>();
-        switch (targetType) {
-            case SINGLE_ALLY:
+//        switch (targetType) {
+//            case SINGLE_ALLY:
 //                cells.add(match.getSelectedAttacker().getCurrentCell());
-                break;
-            case SINGLE_OPP:
-                cells.add(target);
-                break;
-            case ALL_OPPS:
-                cells.addAll(match.getOppCells());
-                break;
-            case SINGLE_CELL:
-                cells.add(target);
-                break;
-            case OPPS_IN_ROW:
+//                break;
+//            case SINGLE_OPP:
+//                cells.add(target);
+//                break;
+//            case ALL_OPPS:
+//                cells.addAll(match.getOppCells());
+//                break;
+//            case SINGLE_CELL:
+//                cells.add(target);
+//                break;
+//            case OPPS_IN_ROW:
 //                cells.addAll(match.getOppCellsInRow(match.getSelectedAttacker().getCurrentCell()));
-                break;
-        }
+//                break;
+//        }
         return cells;
     }
 
