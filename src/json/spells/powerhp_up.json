@@ -1,6 +1,7 @@
 {
   "@type": "models.card.Spell",
   "@val": {
+    "applyOnCellOrAttacker": "ON_ATTACKER",
     "targetType": {
       "randomOrNot": "NOT_RANDOM",
       "targetAttackerRange": "ALL_THREE",
@@ -15,7 +16,6 @@
         "@val": {
           "duration": 2,
           "buffMode": "EVIL",
-          "effectApplyInfo": "ON_ATTACKER",
           "cell": null,
           "attacker": null,
           "player": null,
@@ -25,7 +25,7 @@
       }
     ],
     "desc": "stun an opp",
-    "name": "Power Up",
+    "name": "PowerHP Up",
     "id": 13,
     "collectionID": 0,
     "cardIDInGame": null,

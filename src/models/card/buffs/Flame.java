@@ -1,17 +1,14 @@
 package models.card.buffs;
 
-import models.card.EffectApplyInfo;
 import models.card.Buff;
 import models.card.BuffMode;
-import models.match.Cell;
 
+/**
+ * Flaming cell; Any attacker standing on will get damaged.
+ */
 public class Flame extends Buff {
     public Flame(int duration) {
-        super(duration, EffectApplyInfo.ON_CELL, BuffMode.EVIL);
-    }
-
-    public Flame(int duration, Cell cell) {
-        super(duration, cell, null, EffectApplyInfo.ON_CELL, BuffMode.EVIL);
+        super(duration, BuffMode.EVIL);
     }
 
     public void apply() {

@@ -7,6 +7,7 @@
     "hp": 35,
     "ap": 3,
     "specialPower": {
+      "applyOnCellOrAttacker": "ON_ATTACKER",
       "targetType": {
         "randomOrNot": "NOT_RANDOM",
         "targetAttackerRange": "ALL_THREE",
@@ -20,9 +21,9 @@
           "@type": "models.card.effects.GiveEffect",
           "@val": {
             "duration": 2147483647,
+            "num": 0,
             "value": 0,
             "effectName": "HOLY",
-            "effectApplyInfo": null,
             "cell": null,
             "attacker": null,
             "player": null,

@@ -1,14 +1,17 @@
 package models.Item;
 
+import models.Player;
 import models.card.Effect;
 import models.card.TargetType;
+import models.match.Cell;
+import models.match.Match;
 
 public class Usable extends Item {
     public Usable(String name, int price, TargetType targetType, Effect effect, String desc) {
         super(name, price, targetType, effect, desc);
     }
 
-    public void castItem() {
+    public void castItem(Match match, Player player, Cell cell) {
 
     }
 }

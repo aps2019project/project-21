@@ -1,5 +1,6 @@
 package models.card;
 
+import models.Player;
 import models.match.Cell;
 import models.match.Match;
 
@@ -58,6 +59,12 @@ public class Attacker extends Card {
         appliedEffects.addAll(effects);
     }
 
+    public void removeEffect(Effect effect) {
+        if (effect == null)
+            return;
+        appliedEffects.remove(effect);
+    }
+
     public void move(int x, int y) {
 
     }
@@ -70,10 +77,10 @@ public class Attacker extends Card {
 
     }
 
-    public void castSpecialPower(Match match, Cell target) {
-        //  check if he can use spell
+    public void castSpecialPower(Match match, Player player, Cell target) {
+        //  check if he can use spell , has enough mana
 
-        specialPower.castSpell(match, target);
+        specialPower.castSpell(match, player, target);
     }
 
     public void disarm() {
@@ -166,7 +173,8 @@ public class Attacker extends Card {
         return specialPower;
     }
 
-    public static Attacker getAttackerById(String Id){
+    public static Attacker getAttackerById(String Id) {
         return null;
     }
+
 }

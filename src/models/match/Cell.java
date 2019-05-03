@@ -6,8 +6,10 @@ import models.card.Attacker;
 import models.card.Effect;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Cell {
+
     private int x;
     private int y;
 
@@ -55,6 +57,13 @@ public class Cell {
 
     public void addEffect(Effect effect) {
         this.effects.add(effect);
+    }
+
+    public void addEffect(List<Effect> effects) {
+        if (effects == null)
+            return;
+        for (Effect effect : effects)
+            addEffect(effect);
     }
 
     public void setCollectable(Collectable collectable) {
