@@ -1,0 +1,30 @@
+{
+  "@type": "models.Item.Usable",
+  "@val": {
+    "applyType": null,
+    "effects": [
+      {
+        "@type": "models.card.buffs.IncreaseMana",
+        "@val": {
+          "value": 1,
+          "duration": 3,
+          "buffMode": "GOOD",
+          "cell": null,
+          "attacker": null,
+          "player": null,
+          "match": null,
+          "activationType": "NONE"
+        }
+      }
+    ],
+    "targetType": null,
+    "desc": "Increases Mana in first three turns",
+    "name": "Taje Danaee",
+    "id": 0,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 300,
+    "manaCost": 0,
+    "currentCell": null
+  }
+}

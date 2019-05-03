@@ -15,8 +15,8 @@ public class Buff extends Effect {
         this.buffMode = buffMode;
     }
 
-    protected Buff(int duration, Cell cell, Attacker attacker, ApplyOnCellOrAttacker applyOnCellOrAttacker, BuffMode buffMode) {
-        super(cell, attacker, applyOnCellOrAttacker);
+    protected Buff(int duration, Cell cell, Attacker attacker, ApplyType applyType, BuffMode buffMode) {
+        super(cell, attacker, applyType);
         this.duration = duration;
         this.buffMode = buffMode;
     }

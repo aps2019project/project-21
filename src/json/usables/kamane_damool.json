@@ -1,0 +1,36 @@
+{
+  "@type": "models.Item.Usable",
+  "@val": {
+    "applyType": null,
+    "effects": [
+      {
+        "@type": "models.card.buffs.Disarm",
+        "@val": {
+          "duration": 1,
+          "buffMode": "EVIL",
+          "cell": null,
+          "attacker": null,
+          "player": null,
+          "match": null,
+          "activationType": "NONE"
+        }
+      }
+    ],
+    "targetType": {
+      "randomOrNot": "NOT_RANDOM",
+      "targetAttackerRange": "RANGED_OR_HYBRID",
+      "cellType": "NONE",
+      "heroOrMinion": "HERO",
+      "oppOrAlly": "ALLY",
+      "chooseType": "SELECTED_ALLY"
+    },
+    "desc": "Ranged and hybrid ally hero will disarm opp on attack",
+    "name": "Kamane Damool",
+    "id": 2,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 30000,
+    "manaCost": 0,
+    "currentCell": null
+  }
+}

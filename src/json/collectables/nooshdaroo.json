@@ -1,0 +1,35 @@
+{
+  "@type": "models.Item.Collectable",
+  "@val": {
+    "applyType": null,
+    "effects": [
+      {
+        "@type": "models.card.effects.IncreaseHP",
+        "@val": {
+          "changeValue": 6,
+          "cell": null,
+          "attacker": null,
+          "player": null,
+          "match": null,
+          "activationType": "NONE"
+        }
+      }
+    ],
+    "targetType": {
+      "randomOrNot": "RANDOM",
+      "targetAttackerRange": "ALL_THREE",
+      "cellType": "NONE",
+      "heroOrMinion": "BOTH",
+      "oppOrAlly": "ALLY",
+      "chooseType": "NONE"
+    },
+    "desc": "Increase HP of a random ally 3 units.",
+    "name": "Nooshdaroo",
+    "id": 0,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 0,
+    "manaCost": 0,
+    "currentCell": null
+  }
+}
