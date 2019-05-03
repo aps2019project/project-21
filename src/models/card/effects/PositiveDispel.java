@@ -1,27 +1,25 @@
 package models.card.effects;
 
-import models.card.EffectApplyInfo;
-import models.card.Attacker;
-import models.card.Effect;
+import models.card.*;
 import models.match.Cell;
 
+import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Removes Evil Buffs for Ally attacker
+ * and removes Good Buffs for Opps
+ */
 public class PositiveDispel extends Effect {
-    public PositiveDispel(EffectApplyInfo effectApplyInfo) {
-        super(effectApplyInfo);
-    }
-
-    public PositiveDispel(Cell cell, EffectApplyInfo effectApplyInfo) {
-        super(cell, null, effectApplyInfo);
-    }
-
-    public PositiveDispel(Attacker attacker, EffectApplyInfo effectApplyInfo) {
-        super(null, attacker, effectApplyInfo);
+    public PositiveDispel() {
+        super();
     }
 
     public void apply() {
         if (cell == null && attacker == null)
+            return;
+        if (match == null || player == null)
             return;
         Attacker attacker;
         if (cell != null)
@@ -31,14 +29,24 @@ public class PositiveDispel extends Effect {
         if (attacker == null)
             return;
 
-        List<Effect> effects = attacker.getAppliedEffects();
-        if (effectApplyInfo == EffectApplyInfo.ON_ALLY) {
+        List<Effect> effects = new ArrayList<>(attacker.getAppliedEffects());
+        if (match.isInTeam(attacker, player)) {
             for (Effect effect : effects) {
-                //  check only for buffs and evil buffs then remove
+                try {
+                    if (((Buff) effect).getBuffMode().equals(BuffMode.EVIL))
+                        attacker.removeEffect(effect);
+                } catch (Exception e) {
+
+                }
             }
-        } else if (effectApplyInfo == EffectApplyInfo.ON_OPP) {
+        } else {
             for (Effect effect : effects) {
-                //  check only for buffs and good buffs then remove
+                try {
+                    if (((Buff) effect).getBuffMode().equals(BuffMode.GOOD))
+                        attacker.removeEffect(effect);
+                } catch (Exception e) {
+
+                }
             }
         }
     }

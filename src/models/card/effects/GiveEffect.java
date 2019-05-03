@@ -1,28 +1,34 @@
 package models.card.effects;
 
 import models.card.Effect;
-import models.card.Hero;
-import models.card.buffs.Disarm;
-import models.card.buffs.Holy;
-import models.card.buffs.Power;
-import models.card.buffs.PowerMode;
-import models.match.PlayerMatchInfo;
+import models.card.buffs.*;
 
+/**
+ * Gives an amount of num effects to an attacker
+ */
 public class GiveEffect extends Effect {
     private int duration;
+    private int num;
     private int value;
     private EffectName effectName;
 
-    public GiveEffect(int duration, int value, EffectName effectName) {
+    public GiveEffect(int duration, int num, EffectName effectName) {
         super();
         this.duration = duration;
-        this.value = value;
+        this.num = num;
         this.effectName = effectName;
     }
 
     public GiveEffect(int duration, EffectName effectName) {
         super();
         this.duration = duration;
+        this.effectName = effectName;
+    }
+
+    public GiveEffect(int duration, EffectName effectName, int value) {
+        super();
+        this.duration = duration;
+        this.value = value;
         this.effectName = effectName;
     }
 
@@ -34,13 +40,12 @@ public class GiveEffect extends Effect {
     public void apply() {
         if (match == null || player == null)
             return;
-        PlayerMatchInfo info = match.getInfo(player);
-        if (info == null)
+        if (attacker == null)
             return;
-        Hero hero = info.getHero();
-        if (hero == null)
-            return;
-        hero.giveHolyBuff();
+        for (int i = 0; i < num; i++) {
+            Effect effect = extractEffect();
+            attacker.addEffect(effect);
+        }
     }
 
     private Effect extractEffect() {
@@ -49,10 +54,26 @@ public class GiveEffect extends Effect {
                 return new Disarm(duration);
             case HOLY:
                 return new Holy(duration);
-            case POWER:
-                return new Power(duration, value, PowerMode.AP);
-//            case POSITIVE_DISPEL:
-//                return new PositiveDispel()
+            case POWER_AP:
+                return new PowerAP(duration, value);
+            case POWER_HP:
+                return new PowerHP(duration, value);
+            case POSITIVE_DISPEL:
+                return new PositiveDispel();
+            case INCREASE_AP:
+                return new IncreaseAP(value);
+            case DECREASE_HP:
+                return new DecreaseHP(value);
+            case POISON:
+                return new Poison(duration);
+            case FLAME:
+                return new Flame(duration);
+            case WEAKNESS_AP:
+                return new WeaknessAP(duration, value);
+            case WEAKNESS_HP:
+                return new WeaknessHP(duration, value);
+            case INCREASE_MANA:
+                return new IncreaseMana(duration, value);
         }
         return null;
     }

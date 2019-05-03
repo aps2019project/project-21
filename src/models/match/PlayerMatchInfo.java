@@ -6,6 +6,7 @@ import models.Item.Collectable;
 import models.Player;
 import models.card.Attacker;
 import models.card.Card;
+import models.card.Effect;
 import models.card.Hero;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class PlayerMatchInfo {
     private List<Card> graveyard = new ArrayList<>();
     private List<Collectable> achievedCollectables = new ArrayList<>();
     private List<Attacker> groundedAttackers = new ArrayList<>();
+    private List<Effect> effects = new ArrayList<>();
 
     PlayerMatchInfo(Player player) {
         deck = Deck.copyDeck(player.getCollection().getMainDeck());
@@ -30,7 +32,7 @@ public class PlayerMatchInfo {
         return graveyard;
     }
 
-    public List<Collectable> getAchievedCollectables(){
+    public List<Collectable> getAchievedCollectables() {
         return getAchievedCollectables();
     }
 
@@ -59,5 +61,18 @@ public class PlayerMatchInfo {
             if (attacker.getClass().equals(Hero.class))
                 return (Hero) attacker;
         return null;
+    }
+
+    public void addEffect(Effect effect) {
+        if (effect == null)
+            return;
+        effects.add(effect);
+    }
+
+    public void addEffect(List<Effect> effects) {
+        if (effects == null)
+            return;
+        for (Effect effect : effects)
+            addEffect(effect);
     }
 }

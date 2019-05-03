@@ -1,5 +1,6 @@
 package models.card;
 
+import models.Player;
 import models.match.Cell;
 import models.match.Match;
 
@@ -30,8 +31,8 @@ public class Spell extends Card {
         this.desc = desc;
     }
 
-    public void castSpell(Match match, Cell targetCell) {
-        List<Cell> targetCells = getTargetCells(match, targetCell);
+    public void castSpell(Match match, Player player, Cell targetCell) {
+        List<Cell> targetCells = getTargetCells(match, player, targetCell);
         if (targetCells == null || targetCells.isEmpty())
             return;
         for (Cell cell : targetCells) {
@@ -41,25 +42,9 @@ public class Spell extends Card {
         }
     }
 
-    private List<Cell> getTargetCells(Match match, Cell target) {
+    private List<Cell> getTargetCells(Match match, Player player, Cell target) {
         List<Cell> cells = new ArrayList<>();
-//        switch (targetType) {
-//            case SINGLE_ALLY:
-//                cells.add(match.getSelectedAttacker().getCurrentCell());
-//                break;
-//            case SINGLE_OPP:
-//                cells.add(target);
-//                break;
-//            case ALL_OPPS:
-//                cells.addAll(match.getOppCells());
-//                break;
-//            case SINGLE_CELL:
-//                cells.add(target);
-//                break;
-//            case OPPS_IN_ROW:
-//                cells.addAll(match.getOppCellsInRow(match.getSelectedAttacker().getCurrentCell()));
-//                break;
-//        }
+        //  TODO:  extract targets
         return cells;
     }
 

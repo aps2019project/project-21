@@ -121,7 +121,7 @@ public class BattleMenu extends Menu {
 
     private void select() {
         Attacker attacker = Attacker.getAttackerById(request.getCommandArguments().get(0));
-        Match.getCurrentMatch().setSelectedAttacker(attacker);
+        Match.getCurrentMatch().setSelectedCard(attacker);
     }
 
     private void moveTo() {
@@ -186,7 +186,7 @@ public class BattleMenu extends Menu {
     private void use() {
         int x = Integer.parseInt(request.getCommandArguments().get(0));
         int y = Integer.parseInt(request.getCommandArguments().get(1));
-        Match.getCurrentMatch().useItem(x, y);
+        Match.getCurrentMatch().useCollectable(x, y);
     }
 
     private void showNextCard() {

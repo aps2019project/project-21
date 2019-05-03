@@ -7,5 +7,5 @@ public enum ActivationType {
     ON_DEATH,
     ON_ATTACK,
     ON_DEFEND,
-    COMBO
+    ON_EVERY_ALLY_ATTACK
 }

@@ -33,4 +33,24 @@ public class Effect {
     public EffectApplyInfo getEffectApplyInfo() {
         return effectApplyInfo;
     }
+
+    public void setAttacker(Attacker attacker) {
+        this.attacker = attacker;
+    }
+
+    public void setCell(Cell cell) {
+        this.cell = cell;
+    }
+
+    public void setMatch(Match match) {
+        this.match = match;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public void setActivationType(ActivationType activationType) {
+        this.activationType = activationType;
+    }
 }

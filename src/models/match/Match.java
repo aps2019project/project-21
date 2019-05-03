@@ -4,6 +4,7 @@ import models.Item.Collectable;
 import models.Player;
 import models.card.Attacker;
 import models.card.Card;
+import models.card.Spell;
 import view.ErrorMode;
 import view.View;
 
@@ -24,15 +25,15 @@ public class Match {
     private GameType gameType;
     private Time gameTime;
     private int turn;  // 0 for player1 and 1 for player2
-    private Attacker selectedAttacker;
+    private Card selectedCard;
     private Collectable selectedCollectable;
     private View view = View.getInstance();
 
-    public static Match getCurrentMatch(){
+    public static Match getCurrentMatch() {
         return currentMatch;
     }
 
-    public PlayerMatchInfo[] getPlayersMatchInfo(){
+    public PlayerMatchInfo[] getPlayersMatchInfo() {
         return this.info;
     }
 
@@ -48,24 +49,28 @@ public class Match {
         this.goalMode = goalMode;
     }
 
-    public void selectCard(String cardID) {
+    public void selectAttacker(String attackerID) {
         for (Attacker attacker : info[turn].getGroundedAttackers())
-            if (attacker.getCardIDInGame().equals(cardID)) {
-                selectedAttacker = attacker;
+            if (attacker.getCardIDInGame().equals(attackerID)) {
+                selectedCard = attacker;
                 return;
             }
         view.printError(ErrorMode.CARD_ID_INVALID);
     }
 
-    public void setSelectedAttacker(Attacker attacker){
-        selectedAttacker = attacker;
+    public void selectCard(String cardID) {
+        //  TODO
     }
 
-    public int getTurn(){
+    public void setSelectedCard(Card card) {
+        selectedCard = card;
+    }
+
+    public int getTurn() {
         return turn;
     }
 
-    public Collectable getSelectedCollectable(){
+    public Collectable getSelectedCollectable() {
         return selectedCollectable;
     }
 
@@ -79,15 +84,21 @@ public class Match {
             return;
         if (!isMoveTargetValid(target))
             return;
-        //  actually moving the attacker
-        selectedAttacker.getCurrentCell().setEmpty();
-        selectedAttacker.setCurrentCell(target);
-        target.setCurrentAttacker(selectedAttacker);
-        System.out.println(selectedAttacker.getCardIDInGame() + " moved to " + x + " " + y);
+        if (!isSelectedCardAttacker())
+            return;
+        Attacker attacker = (Attacker) selectedCard;
+        //  actually moving the attacker:
+        attacker.getCurrentCell().setEmpty();
+        attacker.setCurrentCell(target);
+        target.setCurrentAttacker(attacker);
+        System.out.println(selectedCard.getCardIDInGame() + " moved to " + x + " " + y);
     }
 
     private boolean isMoveTargetValid(Cell target) {
-        if (Cell.getManhattanDistance(selectedAttacker.getCurrentCell(), target) > MOVE_RANGE)
+        if (!isSelectedCardAttacker())
+            return false;
+        Attacker attacker = (Attacker) selectedCard;
+        if (Cell.getManhattanDistance(attacker.getCurrentCell(), target) > MOVE_RANGE)
             return false;
         //if(special) validTarget = true
         if (!target.isEmpty())
@@ -98,22 +109,59 @@ public class Match {
     }
 
     public void attack(String opponentCardID) {
+        //  TODO: cast OnAttack spells (for minions and one hero)
+    }
+
+    public void counterAttack() {
+        //  TODO: cast OnDefend spells
     }
 
     public void attackCombo(String opponentCardID, int[] myCardIDs) {
+        //  TODO:  check that they can do combo attack
     }
 
-    public void useSpecialPower(int x, int y) {
-        if (!isAnyCardSelected())
-            return;
+    public void useSpell(int x, int y) {
         Cell target = getCell(x, y);
         if (target == null)
             return;
         if (!isAttackTargetValid(target))
             return;
-        if (!selectedAttacker.hasSpecialPower())
+        if (!isSelectedCardSpell())
             return;
-        selectedAttacker.castSpecialPower(this, target);
+        Spell spell = (Spell) selectedCard;
+        spell.castSpell(this, getThisTurnsPlayer(), target);
+    }
+
+    public void useCollectable(int x, int y) {
+        Cell target = getCell(x, y);
+        if (target == null)
+            return;
+        if (!isAttackTargetValid(target))
+            return;
+        if (!isAnyCardSelected())
+            return;
+        Collectable collectable = (Collectable) selectedCard;
+        collectable.castItem(this, getThisTurnsPlayer(), target);
+    }
+
+    public void useSpecialPower(int x, int y) {
+        if (!isAnyCardSelected())
+            return;
+        if (!isSelectedCardAttacker())
+            return;
+        Cell target = getCell(x, y);
+        Attacker attacker = (Attacker) selectedCard;
+        if (target == null)
+            return;
+        if (!isAttackTargetValid(target))
+            return;
+        if (!attacker.hasSpecialPower())
+            return;
+        attacker.castSpecialPower(this, getThisTurnsPlayer(), target);
+    }
+
+    public void applyEffects() {
+        // TODO: heroes, minons, infos
     }
 
     private boolean isAttackTargetValid(Cell target) {
@@ -122,6 +170,7 @@ public class Match {
     }
 
     public void insertCard(String cardName, int x, int y) {
+        // TODO: if minion then cast OnSpawn spell
         Card card = info[turn].getHand().getCard(cardName);
         if (card == null) {
             System.out.println("invalid card name");
@@ -153,7 +202,7 @@ public class Match {
         }
 //        card.setXCoordinate(x);
 //        card.setYCoordinate(y);
-        card.setCardIDInGame(players[turn].getUsername() + "_" + card.getName() + "_" + id);
+        card.setCardIDInGame(getThisTurnsPlayer().getUsername() + "_" + card.getName() + "_" + id);
         info[turn].getGroundedAttackers().add((Attacker) card);
         info[turn].getHand().remove(card);
         //  handle cells in both cell and attacker
@@ -162,15 +211,15 @@ public class Match {
 
     public void swapTurn() {
         turn = 1 - turn;
-        //blah blah blah
-        //  heh heh heh :| :(
+        prepareNextRound(turn);
+    }
+
+    private void prepareNextRound(int turn) {
+        //  TODO: cast passive effects (minions, usables)
     }
 
     public void selectCollectable(int collectableID) {
 
-    }
-
-    public void useItem(int x, int y) {
     }
 
     public void play() {
@@ -196,11 +245,11 @@ public class Match {
     }
 
     private boolean isAnyCardSelected() {
-        return selectedAttacker != null;
+        return selectedCard != null;
     }
 
-    public Card getSelectedAttacker() {
-        return selectedAttacker;
+    public Card getSelectedCard() {
+        return selectedCard;
     }
 
     public Cell getCell(int x, int y) {
@@ -229,7 +278,31 @@ public class Match {
         }
     }
 
-    public PlayerMatchInfo getInfo(Player player){
+    public PlayerMatchInfo getInfo(Player player) {
         return null;
+    }
+
+    private boolean isSelectedCardAttacker() {
+        // TODO
+        return true;
+    }
+
+    private boolean isSelectedCardSpell() {
+        //  TODO
+        return true;
+    }
+
+    private boolean isSelectedCardCollectable() {
+        //  TODO
+        return true;
+    }
+
+    public Player getThisTurnsPlayer() {
+        return players[turn];
+    }
+
+    public boolean isInTeam(Attacker attacker, Player player) {
+        //  TODO
+        return true;
     }
 }

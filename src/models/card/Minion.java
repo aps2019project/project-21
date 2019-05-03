@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Minion extends Attacker {
     private static List<Minion> minions = new ArrayList<>();
+    private boolean isCombo;
 
     public Minion(String name, int price, int manaCost, int maxHp, int maxAp,
                   int attackRange, AttackMode attackMode, Spell specialPower) {

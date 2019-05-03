@@ -4,6 +4,9 @@ import models.card.EffectApplyInfo;
 import models.card.Attacker;
 import models.card.Effect;
 
+/**
+ * Damages an attacker
+ */
 public class DecreaseHP extends Effect {
     private int value;
 
@@ -14,11 +17,6 @@ public class DecreaseHP extends Effect {
 
     public DecreaseHP(int value, EffectApplyInfo effectApplyInfo) {
         super(effectApplyInfo);
-        this.value = value;
-    }
-
-    public DecreaseHP(Attacker attacker, int value) {
-        super(null, attacker, EffectApplyInfo.ON_ATTACKER);
         this.value = value;
     }
 
