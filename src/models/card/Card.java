@@ -3,8 +3,11 @@ package models.card;
 import models.Player;
 import models.match.Cell;
 
+import java.util.ArrayList;
+
 public class Card {
     private static int cardCount = 0;
+    public static ArrayList<Card> cards=new ArrayList<>();
     protected String name;
     protected int id;
     protected int collectionID;
@@ -21,6 +24,7 @@ public class Card {
         this.name = name;
         this.price = price;
         this.manaCost = manaCost;
+        Card.cards.add(this);
     }
 
     {
@@ -33,6 +37,7 @@ public class Card {
         Card.setCollectionID(player.getCardCurrentID());
         player.setCardCurrentID(player.getCardCurrentID() + 1);
         player.getCollection().addCard(Card);
+        cards.add(Card);
     }
 
     public String getName() {
@@ -69,7 +74,8 @@ public class Card {
 
     public static Card getCardByID(String ID){
         //bulshet zadam
-        return Card.getCardByID("10");
+        // peyda nakrd bayad null bede
+        return null;
     }
 
     public boolean TwoCardAreSame(Card card){

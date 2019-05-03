@@ -1,8 +1,9 @@
 package models.match;
 
+import models.Item.Collectable;
+import models.Player;
 import models.card.Attacker;
 import models.card.Card;
-import models.Player;
 import view.ErrorMode;
 import view.View;
 
@@ -24,6 +25,7 @@ public class Match {
     private Time gameTime;
     private int turn;  // 0 for player1 and 1 for player2
     private Attacker selectedAttacker;
+    private Collectable selectedCollectable;
     private View view = View.getInstance();
 
     public static Match getCurrentMatch(){
@@ -53,6 +55,18 @@ public class Match {
                 return;
             }
         view.printError(ErrorMode.CARD_ID_INVALID);
+    }
+
+    public void setSelectedAttacker(Attacker attacker){
+        selectedAttacker = attacker;
+    }
+
+    public int getTurn(){
+        return turn;
+    }
+
+    public Collectable getSelectedCollectable(){
+        return selectedCollectable;
     }
 
     public void moveCard(int x, int y) {
@@ -153,15 +167,10 @@ public class Match {
     }
 
     public void selectCollectable(int collectableID) {
-    }
 
-    public void showItemInfo() {
     }
 
     public void useItem(int x, int y) {
-    }
-
-    public void enterGraveyard() {
     }
 
     public void play() {
@@ -173,7 +182,7 @@ public class Match {
         return false;
     }
 
-    private void endMatch() {
+    public void endMatch() {
         saveMatchResults();
         showMatchResults();
     }

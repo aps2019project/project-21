@@ -47,12 +47,17 @@ public class Item extends Card {
         this.name = name;
     }
 
-    public static Item getItemByName(String name) {
+    public static Item getItemByName(String name){
         //bayad por shavad
         return null;
     }
 
-    public boolean twoItemAreSame(Item item) {
+    public static Item getItemById(String Id){
+        //bayad por shavad
+        return null;
+    }
+
+    public boolean twoItemAreSame(Item item){
         return true;
     }
 }

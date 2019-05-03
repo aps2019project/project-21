@@ -55,4 +55,9 @@ public class Hero extends Attacker {
         for (Hero hero : heroes)
             addHero(hero);
     }
+
+    public static Hero getHeroByID(String ID){
+
+        return null;
+    }
 }
