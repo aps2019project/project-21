@@ -5,10 +5,6 @@ import com.gilecode.yagson.YaGsonBuilder;
 import models.Item.Collectable;
 import models.Item.Usable;
 import models.card.*;
-import models.card.buffs.*;
-import models.card.effects.*;
-import models.card.TargetType;
-import models.card.target_enums.*;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -43,13 +39,13 @@ public class CardMaker {
 
     private static void spellMaker() throws IOException {
         List<Effect> effects = new ArrayList<>();
-        //effects.add(new PowerHP(Integer.MAX_VALUE, 8, PowerMode.AP, EffectApplyInfo.ON_ALLY));
-        //effects.add(new Disarm(Integer.MAX_VALUE, EffectApplyInfo.ON_OPP));
-        //effects.add(new Effect(EffectApplyInfo.ON_BOTH, EffectType.POSITIVE_DISPEL));
-        //effects.add(new DecreaseHP(8,EffectApplyInfo.ON_OPP_HERO));
+        //effects.add(new PowerHP(Integer.MAX_VALUE, 8, PowerMode.AP, ApplyOnCellOrAttacker.ON_ALLY));
+        //effects.add(new Disarm(Integer.MAX_VALUE, ApplyOnCellOrAttacker.ON_OPP));
+        //effects.add(new Effect(ApplyOnCellOrAttacker.ON_BOTH, EffectType.POSITIVE_DISPEL));
+        //effects.add(new DecreaseHP(8,ApplyOnCellOrAttacker.ON_OPP_HERO));
         //effects.add(new Flame(2));
-        //effects.add(new Poison(4, EffectApplyInfo.ON_OPP));
-        //effects.add(new WeaknessHP(Integer.MAX_VALUE, Integer.MAX_VALUE, WeaknessMode.AP, EffectApplyInfo.ON_OPP));
+        //effects.add(new Poison(4, ApplyOnCellOrAttacker.ON_OPP));
+        //effects.add(new WeaknessHP(Integer.MAX_VALUE, Integer.MAX_VALUE, WeaknessMode.AP, ApplyOnCellOrAttacker.ON_OPP));
 //        effects.add(new Stun(2));
 //        TargetType targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
 //                CellType.SINGLE_CELL, HeroOrMinion.BOTH, OppOrAlly.OPP);

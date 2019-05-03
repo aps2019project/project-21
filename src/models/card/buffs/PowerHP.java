@@ -1,6 +1,5 @@
 package models.card.buffs;
 
-import models.card.EffectApplyInfo;
 import models.card.Attacker;
 import models.card.Buff;
 import models.card.BuffMode;
@@ -13,12 +12,7 @@ public class PowerHP extends Buff {
     private int initialHP;
 
     public PowerHP(int duration, int value) {
-        super(duration, EffectApplyInfo.ON_ATTACKER, BuffMode.GOOD);
-        this.value = value;
-    }
-
-    public PowerHP(int duration, int value, EffectApplyInfo effectApplyInfo) {
-        super(duration, effectApplyInfo, BuffMode.GOOD);
+        super(duration, BuffMode.GOOD);
         this.value = value;
     }
 

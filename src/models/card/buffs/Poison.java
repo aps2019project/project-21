@@ -1,23 +1,18 @@
 package models.card.buffs;
 
 import models.card.*;
-import models.match.Cell;
 
 /**
  * Poisons a cell or an attacker
  */
 public class Poison extends Buff {
     public Poison(int duration, ActivationType activationType) {
-        super(duration, EffectApplyInfo.ON_ATTACKER, BuffMode.EVIL);
+        super(duration, BuffMode.EVIL);
         super.activationType = activationType;
     }
 
     public Poison(int duration) {
-        super(duration, EffectApplyInfo.ON_ATTACKER, BuffMode.EVIL);
-    }
-
-    public Poison(int duration, EffectApplyInfo effectApplyInfo) {
-        super(duration, effectApplyInfo, BuffMode.EVIL);
+        super(duration, BuffMode.EVIL);
     }
 
     public void apply() {

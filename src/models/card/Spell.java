@@ -8,44 +8,53 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Spell extends Card {
+    private ApplyOnCellOrAttacker applyOnCellOrAttacker;
     private static List<Spell> spells = new ArrayList<>();
     private TargetType targetType;
     private List<Effect> effects = new ArrayList<>();
     private String desc;
 
-    Spell() {
-        super();
-    }
-
-    public Spell(String name, int price, int manaCost, TargetType targetType, List<Effect> effects, String desc) {
+    public Spell(String name, int price, int manaCost, TargetType targetType,
+                 List<Effect> effects, ApplyOnCellOrAttacker applyOnCellOrAttacker, String desc) {
         super(name, price, manaCost);
         this.targetType = targetType;
         this.effects = effects;
         this.desc = desc;
+        this.applyOnCellOrAttacker = applyOnCellOrAttacker;
     }
 
-    public Spell(String name, int price, int manaCost, TargetType targetType, Effect effect, String desc) {
+    public Spell(String name, int price, int manaCost, TargetType targetType,
+                 Effect effect, ApplyOnCellOrAttacker applyOnCellOrAttacker, String desc) {
         super(name, price, manaCost);
         this.targetType = targetType;
         this.effects.add(effect);
         this.desc = desc;
+        this.applyOnCellOrAttacker = applyOnCellOrAttacker;
     }
 
     public void castSpell(Match match, Player player, Cell targetCell) {
-        List<Cell> targetCells = getTargetCells(match, player, targetCell);
-        if (targetCells == null || targetCells.isEmpty())
-            return;
-        for (Cell cell : targetCells) {
-            Attacker target = cell.getAttacker();
-            if (target != null)
-                target.addEffect(effects);
+        if (applyOnCellOrAttacker.equals(ApplyOnCellOrAttacker.ON_ATTACKER)) {
+            List<Attacker> attackers = getTargetAttackers(match, player, targetCell);
+            for (Attacker attacker : attackers)
+                if (attacker != null)
+                    attacker.addEffect(effects);
+        } else {
+            List<Cell> cells = getTargetCells(match, player, targetCell);
+            for (Cell cell : cells)
+                if (cell != null)
+                    cell.addEffect(effects);
         }
     }
 
-    private List<Cell> getTargetCells(Match match, Player player, Cell target) {
+    private List<Cell> getTargetCells(Match match, Player player, Cell targetCell) {
         List<Cell> cells = new ArrayList<>();
-        //  TODO:  extract targets
         return cells;
+    }
+
+    private List<Attacker> getTargetAttackers(Match match, Player player, Cell targetCell) {
+        List<Attacker> attackers = new ArrayList<>(match.getAllGroundedAttacker());
+        List<Attacker> copy = new ArrayList<>(attackers);
+        return attackers;
     }
 
     public static List<Spell> getSpells() {

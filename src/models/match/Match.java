@@ -305,4 +305,9 @@ public class Match {
         //  TODO
         return true;
     }
+
+    public List<Attacker> getAllGroundedAttacker(){
+        //  TODO:
+        return null;
+    }
 }

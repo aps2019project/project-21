@@ -7,6 +7,7 @@
     "hp": 30,
     "ap": 2,
     "specialPower": {
+      "applyOnCellOrAttacker": "ON_ATTACKER",
       "targetType": {
         "randomOrNot": "NOT_RANDOM",
         "targetAttackerRange": "ALL_THREE",
@@ -20,7 +21,6 @@
           "@type": "models.card.effects.DecreaseHP",
           "@val": {
             "value": 4,
-            "effectApplyInfo": "ON_ATTACKER",
             "cell": null,
             "attacker": null,
             "player": null,

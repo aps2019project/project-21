@@ -1,7 +1,6 @@
 package models.card.buffs;
 
-import models.card.EffectApplyInfo;
-import models.card.Attacker;
+import models.card.ApplyOnCellOrAttacker;
 import models.card.Buff;
 import models.card.BuffMode;
 
@@ -10,11 +9,11 @@ import models.card.BuffMode;
  */
 public class Disarm extends Buff {
     public Disarm(int duration) {
-        super(duration, EffectApplyInfo.ON_ATTACKER, BuffMode.EVIL);
+        super(duration, BuffMode.EVIL);
     }
 
-    public Disarm(int duration, EffectApplyInfo effectApplyInfo) {
-        super(duration, effectApplyInfo, BuffMode.EVIL);
+    public Disarm(int duration, ApplyOnCellOrAttacker applyOnCellOrAttacker) {
+        super(duration, BuffMode.EVIL);
     }
 
     public void apply() {

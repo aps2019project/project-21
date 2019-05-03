@@ -1,7 +1,6 @@
 package models.card.effects;
 
 import models.card.*;
-import models.match.Cell;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,6 +1,5 @@
 package models.card.buffs;
 
-import models.card.EffectApplyInfo;
 import models.card.Attacker;
 import models.card.Buff;
 import models.card.BuffMode;
@@ -13,12 +12,7 @@ public class WeaknessAP extends Buff {
     private int initialAP;
 
     public WeaknessAP(int duration, int value) {
-        super(duration, EffectApplyInfo.ON_ATTACKER, BuffMode.EVIL);
-        this.value = value;
-    }
-
-    public WeaknessAP(int duration, int value, EffectApplyInfo effectApplyInfo) {
-        super(duration, effectApplyInfo, BuffMode.EVIL);
+        super(duration, BuffMode.EVIL);
         this.value = value;
     }
 

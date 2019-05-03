@@ -7,6 +7,7 @@
     "hp": 50,
     "ap": 4,
     "specialPower": {
+      "applyOnCellOrAttacker": "ON_ATTACKER",
       "targetType": {
         "randomOrNot": "NOT_RANDOM",
         "targetAttackerRange": "ALL_THREE",
@@ -21,7 +22,6 @@
           "@val": {
             "duration": 1,
             "buffMode": "EVIL",
-            "effectApplyInfo": "ON_ATTACKER",
             "cell": null,
             "attacker": null,
             "player": null,
@@ -30,7 +30,7 @@
           }
         }
       ],
-      "desc": "Disarms one selected attacker.",
+      "desc": "Disarms a selected attacker.",
       "name": "Ezhdehaye Haftsar's Spell",
       "id": 4,
       "collectionID": 0,

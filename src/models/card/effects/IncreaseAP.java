@@ -9,7 +9,7 @@ public class IncreaseAP extends Effect {
     private int changeValue;
 
     public IncreaseAP(int changeValue) {
-        super(null);
+        super();
         this.changeValue = changeValue;
     }
 

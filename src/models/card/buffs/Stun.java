@@ -1,7 +1,5 @@
 package models.card.buffs;
 
-import models.card.EffectApplyInfo;
-import models.card.Attacker;
 import models.card.Buff;
 import models.card.BuffMode;
 
@@ -10,7 +8,7 @@ import models.card.BuffMode;
  */
 public class Stun extends Buff {
     public Stun(int duration) {
-        super(duration, EffectApplyInfo.ON_ATTACKER, BuffMode.EVIL);
+        super(duration, BuffMode.EVIL);
     }
 
     public void apply() {
