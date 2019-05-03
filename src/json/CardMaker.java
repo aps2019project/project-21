@@ -7,6 +7,7 @@ import models.card.*;
 import models.card.buffs.*;
 import models.card.effects.*;
 import models.card.TargetType;
+import models.card.target_enums.*;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -49,7 +50,9 @@ public class CardMaker {
         //effects.add(new Poison(4, EffectApplyInfo.ON_OPP));
         //effects.add(new Weakness(Integer.MAX_VALUE, Integer.MAX_VALUE, WeaknessMode.AP, EffectApplyInfo.ON_OPP));
         effects.add(new Stun(2));
-        Spell spell = new Spell("Shock", 1200, 1, TargetType.SINGLE_OPP, effects,
+        TargetType targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
+                CellType.SINGLE_CELL, HeroOrMinion.BOTH, OppOrAlly.OPP);
+        Spell spell = new Spell("Shock", 1200, 1, targetType, effects,
                 "stun an opp");
         saveToFile(spell);
     }
@@ -81,7 +84,7 @@ public class CardMaker {
         return gson.fromJson(json, Minion.class);
     }
 
-    private static void saveToFile(Card card) throws IOException {
+    static void saveToFile(Card card) throws IOException {
         String folder;
         if (card.getClass().equals(Spell.class))
             folder = "spells";

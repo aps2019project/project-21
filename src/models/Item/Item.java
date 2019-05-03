@@ -11,7 +11,7 @@ import java.util.List;
 public class Item extends Card {
     private static List<Item> items = new ArrayList<>();
     protected List<Effect> effects = new ArrayList<>();
-    protected TargetType targetType = TargetType.NONE;
+    protected TargetType targetType;
     private String desc;
 
     public Item(String name, int price, TargetType targetType, List<Effect> effects, String desc) {
@@ -47,17 +47,17 @@ public class Item extends Card {
         this.name = name;
     }
 
-    public static Item getItemByName(String name){
+    public static Item getItemByName(String name) {
         //bayad por shavad
         return null;
     }
 
-    public static Item getItemById(String Id){
+    public static Item getItemById(String Id) {
         //bayad por shavad
         return null;
     }
 
-    public boolean twoItemAreSame(Item item){
+    public boolean twoItemAreSame(Item item) {
         return true;
     }
 }

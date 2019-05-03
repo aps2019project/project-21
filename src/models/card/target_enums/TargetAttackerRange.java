@@ -1,6 +1,6 @@
 package models.card.target_enums;
 
-public enum AttackerRange {
+public enum TargetAttackerRange {
     MELEE,
     RANGED,
     HYBRID,

@@ -4,26 +4,29 @@ import models.card.target_enums.*;
 
 public class TargetType {
     private RandomOrNot randomOrNot;
-    private AttackerRange attackerRange;
+    private TargetAttackerRange targetAttackerRange;
     private CellType cellType;
     private HeroOrMinion heroOrMinion;
     private OppOrAlly oppOrAlly;
+    private ChooseType chooseType;
 
-    public TargetType(RandomOrNot randomOrNot, AttackerRange attackerRange,
-                      CellType cellType, HeroOrMinion heroOrMinion, OppOrAlly oppOrAlly) {
+    public TargetType(RandomOrNot randomOrNot, TargetAttackerRange targetAttackerRange,
+                      CellType cellType, HeroOrMinion heroOrMinion, OppOrAlly oppOrAlly,
+                      ChooseType chooseType) {
         this.randomOrNot = randomOrNot;
-        this.attackerRange = attackerRange;
+        this.targetAttackerRange = targetAttackerRange;
         this.cellType = cellType;
         this.heroOrMinion = heroOrMinion;
         this.oppOrAlly = oppOrAlly;
+        this.chooseType = chooseType;
     }
 
     public RandomOrNot getRandomOrNot() {
         return randomOrNot;
     }
 
-    public AttackerRange getAttackerRange() {
-        return attackerRange;
+    public TargetAttackerRange getTargetAttackerRange() {
+        return targetAttackerRange;
     }
 
     public CellType getCellType() {
