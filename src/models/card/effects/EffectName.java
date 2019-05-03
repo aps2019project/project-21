@@ -12,6 +12,7 @@ public enum EffectName {
     WEAKNESS_HP,
     DECREASE_HP,
     INCREASE_AP,
+    INCREASE_HP,
     POSITIVE_DISPEL,
     INCREASE_MANA,
     GIVE_EFFECT,

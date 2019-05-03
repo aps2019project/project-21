@@ -4,6 +4,6 @@ public enum TargetAttackerRange {
     MELEE,
     RANGED,
     HYBRID,
-    RANGED_AND_HYBRID,
+    RANGED_OR_HYBRID,
     ALL_THREE,
 }

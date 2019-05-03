@@ -15,7 +15,7 @@ public class Effect {
 
     }
 
-    protected Effect(Cell cell, Attacker attacker, ApplyOnCellOrAttacker applyOnCellOrAttacker) {
+    protected Effect(Cell cell, Attacker attacker, ApplyType applyType) {
         this.cell = cell;
         this.attacker = attacker;
     }

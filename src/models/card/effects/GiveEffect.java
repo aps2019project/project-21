@@ -62,6 +62,8 @@ public class GiveEffect extends Effect {
                 return new PositiveDispel();
             case INCREASE_AP:
                 return new IncreaseAP(value);
+            case INCREASE_HP:
+                return new IncreaseHP(value);
             case DECREASE_HP:
                 return new DecreaseHP(value);
             case POISON:
