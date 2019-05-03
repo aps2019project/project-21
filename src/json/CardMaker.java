@@ -2,14 +2,11 @@ package json;
 
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
-import models.Item.Item;
 import models.Item.Usable;
 import models.card.*;
 import models.card.buffs.*;
-import models.card.effects.DecreaseHP;
-import models.card.effects.IncreaseAP;
-import models.card.effects.PositiveDispel;
-import models.match.Cell;
+import models.card.effects.*;
+import models.card.TargetType;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -24,9 +21,9 @@ public class CardMaker {
     }
 
     private static void usableMaker() throws IOException {
-        Effect effect = new IncreaseMana(3, 1);
-        Usable usable = new Usable("Taje Danaee", 300, effect,
-                "increases manaPoint in first three turns.");
+        Effect effect = new GiveEffect(12, EffectName.HOLY);
+        Usable usable = new Usable("Kamane Demool", 30000, TargetType.NOT_MELEE_HERO, effect,
+                "disarms the enemy for one turn on attack.(only for ranged and hybrid hero.)");
         saveToFile(usable);
     }
 
@@ -96,7 +93,7 @@ public class CardMaker {
             folder = "items";
 
         String path = "src//json//" + folder + "//"
-                + card.getName().toLowerCase().replaceAll("\\s+", "") + ".json";
+                + card.getName().toLowerCase().replaceAll("\\s+", "_") + ".json";
 
         try (FileOutputStream fos = new FileOutputStream(path);
              OutputStreamWriter isr = new OutputStreamWriter(fos,

@@ -11,17 +11,19 @@ import java.util.List;
 public class Item extends Card {
     private static List<Item> items = new ArrayList<>();
     protected List<Effect> effects = new ArrayList<>();
-    protected TargetType targetType;
+    protected TargetType targetType = TargetType.NONE;
     private String desc;
 
-    public Item(String name, int price, List<Effect> effects, String desc) {
+    public Item(String name, int price, TargetType targetType, List<Effect> effects, String desc) {
         super(name, price, 0);
+        this.targetType = targetType;
         this.effects.addAll(effects);
         this.desc = desc;
     }
 
-    public Item(String name, int price, Effect effect, String desc) {
+    public Item(String name, int price, TargetType targetType, Effect effect, String desc) {
         super(name, price, 0);
+        this.targetType = targetType;
         this.effects.add(effect);
         this.desc = desc;
     }
