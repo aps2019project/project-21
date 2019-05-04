@@ -18,14 +18,16 @@ public class Minion extends Attacker {
         return minions;
     }
 
-    public static void addMinions(Minion minion) {
+    public static void addMinion(Minion minion) {
         if (minion == null)
             return;
         minions.add(minion);
     }
 
     public static void addMinion(List<Minion> minions) {
+        if (minions == null)
+            return;
         for (Minion minion : minions)
-            addMinions(minion);
+            addMinion(minion);
     }
 }

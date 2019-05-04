@@ -7,9 +7,12 @@ import models.card.TargetType;
 import models.match.Cell;
 import models.match.Match;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Usable extends Item {
+    private static List<Usable> usables = new ArrayList<>();
+
     public Usable(String name, int price, TargetType targetType,
                   Effect effect, ApplyType applyType, String desc) {
         super(name, price, targetType, effect, applyType, desc);
@@ -22,5 +25,22 @@ public class Usable extends Item {
 
     public void castItem(Match match, Player player, Cell cell) {
 
+    }
+
+    public static List<Usable> getUsables() {
+        return usables;
+    }
+
+    public static void addUsable(Usable usable) {
+        if (usable == null)
+            return;
+        usables.add(usable);
+    }
+
+    public static void addUsable(List<Usable> usables) {
+        if (usables == null)
+            return;
+        for (Usable usable : usables)
+            addUsable(usable);
     }
 }

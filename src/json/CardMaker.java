@@ -81,6 +81,18 @@ public class CardMaker {
         return gson.fromJson(json, Minion.class);
     }
 
+    static Usable usableReader(String path) throws IOException {
+        String json = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
+        YaGson gson = new YaGson();
+        return gson.fromJson(json, Usable.class);
+    }
+
+    static Collectable collectableReader(String path) throws IOException {
+        String json = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
+        YaGson gson = new YaGson();
+        return gson.fromJson(json, Collectable.class);
+    }
+
     static void saveToFile(Card card) throws IOException {
         String folder = "";
         if (card.getClass().equals(Spell.class))

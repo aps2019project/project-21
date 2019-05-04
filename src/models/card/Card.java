@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Card {
     private static int cardCount = 0;
-    public static ArrayList<Card> cards=new ArrayList<>();
+    public static ArrayList<Card> cards = new ArrayList<>();
     protected String name;
     protected int id;
     protected int collectionID;
@@ -72,13 +72,13 @@ public class Card {
         this.collectionID = collectionID;
     }
 
-    public static Card getCardByID(String ID){
+    public static Card getCardByID(String ID) {
         //bulshet zadam
         // peyda nakrd bayad null bede
         return null;
     }
 
-    public boolean TwoCardAreSame(Card card){
+    public boolean TwoCardAreSame(Card card) {
         return true;
     }
 

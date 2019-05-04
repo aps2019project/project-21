@@ -7,9 +7,12 @@ import models.card.TargetType;
 import models.match.Cell;
 import models.match.Match;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Collectable extends Item {
+    private static List<Collectable> collectables = new ArrayList<>();
+
     public Collectable(String name, TargetType targetType,
                        Effect effect, ApplyType applyType, String desc) {
         super(name, 0, targetType, effect, applyType, desc);
@@ -22,5 +25,20 @@ public class Collectable extends Item {
 
     public void castItem(Match match, Player player, Cell target) {
 
+    }
+
+    public static List<Collectable> getCollectables() {
+        return collectables;
+    }
+
+    public static void addCollectable(Collectable collectable) {
+        collectables.add(collectable);
+    }
+
+    public static void addCollectable(List<Collectable> collectables) {
+        if (collectables == null)
+            return;
+        for (Collectable collectable : collectables)
+            addCollectable(collectable);
     }
 }
