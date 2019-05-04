@@ -1,20 +1,22 @@
 {
   "@type": "models.card.Spell",
   "@val": {
-    "applyOnCellOrAttacker": "ON_ATTACKER",
+    "applyType": "ON_ATTACKER",
     "targetType": {
       "randomOrNot": "NOT_RANDOM",
       "targetAttackerRange": "ALL_THREE",
-      "cellType": "SINGLE_CELL",
+      "cellType": "IN_COLUMN",
       "heroOrMinion": "BOTH",
       "oppOrAlly": "OPP",
-      "chooseType": "HIMSELF"
+      "chooseType": "SELECTED_CELL"
     },
     "effects": [
       {
-        "@type": "models.card.buffs.Stun",
+        "@type": "models.card.buffs.WeaknessHP",
         "@val": {
-          "duration": 2,
+          "value": 6,
+          "initialHP": 0,
+          "duration": 2147483647,
           "buffMode": "EVIL",
           "cell": null,
           "attacker": null,
@@ -24,7 +26,7 @@
         }
       }
     ],
-    "desc": "stun an opp",
+    "desc": "Attack all opps in a column 6 units.",
     "name": "All Attack",
     "id": 15,
     "collectionID": 0,

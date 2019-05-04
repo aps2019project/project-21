@@ -1,21 +1,47 @@
 {
   "@type": "models.card.Spell",
   "@val": {
-    "applyOnCellOrAttacker": "ON_ATTACKER",
+    "applyType": "ON_ATTACKER",
     "targetType": {
       "randomOrNot": "NOT_RANDOM",
       "targetAttackerRange": "ALL_THREE",
       "cellType": "SINGLE_CELL",
       "heroOrMinion": "BOTH",
-      "oppOrAlly": "OPP",
+      "oppOrAlly": "ALLY",
       "chooseType": "HIMSELF"
     },
     "effects": [
       {
-        "@type": "models.card.buffs.Stun",
+        "@type": "models.card.buffs.WeaknessHP",
         "@val": {
-          "duration": 2,
+          "value": 6,
+          "initialHP": 0,
+          "duration": 2147483647,
           "buffMode": "EVIL",
+          "cell": null,
+          "attacker": null,
+          "player": null,
+          "match": null,
+          "activationType": "NONE"
+        }
+      },
+      {
+        "@type": "models.card.buffs.Holy",
+        "@val": {
+          "duration": 3,
+          "buffMode": "GOOD",
+          "cell": null,
+          "attacker": null,
+          "player": null,
+          "match": null,
+          "activationType": "NONE"
+        }
+      },
+      {
+        "@type": "models.card.buffs.Holy",
+        "@val": {
+          "duration": 3,
+          "buffMode": "GOOD",
           "cell": null,
           "attacker": null,
           "player": null,
@@ -24,7 +50,7 @@
         }
       }
     ],
-    "desc": "stun an opp",
+    "desc": "Decrease HP 6 units but get 2 holy buffs for 2 rounds.",
     "name": "Health With Profit",
     "id": 12,
     "collectionID": 0,

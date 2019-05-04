@@ -1,7 +1,7 @@
 {
   "@type": "models.card.Spell",
   "@val": {
-    "applyOnCellOrAttacker": "ON_ATTACKER",
+    "applyType": "ON_ATTACKER",
     "targetType": {
       "randomOrNot": "NOT_RANDOM",
       "targetAttackerRange": "ALL_THREE",
@@ -24,7 +24,7 @@
         }
       }
     ],
-    "desc": "stun an opp",
+    "desc": "Stun an opp.",
     "name": "Shock",
     "id": 19,
     "collectionID": 0,

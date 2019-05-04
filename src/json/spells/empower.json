@@ -1,21 +1,20 @@
 {
   "@type": "models.card.Spell",
   "@val": {
-    "applyOnCellOrAttacker": "ON_ATTACKER",
+    "applyType": "ON_ATTACKER",
     "targetType": {
       "randomOrNot": "NOT_RANDOM",
       "targetAttackerRange": "ALL_THREE",
       "cellType": "SINGLE_CELL",
       "heroOrMinion": "BOTH",
-      "oppOrAlly": "OPP",
-      "chooseType": "HIMSELF"
+      "oppOrAlly": "ALLY",
+      "chooseType": "SELECTED_ALLY"
     },
     "effects": [
       {
-        "@type": "models.card.buffs.Stun",
+        "@type": "models.card.effects.IncreaseAP",
         "@val": {
-          "duration": 2,
-          "buffMode": "EVIL",
+          "changeValue": 2,
           "cell": null,
           "attacker": null,
           "player": null,
@@ -24,7 +23,7 @@
         }
       }
     ],
-    "desc": "stun an opp",
+    "desc": "Increase AP 2 units.",
     "name": "Empower",
     "id": 2,
     "collectionID": 0,

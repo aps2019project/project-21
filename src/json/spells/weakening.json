@@ -1,20 +1,22 @@
 {
   "@type": "models.card.Spell",
   "@val": {
-    "applyOnCellOrAttacker": "ON_ATTACKER",
+    "applyType": "ON_ATTACKER",
     "targetType": {
       "randomOrNot": "NOT_RANDOM",
       "targetAttackerRange": "ALL_THREE",
       "cellType": "SINGLE_CELL",
-      "heroOrMinion": "BOTH",
+      "heroOrMinion": "MINION",
       "oppOrAlly": "OPP",
-      "chooseType": "HIMSELF"
+      "chooseType": "SELECTED_OPP"
     },
     "effects": [
       {
-        "@type": "models.card.buffs.Stun",
+        "@type": "models.card.buffs.WeaknessAP",
         "@val": {
-          "duration": 2,
+          "value": 4,
+          "initialAP": 0,
+          "duration": 2147483647,
           "buffMode": "EVIL",
           "cell": null,
           "attacker": null,
@@ -24,7 +26,7 @@
         }
       }
     ],
-    "desc": "stun an opp",
+    "desc": "Decrease AP 4 unit of a opp's minion.",
     "name": "Weakening",
     "id": 16,
     "collectionID": 0,
