@@ -12,6 +12,15 @@ public class Minion extends Attacker {
         super(name, price, manaCost, maxHp, maxAp, attackRange, attackMode, specialPower);
         super.canAttack = false;
         super.canMove = false;
+        this.isCombo = false;
+    }
+
+    public Minion(String name, int price, int manaCost, int maxHp, int maxAp,
+                  int attackRange, AttackMode attackMode, Spell specialPower, boolean isCombo) {
+        super(name, price, manaCost, maxHp, maxAp, attackRange, attackMode, specialPower);
+        super.canAttack = false;
+        super.canMove = false;
+        this.isCombo = isCombo;
     }
 
     public static List<Minion> getMinions() {
@@ -27,5 +36,9 @@ public class Minion extends Attacker {
     public static void addMinion(List<Minion> minions) {
         for (Minion minion : minions)
             addMinions(minion);
+    }
+
+    public boolean isCombo(){
+        return this.isCombo;
     }
 }

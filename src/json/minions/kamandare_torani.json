@@ -1,0 +1,33 @@
+{
+  "@type": "models.card.Minion",
+  "@val": {
+    "isCombo": false,
+    "maxHp": 3,
+    "maxAp": 4,
+    "hp": 3,
+    "ap": 4,
+    "specialPower": null,
+    "appliedEffects": [],
+    "attackRange": 5,
+    "attackMode": "RANGED",
+    "canMove": false,
+    "canAttack": false,
+    "isDisarmed": false,
+    "isStunned": false,
+    "hasHolyBuff": false,
+    "name": "Kamandare Torani",
+    "id": 8,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 500,
+    "manaCost": 1,
+    "currentCell": {
+      "x": 0,
+      "y": 0,
+      "effects": [],
+      "collectable": null,
+      "flag": null,
+      "currentAttacker": null
+    }
+  }
+}

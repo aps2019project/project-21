@@ -1,29 +1,39 @@
 {
-  "@type": "models.card.Hero",
+  "@type": "models.card.Minion",
   "@val": {
-    "cooldown": 2,
-    "maxHp": 40,
-    "maxAp": 3,
-    "hp": 40,
-    "ap": 3,
+    "isCombo": false,
+    "maxHp": 6,
+    "maxAp": 6,
+    "hp": 6,
+    "ap": 6,
     "specialPower": {
       "applyType": "ON_ATTACKER",
       "targetType": {
         "randomOrNot": "NOT_RANDOM",
         "targetAttackerRange": "ALL_THREE",
-        "cellType": "NONE",
+        "cellType": "SINGLE_CELL",
         "heroOrMinion": "BOTH",
         "oppOrAlly": "OPP",
         "chooseType": "SELECTED_OPP"
       },
       "effects": [
         {
-          "@type": "models.card.effects.GiveEffect",
+          "@type": "models.card.buffs.Disarm",
           "@val": {
-            "duration": 0,
-            "num": 0,
-            "value": 0,
-            "effectName": "POSITIVE_DISPEL",
+            "duration": 1,
+            "buffMode": "EVIL",
+            "cell": null,
+            "attacker": null,
+            "player": null,
+            "match": null,
+            "activationType": "NONE"
+          }
+        },
+        {
+          "@type": "models.card.buffs.Poison",
+          "@val": {
+            "duration": 4,
+            "buffMode": "EVIL",
             "cell": null,
             "attacker": null,
             "player": null,
@@ -32,29 +42,29 @@
           }
         }
       ],
-      "desc": "Dispels an opponent attacker.",
-      "name": "Afsaneh's Spell",
-      "id": 14,
+      "desc": "Disarm 1 turn and poison 4 turns.",
+      "name": "Jasose Torani's Spell",
+      "id": 11,
       "collectionID": 0,
       "cardIDInGame": null,
       "price": 0,
-      "manaCost": 1,
+      "manaCost": 0,
       "currentCell": null
     },
     "appliedEffects": [],
-    "attackRange": 3,
-    "attackMode": "RANGED",
-    "canMove": true,
-    "canAttack": true,
+    "attackRange": -1,
+    "attackMode": "MELEE",
+    "canMove": false,
+    "canAttack": false,
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
-    "name": "Afsaneh",
-    "id": 15,
+    "name": "Jasose Torani",
+    "id": 12,
     "collectionID": 0,
     "cardIDInGame": null,
-    "price": 11000,
-    "manaCost": -1,
+    "price": 700,
+    "manaCost": 4,
     "currentCell": {
       "x": 0,
       "y": 0,

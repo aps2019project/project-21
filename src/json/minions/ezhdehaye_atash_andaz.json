@@ -1,0 +1,33 @@
+{
+  "@type": "models.card.Minion",
+  "@val": {
+    "isCombo": false,
+    "maxHp": 9,
+    "maxAp": 5,
+    "hp": 9,
+    "ap": 5,
+    "specialPower": null,
+    "appliedEffects": [],
+    "attackRange": 4,
+    "attackMode": "RANGED",
+    "canMove": false,
+    "canAttack": false,
+    "isDisarmed": false,
+    "isStunned": false,
+    "hasHolyBuff": false,
+    "name": "Ezhdehaye Atash Andaz",
+    "id": 20,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 250,
+    "manaCost": 5,
+    "currentCell": {
+      "x": 0,
+      "y": 0,
+      "effects": [],
+      "collectable": null,
+      "flag": null,
+      "currentAttacker": null
+    }
+  }
+}

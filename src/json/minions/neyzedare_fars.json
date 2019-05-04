@@ -1,0 +1,33 @@
+{
+  "@type": "models.card.Minion",
+  "@val": {
+    "isCombo": false,
+    "maxHp": 5,
+    "maxAp": 3,
+    "hp": 5,
+    "ap": 3,
+    "specialPower": null,
+    "appliedEffects": [],
+    "attackRange": 3,
+    "attackMode": "HYBRID",
+    "canMove": false,
+    "canAttack": false,
+    "isDisarmed": false,
+    "isStunned": false,
+    "hasHolyBuff": false,
+    "name": "Neyzedare Fars",
+    "id": 3,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 500,
+    "manaCost": 1,
+    "currentCell": {
+      "x": 0,
+      "y": 0,
+      "effects": [],
+      "collectable": null,
+      "flag": null,
+      "currentAttacker": null
+    }
+  }
+}

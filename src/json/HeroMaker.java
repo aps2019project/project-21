@@ -58,7 +58,7 @@ public class HeroMaker {
 
 
         // ---------- 5 ----------
-        effect = new Poison(1, ActivationType.ON_ATTACK);
+        effect = new Poison(3, ActivationType.ON_ATTACK);
         targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
                 CellType.NONE, HeroOrMinion.BOTH, OppOrAlly.OPP, ChooseType.SELECTED_OPP);
         specialPower = new Spell("Zahak's Spell", 0, 0,
@@ -69,7 +69,7 @@ public class HeroMaker {
 
 
         // ---------- 6 ----------
-        effect = new Poison(1, ActivationType.ON_ATTACK);
+        effect = new Holy(3);
         targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
                 CellType.NONE, HeroOrMinion.BOTH, OppOrAlly.OPP, ChooseType.SELECTED_OPP);
         specialPower = new Spell("Kaveh's Spell", 0, 1,

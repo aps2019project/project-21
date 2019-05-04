@@ -1,0 +1,33 @@
+{
+  "@type": "models.card.Minion",
+  "@val": {
+    "isCombo": true,
+    "maxHp": 12,
+    "maxAp": 4,
+    "hp": 12,
+    "ap": 4,
+    "specialPower": null,
+    "appliedEffects": [],
+    "attackRange": -1,
+    "attackMode": "MELEE",
+    "canMove": false,
+    "canAttack": false,
+    "isDisarmed": false,
+    "isStunned": false,
+    "hasHolyBuff": false,
+    "name": "Sepahsalare Fars",
+    "id": 7,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 800,
+    "manaCost": 7,
+    "currentCell": {
+      "x": 0,
+      "y": 0,
+      "effects": [],
+      "collectable": null,
+      "flag": null,
+      "currentAttacker": null
+    }
+  }
+}

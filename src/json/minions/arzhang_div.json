@@ -1,0 +1,33 @@
+{
+  "@type": "models.card.Minion",
+  "@val": {
+    "isCombo": true,
+    "maxHp": 6,
+    "maxAp": 6,
+    "hp": 6,
+    "ap": 6,
+    "specialPower": null,
+    "appliedEffects": [],
+    "attackRange": -1,
+    "attackMode": "MELEE",
+    "canMove": false,
+    "canAttack": false,
+    "isDisarmed": false,
+    "isStunned": false,
+    "hasHolyBuff": false,
+    "name": "Arzhang Div",
+    "id": 24,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 600,
+    "manaCost": 3,
+    "currentCell": {
+      "x": 0,
+      "y": 0,
+      "effects": [],
+      "collectable": null,
+      "flag": null,
+      "currentAttacker": null
+    }
+  }
+}

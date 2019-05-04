@@ -1,0 +1,33 @@
+{
+  "@type": "models.card.Minion",
+  "@val": {
+    "isCombo": false,
+    "maxHp": 30,
+    "maxAp": 8,
+    "hp": 30,
+    "ap": 8,
+    "specialPower": null,
+    "appliedEffects": [],
+    "attackRange": 2,
+    "attackMode": "HYBRID",
+    "canMove": false,
+    "canAttack": false,
+    "isDisarmed": false,
+    "isStunned": false,
+    "hasHolyBuff": false,
+    "name": "Ghole Bozorg",
+    "id": 22,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 600,
+    "manaCost": 9,
+    "currentCell": {
+      "x": 0,
+      "y": 0,
+      "effects": [],
+      "collectable": null,
+      "flag": null,
+      "currentAttacker": null
+    }
+  }
+}

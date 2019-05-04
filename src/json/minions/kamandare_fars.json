@@ -1,0 +1,33 @@
+{
+  "@type": "models.card.Minion",
+  "@val": {
+    "isCombo": false,
+    "maxHp": 6,
+    "maxAp": 4,
+    "hp": 6,
+    "ap": 4,
+    "specialPower": null,
+    "appliedEffects": [],
+    "attackRange": 7,
+    "attackMode": "RANGED",
+    "canMove": false,
+    "canAttack": false,
+    "isDisarmed": false,
+    "isStunned": false,
+    "hasHolyBuff": false,
+    "name": "Kamandare Fars",
+    "id": 0,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 300,
+    "manaCost": 2,
+    "currentCell": {
+      "x": 0,
+      "y": 0,
+      "effects": [],
+      "collectable": null,
+      "flag": null,
+      "currentAttacker": null
+    }
+  }
+}
