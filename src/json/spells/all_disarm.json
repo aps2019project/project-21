@@ -1,20 +1,20 @@
 {
   "@type": "models.card.Spell",
   "@val": {
-    "applyOnCellOrAttacker": "ON_ATTACKER",
+    "applyType": "ON_ATTACKER",
     "targetType": {
       "randomOrNot": "NOT_RANDOM",
       "targetAttackerRange": "ALL_THREE",
-      "cellType": "SINGLE_CELL",
+      "cellType": "NONE",
       "heroOrMinion": "BOTH",
       "oppOrAlly": "OPP",
-      "chooseType": "HIMSELF"
+      "chooseType": "NONE"
     },
     "effects": [
       {
-        "@type": "models.card.buffs.Stun",
+        "@type": "models.card.buffs.Disarm",
         "@val": {
-          "duration": 2,
+          "duration": 1,
           "buffMode": "EVIL",
           "cell": null,
           "attacker": null,
@@ -24,7 +24,7 @@
         }
       }
     ],
-    "desc": "stun an opp",
+    "desc": "Disarm all opps for 1 round.",
     "name": "All Disarm",
     "id": 9,
     "collectionID": 0,

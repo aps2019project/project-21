@@ -1,20 +1,22 @@
 {
   "@type": "models.card.Spell",
   "@val": {
-    "applyOnCellOrAttacker": "ON_ATTACKER",
+    "applyType": "ON_ATTACKER",
     "targetType": {
-      "randomOrNot": "NOT_RANDOM",
+      "randomOrNot": "RANDOM",
       "targetAttackerRange": "ALL_THREE",
-      "cellType": "SINGLE_CELL",
-      "heroOrMinion": "BOTH",
+      "cellType": "SQUARE_3_3",
+      "heroOrMinion": "MINION",
       "oppOrAlly": "OPP",
-      "chooseType": "HIMSELF"
+      "chooseType": "SELECTED_CELL"
     },
     "effects": [
       {
-        "@type": "models.card.buffs.Stun",
+        "@type": "models.card.buffs.WeaknessHP",
         "@val": {
-          "duration": 2,
+          "value": 2147483647,
+          "initialHP": 0,
+          "duration": 2147483647,
           "buffMode": "EVIL",
           "cell": null,
           "attacker": null,
@@ -24,7 +26,7 @@
         }
       }
     ],
-    "desc": "stun an opp",
+    "desc": "Kill a minion around king randomly chosen.",
     "name": "Kings Guard",
     "id": 18,
     "collectionID": 0,

@@ -1,20 +1,22 @@
 {
   "@type": "models.card.Spell",
   "@val": {
-    "applyOnCellOrAttacker": "ON_ATTACKER",
+    "applyType": "ON_ATTACKER",
     "targetType": {
       "randomOrNot": "NOT_RANDOM",
       "targetAttackerRange": "ALL_THREE",
       "cellType": "SINGLE_CELL",
       "heroOrMinion": "BOTH",
       "oppOrAlly": "OPP",
-      "chooseType": "HIMSELF"
+      "chooseType": "SELECTED_OPP"
     },
     "effects": [
       {
-        "@type": "models.card.buffs.Stun",
+        "@type": "models.card.buffs.WeaknessHP",
         "@val": {
-          "duration": 2,
+          "value": 4,
+          "initialHP": 0,
+          "duration": 2147483647,
           "buffMode": "EVIL",
           "cell": null,
           "attacker": null,
@@ -24,13 +26,13 @@
         }
       }
     ],
-    "desc": "stun an opp",
-    "name": "Sacrifice",
-    "id": 17,
+    "desc": "Attack an opp 4 units.",
+    "name": "Fireball",
+    "id": 3,
     "collectionID": 0,
     "cardIDInGame": null,
-    "price": 1600,
-    "manaCost": 2,
+    "price": 400,
+    "manaCost": 1,
     "currentCell": null
   }
 }

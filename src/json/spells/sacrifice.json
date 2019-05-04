@@ -6,18 +6,18 @@
       "randomOrNot": "NOT_RANDOM",
       "targetAttackerRange": "ALL_THREE",
       "cellType": "SINGLE_CELL",
-      "heroOrMinion": "BOTH",
+      "heroOrMinion": "MINION",
       "oppOrAlly": "ALLY",
       "chooseType": "HIMSELF"
     },
     "effects": [
       {
-        "@type": "models.card.buffs.PowerAP",
+        "@type": "models.card.buffs.WeaknessHP",
         "@val": {
-          "value": 4,
-          "initialAP": 0,
-          "duration": 3,
-          "buffMode": "GOOD",
+          "value": 6,
+          "initialHP": 0,
+          "duration": 2147483647,
+          "buffMode": "EVIL",
           "cell": null,
           "attacker": null,
           "player": null,
@@ -26,10 +26,12 @@
         }
       },
       {
-        "@type": "models.card.buffs.Disarm",
+        "@type": "models.card.buffs.PowerAP",
         "@val": {
-          "duration": 1,
-          "buffMode": "EVIL",
+          "value": 8,
+          "initialAP": 0,
+          "duration": 2147483647,
+          "buffMode": "GOOD",
           "cell": null,
           "attacker": null,
           "player": null,
@@ -38,13 +40,13 @@
         }
       }
     ],
-    "desc": "Increase AP 4 units for 3 rounds, but disarm for 1 round.",
-    "name": "Madness",
-    "id": 8,
+    "desc": "Decrease HP 6 units but increase AP 8 units of an ally minion.",
+    "name": "Sacrifice",
+    "id": 17,
     "collectionID": 0,
     "cardIDInGame": null,
-    "price": 650,
-    "manaCost": 0,
+    "price": 1600,
+    "manaCost": 2,
     "currentCell": null
   }
 }

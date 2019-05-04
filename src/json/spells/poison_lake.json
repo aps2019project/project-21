@@ -1,20 +1,20 @@
 {
   "@type": "models.card.Spell",
   "@val": {
-    "applyOnCellOrAttacker": "ON_ATTACKER",
+    "applyType": "ON_ATTACKER",
     "targetType": {
       "randomOrNot": "NOT_RANDOM",
       "targetAttackerRange": "ALL_THREE",
-      "cellType": "SINGLE_CELL",
+      "cellType": "SQUARE_3_3",
       "heroOrMinion": "BOTH",
-      "oppOrAlly": "OPP",
-      "chooseType": "HIMSELF"
+      "oppOrAlly": "BOTH",
+      "chooseType": "SELECTED_CELL"
     },
     "effects": [
       {
-        "@type": "models.card.buffs.Stun",
+        "@type": "models.card.buffs.Poison",
         "@val": {
-          "duration": 2,
+          "duration": 1,
           "buffMode": "EVIL",
           "cell": null,
           "attacker": null,
@@ -24,7 +24,7 @@
         }
       }
     ],
-    "desc": "stun an opp",
+    "desc": "Put poison on a 3*3 square.",
     "name": "Poison Lake",
     "id": 7,
     "collectionID": 0,

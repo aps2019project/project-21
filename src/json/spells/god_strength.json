@@ -1,21 +1,23 @@
 {
   "@type": "models.card.Spell",
   "@val": {
-    "applyOnCellOrAttacker": "ON_ATTACKER",
+    "applyType": "ON_ATTACKER",
     "targetType": {
       "randomOrNot": "NOT_RANDOM",
       "targetAttackerRange": "ALL_THREE",
       "cellType": "SINGLE_CELL",
-      "heroOrMinion": "BOTH",
-      "oppOrAlly": "OPP",
+      "heroOrMinion": "HERO",
+      "oppOrAlly": "ALLY",
       "chooseType": "HIMSELF"
     },
     "effects": [
       {
-        "@type": "models.card.buffs.Stun",
+        "@type": "models.card.buffs.PowerAP",
         "@val": {
-          "duration": 2,
-          "buffMode": "EVIL",
+          "value": 4,
+          "initialAP": 0,
+          "duration": 2147483647,
+          "buffMode": "GOOD",
           "cell": null,
           "attacker": null,
           "player": null,
@@ -24,7 +26,7 @@
         }
       }
     ],
-    "desc": "stun an opp",
+    "desc": "Increase AP of Hero 4 units.",
     "name": "God Strength",
     "id": 4,
     "collectionID": 0,

@@ -1,18 +1,18 @@
 {
   "@type": "models.card.Spell",
   "@val": {
-    "applyOnCellOrAttacker": "ON_ATTACKER",
+    "applyType": "ON_ATTACKER",
     "targetType": {
       "randomOrNot": "NOT_RANDOM",
       "targetAttackerRange": "ALL_THREE",
-      "cellType": "SINGLE_CELL",
+      "cellType": "SQUARE_2_2",
       "heroOrMinion": "BOTH",
-      "oppOrAlly": "OPP",
-      "chooseType": "HIMSELF"
+      "oppOrAlly": "BOTH",
+      "chooseType": "SELECTED_CELL"
     },
     "effects": [
       {
-        "@type": "models.card.buffs.Stun",
+        "@type": "models.card.buffs.Flame",
         "@val": {
           "duration": 2,
           "buffMode": "EVIL",
@@ -24,7 +24,7 @@
         }
       }
     ],
-    "desc": "stun an opp",
+    "desc": "Put flame on a 2*2 Square.",
     "name": "Hell Fire",
     "id": 5,
     "collectionID": 0,

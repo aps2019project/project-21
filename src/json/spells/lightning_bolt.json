@@ -1,20 +1,22 @@
 {
   "@type": "models.card.Spell",
   "@val": {
-    "applyOnCellOrAttacker": "ON_ATTACKER",
+    "applyType": "ON_ATTACKER",
     "targetType": {
       "randomOrNot": "NOT_RANDOM",
       "targetAttackerRange": "ALL_THREE",
       "cellType": "SINGLE_CELL",
-      "heroOrMinion": "BOTH",
+      "heroOrMinion": "HERO",
       "oppOrAlly": "OPP",
-      "chooseType": "HIMSELF"
+      "chooseType": "SELECTED_OPP"
     },
     "effects": [
       {
-        "@type": "models.card.buffs.Stun",
+        "@type": "models.card.buffs.WeaknessHP",
         "@val": {
-          "duration": 2,
+          "value": 8,
+          "initialHP": 0,
+          "duration": 2147483647,
           "buffMode": "EVIL",
           "cell": null,
           "attacker": null,
@@ -24,7 +26,7 @@
         }
       }
     ],
-    "desc": "stun an opp",
+    "desc": "Attack opp's hero 8 units.",
     "name": "Lightning Bolt",
     "id": 6,
     "collectionID": 0,

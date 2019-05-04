@@ -1,21 +1,19 @@
 {
   "@type": "models.card.Spell",
   "@val": {
-    "applyOnCellOrAttacker": "ON_ATTACKER",
+    "applyType": "ON_ATTACKER",
     "targetType": {
       "randomOrNot": "NOT_RANDOM",
       "targetAttackerRange": "ALL_THREE",
-      "cellType": "SINGLE_CELL",
+      "cellType": "SQUARE_2_2",
       "heroOrMinion": "BOTH",
-      "oppOrAlly": "OPP",
-      "chooseType": "HIMSELF"
+      "oppOrAlly": "BOTH",
+      "chooseType": "SELECTED_CELL"
     },
     "effects": [
       {
-        "@type": "models.card.buffs.Stun",
+        "@type": "models.card.effects.PositiveDispel",
         "@val": {
-          "duration": 2,
-          "buffMode": "EVIL",
           "cell": null,
           "attacker": null,
           "player": null,
@@ -24,7 +22,7 @@
         }
       }
     ],
-    "desc": "stun an opp",
+    "desc": "Dispel A 2*2 Square.",
     "name": "Area Dispel",
     "id": 1,
     "collectionID": 0,
