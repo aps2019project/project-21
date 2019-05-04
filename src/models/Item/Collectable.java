@@ -41,4 +41,11 @@ public class Collectable extends Item {
         for (Collectable collectable : collectables)
             addCollectable(collectable);
     }
+
+    public static Collectable getCollectableByID(int id) {
+        for (Collectable collectable : collectables)
+            if (collectable.id == id)
+                return collectable;
+        return null;
+    }
 }

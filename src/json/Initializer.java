@@ -2,6 +2,7 @@ package json;
 
 import models.Item.Collectable;
 import models.Item.Usable;
+import models.Player;
 import models.card.Hero;
 import models.card.Minion;
 import models.card.Spell;
@@ -19,6 +20,7 @@ public class Initializer {
             Minion.addMinion(initMinions());
             Collectable.addCollectable(initCollectables());
             Usable.addUsable(initUsables());
+            Player.addPlayer(initPlayers());
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -82,5 +84,17 @@ public class Initializer {
             if (file.isFile())
                 collectables.add(CardMaker.collectableReader(file.getPath()));
         return collectables;
+    }
+
+    private static List<Player> initPlayers() throws IOException {
+        List<Player> players = new ArrayList<>();
+        File path = new File("src//json//accounts");
+        File[] files = path.listFiles();
+        if (files == null)
+            return players;
+        for (File file : files)
+            if (file.isFile())
+                players.add(CardMaker.playerReader(file.getPath()));
+        return players;
     }
 }

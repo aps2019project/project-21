@@ -30,4 +30,17 @@ public class Minion extends Attacker {
         for (Minion minion : minions)
             addMinion(minion);
     }
+
+    public static Minion getMinionByID(String id) {
+        if (!id.matches("\\d+"))
+            return null;
+        return getMinionByID(Integer.parseInt(id));
+    }
+
+    public static Minion getMinionByID(int id) {
+        for (Minion minion : minions)
+            if (minion.id == id)
+                return minion;
+        return null;
+    }
 }

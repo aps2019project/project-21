@@ -2,6 +2,7 @@ package controller.menus;
 
 import controller.InputScanner;
 import controller.request.AccountMenuRequest;
+import json.CardMaker;
 import models.Player;
 import view.ErrorMode;
 import view.View;
@@ -61,8 +62,7 @@ public class AccountMenu extends Menu {
     }
 
     private void login() {
-        System.out.println("Enter your username");
-        String username = InputScanner.nextLine();
+        String username = request.getCommandArguments().get(0);
         if (!Player.hasThisPlayer(username)) {
             View.getInstance().printError(ErrorMode.INVALID_USERNAME);
             return;
@@ -75,9 +75,14 @@ public class AccountMenu extends Menu {
     }
 
     private void createAccount() {
-        String userName = request.getCommandArguments().get(0);
+        String username = request.getCommandArguments().get(0);
+        if (Player.hasThisPlayer(username)) {
+            View.getInstance().printError(ErrorMode.USERNAME_IS_TAKEN);
+            return;
+        }
+        System.out.println("Set Password:");
         String password = InputScanner.nextLine();
-        Player.createAccount(userName, password);
+        Player.createAccount(username, password);
     }
 
     private void logout() {
@@ -85,7 +90,11 @@ public class AccountMenu extends Menu {
     }
 
     private void save() {
-
+        if (Player.getCurrentPlayer() == null) {
+            view.printError(ErrorMode.YOU_MUST_LOG_IN);
+            return;
+        }
+        Player.savePlayer();
     }
 
     protected void showMenu() {

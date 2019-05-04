@@ -43,4 +43,11 @@ public class Usable extends Item {
         for (Usable usable : usables)
             addUsable(usable);
     }
+
+    public static Usable getUsableByID(int id) {
+        for (Usable usable : usables)
+            if (usable.id == id)
+                return usable;
+        return null;
+    }
 }

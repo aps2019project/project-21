@@ -1,5 +1,6 @@
 package models;
 
+import json.CardMaker;
 import models.match.Match;
 import view.ErrorMode;
 import view.View;
@@ -22,7 +23,7 @@ public class Player {
         return cardCurrentID;
     }
 
-    public void setWins(){
+    public void setWins() {
 
     }
 
@@ -53,6 +54,7 @@ public class Player {
         }
         Player newPlayer = new Player(username, password);
         players.add(newPlayer);
+        savePlayer(newPlayer);
         setCurrentPlayer(newPlayer);
     }
 
@@ -144,16 +146,39 @@ public class Player {
         return true;
     }
 
-    public boolean compareTwoPlayer(Player player){
+    public boolean compareTwoPlayer(Player player) {
         //after run should check
-        if (player.getWins() > this.wins){
+        if (player.getWins() > this.wins) {
             return true;
-        } else if (player.getWins() < this.wins){
+        } else if (player.getWins() < this.wins) {
             return false;
-        } else if (this.username.compareTo(player.getUsername()) < 0){
+        } else if (this.username.compareTo(player.getUsername()) < 0) {
             return true;
         }
         return false;
+    }
+
+    public static void addPlayer(Player player) {
+        if (player == null)
+            return;
+        players.add(player);
+    }
+
+    public static void addPlayer(List<Player> players) {
+        if (players == null)
+            return;
+        for (Player player : players)
+            addPlayer(player);
+    }
+
+    public static void savePlayer(Player player) {
+        CardMaker.saveToFile(player);
+    }
+
+    public static void savePlayer() {
+        if (currentPlayer == null)
+            return;
+        CardMaker.saveToFile(currentPlayer);
     }
 
 }

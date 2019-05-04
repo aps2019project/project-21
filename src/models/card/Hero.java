@@ -58,8 +58,16 @@ public class Hero extends Attacker {
             addHero(hero);
     }
 
-    public static Hero getHeroByID(String ID) {
+    public static Hero getHeroByID(String id) {
+        if (!id.matches("\\d+"))
+            return null;
+        return getHeroBYID(Integer.parseInt(id));
+    }
 
+    public static Hero getHeroBYID(int id) {
+        for (Hero hero : heroes)
+            if (hero.id == id)
+                return hero;
         return null;
     }
 }

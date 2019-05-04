@@ -9,6 +9,9 @@ import models.Player;
 import models.card.*;
 import models.match.Match;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 public class View {
     private static View view = new View();
     private Player currentPlayer;
@@ -34,28 +37,19 @@ public class View {
     }
 
     public void showUser(Player player) {
-        System.out.println("Username:" + player.getUsername() + "-Wins:" + player.getWins());
+        if (player == null)
+            return;
+        System.out.println("Username: " + player.getUsername() + " -Wins: " + player.getWins());
     }
 
     public void scoreBoard() {
-        int numOfPlayers = Player.getPlayers().size();
-        Player[] players = new Player[numOfPlayers];
-        for (int i = 0; i < numOfPlayers; i++) {
-            players[i] = Player.getPlayers().get(i);
-        }
-        //insertion sort of users
-        for (int i = numOfPlayers - 2; i > -1; i--) {
-            for (int j = 0; j < i; j++) {
-                if (players[j].compareTwoPlayer(players[j + 1])) {
-                    Player p = players[j];
-                    players[j] = players[j + 1];
-                    players[j + 1] = p;
-                }
-            }
-        }
+        Player[] players = new Player[Player.getPlayers().size()];
+        Player.getPlayers().toArray(players);
+        Arrays.sort(players, Comparator.comparingInt(Player::getWins));
+
         //print users
-        for (int i = 0; i < numOfPlayers; i++) {
-            System.out.print(i + 1);
+        for (int i = 0; i < players.length; i++) {
+            System.out.print(i + 1 + "- ");
             showUser(players[i]);
         }
     }
@@ -146,7 +140,7 @@ public class View {
                     "10 - show all decks\n" +
                     "11 - show deck [deck name]\n" +
                     "12 - help\n");
-        } else if (menuName.equals("Shop")){
+        } else if (menuName.equals("Shop")) {
             System.out.print("Shop : \n" +
                     "1 - exit\n" +
                     "2 - show collection\n" +
@@ -156,7 +150,7 @@ public class View {
                     "6 - sell [card id|card id]\n" +
                     "7 - show\n" +
                     "8 - help\n");
-        } else if (menuName.equals("Battle")){
+        } else if (menuName.equals("Battle")) {
             System.out.print("Battle :\n" +
                     "1 - Game info\n" +
                     "2 - Show my minions\n" +
@@ -180,7 +174,7 @@ public class View {
                     "20 - End Game\n" +
                     "21 - Exit\n" +
                     "22 - Show menu\n");
-        } else if (menuName.equals("Graveyard")){
+        } else if (menuName.equals("Graveyard")) {
             System.out.print("Graveyard :\n" +
                     "1 - Show info [card id]\n" +
                     "2 - Show cards\n");
@@ -228,26 +222,26 @@ public class View {
 
     public void showMyMinions(Attacker attacker) {
         System.out.print(attacker.getId() +
-                " : "+
+                " : " +
                 attacker.getName() +
-                " , health : "+
+                " , health : " +
                 attacker.getHP() +
                 " , location : (" +
                 attacker.getCurrentCell().getX() +
-                ","+
+                "," +
                 attacker.getCurrentCell().getY() +
                 ") , power : " +
                 attacker.getAP());
     }
 
     public void showCardInfo(Card card) {
-        if (card.getClass().equals(Hero.class)){
+        if (card.getClass().equals(Hero.class)) {
             System.out.println("Hero : \n" +
                     "Name : " +
                     card.getName() +
                     "\nCost : " +
                     card.getPrice());
-        } else if (card.getClass().equals(Spell.class)){
+        } else if (card.getClass().equals(Spell.class)) {
             System.out.println("Spell : \n" +
                     "Name :" +
                     card.getName() +
@@ -255,27 +249,27 @@ public class View {
                     card.getManaCost() +
                     "\nCost : " +
                     card.getPrice());
-        } else if (card.getClass().equals(Minion.class)){
+        } else if (card.getClass().equals(Minion.class)) {
             System.out.println("Minion :\n" +
                     "Name :" +
                     card.getName() +
                     "\nHP : " +
-                    ((Minion)card).getHP() +
+                    ((Minion) card).getHP() +
                     " AP : " +
-                    ((Minion)card).getAP() +
+                    ((Minion) card).getAP() +
                     " MP : " +
-                    card.getPrice()+
+                    card.getPrice() +
                     "\nRange : " +
-                            ((Minion)card).getAttackRange() +
+                    ((Minion) card).getAttackRange() +
                     "\nCombo-ability :" +
                     "?????" +
-                    "\nCost : "+
+                    "\nCost : " +
                     card.getPrice());
-        } else if (card.getClass().equals(Item.class)){
+        } else if (card.getClass().equals(Item.class)) {
             System.out.println("Name : " +
                     card.getName() +
                     " , Desc : " +
-                        "???????");
+                    "???????");
         }
     }
 

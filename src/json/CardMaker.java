@@ -4,6 +4,7 @@ import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
 import models.Item.Collectable;
 import models.Item.Usable;
+import models.Player;
 import models.card.*;
 
 import java.io.*;
@@ -93,23 +94,41 @@ public class CardMaker {
         return gson.fromJson(json, Collectable.class);
     }
 
-    static void saveToFile(Card card) throws IOException {
+    static Player playerReader(String path) throws IOException {
+        String json = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
+        YaGson gson = new YaGson();
+        return gson.fromJson(json, Player.class);
+    }
+
+    public static void saveToFile(Object object) {
         String folder = "";
-        if (card.getClass().equals(Spell.class))
+        if (object.getClass().equals(Spell.class))
             folder = "spells";
-        else if (card.getClass().equals(Hero.class))
+        else if (object.getClass().equals(Hero.class))
             folder = "heroes";
-        else if (card.getClass().equals(Minion.class))
+        else if (object.getClass().equals(Minion.class))
             folder = "minions";
-        else if (card.getClass().equals(Usable.class))
+        else if (object.getClass().equals(Usable.class))
             folder = "usables";
-        else if (card.getClass().equals(Collectable.class))
+        else if (object.getClass().equals(Collectable.class))
             folder = "collectables";
+        else if (object.getClass().equals(Player.class))
+            folder = "accounts";
         else
             System.out.println("Card class not found!");
+        String name = "";
+        try {
+            name = ((Card) object).getName();
+        } catch (Exception e) {
 
+        }
+        try {
+            name = ((Player) object).getUsername();
+        } catch (Exception e) {
+
+        }
         String path = "src//json//" + folder + "//"
-                + card.getName().toLowerCase().replaceAll("\\s+", "_") + ".json";
+                + name.toLowerCase().replaceAll("\\s+", "_") + ".json";
 
         try (FileOutputStream fos = new FileOutputStream(path);
              OutputStreamWriter isr = new OutputStreamWriter(fos,
@@ -120,7 +139,9 @@ public class CardMaker {
 
             YaGson yaGson = yaGsonBuilder.setPrettyPrinting().create();
 
-            yaGson.toJson(card, isr);
+            yaGson.toJson(object, isr);
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
 
         System.out.println("Items written to file");
