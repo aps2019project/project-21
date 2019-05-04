@@ -52,12 +52,22 @@ public class Hero extends Attacker {
     }
 
     public static void addHero(List<Hero> heroes) {
+        if (heroes == null)
+            return;
         for (Hero hero : heroes)
             addHero(hero);
     }
 
-    public static Hero getHeroByID(String ID){
+    public static Hero getHeroByID(String id) {
+        if (!id.matches("\\d+"))
+            return null;
+        return getHeroBYID(Integer.parseInt(id));
+    }
 
+    public static Hero getHeroBYID(int id) {
+        for (Hero hero : heroes)
+            if (hero.id == id)
+                return hero;
         return null;
     }
 }

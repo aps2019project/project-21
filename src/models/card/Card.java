@@ -1,13 +1,14 @@
 package models.card;
 
+import models.Item.Item;
 import models.Player;
 import models.match.Cell;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Card {
     private static int cardCount = 0;
-    public static ArrayList<Card> cards=new ArrayList<>();
     protected String name;
     protected int id;
     protected int collectionID;
@@ -24,7 +25,6 @@ public class Card {
         this.name = name;
         this.price = price;
         this.manaCost = manaCost;
-        Card.cards.add(this);
     }
 
     {
@@ -37,7 +37,6 @@ public class Card {
         Card.setCollectionID(player.getCardCurrentID());
         player.setCardCurrentID(player.getCardCurrentID() + 1);
         player.getCollection().addCard(Card);
-        cards.add(Card);
     }
 
     public String getName() {
@@ -72,14 +71,29 @@ public class Card {
         this.collectionID = collectionID;
     }
 
-    public static Card getCardByID(String ID){
-        //bulshet zadam
-        // peyda nakrd bayad null bede
-        return null;
+    public boolean TwoCardAreSame(Card card) {
+        return true;
     }
 
-    public boolean TwoCardAreSame(Card card){
-        return true;
+    public static List<Card> getCards() {
+        List<Card> cards = new ArrayList<>();
+        cards.addAll(Attacker.getAttackers());
+        cards.addAll(Spell.getSpells());
+        cards.addAll(Item.getItems());
+        return cards;
+    }
+
+    public static Card getCardByID(String id) {
+        if (!id.matches("\\d+"))
+            return null;
+        return getCardByID(Integer.parseInt(id));
+    }
+
+    public static Card getCardByID(int id) {
+        for (Card card : getCards())
+            if (card.id == id)
+                return card;
+        return null;
     }
 
 }

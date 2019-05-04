@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Item extends Card {
-    private static List<Item> items = new ArrayList<>();
     private ApplyType applyType;
     protected List<Effect> effects = new ArrayList<>();
     protected TargetType targetType;
@@ -60,12 +59,27 @@ public class Item extends Card {
         return null;
     }
 
-    public static Item getItemById(String Id) {
-        //bayad por shavad
+    public static Item getItemById(String id) {
+        if (!id.matches("\\d+"))
+            return null;
+        return getItemByID(Integer.parseInt(id));
+    }
+
+    public static Item getItemByID(int id) {
+        for (Item item : getItems())
+            if (item.id == id)
+                return item;
         return null;
     }
 
     public boolean twoItemAreSame(Item item) {
         return true;
+    }
+
+    public static List<Item> getItems() {
+        List<Item> items = new ArrayList<>();
+        items.addAll(Usable.getUsables());
+        items.addAll(Collectable.getCollectables());
+        return items;
     }
 }

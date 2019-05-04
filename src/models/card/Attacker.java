@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Attacker extends Card {
-    public static ArrayList<Attacker> attackers = new ArrayList<>();
     private int maxHp;
     private int maxAp;
     private int hp;
@@ -44,7 +43,6 @@ public class Attacker extends Card {
         this.attackRange = attackRange;
         this.attackMode = attackMode;
         currentCell = new Cell();
-        attackers.add(this);
     }
 
     public void manageEffects() {
@@ -173,8 +171,25 @@ public class Attacker extends Card {
         return specialPower;
     }
 
-    public static Attacker getAttackerById(String Id) {
+    public static Attacker getAttackerById(String id) {
+        if (!id.matches("\\d+"))
+            return null;
+        return getAttackerByID(Integer.parseInt(id));
+    }
+
+    public static Attacker getAttackerByID(int id) {
+        for (Attacker attacker : getAttackers())
+            if (attacker.id == id)
+                return attacker;
         return null;
     }
+
+    public static List<Attacker> getAttackers() {
+        List<Attacker> attackers = new ArrayList<>();
+        attackers.addAll(Minion.getMinions());
+        attackers.addAll(Hero.getHeroes());
+        return attackers;
+    }
+
 
 }
