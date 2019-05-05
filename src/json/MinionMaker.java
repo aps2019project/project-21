@@ -21,6 +21,7 @@ public class MinionMaker {
         // ---------- 2 ----------
         List<Effect> effects = new ArrayList<>();
         effects.add(new Stun(1));
+        effects.get(0).setActivationType(ActivationType.ON_ATTACK);
         TargetType targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
                 CellType.SINGLE_CELL, HeroOrMinion.BOTH, OppOrAlly.OPP, ChooseType.SELECTED_OPP);
         Spell specialPower = new Spell("Shamshirzane Fars's Spell", 0, 0,
@@ -44,6 +45,7 @@ public class MinionMaker {
         // ---------- 5 ----------
         effects = new ArrayList<>();
         effects.add(new WeaknessHP(Integer.MAX_VALUE, 5)); //save number of attacked.
+        effects.get(0).setActivationType(ActivationType.ON_ATTACK);
         targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
                 CellType.SINGLE_CELL, HeroOrMinion.BOTH, OppOrAlly.OPP, ChooseType.SELECTED_OPP);
         specialPower = new Spell("Pahlavane Fars's Spell", 0, 0,
@@ -78,6 +80,8 @@ public class MinionMaker {
         effects = new ArrayList<>();
         effects.add(new Disarm(1));
         effects.add(new Poison(4));
+        effects.get(0).setActivationType(ActivationType.ON_ATTACK);
+        effects.get(0).setActivationType(ActivationType.ON_ATTACK);
         targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
                 CellType.SINGLE_CELL, HeroOrMinion.BOTH, OppOrAlly.OPP, ChooseType.SELECTED_OPP);
         specialPower = new Spell("Jasose Torani's Spell", 0, 0,
@@ -109,12 +113,13 @@ public class MinionMaker {
         // ---------- 15 ----------
         effects = new ArrayList<>();
         effects.add(new PowerHP(Integer.MAX_VALUE,10));
+        effects.get(0).setActivationType(ActivationType.PASSIVE);
         targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
                 CellType.SINGLE_CELL, HeroOrMinion.BOTH, OppOrAlly.ALLY, ChooseType.HIMSELF);
         specialPower = new Spell("Oghab's Spell", 0, 0,
                 targetType, effects, ApplyType.ON_ATTACKER, "Increase HP 10 units.");
         minion = new Minion("Oghab", 200, 2, 0,
-                2, 3, AttackMode.RANGED, specialPower); //passive
+                2, 3, AttackMode.RANGED, specialPower);
         saveToFile(minion);
 
         // ---------- 16 ----------600
@@ -123,10 +128,28 @@ public class MinionMaker {
         saveToFile(minion);
 
         // ---------- 17 ----------
-
+        effects = new ArrayList<>();
+        effects.add(new WeaknessHP(Integer.MAX_VALUE, 2));
+        effects.get(0).setActivationType(ActivationType.ON_DEATH);
+        targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
+                CellType.SQUARE_3_3, HeroOrMinion.MINION, OppOrAlly.OPP, ChooseType.HIMSELF);
+        specialPower = new Spell("Ghole Tak Cheshm's spell", 0, 0,
+                targetType, effects, ApplyType.ON_ATTACKER, "Attack all neighbour minions 2 units.");
+        minion = new Minion("Ghole Tak cheshm", 500, 7, 12,
+                11, 3, AttackMode.HYBRID, specialPower);
+        saveToFile(minion);
 
         // ---------- 18 ----------
-
+        effects = new ArrayList<>();
+        effects.add(new Poison(3));
+        effects.get(0).setActivationType(ActivationType.ON_ATTACK);
+        targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
+                CellType.SINGLE_CELL, HeroOrMinion.BOTH, OppOrAlly.OPP, ChooseType.SELECTED_OPP);
+        specialPower = new Spell("Mare Sammi's Spell", 0, 0,
+                targetType, effects, ApplyType.ON_ATTACKER, "Poison opp 3 turns.");
+        minion = new Minion("Mare Sammi", 300, 4, 5,
+                6, 4, AttackMode.RANGED, specialPower);
+        saveToFile(minion);
 
         // ---------- 19 ----------
         minion = new Minion("Ezhdehaye Atash Andaz", 250, 5, 9,
@@ -134,10 +157,10 @@ public class MinionMaker {
         saveToFile(minion);
 
         // ---------- 20 ----------
-
+        //later
 
         // ---------- 21 ----------
-
+        //later
 
         // ---------- 22 ----------
 
@@ -155,22 +178,32 @@ public class MinionMaker {
 
 
         // ---------- 27 ----------
-
+        //later
 
         // ---------- 28 ----------
-
+        //later
 
         // ---------- 29 ----------
-
+        //later
 
         // ---------- 30 ----------
-
+        //later
 
         // ---------- 31 ----------
-
+        effects = new ArrayList<>();
+        effects.add(new WeaknessHP(Integer.MAX_VALUE, 16));
+        effects.get(0).setActivationType(ActivationType.ON_SPAWN);
+        targetType = new TargetType(RandomOrNot.RANDOM, TargetAttackerRange.ALL_THREE,
+                CellType.SINGLE_CELL, HeroOrMinion.MINION, OppOrAlly.OPP, ChooseType.NONE);
+        specialPower = new Spell("Bahman's Spell", 0, 0,
+                targetType, effects, ApplyType.ON_ATTACKER,
+                "Attack a minion 16 units, randomly chosen.");
+        minion = new Minion("Bahman", 200, 2, 0,
+                2, 3, AttackMode.RANGED, specialPower);
+        saveToFile(minion);
 
         // ---------- 32 ----------
-
+        //later
 
         // ---------- 33 ----------
         minion = new Minion("Eiraj", 500, 4, 6,
@@ -183,16 +216,45 @@ public class MinionMaker {
         saveToFile(minion);
 
         // ---------- 35 ----------
-
+        //later
 
         // ---------- 36 ----------
-
+        effects = new ArrayList<>();
+        effects.add(new Stun(1));
+        effects.get(0).setActivationType(ActivationType.ON_SPAWN);
+        targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
+                CellType.SQUARE_3_3, HeroOrMinion.MINION, OppOrAlly.OPP, ChooseType.HIMSELF);
+        specialPower = new Spell("Nane Sarma's Spell", 0, 0,
+                targetType, effects, ApplyType.ON_ATTACKER, "Stun 8 neighbourhood minions.");
+        minion = new Minion("Nane Sarma", 500, 3, 3,
+                4, 5, AttackMode.RANGED, specialPower);
+        saveToFile(minion);
 
         // ---------- 37 ----------
-
+        effects = new ArrayList<>();
+        for(int i = 0; i < 12; i++) {
+            effects.add(new Holy(Integer.MAX_VALUE));
+            effects.get(i).setActivationType(ActivationType.PASSIVE);
+        }
+        targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
+                CellType.SINGLE_CELL, HeroOrMinion.BOTH, OppOrAlly.ALLY, ChooseType.HIMSELF);
+        specialPower = new Spell("Folad Zereh's Spell", 0, 0,
+                targetType, effects, ApplyType.ON_ATTACKER, "Having 12 continuous holy buffs.");
+        minion = new Minion("Folad Zereh", 650, 3, 1,
+                1, -1, AttackMode.MELEE, specialPower);
+        saveToFile(minion);
 
         // ---------- 38 ----------
-
+        effects = new ArrayList<>();
+        effects.add(new WeaknessHP(Integer.MAX_VALUE, 6));
+        effects.get(0).setActivationType(ActivationType.ON_DEATH);
+        targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
+                CellType.SINGLE_CELL, HeroOrMinion.HERO, OppOrAlly.OPP, ChooseType.NONE);
+        specialPower = new Spell("Siavash's Spell", 0, 0,
+                targetType, effects, ApplyType.ON_ATTACKER, "Attack opp's hero 6 units on death.");
+        minion = new Minion("", 350, 4, 8,
+                5, -1, AttackMode.MELEE, specialPower);
+        saveToFile(minion);
 
         // ---------- 39 ----------
         minion = new Minion("Shah Ghol", 600, 5, 10,
