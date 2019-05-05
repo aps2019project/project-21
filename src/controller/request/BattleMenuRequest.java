@@ -174,8 +174,4 @@ public class BattleMenuRequest extends Request {
     private void showCardsCheck() {
         type = RequestType.SHOW_CARDS;
     }
-
-    protected void backCheck() {
-
-    }
 }

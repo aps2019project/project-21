@@ -20,7 +20,10 @@ public class BattleMenu extends Menu {
     }
 
     public void main() {
-        showMenu();
+        if (showMenu) {
+            showMenu();
+            showMenu = false;
+        }
 
         request = new BattleMenuRequest();
 
@@ -196,7 +199,7 @@ public class BattleMenu extends Menu {
     }
 
     private void enterGraveyard() {
-        MenuManager.getInstance().changeMenu(MenuType.GRAVEYARD_MENU);
+        MenuManager.getInstance().gotoGraveyard();
     }
 
     private void endGame() {

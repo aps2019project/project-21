@@ -1,6 +1,7 @@
 package models;
 
 import json.CardMaker;
+import models.card.Card;
 import models.match.Match;
 import view.ErrorMode;
 import view.View;
@@ -13,7 +14,7 @@ public class Player {
     private static Player currentPlayer;
     private String username;
     private String password;
-    private Collection collection;
+    private Collection collection = new Collection();
     private int drake;
     private List<Match> matchHistory = new ArrayList<>();
     private int wins;
@@ -179,6 +180,29 @@ public class Player {
         if (currentPlayer == null)
             return;
         CardMaker.saveToFile(currentPlayer);
+    }
+
+    public boolean hasLessThanThreeItems() {
+        return this.collection.hasLessThanThreeItems();
+    }
+
+    public void buy(Card card) {
+        if (card == null || drake < card.getPrice())
+            return;
+        if (!hasLessThanThreeItems())
+            return;
+        drake -= card.getPrice();
+        card = CardMaker.deepCopy(card, Card.class);
+        collection.addCard(card);
+    }
+
+    public void sell(Card card) {
+        if (card == null)
+            return;
+        if (!collection.hasThisCard(card))
+            return;
+        collection.removeCard(card);
+        drake += card.getPrice();
     }
 
 }

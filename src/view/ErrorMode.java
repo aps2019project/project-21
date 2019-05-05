@@ -18,7 +18,7 @@ public enum ErrorMode {
     INVALID_TARGET(""),
     CAN_NOT_ATTACK(""),
     UNAVAILABLE_OPPONENT(""),
-    INVALID_CARD_ID(""),
+    INVALID_CARD_ID("No card with such an id."),
     HAVE_NOT_MANA(""),
     INVALID_CARD_NAME(""),
     NOT_IN_SHOP("there is no item or card with this name in shop"),
@@ -27,7 +27,14 @@ public enum ErrorMode {
     CUSTOM_ERROR(""),
     YOU_MUST_LOG_IN("You must login"),
     LOGIN_FAILED("log in failed"),
-    INVALID_USERNAME("invalid username");
+    INVALID_USERNAME("invalid username"),
+    NO_CARD_WITH_THIS_NAME("no card with this name."),
+    HAS_THREE_ITEMS("player's collection has already 3 items.\nno more items can be added."),
+    BUY_SUCCESSFUL("successfully bought card | item."),
+    YOU_DONT_HAVE_THIS_CARD("you don't have this card or item. sorry!"),
+    SELL_SUCCESSFUL("sold the card or item successfully."),
+    INVALID_COMMAND("invalid command");
+
 
     private String message;
 

@@ -40,8 +40,4 @@ public class TargetType {
     public OppOrAlly getOppOrAlly() {
         return oppOrAlly;
     }
-
-    public String targetString(){
-        return null;
-    }
 }

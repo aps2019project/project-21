@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class ShopMenuRequest extends Request {
     @Override
     public void extractType() {
-        // set field type in parent class
+        type = RequestType.INVALID;
         String command = this.getCommandLine();
         if (command.equals("exit"))
             exitCheck();
@@ -16,14 +16,16 @@ public class ShopMenuRequest extends Request {
             searchCollectionCheck();
         else if (command.startsWith("search"))
             searchCheck();
-        else if (command.equals("buy"))
+        else if (command.startsWith("buy"))
             buyCheck();
-        else if (command.equals("sell"))
+        else if (command.startsWith("sell"))
             sellCheck();
         else if (command.equals("show"))
             showCheck();
         else if (command.equals("help"))
             helpCheck();
+        else if (command.equals("back"))
+            backCheck();
     }
 
     private void showCollectionCheck() {
@@ -33,34 +35,44 @@ public class ShopMenuRequest extends Request {
     private void searchCheck() {
         String Regex = "search (\\w+)";
         Matcher matcher = Pattern.compile(Regex).matcher(commandLine);
-        if (matcher.matches()){
+        if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
             type = RequestType.SEARCH;
-        }
+        } else
+            invalidCommand();
     }
 
     private void searchCollectionCheck() {
         String Regex = "search collection (\\w+)";
         Matcher matcher = Pattern.compile(Regex).matcher(commandLine);
-        if (matcher.matches()){
+        if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
             type = RequestType.SEARCH_COLLECTION;
-        }
+        } else
+            invalidCommand();
     }
 
     private void buyCheck() {
-        type = RequestType.BUY;
+        String regex = "buy (\\w+)";
+        Matcher matcher = Pattern.compile(regex).matcher(commandLine);
+        if (matcher.matches()) {
+            commandArguments.add(matcher.group(1));
+            type = RequestType.BUY;
+        } else
+            invalidCommand();
     }
 
     private void sellCheck() {
-        type = RequestType.SELL;
+        String regex = "sell (\\w+)";
+        Matcher matcher = Pattern.compile(regex).matcher(commandLine);
+        if (matcher.matches()) {
+            commandArguments.add(matcher.group(1));
+            type = RequestType.SELL;
+        } else
+            invalidCommand();
     }
 
     private void showCheck() {
         type = RequestType.SHOW;
-    }
-
-    protected void backCheck() {
-
     }
 }

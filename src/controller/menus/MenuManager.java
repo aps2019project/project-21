@@ -38,20 +38,19 @@ public class MenuManager {
         }
     }
 
-    protected void changeMenu(MenuType menuType) {
-        this.menuType = menuType;
-    }
-
     protected void gotoShop() {
         menuType = MenuType.SHOP_MENU;
+        ShopMenu.getInstance().showMenu = true;
     }
 
     protected void gotoCollection() {
         menuType = MenuType.COLLECTION_MENU;
+        CollectionMenu.getInstance().showMenu = true;
     }
 
     protected void gotoBattle() {
         menuType = MenuType.BATTLE_MENU;
+        BattleMenu.getInstance().showMenu = true;
     }
 
     protected void exit() {
@@ -60,9 +59,16 @@ public class MenuManager {
 
     protected void gotoGraveyard() {
         menuType = MenuType.GRAVEYARD_MENU;
+        Graveyard.getInstance().showMenu = true;
     }
 
     protected void gotoAccount() {
         menuType = MenuType.ACCOUNT_MENU;
+        AccountMenu.getInstance().showMenu = true;
+    }
+
+    protected void gotoMainMenu() {
+        menuType = MenuType.MAIN_MENU;
+        MainMenu.getInstance().showMenu = true;
     }
 }

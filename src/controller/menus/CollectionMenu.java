@@ -20,7 +20,10 @@ public class CollectionMenu extends Menu {
     }
 
     public void main() {
-        showMenu();
+        if (showMenu) {
+            showMenu();
+            showMenu = false;
+        }
 
         request = new MainMenuRequest();
 
@@ -76,7 +79,7 @@ public class CollectionMenu extends Menu {
     public void search() {
         Item search = Item.getItemByName(request.getCommandArguments().get(0));
         boolean found = true;
-        for (Item item : Player.getCurrentPlayer().getCollection().getItems()) {
+        for (Item item : Player.getCurrentPlayer().getCollection().getUsables()) {
             if (item.twoItemAreSame(search)) {
                 found = false;
                 System.out.println("Item founded!");

@@ -7,13 +7,13 @@ import view.View;
 abstract class Menu {
     protected View view = View.getInstance();
     protected Request request;
-    protected Player player;
+    protected boolean showMenu = true;
 
     abstract void main();
 
     abstract protected void showMenu();
 
     protected void exit(){
-        MenuManager.getInstance().changeMenu(MenuType.EXIT);
+        MenuManager.getInstance().exit();
     }
 }

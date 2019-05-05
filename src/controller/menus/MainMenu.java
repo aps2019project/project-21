@@ -14,7 +14,10 @@ public class MainMenu extends Menu {
     }
 
     public void main() {
-        showMenu();
+        if (showMenu){
+            showMenu();
+            showMenu = false;
+        }
 
         request = new MainMenuRequest();
 
@@ -52,26 +55,19 @@ public class MainMenu extends Menu {
     }
 
     private void shop() {
-        MenuManager.getInstance().changeMenu(MenuType.SHOP_MENU);
+        MenuManager.getInstance().gotoShop();
     }
 
     private void battle() {
-        MenuManager.getInstance().changeMenu(MenuType.BATTLE_MENU);
+        MenuManager.getInstance().gotoBattle();
     }
 
     private void collection() {
-        MenuManager.getInstance().changeMenu(MenuType.COLLECTION_MENU);
+        MenuManager.getInstance().gotoCollection();
     }
 
     protected void showMenu() {
-        System.out.println("-------MainMenu-------");
-        System.out.println("1. collection");
-        System.out.println("2. shop");
-        System.out.println("3. battle");
-        System.out.println("4. show menu");
-        System.out.println("5. help");
-        System.out.println("6. back");
-        System.out.println("7. exit");
+        view.showMenu("MainMenu");
     }
 
     private void back() {

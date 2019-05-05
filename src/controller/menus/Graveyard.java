@@ -19,7 +19,10 @@ public class Graveyard extends Menu {
     }
 
     public void main() {
-        showMenu();
+        if (showMenu) {
+            showMenu();
+            showMenu = false;
+        }
 
         request = new MainMenuRequest();
 
@@ -53,7 +56,7 @@ public class Graveyard extends Menu {
 
     private void showCards() {
         PlayerMatchInfo player = Match.getCurrentMatch().getPlayersMatchInfo()[0];
-        for (Card card : player.getGraveyard()){
+        for (Card card : player.getGraveyard()) {
             view.printCardGraveyard(card);
         }
     }

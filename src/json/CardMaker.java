@@ -146,4 +146,14 @@ public class CardMaker {
 
         System.out.println("Items written to file");
     }
+
+    public static <T> T deepCopy(T object, Class<T> type) {
+        try {
+            YaGson gson = new YaGson();
+            return gson.fromJson(gson.toJson(object, type), type);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

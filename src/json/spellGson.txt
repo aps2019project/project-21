@@ -35,7 +35,7 @@ public static void spellMaker() throws IOException {
         //effects.add(new Disarm(Integer.MAX_VALUE, ApplyType.ON_OPP));
         //effects.add(new Effect(ApplyType.ON_BOTH, EffectType.POSITIVE_DISPEL));
         Spell spell = new Spell("God Strength", 450, 2, TargetType.ALLY_HERO, effects,
-                "add 4 ap to hero");
+                "add 4 ap to heroes");
         saveToFile(spell, "src//json//spells//godStrength.json");
     }
 _________________________________________

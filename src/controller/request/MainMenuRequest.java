@@ -29,8 +29,4 @@ public class MainMenuRequest extends Request {
     private void collectionCheck() {
         type = RequestType.COLLECTION;
     }
-
-    protected void backCheck() {
-        type = RequestType.BACK;
-    }
 }

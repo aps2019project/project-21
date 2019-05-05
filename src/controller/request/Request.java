@@ -2,13 +2,13 @@ package controller.request;
 
 import controller.InputScanner;
 import view.ErrorMode;
+import view.View;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Request {
     protected RequestType type = null;
-    protected ErrorMode error = null;
     protected String commandLine;
     protected List<String> commandArguments = new ArrayList<>();
 
@@ -34,7 +34,9 @@ public abstract class Request {
         type = RequestType.SHOW_MENU;
     }
 
-    abstract protected void backCheck();
+    protected void backCheck() {
+        type = RequestType.BACK;
+    }
 
     public void setType(RequestType type) {
         this.type = type;
@@ -46,6 +48,10 @@ public abstract class Request {
 
     public List<String> getCommandArguments() {
         return commandArguments;
+    }
+
+    protected void invalidCommand() {
+        View.getInstance().printError(ErrorMode.INVALID_COMMAND);
     }
 }
 

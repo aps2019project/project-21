@@ -74,18 +74,28 @@ public class Deck {
         this.hero = hero;
     }
 
-    public void addObject(Object object){
+    public void addObject(Object object) {
 
     }
 
-    public void deleteObject(Object object){
+    public void deleteObject(Object object) {
 
     }
 
-    public boolean deckIsValid(){
-        if (cards.size() == 20 && hero!=null){
+    public boolean deckIsValid() {
+        if (cards.size() == 20 && hero != null) {
             return true;
         }
         return false;
+    }
+
+    public void remove(Card card) {
+        if (card == null)
+            return;
+        cards.remove(card);
+        if (hero.getId() == card.getId())
+            hero = null;
+        if (item.getId() == card.getId())
+            item = null;
     }
 }

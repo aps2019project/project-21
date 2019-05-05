@@ -19,8 +19,10 @@ public class AccountMenu extends Menu {
     }
 
     void main() {
-
-        showMenu();
+        if (showMenu) {
+            showMenu();
+            showMenu = false;
+        }
 
         request = new AccountMenuRequest();
 
@@ -98,18 +100,7 @@ public class AccountMenu extends Menu {
     }
 
     protected void showMenu() {
-        System.out.println("-------AccountMenu-------");
-        if (Player.getCurrentPlayer() != null)
-            System.out.println("logged in as " + Player.getCurrentPlayer().getUsername());
-        System.out.println("options:");
-        System.out.println("1. create account");
-        System.out.println("2. login");
-        System.out.println("3. show leaderboard");
-        System.out.println("4. save");
-        System.out.println("5. logout");
-        System.out.println("6. main menu");
-        System.out.println("7. help");
-        System.out.println("8. exit");
+        view.showMenu("Account");
     }
 
     private void gotoMainMenu() {
@@ -117,6 +108,6 @@ public class AccountMenu extends Menu {
             view.printError(ErrorMode.YOU_MUST_LOG_IN);
             return;
         }
-        MenuManager.getInstance().changeMenu(MenuType.MAIN_MENU);
+        MenuManager.getInstance().gotoMainMenu();
     }
 }

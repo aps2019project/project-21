@@ -17,7 +17,7 @@ public class AccountMenuRequest extends Request {
             saveCheck();
         else if (commandLine.contains("logout"))
             logoutCheck();
-        else if(commandLine.contains("main menu"))
+        else if (commandLine.contains("main menu"))
             mainMenuCheck();
         else if (commandLine.contains("help"))
             helpCheck();
@@ -51,7 +51,7 @@ public class AccountMenuRequest extends Request {
         type = RequestType.SHOW_LEADERBOARD;
     }
 
-    private void mainMenuCheck(){
+    private void mainMenuCheck() {
         type = RequestType.MAIN_MENU;
     }
 
@@ -61,9 +61,5 @@ public class AccountMenuRequest extends Request {
 
     private void logoutCheck() {
         type = RequestType.LOGOUT;
-    }
-
-    protected void backCheck() {
-        //  should be empty
     }
 }

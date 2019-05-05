@@ -59,7 +59,7 @@ public class View {
     }
 
     private void printItem(Item item) {
-        System.out.println("Name :" + item.getName() +
+        System.out.println("Name : " + item.getName() +
                 " - Desc : " +
                 item.getDesc() +
                 " - Sell cost : " +
@@ -67,65 +67,71 @@ public class View {
     }
 
     private void printMinion(Minion minion) {
-        System.out.println("Type : Minion - " +
-                "Name : " +
+        System.out.println("Type : Minion" +
+                " - Name : " +
                 minion.getName() +
-                "Class : " +
+                " - Class : " +
                 minion.getAttackMode() +
-                "- AP : " +
+                " - AP : " +
                 minion.getAP() +
-                "- HP : " +
+                " - HP : " +
                 minion.getHP() +
-                "- MP : " +
+                " - MP : " +
                 minion.getManaCost() +
-                "- Special power : " +
-                minion.getSpecialPower().getTargetType().targetString() +
-                "- Sell cost : " +
+                " - Special power : " +
+                minion.getSpecialPower().getDesc() +
+                " - Sell cost : " +
                 minion.getPrice());
     }
 
     private void printSpell(Spell spell) {
-        System.out.println("Type: Spell -" +
-                "Name" +
+        System.out.println("Type: Spell" +
+                " - Name: " +
                 spell.getName() +
-                "- MP" +
+                " - MP: " +
                 spell.getManaCost() +
-                "- Description:" +
-                spell.getTargetType().targetString() +
-                "- Sell cost:" +
+                " - Description: " +
+                spell.getDesc() +
+                " - Sell cost: " +
                 spell.getManaCost());
     }
 
     private void printHero(Hero hero) {
-        System.out.println("Name:" + hero.getName() +
-                "-AP:" +
+        System.out.println("Name: " + hero.getName() +
+                " - AP: " +
                 hero.getAP() +
-                "-HP:" +
+                " - HP: " +
                 hero.getHP() +
-                "-Class:" +
+                " - Class: " +
                 hero.getAttackMode() +
-                "-Special power:" +
+                " - Special power: " +
                 hero.getSpecialPower().getName() +
-                "-Sell cost:" +
+                " - Sell cost: " +
                 hero.getPrice());
     }
 
     public void showMenu(String menuName) {
+        if (Player.getCurrentPlayer() != null)
+            System.out.println("logged in as " + Player.getCurrentPlayer().getUsername());
         if (menuName.equals("Account")) {
-            System.out.print("Account:\n" +
-                    "1 - create acount [user name]\n" +
-                    "2 - login [user name]\n" +
-                    "3 - show leaderboard\n" +
-                    "4 - save\n" +
-                    "5 - logout\n" +
-                    "6 - help\n");
-        } else if (menuName.equals("mainMenu")) {
-            System.out.print("Main menu :\n" +
-                    "1 - Collection\n" +
-                    "2 - Shop\n" +
-                    "3 - Battle\n" +
-                    "4 - Exit\n" +
-                    "5 - Help\n");
+            System.out.print("------ AccountMenu ------\n" +
+                    "1. create account [user name]\n" +
+                    "2. login [user name]\n" +
+                    "3. show leaderboard\n" +
+                    "4. save\n" +
+                    "5. logout\n" +
+                    "6. main menu\n" +
+                    "7. help\n" +
+                    "8. exit\n");
+        } else if (menuName.equals("MainMenu")) {
+            System.out.print("------ MainMenu ------\n" +
+                    "1. collection\n" +
+                    "2. shop\n" +
+                    "3. battle\n" +
+                    "4. show menu\n" +
+                    "5. help\n" +
+                    "6. back\n" +
+                    "7. exit\n");
         } else if (menuName.equals("Collection")) {
             System.out.print("Collection :\n" +
                     "1 - exit\n" +
@@ -141,15 +147,16 @@ public class View {
                     "11 - show deck [deck name]\n" +
                     "12 - help\n");
         } else if (menuName.equals("Shop")) {
-            System.out.print("Shop : \n" +
-                    "1 - exit\n" +
-                    "2 - show collection\n" +
-                    "3 - search [item name|card name]\n" +
-                    "4 - search collection [item name|card name]\n" +
-                    "5 - buy [card name|item name]n" +
-                    "6 - sell [card id|card id]\n" +
-                    "7 - show\n" +
-                    "8 - help\n");
+            System.out.print("------ Shop ------\n" +
+                    "1. show collection\n" +
+                    "2. search [item name|card name]\n" +
+                    "3. search collection [item name|card name]\n" +
+                    "4. buy [card name|item name]\n" +
+                    "5. sell [card id|card id]\n" +
+                    "6. show\n" +
+                    "7. help\n" +
+                    "8. back\n" +
+                    "9. exit\n");
         } else if (menuName.equals("Battle")) {
             System.out.print("Battle :\n" +
                     "1 - Game info\n" +
@@ -187,14 +194,14 @@ public class View {
 
     public void showCollection(Collection collection) {
         System.out.println("Heroes:\n");
-        for (int i = 0; i < collection.getHero().size(); i++) {
+        for (int i = 0; i < collection.getHeroes().size(); i++) {
             System.out.print("\t\t" + (i + 1) + " - ");
-            printHero(collection.getHero().get(i));
+            printHero(collection.getHeroes().get(i));
         }
         System.out.println("Items:\n");
-        for (int i = 0; i < collection.getItems().size(); i++) {
+        for (int i = 0; i < collection.getUsables().size(); i++) {
             System.out.print("\t\t" + (i + 1) + " - ");
-            printItem(collection.getItems().get(i));
+            printItem(collection.getUsables().get(i));
         }
         System.out.println("Cards :\n");
         int i = 0;

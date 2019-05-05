@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Card {
-    private static int cardCount = 0;
+    private static int cardCount = 100;
     protected String name;
     protected int id;
     protected int collectionID;
     protected String cardIDInGame;
     protected int price;
-    protected int manaCost; //for hero = -1
+    protected int manaCost;
     protected Cell currentCell;
 
     public Card() {
@@ -30,13 +30,6 @@ public class Card {
     {
         this.id = cardCount;
         cardCount++;
-    }
-
-    public void makeCopyAndAddToCollection(Player player) {
-        Card Card = new Card(name, price, manaCost);
-        Card.setCollectionID(player.getCardCurrentID());
-        player.setCardCurrentID(player.getCardCurrentID() + 1);
-        player.getCollection().addCard(Card);
     }
 
     public String getName() {
@@ -67,8 +60,9 @@ public class Card {
         this.cardIDInGame = cardIDInGame;
     }
 
-    public void setCollectionID(int collectionID) {
-        this.collectionID = collectionID;
+    public void setCollectionID() {
+        this.collectionID = cardCount;
+        cardCount++;
     }
 
     public boolean TwoCardAreSame(Card card) {
@@ -90,10 +84,36 @@ public class Card {
     }
 
     public static Card getCardByID(int id) {
-        for (Card card : getCards())
+        return getCardByID(id, getCards());
+    }
+
+    public static Card getCardByName(String name) {
+        return getCardByName(name, getCards());
+    }
+
+    public static Card getCardByName(String name, List<Card> cards) {
+        for (Card card : cards)
+            if (card.name.equals(name))
+                return card;
+        return null;
+    }
+
+    public static List<Card> getAllCardByName(String name, List<Card> cards) {
+        List<Card> cardList = new ArrayList<>();
+        for (Card card : cards)
+            if (card.name.equals(name))
+                cardList.add(card);
+        return cardList;
+    }
+
+    public static Card getCardByID(int id, List<Card> cards) {
+        for (Card card : cards)
             if (card.id == id)
                 return card;
         return null;
     }
 
+    public int getCollectionID() {
+        return collectionID;
+    }
 }

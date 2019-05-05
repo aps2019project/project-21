@@ -1,13 +1,11 @@
 package controller.menus;
 
-import controller.request.AccountMenuRequest;
-import controller.request.RequestType;
+import controller.request.ShopMenuRequest;
 import models.Item.Item;
 import models.Player;
 import models.card.Card;
 import view.ErrorMode;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ShopMenu extends Menu {
@@ -21,13 +19,21 @@ public class ShopMenu extends Menu {
 
     }
 
-    private List<Card> cards = new ArrayList<>();
-    private List<Item> items = new ArrayList<>();
+    private List<Card> getCards() {
+        return Card.getCards();
+    }
+
+    private List<Item> getItems() {
+        return Item.getItems();
+    }
 
     public void main() {
-        showMenu();
+        if (showMenu) {
+            showMenu();
+            showMenu = false;
+        }
 
-        request = new AccountMenuRequest();
+        request = new ShopMenuRequest();
 
         request.getNewCommand();
 
@@ -35,22 +41,22 @@ public class ShopMenu extends Menu {
 
         switch (request.getType()) {
             case SEARCH:
-                search(request.getCommandLine().substring(7));
+                search();
                 break;
             case SEARCH_COLLECTION:
-                searchCollection(player, request.getCommandLine().substring(18));
+                searchCollection();
                 break;
             case SHOW_COLLECTION:
-                showCollection(player);
+                showCollection();
                 break;
             case SHOW:
                 show();
                 break;
             case SELL:
-                sell(player, request.getCommandLine().substring(5));
+                sell();
                 break;
             case BUY:
-                buy(player, request.getCommandLine().substring(4));
+                buy();
                 break;
             case HELP:
                 showMenu();
@@ -58,143 +64,78 @@ public class ShopMenu extends Menu {
             case SHOW_MENU:
                 showMenu();
                 break;
+            case BACK:
+                MenuManager.getInstance().gotoMainMenu();
+                break;
             case EXIT:
-                request.setType(RequestType.MAIN_MENU);
-                MenuManager.getInstance().changeMenu(MenuType.MAIN_MENU);
+                exit();
                 break;
         }
     }
 
-    private void showCollection(Player player) {
-        view.showCollection(player.getCollection());
+    private void showCollection() {
+        view.showCollection(Player.getCurrentPlayer().getCollection());
     }
 
-    private int search(String name) {
-        for (int i = 0; i < cards.size(); i++) {
-            if (cards.get(i).getName().equals(name)) {
-                System.out.println(cards.get(i).getId());
-                return cards.get(i).getId();
-            }
-        }
-        for (int i = 0; i < items.size(); i++) {
-            if (items.get(i).getName().equals(name)) {
-                System.out.println(items.get(i).getId());
-                return items.get(i).getId();
-            }
-        }
-        view.printError(ErrorMode.NOT_IN_SHOP);
-        return -1;
+    private void search() {
+        String cardName = request.getCommandArguments().get(0);
+        Card card = Card.getCardByName(cardName);
+        if (card == null)
+            view.printError(ErrorMode.NO_CARD_WITH_THIS_NAME);
+        else
+            System.out.println(card.getId());
     }
 
-    private int searchCollection(Player player, String name) {
-        boolean isItInCollection = false;
-        for (int i = 0; i < player.getCollection().getCards().size(); i++) {
-            if (player.getCollection().getCards().get(i).getName().equals(name)) {
-                System.out.println(player.getCollection().getCards().get(i).getId());
-                isItInCollection = true;
-            }
-        }
-        for (int i = 0; i < player.getCollection().getItems().size(); i++) {
-            if (player.getCollection().getItems().get(i).getName().equals(name)) {
-                System.out.println(player.getCollection().getItems().get(i).getId());
-                isItInCollection = true;
-            }
-        }
-        if (!isItInCollection) {
+    private void searchCollection() {
+        String cardName = request.getCommandArguments().get(0);
+        List<Card> cards = Card.getAllCardByName(cardName, Player.getCurrentPlayer().getCollection().getCards());
+        if (cards.isEmpty())
             view.printError(ErrorMode.CARD_IS_NOT_IN_COLLECTION);
-            return 0;
-        }
-        return 1;
+        else
+            for (Card card : cards)
+                System.out.println(card.getCollectionID() + " ");
     }
 
-    private void buy(Player player, String name) {
-        boolean isItCard = false;
-        boolean isItInShop = false;
-        Card Card = new Card();
-        for (int i = 0; i < cards.size() && !isItCard; i++) {
-            if (cards.get(i).getName().equals(name)) {
-                Card = cards.get(i);
-                isItCard = true;
-                isItInShop = true;
-            }
-        }
-        Item item = new Item();
-        for (int i = 0; i < items.size() && !isItCard; i++) {
-            if (items.get(i).getName().equals(name)) {
-                item = items.get(i);
-                isItInShop = true;
-            }
-        }
-        if (!isItInShop) {
-            view.printError(ErrorMode.NOT_IN_SHOP);
+    private void buy() {
+        String cardName = request.getCommandArguments().get(0);
+        Card card = Card.getCardByName(cardName);
+        if (card == null) {
+            view.printError(ErrorMode.NO_CARD_WITH_THIS_NAME);
             return;
         }
-        if (isItCard) {
-            if (Card.getPrice() > player.getDrake()) {
-                view.printError(ErrorMode.NOT_ENOUGH_MONEY);
-                return;
-            }
-            Card.makeCopyAndAddToCollection(player);
-            player.setDrake(player.getDrake() - Card.getPrice());
-        }
-        if (item.getPrice() > player.getDrake()) {
+        if (Player.getCurrentPlayer().getDrake() < card.getPrice()) {
             view.printError(ErrorMode.NOT_ENOUGH_MONEY);
             return;
         }
-        if (player.getCollection().getItems().size() == 3) {
-            view.printError(ErrorMode.HAVE_3_ITEMS);
+        if (!Player.getCurrentPlayer().hasLessThanThreeItems()) {
+            view.printError(ErrorMode.HAS_THREE_ITEMS);
             return;
         }
-        item.makeCopyAndAddToCollection(player);
-        player.setDrake(player.getDrake() - item.getPrice());
+        Player.getCurrentPlayer().buy(card);
+        view.printError(ErrorMode.BUY_SUCCESSFUL);
     }
 
-    private void sell(Player player, String name) {
-        boolean isItInCollection = false;
-        boolean isItCard = false;
-        Card Card = new Card();
-        Item item = new Item();
-        for (int i = 0; i < player.getCollection().getCards().size() && !isItInCollection; i++) {
-            if (player.getCollection().getCards().get(i).getName().equals(name)) {
-                Card = player.getCollection().getCards().get(i);
-                isItCard = true;
-                isItInCollection = true;
-            }
-        }
-        for (int i = 0; i < player.getCollection().getItems().size() && !isItInCollection; i++) {
-            if (player.getCollection().getItems().get(i).getName().equals(name)) {
-                item = player.getCollection().getItems().get(i);
-                isItInCollection = true;
-            }
-        }
-        if (!isItInCollection) {
-            view.printError(ErrorMode.CARD_IS_NOT_IN_COLLECTION);
+    private void sell() {
+        String collectionID = request.getCommandArguments().get(0);
+        if (!collectionID.matches("\\d+")) {
+            view.printError(ErrorMode.INVALID_CARD_ID);
             return;
         }
-        if (isItCard) {
-            player.getCollection().removeCard(Card);
-            player.setDrake(player.getDrake() + Card.getPrice());
+        Card card = Player.getCurrentPlayer().getCollection()
+                .getCardByCollectionID(Integer.parseInt(collectionID));
+        if (card == null) {
+            view.printError(ErrorMode.YOU_DONT_HAVE_THIS_CARD);
             return;
         }
-        player.getCollection().removeItem(item);
-        player.setDrake(player.getDrake() + item.getPrice());
+        Player.getCurrentPlayer().sell(card);
+        view.printError(ErrorMode.SELL_SUCCESSFUL);
     }
 
     private void show() {
         view.showShop(this);
     }
 
-    private void addCardToShop(Card Card) {
-        if (!this.cards.contains(Card))
-            this.cards.add(Card);
-    }
-
-    private void addItemToShop(Item item) {
-        if (!this.items.contains(item))
-            this.items.add(item);
-    }
-
     protected void showMenu() {
-        view.showMenu("shopMenu");
+        view.showMenu("Shop");
     }
 }

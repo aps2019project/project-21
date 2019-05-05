@@ -121,8 +121,4 @@ public class CollectionMenuRequest extends Request {
             type = RequestType.SHOW_DECK;
         }
     }
-
-    protected void backCheck() {
-
-    }
 }

@@ -1,6 +1,6 @@
 package models;
 
-import models.Item.Item;
+import models.Item.Usable;
 import models.card.Card;
 import models.card.Hero;
 import models.card.Minion;
@@ -12,78 +12,45 @@ import java.util.List;
 public class Collection {
     private List<Deck> decks = new ArrayList<>();
     private Deck mainDeck;
-    private List<Card> cards = new ArrayList<>();
-    private List<Hero> hero = new ArrayList<>();
+
+    private List<Hero> heroes = new ArrayList<>();
     private List<Minion> minions = new ArrayList<>();
     private List<Spell> spells = new ArrayList<>();
-    private List<Item> items = new ArrayList<>();
+    private List<Usable> usables = new ArrayList<>();
 
-    public void addCard(Card card){
-        cards.add(card);
-        if (card.getClass().equals(Hero.class)){
-            hero.add((Hero)card);
-        } else if (card.getClass().equals(Spell.class)){
-            spells.add((Spell)card);
-        } else {
-            minions.add((Minion)card);
-        }
+    public void addCard(Card card) {
+        if (card.getClass().equals(Hero.class)) {
+            heroes.add((Hero) card);
+        } else if (card.getClass().equals(Spell.class)) {
+            spells.add((Spell) card);
+        } else if (card.getClass().equals(Minion.class))
+            minions.add((Minion) card);
+        else if (card.getClass().equals(Usable.class))
+            usables.add((Usable) card);
+        card.setCollectionID();
     }
 
-    public void addItem(Item item){
-        this.items.add(item);
-    }
-
-    public void removeCard(Card card){
-        cards.remove(card);
-        if (cards.getClass().equals(Minion.class)) {
+    public void removeCard(Card card) {
+        if (card.getClass().equals(Minion.class))
             this.minions.remove(card);
-            for (int i = 0; i < decks.size(); i++) {
-                Deck deck = decks.get(i);
-                for (int  j=0 ; j<deck.getCards().size(); j++) {
-                    if (deck.getCards().get(j).TwoCardAreSame(card))
-                        deck.getCards().remove(j);
-                }
-            }
-        } else if (cards.getClass().equals(Spell.class)) {
-            this.spells.remove(card);
-            for (int i = 0; i < decks.size(); i++) {
-                Deck deck = decks.get(i);
-                for (int  j=0 ; j<deck.getCards().size(); j++) {
-                    if (deck.getCards().get(j).TwoCardAreSame(card))
-                        deck.getCards().remove(j);
-                }
-            }
-        } else {
-            this.hero.remove(card);
-            for (int i=0;i<decks.size() ; i++){
-                Deck deck = decks.get(i);
-                if (deck.getHero().getId() == card.getId())
-                    deck.setHero(null);
-            }
-        }
-    }
-
-    public void removeItem(Item item){
-        cards.remove(item);
-        this.items.remove(item);
-        for(int i = 0; i < decks.size(); i++) {
-            if(decks.get(i).getItem().getId() == item.getId())
-                decks.get(i).setItem(null);
-        }
+        else if (card.getClass().equals(Spell.class))
+            this.spells.remove((Spell) card);
+        else if (card.getClass().equals(Hero.class))
+            this.heroes.remove(card);
+        else if (card.getClass().equals(Usable.class))
+            this.usables.remove(card);
+        for (Deck deck : decks)
+            deck.remove(card);
     }
 
     public List<Deck> getDecks() {
         return decks;
     }
 
-    public void setDecks(List<Deck> decks) {
-        this.decks = decks;
-    }
-
-    public void addDeck(Deck deck){
-        boolean found=true;
-        for (Deck deck1 : this.decks){
-            if (deck1.getName().equals(deck.getName())){
+    public void addDeck(Deck deck) {
+        boolean found = true;
+        for (Deck deck1 : this.decks) {
+            if (deck1.getName().equals(deck.getName())) {
                 found = false;
                 System.out.println("Deck name is not available");
             }
@@ -93,15 +60,15 @@ public class Collection {
         }
     }
 
-    public void deleteDeck(Deck deck){
+    public void deleteDeck(Deck deck) {
         boolean found = true;
-        for (Deck deck1: this.decks){
-            if (deck1.getName().equals(deck.getName())){
+        for (Deck deck1 : this.decks) {
+            if (deck1.getName().equals(deck.getName())) {
                 this.decks.remove(deck1);
                 found = false;
             }
         }
-        if (found){
+        if (found) {
             System.out.println("Deck isn't exist");
         }
     }
@@ -114,48 +81,51 @@ public class Collection {
         this.mainDeck = mainDeck;
     }
 
-    public void setCards(List<Card> cards) {
-        this.cards = cards;
-    }
-
     public List<Card> getCards() {
+        List<Card> cards = new ArrayList<>();
+        cards.addAll(heroes);
+        cards.addAll(minions);
+        cards.addAll(spells);
+        cards.addAll(usables);
         return cards;
-    }
-
-    public void setHero(List<Hero> hero) {
-        this.hero = hero;
     }
 
     public List<Spell> getSpells() {
         return spells;
     }
 
-    public List<Hero> getHero() {
-        return hero;
+    public List<Hero> getHeroes() {
+        return heroes;
     }
 
     public List<Minion> getMinions() {
         return minions;
     }
 
-    public void setSpells(List<Spell> spells) {
-        this.spells = spells;
+    public List<Usable> getUsables() {
+        return usables;
     }
 
-    public void setMinions(List<Minion> minions) {
-        this.minions = minions;
-    }
-
-    public List<Item> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Item> items) {
-        this.items = items;
-    }
-
-    public Deck searchDeck(String name){
+    public Deck searchDeck(String name) {
         // error mode should handled
+        return null;
+    }
+
+    public boolean hasLessThanThreeItems() {
+        return this.usables.size() < 3;
+    }
+
+    public boolean hasThisCard(Card card) {
+        for (Card card1 : getCards())
+            if (card1.getId() == card.getId())
+                return true;
+        return false;
+    }
+
+    public Card getCardByCollectionID(int id) {
+        for (Card card : getCards())
+            if (card.getCollectionID() == id)
+                return card;
         return null;
     }
 }
