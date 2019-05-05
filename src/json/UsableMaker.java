@@ -6,6 +6,8 @@ import models.card.Effect;
 import models.card.TargetType;
 import models.card.buffs.Disarm;
 import models.card.buffs.IncreaseMana;
+import models.card.buffs.WeaknessAP;
+import models.card.buffs.WeaknessHP;
 import models.card.effects.EffectName;
 import models.card.effects.GiveEffect;
 import models.card.target_enums.*;
@@ -47,7 +49,13 @@ public class UsableMaker {
 
 
         // ---------- 4 ----------
-
+        effects = new ArrayList<>();
+        effects.add(new WeaknessAP(Integer.MAX_VALUE, 2));
+        targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.RANGED_OR_HYBRID,
+                CellType.NONE, HeroOrMinion.HERO, OppOrAlly.OPP, ChooseType.SELECTED_OPP);
+        usable = new Usable("Pare Simorgh", 3500, targetType, effects,
+                ApplyType.ON_ATTACKER, "Attack Hybrid or Ranged Opp hero 2 units.");
+        saveToFile(usable);
 
         // ---------- 5 ----------
 
