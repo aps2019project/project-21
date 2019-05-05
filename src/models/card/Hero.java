@@ -70,4 +70,8 @@ public class Hero extends Attacker {
                 return hero;
         return null;
     }
+
+    public boolean hasAttackMode() {
+        return getAttackMode() != null;
+    }
 }

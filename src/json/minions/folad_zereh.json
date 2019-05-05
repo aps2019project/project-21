@@ -1,0 +1,197 @@
+{
+  "@type": "models.card.Minion",
+  "@val": {
+    "isCombo": false,
+    "maxHp": 1,
+    "maxAp": 1,
+    "hp": 1,
+    "ap": 1,
+    "specialPower": {
+      "applyType": "ON_ATTACKER",
+      "targetType": {
+        "randomOrNot": "NOT_RANDOM",
+        "targetAttackerRange": "ALL_THREE",
+        "cellType": "SINGLE_CELL",
+        "heroOrMinion": "BOTH",
+        "oppOrAlly": "ALLY",
+        "chooseType": "HIMSELF"
+      },
+      "effects": [
+        {
+          "@type": "models.card.buffs.Holy",
+          "@val": {
+            "duration": 2147483647,
+            "buffMode": "GOOD",
+            "cell": null,
+            "attacker": null,
+            "player": null,
+            "match": null,
+            "activationType": "PASSIVE"
+          }
+        },
+        {
+          "@type": "models.card.buffs.Holy",
+          "@val": {
+            "duration": 2147483647,
+            "buffMode": "GOOD",
+            "cell": null,
+            "attacker": null,
+            "player": null,
+            "match": null,
+            "activationType": "PASSIVE"
+          }
+        },
+        {
+          "@type": "models.card.buffs.Holy",
+          "@val": {
+            "duration": 2147483647,
+            "buffMode": "GOOD",
+            "cell": null,
+            "attacker": null,
+            "player": null,
+            "match": null,
+            "activationType": "PASSIVE"
+          }
+        },
+        {
+          "@type": "models.card.buffs.Holy",
+          "@val": {
+            "duration": 2147483647,
+            "buffMode": "GOOD",
+            "cell": null,
+            "attacker": null,
+            "player": null,
+            "match": null,
+            "activationType": "PASSIVE"
+          }
+        },
+        {
+          "@type": "models.card.buffs.Holy",
+          "@val": {
+            "duration": 2147483647,
+            "buffMode": "GOOD",
+            "cell": null,
+            "attacker": null,
+            "player": null,
+            "match": null,
+            "activationType": "PASSIVE"
+          }
+        },
+        {
+          "@type": "models.card.buffs.Holy",
+          "@val": {
+            "duration": 2147483647,
+            "buffMode": "GOOD",
+            "cell": null,
+            "attacker": null,
+            "player": null,
+            "match": null,
+            "activationType": "PASSIVE"
+          }
+        },
+        {
+          "@type": "models.card.buffs.Holy",
+          "@val": {
+            "duration": 2147483647,
+            "buffMode": "GOOD",
+            "cell": null,
+            "attacker": null,
+            "player": null,
+            "match": null,
+            "activationType": "PASSIVE"
+          }
+        },
+        {
+          "@type": "models.card.buffs.Holy",
+          "@val": {
+            "duration": 2147483647,
+            "buffMode": "GOOD",
+            "cell": null,
+            "attacker": null,
+            "player": null,
+            "match": null,
+            "activationType": "PASSIVE"
+          }
+        },
+        {
+          "@type": "models.card.buffs.Holy",
+          "@val": {
+            "duration": 2147483647,
+            "buffMode": "GOOD",
+            "cell": null,
+            "attacker": null,
+            "player": null,
+            "match": null,
+            "activationType": "PASSIVE"
+          }
+        },
+        {
+          "@type": "models.card.buffs.Holy",
+          "@val": {
+            "duration": 2147483647,
+            "buffMode": "GOOD",
+            "cell": null,
+            "attacker": null,
+            "player": null,
+            "match": null,
+            "activationType": "PASSIVE"
+          }
+        },
+        {
+          "@type": "models.card.buffs.Holy",
+          "@val": {
+            "duration": 2147483647,
+            "buffMode": "GOOD",
+            "cell": null,
+            "attacker": null,
+            "player": null,
+            "match": null,
+            "activationType": "PASSIVE"
+          }
+        },
+        {
+          "@type": "models.card.buffs.Holy",
+          "@val": {
+            "duration": 2147483647,
+            "buffMode": "GOOD",
+            "cell": null,
+            "attacker": null,
+            "player": null,
+            "match": null,
+            "activationType": "PASSIVE"
+          }
+        }
+      ],
+      "desc": "Having 12 continuous holy buffs.",
+      "name": "Folad_Zereh's_Spell",
+      "id": 183,
+      "collectionID": 0,
+      "cardIDInGame": null,
+      "price": 0,
+      "manaCost": 0,
+      "currentCell": null
+    },
+    "appliedEffects": [],
+    "attackRange": -1,
+    "attackMode": "MELEE",
+    "canMove": false,
+    "canAttack": false,
+    "isDisarmed": false,
+    "isStunned": false,
+    "hasHolyBuff": false,
+    "name": "Folad_Zereh",
+    "id": 184,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 650,
+    "manaCost": 3,
+    "currentCell": {
+      "x": 0,
+      "y": 0,
+      "effects": [],
+      "collectable": null,
+      "flag": null,
+      "currentAttacker": null
+    }
+  }
+}

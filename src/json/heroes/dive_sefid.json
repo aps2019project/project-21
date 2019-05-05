@@ -33,7 +33,7 @@
         }
       ],
       "desc": "Casts one power buff with 4 ap increase on himself forever",
-      "name": "Dive Sefid's Spell",
+      "name": "Dive_Sefid's_Spell",
       "id": 100,
       "collectionID": 0,
       "cardIDInGame": null,
@@ -49,7 +49,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
-    "name": "Dive Sefid",
+    "name": "Dive_Sefid",
     "id": 101,
     "collectionID": 0,
     "cardIDInGame": null,

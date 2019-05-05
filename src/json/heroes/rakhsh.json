@@ -31,7 +31,7 @@
         }
       ],
       "desc": "Stuns one opponent attacker for one turn.",
-      "name": "Rakhsh's Spell",
+      "name": "Rakhsh's_Spell",
       "id": 109,
       "collectionID": 0,
       "cardIDInGame": null,

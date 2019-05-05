@@ -108,10 +108,12 @@ public class Deck {
         if (card == null)
             return;
         cards.remove(card);
-        if (hero.getId() == card.getId())
-            hero = null;
-        if (usable.getId() == card.getId())
-            usable = null;
+        if (hasHero())
+            if (hero.getId() == card.getId())
+                hero = null;
+        if (hasUsable())
+            if (usable.getId() == card.getId())
+                usable = null;
     }
 
     public List<Card> getAllCards() { //  except collectables

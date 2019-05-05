@@ -4,14 +4,13 @@ import models.card.*;
 import models.card.buffs.*;
 import models.card.target_enums.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static json.CardMaker.saveToFile;
 
 public class MinionMaker {
-    public static void main(String[] args) throws IOException {
+    public static void main() {
         // ---------- 1 ----------
         Minion minion = new Minion("Kamandare Fars", 300, 2, 6,
                 4, 7, AttackMode.RANGED, null);

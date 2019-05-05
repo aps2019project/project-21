@@ -14,7 +14,7 @@ public class MainMenu extends Menu {
     }
 
     public void main() {
-        if (showMenu){
+        if (showMenu) {
             showMenu();
             showMenu = false;
         }
@@ -46,6 +46,9 @@ public class MainMenu extends Menu {
                 break;
             case EXIT:
                 exit();
+                break;
+            case INVALID:
+                invalidCommand();
                 break;
         }
     }

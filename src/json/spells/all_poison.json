@@ -25,8 +25,8 @@
       }
     ],
     "desc": "Poison on all opps for 1 turn.",
-    "name": "All Poison",
-    "id": 110,
+    "name": "All_Poison",
+    "id": 203,
     "collectionID": 0,
     "cardIDInGame": null,
     "price": 1500,

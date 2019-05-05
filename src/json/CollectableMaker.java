@@ -8,14 +8,13 @@ import models.card.effects.IncreaseAP;
 import models.card.effects.IncreaseHP;
 import models.card.target_enums.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static json.CardMaker.saveToFile;
 
 public class CollectableMaker {
-    public static void main(String[] args) throws IOException {
+    public static void main() {
         // ---------- 1 ----------
         List<Effect> effects = new ArrayList<>();
         effects.add(new IncreaseHP(6));

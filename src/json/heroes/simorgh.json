@@ -31,7 +31,7 @@
         }
       ],
       "desc": "Stuns all opp attackers for one turn.",
-      "name": "Simorgh's Spell",
+      "name": "Simorgh's_Spell",
       "id": 103,
       "collectionID": 0,
       "cardIDInGame": null,

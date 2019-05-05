@@ -30,7 +30,7 @@
         }
       ],
       "desc": "Gives 4 damages to all opponent attackers in the same row as selected hero.",
-      "name": "Arash's Spell",
+      "name": "Arash's_Spell",
       "id": 118,
       "collectionID": 0,
       "cardIDInGame": null,

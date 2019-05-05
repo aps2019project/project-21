@@ -27,8 +27,8 @@
       }
     ],
     "desc": "Increase AP 2 units for all allys.",
-    "name": "All PowerHP",
-    "id": 114,
+    "name": "All_PowerHP",
+    "id": 207,
     "collectionID": 0,
     "cardIDInGame": null,
     "price": 2000,

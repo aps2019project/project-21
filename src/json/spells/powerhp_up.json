@@ -27,8 +27,8 @@
       }
     ],
     "desc": "Increase AP 6 units.",
-    "name": "PowerHP Up",
-    "id": 113,
+    "name": "PowerHP_Up",
+    "id": 206,
     "collectionID": 0,
     "cardIDInGame": null,
     "price": 2500,

@@ -24,8 +24,8 @@
       "chooseType": "NONE"
     },
     "desc": "Increase AP of a random ranged_or_hybrid ally 2 units.",
-    "name": "Tire Doshakh",
-    "id": 101,
+    "name": "Tire_Doshakh",
+    "id": 218,
     "collectionID": 0,
     "cardIDInGame": null,
     "price": 0,

@@ -31,7 +31,7 @@
         }
       ],
       "desc": "Disarms a selected attacker.",
-      "name": "Ezhdehaye Haftsar's Spell",
+      "name": "Ezhdehaye_Haftsar's_Spell",
       "id": 106,
       "collectionID": 0,
       "cardIDInGame": null,
@@ -47,7 +47,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
-    "name": "Ezhdehaye Haftsar",
+    "name": "Ezhdehaye_Haftsar",
     "id": 107,
     "collectionID": 0,
     "cardIDInGame": null,

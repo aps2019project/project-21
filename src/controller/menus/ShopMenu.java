@@ -2,6 +2,7 @@ package controller.menus;
 
 import controller.request.ShopMenuRequest;
 import models.Item.Item;
+import models.Item.Usable;
 import models.Player;
 import models.card.Card;
 import view.ErrorMode;
@@ -70,6 +71,9 @@ public class ShopMenu extends Menu {
             case EXIT:
                 exit();
                 break;
+            case INVALID:
+                invalidCommand();
+                break;
         }
     }
 
@@ -107,7 +111,7 @@ public class ShopMenu extends Menu {
             view.printError(ErrorMode.NOT_ENOUGH_MONEY);
             return;
         }
-        if (!Player.getCurrentPlayer().hasLessThanThreeItems()) {
+        if (card.getClass().equals(Usable.class) && !Player.getCurrentPlayer().hasLessThanThreeItems()) {
             view.printError(ErrorMode.HAS_THREE_ITEMS);
             return;
         }

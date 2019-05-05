@@ -31,7 +31,7 @@
         }
       ],
       "desc": "Gives a selected cell holy buff for 3 turns.",
-      "name": "Kaveh's Spell",
+      "name": "Kaveh's_Spell",
       "id": 115,
       "collectionID": 0,
       "cardIDInGame": null,

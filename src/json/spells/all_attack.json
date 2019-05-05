@@ -27,8 +27,8 @@
       }
     ],
     "desc": "Attack all opps in a column 6 units.",
-    "name": "All Attack",
-    "id": 115,
+    "name": "All_Attack",
+    "id": 208,
     "collectionID": 0,
     "cardIDInGame": null,
     "price": 1500,

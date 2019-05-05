@@ -4,12 +4,12 @@
     "applyType": null,
     "effects": [
       {
-        "@type": "models.card.effects.GiveEffect",
+        "@type": "models.card.buffs.WeaknessAP",
         "@val": {
-          "duration": 12,
-          "num": 0,
-          "value": 0,
-          "effectName": "HOLY",
+          "value": 2,
+          "initialAP": 0,
+          "duration": 2147483647,
+          "buffMode": "EVIL",
           "cell": null,
           "attacker": null,
           "player": null,
@@ -20,18 +20,18 @@
     ],
     "targetType": {
       "randomOrNot": "NOT_RANDOM",
-      "targetAttackerRange": "ALL_THREE",
+      "targetAttackerRange": "RANGED_OR_HYBRID",
       "cellType": "NONE",
       "heroOrMinion": "HERO",
-      "oppOrAlly": "ALLY",
-      "chooseType": "NONE"
+      "oppOrAlly": "OPP",
+      "chooseType": "SELECTED_OPP"
     },
-    "desc": "Gives ally hero 12 holu buffs.",
-    "name": "Namoose_Separ",
-    "id": 214,
+    "desc": "Attack Hybrid or Ranged Opp hero 2 units.",
+    "name": "Pare_Simorgh",
+    "id": 216,
     "collectionID": 0,
     "cardIDInGame": null,
-    "price": 4000,
+    "price": 3500,
     "manaCost": 0,
     "currentCell": null
   }

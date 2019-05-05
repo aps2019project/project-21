@@ -12,7 +12,7 @@ public enum ErrorMode {
     CARD_IS_ALREADY_IN_DECK(""),
     CARD_IS_NOT_IN_DECK(""),
     HERO_IS_NOT_IN_DECK(""),
-    DECK_IS_NOT_VALID(""),
+    DECK_IS_NOT_VALID("deck is not valid."),
     INVALID_TARGET(""),
     CAN_NOT_ATTACK(""),
     UNAVAILABLE_OPPONENT(""),
@@ -39,6 +39,10 @@ public enum ErrorMode {
     DECK_HAS_ITEM("deck already has a item. you cannot add more items to it."),
     DECK_IS_TOTALLY_VALID("deck is valid. good for you!"),
     DECK_CANNOT_BE_MAIN("deck is not complete. and cannot be chosen as main deck."),
+    LOGIN_SUCCESSFUL("login successful."),
+    ADDED_SUCCESSFULLY("added successfully"),
+    HERO_IS_USED_IN_A_DECK("this hero is already in a deck"),
+    DELETED_SUCCESSFULLY("deleted successfully."),
     INVALID_COMMAND("invalid command");
 
 

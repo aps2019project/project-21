@@ -60,6 +60,8 @@ public class Collection {
         for (Deck deck : copy)
             if (deck.getName().equals(deckName))
                 decks.remove(deck);
+        if (mainDeck.getName().equals(deckName))
+            mainDeck = null;
     }
 
     public Deck getMainDeck() {
@@ -133,5 +135,18 @@ public class Collection {
 
     public boolean hasMainDeck() {
         return mainDeck != null;
+    }
+
+    public boolean isThisHeroInADeck(Hero hero) {
+        if (hero == null)
+            return false;
+        for (Deck deck : decks) {
+            if (deck == null)
+                continue;
+            if (deck.hasHero())
+                if (deck.getHero().getCollectionID() == hero.getCollectionID())
+                    return true;
+        }
+        return false;
     }
 }

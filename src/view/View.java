@@ -40,7 +40,7 @@ public class View {
         Arrays.sort(players, Comparator.comparingInt(Player::getWins));
 
         for (int i = 0; i < players.length; i++) {
-            System.out.print(i + 1 + "- ");
+            System.out.print((i + 1) + "- ");
             showUser(players[i]);
         }
     }
@@ -49,16 +49,23 @@ public class View {
 
     }
 
-    private void printItem(Item item) {
-        System.out.println("Name : " + item.getName() +
+    private void printItem(Item item, String sellOrBuy, boolean showCollectionID) {
+        if (showCollectionID)
+            System.out.print(" collectionID : " + item.getCollectionID());
+        System.out.print(" - Name : " + item.getName() +
                 " - Desc : " +
-                item.getDesc() +
-                " - Sell cost : " +
-                item.getPrice());
+                item.getDesc());
+        if (sellOrBuy != null)
+            System.out.println(" - " + sellOrBuy + " cost : " +
+                    item.getPrice());
+        else
+            System.out.println();
     }
 
-    private void printMinion(Minion minion) {
-        System.out.println("Type : Minion" +
+    private void printMinion(Minion minion, String sellOrBuy, boolean showCollectionID) {
+        if (showCollectionID)
+            System.out.print(" collectionID : " + minion.getCollectionID());
+        System.out.print(" - Type : Minion" +
                 " - Name : " +
                 minion.getName() +
                 " - Class : " +
@@ -69,36 +76,51 @@ public class View {
                 minion.getHP() +
                 " - MP : " +
                 minion.getManaCost() +
-                " - Special power : " +
-                minion.getSpecialPower().getDesc() +
-                " - Sell cost : " +
-                minion.getPrice());
+                " - Special power : ");
+        if (minion.hasSpecialPower())
+            System.out.print(minion.getSpecialPower().getDesc());
+        if (sellOrBuy != null)
+            System.out.println(" - " + sellOrBuy + " cost : " +
+                    minion.getPrice());
+        else
+            System.out.println();
     }
 
-    private void printSpell(Spell spell) {
-        System.out.println("Type: Spell" +
+    private void printSpell(Spell spell, String sellOrBuy, boolean showCollectionID) {
+        if (showCollectionID)
+            System.out.print(" collectionID : " + spell.getCollectionID());
+        System.out.print(" - Type: Spell" +
                 " - Name: " +
                 spell.getName() +
                 " - MP: " +
                 spell.getManaCost() +
                 " - Description: " +
-                spell.getDesc() +
-                " - Sell cost: " +
-                spell.getPrice());
+                spell.getDesc());
+        if (sellOrBuy != null)
+            System.out.println(" - " + sellOrBuy + "  cost: " +
+                    spell.getPrice());
+        else
+            System.out.println();
     }
 
-    private void printHero(Hero hero) {
-        System.out.println("Name: " + hero.getName() +
+    private void printHero(Hero hero, String sellOrBuy, boolean showCollectionID) {
+        if (showCollectionID)
+            System.out.print(" collectionID : " + hero.getCollectionID());
+        System.out.print(" - Name: " + hero.getName() +
                 " - AP: " +
                 hero.getAP() +
                 " - HP: " +
                 hero.getHP() +
-                " - Class: " +
-                hero.getAttackMode() +
-                " - Special power: " +
-                hero.getSpecialPower().getName() +
-                " - Sell cost: " +
-                hero.getPrice());
+                " - Class: ");
+        System.out.print(hero.getAttackMode());
+        System.out.print(" - Special power: ");
+        if (hero.hasSpecialPower())
+            System.out.print(hero.getSpecialPower().getName());
+        if (sellOrBuy != null)
+            System.out.println(" - " + sellOrBuy + " cost : " +
+                    hero.getPrice());
+        else
+            System.out.println();
     }
 
     public void showMenu(String menuName) {
@@ -184,24 +206,24 @@ public class View {
     public void showDeck(Deck deck) {
         if (deck == null)
             return;
-        System.out.print("Heroes:\n");
+        System.out.print("\tHeroes:\n");
         if (deck.hasHero()) {
             System.out.print("\t\t1 : ");
-            printHero(deck.getHero());
+            printHero(deck.getHero(), null, true);
         }
-        System.out.print("Items:\n");
+        System.out.print("\tItems:\n");
         if (deck.hasUsable()) {
             System.out.print("\t\t1 : ");
-            printItem(deck.getUsable());
+            printItem(deck.getUsable(), null, true);
         }
-        System.out.println("Cards:\n");
+        System.out.print("\tCards:\n");
         for (int i = 0; i < deck.getCards().size(); i++) {
             Card card = deck.getCards().get(i);
-            System.out.print(i + 1 + " : ");
+            System.out.print("\t\t" + (i + 1) + " : ");
             if (card.getClass().equals(Minion.class))
-                printMinion((Minion) card);
+                printMinion((Minion) card, null, true);
             else if (card.getClass().equals(Spell.class))
-                printSpell((Spell) card);
+                printSpell((Spell) card, null, true);
         }
     }
 
@@ -224,25 +246,27 @@ public class View {
     }
 
     public void showCollection(Collection collection) {
-        System.out.println("Heroes:\n");
+        System.out.println("Heroes:");
         for (int i = 0; i < collection.getHeroes().size(); i++) {
             System.out.print("\t\t" + (i + 1) + " - ");
-            printHero(collection.getHeroes().get(i));
+            printHero(collection.getHeroes().get(i), "sell", true);
         }
-        System.out.println("Items:\n");
+        System.out.println("Items:");
         for (int i = 0; i < collection.getUsables().size(); i++) {
             System.out.print("\t\t" + (i + 1) + " - ");
-            printItem(collection.getUsables().get(i));
+            printItem(collection.getUsables().get(i), "sell", true);
         }
-        System.out.println("Cards :\n");
-        int i = 0;
-        for (; i < collection.getSpells().size(); i++) {
-            System.out.print("\t\t" + (i + 1) + " - ");
-            printSpell(collection.getSpells().get(i));
+        System.out.println("Cards :");
+        int counter = 1;
+        for (int i = 0; i < collection.getSpells().size(); i++) {
+            System.out.print("\t\t" + counter + " - ");
+            printSpell(collection.getSpells().get(i), "sell", true);
+            counter++;
         }
-        for (; i < collection.getMinions().size() + collection.getSpells().size(); i++) {
-            System.out.print("\t\t" + (i + 1) + " - ");
-            printMinion(collection.getMinions().get(i));
+        for (int i = 0; i < collection.getMinions().size(); i++) {
+            System.out.print("\t\t" + counter + " - ");
+            printMinion(collection.getMinions().get(i), "sell", true);
+            counter++;
         }
     }
 
@@ -321,22 +345,22 @@ public class View {
     public void showShop() {
         System.out.println("Heroes :");
         for (int i = 0; i < Hero.getHeroes().size(); i++) {
-            System.out.print("\t\t" + i + 1 + " : ");
-            printHero(Hero.getHeroes().get(i));
+            System.out.print("\t\t" + (i + 1) + " : ");
+            printHero(Hero.getHeroes().get(i), "buy", false);
         }
         System.out.println("Items :");
         for (int i = 0; i < Usable.getUsables().size(); i++) {
-            System.out.print("\t\t" + i + 1 + " : ");
-            printItem(Usable.getUsables().get(i));
+            System.out.print("\t\t" + (i + 1) + " : ");
+            printItem(Usable.getUsables().get(i), "buy", false);
         }
         System.out.println("Cards :");
         for (int i = 0; i < Spell.getSpells().size(); i++) {
-            System.out.print("\t\t" + i + 1 + " : ");
-            printSpell(Spell.getSpells().get(i));
+            System.out.print("\t\t" + (i + 1) + " : ");
+            printSpell(Spell.getSpells().get(i), "buy", false);
         }
         for (int i = 0; i < Minion.getMinions().size(); i++) {
-            System.out.print("\t\t" + i + 1 + Spell.getSpells().size() + " : ");
-            printMinion(Minion.getMinions().get(i));
+            System.out.print("\t\t" + (i + 1 + Spell.getSpells().size()) + " : ");
+            printMinion(Minion.getMinions().get(i), "buy", false);
         }
     }
 

@@ -26,7 +26,7 @@
             "attacker": null,
             "player": null,
             "match": null,
-            "activationType": "NONE"
+            "activationType": "ON_ATTACK"
           }
         },
         {
@@ -43,8 +43,8 @@
         }
       ],
       "desc": "Disarm 1 turn and poison 4 turns.",
-      "name": "Jasose Torani's Spell",
-      "id": 120,
+      "name": "Jasose_Torani's_Spell",
+      "id": 149,
       "collectionID": 0,
       "cardIDInGame": null,
       "price": 0,
@@ -59,8 +59,8 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
-    "name": "Jasose Torani",
-    "id": 121,
+    "name": "Jasose_Torani",
+    "id": 150,
     "collectionID": 0,
     "cardIDInGame": null,
     "price": 700,

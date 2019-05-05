@@ -21,7 +21,7 @@ public class Card {
     }
 
     public Card(String name, int price, int manaCost) {
-        this.name = name;
+        this.name = name.replaceAll("\\s+", "_");
         this.price = price;
         this.manaCost = manaCost;
     }

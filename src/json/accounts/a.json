@@ -1,0 +1,1843 @@
+{
+  "@type": "models.Player",
+  "@val": {
+    "username": "a",
+    "password": "a",
+    "collection": {
+      "decks": [
+        {
+          "name": "deck1",
+          "cards": [
+            {
+              "@type": "models.card.Spell",
+              "@val": {
+                "applyType": "ON_ATTACKER",
+                "targetType": {
+                  "randomOrNot": "NOT_RANDOM",
+                  "targetAttackerRange": "ALL_THREE",
+                  "cellType": "SINGLE_CELL",
+                  "heroOrMinion": "MINION",
+                  "oppOrAlly": "ALLY",
+                  "chooseType": "HIMSELF"
+                },
+                "effects": [
+                  {
+                    "@type": "models.card.buffs.WeaknessHP",
+                    "@val": {
+                      "value": 6,
+                      "initialHP": 0,
+                      "duration": 2147483647,
+                      "buffMode": "EVIL",
+                      "cell": null,
+                      "attacker": null,
+                      "player": null,
+                      "match": null,
+                      "activationType": "NONE"
+                    }
+                  },
+                  {
+                    "@type": "models.card.buffs.PowerAP",
+                    "@val": {
+                      "value": 8,
+                      "initialAP": 0,
+                      "duration": 2147483647,
+                      "buffMode": "GOOD",
+                      "cell": null,
+                      "attacker": null,
+                      "player": null,
+                      "match": null,
+                      "activationType": "NONE"
+                    }
+                  }
+                ],
+                "desc": "Decrease HP 6 units but increase AP 8 units of an ally minion.",
+                "name": "Sacrifice",
+                "id": 117,
+                "collectionID": 183,
+                "cardIDInGame": null,
+                "price": 1600,
+                "manaCost": 2,
+                "currentCell": null
+              }
+            },
+            {
+              "@type": "models.card.Spell",
+              "@val": {
+                "applyType": "ON_ATTACKER",
+                "targetType": {
+                  "randomOrNot": "NOT_RANDOM",
+                  "targetAttackerRange": "ALL_THREE",
+                  "cellType": "IN_COLUMN",
+                  "heroOrMinion": "BOTH",
+                  "oppOrAlly": "OPP",
+                  "chooseType": "SELECTED_CELL"
+                },
+                "effects": [
+                  {
+                    "@type": "models.card.buffs.WeaknessHP",
+                    "@val": {
+                      "value": 6,
+                      "initialHP": 0,
+                      "duration": 2147483647,
+                      "buffMode": "EVIL",
+                      "cell": null,
+                      "attacker": null,
+                      "player": null,
+                      "match": null,
+                      "activationType": "NONE"
+                    }
+                  }
+                ],
+                "desc": "Attack all opps in a column 6 units.",
+                "name": "All_Attack",
+                "id": 115,
+                "collectionID": 184,
+                "cardIDInGame": null,
+                "price": 1500,
+                "manaCost": 4,
+                "currentCell": null
+              }
+            },
+            {
+              "@type": "models.card.Spell",
+              "@val": {
+                "applyType": "ON_ATTACKER",
+                "targetType": {
+                  "randomOrNot": "NOT_RANDOM",
+                  "targetAttackerRange": "ALL_THREE",
+                  "cellType": "SINGLE_CELL",
+                  "heroOrMinion": "BOTH",
+                  "oppOrAlly": "BOTH",
+                  "chooseType": "SELECTED_CELL"
+                },
+                "effects": [
+                  {
+                    "@type": "models.card.effects.PositiveDispel",
+                    "@val": {
+                      "cell": null,
+                      "attacker": null,
+                      "player": null,
+                      "match": null,
+                      "activationType": "NONE"
+                    }
+                  }
+                ],
+                "desc": "Dispel an opp or an ally.",
+                "name": "Dispel",
+                "id": 111,
+                "collectionID": 185,
+                "cardIDInGame": null,
+                "price": 2100,
+                "manaCost": 0,
+                "currentCell": null
+              }
+            },
+            {
+              "@type": "models.card.Spell",
+              "@val": {
+                "applyType": "ON_ATTACKER",
+                "targetType": {
+                  "randomOrNot": "RANDOM",
+                  "targetAttackerRange": "ALL_THREE",
+                  "cellType": "SQUARE_3_3",
+                  "heroOrMinion": "MINION",
+                  "oppOrAlly": "OPP",
+                  "chooseType": "SELECTED_CELL"
+                },
+                "effects": [
+                  {
+                    "@type": "models.card.buffs.WeaknessHP",
+                    "@val": {
+                      "value": 2147483647,
+                      "initialHP": 0,
+                      "duration": 2147483647,
+                      "buffMode": "EVIL",
+                      "cell": null,
+                      "attacker": null,
+                      "player": null,
+                      "match": null,
+                      "activationType": "NONE"
+                    }
+                  }
+                ],
+                "desc": "Kill a minion around king randomly chosen.",
+                "name": "Kings_Guard",
+                "id": 118,
+                "collectionID": 186,
+                "cardIDInGame": null,
+                "price": 1750,
+                "manaCost": 9,
+                "currentCell": null
+              }
+            },
+            {
+              "@type": "models.card.Spell",
+              "@val": {
+                "applyType": "ON_ATTACKER",
+                "targetType": {
+                  "randomOrNot": "NOT_RANDOM",
+                  "targetAttackerRange": "ALL_THREE",
+                  "cellType": "SINGLE_CELL",
+                  "heroOrMinion": "BOTH",
+                  "oppOrAlly": "ALLY",
+                  "chooseType": "SELECTED_ALLY"
+                },
+                "effects": [
+                  {
+                    "@type": "models.card.effects.IncreaseAP",
+                    "@val": {
+                      "changeValue": 2,
+                      "cell": null,
+                      "attacker": null,
+                      "player": null,
+                      "match": null,
+                      "activationType": "NONE"
+                    }
+                  }
+                ],
+                "desc": "Increase AP 2 units.",
+                "name": "Empower",
+                "id": 102,
+                "collectionID": 187,
+                "cardIDInGame": null,
+                "price": 250,
+                "manaCost": 1,
+                "currentCell": null
+              }
+            },
+            {
+              "@type": "models.card.Spell",
+              "@val": {
+                "applyType": "ON_ATTACKER",
+                "targetType": {
+                  "randomOrNot": "NOT_RANDOM",
+                  "targetAttackerRange": "ALL_THREE",
+                  "cellType": "SQUARE_2_2",
+                  "heroOrMinion": "BOTH",
+                  "oppOrAlly": "BOTH",
+                  "chooseType": "SELECTED_CELL"
+                },
+                "effects": [
+                  {
+                    "@type": "models.card.effects.PositiveDispel",
+                    "@val": {
+                      "cell": null,
+                      "attacker": null,
+                      "player": null,
+                      "match": null,
+                      "activationType": "NONE"
+                    }
+                  }
+                ],
+                "desc": "Dispel A 2*2 Square.",
+                "name": "Area_Dispel",
+                "id": 101,
+                "collectionID": 188,
+                "cardIDInGame": null,
+                "price": 1500,
+                "manaCost": 2,
+                "currentCell": null
+              }
+            },
+            {
+              "@type": "models.card.Minion",
+              "@val": {
+                "isCombo": false,
+                "maxHp": 0,
+                "maxAp": 2,
+                "hp": 0,
+                "ap": 2,
+                "specialPower": {
+                  "applyType": "ON_ATTACKER",
+                  "targetType": {
+                    "randomOrNot": "NOT_RANDOM",
+                    "targetAttackerRange": "ALL_THREE",
+                    "cellType": "SINGLE_CELL",
+                    "heroOrMinion": "BOTH",
+                    "oppOrAlly": "ALLY",
+                    "chooseType": "HIMSELF"
+                  },
+                  "effects": [
+                    {
+                      "@type": "models.card.buffs.PowerHP",
+                      "@val": {
+                        "value": 10,
+                        "initialHP": 0,
+                        "duration": 2147483647,
+                        "buffMode": "GOOD",
+                        "cell": null,
+                        "attacker": null,
+                        "player": null,
+                        "match": null,
+                        "activationType": "PASSIVE"
+                      }
+                    }
+                  ],
+                  "desc": "Increase HP 10 units.",
+                  "name": "Oghab's_Spell",
+                  "id": 131,
+                  "collectionID": 0,
+                  "cardIDInGame": null,
+                  "price": 0,
+                  "manaCost": 0,
+                  "currentCell": null
+                },
+                "appliedEffects": [],
+                "attackRange": 3,
+                "attackMode": "RANGED",
+                "canMove": false,
+                "canAttack": false,
+                "isDisarmed": false,
+                "isStunned": false,
+                "hasHolyBuff": false,
+                "name": "Oghab",
+                "id": 132,
+                "collectionID": 166,
+                "cardIDInGame": null,
+                "price": 200,
+                "manaCost": 2,
+                "currentCell": {
+                  "x": 0,
+                  "y": 0,
+                  "effects": [],
+                  "collectable": null,
+                  "flag": null,
+                  "currentAttacker": null
+                }
+              }
+            },
+            {
+              "@type": "models.card.Minion",
+              "@val": {
+                "isCombo": false,
+                "maxHp": 0,
+                "maxAp": 2,
+                "hp": 0,
+                "ap": 2,
+                "specialPower": {
+                  "applyType": "ON_ATTACKER",
+                  "targetType": {
+                    "randomOrNot": "NOT_RANDOM",
+                    "targetAttackerRange": "ALL_THREE",
+                    "cellType": "SINGLE_CELL",
+                    "heroOrMinion": "BOTH",
+                    "oppOrAlly": "ALLY",
+                    "chooseType": "HIMSELF"
+                  },
+                  "effects": [
+                    {
+                      "@type": "models.card.buffs.PowerHP",
+                      "@val": {
+                        "value": 10,
+                        "initialHP": 0,
+                        "duration": 2147483647,
+                        "buffMode": "GOOD",
+                        "cell": null,
+                        "attacker": null,
+                        "player": null,
+                        "match": null,
+                        "activationType": "PASSIVE"
+                      }
+                    }
+                  ],
+                  "desc": "Increase HP 10 units.",
+                  "name": "Oghab's_Spell",
+                  "id": 131,
+                  "collectionID": 0,
+                  "cardIDInGame": null,
+                  "price": 0,
+                  "manaCost": 0,
+                  "currentCell": null
+                },
+                "appliedEffects": [],
+                "attackRange": 3,
+                "attackMode": "RANGED",
+                "canMove": false,
+                "canAttack": false,
+                "isDisarmed": false,
+                "isStunned": false,
+                "hasHolyBuff": false,
+                "name": "Oghab",
+                "id": 132,
+                "collectionID": 168,
+                "cardIDInGame": null,
+                "price": 200,
+                "manaCost": 2,
+                "currentCell": {
+                  "x": 0,
+                  "y": 0,
+                  "effects": [],
+                  "collectable": null,
+                  "flag": null,
+                  "currentAttacker": null
+                }
+              }
+            },
+            {
+              "@type": "models.card.Minion",
+              "@val": {
+                "isCombo": false,
+                "maxHp": 24,
+                "maxAp": 6,
+                "hp": 24,
+                "ap": 6,
+                "specialPower": {
+                  "applyType": "ON_ATTACKER",
+                  "targetType": {
+                    "randomOrNot": "NOT_RANDOM",
+                    "targetAttackerRange": "ALL_THREE",
+                    "cellType": "SINGLE_CELL",
+                    "heroOrMinion": "BOTH",
+                    "oppOrAlly": "OPP",
+                    "chooseType": "SELECTED_OPP"
+                  },
+                  "effects": [
+                    {
+                      "@type": "models.card.buffs.WeaknessHP",
+                      "@val": {
+                        "value": 5,
+                        "initialHP": 0,
+                        "duration": 2147483647,
+                        "buffMode": "EVIL",
+                        "cell": null,
+                        "attacker": null,
+                        "player": null,
+                        "match": null,
+                        "activationType": "ON_ATTACK"
+                      }
+                    }
+                  ],
+                  "desc": "Attack 5 more for each time it attacked that card.",
+                  "name": "Pahlavane_Fars's_Spell",
+                  "id": 109,
+                  "collectionID": 0,
+                  "cardIDInGame": null,
+                  "price": 0,
+                  "manaCost": 0,
+                  "currentCell": null
+                },
+                "appliedEffects": [],
+                "attackRange": -1,
+                "attackMode": "MELEE",
+                "canMove": false,
+                "canAttack": false,
+                "isDisarmed": false,
+                "isStunned": false,
+                "hasHolyBuff": false,
+                "name": "Pahlavane_Fars",
+                "id": 110,
+                "collectionID": 167,
+                "cardIDInGame": null,
+                "price": 600,
+                "manaCost": 9,
+                "currentCell": {
+                  "x": 0,
+                  "y": 0,
+                  "effects": [],
+                  "collectable": null,
+                  "flag": null,
+                  "currentAttacker": null
+                }
+              }
+            },
+            {
+              "@type": "models.card.Minion",
+              "@val": {
+                "isCombo": true,
+                "maxHp": 10,
+                "maxAp": 4,
+                "hp": 10,
+                "ap": 4,
+                "specialPower": null,
+                "appliedEffects": [],
+                "attackRange": -1,
+                "attackMode": "MELEE",
+                "canMove": false,
+                "canAttack": false,
+                "isDisarmed": false,
+                "isStunned": false,
+                "hasHolyBuff": false,
+                "name": "Shah_Ghol",
+                "id": 160,
+                "collectionID": 169,
+                "cardIDInGame": null,
+                "price": 600,
+                "manaCost": 5,
+                "currentCell": {
+                  "x": 0,
+                  "y": 0,
+                  "effects": [],
+                  "collectable": null,
+                  "flag": null,
+                  "currentAttacker": null
+                }
+              }
+            },
+            {
+              "@type": "models.card.Minion",
+              "@val": {
+                "isCombo": true,
+                "maxHp": 6,
+                "maxAp": 10,
+                "hp": 6,
+                "ap": 10,
+                "specialPower": null,
+                "appliedEffects": [],
+                "attackRange": -1,
+                "attackMode": "MELEE",
+                "canMove": false,
+                "canAttack": false,
+                "isDisarmed": false,
+                "isStunned": false,
+                "hasHolyBuff": false,
+                "name": "Shahzade_Torani",
+                "id": 125,
+                "collectionID": 170,
+                "cardIDInGame": null,
+                "price": 800,
+                "manaCost": 6,
+                "currentCell": {
+                  "x": 0,
+                  "y": 0,
+                  "effects": [],
+                  "collectable": null,
+                  "flag": null,
+                  "currentAttacker": null
+                }
+              }
+            },
+            {
+              "@type": "models.card.Minion",
+              "@val": {
+                "isCombo": false,
+                "maxHp": 6,
+                "maxAp": 6,
+                "hp": 6,
+                "ap": 6,
+                "specialPower": {
+                  "applyType": "ON_ATTACKER",
+                  "targetType": {
+                    "randomOrNot": "NOT_RANDOM",
+                    "targetAttackerRange": "ALL_THREE",
+                    "cellType": "SINGLE_CELL",
+                    "heroOrMinion": "BOTH",
+                    "oppOrAlly": "OPP",
+                    "chooseType": "SELECTED_OPP"
+                  },
+                  "effects": [
+                    {
+                      "@type": "models.card.buffs.Disarm",
+                      "@val": {
+                        "duration": 1,
+                        "buffMode": "EVIL",
+                        "cell": null,
+                        "attacker": null,
+                        "player": null,
+                        "match": null,
+                        "activationType": "ON_ATTACK"
+                      }
+                    },
+                    {
+                      "@type": "models.card.buffs.Poison",
+                      "@val": {
+                        "duration": 4,
+                        "buffMode": "EVIL",
+                        "cell": null,
+                        "attacker": null,
+                        "player": null,
+                        "match": null,
+                        "activationType": "NONE"
+                      }
+                    }
+                  ],
+                  "desc": "Disarm 1 turn and poison 4 turns.",
+                  "name": "Jasose_Torani's_Spell",
+                  "id": 120,
+                  "collectionID": 0,
+                  "cardIDInGame": null,
+                  "price": 0,
+                  "manaCost": 0,
+                  "currentCell": null
+                },
+                "appliedEffects": [],
+                "attackRange": -1,
+                "attackMode": "MELEE",
+                "canMove": false,
+                "canAttack": false,
+                "isDisarmed": false,
+                "isStunned": false,
+                "hasHolyBuff": false,
+                "name": "Jasose_Torani",
+                "id": 121,
+                "collectionID": 171,
+                "cardIDInGame": null,
+                "price": 700,
+                "manaCost": 4,
+                "currentCell": {
+                  "x": 0,
+                  "y": 0,
+                  "effects": [],
+                  "collectable": null,
+                  "flag": null,
+                  "currentAttacker": null
+                }
+              }
+            },
+            {
+              "@type": "models.card.Minion",
+              "@val": {
+                "isCombo": false,
+                "maxHp": 6,
+                "maxAp": 4,
+                "hp": 6,
+                "ap": 4,
+                "specialPower": null,
+                "appliedEffects": [],
+                "attackRange": 7,
+                "attackMode": "RANGED",
+                "canMove": false,
+                "canAttack": false,
+                "isDisarmed": false,
+                "isStunned": false,
+                "hasHolyBuff": false,
+                "name": "Kamandare_Fars",
+                "id": 100,
+                "collectionID": 172,
+                "cardIDInGame": null,
+                "price": 300,
+                "manaCost": 2,
+                "currentCell": {
+                  "x": 0,
+                  "y": 0,
+                  "effects": [],
+                  "collectable": null,
+                  "flag": null,
+                  "currentAttacker": null
+                }
+              }
+            },
+            {
+              "@type": "models.card.Minion",
+              "@val": {
+                "isCombo": false,
+                "maxHp": 3,
+                "maxAp": 4,
+                "hp": 3,
+                "ap": 4,
+                "specialPower": {
+                  "applyType": "ON_ATTACKER",
+                  "targetType": {
+                    "randomOrNot": "NOT_RANDOM",
+                    "targetAttackerRange": "ALL_THREE",
+                    "cellType": "SQUARE_3_3",
+                    "heroOrMinion": "MINION",
+                    "oppOrAlly": "OPP",
+                    "chooseType": "HIMSELF"
+                  },
+                  "effects": [
+                    {
+                      "@type": "models.card.buffs.Stun",
+                      "@val": {
+                        "duration": 1,
+                        "buffMode": "EVIL",
+                        "cell": null,
+                        "attacker": null,
+                        "player": null,
+                        "match": null,
+                        "activationType": "ON_SPAWN"
+                      }
+                    }
+                  ],
+                  "desc": "Stun 8 neighbourhood minions.",
+                  "name": "Nane_Sarma's_Spell",
+                  "id": 151,
+                  "collectionID": 0,
+                  "cardIDInGame": null,
+                  "price": 0,
+                  "manaCost": 0,
+                  "currentCell": null
+                },
+                "appliedEffects": [],
+                "attackRange": 5,
+                "attackMode": "RANGED",
+                "canMove": false,
+                "canAttack": false,
+                "isDisarmed": false,
+                "isStunned": false,
+                "hasHolyBuff": false,
+                "name": "Nane_Sarma",
+                "id": 152,
+                "collectionID": 173,
+                "cardIDInGame": null,
+                "price": 500,
+                "manaCost": 3,
+                "currentCell": {
+                  "x": 0,
+                  "y": 0,
+                  "effects": [],
+                  "collectable": null,
+                  "flag": null,
+                  "currentAttacker": null
+                }
+              }
+            },
+            {
+              "@type": "models.card.Minion",
+              "@val": {
+                "isCombo": false,
+                "maxHp": 5,
+                "maxAp": 3,
+                "hp": 5,
+                "ap": 3,
+                "specialPower": null,
+                "appliedEffects": [],
+                "attackRange": 3,
+                "attackMode": "HYBRID",
+                "canMove": false,
+                "canAttack": false,
+                "isDisarmed": false,
+                "isStunned": false,
+                "hasHolyBuff": false,
+                "name": "Neyzedare_Fars",
+                "id": 105,
+                "collectionID": 174,
+                "cardIDInGame": null,
+                "price": 500,
+                "manaCost": 1,
+                "currentCell": {
+                  "x": 0,
+                  "y": 0,
+                  "effects": [],
+                  "collectable": null,
+                  "flag": null,
+                  "currentAttacker": null
+                }
+              }
+            },
+            {
+              "@type": "models.card.Minion",
+              "@val": {
+                "isCombo": false,
+                "maxHp": 30,
+                "maxAp": 8,
+                "hp": 30,
+                "ap": 8,
+                "specialPower": null,
+                "appliedEffects": [],
+                "attackRange": 2,
+                "attackMode": "HYBRID",
+                "canMove": false,
+                "canAttack": false,
+                "isDisarmed": false,
+                "isStunned": false,
+                "hasHolyBuff": false,
+                "name": "Ghole_Bozorg",
+                "id": 178,
+                "collectionID": 175,
+                "cardIDInGame": null,
+                "price": 600,
+                "manaCost": 9,
+                "currentCell": {
+                  "x": 0,
+                  "y": 0,
+                  "effects": [],
+                  "collectable": null,
+                  "flag": null,
+                  "currentAttacker": null
+                }
+              }
+            },
+            {
+              "@type": "models.card.Minion",
+              "@val": {
+                "isCombo": false,
+                "maxHp": 0,
+                "maxAp": 2,
+                "hp": 0,
+                "ap": 2,
+                "specialPower": {
+                  "applyType": "ON_ATTACKER",
+                  "targetType": {
+                    "randomOrNot": "NOT_RANDOM",
+                    "targetAttackerRange": "ALL_THREE",
+                    "cellType": "SINGLE_CELL",
+                    "heroOrMinion": "BOTH",
+                    "oppOrAlly": "ALLY",
+                    "chooseType": "HIMSELF"
+                  },
+                  "effects": [
+                    {
+                      "@type": "models.card.buffs.PowerHP",
+                      "@val": {
+                        "value": 10,
+                        "initialHP": 0,
+                        "duration": 2147483647,
+                        "buffMode": "GOOD",
+                        "cell": null,
+                        "attacker": null,
+                        "player": null,
+                        "match": null,
+                        "activationType": "PASSIVE"
+                      }
+                    }
+                  ],
+                  "desc": "Increase HP 10 units.",
+                  "name": "Oghab's_Spell",
+                  "id": 160,
+                  "collectionID": 0,
+                  "cardIDInGame": null,
+                  "price": 0,
+                  "manaCost": 0,
+                  "currentCell": null
+                },
+                "appliedEffects": [],
+                "attackRange": 3,
+                "attackMode": "RANGED",
+                "canMove": false,
+                "canAttack": false,
+                "isDisarmed": false,
+                "isStunned": false,
+                "hasHolyBuff": false,
+                "name": "Oghab",
+                "id": 161,
+                "collectionID": 182,
+                "cardIDInGame": null,
+                "price": 200,
+                "manaCost": 2,
+                "currentCell": {
+                  "x": 0,
+                  "y": 0,
+                  "effects": [],
+                  "collectable": null,
+                  "flag": null,
+                  "currentAttacker": null
+                }
+              }
+            },
+            {
+              "@type": "models.card.Minion",
+              "@val": {
+                "isCombo": false,
+                "maxHp": 0,
+                "maxAp": 2,
+                "hp": 0,
+                "ap": 2,
+                "specialPower": {
+                  "applyType": "ON_ATTACKER",
+                  "targetType": {
+                    "randomOrNot": "NOT_RANDOM",
+                    "targetAttackerRange": "ALL_THREE",
+                    "cellType": "SINGLE_CELL",
+                    "heroOrMinion": "BOTH",
+                    "oppOrAlly": "ALLY",
+                    "chooseType": "HIMSELF"
+                  },
+                  "effects": [
+                    {
+                      "@type": "models.card.buffs.PowerHP",
+                      "@val": {
+                        "value": 10,
+                        "initialHP": 0,
+                        "duration": 2147483647,
+                        "buffMode": "GOOD",
+                        "cell": null,
+                        "attacker": null,
+                        "player": null,
+                        "match": null,
+                        "activationType": "PASSIVE"
+                      }
+                    }
+                  ],
+                  "desc": "Increase HP 10 units.",
+                  "name": "Oghab's_Spell",
+                  "id": 160,
+                  "collectionID": 0,
+                  "cardIDInGame": null,
+                  "price": 0,
+                  "manaCost": 0,
+                  "currentCell": null
+                },
+                "appliedEffects": [],
+                "attackRange": 3,
+                "attackMode": "RANGED",
+                "canMove": false,
+                "canAttack": false,
+                "isDisarmed": false,
+                "isStunned": false,
+                "hasHolyBuff": false,
+                "name": "Oghab",
+                "id": 161,
+                "collectionID": 181,
+                "cardIDInGame": null,
+                "price": 200,
+                "manaCost": 2,
+                "currentCell": {
+                  "x": 0,
+                  "y": 0,
+                  "effects": [],
+                  "collectable": null,
+                  "flag": null,
+                  "currentAttacker": null
+                }
+              }
+            },
+            {
+              "@type": "models.card.Minion",
+              "@val": {
+                "isCombo": false,
+                "maxHp": 0,
+                "maxAp": 2,
+                "hp": 0,
+                "ap": 2,
+                "specialPower": {
+                  "applyType": "ON_ATTACKER",
+                  "targetType": {
+                    "randomOrNot": "NOT_RANDOM",
+                    "targetAttackerRange": "ALL_THREE",
+                    "cellType": "SINGLE_CELL",
+                    "heroOrMinion": "BOTH",
+                    "oppOrAlly": "ALLY",
+                    "chooseType": "HIMSELF"
+                  },
+                  "effects": [
+                    {
+                      "@type": "models.card.buffs.PowerHP",
+                      "@val": {
+                        "value": 10,
+                        "initialHP": 0,
+                        "duration": 2147483647,
+                        "buffMode": "GOOD",
+                        "cell": null,
+                        "attacker": null,
+                        "player": null,
+                        "match": null,
+                        "activationType": "PASSIVE"
+                      }
+                    }
+                  ],
+                  "desc": "Increase HP 10 units.",
+                  "name": "Oghab's_Spell",
+                  "id": 160,
+                  "collectionID": 0,
+                  "cardIDInGame": null,
+                  "price": 0,
+                  "manaCost": 0,
+                  "currentCell": null
+                },
+                "appliedEffects": [],
+                "attackRange": 3,
+                "attackMode": "RANGED",
+                "canMove": false,
+                "canAttack": false,
+                "isDisarmed": false,
+                "isStunned": false,
+                "hasHolyBuff": false,
+                "name": "Oghab",
+                "id": 161,
+                "collectionID": 180,
+                "cardIDInGame": null,
+                "price": 200,
+                "manaCost": 2,
+                "currentCell": {
+                  "x": 0,
+                  "y": 0,
+                  "effects": [],
+                  "collectable": null,
+                  "flag": null,
+                  "currentAttacker": null
+                }
+              }
+            },
+            {
+              "@type": "models.card.Minion",
+              "@val": {
+                "isCombo": false,
+                "maxHp": 24,
+                "maxAp": 6,
+                "hp": 24,
+                "ap": 6,
+                "specialPower": {
+                  "applyType": "ON_ATTACKER",
+                  "targetType": {
+                    "randomOrNot": "NOT_RANDOM",
+                    "targetAttackerRange": "ALL_THREE",
+                    "cellType": "SINGLE_CELL",
+                    "heroOrMinion": "BOTH",
+                    "oppOrAlly": "OPP",
+                    "chooseType": "SELECTED_OPP"
+                  },
+                  "effects": [
+                    {
+                      "@type": "models.card.buffs.WeaknessHP",
+                      "@val": {
+                        "value": 5,
+                        "initialHP": 0,
+                        "duration": 2147483647,
+                        "buffMode": "EVIL",
+                        "cell": null,
+                        "attacker": null,
+                        "player": null,
+                        "match": null,
+                        "activationType": "ON_ATTACK"
+                      }
+                    }
+                  ],
+                  "desc": "Attack 5 more for each time it attacked that card.",
+                  "name": "Pahlavane_Fars's_Spell",
+                  "id": 138,
+                  "collectionID": 0,
+                  "cardIDInGame": null,
+                  "price": 0,
+                  "manaCost": 0,
+                  "currentCell": null
+                },
+                "appliedEffects": [],
+                "attackRange": -1,
+                "attackMode": "MELEE",
+                "canMove": false,
+                "canAttack": false,
+                "isDisarmed": false,
+                "isStunned": false,
+                "hasHolyBuff": false,
+                "name": "Pahlavane_Fars",
+                "id": 139,
+                "collectionID": 179,
+                "cardIDInGame": null,
+                "price": 600,
+                "manaCost": 9,
+                "currentCell": {
+                  "x": 0,
+                  "y": 0,
+                  "effects": [],
+                  "collectable": null,
+                  "flag": null,
+                  "currentAttacker": null
+                }
+              }
+            }
+          ],
+          "usable": {
+            "applyType": null,
+            "effects": [
+              {
+                "@type": "models.card.effects.GiveEffect",
+                "@val": {
+                  "duration": 12,
+                  "num": 0,
+                  "value": 0,
+                  "effectName": "HOLY",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "NONE"
+                }
+              }
+            ],
+            "targetType": {
+              "randomOrNot": "NOT_RANDOM",
+              "targetAttackerRange": "ALL_THREE",
+              "cellType": "NONE",
+              "heroOrMinion": "HERO",
+              "oppOrAlly": "ALLY",
+              "chooseType": "NONE"
+            },
+            "desc": "Gives ally hero 12 holu buffs.",
+            "name": "Namoose_Separ",
+            "id": 101,
+            "collectionID": 189,
+            "cardIDInGame": null,
+            "price": 4000,
+            "manaCost": 0,
+            "currentCell": null
+          },
+          "hero": {
+            "cooldown": 2,
+            "maxHp": 30,
+            "maxAp": 2,
+            "hp": 30,
+            "ap": 2,
+            "specialPower": {
+              "applyType": "ON_ATTACKER",
+              "targetType": {
+                "randomOrNot": "NOT_RANDOM",
+                "targetAttackerRange": "ALL_THREE",
+                "cellType": "IN_ROW",
+                "heroOrMinion": "BOTH",
+                "oppOrAlly": "BOTH",
+                "chooseType": "SELECTED_ALLY"
+              },
+              "effects": [
+                {
+                  "@type": "models.card.effects.DecreaseHP",
+                  "@val": {
+                    "value": 4,
+                    "cell": null,
+                    "attacker": null,
+                    "player": null,
+                    "match": null,
+                    "activationType": "NONE"
+                  }
+                }
+              ],
+              "desc": "Gives 4 damages to all opponent attackers in the same row as selected hero.",
+              "name": "Arash's_Spell",
+              "id": 118,
+              "collectionID": 0,
+              "cardIDInGame": null,
+              "price": 0,
+              "manaCost": 2,
+              "currentCell": null
+            },
+            "appliedEffects": [],
+            "attackRange": 6,
+            "attackMode": "RANGED",
+            "canMove": true,
+            "canAttack": true,
+            "isDisarmed": false,
+            "isStunned": false,
+            "hasHolyBuff": false,
+            "name": "Arash",
+            "id": 119,
+            "collectionID": 165,
+            "cardIDInGame": null,
+            "price": 10000,
+            "manaCost": -1,
+            "currentCell": {
+              "x": 0,
+              "y": 0,
+              "effects": [],
+              "collectable": null,
+              "flag": null,
+              "currentAttacker": null
+            }
+          },
+          "collectables": []
+        },
+        {
+          "name": "deck2",
+          "cards": [],
+          "usable": null,
+          "hero": null,
+          "collectables": []
+        },
+        {
+          "name": "deck3",
+          "cards": [],
+          "usable": null,
+          "hero": null,
+          "collectables": []
+        }
+      ],
+      "mainDeck": "@root.collection.decks.0",
+      "heroes": [
+        {
+          "cooldown": 2,
+          "maxHp": 50,
+          "maxAp": 4,
+          "hp": 50,
+          "ap": 4,
+          "specialPower": {
+            "applyType": "ON_ATTACKER",
+            "targetType": {
+              "randomOrNot": "NOT_RANDOM",
+              "targetAttackerRange": "ALL_THREE",
+              "cellType": "SINGLE_CELL",
+              "heroOrMinion": "HERO",
+              "oppOrAlly": "ALLY",
+              "chooseType": "HIMSELF"
+            },
+            "effects": [
+              {
+                "@type": "models.card.buffs.PowerAP",
+                "@val": {
+                  "value": 4,
+                  "initialAP": 0,
+                  "duration": 2147483647,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "NONE"
+                }
+              }
+            ],
+            "desc": "Casts one power buff with 4 ap increase on himself forever",
+            "name": "Dive_Sefid's_Spell",
+            "id": 100,
+            "collectionID": 0,
+            "cardIDInGame": null,
+            "price": 0,
+            "manaCost": 1,
+            "currentCell": null
+          },
+          "appliedEffects": [],
+          "attackRange": 1,
+          "attackMode": "MELEE",
+          "canMove": true,
+          "canAttack": true,
+          "isDisarmed": false,
+          "isStunned": false,
+          "hasHolyBuff": false,
+          "name": "Dive_Sefid",
+          "id": 101,
+          "collectionID": 162,
+          "cardIDInGame": null,
+          "price": 8000,
+          "manaCost": -1,
+          "currentCell": {
+            "x": 0,
+            "y": 0,
+            "effects": [],
+            "collectable": null,
+            "flag": null,
+            "currentAttacker": null
+          }
+        },
+        {
+          "cooldown": 0,
+          "maxHp": 55,
+          "maxAp": 7,
+          "hp": 55,
+          "ap": 7,
+          "specialPower": null,
+          "appliedEffects": [],
+          "attackRange": 4,
+          "attackMode": "HYBRID",
+          "canMove": true,
+          "canAttack": true,
+          "isDisarmed": false,
+          "isStunned": false,
+          "hasHolyBuff": false,
+          "name": "Rostam",
+          "id": 127,
+          "collectionID": 163,
+          "cardIDInGame": null,
+          "price": 8000,
+          "manaCost": -1,
+          "currentCell": {
+            "x": 0,
+            "y": 0,
+            "effects": [],
+            "collectable": null,
+            "flag": null,
+            "currentAttacker": null
+          }
+        },
+        {
+          "cooldown": 2,
+          "maxHp": 40,
+          "maxAp": 3,
+          "hp": 40,
+          "ap": 3,
+          "specialPower": {
+            "applyType": "ON_ATTACKER",
+            "targetType": {
+              "randomOrNot": "NOT_RANDOM",
+              "targetAttackerRange": "ALL_THREE",
+              "cellType": "NONE",
+              "heroOrMinion": "BOTH",
+              "oppOrAlly": "OPP",
+              "chooseType": "SELECTED_OPP"
+            },
+            "effects": [
+              {
+                "@type": "models.card.effects.GiveEffect",
+                "@val": {
+                  "duration": 0,
+                  "num": 0,
+                  "value": 0,
+                  "effectName": "POSITIVE_DISPEL",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "NONE"
+                }
+              }
+            ],
+            "desc": "Dispels an opponent attacker.",
+            "name": "Afsaneh's_Spell",
+            "id": 121,
+            "collectionID": 0,
+            "cardIDInGame": null,
+            "price": 0,
+            "manaCost": 1,
+            "currentCell": null
+          },
+          "appliedEffects": [],
+          "attackRange": 3,
+          "attackMode": "RANGED",
+          "canMove": true,
+          "canAttack": true,
+          "isDisarmed": false,
+          "isStunned": false,
+          "hasHolyBuff": false,
+          "name": "Afsaneh",
+          "id": 122,
+          "collectionID": 164,
+          "cardIDInGame": null,
+          "price": 11000,
+          "manaCost": -1,
+          "currentCell": {
+            "x": 0,
+            "y": 0,
+            "effects": [],
+            "collectable": null,
+            "flag": null,
+            "currentAttacker": null
+          }
+        },
+        "@root.collection.decks.0.hero"
+      ],
+      "minions": [
+        "@root.collection.decks.0.cards.6",
+        "@root.collection.decks.0.cards.8",
+        "@root.collection.decks.0.cards.7",
+        "@root.collection.decks.0.cards.9",
+        "@root.collection.decks.0.cards.10",
+        "@root.collection.decks.0.cards.11",
+        "@root.collection.decks.0.cards.12",
+        "@root.collection.decks.0.cards.13",
+        "@root.collection.decks.0.cards.14",
+        "@root.collection.decks.0.cards.15",
+        {
+          "isCombo": false,
+          "maxHp": 1,
+          "maxAp": 1,
+          "hp": 1,
+          "ap": 1,
+          "specialPower": {
+            "applyType": "ON_ATTACKER",
+            "targetType": {
+              "randomOrNot": "NOT_RANDOM",
+              "targetAttackerRange": "ALL_THREE",
+              "cellType": "SINGLE_CELL",
+              "heroOrMinion": "BOTH",
+              "oppOrAlly": "ALLY",
+              "chooseType": "HIMSELF"
+            },
+            "effects": [
+              {
+                "@type": "models.card.buffs.Holy",
+                "@val": {
+                  "duration": 2147483647,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "PASSIVE"
+                }
+              },
+              {
+                "@type": "models.card.buffs.Holy",
+                "@val": {
+                  "duration": 2147483647,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "PASSIVE"
+                }
+              },
+              {
+                "@type": "models.card.buffs.Holy",
+                "@val": {
+                  "duration": 2147483647,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "PASSIVE"
+                }
+              },
+              {
+                "@type": "models.card.buffs.Holy",
+                "@val": {
+                  "duration": 2147483647,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "PASSIVE"
+                }
+              },
+              {
+                "@type": "models.card.buffs.Holy",
+                "@val": {
+                  "duration": 2147483647,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "PASSIVE"
+                }
+              },
+              {
+                "@type": "models.card.buffs.Holy",
+                "@val": {
+                  "duration": 2147483647,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "PASSIVE"
+                }
+              },
+              {
+                "@type": "models.card.buffs.Holy",
+                "@val": {
+                  "duration": 2147483647,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "PASSIVE"
+                }
+              },
+              {
+                "@type": "models.card.buffs.Holy",
+                "@val": {
+                  "duration": 2147483647,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "PASSIVE"
+                }
+              },
+              {
+                "@type": "models.card.buffs.Holy",
+                "@val": {
+                  "duration": 2147483647,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "PASSIVE"
+                }
+              },
+              {
+                "@type": "models.card.buffs.Holy",
+                "@val": {
+                  "duration": 2147483647,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "PASSIVE"
+                }
+              },
+              {
+                "@type": "models.card.buffs.Holy",
+                "@val": {
+                  "duration": 2147483647,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "PASSIVE"
+                }
+              },
+              {
+                "@type": "models.card.buffs.Holy",
+                "@val": {
+                  "duration": 2147483647,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "PASSIVE"
+                }
+              }
+            ],
+            "desc": "Having 12 continuous holy buffs.",
+            "name": "Folad_Zereh's_Spell",
+            "id": 183,
+            "collectionID": 0,
+            "cardIDInGame": null,
+            "price": 0,
+            "manaCost": 0,
+            "currentCell": null
+          },
+          "appliedEffects": [],
+          "attackRange": -1,
+          "attackMode": "MELEE",
+          "canMove": false,
+          "canAttack": false,
+          "isDisarmed": false,
+          "isStunned": false,
+          "hasHolyBuff": false,
+          "name": "Folad_Zereh",
+          "id": 184,
+          "collectionID": 176,
+          "cardIDInGame": null,
+          "price": 650,
+          "manaCost": 3,
+          "currentCell": {
+            "x": 0,
+            "y": 0,
+            "effects": [],
+            "collectable": null,
+            "flag": null,
+            "currentAttacker": null
+          }
+        },
+        {
+          "isCombo": false,
+          "maxHp": 1,
+          "maxAp": 1,
+          "hp": 1,
+          "ap": 1,
+          "specialPower": {
+            "applyType": "ON_ATTACKER",
+            "targetType": {
+              "randomOrNot": "NOT_RANDOM",
+              "targetAttackerRange": "ALL_THREE",
+              "cellType": "SINGLE_CELL",
+              "heroOrMinion": "BOTH",
+              "oppOrAlly": "ALLY",
+              "chooseType": "HIMSELF"
+            },
+            "effects": [
+              {
+                "@type": "models.card.buffs.Holy",
+                "@val": {
+                  "duration": 2147483647,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "PASSIVE"
+                }
+              },
+              {
+                "@type": "models.card.buffs.Holy",
+                "@val": {
+                  "duration": 2147483647,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "PASSIVE"
+                }
+              },
+              {
+                "@type": "models.card.buffs.Holy",
+                "@val": {
+                  "duration": 2147483647,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "PASSIVE"
+                }
+              },
+              {
+                "@type": "models.card.buffs.Holy",
+                "@val": {
+                  "duration": 2147483647,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "PASSIVE"
+                }
+              },
+              {
+                "@type": "models.card.buffs.Holy",
+                "@val": {
+                  "duration": 2147483647,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "PASSIVE"
+                }
+              },
+              {
+                "@type": "models.card.buffs.Holy",
+                "@val": {
+                  "duration": 2147483647,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "PASSIVE"
+                }
+              },
+              {
+                "@type": "models.card.buffs.Holy",
+                "@val": {
+                  "duration": 2147483647,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "PASSIVE"
+                }
+              },
+              {
+                "@type": "models.card.buffs.Holy",
+                "@val": {
+                  "duration": 2147483647,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "PASSIVE"
+                }
+              },
+              {
+                "@type": "models.card.buffs.Holy",
+                "@val": {
+                  "duration": 2147483647,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "PASSIVE"
+                }
+              },
+              {
+                "@type": "models.card.buffs.Holy",
+                "@val": {
+                  "duration": 2147483647,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "PASSIVE"
+                }
+              },
+              {
+                "@type": "models.card.buffs.Holy",
+                "@val": {
+                  "duration": 2147483647,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "PASSIVE"
+                }
+              },
+              {
+                "@type": "models.card.buffs.Holy",
+                "@val": {
+                  "duration": 2147483647,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "PASSIVE"
+                }
+              }
+            ],
+            "desc": "Having 12 continuous holy buffs.",
+            "name": "Folad_Zereh's_Spell",
+            "id": 183,
+            "collectionID": 0,
+            "cardIDInGame": null,
+            "price": 0,
+            "manaCost": 0,
+            "currentCell": null
+          },
+          "appliedEffects": [],
+          "attackRange": -1,
+          "attackMode": "MELEE",
+          "canMove": false,
+          "canAttack": false,
+          "isDisarmed": false,
+          "isStunned": false,
+          "hasHolyBuff": false,
+          "name": "Folad_Zereh",
+          "id": 184,
+          "collectionID": 177,
+          "cardIDInGame": null,
+          "price": 650,
+          "manaCost": 3,
+          "currentCell": {
+            "x": 0,
+            "y": 0,
+            "effects": [],
+            "collectable": null,
+            "flag": null,
+            "currentAttacker": null
+          }
+        },
+        {
+          "isCombo": false,
+          "maxHp": 6,
+          "maxAp": 6,
+          "hp": 6,
+          "ap": 6,
+          "specialPower": {
+            "applyType": "ON_ATTACKER",
+            "targetType": {
+              "randomOrNot": "NOT_RANDOM",
+              "targetAttackerRange": "ALL_THREE",
+              "cellType": "SINGLE_CELL",
+              "heroOrMinion": "BOTH",
+              "oppOrAlly": "OPP",
+              "chooseType": "SELECTED_OPP"
+            },
+            "effects": [
+              {
+                "@type": "models.card.buffs.Disarm",
+                "@val": {
+                  "duration": 1,
+                  "buffMode": "EVIL",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "ON_ATTACK"
+                }
+              },
+              {
+                "@type": "models.card.buffs.Poison",
+                "@val": {
+                  "duration": 4,
+                  "buffMode": "EVIL",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "NONE"
+                }
+              }
+            ],
+            "desc": "Disarm 1 turn and poison 4 turns.",
+            "name": "Jasose_Torani's_Spell",
+            "id": 149,
+            "collectionID": 0,
+            "cardIDInGame": null,
+            "price": 0,
+            "manaCost": 0,
+            "currentCell": null
+          },
+          "appliedEffects": [],
+          "attackRange": -1,
+          "attackMode": "MELEE",
+          "canMove": false,
+          "canAttack": false,
+          "isDisarmed": false,
+          "isStunned": false,
+          "hasHolyBuff": false,
+          "name": "Jasose_Torani",
+          "id": 150,
+          "collectionID": 178,
+          "cardIDInGame": null,
+          "price": 700,
+          "manaCost": 4,
+          "currentCell": {
+            "x": 0,
+            "y": 0,
+            "effects": [],
+            "collectable": null,
+            "flag": null,
+            "currentAttacker": null
+          }
+        },
+        "@root.collection.decks.0.cards.19",
+        "@root.collection.decks.0.cards.18",
+        "@root.collection.decks.0.cards.17",
+        "@root.collection.decks.0.cards.16"
+      ],
+      "spells": [
+        "@root.collection.decks.0.cards.0",
+        "@root.collection.decks.0.cards.1",
+        "@root.collection.decks.0.cards.2",
+        "@root.collection.decks.0.cards.3",
+        "@root.collection.decks.0.cards.4",
+        "@root.collection.decks.0.cards.5"
+      ],
+      "usables": [
+        "@root.collection.decks.0.usable",
+        {
+          "applyType": null,
+          "effects": [
+            {
+              "@type": "models.card.buffs.IncreaseMana",
+              "@val": {
+                "value": 1,
+                "duration": 3,
+                "buffMode": "GOOD",
+                "cell": null,
+                "attacker": null,
+                "player": null,
+                "match": null,
+                "activationType": "NONE"
+              }
+            }
+          ],
+          "targetType": null,
+          "desc": "Increases Mana in first three turns",
+          "name": "Taje_Danaee",
+          "id": 100,
+          "collectionID": 190,
+          "cardIDInGame": null,
+          "price": 300,
+          "manaCost": 0,
+          "currentCell": null
+        },
+        {
+          "applyType": null,
+          "effects": [
+            {
+              "@type": "models.card.buffs.IncreaseMana",
+              "@val": {
+                "value": 1,
+                "duration": 3,
+                "buffMode": "GOOD",
+                "cell": null,
+                "attacker": null,
+                "player": null,
+                "match": null,
+                "activationType": "NONE"
+              }
+            }
+          ],
+          "targetType": null,
+          "desc": "Increases Mana in first three turns",
+          "name": "Taje_Danaee",
+          "id": 100,
+          "collectionID": 191,
+          "cardIDInGame": null,
+          "price": 300,
+          "manaCost": 0,
+          "currentCell": null
+        }
+      ]
+    },
+    "drake": 2147425147,
+    "matchHistory": [],
+    "wins": 0,
+    "cardCurrentID": 0
+  }
+}

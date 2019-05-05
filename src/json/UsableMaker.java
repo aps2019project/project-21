@@ -7,19 +7,17 @@ import models.card.TargetType;
 import models.card.buffs.Disarm;
 import models.card.buffs.IncreaseMana;
 import models.card.buffs.WeaknessAP;
-import models.card.buffs.WeaknessHP;
 import models.card.effects.EffectName;
 import models.card.effects.GiveEffect;
 import models.card.target_enums.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static json.CardMaker.saveToFile;
 
 public class UsableMaker {
-    public static void main(String[] args) throws IOException {
+    public static void main() {
         // ---------- 1 ----------
         List<Effect> effects = new ArrayList<>();
         effects.add(new IncreaseMana(3, 1));

@@ -7,12 +7,10 @@ import models.card.effects.EffectName;
 import models.card.effects.GiveEffect;
 import models.card.target_enums.*;
 
-import java.io.IOException;
-
 import static json.CardMaker.saveToFile;
 
 public class HeroMaker {
-    public static void main(String[] args) throws IOException {
+    public static void main() {
         // ---------- 1 ----------
         Effect effect = new PowerAP(Integer.MAX_VALUE, 4);
         TargetType targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,

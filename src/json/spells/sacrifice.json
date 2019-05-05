@@ -42,7 +42,7 @@
     ],
     "desc": "Decrease HP 6 units but increase AP 8 units of an ally minion.",
     "name": "Sacrifice",
-    "id": 117,
+    "id": 210,
     "collectionID": 0,
     "cardIDInGame": null,
     "price": 1600,

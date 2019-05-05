@@ -1,6 +1,7 @@
 package models;
 
 import json.CardMaker;
+import models.Item.Usable;
 import models.card.Card;
 import models.match.Match;
 import view.ErrorMode;
@@ -189,7 +190,7 @@ public class Player {
     public void buy(Card card) {
         if (card == null || drake < card.getPrice())
             return;
-        if (!hasLessThanThreeItems())
+        if (card.getClass().equals(Usable.class) && !hasLessThanThreeItems())
             return;
         drake -= card.getPrice();
         card = CardMaker.deepCopy(card, Card.class);

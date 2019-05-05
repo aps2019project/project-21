@@ -16,7 +16,11 @@ import java.util.List;
 
 public class CardMaker {
     public static void main(String[] args) throws IOException {
-        usableMaker();
+        HeroMaker.main();
+        MinionMaker.main();
+        SpellMaker.main();
+        UsableMaker.main();
+        CollectableMaker.main();
     }
 
     private static void usableMaker() throws IOException {

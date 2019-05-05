@@ -25,8 +25,8 @@
       }
     ],
     "desc": "Put flame on a 2*2 Square.",
-    "name": "Hell Fire",
-    "id": 105,
+    "name": "Hell_Fire",
+    "id": 198,
     "collectionID": 0,
     "cardIDInGame": null,
     "price": 600,

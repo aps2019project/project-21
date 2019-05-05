@@ -25,8 +25,8 @@
       }
     ],
     "desc": "Disarms an opp til the end.",
-    "name": "Total Disarm",
-    "id": 100,
+    "name": "Total_Disarm",
+    "id": 193,
     "collectionID": 0,
     "cardIDInGame": null,
     "price": 1000,

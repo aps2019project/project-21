@@ -2,7 +2,6 @@ package controller.menus;
 
 import controller.InputScanner;
 import controller.request.AccountMenuRequest;
-import json.CardMaker;
 import models.Player;
 import view.ErrorMode;
 import view.View;
@@ -63,6 +62,9 @@ public class AccountMenu extends Menu {
             case EXIT:
                 exit();
                 break;
+            case INVALID:
+                invalidCommand();
+                break;
         }
     }
 
@@ -77,6 +79,8 @@ public class AccountMenu extends Menu {
         boolean isLoginSuccessful = Player.login(username, password);
         if (!isLoginSuccessful)
             view.printError(ErrorMode.LOGIN_FAILED);
+        else
+            view.printError(ErrorMode.LOGIN_SUCCESSFUL);
     }
 
     private void createAccount() {

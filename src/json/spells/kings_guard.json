@@ -27,8 +27,8 @@
       }
     ],
     "desc": "Kill a minion around king randomly chosen.",
-    "name": "Kings Guard",
-    "id": 118,
+    "name": "Kings_Guard",
+    "id": 211,
     "collectionID": 0,
     "cardIDInGame": null,
     "price": 1750,

@@ -51,8 +51,8 @@
       }
     ],
     "desc": "Decrease HP 6 units but get 2 holy buffs for 2 turns.",
-    "name": "Health With Profit",
-    "id": 112,
+    "name": "Health_With_Profit",
+    "id": 205,
     "collectionID": 0,
     "cardIDInGame": null,
     "price": 2250,

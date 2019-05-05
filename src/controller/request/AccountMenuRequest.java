@@ -37,8 +37,7 @@ public class AccountMenuRequest extends Request {
         if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
             type = RequestType.CREATE_ACCOUNT;
-        } else
-            invalidCommand();
+        }
     }
 
     private void loginCheck() {
@@ -47,7 +46,7 @@ public class AccountMenuRequest extends Request {
         if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
             type = RequestType.LOGIN;
-        } else invalidCommand();
+        }
     }
 
     private void hesoyamCheck() {

@@ -80,6 +80,9 @@ public class CollectionMenu extends Menu {
             case EXIT:
                 exit();
                 break;
+            case INVALID:
+                invalidCommand();
+                break;
         }
     }
 
@@ -113,12 +116,12 @@ public class CollectionMenu extends Menu {
     }
 
     private void deleteDeck() {
-        String name = request.getCommandArguments().get(0);
-        if (!Player.getCurrentPlayer().getCollection().hasThis(name)) {
+        String deckName = request.getCommandArguments().get(0);
+        if (!Player.getCurrentPlayer().getCollection().hasThis(deckName)) {
             view.printError(ErrorMode.NO_SUCH_DECK);
             return;
         }
-        Player.getCurrentPlayer().deleteDeck(name);
+        Player.getCurrentPlayer().deleteDeck(deckName);
     }
 
     private void addCardToDeck() {
@@ -146,16 +149,22 @@ public class CollectionMenu extends Menu {
             view.printError(ErrorMode.DECK_HAS_ITEM);
             return;
         }
-        if (deck.isCardsFull()) {
+        if (deck.isFull()) {
             view.printError(ErrorMode.DECK_IS_FULL);
             return;
         }
+        if (card.getClass().equals(Hero.class)
+                && Player.getCurrentPlayer().getCollection().isThisHeroInADeck((Hero) card)) {
+            view.printError(ErrorMode.HERO_IS_USED_IN_A_DECK);
+            return;
+        }
         deck.addCard(card);
+        view.printError(ErrorMode.ADDED_SUCCESSFULLY);
     }
 
     private void removeCardFromDeck() {
         int collectionID = Integer.parseInt(request.getCommandArguments().get(0));
-        String deckName = request.getCommandArguments().get(0);
+        String deckName = request.getCommandArguments().get(1);
         Deck deck = Player.getCurrentPlayer().getCollection().getDeck(deckName);
         if (deck == null) {
             view.printError(ErrorMode.NO_SUCH_DECK);
@@ -167,6 +176,7 @@ public class CollectionMenu extends Menu {
             return;
         }
         deck.remove(card);
+        view.printError(ErrorMode.DELETED_SUCCESSFULLY);
     }
 
 
@@ -179,6 +189,8 @@ public class CollectionMenu extends Menu {
         }
         if (deck.isValid())
             view.printError(ErrorMode.DECK_IS_TOTALLY_VALID);
+        else
+            view.printError(ErrorMode.DECK_IS_NOT_VALID);
     }
 
     private void selectDeck() {

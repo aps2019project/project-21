@@ -1,8 +1,10 @@
 package json;
 
+import models.Collection;
 import models.Item.Collectable;
 import models.Item.Usable;
 import models.Player;
+import models.card.Card;
 import models.card.Hero;
 import models.card.Minion;
 import models.card.Spell;
@@ -21,8 +23,19 @@ public class Initializer {
             Collectable.addCollectable(initCollectables());
             Usable.addUsable(initUsables());
             Player.addPlayer(initPlayers());
+
+            resetCollectionIDs();
+
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    private static void resetCollectionIDs() {
+        for (Player player : Player.getPlayers()) {
+            Collection collection = player.getCollection();
+            for (Card card : collection.getCards())
+                card.setCollectionID();
         }
     }
 

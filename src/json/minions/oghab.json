@@ -28,13 +28,13 @@
             "attacker": null,
             "player": null,
             "match": null,
-            "activationType": "NONE"
+            "activationType": "PASSIVE"
           }
         }
       ],
       "desc": "Increase HP 10 units.",
-      "name": "Oghab's Spell",
-      "id": 131,
+      "name": "Oghab's_Spell",
+      "id": 160,
       "collectionID": 0,
       "cardIDInGame": null,
       "price": 0,
@@ -50,7 +50,7 @@
     "isStunned": false,
     "hasHolyBuff": false,
     "name": "Oghab",
-    "id": 132,
+    "id": 161,
     "collectionID": 0,
     "cardIDInGame": null,
     "price": 200,

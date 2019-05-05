@@ -27,8 +27,8 @@
       }
     ],
     "desc": "Attack opp's hero 8 units.",
-    "name": "Lightning Bolt",
-    "id": 106,
+    "name": "Lightning_Bolt",
+    "id": 199,
     "collectionID": 0,
     "cardIDInGame": null,
     "price": 1250,

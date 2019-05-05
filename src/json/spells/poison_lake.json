@@ -25,8 +25,8 @@
       }
     ],
     "desc": "Put poison on a 3*3 square.",
-    "name": "Poison Lake",
-    "id": 107,
+    "name": "Poison_Lake",
+    "id": 200,
     "collectionID": 0,
     "cardIDInGame": null,
     "price": 900,
