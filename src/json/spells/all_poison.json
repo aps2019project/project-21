@@ -24,7 +24,7 @@
         }
       }
     ],
-    "desc": "Poison on all opps for 1 round.",
+    "desc": "Poison on all opps for 1 turn.",
     "name": "All Poison",
     "id": 10,
     "collectionID": 0,

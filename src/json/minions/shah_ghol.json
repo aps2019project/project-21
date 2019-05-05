@@ -1,0 +1,33 @@
+{
+  "@type": "models.card.Minion",
+  "@val": {
+    "isCombo": true,
+    "maxHp": 10,
+    "maxAp": 4,
+    "hp": 10,
+    "ap": 4,
+    "specialPower": null,
+    "appliedEffects": [],
+    "attackRange": -1,
+    "attackMode": "MELEE",
+    "canMove": false,
+    "canAttack": false,
+    "isDisarmed": false,
+    "isStunned": false,
+    "hasHolyBuff": false,
+    "name": "Shah Ghol",
+    "id": 23,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 600,
+    "manaCost": 5,
+    "currentCell": {
+      "x": 0,
+      "y": 0,
+      "effects": [],
+      "collectable": null,
+      "flag": null,
+      "currentAttacker": null
+    }
+  }
+}

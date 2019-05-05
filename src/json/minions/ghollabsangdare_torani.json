@@ -1,0 +1,33 @@
+{
+  "@type": "models.card.Minion",
+  "@val": {
+    "isCombo": false,
+    "maxHp": 4,
+    "maxAp": 2,
+    "hp": 4,
+    "ap": 2,
+    "specialPower": null,
+    "appliedEffects": [],
+    "attackRange": 7,
+    "attackMode": "RANGED",
+    "canMove": false,
+    "canAttack": false,
+    "isDisarmed": false,
+    "isStunned": false,
+    "hasHolyBuff": false,
+    "name": "Ghollabsangdare Torani",
+    "id": 9,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 600,
+    "manaCost": 1,
+    "currentCell": {
+      "x": 0,
+      "y": 0,
+      "effects": [],
+      "collectable": null,
+      "flag": null,
+      "currentAttacker": null
+    }
+  }
+}

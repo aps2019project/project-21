@@ -7,7 +7,7 @@
     "hp": 50,
     "ap": 4,
     "specialPower": {
-      "applyOnCellOrAttacker": "ON_CELL",
+      "applyType": "ON_CELL",
       "targetType": {
         "randomOrNot": "NOT_RANDOM",
         "targetAttackerRange": "ALL_THREE",
@@ -18,15 +18,15 @@
       },
       "effects": [
         {
-          "@type": "models.card.buffs.Poison",
+          "@type": "models.card.buffs.Holy",
           "@val": {
-            "duration": 1,
-            "buffMode": "EVIL",
+            "duration": 3,
+            "buffMode": "GOOD",
             "cell": null,
             "attacker": null,
             "player": null,
             "match": null,
-            "activationType": "ON_ATTACK"
+            "activationType": "NONE"
           }
         }
       ],

@@ -7,7 +7,7 @@
     "hp": 50,
     "ap": 2,
     "specialPower": {
-      "applyOnCellOrAttacker": "ON_ATTACKER",
+      "applyType": "ON_ATTACKER",
       "targetType": {
         "randomOrNot": "NOT_RANDOM",
         "targetAttackerRange": "ALL_THREE",
@@ -20,7 +20,7 @@
         {
           "@type": "models.card.buffs.Poison",
           "@val": {
-            "duration": 1,
+            "duration": 3,
             "buffMode": "EVIL",
             "cell": null,
             "attacker": null,

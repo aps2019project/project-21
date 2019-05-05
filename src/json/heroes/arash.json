@@ -7,7 +7,7 @@
     "hp": 30,
     "ap": 2,
     "specialPower": {
-      "applyOnCellOrAttacker": "ON_ATTACKER",
+      "applyType": "ON_ATTACKER",
       "targetType": {
         "randomOrNot": "NOT_RANDOM",
         "targetAttackerRange": "ALL_THREE",

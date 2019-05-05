@@ -111,7 +111,7 @@ public class SpellMaker {
         targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
                 CellType.SINGLE_CELL, HeroOrMinion.BOTH, OppOrAlly.ALLY, ChooseType.HIMSELF);
         spell = new Spell("Madness", 650, 0, targetType, effects,
-                ApplyType.ON_ATTACKER, "Increase AP 4 units for 3 rounds, but disarm for 1 round.");
+                ApplyType.ON_ATTACKER, "Increase AP 4 units for 3 turns, but disarm for 1 turn.");
         saveToFile(spell);
 
 
@@ -121,7 +121,7 @@ public class SpellMaker {
         targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
                 CellType.NONE, HeroOrMinion.BOTH, OppOrAlly.OPP, ChooseType.NONE);
         spell = new Spell("All Disarm", 2000, 9, targetType, effects,
-                ApplyType.ON_ATTACKER, "Disarm all opps for 1 round.");
+                ApplyType.ON_ATTACKER, "Disarm all opps for 1 turn.");
         saveToFile(spell);
 
 
@@ -131,7 +131,7 @@ public class SpellMaker {
         targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
                 CellType.NONE, HeroOrMinion.BOTH, OppOrAlly.OPP, ChooseType.NONE);
         spell = new Spell("All Poison", 1500, 8, targetType, effects,
-                ApplyType.ON_ATTACKER, "Poison on all opps for 1 round.");
+                ApplyType.ON_ATTACKER, "Poison on all opps for 1 turn.");
         saveToFile(spell);
 
 
@@ -153,7 +153,7 @@ public class SpellMaker {
         targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
                 CellType.SINGLE_CELL, HeroOrMinion.BOTH, OppOrAlly.ALLY, ChooseType.HIMSELF);
         spell = new Spell("Health With Profit", 2250, 0, targetType, effects,
-                ApplyType.ON_ATTACKER, "Decrease HP 6 units but get 2 holy buffs for 2 rounds.");
+                ApplyType.ON_ATTACKER, "Decrease HP 6 units but get 2 holy buffs for 2 turns.");
         saveToFile(spell);
 
 

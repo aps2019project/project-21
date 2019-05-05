@@ -1,0 +1,33 @@
+{
+  "@type": "models.card.Minion",
+  "@val": {
+    "isCombo": false,
+    "maxHp": 10,
+    "maxAp": 6,
+    "hp": 10,
+    "ap": 6,
+    "specialPower": null,
+    "appliedEffects": [],
+    "attackRange": -1,
+    "attackMode": "MELEE",
+    "canMove": false,
+    "canAttack": false,
+    "isDisarmed": false,
+    "isStunned": false,
+    "hasHolyBuff": false,
+    "name": "Asb Savare Fars",
+    "id": 4,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 200,
+    "manaCost": 4,
+    "currentCell": {
+      "x": 0,
+      "y": 0,
+      "effects": [],
+      "collectable": null,
+      "flag": null,
+      "currentAttacker": null
+    }
+  }
+}

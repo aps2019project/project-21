@@ -1,0 +1,33 @@
+{
+  "@type": "models.card.Minion",
+  "@val": {
+    "isCombo": false,
+    "maxHp": 14,
+    "maxAp": 10,
+    "hp": 14,
+    "ap": 10,
+    "specialPower": null,
+    "appliedEffects": [],
+    "attackRange": 7,
+    "attackMode": "HYBRID",
+    "canMove": false,
+    "canAttack": false,
+    "isDisarmed": false,
+    "isStunned": false,
+    "hasHolyBuff": false,
+    "name": "Dive Siah",
+    "id": 15,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 300,
+    "manaCost": 9,
+    "currentCell": {
+      "x": 0,
+      "y": 0,
+      "effects": [],
+      "collectable": null,
+      "flag": null,
+      "currentAttacker": null
+    }
+  }
+}

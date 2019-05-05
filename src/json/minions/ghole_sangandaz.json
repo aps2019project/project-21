@@ -1,0 +1,33 @@
+{
+  "@type": "models.card.Minion",
+  "@val": {
+    "isCombo": false,
+    "maxHp": 12,
+    "maxAp": 12,
+    "hp": 12,
+    "ap": 12,
+    "specialPower": null,
+    "appliedEffects": [],
+    "attackRange": 7,
+    "attackMode": "RANGED",
+    "canMove": false,
+    "canAttack": false,
+    "isDisarmed": false,
+    "isStunned": false,
+    "hasHolyBuff": false,
+    "name": "Ghole Sangandaz",
+    "id": 16,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 300,
+    "manaCost": 9,
+    "currentCell": {
+      "x": 0,
+      "y": 0,
+      "effects": [],
+      "collectable": null,
+      "flag": null,
+      "currentAttacker": null
+    }
+  }
+}

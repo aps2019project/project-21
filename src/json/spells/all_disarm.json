@@ -24,7 +24,7 @@
         }
       }
     ],
-    "desc": "Disarm all opps for 1 round.",
+    "desc": "Disarm all opps for 1 turn.",
     "name": "All Disarm",
     "id": 9,
     "collectionID": 0,
