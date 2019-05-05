@@ -132,7 +132,7 @@ public class ShopMenu extends Menu {
     }
 
     private void show() {
-        view.showShop(this);
+        view.showShop();
     }
 
     protected void showMenu() {

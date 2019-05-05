@@ -49,6 +49,9 @@ public class AccountMenu extends Menu {
             case MAIN_MENU:
                 gotoMainMenu();
                 break;
+            case HESOYAM:
+                hesoyam();
+                break;
             case HELP:
                 showMenu();
                 break;
@@ -101,6 +104,11 @@ public class AccountMenu extends Menu {
 
     protected void showMenu() {
         view.showMenu("Account");
+    }
+
+    private void hesoyam() {
+        if (Player.getCurrentPlayer() != null)
+            Player.getCurrentPlayer().setDrake(Integer.MAX_VALUE);
     }
 
     private void gotoMainMenu() {

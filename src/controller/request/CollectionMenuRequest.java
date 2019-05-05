@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 public class CollectionMenuRequest extends Request {
     @Override
     public void extractType() {
-        // set field type in parent class
         type = RequestType.INVALID;
         if (commandLine.equals("exit"))
             exitCheck();
@@ -14,11 +13,11 @@ public class CollectionMenuRequest extends Request {
             helpCheck();
         else if (commandLine.equals("show"))
             showCollectionCheck();
-        else if (commandLine.startsWith("search "))
+        else if (commandLine.contains("search"))
             searchCheck();
         else if (commandLine.equals("save"))
             saveCheck();
-        else if (commandLine.startsWith("create deck "))
+        else if (commandLine.startsWith("create deck"))
             createDeckCheck();
         else if (commandLine.startsWith("delete deck"))
             deleteDeckCheck();
@@ -34,6 +33,8 @@ public class CollectionMenuRequest extends Request {
             showAllDecksCheck();
         else if (commandLine.startsWith("show deck"))
             showDeckCheck();
+        else if (commandLine.equals("back"))
+            backCheck();
     }
 
     private void showCollectionCheck() {
@@ -46,7 +47,8 @@ public class CollectionMenuRequest extends Request {
         if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
             type = RequestType.SEARCH_COLLECTION;
-        }
+        } else
+            invalidCommand();
     }
 
     private void saveCheck() {
@@ -59,7 +61,8 @@ public class CollectionMenuRequest extends Request {
         if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
             type = RequestType.CREATE_DECK;
-        }
+        } else
+            invalidCommand();
     }
 
     private void deleteDeckCheck() {
@@ -68,7 +71,8 @@ public class CollectionMenuRequest extends Request {
         if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
             type = RequestType.DELETE_DECK;
-        }
+        } else
+            invalidCommand();
     }
 
     private void addToDeckCheck() {
@@ -78,7 +82,8 @@ public class CollectionMenuRequest extends Request {
             commandArguments.add(matcher.group(1));
             commandArguments.add(matcher.group(2));
             type = RequestType.ADD_TO_DECK;
-        }
+        } else
+            invalidCommand();
     }
 
     private void removeFromCheck() {
@@ -97,16 +102,18 @@ public class CollectionMenuRequest extends Request {
         if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
             type = RequestType.VALIDATE_DECK;
-        }
+        } else
+            invalidCommand();
     }
 
     private void selectDeckCheck() {
         String Regex = "select deck (\\w+)";
         Matcher matcher = Pattern.compile(Regex).matcher(commandLine);
-        if (matcher.matches()){
+        if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
             type = RequestType.SELECT_DECK;
-        }
+        } else
+            invalidCommand();
     }
 
     private void showAllDecksCheck() {
@@ -114,11 +121,11 @@ public class CollectionMenuRequest extends Request {
     }
 
     private void showDeckCheck() {
-        String Regex ="show deck (\\w+)";
+        String Regex = "show deck (\\w+)";
         Matcher matcher = Pattern.compile(Regex).matcher(commandLine);
-        if (matcher.matches()){
+        if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
             type = RequestType.SHOW_DECK;
-        }
+        } else invalidCommand();
     }
 }

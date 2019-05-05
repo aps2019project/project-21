@@ -27,6 +27,8 @@ public class AccountMenuRequest extends Request {
             backCheck();
         else if (commandLine.contains("exit"))
             exitCheck();
+        else if (commandLine.equals("hesoyam"))
+            hesoyamCheck();
     }
 
     private void createAccountCheck() {
@@ -35,7 +37,8 @@ public class AccountMenuRequest extends Request {
         if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
             type = RequestType.CREATE_ACCOUNT;
-        }
+        } else
+            invalidCommand();
     }
 
     private void loginCheck() {
@@ -44,7 +47,11 @@ public class AccountMenuRequest extends Request {
         if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
             type = RequestType.LOGIN;
-        }
+        } else invalidCommand();
+    }
+
+    private void hesoyamCheck() {
+        type = RequestType.HESOYAM;
     }
 
     private void showLeaderBoardCheck() {

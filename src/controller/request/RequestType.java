@@ -13,6 +13,7 @@ public enum RequestType {
     SHOW_LEADERBOARD,
     SAVE,
     LOGOUT,
+    HESOYAM,
 
     MAIN_MENU,
     COLLECTION,

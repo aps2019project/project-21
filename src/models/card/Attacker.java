@@ -13,21 +13,17 @@ public class Attacker extends Card {
     private int hp;
     private int ap;
 
-    private Spell specialPower;
+    private Spell specialPower = new Spell();
     private List<Effect> appliedEffects = new ArrayList<>();
 
-    public int getAttackRange() {
-        return attackRange;
-    }
-
     private int attackRange;
-    private AttackMode attackMode;
+
+    private AttackMode attackMode = AttackMode.HYBRID; //  default
     protected boolean canMove;
     protected boolean canAttack;
     private boolean isDisarmed = false;
     private boolean isStunned = false;
     private boolean hasHolyBuff = false;
-
     Attacker() {
 
     }
@@ -47,6 +43,10 @@ public class Attacker extends Card {
 
     public void manageEffects() {
         //  must be called each turn for each attacker
+    }
+
+    public int getAttackRange() {
+        return attackRange;
     }
 
     public void addEffect(Effect effect) {

@@ -24,7 +24,7 @@
     ],
     "desc": "Dispel A 2*2 Square.",
     "name": "Area Dispel",
-    "id": 1,
+    "id": 101,
     "collectionID": 0,
     "cardIDInGame": null,
     "price": 1500,

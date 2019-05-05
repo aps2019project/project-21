@@ -1,7 +1,6 @@
 package models.card;
 
 import models.Item.Item;
-import models.Player;
 import models.match.Cell;
 
 import java.util.ArrayList;
@@ -116,4 +115,5 @@ public class Card {
     public int getCollectionID() {
         return collectionID;
     }
+
 }

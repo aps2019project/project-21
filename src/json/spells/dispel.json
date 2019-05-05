@@ -24,7 +24,7 @@
     ],
     "desc": "Dispel an opp or an ally.",
     "name": "Dispel",
-    "id": 11,
+    "id": 111,
     "collectionID": 0,
     "cardIDInGame": null,
     "price": 2100,

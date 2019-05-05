@@ -3,12 +3,16 @@ package models.card;
 import models.card.target_enums.*;
 
 public class TargetType {
-    private RandomOrNot randomOrNot;
-    private TargetAttackerRange targetAttackerRange;
-    private CellType cellType;
-    private HeroOrMinion heroOrMinion;
-    private OppOrAlly oppOrAlly;
-    private ChooseType chooseType;
+    private RandomOrNot randomOrNot = RandomOrNot.NOT_RANDOM;
+    private TargetAttackerRange targetAttackerRange = TargetAttackerRange.ALL_THREE;
+    private CellType cellType = CellType.NONE;
+    private HeroOrMinion heroOrMinion = HeroOrMinion.BOTH;
+    private OppOrAlly oppOrAlly = OppOrAlly.BOTH;
+    private ChooseType chooseType = ChooseType.NONE;
+
+    public TargetType() {
+
+    }
 
     public TargetType(RandomOrNot randomOrNot, TargetAttackerRange targetAttackerRange,
                       CellType cellType, HeroOrMinion heroOrMinion, OppOrAlly oppOrAlly,

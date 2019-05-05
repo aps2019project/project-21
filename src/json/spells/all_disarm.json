@@ -26,7 +26,7 @@
     ],
     "desc": "Disarm all opps for 1 turn.",
     "name": "All Disarm",
-    "id": 9,
+    "id": 109,
     "collectionID": 0,
     "cardIDInGame": null,
     "price": 2000,

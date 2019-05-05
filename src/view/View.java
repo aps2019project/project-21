@@ -1,29 +1,21 @@
 package view;
 
-import controller.menus.ShopMenu;
 import models.Collection;
 import models.Deck;
 import models.Item.Collectable;
 import models.Item.Item;
+import models.Item.Usable;
 import models.Player;
 import models.card.*;
-import models.match.Match;
 
 import java.util.Arrays;
 import java.util.Comparator;
 
 public class View {
     private static View view = new View();
-    private Player currentPlayer;
-    private Match currentMatch;
-
 
     public static View getInstance() {
         return view;
-    }
-
-    public void setCurrentPlayer(Player currentPlayer) {
-        this.currentPlayer = currentPlayer;
     }
 
     private View() {
@@ -47,7 +39,6 @@ public class View {
         Player.getPlayers().toArray(players);
         Arrays.sort(players, Comparator.comparingInt(Player::getWins));
 
-        //print users
         for (int i = 0; i < players.length; i++) {
             System.out.print(i + 1 + "- ");
             showUser(players[i]);
@@ -93,7 +84,7 @@ public class View {
                 " - Description: " +
                 spell.getDesc() +
                 " - Sell cost: " +
-                spell.getManaCost());
+                spell.getPrice());
     }
 
     private void printHero(Hero hero) {
@@ -133,19 +124,21 @@ public class View {
                     "6. back\n" +
                     "7. exit\n");
         } else if (menuName.equals("Collection")) {
-            System.out.print("Collection :\n" +
-                    "1 - exit\n" +
-                    "2 - how" +
-                    "3 - search [card name|item name]\n" +
-                    "4 - save\n" +
-                    "5 - create deck [deck name]\n" +
-                    "6 - delete deck [deck name]\n" +
-                    "7 - add [card id|card id|hero id] to deck [deck name]\n" +
-                    "8 - remove [card id|card id|hero id] from deck [deck name]\n" +
-                    "9 - validate deck [deck name]\n" +
-                    "10 - show all decks\n" +
-                    "11 - show deck [deck name]\n" +
-                    "12 - help\n");
+            System.out.print("------ Collection ------\n" +
+                    "1. show\n" +
+                    "2. search [card name|item name]\n" +
+                    "3. save\n" +
+                    "4. create deck [deck name]\n" +
+                    "5. delete deck [deck name]\n" +
+                    "6. add [card id|card id|hero id] to deck [deck name]\n" +
+                    "7. remove [card id|card id|hero id] from deck [deck name]\n" +
+                    "8. validate deck [deck name]\n" +
+                    "9. select deck [deck name]\n" +
+                    "10. show all decks\n" +
+                    "11. show deck [deck name]\n" +
+                    "12. help\n" +
+                    "13. back\n" +
+                    "14. exit\n");
         } else if (menuName.equals("Shop")) {
             System.out.print("------ Shop ------\n" +
                     "1. show collection\n" +
@@ -189,7 +182,45 @@ public class View {
     }
 
     public void showDeck(Deck deck) {
+        if (deck == null)
+            return;
+        System.out.print("Heroes:\n");
+        if (deck.hasHero()) {
+            System.out.print("\t\t1 : ");
+            printHero(deck.getHero());
+        }
+        System.out.print("Items:\n");
+        if (deck.hasUsable()) {
+            System.out.print("\t\t1 : ");
+            printItem(deck.getUsable());
+        }
+        System.out.println("Cards:\n");
+        for (int i = 0; i < deck.getCards().size(); i++) {
+            Card card = deck.getCards().get(i);
+            System.out.print(i + 1 + " : ");
+            if (card.getClass().equals(Minion.class))
+                printMinion((Minion) card);
+            else if (card.getClass().equals(Spell.class))
+                printSpell((Spell) card);
+        }
+    }
 
+    public void showDecks(Collection collection) {
+        if (collection == null)
+            return;
+        int counter = 1;
+        if (collection.hasMainDeck()) {
+            System.out.println(counter + " : "
+                    + collection.getMainDeck().getName() + " :");
+            showDeck(collection.getMainDeck());
+            counter++;
+        }
+        for (Deck deck : collection.getDecks())
+            if (!collection.hasMainDeck()
+                    || !deck.getName().equals(collection.getMainDeck().getName())) {
+                System.out.println(counter + " : " + deck.getName() + " :");
+                showDeck(deck);
+            }
     }
 
     public void showCollection(Collection collection) {
@@ -287,19 +318,26 @@ public class View {
     public void showGeneralThings(String thingName) {
     }
 
-    public void showShop(ShopMenu shopMenu) {
-    }
-
-    public Player getCurrentPlayer() {
-        return currentPlayer;
-    }
-
-    public Match getCurrentMatch() {
-        return currentMatch;
-    }
-
-    public void setCurrentMatch(Match currentMatch) {
-        this.currentMatch = currentMatch;
+    public void showShop() {
+        System.out.println("Heroes :");
+        for (int i = 0; i < Hero.getHeroes().size(); i++) {
+            System.out.print("\t\t" + i + 1 + " : ");
+            printHero(Hero.getHeroes().get(i));
+        }
+        System.out.println("Items :");
+        for (int i = 0; i < Usable.getUsables().size(); i++) {
+            System.out.print("\t\t" + i + 1 + " : ");
+            printItem(Usable.getUsables().get(i));
+        }
+        System.out.println("Cards :");
+        for (int i = 0; i < Spell.getSpells().size(); i++) {
+            System.out.print("\t\t" + i + 1 + " : ");
+            printSpell(Spell.getSpells().get(i));
+        }
+        for (int i = 0; i < Minion.getMinions().size(); i++) {
+            System.out.print("\t\t" + i + 1 + Spell.getSpells().size() + " : ");
+            printMinion(Minion.getMinions().get(i));
+        }
     }
 
     public void showItemInfo() {

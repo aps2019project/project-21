@@ -1,23 +1,28 @@
 package models;
 
+import models.Item.Collectable;
+import models.Item.Usable;
 import models.card.Card;
 import models.card.Hero;
 import models.Item.Item;
+import models.card.Minion;
+import models.card.Spell;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Deck {
-    private static final int MAX_SIZE = 20;
+    private static final int MAX_NUM_CARDS = 20; // minions and spells
     private String name;
-    private List<Card> cards = new ArrayList<>();
-    private Item item;
+    private List<Card> cards = new ArrayList<>();  // minions and spells
+    private Usable usable;
     private Hero hero;
+    private List<Collectable> collectables = new ArrayList<>(); // achieved during the match
 
-    public Deck(String name, List<Card> cards, Item item, Hero hero) {
+    public Deck(String name, List<Card> cards, Usable usable, Hero hero) {
         this.name = name;
         this.cards = cards;
-        this.item = item;
+        this.usable = usable;
         this.hero = hero;
     }
 
@@ -26,7 +31,7 @@ public class Deck {
     }
 
     public static Deck copyDeck(Deck deck) {
-        return new Deck(deck.name, deck.cards, deck.item, deck.hero);
+        return new Deck(deck.name, deck.cards, deck.usable, deck.hero);
     }
 
     public void shuffle() {
@@ -50,20 +55,17 @@ public class Deck {
         this.name = name;
     }
 
+    //  only for minions and spells
     public List<Card> getCards() {
         return cards;
     }
 
-    public void setCards(List<Card> cards) {
-        this.cards = cards;
+    public Item getUsable() {
+        return usable;
     }
 
-    public Item getItem() {
-        return item;
-    }
-
-    public void setItem(Item item) {
-        this.item = item;
+    public void setUsable(Usable usable) {
+        this.usable = usable;
     }
 
     public Hero getHero() {
@@ -74,19 +76,32 @@ public class Deck {
         this.hero = hero;
     }
 
-    public void addObject(Object object) {
+    public void addCard(Card card) {
+        if (card == null)
+            return;
+        if (card.getClass().equals(Hero.class))
+            if (hero == null)
+                hero = (Hero) card;
+        if (card.getClass().equals(Usable.class))
+            if (usable == null)
+                usable = (Usable) card;
+        if (card.getClass().equals(Spell.class) || card.getClass().equals(Minion.class))
+            if (!isCardsFull())
+                cards.add(card);
+    }
 
+    public void addCollectable(Collectable collectable) {
+        if (collectable == null)
+            return;
+        this.collectables.add(collectable);
     }
 
     public void deleteObject(Object object) {
 
     }
 
-    public boolean deckIsValid() {
-        if (cards.size() == 20 && hero != null) {
-            return true;
-        }
-        return false;
+    public boolean isValid() {
+        return isCardsFull() && hasHero();
     }
 
     public void remove(Card card) {
@@ -95,7 +110,46 @@ public class Deck {
         cards.remove(card);
         if (hero.getId() == card.getId())
             hero = null;
-        if (item.getId() == card.getId())
-            item = null;
+        if (usable.getId() == card.getId())
+            usable = null;
     }
+
+    public List<Card> getAllCards() { //  except collectables
+        List<Card> cards = new ArrayList<>(this.cards);
+        if (hero != null)
+            cards.add(hero);
+        if (usable != null)
+            cards.add(usable);
+        return cards;
+    }
+
+    public Card getCardByCollectionID(int collectionID) {
+        for (Card card : getAllCards())
+            if (card.getCollectionID() == collectionID)
+                return card;
+        return null;
+    }
+
+    public boolean hasThisCard(Card card) {
+        return getCardByCollectionID(card.getCollectionID()) != null;
+    }
+
+    public boolean hasHero() {
+        return hero != null;
+    }
+
+    public boolean hasUsable() {
+        return usable != null;
+    }
+
+    public boolean isCardsFull() {
+        return cards.size() >= MAX_NUM_CARDS;
+    }
+
+    public boolean isFull() {
+        return isCardsFull()
+                && hasHero()
+                && hasUsable();
+    }
+
 }

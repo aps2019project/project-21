@@ -10,8 +10,6 @@ public enum ErrorMode {
     DECKNAME_IS_TAKEN(""),
     CARD_IS_NOT_IN_COLLECTION("there is no item or card with this name in collection"),
     CARD_IS_ALREADY_IN_DECK(""),
-    DECK_IS_FULL(""),
-    DECK_HAS_HERO(""),
     CARD_IS_NOT_IN_DECK(""),
     HERO_IS_NOT_IN_DECK(""),
     DECK_IS_NOT_VALID(""),
@@ -33,6 +31,14 @@ public enum ErrorMode {
     BUY_SUCCESSFUL("successfully bought card | item."),
     YOU_DONT_HAVE_THIS_CARD("you don't have this card or item. sorry!"),
     SELL_SUCCESSFUL("sold the card or item successfully."),
+    DECK_ALREADY_EXISTS("a deck with h this name already exits"),
+    NO_SUCH_DECK("there is no deck with this name"),
+    ALREADY_IN_DECK("card is already in deck."),
+    DECK_IS_FULL("deck is full. you cannot add more cards."),
+    DECK_HAS_HERO("deck already has a hero. you cannot add more heroes to it."),
+    DECK_HAS_ITEM("deck already has a item. you cannot add more items to it."),
+    DECK_IS_TOTALLY_VALID("deck is valid. good for you!"),
+    DECK_CANNOT_BE_MAIN("deck is not complete. and cannot be chosen as main deck."),
     INVALID_COMMAND("invalid command");
 
 

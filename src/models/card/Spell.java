@@ -8,11 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Spell extends Card {
-    private ApplyType applyType;
+    private ApplyType applyType = ApplyType.ON_ATTACKER;
     private static List<Spell> spells = new ArrayList<>();
-    private TargetType targetType;
+    private TargetType targetType = new TargetType();
     private List<Effect> effects = new ArrayList<>();
-    private String desc;
+    private String desc = "";
+
+    public Spell(){
+    }
 
     public Spell(String name, int price, int manaCost, TargetType targetType,
                  List<Effect> effects, ApplyType applyType, String desc) {

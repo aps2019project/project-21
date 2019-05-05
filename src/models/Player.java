@@ -205,5 +205,17 @@ public class Player {
         drake += card.getPrice();
     }
 
+    public void createDeck(String deckName) {
+        collection.createDeck(deckName);
+    }
+
+    public void deleteDeck(String deckName) {
+        collection.deleteDeck(deckName);
+    }
+
+    public void setMainDeck(Deck deck) {
+        collection.setMainDeck(deck);
+    }
+
 }
 

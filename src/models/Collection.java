@@ -48,29 +48,18 @@ public class Collection {
     }
 
     public void addDeck(Deck deck) {
-        boolean found = true;
-        for (Deck deck1 : this.decks) {
-            if (deck1.getName().equals(deck.getName())) {
-                found = false;
-                System.out.println("Deck name is not available");
-            }
-        }
-        if (found) {
-            decks.add(deck);
-        }
+        if (deck == null || hasThis(deck.getName()))
+            return;
+        decks.add(deck);
     }
 
-    public void deleteDeck(Deck deck) {
-        boolean found = true;
-        for (Deck deck1 : this.decks) {
-            if (deck1.getName().equals(deck.getName())) {
-                this.decks.remove(deck1);
-                found = false;
-            }
-        }
-        if (found) {
-            System.out.println("Deck isn't exist");
-        }
+    public void deleteDeck(String deckName) {
+        if (!hasThis(deckName))
+            return;
+        List<Deck> copy = new ArrayList<>(decks);
+        for (Deck deck : copy)
+            if (deck.getName().equals(deckName))
+                decks.remove(deck);
     }
 
     public Deck getMainDeck() {
@@ -106,11 +95,6 @@ public class Collection {
         return usables;
     }
 
-    public Deck searchDeck(String name) {
-        // error mode should handled
-        return null;
-    }
-
     public boolean hasLessThanThreeItems() {
         return this.usables.size() < 3;
     }
@@ -127,5 +111,27 @@ public class Collection {
             if (card.getCollectionID() == id)
                 return card;
         return null;
+    }
+
+    public Deck getDeck(String deckName) {
+        for (Deck deck : decks)
+            if (deck.getName().equals(deckName))
+                return deck;
+        return null;
+    }
+
+    public boolean hasThis(String deckName) {
+        return getDeck(deckName) != null;
+    }
+
+    public void createDeck(String deckName) {
+        if (hasThis(deckName))
+            return;
+        Deck deck = new Deck(deckName);
+        addDeck(deck);
+    }
+
+    public boolean hasMainDeck() {
+        return mainDeck != null;
     }
 }
