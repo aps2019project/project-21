@@ -162,19 +162,75 @@ public class MinionMaker {
         //later
 
         // ---------- 22 ----------
-
+        effects = new ArrayList<>();
+        effects.add(new WeaknessHP(Integer.MAX_VALUE, 6)); //delay 1 round!
+        effects.add(new WeaknessHP(Integer.MAX_VALUE, 4)); //delay 2 round!
+        effects.get(0).setActivationType(ActivationType.ON_ATTACK);
+        effects.get(1).setActivationType(ActivationType.ON_ATTACK);
+        targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
+                CellType.SINGLE_CELL, HeroOrMinion.MINION, OppOrAlly.OPP, ChooseType.SELECTED_OPP);
+        specialPower = new Spell("Gorge Sefid's Spell", 0, 0,
+                targetType, effects, ApplyType.ON_ATTACKER,
+                "Decrease HP of attacked minion 6 and 4 at next 2 rounds.");
+        minion = new Minion("Gorge Sefid", 400, 5, 8,
+                2, -1, AttackMode.MELEE, specialPower);
+        saveToFile(minion);
 
         // ---------- 23 ----------
-
+        effects = new ArrayList<>();
+        effects.add(new WeaknessHP(Integer.MAX_VALUE, 8)); //delay 1 round!
+        effects.get(0).setActivationType(ActivationType.ON_ATTACK);
+        targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
+                CellType.SINGLE_CELL, HeroOrMinion.MINION, OppOrAlly.OPP, ChooseType.SELECTED_OPP);
+        specialPower = new Spell("Palang's Spell", 0, 0,
+                targetType, effects, ApplyType.ON_ATTACKER,
+                "Decrease HP of attacked minion 8 at next round.");
+        minion = new Minion("Palang", 400, 4, 6,
+                2, -1, AttackMode.MELEE, specialPower);
+        saveToFile(minion);
 
         // ---------- 24 ----------
-
+        effects = new ArrayList<>();
+        effects.add(new WeaknessHP(Integer.MAX_VALUE, 6)); //delay 1 round!
+        effects.get(0).setActivationType(ActivationType.ON_ATTACK);
+        targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
+                CellType.SINGLE_CELL, HeroOrMinion.MINION, OppOrAlly.OPP, ChooseType.SELECTED_OPP);
+        specialPower = new Spell("Gorg's Spell", 0, 0,
+                targetType, effects, ApplyType.ON_ATTACKER,
+                "Decrease HP of attacked minion 6 at next round.");
+        minion = new Minion("Gorg", 400, 3, 6,
+                1, -1, AttackMode.MELEE, specialPower);
+        saveToFile(minion);
 
         // ---------- 25 ----------
-
+        effects = new ArrayList<>();
+        effects.add(new PowerAP(1,2));
+        effects.add(new WeaknessHP(1,1));
+        effects.get(0).setActivationType(ActivationType.PASSIVE);
+        effects.get(1).setActivationType(ActivationType.PASSIVE);
+        targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
+                CellType.SQUARE_3_3, HeroOrMinion.BOTH, OppOrAlly.ALLY, ChooseType.HIMSELF);
+        specialPower = new Spell("Jadogar's Spell", 0, 0,
+                targetType, effects, ApplyType.ON_ATTACKER,
+                "Power AP 2 units but weakness HP 1 unit for 1 round, on itself and neighbors.  ");
+        minion = new Minion("Jadogar", 550, 4, 5,
+                4, 3, AttackMode.RANGED, specialPower);
+        saveToFile(minion);
 
         // ---------- 26 ----------
-
+        effects = new ArrayList<>();
+        effects.add(new PowerAP(Integer.MAX_VALUE,2));
+        effects.add(new Holy(Integer.MAX_VALUE));
+        effects.get(0).setActivationType(ActivationType.PASSIVE);
+        effects.get(1).setActivationType(ActivationType.PASSIVE);
+        targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
+                CellType.SQUARE_3_3, HeroOrMinion.BOTH, OppOrAlly.ALLY, ChooseType.HIMSELF);
+        specialPower = new Spell("Jadogare Azam's Spell", 0, 0,
+                targetType, effects, ApplyType.ON_ATTACKER,
+                "Power AP 2 units and continuous holy buff, on itself and neighbors.");
+        minion = new Minion("Jadogare Azam", 550, 6, 6,
+                6, 5, AttackMode.RANGED, specialPower);
+        saveToFile(minion);
 
         // ---------- 27 ----------
         //later
