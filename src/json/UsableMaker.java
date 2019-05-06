@@ -1,12 +1,11 @@
 package json;
 
 import models.Item.Usable;
+import models.card.ActivationType;
 import models.card.ApplyType;
 import models.card.Effect;
 import models.card.TargetType;
-import models.card.buffs.Disarm;
-import models.card.buffs.IncreaseMana;
-import models.card.buffs.WeaknessAP;
+import models.card.buffs.*;
 import models.card.effects.EffectName;
 import models.card.effects.GiveEffect;
 import models.card.target_enums.*;
@@ -56,24 +55,66 @@ public class UsableMaker {
         saveToFile(usable);
 
         // ---------- 5 ----------
-
+        effects = new ArrayList<>();
+        effects.add(new WeaknessAP(1, 2));
+        effects.get(0).setActivationType(ActivationType.ON_ATTACK);
+        targetType = new TargetType(RandomOrNot.RANDOM, TargetAttackerRange.ALL_THREE,
+                CellType.NONE, HeroOrMinion.BOTH, OppOrAlly.OPP, ChooseType.NONE);
+        usable = new Usable("Terror Hood", 5000, targetType, effects,
+                ApplyType.ON_ATTACKER, "Decrease 2 units of opp's (randomly chosen) AP for 1 turn, on attack.");
+        saveToFile(usable);
 
         // ---------- 6 ----------
-
+        //later King Wisdom
 
         // ---------- 7 ----------
-
+        effects = new ArrayList<>();
+        effects.add(new WeaknessHP(Integer.MAX_VALUE, 1));
+        effects.get(0).setActivationType(ActivationType.ON_SPAWN);
+        targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
+                CellType.NONE, HeroOrMinion.HERO, OppOrAlly.OPP, ChooseType.NONE);
+        usable = new Usable("Assassination Dagger", 15000, targetType, effects,
+                ApplyType.ON_ATTACKER, "Attack opp's hero when put each card on board.");
+        saveToFile(usable);
 
         // ---------- 8 ----------
-
+        effects = new ArrayList<>();
+        effects.add(new Poison(1));
+        effects.get(0).setActivationType(ActivationType.ON_ATTACK);
+        targetType = new TargetType(RandomOrNot.RANDOM, TargetAttackerRange.ALL_THREE,
+                CellType.NONE, HeroOrMinion.BOTH, OppOrAlly.OPP, ChooseType.NONE);
+        usable = new Usable("Poisonous Dagger", 7000, targetType, effects,
+                ApplyType.ON_ATTACKER, "Poison random opp for 1 turn, while attack.");
+        saveToFile(usable);
 
         // ---------- 9 ----------
-
+        effects = new ArrayList<>();
+        effects.add(new Disarm(1));
+        effects.get(0).setActivationType(ActivationType.ON_ATTACK);
+        targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
+                CellType.SINGLE_CELL, HeroOrMinion.BOTH, OppOrAlly.OPP, ChooseType.SELECTED_OPP);
+        usable = new Usable("Shock Hammer", 15000, targetType, effects,
+                ApplyType.ON_ATTACKER, "Hero disarm opp for 1 turn, while attack.");
+        saveToFile(usable);
 
         // ---------- 10 ----------
-
+        effects = new ArrayList<>();
+        effects.add(new PowerAP(Integer.MAX_VALUE, 1));
+        effects.get(0).setActivationType(ActivationType.ON_DEATH);
+        targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
+                CellType.SINGLE_CELL, HeroOrMinion.BOTH, OppOrAlly.ALLY, ChooseType.SELECTED_ALLY);
+        usable = new Usable("Soul Eater", 25000, targetType, effects,
+                ApplyType.ON_ATTACKER, "Apply power buff 1 unit of ally, on death.");
+        saveToFile(usable);
 
         // ---------- 11 ----------
-
+        effects = new ArrayList<>();
+        effects.add(new Holy(2));
+        effects.get(0).setActivationType(ActivationType.ON_SPAWN);
+        targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
+                CellType.NONE, HeroOrMinion.MINION, OppOrAlly.ALLY, ChooseType.SELECTED_ALLY);
+        usable = new Usable("Ghosle Tameid", 20000, targetType, effects,
+                ApplyType.ON_ATTACKER, "Holy buff for 2 rounds when spawn.");
+        saveToFile(usable);
     }
 }
