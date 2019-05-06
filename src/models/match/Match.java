@@ -8,6 +8,7 @@ import models.card.Spell;
 import view.ErrorMode;
 import view.View;
 
+import java.awt.geom.GeneralPath;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,9 @@ public class Match {
     private Card selectedCard;
     private Collectable selectedCollectable;
     private View view = View.getInstance();
+    private Attacker attackerCapturedFlag;
+    private int[] flagCoordinate;
+    private ArrayList<Attacker> attackersCapturedFlag;
 
     public static Match getCurrentMatch() {
         return currentMatch;
@@ -35,6 +39,34 @@ public class Match {
 
     public PlayerMatchInfo[] getPlayersMatchInfo() {
         return this.info;
+    }
+
+    public Player[] getPlayers(){
+        return this.players;
+    }
+
+    public GoalMode getGoalMode(){
+        return this.goalMode;
+    }
+
+    public Attacker getAttackerCapturedFlag() {
+        return attackerCapturedFlag;
+    }
+
+    public void setPlayerCapturedFlag(Attacker attackerCapturedFlag){
+        this.attackerCapturedFlag = attackerCapturedFlag;
+    }
+
+    public int[] getFlagCoordinate() {
+        return flagCoordinate;
+    }
+
+    public void setFlagCoordinate(int[] flagCoordinate) {
+        this.flagCoordinate = flagCoordinate;
+    }
+
+    public ArrayList<Attacker> getAttackersCapturedFlag() {
+        return attackersCapturedFlag;
     }
 
     public Match(Player playerOne, Player playerTwo, GameMode gameMode, GameType gameType, GoalMode goalMode, int flagCount) {
@@ -48,6 +80,11 @@ public class Match {
         this.gameType = gameType;
         this.goalMode = goalMode;
         this.flagCount = flagCount;
+        this.attackerCapturedFlag = null;
+        this.flagCoordinate = new int[2];
+        this.flagCoordinate[0] = -1;
+        this.flagCoordinate[1] = -1;
+        this.attackersCapturedFlag = new ArrayList<>();
     }
 
     public void selectAttacker(String attackerID) {
@@ -261,22 +298,6 @@ public class Match {
         List<Cell> cells = new ArrayList<>();
         //  TODO
         return null;
-    }
-
-    public void showGameInfo() {
-        System.out.println("-----Game Info:");
-        for (int i = 0; i < 2; i++)
-            System.out.println(players[i].getUsername() + "  mp: " + info[i].getMp());
-        if (goalMode == GoalMode.KILL_HERO) {
-            for (int i = 0; i < 2; i++)
-                System.out.println((i + 1) + "th Hero hp: " + info[i].getDeck().getHero().getHP());
-        } else if (goalMode == GoalMode.HOLD_FLAG) {
-            for (int i = 0; i < 2; i++)
-                System.out.println();
-            //  TODO
-        } else {
-            //  TODO
-        }
     }
 
     public PlayerMatchInfo getInfo(Player player) {

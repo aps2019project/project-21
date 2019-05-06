@@ -7,6 +7,8 @@ import models.Item.Item;
 import models.Item.Usable;
 import models.Player;
 import models.card.*;
+import models.match.GoalMode;
+import models.match.Match;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -279,7 +281,29 @@ public class View {
     }
 
     public void showGameInfo() {
-
+        Match match = Match.getCurrentMatch();
+        System.out.println("-----Game Info:");
+        for (int i = 0; i < 2; i++)
+            System.out.println(match.getPlayers()[i].getUsername() + "  mp: " +
+                    match.getPlayersMatchInfo()[i].getMp());
+        if (match.getGoalMode() == GoalMode.KILL_HERO) {
+            for (int i = 0; i < 2; i++)
+                System.out.println((i + 1) + "th Hero hp: "
+                        + match.getPlayersMatchInfo()[i].getDeck().getHero().getHP());
+        } else if (match.getGoalMode() == GoalMode.HOLD_FLAG) {
+            if(match.getAttackerCapturedFlag() == null)
+                System.out.println("Flag Coordinate: ("
+                        + match.getFlagCoordinate()[0] + ", "
+                        + match.getFlagCoordinate()[1] + ")");
+            else
+                System.out.println("Attacker " + match.getAttackerCapturedFlag().getName()
+                + " has the flag.");
+        } else {
+            System.out.println("Attackers having flag:");
+            for(int i = 0; i < match.getAttackersCapturedFlag().size(); i++)
+                System.out.println((i+1) + ". "
+                        + match.getAttackersCapturedFlag().get(i).getName());
+        }
     }
 
     public void showMyMinions(Attacker attacker) {
