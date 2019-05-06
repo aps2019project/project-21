@@ -4,34 +4,32 @@
     "applyType": null,
     "effects": [
       {
-        "@type": "models.card.effects.GiveEffect",
+        "@type": "models.card.buffs.Disarm",
         "@val": {
-          "duration": 12,
-          "num": 0,
-          "value": 0,
-          "effectName": "HOLY",
+          "duration": 1,
+          "buffMode": "EVIL",
           "cell": null,
           "attacker": null,
           "player": null,
           "match": null,
-          "activationType": "NONE"
+          "activationType": "ON_ATTACK"
         }
       }
     ],
     "targetType": {
       "randomOrNot": "NOT_RANDOM",
       "targetAttackerRange": "ALL_THREE",
-      "cellType": "NONE",
-      "heroOrMinion": "HERO",
-      "oppOrAlly": "ALLY",
-      "chooseType": "NONE"
+      "cellType": "SINGLE_CELL",
+      "heroOrMinion": "BOTH",
+      "oppOrAlly": "OPP",
+      "chooseType": "SELECTED_OPP"
     },
-    "desc": "Gives ally hero 12 holu buffs.",
-    "name": "Namoose_Separ",
-    "id": 229,
+    "desc": "Hero disarm opp for 1 turn, while attack.",
+    "name": "Shock_Hammer",
+    "id": 235,
     "collectionID": 0,
     "cardIDInGame": null,
-    "price": 4000,
+    "price": 15000,
     "manaCost": 0,
     "currentCell": null
   }

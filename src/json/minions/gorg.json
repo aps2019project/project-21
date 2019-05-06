@@ -2,37 +2,39 @@
   "@type": "models.card.Minion",
   "@val": {
     "isCombo": false,
-    "maxHp": 3,
-    "maxAp": 4,
-    "hp": 3,
-    "ap": 4,
+    "maxHp": 6,
+    "maxAp": 1,
+    "hp": 6,
+    "ap": 1,
     "specialPower": {
       "applyType": "ON_ATTACKER",
       "targetType": {
         "randomOrNot": "NOT_RANDOM",
         "targetAttackerRange": "ALL_THREE",
-        "cellType": "SQUARE_3_3",
+        "cellType": "SINGLE_CELL",
         "heroOrMinion": "MINION",
         "oppOrAlly": "OPP",
-        "chooseType": "HIMSELF"
+        "chooseType": "SELECTED_OPP"
       },
       "effects": [
         {
-          "@type": "models.card.buffs.Stun",
+          "@type": "models.card.buffs.WeaknessHP",
           "@val": {
-            "duration": 1,
+            "value": 6,
+            "initialHP": 0,
+            "duration": 2147483647,
             "buffMode": "EVIL",
             "cell": null,
             "attacker": null,
             "player": null,
             "match": null,
-            "activationType": "ON_SPAWN"
+            "activationType": "ON_ATTACK"
           }
         }
       ],
-      "desc": "Stun 8 neighbourhood minions.",
-      "name": "Nane_Sarma's_Spell",
-      "id": 195,
+      "desc": "Decrease HP of attacked minion 6 at next round.",
+      "name": "Gorg's_Spell",
+      "id": 179,
       "collectionID": 0,
       "cardIDInGame": null,
       "price": 0,
@@ -40,18 +42,18 @@
       "currentCell": null
     },
     "appliedEffects": [],
-    "attackRange": 5,
-    "attackMode": "RANGED",
+    "attackRange": -1,
+    "attackMode": "MELEE",
     "canMove": false,
     "canAttack": false,
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
-    "name": "Nane_Sarma",
-    "id": 196,
+    "name": "Gorg",
+    "id": 180,
     "collectionID": 0,
     "cardIDInGame": null,
-    "price": 500,
+    "price": 400,
     "manaCost": 3,
     "currentCell": {
       "x": 0,

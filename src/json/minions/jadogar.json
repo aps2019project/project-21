@@ -3,36 +3,52 @@
   "@val": {
     "isCombo": false,
     "maxHp": 5,
-    "maxAp": 6,
+    "maxAp": 4,
     "hp": 5,
-    "ap": 6,
+    "ap": 4,
     "specialPower": {
       "applyType": "ON_ATTACKER",
       "targetType": {
         "randomOrNot": "NOT_RANDOM",
         "targetAttackerRange": "ALL_THREE",
-        "cellType": "SINGLE_CELL",
+        "cellType": "SQUARE_3_3",
         "heroOrMinion": "BOTH",
-        "oppOrAlly": "OPP",
-        "chooseType": "SELECTED_OPP"
+        "oppOrAlly": "ALLY",
+        "chooseType": "HIMSELF"
       },
       "effects": [
         {
-          "@type": "models.card.buffs.Poison",
+          "@type": "models.card.buffs.PowerAP",
           "@val": {
-            "duration": 3,
+            "value": 2,
+            "initialAP": 0,
+            "duration": 1,
+            "buffMode": "GOOD",
+            "cell": null,
+            "attacker": null,
+            "player": null,
+            "match": null,
+            "activationType": "PASSIVE"
+          }
+        },
+        {
+          "@type": "models.card.buffs.WeaknessHP",
+          "@val": {
+            "value": 1,
+            "initialHP": 0,
+            "duration": 1,
             "buffMode": "EVIL",
             "cell": null,
             "attacker": null,
             "player": null,
             "match": null,
-            "activationType": "ON_ATTACK"
+            "activationType": "PASSIVE"
           }
         }
       ],
-      "desc": "Poison opp 3 turns.",
-      "name": "MareSammi'sSpell",
-      "id": 139,
+      "desc": "Power AP 2 units but weakness HP 1 unit for 1 round, on itself and neighbors.  ",
+      "name": "Jadogar's_Spell",
+      "id": 182,
       "collectionID": 0,
       "cardIDInGame": null,
       "price": 0,
@@ -40,18 +56,18 @@
       "currentCell": null
     },
     "appliedEffects": [],
-    "attackRange": 4,
+    "attackRange": 3,
     "attackMode": "RANGED",
     "canMove": false,
     "canAttack": false,
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
-    "name": "MareSammi",
-    "id": 140,
+    "name": "Jadogar",
+    "id": 183,
     "collectionID": 0,
     "cardIDInGame": null,
-    "price": 300,
+    "price": 550,
     "manaCost": 4,
     "currentCell": {
       "x": 0,

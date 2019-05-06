@@ -4,17 +4,17 @@
     "applyType": null,
     "effects": [
       {
-        "@type": "models.card.effects.GiveEffect",
+        "@type": "models.card.buffs.WeaknessHP",
         "@val": {
-          "duration": 12,
-          "num": 0,
-          "value": 0,
-          "effectName": "HOLY",
+          "value": 1,
+          "initialHP": 0,
+          "duration": 2147483647,
+          "buffMode": "EVIL",
           "cell": null,
           "attacker": null,
           "player": null,
           "match": null,
-          "activationType": "NONE"
+          "activationType": "ON_SPAWN"
         }
       }
     ],
@@ -23,15 +23,15 @@
       "targetAttackerRange": "ALL_THREE",
       "cellType": "NONE",
       "heroOrMinion": "HERO",
-      "oppOrAlly": "ALLY",
+      "oppOrAlly": "OPP",
       "chooseType": "NONE"
     },
-    "desc": "Gives ally hero 12 holu buffs.",
-    "name": "Namoose_Separ",
-    "id": 229,
+    "desc": "Attack opp's hero when put each card on board.",
+    "name": "Assassination_Dagger",
+    "id": 233,
     "collectionID": 0,
     "cardIDInGame": null,
-    "price": 4000,
+    "price": 15000,
     "manaCost": 0,
     "currentCell": null
   }

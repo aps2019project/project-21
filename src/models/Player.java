@@ -221,6 +221,5 @@ public class Player {
     public boolean hasAValidMainDeck() {
         return collection.hasValidMainDeck();
     }
-
 }
 

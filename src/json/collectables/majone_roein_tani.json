@@ -1,0 +1,144 @@
+{
+  "@type": "models.Item.Collectable",
+  "@val": {
+    "applyType": null,
+    "effects": [
+      {
+        "@type": "models.card.buffs.Holy",
+        "@val": {
+          "duration": 2,
+          "buffMode": "GOOD",
+          "cell": null,
+          "attacker": null,
+          "player": null,
+          "match": null,
+          "activationType": "NONE"
+        }
+      },
+      {
+        "@type": "models.card.buffs.Holy",
+        "@val": {
+          "duration": 2,
+          "buffMode": "GOOD",
+          "cell": null,
+          "attacker": null,
+          "player": null,
+          "match": null,
+          "activationType": "NONE"
+        }
+      },
+      {
+        "@type": "models.card.buffs.Holy",
+        "@val": {
+          "duration": 2,
+          "buffMode": "GOOD",
+          "cell": null,
+          "attacker": null,
+          "player": null,
+          "match": null,
+          "activationType": "NONE"
+        }
+      },
+      {
+        "@type": "models.card.buffs.Holy",
+        "@val": {
+          "duration": 2,
+          "buffMode": "GOOD",
+          "cell": null,
+          "attacker": null,
+          "player": null,
+          "match": null,
+          "activationType": "NONE"
+        }
+      },
+      {
+        "@type": "models.card.buffs.Holy",
+        "@val": {
+          "duration": 2,
+          "buffMode": "GOOD",
+          "cell": null,
+          "attacker": null,
+          "player": null,
+          "match": null,
+          "activationType": "NONE"
+        }
+      },
+      {
+        "@type": "models.card.buffs.Holy",
+        "@val": {
+          "duration": 2,
+          "buffMode": "GOOD",
+          "cell": null,
+          "attacker": null,
+          "player": null,
+          "match": null,
+          "activationType": "NONE"
+        }
+      },
+      {
+        "@type": "models.card.buffs.Holy",
+        "@val": {
+          "duration": 2,
+          "buffMode": "GOOD",
+          "cell": null,
+          "attacker": null,
+          "player": null,
+          "match": null,
+          "activationType": "NONE"
+        }
+      },
+      {
+        "@type": "models.card.buffs.Holy",
+        "@val": {
+          "duration": 2,
+          "buffMode": "GOOD",
+          "cell": null,
+          "attacker": null,
+          "player": null,
+          "match": null,
+          "activationType": "NONE"
+        }
+      },
+      {
+        "@type": "models.card.buffs.Holy",
+        "@val": {
+          "duration": 2,
+          "buffMode": "GOOD",
+          "cell": null,
+          "attacker": null,
+          "player": null,
+          "match": null,
+          "activationType": "NONE"
+        }
+      },
+      {
+        "@type": "models.card.buffs.Holy",
+        "@val": {
+          "duration": 2,
+          "buffMode": "GOOD",
+          "cell": null,
+          "attacker": null,
+          "player": null,
+          "match": null,
+          "activationType": "NONE"
+        }
+      }
+    ],
+    "targetType": {
+      "randomOrNot": "RANDOM",
+      "targetAttackerRange": "ALL_THREE",
+      "cellType": "NONE",
+      "heroOrMinion": "MINION",
+      "oppOrAlly": "ALLY",
+      "chooseType": "NONE"
+    },
+    "desc": "10 holy buff for a random minion.",
+    "name": "Majone_Roein_Tani",
+    "id": 241,
+    "collectionID": 0,
+    "cardIDInGame": null,
+    "price": 0,
+    "manaCost": 0,
+    "currentCell": null
+  }
+}

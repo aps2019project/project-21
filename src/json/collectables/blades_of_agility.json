@@ -1,15 +1,7 @@
 {
-  "@type": "models.card.Spell",
+  "@type": "models.Item.Collectable",
   "@val": {
-    "applyType": "ON_ATTACKER",
-    "targetType": {
-      "randomOrNot": "NOT_RANDOM",
-      "targetAttackerRange": "ALL_THREE",
-      "cellType": "SINGLE_CELL",
-      "heroOrMinion": "BOTH",
-      "oppOrAlly": "ALLY",
-      "chooseType": "HIMSELF"
-    },
+    "applyType": null,
     "effects": [
       {
         "@type": "models.card.buffs.PowerAP",
@@ -26,13 +18,21 @@
         }
       }
     ],
-    "desc": "Increase AP 6 units.",
-    "name": "PowerHP_Up",
-    "id": 221,
+    "targetType": {
+      "randomOrNot": "RANDOM",
+      "targetAttackerRange": "ALL_THREE",
+      "cellType": "NONE",
+      "heroOrMinion": "BOTH",
+      "oppOrAlly": "ALLY",
+      "chooseType": "NONE"
+    },
+    "desc": "PowerAp 6 units for a random ally.",
+    "name": "Blades_of_agility",
+    "id": 244,
     "collectionID": 0,
     "cardIDInGame": null,
-    "price": 2500,
-    "manaCost": 2,
+    "price": 0,
+    "manaCost": 0,
     "currentCell": null
   }
 }

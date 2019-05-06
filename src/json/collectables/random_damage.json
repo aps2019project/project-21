@@ -4,9 +4,12 @@
     "applyType": null,
     "effects": [
       {
-        "@type": "models.card.effects.IncreaseHP",
+        "@type": "models.card.buffs.WeaknessHP",
         "@val": {
-          "changeValue": 6,
+          "value": 2,
+          "initialHP": 0,
+          "duration": 2147483647,
+          "buffMode": "EVIL",
           "cell": null,
           "attacker": null,
           "player": null,
@@ -20,12 +23,12 @@
       "targetAttackerRange": "ALL_THREE",
       "cellType": "NONE",
       "heroOrMinion": "BOTH",
-      "oppOrAlly": "ALLY",
+      "oppOrAlly": "OPP",
       "chooseType": "NONE"
     },
-    "desc": "Increase HP of a random ally 3 units.",
-    "name": "Nooshdaroo",
-    "id": 238,
+    "desc": "Damage an attacker 2 units.",
+    "name": "Random_Damage",
+    "id": 243,
     "collectionID": 0,
     "cardIDInGame": null,
     "price": 0,

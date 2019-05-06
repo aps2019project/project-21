@@ -1,34 +1,35 @@
 {
-  "@type": "models.Item.Collectable",
+  "@type": "models.Item.Usable",
   "@val": {
     "applyType": null,
     "effects": [
       {
-        "@type": "models.card.effects.IncreaseHP",
+        "@type": "models.card.buffs.Holy",
         "@val": {
-          "changeValue": 6,
+          "duration": 2,
+          "buffMode": "GOOD",
           "cell": null,
           "attacker": null,
           "player": null,
           "match": null,
-          "activationType": "NONE"
+          "activationType": "ON_SPAWN"
         }
       }
     ],
     "targetType": {
-      "randomOrNot": "RANDOM",
+      "randomOrNot": "NOT_RANDOM",
       "targetAttackerRange": "ALL_THREE",
       "cellType": "NONE",
-      "heroOrMinion": "BOTH",
+      "heroOrMinion": "MINION",
       "oppOrAlly": "ALLY",
-      "chooseType": "NONE"
+      "chooseType": "SELECTED_ALLY"
     },
-    "desc": "Increase HP of a random ally 3 units.",
-    "name": "Nooshdaroo",
-    "id": 238,
+    "desc": "Holy buff for 2 rounds when spawn.",
+    "name": "Ghosle_Tameid",
+    "id": 237,
     "collectionID": 0,
     "cardIDInGame": null,
-    "price": 0,
+    "price": 20000,
     "manaCost": 0,
     "currentCell": null
   }

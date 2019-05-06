@@ -11,6 +11,7 @@ public class AIPlayer extends Player {
     public AIPlayer(int aiID, Deck deck, int winningPrize) {
         super();
         super.getCollection().addDeck(deck);
+        super.getCollection().autoChooseDeck();
         this.aiID = aiID;
         this.winningPrize = winningPrize;
         this.setUsername(Integer.toString(aiID));
@@ -43,5 +44,12 @@ public class AIPlayer extends Player {
 
     public int getWinningPrize() {
         return winningPrize;
+    }
+
+    public static AIPlayer getAIPlayer(int aiID) {
+        for (AIPlayer aiPlayer : aiPlayers)
+            if (aiPlayer.aiID == aiID)
+                return aiPlayer;
+        return null;
     }
 }

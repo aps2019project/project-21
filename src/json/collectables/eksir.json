@@ -4,9 +4,26 @@
     "applyType": null,
     "effects": [
       {
-        "@type": "models.card.effects.IncreaseHP",
+        "@type": "models.card.buffs.PowerAP",
         "@val": {
-          "changeValue": 6,
+          "value": 3,
+          "initialAP": 0,
+          "duration": 2147483647,
+          "buffMode": "GOOD",
+          "cell": null,
+          "attacker": null,
+          "player": null,
+          "match": null,
+          "activationType": "NONE"
+        }
+      },
+      {
+        "@type": "models.card.buffs.PowerHP",
+        "@val": {
+          "value": 3,
+          "initialHP": 0,
+          "duration": 2147483647,
+          "buffMode": "GOOD",
           "cell": null,
           "attacker": null,
           "player": null,
@@ -23,9 +40,9 @@
       "oppOrAlly": "ALLY",
       "chooseType": "NONE"
     },
-    "desc": "Increase HP of a random ally 3 units.",
-    "name": "Nooshdaroo",
-    "id": 238,
+    "desc": "3 powerHP and 3 powerAP for random minion.",
+    "name": "Eksir",
+    "id": 240,
     "collectionID": 0,
     "cardIDInGame": null,
     "price": 0,

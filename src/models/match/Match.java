@@ -22,6 +22,7 @@ public class Match {
     private GameMode gameMode;
     private GoalMode goalMode;
     private GameType gameType;
+    private int flagCount;
     private Time gameTime;
     private int turn;  // 0 for player1 and 1 for player2
     private Card selectedCard;
@@ -36,7 +37,7 @@ public class Match {
         return this.info;
     }
 
-    public Match(Player playerOne, Player playerTwo, GameMode gameMode, GameType gameType, GoalMode goalMode) {
+    public Match(Player playerOne, Player playerTwo, GameMode gameMode, GameType gameType, GoalMode goalMode, int flagCount) {
         this.players[0] = playerOne;
         this.players[1] = playerTwo;
         this.battlefield = new Battlefield();
@@ -46,6 +47,7 @@ public class Match {
         this.gameMode = gameMode;
         this.gameType = gameType;
         this.goalMode = goalMode;
+        this.flagCount = flagCount;
     }
 
     public void selectAttacker(String attackerID) {
@@ -305,9 +307,13 @@ public class Match {
         return true;
     }
 
-    public List<Attacker> getAllGroundedAttacker(){
+    public List<Attacker> getAllGroundedAttacker() {
         //  TODO:
         return null;
+    }
+
+    public static void setCurrentMatch(Match currentMatch) {
+        Match.currentMatch = currentMatch;
     }
 
 

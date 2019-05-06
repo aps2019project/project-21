@@ -1,17 +1,20 @@
 {
-  "@type": "models.Item.Collectable",
+  "@type": "models.Item.Usable",
   "@val": {
     "applyType": null,
     "effects": [
       {
-        "@type": "models.card.effects.IncreaseHP",
+        "@type": "models.card.buffs.WeaknessAP",
         "@val": {
-          "changeValue": 6,
+          "value": 2,
+          "initialAP": 0,
+          "duration": 1,
+          "buffMode": "EVIL",
           "cell": null,
           "attacker": null,
           "player": null,
           "match": null,
-          "activationType": "NONE"
+          "activationType": "ON_ATTACK"
         }
       }
     ],
@@ -20,15 +23,15 @@
       "targetAttackerRange": "ALL_THREE",
       "cellType": "NONE",
       "heroOrMinion": "BOTH",
-      "oppOrAlly": "ALLY",
+      "oppOrAlly": "OPP",
       "chooseType": "NONE"
     },
-    "desc": "Increase HP of a random ally 3 units.",
-    "name": "Nooshdaroo",
-    "id": 238,
+    "desc": "Decrease 2 units of opp's (randomly chosen) AP for 1 turn, on attack.",
+    "name": "Terror_Hood",
+    "id": 232,
     "collectionID": 0,
     "cardIDInGame": null,
-    "price": 0,
+    "price": 5000,
     "manaCost": 0,
     "currentCell": null
   }

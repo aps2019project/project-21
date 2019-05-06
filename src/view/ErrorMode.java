@@ -45,6 +45,8 @@ public enum ErrorMode {
     DELETED_SUCCESSFULLY("deleted successfully."),
     YOU_MUST_LOGOUT("you must logout."),
     MAIN_DECK_IS_INVALID("your main deck is not valid."),
+    AIPLAYER_IS_NULL("aiPlayer is null"),
+    HIS_MAIN_DECK_INVALID("his main deck is not valid. (not her, I'm sexist bro.)."),
     INVALID_COMMAND("invalid command");
 
 

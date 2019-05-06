@@ -49,6 +49,8 @@ public class BattleMenuRequest extends Request {
             exitCheck();
         else if (commandLine.equalsIgnoreCase("show menu"))
             showMenuCheck();
+        else if(commandLine.equals("back"))
+            backCheck();
     }
 
     private void gameInfoCheck() {

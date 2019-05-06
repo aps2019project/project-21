@@ -4,34 +4,34 @@
     "applyType": null,
     "effects": [
       {
-        "@type": "models.card.effects.GiveEffect",
+        "@type": "models.card.buffs.PowerAP",
         "@val": {
-          "duration": 12,
-          "num": 0,
-          "value": 0,
-          "effectName": "HOLY",
+          "value": 1,
+          "initialAP": 0,
+          "duration": 2147483647,
+          "buffMode": "GOOD",
           "cell": null,
           "attacker": null,
           "player": null,
           "match": null,
-          "activationType": "NONE"
+          "activationType": "ON_DEATH"
         }
       }
     ],
     "targetType": {
       "randomOrNot": "NOT_RANDOM",
       "targetAttackerRange": "ALL_THREE",
-      "cellType": "NONE",
-      "heroOrMinion": "HERO",
+      "cellType": "SINGLE_CELL",
+      "heroOrMinion": "BOTH",
       "oppOrAlly": "ALLY",
-      "chooseType": "NONE"
+      "chooseType": "SELECTED_ALLY"
     },
-    "desc": "Gives ally hero 12 holu buffs.",
-    "name": "Namoose_Separ",
-    "id": 229,
+    "desc": "Apply power buff 1 unit of ally, on death.",
+    "name": "Soul_Eater",
+    "id": 236,
     "collectionID": 0,
     "cardIDInGame": null,
-    "price": 4000,
+    "price": 25000,
     "manaCost": 0,
     "currentCell": null
   }

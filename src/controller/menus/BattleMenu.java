@@ -211,7 +211,7 @@ public class BattleMenu extends Menu {
     }
 
     protected void showMenu() {
-        view.showMenu("MainMenu");
+        view.showMenu("Battle");
     }
 
     private void back() {

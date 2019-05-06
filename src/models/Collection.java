@@ -64,7 +64,6 @@ public class Collection {
                 else if (card.getClass().equals(Spell.class))
                     spells.add((Spell) card);
             }
-
     }
 
     public void deleteDeck(String deckName) {
@@ -166,5 +165,14 @@ public class Collection {
                     return true;
         }
         return false;
+    }
+
+    public void autoChooseDeck() {
+        for (Deck deck : decks) {
+            if (deck != null && deck.isValid()) {
+                mainDeck = deck;
+                return;
+            }
+        }
     }
 }

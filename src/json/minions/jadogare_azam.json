@@ -2,37 +2,51 @@
   "@type": "models.card.Minion",
   "@val": {
     "isCombo": false,
-    "maxHp": 3,
-    "maxAp": 4,
-    "hp": 3,
-    "ap": 4,
+    "maxHp": 6,
+    "maxAp": 6,
+    "hp": 6,
+    "ap": 6,
     "specialPower": {
       "applyType": "ON_ATTACKER",
       "targetType": {
         "randomOrNot": "NOT_RANDOM",
         "targetAttackerRange": "ALL_THREE",
         "cellType": "SQUARE_3_3",
-        "heroOrMinion": "MINION",
-        "oppOrAlly": "OPP",
+        "heroOrMinion": "BOTH",
+        "oppOrAlly": "ALLY",
         "chooseType": "HIMSELF"
       },
       "effects": [
         {
-          "@type": "models.card.buffs.Stun",
+          "@type": "models.card.buffs.PowerAP",
           "@val": {
-            "duration": 1,
-            "buffMode": "EVIL",
+            "value": 2,
+            "initialAP": 0,
+            "duration": 2147483647,
+            "buffMode": "GOOD",
             "cell": null,
             "attacker": null,
             "player": null,
             "match": null,
-            "activationType": "ON_SPAWN"
+            "activationType": "PASSIVE"
+          }
+        },
+        {
+          "@type": "models.card.buffs.Holy",
+          "@val": {
+            "duration": 2147483647,
+            "buffMode": "GOOD",
+            "cell": null,
+            "attacker": null,
+            "player": null,
+            "match": null,
+            "activationType": "PASSIVE"
           }
         }
       ],
-      "desc": "Stun 8 neighbourhood minions.",
-      "name": "NaneSarma'sSpell",
-      "id": 151,
+      "desc": "Power AP 2 units and continuous holy buff, on itself and neighbors.",
+      "name": "Jadogare_Azam's_Spell",
+      "id": 185,
       "collectionID": 0,
       "cardIDInGame": null,
       "price": 0,
@@ -47,12 +61,12 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
-    "name": "NaneSarma",
-    "id": 152,
+    "name": "Jadogare_Azam",
+    "id": 186,
     "collectionID": 0,
     "cardIDInGame": null,
-    "price": 500,
-    "manaCost": 3,
+    "price": 550,
+    "manaCost": 6,
     "currentCell": {
       "x": 0,
       "y": 0,
