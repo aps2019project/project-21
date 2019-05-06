@@ -27,7 +27,7 @@ public class AccountMenuRequest extends Request {
             backCheck();
         else if (commandLine.contains("exit"))
             exitCheck();
-        else if (commandLine.equals("hesoyam"))
+        else if (commandLine.equalsIgnoreCase("hesoyam"))
             hesoyamCheck();
     }
 

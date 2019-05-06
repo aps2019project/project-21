@@ -6,7 +6,6 @@ import models.card.Attacker;
 import models.card.Card;
 import models.match.Match;
 import models.match.PlayerMatchInfo;
-import view.View;
 
 public class BattleMenu extends Menu {
     private static BattleMenu instance = new BattleMenu();
@@ -32,7 +31,6 @@ public class BattleMenu extends Menu {
         request.extractType();
 
         switch (request.getType()) {
-            //  add cases
             case HELP:
                 showMenu();
                 break;
@@ -73,7 +71,7 @@ public class BattleMenu extends Menu {
                 insertCardIn();
                 break;
             case END_TURN:
-                endturn();
+                endTurn();
                 break;
             case SHOW_COLLECTABLES:
                 showCollectables();
@@ -95,6 +93,12 @@ public class BattleMenu extends Menu {
                 break;
             case SHOW_MENU:
                 showMenu();
+                break;
+            case INVALID:
+                invalidCommand();
+                break;
+            case BACK:
+                back();
                 break;
         }
     }
@@ -170,7 +174,7 @@ public class BattleMenu extends Menu {
         Match.getCurrentMatch().insertCard(name, x, y);
     }
 
-    private void endturn() {
+    private void endTurn() {
         Match.getCurrentMatch().swapTurn();
     }
 
@@ -207,39 +211,11 @@ public class BattleMenu extends Menu {
     }
 
     protected void showMenu() {
-        System.out.println("----Game----\n" +
-                "options:\n" +
-                "1 - Game info\n" +
-                "2 - Show my minions\n" +
-                "3 - Show opponent minions\n" +
-                "4 - Show card info [card id]\n" +
-                "5 - Select [card id]\n" +
-                "6 - Move to ([x], [y])\n" +
-                "7 - Attack [opponent card id]\n" +
-                "8 - Attack combo [opponent card id] [my card id] [my card id] [...]\n" +
-                "9 - Use special power (x; y)\n" +
-                "10 - Show hand\n" +
-                "11 - Insert [card name] in (x; y)\n" +
-                "12 - Insert [card name] in (x; y)\n" +
-                "13 - End turn\n" +
-                "14 - Show collectables\n" +
-                "15 - Select [collectable id]\n" +
-                "16 - Show info\n" +
-                "17 - Use [location x; y]\n" +
-                "18 - Show Next Card\n" +
-                "19 - Enter graveyard\n" +
-                "20 - Help\n" +
-                "21 - End Game\n" +
-                "22 = Exit\n" +
-                "23 - Show menu\n");
+        view.showMenu("MainMenu");
     }
 
-    public View getView() {
-        return view;
-    }
-
-    public void setView(View view) {
-        this.view = view;
+    private void back() {
+        MenuManager.getInstance().gotoMainMenu();
     }
 }
 

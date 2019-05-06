@@ -60,7 +60,7 @@ public class Deck {
         return cards;
     }
 
-    public Item getUsable() {
+    public Usable getUsable() {
         return usable;
     }
 

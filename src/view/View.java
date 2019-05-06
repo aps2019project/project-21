@@ -173,29 +173,29 @@ public class View {
                     "8. back\n" +
                     "9. exit\n");
         } else if (menuName.equals("Battle")) {
-            System.out.print("Battle :\n" +
-                    "1 - Game info\n" +
-                    "2 - Show my minions\n" +
-                    "3 - Show opponent minions\n" +
-                    "4 - Show card info [card id]\n" +
-                    "5 - Select [card id]\n" +
-                    "6 - Move to([x],[y])\n" +
-                    "7 - Attack [opponent card id]\n" +
-                    "8 - Attack combo [opponent card id][my card id][...]\n" +
-                    "9 - Use special power ([x],[y])\n" +
-                    "10 - Show hand\n" +
-                    "11 - Insert [card name] in ([x],[y])\n" +
-                    "12 - End turn\n" +
-                    "13 - Show collectables\n" +
-                    "14 - Select [collectable id]\n" +
-                    "15 - Show info\n" +
-                    "16 - Use ([x],[y])\n" +
-                    "17 - Show Next Card\n" +
-                    "18 - Enter graveyard\n" +
-                    "19 - Help\n" +
-                    "20 - End Game\n" +
-                    "21 - Exit\n" +
-                    "22 - Show menu\n");
+            System.out.print("------ Battle ------\n" +
+                    "1. Game info\n" +
+                    "2. Show my minions\n" +
+                    "3. Show opponent minions\n" +
+                    "4. Show card info [card id]\n" +
+                    "5. Select [card id]\n" +
+                    "6. Move to(x,y)\n" +
+                    "7. Attack [opponent card id]\n" +
+                    "8. Attack combo [opponent card id][my card id][...]\n" +
+                    "9. Use special power (x,y)\n" +
+                    "10. Show hand\n" +
+                    "11. Insert [card name] in (x,y)\n" +
+                    "12. End turn\n" +
+                    "13. Show collectables\n" +
+                    "14. Select [collectable id]\n" +
+                    "15. Show info\n" +
+                    "16. Use (x,y)\n" +
+                    "17. Show Next Card\n" +
+                    "18. Enter graveyard\n" +
+                    "19. Help\n" +
+                    "20. End Game\n" +
+                    "21. Exit\n" +
+                    "22. exit\n");
         } else if (menuName.equals("Graveyard")) {
             System.out.print("Graveyard :\n" +
                     "1 - Show info [card id]\n" +
@@ -366,5 +366,11 @@ public class View {
 
     public void showItemInfo() {
 
+    }
+
+    public static void printException(Exception e) {
+        System.out.println(e.getMessage());
+        for (StackTraceElement s : e.getStackTrace())
+            System.out.println(s);
     }
 }

@@ -10,7 +10,7 @@ public class ShopMenuRequest extends Request {
         String command = this.getCommandLine();
         if (command.equals("exit"))
             exitCheck();
-        else if (command.equals("show collection"))
+        else if (command.equalsIgnoreCase("show collection"))
             showCollectionCheck();
         else if (command.startsWith("search collection"))
             searchCollectionCheck();
@@ -20,12 +20,14 @@ public class ShopMenuRequest extends Request {
             buyCheck();
         else if (command.startsWith("sell"))
             sellCheck();
-        else if (command.equals("show"))
+        else if (command.equalsIgnoreCase("show"))
             showCheck();
-        else if (command.equals("help"))
+        else if (command.equalsIgnoreCase("help"))
             helpCheck();
-        else if (command.equals("back"))
+        else if (command.equalsIgnoreCase("back"))
             backCheck();
+        else if (command.equalsIgnoreCase("show menu"))
+            showMenuCheck();
     }
 
     private void showCollectionCheck() {

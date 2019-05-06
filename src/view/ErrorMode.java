@@ -43,6 +43,8 @@ public enum ErrorMode {
     ADDED_SUCCESSFULLY("added successfully"),
     HERO_IS_USED_IN_A_DECK("this hero is already in a deck"),
     DELETED_SUCCESSFULLY("deleted successfully."),
+    YOU_MUST_LOGOUT("you must logout."),
+    MAIN_DECK_IS_INVALID("your main deck is not valid."),
     INVALID_COMMAND("invalid command");
 
 

@@ -13,8 +13,8 @@ import java.util.List;
 public class Player {
     private static List<Player> players = new ArrayList<>();
     private static Player currentPlayer;
-    private String username;
-    private String password;
+    private String username = "";
+    private String password = "";
     private Collection collection = new Collection();
     private int drake;
     private List<Match> matchHistory = new ArrayList<>();
@@ -23,10 +23,6 @@ public class Player {
 
     public int getCardCurrentID() {
         return cardCurrentID;
-    }
-
-    public void setWins() {
-
     }
 
     public int getWins() {
@@ -43,6 +39,10 @@ public class Player {
         this.username = username;
         this.password = password;
         this.cardCurrentID = 0;
+    }
+
+    public Player() {
+
     }
 
     void showMatchHistory() {
@@ -216,6 +216,10 @@ public class Player {
 
     public void setMainDeck(Deck deck) {
         collection.setMainDeck(deck);
+    }
+
+    public boolean hasAValidMainDeck() {
+        return collection.hasValidMainDeck();
     }
 
 }

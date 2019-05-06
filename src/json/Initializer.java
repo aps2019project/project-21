@@ -1,5 +1,6 @@
 package json;
 
+import models.AIPlayer;
 import models.Collection;
 import models.Item.Collectable;
 import models.Item.Usable;
@@ -23,6 +24,7 @@ public class Initializer {
             Collectable.addCollectable(initCollectables());
             Usable.addUsable(initUsables());
             Player.addPlayer(initPlayers());
+            AIPlayer.addAIPlayer(initAIPlayers());
 
             resetCollectionIDs();
 
@@ -109,5 +111,17 @@ public class Initializer {
             if (file.isFile())
                 players.add(CardMaker.playerReader(file.getPath()));
         return players;
+    }
+
+    private static List<AIPlayer> initAIPlayers() throws IOException {
+        List<AIPlayer> aiPlayers = new ArrayList<>();
+        File path = new File("src//json//aiplayers");
+        File[] files = path.listFiles();
+        if (files == null)
+            return aiPlayers;
+        for (File file : files)
+            if (file.isFile())
+                aiPlayers.add(CardMaker.aiPlayerReader(file.getPath()));
+        return aiPlayers;
     }
 }

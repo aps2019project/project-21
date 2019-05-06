@@ -2,10 +2,12 @@ package json;
 
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
+import models.AIPlayer;
 import models.Item.Collectable;
 import models.Item.Usable;
 import models.Player;
 import models.card.*;
+import view.View;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -15,12 +17,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CardMaker {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         HeroMaker.main();
         MinionMaker.main();
         SpellMaker.main();
         UsableMaker.main();
         CollectableMaker.main();
+        AIPlayerMaker.main();
     }
 
     private static void usableMaker() throws IOException {
@@ -68,28 +71,52 @@ public class CardMaker {
 //        saveToFile(minion);
     }
 
-    static Hero heroReader(String path) throws IOException {
-        String json = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
-        YaGson yaGson = new YaGson();
-        return yaGson.fromJson(json, Hero.class);
+    static Hero heroReader(String path) {
+        try {
+            String json = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
+            YaGson yaGson = new YaGson();
+            return yaGson.fromJson(json, Hero.class);
+        } catch (IOException e) {
+            View.printException(e);
+        }
+        //  shouldn't reach here
+        return null;
     }
 
-    static Spell spellReader(String path) throws IOException {
-        String json = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
-        YaGson gson = new YaGson();
-        return gson.fromJson(json, Spell.class);
+    static Spell spellReader(String path) {
+        try {
+            String json = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
+            YaGson gson = new YaGson();
+            return gson.fromJson(json, Spell.class);
+        } catch (IOException e) {
+            View.printException(e);
+        }
+        //  shouldn't reach here
+        return null;
     }
 
-    static Minion minionReader(String path) throws IOException {
-        String json = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
-        YaGson gson = new YaGson();
-        return gson.fromJson(json, Minion.class);
+    static Minion minionReader(String path) {
+        try {
+            String json = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
+            YaGson gson = new YaGson();
+            return gson.fromJson(json, Minion.class);
+        } catch (IOException e) {
+            View.printException(e);
+        }
+        //  shouldn't reach here
+        return null;
     }
 
-    static Usable usableReader(String path) throws IOException {
-        String json = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
-        YaGson gson = new YaGson();
-        return gson.fromJson(json, Usable.class);
+    static Usable usableReader(String path) {
+        try {
+            String json = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
+            YaGson gson = new YaGson();
+            return gson.fromJson(json, Usable.class);
+        } catch (IOException e) {
+            View.printException(e);
+        }
+        //  shouldn't reach here
+        return null;
     }
 
     static Collectable collectableReader(String path) throws IOException {
@@ -102,6 +129,12 @@ public class CardMaker {
         String json = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
         YaGson gson = new YaGson();
         return gson.fromJson(json, Player.class);
+    }
+
+    static AIPlayer aiPlayerReader(String path) throws IOException {
+        String json = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
+        YaGson gson = new YaGson();
+        return gson.fromJson(json, AIPlayer.class);
     }
 
     public static void saveToFile(Object object) {
@@ -118,18 +151,20 @@ public class CardMaker {
             folder = "collectables";
         else if (object.getClass().equals(Player.class))
             folder = "accounts";
+        else if (object.getClass().equals(AIPlayer.class))
+            folder = "aiplayers";
         else
             System.out.println("Card class not found!");
         String name = "";
         try {
             name = ((Card) object).getName();
         } catch (Exception e) {
-
+            View.printException(e);
         }
         try {
             name = ((Player) object).getUsername();
         } catch (Exception e) {
-
+            View.printException(e);
         }
         String path = "src//json//" + folder + "//"
                 + name.toLowerCase().replaceAll("\\s+", "_") + ".json";
@@ -145,7 +180,7 @@ public class CardMaker {
 
             yaGson.toJson(object, isr);
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            View.printException(e);
         }
 
         System.out.println("Items written to file");
@@ -156,7 +191,7 @@ public class CardMaker {
             YaGson gson = new YaGson();
             return gson.fromJson(gson.toJson(object, type), type);
         } catch (Exception e) {
-            e.printStackTrace();
+            View.printException(e);
             return null;
         }
     }

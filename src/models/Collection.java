@@ -51,6 +51,20 @@ public class Collection {
         if (deck == null || hasThis(deck.getName()))
             return;
         decks.add(deck);
+        if (deck.hasHero())
+            heroes.add(deck.getHero());
+        if (deck.hasUsable())
+            usables.add(deck.getUsable());
+        if (deck.getCards() != null)
+            for (Card card : deck.getCards()) {
+                if (card == null)
+                    continue;
+                if (card.getClass().equals(Minion.class))
+                    minions.add((Minion) card);
+                else if (card.getClass().equals(Spell.class))
+                    spells.add((Spell) card);
+            }
+
     }
 
     public void deleteDeck(String deckName) {
@@ -135,6 +149,10 @@ public class Collection {
 
     public boolean hasMainDeck() {
         return mainDeck != null;
+    }
+
+    public boolean hasValidMainDeck() {
+        return hasMainDeck() && mainDeck.isValid();
     }
 
     public boolean isThisHeroInADeck(Hero hero) {

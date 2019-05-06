@@ -6,44 +6,49 @@ import java.util.regex.Pattern;
 public class BattleMenuRequest extends Request {
     @Override
     public void extractType() {
-        // set field type in parent class
         type = RequestType.INVALID;
-        if (commandLine.equals("Game info"))
+        if (commandLine.equalsIgnoreCase("game info"))
             gameInfoCheck();
-        else if (commandLine.equals("Show my minions"))
+        else if (commandLine.equalsIgnoreCase("show my minions"))
             showMyMinionsCheck();
-        else if (commandLine.equals("Show opponents minions"))
+        else if (commandLine.equalsIgnoreCase("show opponents minions"))
             showOppMinionsCheck();
-        else if (commandLine.startsWith("Show card info "))
+        else if (commandLine.startsWith("show card info "))
             showCardInfoCheck();
-        else if (commandLine.startsWith("Select"))
+        else if (commandLine.startsWith("select"))
             selectCheck();
-        else if (commandLine.startsWith("Move to"))
+        else if (commandLine.startsWith("move to"))
             moveToCheck();
-        else if (commandLine.startsWith("Attack "))
+        else if (commandLine.startsWith("attack "))
             attackCheck();
-        else if (commandLine.startsWith("Attack combo "))
+        else if (commandLine.startsWith("attack combo "))
             attackComboCheck();
-        else if (commandLine.startsWith("Use special power "))
+        else if (commandLine.startsWith("use special power "))
             useSpecialPowerCheck();
-        else if (commandLine.equals("Show hand"))
+        else if (commandLine.equalsIgnoreCase("show hand"))
             showHandCheck();
-        else if (commandLine.startsWith("Insert ") && commandLine.contains("in"))
+        else if (commandLine.startsWith("insert ") && commandLine.contains("in"))
             insertCheck();
-        else if (commandLine.equals("End Turn"))
+        else if (commandLine.equalsIgnoreCase("end turn"))
             endTurnCheck();
-        else if (commandLine.equals("Show collectables"))
+        else if (commandLine.equalsIgnoreCase("show collectables"))
             showCollectablesCheck();
-        else if (commandLine.equals("Show info"))
+        else if (commandLine.equalsIgnoreCase("show info"))
             showInfoCheck();
-        else if (commandLine.startsWith("Use"))
+        else if (commandLine.startsWith("use"))
             useCheck();
-        else if (commandLine.equals("Show Next Card"))
+        else if (commandLine.equalsIgnoreCase("show next card"))
             showNextCardCheck();
-        else if (commandLine.equals("Enter graveyard"))
+        else if (commandLine.equalsIgnoreCase("enter graveyard"))
             enterGraveyardCheck();
-        else if (commandLine.equals("End Game"))
+        else if (commandLine.equalsIgnoreCase("end Game"))
             endGameCheck();
+        else if (commandLine.equalsIgnoreCase("help"))
+            helpCheck();
+        else if (commandLine.equalsIgnoreCase("exit"))
+            exitCheck();
+        else if (commandLine.equalsIgnoreCase("show menu"))
+            showMenuCheck();
     }
 
     private void gameInfoCheck() {
@@ -59,7 +64,7 @@ public class BattleMenuRequest extends Request {
     }
 
     private void showCardInfoCheck() {
-        String regex = "Show card info (\\d+)";
+        String regex = "show card info (\\d+)";
         Matcher matcher = Pattern.compile(regex).matcher(commandLine);
         if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
@@ -68,7 +73,7 @@ public class BattleMenuRequest extends Request {
     }
 
     private void selectCheck() {
-        String regex = "Select (\\d+)";
+        String regex = "select (\\d+)";
         Matcher matcher = Pattern.compile(regex).matcher(commandLine);
         if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
@@ -77,7 +82,7 @@ public class BattleMenuRequest extends Request {
     }
 
     private void moveToCheck() {
-        String regex = "Move to [(](\\d+),(\\d+)[)]";
+        String regex = "move to [(](\\d+),(\\d+)[)]";
         Matcher matcher = Pattern.compile(regex).matcher(commandLine);
         if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
@@ -87,7 +92,7 @@ public class BattleMenuRequest extends Request {
     }
 
     private void attackCheck() {
-        String regex = "Attack (\\d+)";
+        String regex = "attack (\\d+)";
         Matcher matcher = Pattern.compile(regex).matcher(commandLine);
         if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
@@ -113,9 +118,9 @@ public class BattleMenuRequest extends Request {
     }
 
     private void useSpecialPowerCheck() {
-        String regex = "Use special power [(](\\d+),(\\d+)[)]";
+        String regex = "use special power [(](\\d+),(\\d+)[)]";
         Matcher matcher = Pattern.compile(regex).matcher(commandLine);
-        if (matcher.matches()){
+        if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
             commandArguments.add(matcher.group(2));
             type = RequestType.USE_SPECIAL_POWER;
@@ -127,9 +132,9 @@ public class BattleMenuRequest extends Request {
     }
 
     private void insertCheck() {
-        String regex = "Insert (\\w+) in [(](\\d+)(\\d+)[)]";
+        String regex = "insert (\\w+) in [(](\\d+)(\\d+)[)]";
         Matcher matcher = Pattern.compile(regex).matcher(commandLine);
-        if (matcher.matches()){
+        if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
             commandArguments.add(matcher.group(2));
             commandArguments.add(matcher.group(3));
@@ -145,14 +150,14 @@ public class BattleMenuRequest extends Request {
         type = RequestType.SHOW_COLLECTABLES;
     }
 
-    private void showInfoCheck(){
+    private void showInfoCheck() {
         type = RequestType.SHOW_INFO;
     }
 
     private void useCheck() {
-        String regex = "Use location [(](\\d+),(\\d+)[)]";
+        String regex = "use location [(](\\d+),(\\d+)[)]";
         Matcher matcher = Pattern.compile(regex).matcher(commandLine);
-        if (matcher.matches()){
+        if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
             commandArguments.add(matcher.group(2));
             type = RequestType.USE;
@@ -169,9 +174,5 @@ public class BattleMenuRequest extends Request {
 
     private void endGameCheck() {
         type = RequestType.END_GAME;
-    }
-
-    private void showCardsCheck() {
-        type = RequestType.SHOW_CARDS;
     }
 }

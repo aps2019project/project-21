@@ -1,6 +1,6 @@
 package models.match;
 
-enum GameMode {
+public enum GameMode {
     SINGLE_PLAYER,
     MULTI_PLAYER;
 }

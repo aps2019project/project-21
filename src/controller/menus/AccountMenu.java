@@ -84,6 +84,10 @@ public class AccountMenu extends Menu {
     }
 
     private void createAccount() {
+        if (Player.getCurrentPlayer() != null){
+            view.printError(ErrorMode.YOU_MUST_LOGOUT);
+            return;
+        }
         String username = request.getCommandArguments().get(0);
         if (Player.hasThisPlayer(username)) {
             View.getInstance().printError(ErrorMode.USERNAME_IS_TAKEN);

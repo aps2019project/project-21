@@ -7,15 +7,15 @@ public class CollectionMenuRequest extends Request {
     @Override
     public void extractType() {
         type = RequestType.INVALID;
-        if (commandLine.equals("exit"))
+        if (commandLine.equalsIgnoreCase("exit"))
             exitCheck();
-        else if (commandLine.equals("help"))
+        else if (commandLine.equalsIgnoreCase("help"))
             helpCheck();
-        else if (commandLine.equals("show"))
+        else if (commandLine.equalsIgnoreCase("show"))
             showCollectionCheck();
         else if (commandLine.contains("search"))
             searchCheck();
-        else if (commandLine.equals("save"))
+        else if (commandLine.equalsIgnoreCase("save"))
             saveCheck();
         else if (commandLine.startsWith("create deck"))
             createDeckCheck();
@@ -29,12 +29,14 @@ public class CollectionMenuRequest extends Request {
             validateDeckCheck();
         else if (commandLine.startsWith("select deck "))
             selectDeckCheck();
-        else if (commandLine.equals("show all decks"))
+        else if (commandLine.equalsIgnoreCase("show all decks"))
             showAllDecksCheck();
         else if (commandLine.startsWith("show deck"))
             showDeckCheck();
-        else if (commandLine.equals("back"))
+        else if (commandLine.equalsIgnoreCase("back"))
             backCheck();
+        else if(commandLine.equalsIgnoreCase("show menu"))
+            showMenuCheck();
     }
 
     private void showCollectionCheck() {

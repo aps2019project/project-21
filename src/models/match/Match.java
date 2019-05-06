@@ -15,7 +15,6 @@ import java.util.List;
 public class Match {
     private static final int MOVE_RANGE = 2;
     private static Match currentMatch;
-// functions should be handled with currentMatch
 
     private Player[] players = new Player[2];
     private Battlefield battlefield;
@@ -310,4 +309,6 @@ public class Match {
         //  TODO:
         return null;
     }
+
+
 }
