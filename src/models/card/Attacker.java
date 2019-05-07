@@ -166,6 +166,7 @@ public class Attacker extends Card {
 
     public void setCurrentCell(Cell cell) {
         this.currentCell = cell;
+        cell.setCurrentAttacker(this);
     }
 
     public Spell getSpecialPower() {
@@ -226,7 +227,13 @@ public class Attacker extends Card {
         hasHolyBuff = false;
     }
 
-    public boolean isAlive(){
+    public boolean isAlive() {
         return this.hp > 0;
+    }
+
+    public String getDesc() {
+        if (hasSpecialPower())
+            return this.specialPower.getDesc();
+        return "";
     }
 }

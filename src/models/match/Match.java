@@ -1,6 +1,5 @@
 package models.match;
 
-import jdk.jshell.execution.LoaderDelegate;
 import models.Item.Collectable;
 import models.Item.Flag;
 import models.Player;
@@ -26,6 +25,7 @@ public class Match {
     private GoalMode goalMode;
     private GameType gameType;
     private int flagCount; //  only for gather flag
+    private int collectableCount = 2;
     private List<Flag> flags = new ArrayList<>();
     private Flag flag;
     private LocalDateTime gameTime = LocalDateTime.now();
@@ -53,6 +53,8 @@ public class Match {
         this.gameType = gameType;
         this.goalMode = goalMode;
         this.flagCount = flagCount;
+        if (goalMode == GoalMode.HOLD_FLAG)
+            this.flagCount = 1;
         initiateMatch();
     }
 
@@ -91,17 +93,26 @@ public class Match {
         Cell target = getCell(x, y);
         if (target == null)
             return;
-        if (!isMoveTargetValid(target))
+        if (!isMoveTargetValid(target)) {
+            view.printError(ErrorMode.INVALID_MOVE_TARGET);
             return;
+        }
         if (!isSelectedCardAttacker())
             return;
         Attacker attacker = (Attacker) selectedCard;
+        if (!attacker.canMove()) {
+            view.printError(ErrorMode.ATTACKER_CANT_MOVE);
+            return;
+        }
         //  actually moving the attacker:
         attacker.getCurrentCell().setEmpty();
         attacker.setCurrentCell(target);
         target.setCurrentAttacker(attacker);
         System.out.println(selectedCard.getCardIDInGame() + " moved to " + x + " " + y);
-        //  TODO : if he goes on a collectable
+        if (target.hasCollectable()) {
+            info[turn].addCollectable(target.getCollectable());
+            target.setCollectable(null);
+        }
     }
 
     private boolean isMoveTargetValid(Cell target) {
@@ -110,12 +121,9 @@ public class Match {
         Attacker attacker = (Attacker) selectedCard;
         if (Cell.getManhattanDistance(attacker.getCurrentCell(), target) > MOVE_RANGE)
             return false;
-        //if(special) validTarget = true
         if (!target.isEmpty())
             return false;
-        //if(pathisclosed) validTarget = false
         return true;
-        //  error invalid target
     }
 
     public void attack(String oppID) {
@@ -224,42 +232,34 @@ public class Match {
 
     public void insertCard(String cardName, int x, int y) {
         // TODO: if minion then cast OnSpawn spell
-        Card card = info[turn].getHand().getCard(cardName);
-        if (card == null) {
-            System.out.println("invalid card name");
+        Attacker attacker = info[turn].getHand().getAttacker(cardName);
+        if (attacker == null) {
+            view.printError(ErrorMode.NO_CARD_WITH_THIS_NAME);
             return;
         }
-        Cell target = getCell(x, y);
-        if (target == null || !target.isEmpty())
+        Cell cell = getCell(x, y);
+        if (cell == null || !cell.isEmpty() || !isInsertNear(cell)) {
+            view.printError(ErrorMode.INVALID_CELL);
             return;
+        }
+        info[turn].getHand().pop(cardName);
+        attacker.setCurrentCell(cell);
+        cell.setCurrentAttacker(attacker);
+        //  collectables
+        info[turn].pushToHand();
+    }
 
-        boolean isNearOtherAttackers = false;
-        for (Attacker attacker : info[turn].getGroundedAttackers())
-            if (Cell.getManhattanDistance(attacker.getCurrentCell(), target) < 2) {
-                isNearOtherAttackers = true;
-                break;
-            }
-        if (!isNearOtherAttackers)
-            return;
-        //if special power then hasTarget = true
-        if (info[turn].getMp() < card.getManaCost()) {
-            System.out.println("You don't have enough mana");
-            return;
-        }
-        //full???
-        //spell va jame'e hadaf
-        int id = 1;
-        for (int i = 0; i < info[turn].getGroundedAttackers().size(); i++) {
-            if (info[turn].getGroundedAttackers().get(i).getName().equals(cardName))
-                id++;
-        }
-//        card.setXCoordinate(x);
-//        card.setYCoordinate(y);
-        card.setCardIDInGame(getThisTurnsPlayer().getUsername() + "_" + card.getName() + "_" + id);
-        info[turn].getGroundedAttackers().add((Attacker) card);
-        info[turn].getHand().remove(card);
-        //  handle cells in both cell and attacker
-        //  handle spell case
+    private boolean isInsertNear(Cell cell) {
+        for (Attacker attacker : getBothGroundedAttackers())
+            if (Cell.getEuclideanDistance(attacker.getCurrentCell(), cell) < 1.43d)
+                return true;
+        return false;
+    }
+
+    public List<Attacker> getBothGroundedAttackers() {
+        List<Attacker> attackers = new ArrayList<>(info[0].getGroundedAttackers());
+        attackers.addAll(info[1].getGroundedAttackers());
+        return attackers;
     }
 
     public void swapTurn() {
@@ -343,11 +343,6 @@ public class Match {
         return true;
     }
 
-    public List<Attacker> getAllGroundedAttacker() {
-        //  TODO:
-        return null;
-    }
-
     public static void setCurrentMatch(Match currentMatch) {
         Match.currentMatch = currentMatch;
     }
@@ -396,19 +391,60 @@ public class Match {
             playerMatchInfo.reset();
         info[0].getHero().setCurrentCell(getCell(2, 0));
         info[1].getHero().setCurrentCell(getCell(2, 8));
+        info[0].addToGroundedAttackers(info[0].getHero());
+        info[1].addToGroundedAttackers(info[1].getHero());
         for (int i = 0; i < 2; i++)
             Card.setCardIDInGame(players[i], info[i].getHero());
+        if (goalMode == GoalMode.HOLD_FLAG || goalMode == GoalMode.GATHER_FLAG)
+            initiateFlags();
+        initiateCollectables();
+    }
+
+    private void initiateFlags() {
+        int cnt = 0;
+        while (cnt < flagCount) {
+            Cell cell = battlefield.getRandomCell();
+            if (!cell.hasFlag()) {
+                cell.setFlag(new Flag());
+                cnt++;
+            }
+        }
+    }
+
+    private void initiateCollectables() {
+        int cnt = 0;
+        while (cnt < collectableCount) {
+            Cell cell = battlefield.getRandomCell();
+            if (!cell.hasCollectable()) {
+                cell.setCollectable(Collectable.getRandomCollectable());
+                cnt++;
+            }
+        }
+    }
+
+    public void showBattleField() {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 9; j++) {
+                System.out.print(" ---");
+                if (j == 8)
+                    System.out.print(" ");
+            }
+            System.out.println();
+            for (int j = 0; j < 9; j++) {
+                System.out.print("|");
+                if (!getCell(i, j).isEmpty()) {
+                    System.out.print(" X ");
+                } else System.out.print(" O ");
+            }
+            System.out.println();
+        }
+        for (int j = 0; j < 9; j++) {
+            System.out.print(" ---");
+            if (j == 8)
+                System.out.print(" ");
+        }
+        System.out.println();
     }
 
 
 }
-/*
-login a
-a
-main menu
-battle
-2
-select user b
-start multiplayer game KILL_HERO
-
- */

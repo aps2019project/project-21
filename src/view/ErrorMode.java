@@ -13,7 +13,7 @@ public enum ErrorMode {
     CARD_IS_NOT_IN_DECK(""),
     HERO_IS_NOT_IN_DECK(""),
     DECK_IS_NOT_VALID("deck is not valid."),
-    INVALID_TARGET(""),
+    INVALID_MOVE_TARGET("move target not valid."),
     CAN_NOT_ATTACK(""),
     UNAVAILABLE_OPPONENT(""),
     INVALID_CARD_ID("No card with such an id."),
@@ -49,6 +49,8 @@ public enum ErrorMode {
     HIS_MAIN_DECK_INVALID("his main deck is not valid. (not her, I'm sexist bro.)."),
     UNAVAILABLE_FOR_ATTACK("opponent minion is unavailable for attack."),
     CARD_SELECTED("card successfully selected."),
+    ATTACKER_CANT_MOVE("attacker cannot move."),
+    INVALID_CELL("cell is invalid."),
     INVALID_COMMAND("invalid command");
 
 

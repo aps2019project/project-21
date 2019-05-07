@@ -36,7 +36,7 @@ public class MenuManager {
                     case EXIT:
                         break menuLoop;
                 }
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 System.out.println(e.getMessage());
                 for (StackTraceElement s : e.getStackTrace())
                     System.out.println(s);

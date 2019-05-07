@@ -1,5 +1,6 @@
 package models.Item;
 
+import json.CardMaker;
 import models.Player;
 import models.card.ApplyType;
 import models.card.Effect;
@@ -9,6 +10,7 @@ import models.match.Match;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Collectable extends Item {
     private static List<Collectable> collectables = new ArrayList<>();
@@ -47,5 +49,11 @@ public class Collectable extends Item {
             if (collectable.id == id)
                 return collectable;
         return null;
+    }
+
+    public static Collectable getRandomCollectable() {
+        Random random = new Random();
+        return CardMaker.deepCopy(collectables.get(random.nextInt(collectables.size())),
+                Collectable.class);
     }
 }

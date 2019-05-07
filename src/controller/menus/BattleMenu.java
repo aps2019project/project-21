@@ -100,6 +100,9 @@ public class BattleMenu extends Menu {
             case BACK:
                 back();
                 break;
+            case SHOW_BATTLEFIELD:
+                showBattlefield();
+                break;
         }
     }
 
@@ -161,7 +164,7 @@ public class BattleMenu extends Menu {
         for (Card card : currentPlayer.getHand().getCards()) {
             view.showCardInfo(card);
         }
-        System.out.println("next card:\n");
+        System.out.println("next card:");
         Card nextCard = currentPlayer.getDeck().getCards().get(0);
         view.showCardInfo(nextCard);
     }
@@ -215,6 +218,10 @@ public class BattleMenu extends Menu {
 
     private void back() {
         MenuManager.getInstance().gotoMainMenu();
+    }
+
+    private void showBattlefield() {
+        Match.getCurrentMatch().showBattleField();
     }
 }
 

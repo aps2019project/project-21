@@ -55,6 +55,7 @@ public enum RequestType {
     ENTER_GRAVEYARD,
     END_GAME,
     SHOW_CARDS,
+    SHOW_BATTLEFIELD,
 
     //  ALL COMMANDS
 }

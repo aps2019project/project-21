@@ -1,5 +1,7 @@
 package models.match;
 
+import java.util.Random;
+
 public class Battlefield {
     private int width;
     private int length;
@@ -47,5 +49,12 @@ public class Battlefield {
         if (x < 0 || x >= width || y < 0 || y > length)
             return null;
         return cells[x][y];
+    }
+
+    public Cell getRandomCell() {
+        Random random = new Random();
+        int m = random.nextInt(5);
+        int n = random.nextInt(5) + 2;
+        return getCell(m, n);
     }
 }

@@ -1,5 +1,6 @@
 package models;
 
+import models.card.Attacker;
 import models.card.Card;
 
 import java.util.ArrayList;
@@ -50,6 +51,31 @@ public class Hand {
         for (Card card : cards)
             if (card.getName().equals(cardName))
                 return card;
+        return null;
+    }
+
+    public Attacker pop(String name) {
+        for (Card card : cards)
+            if (card instanceof Attacker)
+                if (card.getName().equals(name)) {
+                    cards.remove(card);
+                    return (Attacker) card;
+                }
+        return null;
+    }
+
+    public List<Attacker> getAttackers() {
+        List<Attacker> attackers = new ArrayList<>();
+        for (Card card : cards)
+            if (card instanceof Attacker)
+                attackers.add((Attacker) card);
+        return attackers;
+    }
+
+    public Attacker getAttacker(String name) {
+        for (Attacker attacker : getAttackers())
+            if (attacker.getName().equals(name))
+                return attacker;
         return null;
     }
 }

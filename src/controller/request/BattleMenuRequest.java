@@ -49,8 +49,10 @@ public class BattleMenuRequest extends Request {
             exitCheck();
         else if (commandLine.equalsIgnoreCase("show menu"))
             showMenuCheck();
-        else if(commandLine.equals("back"))
+        else if (commandLine.equals("back"))
             backCheck();
+        else if (commandLine.contains("show battlefield"))
+            showBattleFieldCheck();
     }
 
     private void gameInfoCheck() {
@@ -134,7 +136,7 @@ public class BattleMenuRequest extends Request {
     }
 
     private void insertCheck() {
-        String regex = "insert (\\w+) in [(](\\d+)(\\d+)[)]";
+        String regex = "insert (\\w+) in [(](\\d+), (\\d+)[)]";
         Matcher matcher = Pattern.compile(regex).matcher(commandLine);
         if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
@@ -176,5 +178,9 @@ public class BattleMenuRequest extends Request {
 
     private void endGameCheck() {
         type = RequestType.END_GAME;
+    }
+
+    private void showBattleFieldCheck() {
+        type = RequestType.SHOW_BATTLEFIELD;
     }
 }

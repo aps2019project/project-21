@@ -320,40 +320,40 @@ public class View {
         if (card == null)
             return;
         if (card instanceof Hero) {
-            System.out.println("Hero : \n" +
+            System.out.println("Hero : " +
                     "Name : " +
                     card.getName() +
-                    "\nCost : " +
+                    "Cost : " +
                     card.getPrice() +
-                    "\nDesc : " +
+                    "Desc : " +
                     card.getDesc());
         } else if (card instanceof Spell) {
-            System.out.println("Spell : \n" +
+            System.out.println("Spell : " +
                     "Name :" +
                     card.getName() +
-                    "\nMP : " +
+                    "MP : " +
                     card.getManaCost() +
-                    "\nCost : " +
+                    "Cost : " +
                     card.getPrice()
-                    + "\nDesc : " +
+                    + "Desc : " +
                     card.getDesc());
         } else if (card instanceof Minion) {
-            System.out.println("Minion :\n" +
-                    "Name :" +
+            System.out.println("Minion : " +
+                    "Name : " +
                     card.getName() +
-                    "\nHP : " +
+                    "HP : " +
                     ((Minion) card).getHP() +
                     " AP : " +
                     ((Minion) card).getAP() +
                     " MP : " +
                     card.getPrice() +
-                    "\nRange : " +
+                    "Range : " +
                     ((Minion) card).getAttackRange() +
-                    "\nCombo-ability :" +
+                    "Combo-ability : " +
                     ((Minion) card).isCombo() +
-                    "\nCost : " +
+                    "Cost : " +
                     card.getPrice() +
-                    "\nDesc : " +
+                    "Desc : " +
                     card.getDesc());
         } else
             System.out.println("not a card");

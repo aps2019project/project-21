@@ -126,13 +126,13 @@ public class Card {
     }
 
     public String getDesc() {
-        if (this.getClass().equals(Hero.class))
-            return ((Hero) this).getSpecialPower().getDesc();
-        else if (this.getClass().equals(Minion.class))
-            return ((Minion) this).getSpecialPower().getDesc();
-        else if (this.getClass().equals(Spell.class))
+        if (this instanceof Hero)
+            return ((Hero) this).getDesc();
+        else if (this instanceof Minion)
+            return ((Minion) this).getDesc();
+        else if (this instanceof Spell)
             return ((Spell) this).getDesc();  // this cast is probably not redundant!
-        else if (this.getClass().equals(Usable.class))
+        else if (this instanceof Usable)
             return ((Usable) this).getDesc();
         //  shouldn't reach here
         return null;

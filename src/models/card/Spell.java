@@ -14,7 +14,7 @@ public class Spell extends Card {
     private List<Effect> effects = new ArrayList<>();
     private String desc = "";
 
-    public Spell(){
+    public Spell() {
     }
 
     public Spell(String name, int price, int manaCost, TargetType targetType,
@@ -55,9 +55,10 @@ public class Spell extends Card {
     }
 
     private List<Attacker> getTargetAttackers(Match match, Player player, Cell targetCell) {
-        List<Attacker> attackers = new ArrayList<>(match.getAllGroundedAttacker());
-        List<Attacker> copy = new ArrayList<>(attackers);
-        return attackers;
+//        List<Attacker> attackers = new ArrayList<>(match.getAllGroundedAttacker());
+//        List<Attacker> copy = new ArrayList<>(attackers);
+//        return attackers;
+        return null;
     }
 
     public static List<Spell> getSpells() {
@@ -87,7 +88,7 @@ public class Spell extends Card {
         return desc;
     }
 
-    public void reset(){
+    public void reset() {
         super.reset();
     }
 }

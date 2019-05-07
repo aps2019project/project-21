@@ -24,7 +24,7 @@ public class PlayerMatchInfo {
     private List<Attacker> groundedAttackers = new ArrayList<>();
     private List<Effect> effects = new ArrayList<>();
 
-    PlayerMatchInfo(Player player) {
+    public PlayerMatchInfo(Player player) {
         deck = CardMaker.deepCopy(player.getCollection().getMainDeck(), Deck.class);
         deck.shuffle();
         hand = Hand.extractHand(deck);
@@ -81,4 +81,22 @@ public class PlayerMatchInfo {
     public void reset() {
         deck.reset();
     }
+
+    public void addCollectable(Collectable collectable) {
+        if (collectable == null)
+            return;
+        this.achievedCollectables.add(collectable);
+    }
+
+    public void pushToHand() {
+        hand.pushToHandFromDeck(deck);
+    }
+
+    public void addToGroundedAttackers(Attacker attacker) {
+        if (attacker == null)
+            return;
+        groundedAttackers.add(attacker);
+    }
+
+
 }

@@ -78,4 +78,35 @@ public class Cell {
         this.currentAttacker = attacker;
     }
 
+    public boolean hasFlag() {
+        return this.flag != null;
+    }
+
+    public boolean hasCollectable() {
+        return this.collectable != null;
+    }
+
+    public ArrayList<Effect> getEffects() {
+        return effects;
+    }
+
+    public Collectable getCollectable() {
+        return collectable;
+    }
+
+    public Flag getFlag() {
+        return flag;
+    }
+
+    public Attacker getCurrentAttacker() {
+        return currentAttacker;
+    }
+
+    public static double getEuclideanDistance(Cell first, Cell second) {
+        if (first == null || second == null)
+            return -1;
+        return Math.sqrt((first.x - second.x) * (first.x - second.x)
+                + (first.y - second.y) * (first.y - second.y));
+
+    }
 }
