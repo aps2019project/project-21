@@ -4,11 +4,12 @@ import models.Item.Collectable;
 import models.Item.Usable;
 import models.card.Card;
 import models.card.Hero;
-import models.Item.Item;
 import models.card.Minion;
 import models.card.Spell;
+import view.View;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Deck {
@@ -30,17 +31,13 @@ public class Deck {
         this.name = name;
     }
 
-    public static Deck copyDeck(Deck deck) {
-        return new Deck(deck.name, deck.cards, deck.usable, deck.hero);
-    }
-
     public void shuffle() {
-
+        Collections.shuffle(this.cards);
     }
 
     public void showLastCard() {
         Card last = cards.get(0);
-        //  TODO
+        View.getInstance().showNextCard(last);
     }
 
     public Card pop() {
@@ -116,7 +113,7 @@ public class Deck {
                 usable = null;
     }
 
-    public List<Card> getAllCards() { //  except collectables
+    public List<Card> getAllCards() {  //  except collectables
         List<Card> cards = new ArrayList<>(this.cards);
         if (hero != null)
             cards.add(hero);
@@ -152,6 +149,11 @@ public class Deck {
         return isCardsFull()
                 && hasHero()
                 && hasUsable();
+    }
+
+    public void reset() {
+        for (Card card : getAllCards())
+            card.reset();
     }
 
 }

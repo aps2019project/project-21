@@ -24,6 +24,7 @@ public class Attacker extends Card {
     private boolean isDisarmed = false;
     private boolean isStunned = false;
     private boolean hasHolyBuff = false;
+
     Attacker() {
 
     }
@@ -191,5 +192,41 @@ public class Attacker extends Card {
         return attackers;
     }
 
+    public boolean canAttack() {
+        return canAttack;
+    }
 
+    public boolean canMove() {
+        return canMove;
+    }
+
+    public void setCannotAttack() {
+        this.canAttack = false;
+    }
+
+    public void setCannotMove() {
+        this.canMove = false;
+    }
+
+    public void setCanAttack() {
+        this.canAttack = true;
+    }
+
+    public void setCanMove() {
+        this.canMove = true;
+    }
+
+    public void reset() {
+        super.reset();
+        this.hp = maxHp;
+        this.ap = maxAp;
+        appliedEffects = new ArrayList<>();
+        isStunned = false;
+        isDisarmed = false;
+        hasHolyBuff = false;
+    }
+
+    public boolean isAlive(){
+        return this.hp > 0;
+    }
 }

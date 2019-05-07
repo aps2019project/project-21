@@ -1,6 +1,8 @@
 package models.card;
 
 import models.Item.Item;
+import models.Item.Usable;
+import models.Player;
 import models.match.Cell;
 
 import java.util.ArrayList;
@@ -59,6 +61,13 @@ public class Card {
         this.cardIDInGame = cardIDInGame;
     }
 
+    public static void setCardIDInGame(Player player, Hero hero) {
+        String cardIDInGame = player.getUsername() + "_" +
+                hero.getName() + "_1";
+        hero.setCardIDInGame(cardIDInGame);
+    }
+
+
     public void setCollectionID() {
         this.collectionID = cardCount;
         cardCount++;
@@ -116,4 +125,24 @@ public class Card {
         return collectionID;
     }
 
+    public String getDesc() {
+        if (this.getClass().equals(Hero.class))
+            return ((Hero) this).getSpecialPower().getDesc();
+        else if (this.getClass().equals(Minion.class))
+            return ((Minion) this).getSpecialPower().getDesc();
+        else if (this.getClass().equals(Spell.class))
+            return ((Spell) this).getDesc();  // this cast is probably not redundant!
+        else if (this.getClass().equals(Usable.class))
+            return ((Usable) this).getDesc();
+        //  shouldn't reach here
+        return null;
+    }
+
+    public void reset() {
+        currentCell = null;
+    }
+
+    public void setCurrentCell(Cell currentCell) {
+        this.currentCell = currentCell;
+    }
 }

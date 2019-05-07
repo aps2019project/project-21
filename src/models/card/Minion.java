@@ -56,4 +56,12 @@ public class Minion extends Attacker {
     public boolean isCombo(){
         return this.isCombo;
     }
+
+    public void reset(){
+        super.reset();
+        canAttack = false;
+        canMove = false;
+    }
+
+
 }

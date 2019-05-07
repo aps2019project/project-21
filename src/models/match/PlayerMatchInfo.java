@@ -1,5 +1,6 @@
 package models.match;
 
+import json.CardMaker;
 import models.Deck;
 import models.Hand;
 import models.Item.Collectable;
@@ -24,7 +25,8 @@ public class PlayerMatchInfo {
     private List<Effect> effects = new ArrayList<>();
 
     PlayerMatchInfo(Player player) {
-        deck = Deck.copyDeck(player.getCollection().getMainDeck());
+        deck = CardMaker.deepCopy(player.getCollection().getMainDeck(), Deck.class);
+        deck.shuffle();
         hand = Hand.extractHand(deck);
     }
 
@@ -33,7 +35,7 @@ public class PlayerMatchInfo {
     }
 
     public List<Collectable> getAchievedCollectables() {
-        return getAchievedCollectables();
+        return achievedCollectables;
     }
 
     public int getMp() {
@@ -57,9 +59,9 @@ public class PlayerMatchInfo {
     }
 
     public Hero getHero() {
-        for (Attacker attacker : groundedAttackers)
-            if (attacker.getClass().equals(Hero.class))
-                return (Hero) attacker;
+        for (Card card : deck.getAllCards())
+            if (card instanceof Hero && ((Attacker) card).isAlive())
+                return (Hero) card;
         return null;
     }
 
@@ -74,5 +76,9 @@ public class PlayerMatchInfo {
             return;
         for (Effect effect : effects)
             addEffect(effect);
+    }
+
+    public void reset() {
+        deck.reset();
     }
 }

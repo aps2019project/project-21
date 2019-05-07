@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Spell extends Card {
-    private ApplyType applyType = ApplyType.ON_ATTACKER;
     private static List<Spell> spells = new ArrayList<>();
+    private ApplyType applyType = ApplyType.ON_ATTACKER;
     private TargetType targetType = new TargetType();
     private List<Effect> effects = new ArrayList<>();
     private String desc = "";
@@ -85,5 +85,9 @@ public class Spell extends Card {
 
     public String getDesc() {
         return desc;
+    }
+
+    public void reset(){
+        super.reset();
     }
 }

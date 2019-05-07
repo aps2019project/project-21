@@ -9,6 +9,9 @@ import models.Player;
 import models.card.*;
 import models.match.GoalMode;
 import models.match.Match;
+import models.match.PlayerMatchInfo;
+import models.match.GoalMode;
+import models.match.Match;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -282,31 +285,24 @@ public class View {
 
     public void showGameInfo() {
         Match match = Match.getCurrentMatch();
-        System.out.println("-----Game Info:");
-        for (int i = 0; i < 2; i++)
-            System.out.println(match.getPlayers()[i].getUsername() + "  mp: " +
-                    match.getPlayersMatchInfo()[i].getMp());
+        if (match == null)
+            return;
         if (match.getGoalMode() == GoalMode.KILL_HERO) {
-            for (int i = 0; i < 2; i++)
-                System.out.println((i + 1) + "th Hero hp: "
-                        + match.getPlayersMatchInfo()[i].getDeck().getHero().getHP());
+            for (PlayerMatchInfo p : match.getPlayersMatchInfo())
+                System.out.println(p.getHero().getCardIDInGame() + "'s hp: " + p.getHero().getHP());
         } else if (match.getGoalMode() == GoalMode.HOLD_FLAG) {
-            if(match.getAttackerCapturedFlag() == null)
-                System.out.println("Flag Coordinate: ("
-                        + match.getFlagCoordinate()[0] + ", "
-                        + match.getFlagCoordinate()[1] + ")");
-            else
-                System.out.println("Attacker " + match.getAttackerCapturedFlag().getName()
-                + " has the flag.");
-        } else {
-            System.out.println("Attackers having flag:");
-            for(int i = 0; i < match.getAttackersCapturedFlag().size(); i++)
-                System.out.println((i+1) + ". "
-                        + match.getAttackersCapturedFlag().get(i).getName());
+            System.out.println(match.whoHasFlag());
+            System.out.println("flags position: (" + match.getFlag().getX() + ", "
+                    + match.getFlag().getY() + ")");
+        } else if (match.getGoalMode() == GoalMode.GATHER_FLAG) {
+            for (String name : match.whoHasFlags())
+                System.out.println(name);
         }
     }
 
-    public void showMyMinions(Attacker attacker) {
+    public void showMinions(Attacker attacker) {
+        if (attacker == null)
+            return;
         System.out.print(attacker.getId() +
                 " : " +
                 attacker.getName() +
@@ -321,21 +317,27 @@ public class View {
     }
 
     public void showCardInfo(Card card) {
-        if (card.getClass().equals(Hero.class)) {
+        if (card == null)
+            return;
+        if (card instanceof Hero) {
             System.out.println("Hero : \n" +
                     "Name : " +
                     card.getName() +
                     "\nCost : " +
-                    card.getPrice());
-        } else if (card.getClass().equals(Spell.class)) {
+                    card.getPrice() +
+                    "\nDesc : " +
+                    card.getDesc());
+        } else if (card instanceof Spell) {
             System.out.println("Spell : \n" +
                     "Name :" +
                     card.getName() +
                     "\nMP : " +
                     card.getManaCost() +
                     "\nCost : " +
-                    card.getPrice());
-        } else if (card.getClass().equals(Minion.class)) {
+                    card.getPrice()
+                    + "\nDesc : " +
+                    card.getDesc());
+        } else if (card instanceof Minion) {
             System.out.println("Minion :\n" +
                     "Name :" +
                     card.getName() +
@@ -348,15 +350,13 @@ public class View {
                     "\nRange : " +
                     ((Minion) card).getAttackRange() +
                     "\nCombo-ability :" +
-                    "?????" +
+                    ((Minion) card).isCombo() +
                     "\nCost : " +
-                    card.getPrice());
-        } else if (card.getClass().equals(Item.class)) {
-            System.out.println("Name : " +
-                    card.getName() +
-                    " , Desc : " +
-                    "???????");
-        }
+                    card.getPrice() +
+                    "\nDesc : " +
+                    card.getDesc());
+        } else
+            System.out.println("not a card");
     }
 
     public void showCollectables(Collectable collectable) {
@@ -364,6 +364,7 @@ public class View {
     }
 
     public void showGeneralThings(String thingName) {
+
     }
 
     public void showShop() {
@@ -396,5 +397,10 @@ public class View {
         System.out.println(e.getMessage());
         for (StackTraceElement s : e.getStackTrace())
             System.out.println(s);
+    }
+
+    public void showNextCard(Card card) {
+        System.out.println("this is the next card in your hand:");
+        showCardInfo(card);
     }
 }

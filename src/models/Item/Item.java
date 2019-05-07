@@ -82,4 +82,8 @@ public class Item extends Card {
         items.addAll(Collectable.getCollectables());
         return items;
     }
+
+    public void reset(){
+        super.reset();
+    }
 }

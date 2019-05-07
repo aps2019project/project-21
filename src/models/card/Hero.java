@@ -74,4 +74,10 @@ public class Hero extends Attacker {
     public boolean hasAttackMode() {
         return getAttackMode() != null;
     }
+
+    public void reset() {
+        super.reset();
+        this.canAttack = true;
+        this.canMove = true;
+    }
 }

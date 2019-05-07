@@ -47,6 +47,8 @@ public enum ErrorMode {
     MAIN_DECK_IS_INVALID("your main deck is not valid."),
     AIPLAYER_IS_NULL("aiPlayer is null"),
     HIS_MAIN_DECK_INVALID("his main deck is not valid. (not her, I'm sexist bro.)."),
+    UNAVAILABLE_FOR_ATTACK("opponent minion is unavailable for attack."),
+    CARD_SELECTED("card successfully selected."),
     INVALID_COMMAND("invalid command");
 
 

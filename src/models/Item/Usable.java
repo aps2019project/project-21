@@ -50,4 +50,8 @@ public class Usable extends Item {
                 return usable;
         return null;
     }
+
+    public void reset() {
+        super.reset();
+    }
 }

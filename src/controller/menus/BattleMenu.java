@@ -109,26 +109,25 @@ public class BattleMenu extends Menu {
 
     private void showMyMinions() {
         Match match = Match.getCurrentMatch();
-        for (Attacker attacker : match.getPlayersMatchInfo()[0].getGroundedAttackers()) {
-            view.showMyMinions(attacker);
-        }
+        for (Attacker attacker : match.getPlayersMatchInfo()[match.getTurn()].getGroundedAttackers())
+            view.showMinions(attacker);
     }
 
     private void showOpponentMinions() {
         Match match = Match.getCurrentMatch();
-        for (Attacker attacker : match.getPlayersMatchInfo()[1].getGroundedAttackers()) {
-            view.showMyMinions(attacker);
-        }
+        for (Attacker attacker : match.getPlayersMatchInfo()[1 - match.getTurn()].getGroundedAttackers())
+            view.showMinions(attacker);
     }
 
     private void showCardInfo() {
         Card card = Card.getCardByID(request.getCommandArguments().get(0));
+        if (card == null)
+            return;
         view.showCardInfo(card);
     }
 
     private void select() {
-        Attacker attacker = Attacker.getAttackerById(request.getCommandArguments().get(0));
-        Match.getCurrentMatch().setSelectedCard(attacker);
+        Match.getCurrentMatch().selectAttacker(request.getCommandArguments().get(0));
     }
 
     private void moveTo() {
