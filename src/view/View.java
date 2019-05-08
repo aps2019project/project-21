@@ -315,8 +315,15 @@ public class View {
 
     }
 
-    public void showCollectionSearchInShop(String msg) {
-
+    public void showCollectionSearchInShop(Card card) {
+        if (card == null){
+            System.out.println("Card not found");
+        } else {
+            System.out.println("Name" +
+                    card.getName() +
+                    "ID" +
+                    card.getId());
+        }
     }
 
     public void showGameInfo() {
