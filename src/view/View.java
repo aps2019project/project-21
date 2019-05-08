@@ -425,8 +425,13 @@ public class View {
         }
     }
 
-    public void showItemInfo() {
-
+    public void showItemInfo(Item item) {
+        System.out.println("Name : " +
+                item.getName() +
+                "- Desc : "+
+                item.getDesc()+
+                "- SellCost : " +
+                item.getPrice());
     }
 
     public static void printException(Exception e) {
