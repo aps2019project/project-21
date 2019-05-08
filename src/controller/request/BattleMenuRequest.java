@@ -72,7 +72,7 @@ public class BattleMenuRequest extends Request {
     }
 
     private void showCardInfoCheck() {
-        String regex = "show card info (\\d+)";
+        String regex = "show card info (.+)";
         Matcher matcher = Pattern.compile(regex).matcher(commandLine);
         if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
@@ -81,7 +81,7 @@ public class BattleMenuRequest extends Request {
     }
 
     private void selectCheck() {
-        String regex = "select (\\d+)";
+        String regex = "select (.+)";
         Matcher matcher = Pattern.compile(regex).matcher(commandLine);
         if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
@@ -100,7 +100,7 @@ public class BattleMenuRequest extends Request {
     }
 
     private void attackCheck() {
-        String regex = "attack (\\d+)";
+        String regex = "attack (.+)";
         Matcher matcher = Pattern.compile(regex).matcher(commandLine);
         if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
