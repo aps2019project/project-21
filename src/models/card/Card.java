@@ -68,6 +68,12 @@ public class Card {
         hero.setCardIDInGame(cardIDInGame);
     }
 
+    public static void setCardIDInGame(Player player, Attacker attacker) {
+        String cardIDInGame = player.getUsername() + "_" +
+                attacker.getName() + "_1";
+        attacker.setCardIDInGame(cardIDInGame);
+    }
+
 
     public void setCollectionID() {
         this.collectionID = cardCount;
@@ -96,10 +102,14 @@ public class Card {
         List<Card> cards = Match.getCurrentMatch().getPlayersMatchInfo()[0].getAllCards();
         List<Card> cards1 = Match.getCurrentMatch().getPlayersMatchInfo()[1].getAllCards();
         for(Card card : cards){
+            if(card.getCardIDInGame() == null)
+                continue;
             if(card.getCardIDInGame().equals(id))
                 return card;
         }
         for(Card card : cards1){
+            if(card.getCardIDInGame() == null)
+                continue;
             if(card.getCardIDInGame().equals(id))
                 return card;
         }

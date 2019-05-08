@@ -251,6 +251,7 @@ public class Match {
         goOnCell(attacker, cell);
         info[turn].decreaseMP(attacker.getManaCost());
         info[turn].pushToHand();
+        Card.setCardIDInGame(players[turn], attacker);
     }
 
     private void goOnCell(Attacker attacker, Cell cell) {
