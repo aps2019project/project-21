@@ -311,8 +311,15 @@ public class View {
         }
     }
 
-    public void showSearchInShop(String msg) {
-
+    public void showSearchInShop(Card card) {
+        if (card == null){
+            System.out.println("Card with this name doesn't exist");
+        } else {
+            System.out.println("Name : " +
+                    card.getName() +
+                    " - ID : " +
+                    card.getId());
+        }
     }
 
     public void showCollectionSearchInShop(Card card) {
