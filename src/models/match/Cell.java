@@ -51,10 +51,6 @@ public class Cell {
         this.y = length;
     }
 
-    public Attacker getAttacker() {
-        return null;
-    }
-
     public void addEffect(Effect effect) {
         this.effects.add(effect);
     }

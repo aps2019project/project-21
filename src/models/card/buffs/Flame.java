@@ -14,8 +14,8 @@ public class Flame extends Buff {
     public void apply() {
         if (duration < 0 || cell == null)
             return;
-        if (cell.getAttacker() != null)
-            cell.getAttacker().decreaseHP(2);
+        if (cell.getCurrentAttacker() != null)
+            cell.getCurrentAttacker().decreaseHP(2);
         duration--;
     }
 }

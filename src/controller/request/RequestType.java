@@ -56,6 +56,8 @@ public enum RequestType {
     END_GAME,
     SHOW_CARDS,
     SHOW_BATTLEFIELD,
+    KILL,
+    MP,
 
     //  ALL COMMANDS
 }

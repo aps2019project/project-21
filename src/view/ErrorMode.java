@@ -17,7 +17,7 @@ public enum ErrorMode {
     CAN_NOT_ATTACK(""),
     UNAVAILABLE_OPPONENT(""),
     INVALID_CARD_ID("No card with such an id."),
-    HAVE_NOT_MANA(""),
+    HAVE_NOT_MANA("no enough mana for this."),
     INVALID_CARD_NAME(""),
     NOT_IN_SHOP("there is no item or card with this name in shop"),
     NOT_ENOUGH_MONEY("not enough money"),

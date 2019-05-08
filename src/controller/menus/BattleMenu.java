@@ -103,6 +103,12 @@ public class BattleMenu extends Menu {
             case SHOW_BATTLEFIELD:
                 showBattlefield();
                 break;
+            case KILL:
+                kill();
+                break;
+            case MP:
+                showMP();
+                break;
         }
     }
 
@@ -222,6 +228,14 @@ public class BattleMenu extends Menu {
 
     private void showBattlefield() {
         Match.getCurrentMatch().showBattleField();
+    }
+
+    private void kill(){
+        Match.getCurrentMatch().kill();
+    }
+
+    private void showMP(){
+        Match.getCurrentMatch().showMP();
     }
 }
 

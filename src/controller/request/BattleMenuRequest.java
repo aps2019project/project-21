@@ -53,6 +53,10 @@ public class BattleMenuRequest extends Request {
             backCheck();
         else if (commandLine.contains("show battlefield"))
             showBattleFieldCheck();
+        else if (commandLine.equalsIgnoreCase("kill"))
+            killCheck();
+        else if (commandLine.equalsIgnoreCase("mp"))
+            mpCheck();
     }
 
     private void gameInfoCheck() {
@@ -182,5 +186,13 @@ public class BattleMenuRequest extends Request {
 
     private void showBattleFieldCheck() {
         type = RequestType.SHOW_BATTLEFIELD;
+    }
+
+    private void killCheck() {
+        type = RequestType.KILL;
+    }
+
+    private void mpCheck(){
+        type = RequestType.MP;
     }
 }

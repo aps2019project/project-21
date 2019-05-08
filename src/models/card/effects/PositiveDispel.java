@@ -22,7 +22,7 @@ public class PositiveDispel extends Effect {
             return;
         Attacker attacker;
         if (cell != null)
-            attacker = cell.getAttacker();
+            attacker = cell.getCurrentAttacker();
         else
             attacker = this.attacker;
         if (attacker == null)

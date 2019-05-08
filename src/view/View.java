@@ -321,39 +321,39 @@ public class View {
             return;
         if (card instanceof Hero) {
             System.out.println("Hero : " +
-                    "Name : " +
+                    " Name : " +
                     card.getName() +
-                    "Cost : " +
+                    " Cost : " +
                     card.getPrice() +
-                    "Desc : " +
+                    " Desc : " +
                     card.getDesc());
         } else if (card instanceof Spell) {
             System.out.println("Spell : " +
-                    "Name :" +
+                    " Name : " +
                     card.getName() +
-                    "MP : " +
+                    " MP : " +
                     card.getManaCost() +
-                    "Cost : " +
+                    " Cost : " +
                     card.getPrice()
-                    + "Desc : " +
+                    + " Desc : " +
                     card.getDesc());
         } else if (card instanceof Minion) {
             System.out.println("Minion : " +
-                    "Name : " +
+                    " Name : " +
                     card.getName() +
-                    "HP : " +
+                    " HP : " +
                     ((Minion) card).getHP() +
                     " AP : " +
                     ((Minion) card).getAP() +
                     " MP : " +
-                    card.getPrice() +
-                    "Range : " +
+                    card.getManaCost() +
+                    " Range : " +
                     ((Minion) card).getAttackRange() +
-                    "Combo-ability : " +
+                    " Combo-ability : " +
                     ((Minion) card).isCombo() +
-                    "Cost : " +
+                    " Cost : " +
                     card.getPrice() +
-                    "Desc : " +
+                    " Desc : " +
                     card.getDesc());
         } else
             System.out.println("not a card");
@@ -403,4 +403,6 @@ public class View {
         System.out.println("this is the next card in your hand:");
         showCardInfo(card);
     }
+
+
 }

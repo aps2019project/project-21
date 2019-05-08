@@ -20,8 +20,8 @@ public class Poison extends Buff {
             return;
         if (attacker != null)
             attacker.decreaseHP(1);
-        else if (cell.getAttacker() != null)
-            cell.getAttacker().decreaseHP(1);
+        else if (cell.getCurrentAttacker() != null)
+            cell.getCurrentAttacker().decreaseHP(1);
         duration--;
     }
 }

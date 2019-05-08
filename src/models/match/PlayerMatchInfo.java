@@ -5,10 +5,7 @@ import models.Deck;
 import models.Hand;
 import models.Item.Collectable;
 import models.Player;
-import models.card.Attacker;
-import models.card.Card;
-import models.card.Effect;
-import models.card.Hero;
+import models.card.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +19,9 @@ public class PlayerMatchInfo {
     private List<Card> graveyard = new ArrayList<>();
     private List<Collectable> achievedCollectables = new ArrayList<>();
     private List<Attacker> groundedAttackers = new ArrayList<>();
+    private List<Spell> usedSpells = new ArrayList<>();
     private List<Effect> effects = new ArrayList<>();
+    private int gatheredFlags = 0;
 
     public PlayerMatchInfo(Player player) {
         deck = CardMaker.deepCopy(player.getCollection().getMainDeck(), Deck.class);
@@ -98,5 +97,37 @@ public class PlayerMatchInfo {
         groundedAttackers.add(attacker);
     }
 
+    public List<Card> getAllUsedCards() {
+        List<Card> cards = new ArrayList<>();
+        cards.add(getHero());
+        cards.addAll(groundedAttackers);
+        cards.addAll(graveyard);
+        cards.addAll(usedSpells);
+        return cards;
+    }
 
+    public List<Card> getAllCards() {
+        List<Card> cards = new ArrayList<>();
+        cards.addAll(getAllUsedCards());
+        cards.addAll(deck.getAllCards());
+        return cards;
+    }
+
+    public boolean hasManaForThis(Card card) {
+        return card.getManaCost() <= mp;
+    }
+
+    public void decreaseMP(int value) {
+        if (value > mp)
+            return;
+        this.mp -= value;
+    }
+
+    public int getGatheredFlags() {
+        return gatheredFlags;
+    }
+
+    public void increaseFlags() {
+        this.gatheredFlags++;
+    }
 }

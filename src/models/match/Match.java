@@ -222,7 +222,7 @@ public class Match {
     }
 
     public void applyEffects() {
-        // TODO: heroes, minons, infos
+        // TODO: heroes, minions, infos
     }
 
     private boolean isAttackTargetValid(Cell target) {
@@ -242,11 +242,45 @@ public class Match {
             view.printError(ErrorMode.INVALID_CELL);
             return;
         }
-        info[turn].getHand().pop(cardName);
+        if (!info[turn].hasManaForThis(attacker)) {
+            view.printError(ErrorMode.HAVE_NOT_MANA);
+            return;
+        }
+        attacker = info[turn].getHand().pop(cardName);
+        setCardInGameID(attacker);
+        goOnCell(attacker, cell);
+        info[turn].decreaseMP(attacker.getManaCost());
+        info[turn].pushToHand();
+    }
+
+    private void goOnCell(Attacker attacker, Cell cell) {
+        if (cell == null || attacker == null)
+            return;
         attacker.setCurrentCell(cell);
         cell.setCurrentAttacker(attacker);
-        //  collectables
-        info[turn].pushToHand();
+        if (cell.hasCollectable())
+            info[getCardsTeam(attacker)].addCollectable(cell.getCollectable());
+        if (cell.hasFlag()) {
+            info[getCardsTeam(attacker)].increaseFlags();
+            cell.setFlag(null);
+        }
+    }
+
+
+    private void setCardInGameID(Card card) {
+        if (card == null)
+            return;
+        String cardIdInGame = players[turn].getUsername() + "_" + card.getName() + "_";
+        cardIdInGame += Integer.toString(cardNameRank(card.getName()));
+        card.setCardIDInGame(cardIdInGame);
+    }
+
+    private int cardNameRank(String name) {
+        int num = 1;
+        for (Card card : info[turn].getAllUsedCards())
+            if (card.getName().equals(name))
+                num++;
+        return num;
     }
 
     private boolean isInsertNear(Cell cell) {
@@ -339,8 +373,10 @@ public class Match {
     }
 
     public boolean isInTeam(Attacker attacker, Player player) {
-        //  TODO
-        return true;
+        for (Card card1 : player.getCollection().getMainDeck().getAllCards())
+            if (card1.getCollectionID() == attacker.getCollectionID())
+                return true;
+        return false;
     }
 
     public static void setCurrentMatch(Match currentMatch) {
@@ -433,8 +469,14 @@ public class Match {
             for (int j = 0; j < 9; j++) {
                 System.out.print("|");
                 if (!getCell(i, j).isEmpty()) {
-                    System.out.print(" X ");
+                    Attacker attacker = getCell(i, j).getCurrentAttacker();
+                    if (isInTeam(attacker, players[0]))
+                        System.out.print(" A ");
+                    else if (isInTeam(attacker, players[1]))
+                        System.out.print(" B ");
                 } else System.out.print(" O ");
+                if (j == 8)
+                    System.out.print("|");
             }
             System.out.println();
         }
@@ -444,6 +486,24 @@ public class Match {
                 System.out.print(" ");
         }
         System.out.println();
+    }
+
+    public void kill() {
+        //  TODO
+    }
+
+    public int getCardsTeam(Card card) {  //  returns the turn number
+        for (int i = 0; i < 2; i++) {
+            Player player = players[i];
+            for (Card card1 : player.getCollection().getMainDeck().getAllCards())
+                if (card1.getCollectionID() == card.getCollectionID())
+                    return i;
+        }
+        return -1;
+    }
+
+    public void showMP() {
+        System.out.println(info[turn].getMp());
     }
 
 
