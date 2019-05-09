@@ -31,6 +31,7 @@
         }
       ],
       "desc": "Stuns the opp on attack.",
+      "isCommandValid": true,
       "name": "Shamshirzane_Fars's_Spell",
       "id": 131,
       "collectionID": 0,
@@ -47,6 +48,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Shamshirzane_Fars",
     "id": 132,
     "collectionID": 0,

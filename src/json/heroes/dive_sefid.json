@@ -1,7 +1,8 @@
 {
   "@type": "models.card.Hero",
   "@val": {
-    "cooldown": 2,
+    "primaryCooldown": 2,
+    "cooldown": 0,
     "maxHp": 50,
     "maxAp": 4,
     "hp": 50,
@@ -33,6 +34,7 @@
         }
       ],
       "desc": "Casts one power buff with 4 ap increase on himself forever",
+      "isCommandValid": true,
       "name": "Dive_Sefid's_Spell",
       "id": 100,
       "collectionID": 0,
@@ -49,6 +51,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Dive_Sefid",
     "id": 101,
     "collectionID": 0,

@@ -22,13 +22,13 @@ public class PlayerMatchInfo {
     private List<Spell> usedSpells = new ArrayList<>();
     private List<Effect> effects = new ArrayList<>();
 
-    public PlayerMatchInfo(Player player) {
+    PlayerMatchInfo(Player player) {
         deck = CardMaker.deepCopy(player.getCollection().getMainDeck(), Deck.class);
         deck.shuffle();
         hand = Hand.extractHand(deck);
     }
 
-    public List<Card> getGraveyard() {
+    List<Card> getGraveyard() {
         return graveyard;
     }
 
@@ -36,7 +36,7 @@ public class PlayerMatchInfo {
         return achievedCollectables;
     }
 
-    public int getMp() {
+    int getMp() {
         return mp;
     }
 
@@ -63,7 +63,7 @@ public class PlayerMatchInfo {
         return null;
     }
 
-    public void addEffect(Effect effect) {
+    private void addEffect(Effect effect) {
         if (effect == null)
             return;
         effects.add(effect);
@@ -80,23 +80,23 @@ public class PlayerMatchInfo {
         deck.reset();
     }
 
-    public void addCollectable(Collectable collectable) {
+    void addCollectable(Collectable collectable) {
         if (collectable == null)
             return;
         this.achievedCollectables.add(collectable);
     }
 
-    public void pushToHand() {
+    void pushToHand() {
         hand.pushToHandFromDeck(deck);
     }
 
-    public void addToGroundedAttackers(Attacker attacker) {
+    void addToGroundedAttackers(Attacker attacker) {
         if (attacker == null)
             return;
         groundedAttackers.add(attacker);
     }
 
-    public List<Card> getAllUsedCards() {
+    List<Card> getAllUsedCards() {
         List<Card> cards = new ArrayList<>();
         cards.add(getHero());
         cards.addAll(groundedAttackers);
@@ -112,11 +112,11 @@ public class PlayerMatchInfo {
         return cards;
     }
 
-    public boolean hasManaForThis(Card card) {
+    boolean hasManaForThis(Card card) {
         return card.getManaCost() <= mp;
     }
 
-    public void decreaseMP(int value) {
+    void decreaseMP(int value) {
         if (value > mp)
             return;
         this.mp -= value;
@@ -135,11 +135,11 @@ public class PlayerMatchInfo {
         }
     }
 
-    public void setMp(int mp) {
+    void setMp(int mp) {
         this.mp = Math.min(mp, MAX_MANA);
     }
 
-    public List<Minion> getGroundedMinions() {
+    private List<Minion> getGroundedMinions() {
         List<Minion> minions = new ArrayList<>();
         for (Attacker attacker : groundedAttackers)
             if (attacker instanceof Minion)
@@ -147,21 +147,21 @@ public class PlayerMatchInfo {
         return minions;
     }
 
-    public Minion getGroundedMinionByID(String id) {
+    Minion getGroundedMinionByID(String id) {
         for (Minion minion : getGroundedMinions())
             if (minion.getCardIDInGame().equalsIgnoreCase(id))
                 return minion;
         return null;
     }
 
-    public Card getGraveyardCard(String cardID) {
+    Card getGraveyardCard(String cardID) {
         for (Card card : graveyard)
             if (card.getCardIDInGame().equalsIgnoreCase(cardID))
                 return card;
         return null;
     }
 
-    public int gatheredFlags() {
+    int gatheredFlags() {
         int ret = 0;
         for (Attacker attacker : groundedAttackers)
             if (attacker.getFlag() != null)

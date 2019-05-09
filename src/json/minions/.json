@@ -33,6 +33,7 @@
         }
       ],
       "desc": "Attack opp's hero 6 units on death.",
+      "isCommandValid": true,
       "name": "Siavash's_Spell",
       "id": 201,
       "collectionID": 0,
@@ -49,6 +50,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "",
     "id": 202,
     "collectionID": 0,

@@ -33,6 +33,7 @@
         }
       ],
       "desc": "Decrease HP of attacked minion 6 at next round.",
+      "isCommandValid": true,
       "name": "Gorg's_Spell",
       "id": 179,
       "collectionID": 0,
@@ -49,6 +50,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Gorg",
     "id": 180,
     "collectionID": 0,

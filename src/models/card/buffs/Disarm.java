@@ -1,6 +1,5 @@
 package models.card.buffs;
 
-import models.card.ApplyType;
 import models.card.Buff;
 import models.card.BuffMode;
 
@@ -9,10 +8,6 @@ import models.card.BuffMode;
  */
 public class Disarm extends Buff {
     public Disarm(int duration) {
-        super(duration, BuffMode.EVIL);
-    }
-
-    public Disarm(int duration, ApplyType applyType) {
         super(duration, BuffMode.EVIL);
     }
 

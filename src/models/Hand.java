@@ -11,7 +11,7 @@ public class Hand {
 
     private List<Card> cards = new ArrayList<>();
 
-    public Hand() {
+    Hand() {
 
     }
 
@@ -64,7 +64,7 @@ public class Hand {
         return null;
     }
 
-    public List<Attacker> getAttackers() {
+    private List<Attacker> getAttackers() {
         List<Attacker> attackers = new ArrayList<>();
         for (Card card : cards)
             if (card instanceof Attacker)

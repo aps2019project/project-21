@@ -125,7 +125,7 @@ public class Spell extends Card {
         return spells;
     }
 
-    public static void addSpell(Spell spell) {
+    private static void addSpell(Spell spell) {
         if (spell == null)
             return;
         spells.add(spell);

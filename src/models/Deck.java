@@ -6,7 +6,6 @@ import models.card.Card;
 import models.card.Hero;
 import models.card.Minion;
 import models.card.Spell;
-import view.View;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,7 +26,7 @@ public class Deck {
         this.hero = hero;
     }
 
-    public Deck(String name) {
+    Deck(String name) {
         this.name = name;
     }
 
@@ -35,12 +34,7 @@ public class Deck {
         Collections.shuffle(this.cards);
     }
 
-    public void showLastCard() {
-        Card last = cards.get(0);
-        View.getInstance().showNextCard(last);
-    }
-
-    public Card pop() {
+    Card pop() {
         return cards.remove(0);
     }
 
@@ -87,16 +81,6 @@ public class Deck {
                 cards.add(card);
     }
 
-    public void addCollectable(Collectable collectable) {
-        if (collectable == null)
-            return;
-        this.collectables.add(collectable);
-    }
-
-    public void deleteObject(Object object) {
-
-    }
-
     public boolean isValid() {
         return isCardsFull() && hasHero();
     }
@@ -141,7 +125,7 @@ public class Deck {
         return usable != null;
     }
 
-    public boolean isCardsFull() {
+    private boolean isCardsFull() {
         return cards.size() >= MAX_NUM_CARDS;
     }
 

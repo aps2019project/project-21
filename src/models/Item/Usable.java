@@ -31,7 +31,7 @@ public class Usable extends Item {
         return usables;
     }
 
-    public static void addUsable(Usable usable) {
+    private static void addUsable(Usable usable) {
         if (usable == null)
             return;
         usables.add(usable);
@@ -42,13 +42,6 @@ public class Usable extends Item {
             return;
         for (Usable usable : usables)
             addUsable(usable);
-    }
-
-    public static Usable getUsableByID(int id) {
-        for (Usable usable : usables)
-            if (usable.id == id)
-                return usable;
-        return null;
     }
 
     public void reset() {

@@ -24,6 +24,7 @@
       }
     ],
     "desc": "Increase AP 2 units.",
+    "isCommandValid": true,
     "name": "Empower",
     "id": 210,
     "collectionID": 0,

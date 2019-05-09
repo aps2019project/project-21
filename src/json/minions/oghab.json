@@ -33,6 +33,7 @@
         }
       ],
       "desc": "Increase HP 10 units.",
+      "isCommandValid": true,
       "name": "Oghab's_Spell",
       "id": 160,
       "collectionID": 0,
@@ -49,6 +50,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Oghab",
     "id": 161,
     "collectionID": 0,

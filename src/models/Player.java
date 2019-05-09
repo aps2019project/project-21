@@ -22,16 +22,8 @@ public class Player {
     private int losses;
     private int cardCurrentID;
 
-    public int getCardCurrentID() {
-        return cardCurrentID;
-    }
-
     public int getWins() {
         return wins;
-    }
-
-    public void setCardCurrentID(int cardCurrentID) {
-        this.cardCurrentID = cardCurrentID;
     }
 
     public Player(String username, String password) {
@@ -46,10 +38,6 @@ public class Player {
 
     }
 
-    void showMatchHistory() {
-
-    }
-
     public static void createAccount(String username, String password) {
         if (hasThisPlayer(username)) {
             View.getInstance().printError(ErrorMode.USERNAME_IS_TAKEN);
@@ -61,39 +49,16 @@ public class Player {
         setCurrentPlayer(newPlayer);
     }
 
-    public void logout() {
-
-    }
-
-    public static void showLeaderBoard() {
-
-    }
-
-    public static void help() {
-    }
-
     public static List<Player> getPlayers() {
         return players;
-    }
-
-    public static void setPlayers(List<Player> players) {
-        Player.players = players;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public Collection getCollection() {
@@ -114,10 +79,6 @@ public class Player {
 
     public List<Match> getMatchHistory() {
         return matchHistory;
-    }
-
-    public void setMatchHistory(List<Match> matchHistory) {
-        this.matchHistory = matchHistory;
     }
 
     public static void setCurrentPlayer(Player currentPlayer) {
@@ -149,19 +110,7 @@ public class Player {
         return true;
     }
 
-    public boolean compareTwoPlayer(Player player) {
-        //after run should check
-        if (player.getWins() > this.wins) {
-            return true;
-        } else if (player.getWins() < this.wins) {
-            return false;
-        } else if (this.username.compareTo(player.getUsername()) < 0) {
-            return true;
-        }
-        return false;
-    }
-
-    public static void addPlayer(Player player) {
+    private static void addPlayer(Player player) {
         if (player == null)
             return;
         players.add(player);
@@ -174,7 +123,7 @@ public class Player {
             addPlayer(player);
     }
 
-    public static void savePlayer(Player player) {
+    private static void savePlayer(Player player) {
         CardMaker.saveToFile(player);
     }
 

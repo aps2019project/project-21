@@ -31,6 +31,7 @@
         }
       ],
       "desc": "Stun 8 neighbourhood minions.",
+      "isCommandValid": true,
       "name": "Nane_Sarma's_Spell",
       "id": 195,
       "collectionID": 0,
@@ -47,6 +48,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Nane_Sarma",
     "id": 196,
     "collectionID": 0,

@@ -1,6 +1,7 @@
 {
   "@type": "models.card.Hero",
   "@val": {
+    "primaryCooldown": 0,
     "cooldown": 0,
     "maxHp": 55,
     "maxAp": 7,
@@ -15,6 +16,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Rostam",
     "id": 127,
     "collectionID": 0,

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AIPlayerMaker {
-    public static void main() {
+    public static void main(String[] a) {
         // ---------- 1 ----------
         Hero hero = CardMaker.heroReader("src//json//heroes//dive_sefid.json");
         Usable usable = CardMaker.usableReader("src//json//usables//taje_danaee.json");
@@ -60,19 +60,81 @@ public class AIPlayerMaker {
         CardMaker.saveToFile(aiPlayer);
 
 
-//        // ---------- 2 ----------
-//        hero = CardMaker.heroReader("src//json//heroes//zahak.json");
-//        usable = CardMaker.usableReader("src//json//usables//soul_eater.json");
-//        aiPlayer = new AIPlayer(2, deck, 1000);
-//        CardMaker.saveToFile(aiPlayer);
-//
-//
-//        // ---------- 3 ----------
-//        hero = CardMaker.heroReader("src//json//heroes//arash.json");
-//        usable = CardMaker.usableReader("src//json//usables//terror_hood.json");
-//        aiPlayer = new AIPlayer(3, deck, 1500);
-//        CardMaker.saveToFile(aiPlayer);
+        // ---------- 2 ----------
+        hero = CardMaker.heroReader("src//json//heroes//zahak.json");
+        usable = CardMaker.usableReader("src//json//usables//soul_eater.json");
+        cards = new ArrayList<>();
+        cards.add(CardMaker.spellReader("src//json//spells//area_dispel.json"));
+        cards.add(CardMaker.spellReader("src//json//spells//empower.json"));
+        cards.add(CardMaker.spellReader("src//json//spells//god_strength.json"));
+        cards.add(CardMaker.spellReader("src//json//spells//madness.json"));
+        cards.add(CardMaker.spellReader("src//json//spells//poison_lake.json"));
+        cards.add(CardMaker.spellReader("src//json//spells//health_with_profit.json"));
+        cards.add(CardMaker.spellReader("src//json//spells//kings_guard.json"));
 
+        cards.add(CardMaker.minionReader("src//json//minions//shamshirzane_fars.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//kamandare_fars.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//kamandare_fars.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//eiraj.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//shah_ghol.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//neyzedare_torani.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//gorzdare_torani.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//gorzdare_torani.json"));
+//        cards.add(CardMaker.minionReader("src//json//minions//dive_siah.json"));
+//        cards.add(CardMaker.minionReader("src//json//minions//ghole_tak_cheshm.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//mare_sammi.json"));
+//        cards.add(CardMaker.minionReader("src//json//minions//mare_ghol_peykar.json"));
+//        cards.add(CardMaker.minionReader("src//json//minions//gorge_sefid.json"));
+//        cards.add(CardMaker.minionReader("src//json//minions//jadogare_azam.json"));
+//        cards.add(CardMaker.minionReader("src//json//minions//siavash.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//nane_sarma.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//nane_sarma.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//nane_sarma.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//nane_sarma.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//nane_sarma.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//nane_sarma.json"));
+        deck = new Deck("ai2Deck", cards, usable, hero);
+        aiPlayer = new AIPlayer(2, deck, 1000);
+        CardMaker.saveToFile(aiPlayer);
+
+
+//
+        // ---------- 3 ----------
+        hero = CardMaker.heroReader("src//json//heroes//arash.json");
+        usable = CardMaker.usableReader("src//json//usables//terror_hood.json");
+        cards = new ArrayList<>();
+        cards.add(CardMaker.spellReader("src//json//spells//area_dispel.json"));
+        cards.add(CardMaker.spellReader("src//json//spells//empower.json"));
+        cards.add(CardMaker.spellReader("src//json//spells//god_strength.json"));
+        cards.add(CardMaker.spellReader("src//json//spells//madness.json"));
+        cards.add(CardMaker.spellReader("src//json//spells//poison_lake.json"));
+        cards.add(CardMaker.spellReader("src//json//spells//health_with_profit.json"));
+        cards.add(CardMaker.spellReader("src//json//spells//kings_guard.json"));
+
+        cards.add(CardMaker.minionReader("src//json//minions//kamandare_fars.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//bahman.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//ghole_bozorg.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//kamandare_fars.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//jadogar.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//neyzedare_torani.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//gorzdare_torani.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//gorzdare_torani.json"));
+//        cards.add(CardMaker.minionReader("src//json//minions//dive_siah.json"));
+//        cards.add(CardMaker.minionReader("src//json//minions//ghole_tak_cheshm.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//mare_sammi.json"));
+//        cards.add(CardMaker.minionReader("src//json//minions//mare_ghol_peykar.json"));
+//        cards.add(CardMaker.minionReader("src//json//minions//gorge_sefid.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//dive_gorazsavar.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//gorg.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//nane_sarma.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//nane_sarma.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//nane_sarma.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//nane_sarma.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//nane_sarma.json"));
+        cards.add(CardMaker.minionReader("src//json//minions//nane_sarma.json"));
+        deck = new Deck("ai3Deck", cards, usable, hero);
+        aiPlayer = new AIPlayer(3, deck, 1500);
+        CardMaker.saveToFile(aiPlayer);
 
     }
 }

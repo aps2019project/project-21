@@ -25,6 +25,7 @@
       }
     ],
     "desc": "Put poison on a 3*3 square.",
+    "isCommandValid": true,
     "name": "Poison_Lake",
     "id": 215,
     "collectionID": 0,

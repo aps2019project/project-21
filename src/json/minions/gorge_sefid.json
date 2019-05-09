@@ -47,6 +47,7 @@
         }
       ],
       "desc": "Decrease HP of attacked minion 6 and 4 at next 2 rounds.",
+      "isCommandValid": true,
       "name": "Gorge_Sefid's_Spell",
       "id": 173,
       "collectionID": 0,
@@ -63,6 +64,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Gorge_Sefid",
     "id": 174,
     "collectionID": 0,

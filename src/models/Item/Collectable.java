@@ -29,11 +29,11 @@ public class Collectable extends Item {
 
     }
 
-    public static List<Collectable> getCollectables() {
+    static List<Collectable> getCollectables() {
         return collectables;
     }
 
-    public static void addCollectable(Collectable collectable) {
+    private static void addCollectable(Collectable collectable) {
         collectables.add(collectable);
     }
 
@@ -42,13 +42,6 @@ public class Collectable extends Item {
             return;
         for (Collectable collectable : collectables)
             addCollectable(collectable);
-    }
-
-    public static Collectable getCollectableByID(int id) {
-        for (Collectable collectable : collectables)
-            if (collectable.id == id)
-                return collectable;
-        return null;
     }
 
     public static Collectable getRandomCollectable() {

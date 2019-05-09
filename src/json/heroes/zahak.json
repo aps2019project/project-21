@@ -1,6 +1,7 @@
 {
   "@type": "models.card.Hero",
   "@val": {
+    "primaryCooldown": 0,
     "cooldown": 0,
     "maxHp": 50,
     "maxAp": 2,
@@ -31,6 +32,7 @@
         }
       ],
       "desc": "Poisons an opponent on attack for 3 turns.",
+      "isCommandValid": true,
       "name": "Zahak's_Spell",
       "id": 112,
       "collectionID": 0,
@@ -47,6 +49,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Zahak",
     "id": 113,
     "collectionID": 0,

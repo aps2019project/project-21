@@ -27,6 +27,7 @@
       }
     ],
     "desc": "Kill a minion around king randomly chosen.",
+    "isCommandValid": true,
     "name": "Kings_Guard",
     "id": 226,
     "collectionID": 0,

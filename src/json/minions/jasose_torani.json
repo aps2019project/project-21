@@ -43,6 +43,7 @@
         }
       ],
       "desc": "Disarm 1 turn and poison 4 turns.",
+      "isCommandValid": true,
       "name": "Jasose_Torani's_Spell",
       "id": 149,
       "collectionID": 0,
@@ -59,6 +60,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Jasose_Torani",
     "id": 150,
     "collectionID": 0,

@@ -1,7 +1,8 @@
 {
   "@type": "models.card.Hero",
   "@val": {
-    "cooldown": 2,
+    "primaryCooldown": 2,
+    "cooldown": 0,
     "maxHp": 30,
     "maxAp": 2,
     "hp": 30,
@@ -30,6 +31,7 @@
         }
       ],
       "desc": "Gives 4 damages to all opponent attackers in the same row as selected hero.",
+      "isCommandValid": true,
       "name": "Arash's_Spell",
       "id": 118,
       "collectionID": 0,
@@ -46,6 +48,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Arash",
     "id": 119,
     "collectionID": 0,

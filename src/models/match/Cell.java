@@ -22,7 +22,7 @@ public class Cell {
         this.currentAttacker = attacker;
     }
 
-    public static int getManhattanDistance(Cell first, Cell second) {
+    static int getManhattanDistance(Cell first, Cell second) {
         return Math.abs(first.x - second.x) + Math.abs(first.y - second.y);
     }
 
@@ -30,7 +30,7 @@ public class Cell {
         return currentAttacker == null;
     }
 
-    public void setEmpty() {
+    void setEmpty() {
         currentAttacker = null;
     }
 
@@ -43,7 +43,7 @@ public class Cell {
         this.y = length;
     }
 
-    public void addEffect(Effect effect) {
+    private void addEffect(Effect effect) {
         this.effects.add(effect);
     }
 
@@ -66,11 +66,11 @@ public class Cell {
         this.currentAttacker = attacker;
     }
 
-    public boolean hasFlag() {
+    boolean hasFlag() {
         return this.flag != null;
     }
 
-    public boolean hasCollectable() {
+    boolean hasCollectable() {
         return this.collectable != null;
     }
 
@@ -90,7 +90,7 @@ public class Cell {
         return currentAttacker;
     }
 
-    public static double getEuclideanDistance(Cell first, Cell second) {
+    static double getEuclideanDistance(Cell first, Cell second) {
         if (first == null || second == null)
             return -1;
         return Math.sqrt((first.x - second.x) * (first.x - second.x)

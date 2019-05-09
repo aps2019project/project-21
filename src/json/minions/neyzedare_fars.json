@@ -15,6 +15,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Neyzedare_Fars",
     "id": 134,
     "collectionID": 0,

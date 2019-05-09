@@ -15,6 +15,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Dive_Gorazsavar",
     "id": 163,
     "collectionID": 0,

@@ -25,6 +25,7 @@
       }
     ],
     "desc": "Poison on all opps for 1 turn.",
+    "isCommandValid": true,
     "name": "All_Poison",
     "id": 218,
     "collectionID": 0,

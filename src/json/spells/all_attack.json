@@ -27,6 +27,7 @@
       }
     ],
     "desc": "Attack all opps in a column 6 units.",
+    "isCommandValid": true,
     "name": "All_Attack",
     "id": 223,
     "collectionID": 0,

@@ -33,6 +33,7 @@
         }
       ],
       "desc": "Attack 5 more for each time it attacked that card.",
+      "isCommandValid": true,
       "name": "Pahlavane_Fars's_Spell",
       "id": 138,
       "collectionID": 0,
@@ -49,6 +50,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Pahlavane_Fars",
     "id": 139,
     "collectionID": 0,

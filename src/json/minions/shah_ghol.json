@@ -15,6 +15,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Shah_Ghol",
     "id": 204,
     "collectionID": 0,

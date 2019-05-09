@@ -23,6 +23,7 @@
       }
     ],
     "desc": "Dispel A 2*2 Square.",
+    "isCommandValid": true,
     "name": "Area_Dispel",
     "id": 209,
     "collectionID": 0,

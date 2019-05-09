@@ -15,6 +15,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Dive_Siah",
     "id": 156,
     "collectionID": 0,

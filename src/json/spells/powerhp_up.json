@@ -27,6 +27,7 @@
       }
     ],
     "desc": "Increase AP 6 units.",
+    "isCommandValid": true,
     "name": "PowerHP_Up",
     "id": 221,
     "collectionID": 0,

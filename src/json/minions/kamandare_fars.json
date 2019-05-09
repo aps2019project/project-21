@@ -15,6 +15,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Kamandare_Fars",
     "id": 129,
     "collectionID": 0,

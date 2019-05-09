@@ -90,11 +90,8 @@ public class Match {
     }
 
     public void select(String cardID) {
-        if (selectAttacker(cardID) || selectCollectable(cardID) || selectSpell(cardID))
-            ;
-        else
+        if (!selectAttacker(cardID) && !selectCollectable(cardID) && !selectSpell(cardID))
             view.printError(ErrorMode.CARD_OR_COLLECTABLE_ID_INVALID);
-
     }
 
     public int getTurn() {
@@ -147,9 +144,7 @@ public class Match {
         Attacker attacker = (Attacker) selectedCard;
         if (Cell.getManhattanDistance(attacker.getCurrentCell(), target) > MOVE_RANGE)
             return false;
-        if (!target.isEmpty())
-            return false;
-        return true;
+        return target.isEmpty();
     }
 
     private boolean isPathClosed(Cell source, Cell dest) {
@@ -222,7 +217,7 @@ public class Match {
         }
     }
 
-    public boolean isInRangeOfAttack(Attacker target, Attacker attacker) {
+    private boolean isInRangeOfAttack(Attacker target, Attacker attacker) {
         if (attacker == null || target == null)
             return false;
         int dist = Cell.getManhattanDistance(target.getCurrentCell(),
@@ -234,14 +229,14 @@ public class Match {
         } else return dist <= attacker.getAttackRange();
     }
 
-    public Attacker getGroundedOppAttacker(String oppID) {
+    private Attacker getGroundedOppAttacker(String oppID) {
         for (Attacker attacker : info[1 - turn].getGroundedAttackers())
             if (attacker.getCardIDInGame().equals(oppID))
                 return attacker;
         return null;
     }
 
-    public void counterAttack(Attacker opp) {
+    private void counterAttack(Attacker opp) {
         if (opp == null || getSelectedAttacker() == null || opp.isDisarmed())
             return;
         getSelectedAttacker().decreaseHP(opp.getAP());
@@ -265,8 +260,8 @@ public class Match {
         }
         Minion selectedMinion = (Minion) selectedCard;
         Minion[] minions = new Minion[myCardIDs.length];
-        for (int i = 0; i < myCardIDs.length; i++) {
-            Minion comboMinion = info[turn].getGroundedMinionByID(myCardIDs[i]);
+        for (String myCardID : myCardIDs) {
+            Minion comboMinion = info[turn].getGroundedMinionByID(myCardID);
             if (comboMinion == null) {
                 view.printError(ErrorMode.SELECTED_CARD_NOT_MINION);
                 return;
@@ -295,7 +290,6 @@ public class Match {
         }
         counterAttack(target);
         checkIfHeIsDead(target);
-        //  TODO: cast OnAttack spells (for minions and one hero)
     }
 
     private boolean isInRangeOfOneOfThese(Attacker target, Minion[] minions) {
@@ -376,7 +370,7 @@ public class Match {
         attacker.castSpecialPower(this, getThisTurnsPlayer(), target);
     }
 
-    public void applyEffects() {
+    private void applyEffects() {
         for (Attacker attacker : getBothGroundedAttackers())
             attacker.applyEffects();
     }
@@ -514,7 +508,7 @@ public class Match {
         return -1;
     }
 
-    public void endMatch(Player winner, Player loser) {
+    private void endMatch(Player winner, Player loser) {
         this.winner = winner;
         this.loser = loser;
         winner.addDrake(getMatchWinningPrize());
@@ -550,11 +544,14 @@ public class Match {
         return selectedCard != null;
     }
 
-    public Cell getCell(int x, int y) {
+    private Cell getCell(int x, int y) {
         return battlefield.getCell(x, y);
     }
 
     public PlayerMatchInfo getInfo(Player player) {
+        for (int i = 0; i < 2; i++)
+            if (players[i].getUsername().equals(player.getUsername()))
+                return info[i];
         return null;
     }
 
@@ -587,20 +584,8 @@ public class Match {
         Match.currentMatch = currentMatch;
     }
 
-    public GameMode getGameMode() {
-        return gameMode;
-    }
-
     public GoalMode getGoalMode() {
         return goalMode;
-    }
-
-    public GameType getGameType() {
-        return gameType;
-    }
-
-    public int getFlagCount() {
-        return flagCount;
     }
 
     public List<Flag> getFlags() {
@@ -622,7 +607,7 @@ public class Match {
         return attackers;
     }
 
-    public Attacker getSelectedAttacker() {
+    private Attacker getSelectedAttacker() {
         if (selectedCard instanceof Attacker)
             return (Attacker) selectedCard;
         return null;
@@ -796,7 +781,7 @@ public class Match {
         view.printGraveyardCard(card);
     }
 
-    public void showCardInfoInGraveyard(Card card) {
+    private void showCardInfoInGraveyard(Card card) {
         if (card == null)
             return;
         view.printGraveyardCard(card);

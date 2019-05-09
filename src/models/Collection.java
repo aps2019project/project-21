@@ -18,7 +18,7 @@ public class Collection {
     private List<Spell> spells = new ArrayList<>();
     private List<Usable> usables = new ArrayList<>();
 
-    public void addCard(Card card) {
+    void addCard(Card card) {
         if (card.getClass().equals(Hero.class)) {
             heroes.add((Hero) card);
         } else if (card.getClass().equals(Spell.class)) {
@@ -30,15 +30,15 @@ public class Collection {
         card.setCollectionID();
     }
 
-    public void removeCard(Card card) {
+    void removeCard(Card card) {
         if (card.getClass().equals(Minion.class))
-            this.minions.remove(card);
+            this.minions.remove((Minion) card);
         else if (card.getClass().equals(Spell.class))
             this.spells.remove((Spell) card);
         else if (card.getClass().equals(Hero.class))
-            this.heroes.remove(card);
+            this.heroes.remove((Hero) card);
         else if (card.getClass().equals(Usable.class))
-            this.usables.remove(card);
+            this.usables.remove((Usable) card);
         for (Deck deck : decks)
             deck.remove(card);
     }
@@ -47,7 +47,7 @@ public class Collection {
         return decks;
     }
 
-    public void addDeck(Deck deck) {
+    void addDeck(Deck deck) {
         if (deck == null || hasThis(deck.getName()))
             return;
         decks.add(deck);
@@ -66,7 +66,7 @@ public class Collection {
             }
     }
 
-    public void deleteDeck(String deckName) {
+    void deleteDeck(String deckName) {
         if (!hasThis(deckName))
             return;
         List<Deck> copy = new ArrayList<>(decks);
@@ -81,7 +81,7 @@ public class Collection {
         return mainDeck;
     }
 
-    public void setMainDeck(Deck mainDeck) {
+    void setMainDeck(Deck mainDeck) {
         this.mainDeck = mainDeck;
     }
 
@@ -110,11 +110,11 @@ public class Collection {
         return usables;
     }
 
-    public boolean hasLessThanThreeItems() {
+    boolean hasLessThanThreeItems() {
         return this.usables.size() < 3;
     }
 
-    public boolean hasThisCard(Card card) {
+    boolean hasThisCard(Card card) {
         for (Card card1 : getCards())
             if (card1.getId() == card.getId())
                 return true;
@@ -139,7 +139,7 @@ public class Collection {
         return getDeck(deckName) != null;
     }
 
-    public void createDeck(String deckName) {
+    void createDeck(String deckName) {
         if (hasThis(deckName))
             return;
         Deck deck = new Deck(deckName);
@@ -150,7 +150,7 @@ public class Collection {
         return mainDeck != null;
     }
 
-    public boolean hasValidMainDeck() {
+    boolean hasValidMainDeck() {
         return hasMainDeck() && mainDeck.isValid();
     }
 
@@ -167,12 +167,11 @@ public class Collection {
         return false;
     }
 
-    public void autoChooseDeck() {
-        for (Deck deck : decks) {
+    void autoChooseDeck() {
+        for (Deck deck : decks)
             if (deck != null && deck.isValid()) {
                 mainDeck = deck;
                 return;
             }
-        }
     }
 }

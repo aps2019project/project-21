@@ -27,6 +27,7 @@
       }
     ],
     "desc": "Increase AP of Hero 4 units.",
+    "isCommandValid": true,
     "name": "God_Strength",
     "id": 212,
     "collectionID": 0,

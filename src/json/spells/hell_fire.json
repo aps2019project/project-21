@@ -25,6 +25,7 @@
       }
     ],
     "desc": "Put flame on a 2*2 Square.",
+    "isCommandValid": true,
     "name": "Hell_Fire",
     "id": 213,
     "collectionID": 0,

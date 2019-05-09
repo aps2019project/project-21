@@ -25,6 +25,7 @@
       }
     ],
     "desc": "Stun an opp.",
+    "isCommandValid": true,
     "name": "Shock",
     "id": 227,
     "collectionID": 0,

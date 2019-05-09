@@ -24,7 +24,7 @@ public class AIPlayer extends Player {
             addAIPlayer(aiPlayer);
     }
 
-    public static void addAIPlayer(AIPlayer aiPlayer) {
+    private static void addAIPlayer(AIPlayer aiPlayer) {
         if (aiPlayer == null)
             return;
         aiPlayers.add(aiPlayer);
@@ -32,10 +32,6 @@ public class AIPlayer extends Player {
 
     public static List<AIPlayer> getAiPlayers() {
         return aiPlayers;
-    }
-
-    private void play() {
-
     }
 
     public int getAiID() {

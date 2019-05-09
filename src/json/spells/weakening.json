@@ -27,6 +27,7 @@
       }
     ],
     "desc": "Decrease AP 4 unit of a opp's minion.",
+    "isCommandValid": true,
     "name": "Weakening",
     "id": 224,
     "collectionID": 0,

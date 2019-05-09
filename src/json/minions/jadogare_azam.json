@@ -45,6 +45,7 @@
         }
       ],
       "desc": "Power AP 2 units and continuous holy buff, on itself and neighbors.",
+      "isCommandValid": true,
       "name": "Jadogare_Azam's_Spell",
       "id": 185,
       "collectionID": 0,
@@ -61,6 +62,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Jadogare_Azam",
     "id": 186,
     "collectionID": 0,

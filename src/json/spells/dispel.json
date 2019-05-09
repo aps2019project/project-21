@@ -23,6 +23,7 @@
       }
     ],
     "desc": "Dispel an opp or an ally.",
+    "isCommandValid": true,
     "name": "Dispel",
     "id": 219,
     "collectionID": 0,

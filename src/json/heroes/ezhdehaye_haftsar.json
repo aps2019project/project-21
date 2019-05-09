@@ -1,7 +1,8 @@
 {
   "@type": "models.card.Hero",
   "@val": {
-    "cooldown": 1,
+    "primaryCooldown": 1,
+    "cooldown": 0,
     "maxHp": 50,
     "maxAp": 4,
     "hp": 50,
@@ -31,6 +32,7 @@
         }
       ],
       "desc": "Disarms a selected attacker.",
+      "isCommandValid": true,
       "name": "Ezhdehaye_Haftsar's_Spell",
       "id": 106,
       "collectionID": 0,
@@ -47,6 +49,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Ezhdehaye_Haftsar",
     "id": 107,
     "collectionID": 0,

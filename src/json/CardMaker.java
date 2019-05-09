@@ -23,7 +23,7 @@ public class CardMaker {
         SpellMaker.main();
         UsableMaker.main();
         CollectableMaker.main();
-        AIPlayerMaker.main();
+//        AIPlayerMaker.main();
     }
 
     private static void usableMaker() throws IOException {
@@ -156,16 +156,10 @@ public class CardMaker {
         else
             System.out.println("Card class not found!");
         String name = "";
-        try {
+        if (object instanceof Card)
             name = ((Card) object).getName();
-        } catch (Exception e) {
-            View.printException(e);
-        }
-        try {
+        else if (object instanceof Player)
             name = ((Player) object).getUsername();
-        } catch (Exception e) {
-            View.printException(e);
-        }
         String path = "src//json//" + folder + "//"
                 + name.toLowerCase().replaceAll("\\s+", "_") + ".json";
 

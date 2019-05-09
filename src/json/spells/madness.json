@@ -39,6 +39,7 @@
       }
     ],
     "desc": "Increase AP 4 units for 3 turns, but disarm for 1 turn.",
+    "isCommandValid": true,
     "name": "Madness",
     "id": 216,
     "collectionID": 0,

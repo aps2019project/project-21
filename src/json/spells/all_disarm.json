@@ -25,6 +25,7 @@
       }
     ],
     "desc": "Disarm all opps for 1 turn.",
+    "isCommandValid": true,
     "name": "All_Disarm",
     "id": 217,
     "collectionID": 0,

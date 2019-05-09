@@ -27,6 +27,7 @@
       }
     ],
     "desc": "Attack an opp 4 units.",
+    "isCommandValid": true,
     "name": "Fireball",
     "id": 211,
     "collectionID": 0,

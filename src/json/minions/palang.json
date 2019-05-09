@@ -33,6 +33,7 @@
         }
       ],
       "desc": "Decrease HP of attacked minion 8 at next round.",
+      "isCommandValid": true,
       "name": "Palang's_Spell",
       "id": 176,
       "collectionID": 0,
@@ -49,6 +50,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Palang",
     "id": 177,
     "collectionID": 0,

@@ -31,6 +31,7 @@
         }
       ],
       "desc": "Poison opp 3 turns.",
+      "isCommandValid": true,
       "name": "Mare_Sammi's_Spell",
       "id": 168,
       "collectionID": 0,
@@ -47,6 +48,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Mare_Sammi",
     "id": 169,
     "collectionID": 0,

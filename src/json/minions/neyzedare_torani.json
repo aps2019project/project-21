@@ -15,6 +15,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Neyzedare_Torani",
     "id": 147,
     "collectionID": 0,

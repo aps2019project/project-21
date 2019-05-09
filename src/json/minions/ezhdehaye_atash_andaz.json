@@ -15,6 +15,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Ezhdehaye_Atash_Andaz",
     "id": 171,
     "collectionID": 0,

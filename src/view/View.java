@@ -31,7 +31,7 @@ public class View {
         System.out.println(error.getMessage());
     }
 
-    public void showUser(Player player) {
+    private void showUser(Player player) {
         if (player == null)
             return;
         System.out.println("Username: " + player.getUsername() + " - Wins: " + player.getWins() +
@@ -424,10 +424,6 @@ public class View {
                 " desc: " + collectable.getDesc() + " idInGame: " + collectable.getCardIDInGame());
     }
 
-    public void showGeneralThings(String thingName) {
-
-    }
-
     public void showShop() {
         System.out.println("Heroes :");
         for (int i = 0; i < Hero.getHeroes().size(); i++) {
@@ -463,11 +459,6 @@ public class View {
         System.out.println(e.getMessage());
         for (StackTraceElement s : e.getStackTrace())
             System.out.println(s);
-    }
-
-    public void showNextCard(Card card) {
-        System.out.println("this is the next card in your hand:");
-        showCardInfo(card);
     }
 
     public void showMatchResults(Match match) {

@@ -1,6 +1,5 @@
 package models.Item;
 
-import models.Player;
 import models.card.ApplyType;
 import models.card.Card;
 import models.card.Effect;
@@ -39,41 +38,12 @@ public class Item extends Card {
         return desc;
     }
 
-    public void makeCopyAndAddToCollection(Player player) {
-//        Item item = new Item(name, price);
-//        item.setCollectionID(player.getCardCurrentID());
-//        player.setCardCurrentID(player.getCardCurrentID() + 1);
-//        player.getCollection().addItem(item);
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public static Item getItemByName(String name) {
-        //bayad por shavad
-        return null;
-    }
-
-    public static Item getItemById(String id) {
-        if (!id.matches("\\d+"))
-            return null;
-        return getItemByID(Integer.parseInt(id));
-    }
-
-    public static Item getItemByID(int id) {
-        for (Item item : getItems())
-            if (item.id == id)
-                return item;
-        return null;
-    }
-
-    public boolean twoItemAreSame(Item item) {
-        return true;
     }
 
     public static List<Item> getItems() {

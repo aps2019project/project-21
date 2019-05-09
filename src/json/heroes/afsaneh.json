@@ -1,7 +1,8 @@
 {
   "@type": "models.card.Hero",
   "@val": {
-    "cooldown": 2,
+    "primaryCooldown": 2,
+    "cooldown": 0,
     "maxHp": 40,
     "maxAp": 3,
     "hp": 40,
@@ -33,6 +34,7 @@
         }
       ],
       "desc": "Dispels an opponent attacker.",
+      "isCommandValid": true,
       "name": "Afsaneh's_Spell",
       "id": 121,
       "collectionID": 0,
@@ -49,6 +51,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Afsaneh",
     "id": 122,
     "collectionID": 0,

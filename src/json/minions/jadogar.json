@@ -47,6 +47,7 @@
         }
       ],
       "desc": "Power AP 2 units but weakness HP 1 unit for 1 round, on itself and neighbors.  ",
+      "isCommandValid": true,
       "name": "Jadogar's_Spell",
       "id": 182,
       "collectionID": 0,
@@ -63,6 +64,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Jadogar",
     "id": 183,
     "collectionID": 0,

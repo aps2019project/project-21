@@ -1,28 +1,16 @@
 package view;
 
 public enum ErrorMode {
-    INVALID_DECK("selected deck is invalid"),
     CARD_ID_INVALID("card id is invalid."),
     NO_CARD_IS_SELECTED("No card is selected."),
-    USERNAME_IS_TAKEN(""),
-    WRONG_PASSWORD(""),
-    SYNTAX(""),
-    DECKNAME_IS_TAKEN(""),
+    USERNAME_IS_TAKEN("this username is taken."),
     CARD_IS_NOT_IN_COLLECTION("there is no item or card with this name in collection"),
-    CARD_IS_ALREADY_IN_DECK(""),
-    CARD_IS_NOT_IN_DECK(""),
-    HERO_IS_NOT_IN_DECK(""),
+    CARD_IS_NOT_IN_DECK("card is not in deck."),
     DECK_IS_NOT_VALID("deck is not valid."),
     INVALID_MOVE_TARGET("move target not valid."),
-    CAN_NOT_ATTACK(""),
-    UNAVAILABLE_OPPONENT(""),
     INVALID_CARD_ID("No card with such an id."),
     HAVE_NOT_MANA("no enough mana for this."),
-    INVALID_CARD_NAME(""),
-    NOT_IN_SHOP("there is no item or card with this name in shop"),
     NOT_ENOUGH_MONEY("not enough money"),
-    HAVE_3_ITEMS("you have 3 items, you can't buy more item"),
-    CUSTOM_ERROR(""),
     YOU_MUST_LOG_IN("You must login"),
     LOGIN_FAILED("log in failed"),
     INVALID_USERNAME("invalid username"),
@@ -48,7 +36,6 @@ public enum ErrorMode {
     AIPLAYER_IS_NULL("aiPlayer is null"),
     HIS_MAIN_DECK_INVALID("his main deck is not valid. (not her, I'm sexist bro.)."),
     UNAVAILABLE_FOR_ATTACK("opponent minion is unavailable for attack."),
-    CARD_SELECTED("card successfully selected."),
     ATTACKER_CANT_MOVE("attacker cannot move."),
     INVALID_CELL("cell is invalid."),
     SELECTED_CARD_NOT_MINION("selected card must be minion"),
@@ -60,10 +47,7 @@ public enum ErrorMode {
     COOLDOWN("hero is in cooldown."),
     NO_SPELL_SELECTED("you must choose a spell."),
     STUNNED("attacker is stunned."),
-    DISARMED("attacker is disarmed."),
     INVALID_COMMAND("invalid command");
-
-
 
     private String message;
 

@@ -27,7 +27,7 @@ public class Minion extends Attacker {
         return minions;
     }
 
-    public static void addMinion(Minion minion) {
+    private static void addMinion(Minion minion) {
         if (minion == null)
             return;
         minions.add(minion);
@@ -40,19 +40,6 @@ public class Minion extends Attacker {
             addMinion(minion);
     }
 
-    public static Minion getMinionByID(String id) {
-        if (!id.matches("\\d+"))
-            return null;
-        return getMinionByID(Integer.parseInt(id));
-    }
-
-    public static Minion getMinionByID(int id) {
-        for (Minion minion : minions)
-            if (minion.id == id)
-                return minion;
-        return null;
-    }
-
     public boolean isCombo() {
         return this.isCombo;
     }
@@ -63,7 +50,4 @@ public class Minion extends Attacker {
         canMove = false;
     }
 
-    public void setCombo(boolean combo) {
-        isCombo = combo;
-    }
 }

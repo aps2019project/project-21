@@ -25,6 +25,7 @@
       }
     ],
     "desc": "Disarms an opp til the end.",
+    "isCommandValid": true,
     "name": "Total_Disarm",
     "id": 208,
     "collectionID": 0,

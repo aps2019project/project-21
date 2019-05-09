@@ -27,6 +27,7 @@
       }
     ],
     "desc": "Increase AP 2 units for all allys.",
+    "isCommandValid": true,
     "name": "All_PowerHP",
     "id": 222,
     "collectionID": 0,

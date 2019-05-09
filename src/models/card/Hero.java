@@ -35,19 +35,11 @@ public class Hero extends Attacker {
         this.canAttack = canAttack;
     }
 
-    public int getPrimaryCooldown() {
-        return primaryCooldown;
-    }
-
-    public void setPrimaryCooldown(int primaryCooldown) {
-        this.primaryCooldown = primaryCooldown;
-    }
-
     public static List<Hero> getHeroes() {
         return heroes;
     }
 
-    public static void addHero(Hero hero) {
+    private static void addHero(Hero hero) {
         if (hero == null)
             return;
         heroes.add(hero);
@@ -58,23 +50,6 @@ public class Hero extends Attacker {
             return;
         for (Hero hero : heroes)
             addHero(hero);
-    }
-
-    public static Hero getHeroByID(String id) {
-        if (!id.matches("\\d+"))
-            return null;
-        return getHeroBYID(Integer.parseInt(id));
-    }
-
-    public static Hero getHeroBYID(int id) {
-        for (Hero hero : heroes)
-            if (hero.id == id)
-                return hero;
-        return null;
-    }
-
-    public boolean hasAttackMode() {
-        return getAttackMode() != null;
     }
 
     public void reset() {
@@ -91,7 +66,7 @@ public class Hero extends Attacker {
         this.cooldown = cooldown;
     }
 
-    public void resetCooldown() {
+    void resetCooldown() {
         this.cooldown = primaryCooldown;
     }
 

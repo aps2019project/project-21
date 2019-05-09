@@ -1,14 +1,14 @@
 {
   "@type": "models.AIPlayer",
   "@val": {
-    "aiID": 1,
-    "winningPrize": 500,
-    "username": "1",
+    "aiID": 3,
+    "winningPrize": 1500,
+    "username": "3",
     "password": "",
     "collection": {
       "decks": [
         {
-          "name": "ai1Deck",
+          "name": "ai3Deck",
           "cards": [
             {
               "@type": "models.card.Spell",
@@ -17,118 +17,7 @@
                 "targetType": {
                   "randomOrNot": "NOT_RANDOM",
                   "targetAttackerRange": "ALL_THREE",
-                  "cellType": "SINGLE_CELL",
-                  "heroOrMinion": "BOTH",
-                  "oppOrAlly": "OPP",
-                  "chooseType": "SELECTED_OPP"
-                },
-                "effects": [
-                  {
-                    "@type": "models.card.buffs.Disarm",
-                    "@val": {
-                      "duration": 2147483647,
-                      "buffMode": "EVIL",
-                      "cell": null,
-                      "attacker": null,
-                      "player": null,
-                      "match": null,
-                      "activationType": "NONE"
-                    }
-                  }
-                ],
-                "desc": "Disarms an opp til the end.",
-                "isCommandValid": true,
-                "name": "Total_Disarm",
-                "id": 208,
-                "collectionID": 0,
-                "cardIDInGame": null,
-                "price": 1000,
-                "manaCost": 0,
-                "currentCell": null
-              }
-            },
-            {
-              "@type": "models.card.Spell",
-              "@val": {
-                "applyType": "ON_ATTACKER",
-                "targetType": {
-                  "randomOrNot": "NOT_RANDOM",
-                  "targetAttackerRange": "ALL_THREE",
-                  "cellType": "NONE",
-                  "heroOrMinion": "BOTH",
-                  "oppOrAlly": "OPP",
-                  "chooseType": "NONE"
-                },
-                "effects": [
-                  {
-                    "@type": "models.card.buffs.Disarm",
-                    "@val": {
-                      "duration": 1,
-                      "buffMode": "EVIL",
-                      "cell": null,
-                      "attacker": null,
-                      "player": null,
-                      "match": null,
-                      "activationType": "NONE"
-                    }
-                  }
-                ],
-                "desc": "Disarm all opps for 1 turn.",
-                "isCommandValid": true,
-                "name": "All_Disarm",
-                "id": 217,
-                "collectionID": 0,
-                "cardIDInGame": null,
-                "price": 2000,
-                "manaCost": 9,
-                "currentCell": null
-              }
-            },
-            {
-              "@type": "models.card.Spell",
-              "@val": {
-                "applyType": "ON_ATTACKER",
-                "targetType": {
-                  "randomOrNot": "NOT_RANDOM",
-                  "targetAttackerRange": "ALL_THREE",
-                  "cellType": "NONE",
-                  "heroOrMinion": "BOTH",
-                  "oppOrAlly": "OPP",
-                  "chooseType": "NONE"
-                },
-                "effects": [
-                  {
-                    "@type": "models.card.buffs.Poison",
-                    "@val": {
-                      "duration": 4,
-                      "buffMode": "EVIL",
-                      "cell": null,
-                      "attacker": null,
-                      "player": null,
-                      "match": null,
-                      "activationType": "NONE"
-                    }
-                  }
-                ],
-                "desc": "Poison on all opps for 1 turn.",
-                "isCommandValid": true,
-                "name": "All_Poison",
-                "id": 218,
-                "collectionID": 0,
-                "cardIDInGame": null,
-                "price": 1500,
-                "manaCost": 8,
-                "currentCell": null
-              }
-            },
-            {
-              "@type": "models.card.Spell",
-              "@val": {
-                "applyType": "ON_ATTACKER",
-                "targetType": {
-                  "randomOrNot": "NOT_RANDOM",
-                  "targetAttackerRange": "ALL_THREE",
-                  "cellType": "SINGLE_CELL",
+                  "cellType": "SQUARE_2_2",
                   "heroOrMinion": "BOTH",
                   "oppOrAlly": "BOTH",
                   "chooseType": "SELECTED_CELL"
@@ -145,14 +34,14 @@
                     }
                   }
                 ],
-                "desc": "Dispel an opp or an ally.",
+                "desc": "Dispel A 2*2 Square.",
                 "isCommandValid": true,
-                "name": "Dispel",
-                "id": 219,
+                "name": "Area_Dispel",
+                "id": 209,
                 "collectionID": 0,
                 "cardIDInGame": null,
-                "price": 2100,
-                "manaCost": 0,
+                "price": 1500,
+                "manaCost": 2,
                 "currentCell": null
               }
             },
@@ -164,7 +53,170 @@
                   "randomOrNot": "NOT_RANDOM",
                   "targetAttackerRange": "ALL_THREE",
                   "cellType": "SINGLE_CELL",
-                  "heroOrMinion": "MINION",
+                  "heroOrMinion": "BOTH",
+                  "oppOrAlly": "ALLY",
+                  "chooseType": "SELECTED_ALLY"
+                },
+                "effects": [
+                  {
+                    "@type": "models.card.effects.IncreaseAP",
+                    "@val": {
+                      "changeValue": 2,
+                      "cell": null,
+                      "attacker": null,
+                      "player": null,
+                      "match": null,
+                      "activationType": "NONE"
+                    }
+                  }
+                ],
+                "desc": "Increase AP 2 units.",
+                "isCommandValid": true,
+                "name": "Empower",
+                "id": 210,
+                "collectionID": 0,
+                "cardIDInGame": null,
+                "price": 250,
+                "manaCost": 1,
+                "currentCell": null
+              }
+            },
+            {
+              "@type": "models.card.Spell",
+              "@val": {
+                "applyType": "ON_ATTACKER",
+                "targetType": {
+                  "randomOrNot": "NOT_RANDOM",
+                  "targetAttackerRange": "ALL_THREE",
+                  "cellType": "SINGLE_CELL",
+                  "heroOrMinion": "HERO",
+                  "oppOrAlly": "ALLY",
+                  "chooseType": "HIMSELF"
+                },
+                "effects": [
+                  {
+                    "@type": "models.card.buffs.PowerAP",
+                    "@val": {
+                      "value": 4,
+                      "initialAP": 0,
+                      "duration": 2147483647,
+                      "buffMode": "GOOD",
+                      "cell": null,
+                      "attacker": null,
+                      "player": null,
+                      "match": null,
+                      "activationType": "NONE"
+                    }
+                  }
+                ],
+                "desc": "Increase AP of Hero 4 units.",
+                "isCommandValid": true,
+                "name": "God_Strength",
+                "id": 212,
+                "collectionID": 0,
+                "cardIDInGame": null,
+                "price": 450,
+                "manaCost": 2,
+                "currentCell": null
+              }
+            },
+            {
+              "@type": "models.card.Spell",
+              "@val": {
+                "applyType": "ON_ATTACKER",
+                "targetType": {
+                  "randomOrNot": "NOT_RANDOM",
+                  "targetAttackerRange": "ALL_THREE",
+                  "cellType": "SINGLE_CELL",
+                  "heroOrMinion": "BOTH",
+                  "oppOrAlly": "ALLY",
+                  "chooseType": "HIMSELF"
+                },
+                "effects": [
+                  {
+                    "@type": "models.card.buffs.PowerAP",
+                    "@val": {
+                      "value": 4,
+                      "initialAP": 0,
+                      "duration": 3,
+                      "buffMode": "GOOD",
+                      "cell": null,
+                      "attacker": null,
+                      "player": null,
+                      "match": null,
+                      "activationType": "NONE"
+                    }
+                  },
+                  {
+                    "@type": "models.card.buffs.Disarm",
+                    "@val": {
+                      "duration": 1,
+                      "buffMode": "EVIL",
+                      "cell": null,
+                      "attacker": null,
+                      "player": null,
+                      "match": null,
+                      "activationType": "NONE"
+                    }
+                  }
+                ],
+                "desc": "Increase AP 4 units for 3 turns, but disarm for 1 turn.",
+                "isCommandValid": true,
+                "name": "Madness",
+                "id": 216,
+                "collectionID": 0,
+                "cardIDInGame": null,
+                "price": 650,
+                "manaCost": 0,
+                "currentCell": null
+              }
+            },
+            {
+              "@type": "models.card.Spell",
+              "@val": {
+                "applyType": "ON_ATTACKER",
+                "targetType": {
+                  "randomOrNot": "NOT_RANDOM",
+                  "targetAttackerRange": "ALL_THREE",
+                  "cellType": "SQUARE_3_3",
+                  "heroOrMinion": "BOTH",
+                  "oppOrAlly": "BOTH",
+                  "chooseType": "SELECTED_CELL"
+                },
+                "effects": [
+                  {
+                    "@type": "models.card.buffs.Poison",
+                    "@val": {
+                      "duration": 1,
+                      "buffMode": "EVIL",
+                      "cell": null,
+                      "attacker": null,
+                      "player": null,
+                      "match": null,
+                      "activationType": "NONE"
+                    }
+                  }
+                ],
+                "desc": "Put poison on a 3*3 square.",
+                "isCommandValid": true,
+                "name": "Poison_Lake",
+                "id": 215,
+                "collectionID": 0,
+                "cardIDInGame": null,
+                "price": 900,
+                "manaCost": 5,
+                "currentCell": null
+              }
+            },
+            {
+              "@type": "models.card.Spell",
+              "@val": {
+                "applyType": "ON_ATTACKER",
+                "targetType": {
+                  "randomOrNot": "NOT_RANDOM",
+                  "targetAttackerRange": "ALL_THREE",
+                  "cellType": "SINGLE_CELL",
+                  "heroOrMinion": "BOTH",
                   "oppOrAlly": "ALLY",
                   "chooseType": "HIMSELF"
                 },
@@ -184,11 +236,21 @@
                     }
                   },
                   {
-                    "@type": "models.card.buffs.PowerAP",
+                    "@type": "models.card.buffs.Holy",
                     "@val": {
-                      "value": 8,
-                      "initialAP": 0,
-                      "duration": 2147483647,
+                      "duration": 3,
+                      "buffMode": "GOOD",
+                      "cell": null,
+                      "attacker": null,
+                      "player": null,
+                      "match": null,
+                      "activationType": "NONE"
+                    }
+                  },
+                  {
+                    "@type": "models.card.buffs.Holy",
+                    "@val": {
+                      "duration": 3,
                       "buffMode": "GOOD",
                       "cell": null,
                       "attacker": null,
@@ -198,14 +260,14 @@
                     }
                   }
                 ],
-                "desc": "Decrease HP 6 units but increase AP 8 units of an ally minion.",
+                "desc": "Decrease HP 6 units but get 2 holy buffs for 2 turns.",
                 "isCommandValid": true,
-                "name": "Sacrifice",
-                "id": 225,
+                "name": "Health_With_Profit",
+                "id": 220,
                 "collectionID": 0,
                 "cardIDInGame": null,
-                "price": 1600,
-                "manaCost": 2,
+                "price": 2250,
+                "manaCost": 0,
                 "currentCell": null
               }
             },
@@ -214,18 +276,20 @@
               "@val": {
                 "applyType": "ON_ATTACKER",
                 "targetType": {
-                  "randomOrNot": "NOT_RANDOM",
+                  "randomOrNot": "RANDOM",
                   "targetAttackerRange": "ALL_THREE",
-                  "cellType": "SINGLE_CELL",
-                  "heroOrMinion": "BOTH",
+                  "cellType": "SQUARE_3_3",
+                  "heroOrMinion": "MINION",
                   "oppOrAlly": "OPP",
-                  "chooseType": "HIMSELF"
+                  "chooseType": "SELECTED_CELL"
                 },
                 "effects": [
                   {
-                    "@type": "models.card.buffs.Stun",
+                    "@type": "models.card.buffs.WeaknessHP",
                     "@val": {
-                      "duration": 2,
+                      "value": 2147483647,
+                      "initialHP": 0,
+                      "duration": 2147483647,
                       "buffMode": "EVIL",
                       "cell": null,
                       "attacker": null,
@@ -235,102 +299,248 @@
                     }
                   }
                 ],
-                "desc": "Stun an opp.",
+                "desc": "Kill a minion around king randomly chosen.",
                 "isCommandValid": true,
-                "name": "Shock",
-                "id": 227,
+                "name": "Kings_Guard",
+                "id": 226,
                 "collectionID": 0,
                 "cardIDInGame": null,
-                "price": 1200,
-                "manaCost": 1,
+                "price": 1750,
+                "manaCost": 9,
                 "currentCell": null
               }
             },
             {
-              "@type": "models.card.Spell",
+              "@type": "models.card.Minion",
               "@val": {
-                "applyType": "ON_ATTACKER",
-                "targetType": {
-                  "randomOrNot": "NOT_RANDOM",
-                  "targetAttackerRange": "ALL_THREE",
-                  "cellType": "SINGLE_CELL",
-                  "heroOrMinion": "BOTH",
-                  "oppOrAlly": "OPP",
-                  "chooseType": "HIMSELF"
-                },
-                "effects": [
-                  {
-                    "@type": "models.card.buffs.Stun",
-                    "@val": {
-                      "duration": 2,
-                      "buffMode": "EVIL",
-                      "cell": null,
-                      "attacker": null,
-                      "player": null,
-                      "match": null,
-                      "activationType": "NONE"
+                "isCombo": false,
+                "maxHp": 6,
+                "maxAp": 4,
+                "hp": 6,
+                "ap": 4,
+                "specialPower": null,
+                "appliedEffects": [],
+                "attackRange": 7,
+                "attackMode": "RANGED",
+                "canMove": false,
+                "canAttack": false,
+                "isDisarmed": false,
+                "isStunned": false,
+                "hasHolyBuff": false,
+                "flag": null,
+                "name": "Kamandare_Fars",
+                "id": 129,
+                "collectionID": 0,
+                "cardIDInGame": null,
+                "price": 300,
+                "manaCost": 2,
+                "currentCell": {
+                  "x": 0,
+                  "y": 0,
+                  "effects": [],
+                  "collectable": null,
+                  "flag": null,
+                  "currentAttacker": null
+                }
+              }
+            },
+            {
+              "@type": "models.card.Minion",
+              "@val": {
+                "isCombo": false,
+                "maxHp": 0,
+                "maxAp": 2,
+                "hp": 0,
+                "ap": 2,
+                "specialPower": {
+                  "applyType": "ON_ATTACKER",
+                  "targetType": {
+                    "randomOrNot": "RANDOM",
+                    "targetAttackerRange": "ALL_THREE",
+                    "cellType": "SINGLE_CELL",
+                    "heroOrMinion": "MINION",
+                    "oppOrAlly": "OPP",
+                    "chooseType": "NONE"
+                  },
+                  "effects": [
+                    {
+                      "@type": "models.card.buffs.WeaknessHP",
+                      "@val": {
+                        "value": 16,
+                        "initialHP": 0,
+                        "duration": 2147483647,
+                        "buffMode": "EVIL",
+                        "cell": null,
+                        "attacker": null,
+                        "player": null,
+                        "match": null,
+                        "activationType": "ON_SPAWN"
+                      }
                     }
-                  }
-                ],
-                "desc": "Stun an opp.",
-                "isCommandValid": true,
-                "name": "Shock",
-                "id": 227,
-                "collectionID": 0,
-                "cardIDInGame": null,
-                "price": 1200,
-                "manaCost": 1,
-                "currentCell": null
-              }
-            },
-            {
-              "@type": "models.card.Spell",
-              "@val": {
-                "applyType": "ON_ATTACKER",
-                "targetType": {
-                  "randomOrNot": "NOT_RANDOM",
-                  "targetAttackerRange": "ALL_THREE",
-                  "cellType": "SINGLE_CELL",
-                  "heroOrMinion": "BOTH",
-                  "oppOrAlly": "OPP",
-                  "chooseType": "HIMSELF"
+                  ],
+                  "desc": "Attack a minion 16 units, randomly chosen.",
+                  "isCommandValid": true,
+                  "name": "Bahman's_Spell",
+                  "id": 188,
+                  "collectionID": 0,
+                  "cardIDInGame": null,
+                  "price": 0,
+                  "manaCost": 0,
+                  "currentCell": null
                 },
-                "effects": [
-                  {
-                    "@type": "models.card.buffs.Stun",
-                    "@val": {
-                      "duration": 2,
-                      "buffMode": "EVIL",
-                      "cell": null,
-                      "attacker": null,
-                      "player": null,
-                      "match": null,
-                      "activationType": "NONE"
+                "appliedEffects": [],
+                "attackRange": 3,
+                "attackMode": "RANGED",
+                "canMove": false,
+                "canAttack": false,
+                "isDisarmed": false,
+                "isStunned": false,
+                "hasHolyBuff": false,
+                "flag": null,
+                "name": "Bahman",
+                "id": 189,
+                "collectionID": 0,
+                "cardIDInGame": null,
+                "price": 200,
+                "manaCost": 2,
+                "currentCell": {
+                  "x": 0,
+                  "y": 0,
+                  "effects": [],
+                  "collectable": null,
+                  "flag": null,
+                  "currentAttacker": null
+                }
+              }
+            },
+            {
+              "@type": "models.card.Minion",
+              "@val": {
+                "isCombo": false,
+                "maxHp": 30,
+                "maxAp": 8,
+                "hp": 30,
+                "ap": 8,
+                "specialPower": null,
+                "appliedEffects": [],
+                "attackRange": 2,
+                "attackMode": "HYBRID",
+                "canMove": false,
+                "canAttack": false,
+                "isDisarmed": false,
+                "isStunned": false,
+                "hasHolyBuff": false,
+                "flag": null,
+                "name": "Ghole_Bozorg",
+                "id": 193,
+                "collectionID": 0,
+                "cardIDInGame": null,
+                "price": 600,
+                "manaCost": 9,
+                "currentCell": {
+                  "x": 0,
+                  "y": 0,
+                  "effects": [],
+                  "collectable": null,
+                  "flag": null,
+                  "currentAttacker": null
+                }
+              }
+            },
+            {
+              "@type": "models.card.Minion",
+              "@val": {
+                "isCombo": false,
+                "maxHp": 6,
+                "maxAp": 4,
+                "hp": 6,
+                "ap": 4,
+                "specialPower": null,
+                "appliedEffects": [],
+                "attackRange": 7,
+                "attackMode": "RANGED",
+                "canMove": false,
+                "canAttack": false,
+                "isDisarmed": false,
+                "isStunned": false,
+                "hasHolyBuff": false,
+                "flag": null,
+                "name": "Kamandare_Fars",
+                "id": 129,
+                "collectionID": 0,
+                "cardIDInGame": null,
+                "price": 300,
+                "manaCost": 2,
+                "currentCell": {
+                  "x": 0,
+                  "y": 0,
+                  "effects": [],
+                  "collectable": null,
+                  "flag": null,
+                  "currentAttacker": null
+                }
+              }
+            },
+            {
+              "@type": "models.card.Minion",
+              "@val": {
+                "isCombo": false,
+                "maxHp": 5,
+                "maxAp": 4,
+                "hp": 5,
+                "ap": 4,
+                "specialPower": {
+                  "applyType": "ON_ATTACKER",
+                  "targetType": {
+                    "randomOrNot": "NOT_RANDOM",
+                    "targetAttackerRange": "ALL_THREE",
+                    "cellType": "SQUARE_3_3",
+                    "heroOrMinion": "BOTH",
+                    "oppOrAlly": "ALLY",
+                    "chooseType": "HIMSELF"
+                  },
+                  "effects": [
+                    {
+                      "@type": "models.card.buffs.PowerAP",
+                      "@val": {
+                        "value": 2,
+                        "initialAP": 0,
+                        "duration": 1,
+                        "buffMode": "GOOD",
+                        "cell": null,
+                        "attacker": null,
+                        "player": null,
+                        "match": null,
+                        "activationType": "PASSIVE"
+                      }
+                    },
+                    {
+                      "@type": "models.card.buffs.WeaknessHP",
+                      "@val": {
+                        "value": 1,
+                        "initialHP": 0,
+                        "duration": 1,
+                        "buffMode": "EVIL",
+                        "cell": null,
+                        "attacker": null,
+                        "player": null,
+                        "match": null,
+                        "activationType": "PASSIVE"
+                      }
                     }
-                  }
-                ],
-                "desc": "Stun an opp.",
-                "isCommandValid": true,
-                "name": "Shock",
-                "id": 227,
-                "collectionID": 0,
-                "cardIDInGame": null,
-                "price": 1200,
-                "manaCost": 1,
-                "currentCell": null
-              }
-            },
-            {
-              "@type": "models.card.Minion",
-              "@val": {
-                "isCombo": false,
-                "maxHp": 6,
-                "maxAp": 4,
-                "hp": 6,
-                "ap": 4,
-                "specialPower": null,
+                  ],
+                  "desc": "Power AP 2 units but weakness HP 1 unit for 1 round, on itself and neighbors.  ",
+                  "isCommandValid": true,
+                  "name": "Jadogar's_Spell",
+                  "id": 182,
+                  "collectionID": 0,
+                  "cardIDInGame": null,
+                  "price": 0,
+                  "manaCost": 0,
+                  "currentCell": null
+                },
                 "appliedEffects": [],
-                "attackRange": 7,
+                "attackRange": 3,
                 "attackMode": "RANGED",
                 "canMove": false,
                 "canAttack": false,
@@ -338,148 +548,12 @@
                 "isStunned": false,
                 "hasHolyBuff": false,
                 "flag": null,
-                "name": "Kamandare_Fars",
-                "id": 129,
+                "name": "Jadogar",
+                "id": 183,
                 "collectionID": 0,
                 "cardIDInGame": null,
-                "price": 300,
-                "manaCost": 2,
-                "currentCell": {
-                  "x": 0,
-                  "y": 0,
-                  "effects": [],
-                  "collectable": null,
-                  "flag": null,
-                  "currentAttacker": null
-                }
-              }
-            },
-            {
-              "@type": "models.card.Minion",
-              "@val": {
-                "isCombo": false,
-                "maxHp": 6,
-                "maxAp": 4,
-                "hp": 6,
-                "ap": 4,
-                "specialPower": null,
-                "appliedEffects": [],
-                "attackRange": 7,
-                "attackMode": "RANGED",
-                "canMove": false,
-                "canAttack": false,
-                "isDisarmed": false,
-                "isStunned": false,
-                "hasHolyBuff": false,
-                "flag": null,
-                "name": "Kamandare_Fars",
-                "id": 129,
-                "collectionID": 0,
-                "cardIDInGame": null,
-                "price": 300,
-                "manaCost": 2,
-                "currentCell": {
-                  "x": 0,
-                  "y": 0,
-                  "effects": [],
-                  "collectable": null,
-                  "flag": null,
-                  "currentAttacker": null
-                }
-              }
-            },
-            {
-              "@type": "models.card.Minion",
-              "@val": {
-                "isCombo": false,
-                "maxHp": 6,
-                "maxAp": 4,
-                "hp": 6,
-                "ap": 4,
-                "specialPower": null,
-                "appliedEffects": [],
-                "attackRange": 7,
-                "attackMode": "RANGED",
-                "canMove": false,
-                "canAttack": false,
-                "isDisarmed": false,
-                "isStunned": false,
-                "hasHolyBuff": false,
-                "flag": null,
-                "name": "Kamandare_Fars",
-                "id": 129,
-                "collectionID": 0,
-                "cardIDInGame": null,
-                "price": 300,
-                "manaCost": 2,
-                "currentCell": {
-                  "x": 0,
-                  "y": 0,
-                  "effects": [],
-                  "collectable": null,
-                  "flag": null,
-                  "currentAttacker": null
-                }
-              }
-            },
-            {
-              "@type": "models.card.Minion",
-              "@val": {
-                "isCombo": false,
-                "maxHp": 6,
-                "maxAp": 4,
-                "hp": 6,
-                "ap": 4,
-                "specialPower": null,
-                "appliedEffects": [],
-                "attackRange": 7,
-                "attackMode": "RANGED",
-                "canMove": false,
-                "canAttack": false,
-                "isDisarmed": false,
-                "isStunned": false,
-                "hasHolyBuff": false,
-                "flag": null,
-                "name": "Kamandare_Fars",
-                "id": 129,
-                "collectionID": 0,
-                "cardIDInGame": null,
-                "price": 300,
-                "manaCost": 2,
-                "currentCell": {
-                  "x": 0,
-                  "y": 0,
-                  "effects": [],
-                  "collectable": null,
-                  "flag": null,
-                  "currentAttacker": null
-                }
-              }
-            },
-            {
-              "@type": "models.card.Minion",
-              "@val": {
-                "isCombo": false,
-                "maxHp": 6,
-                "maxAp": 4,
-                "hp": 6,
-                "ap": 4,
-                "specialPower": null,
-                "appliedEffects": [],
-                "attackRange": 7,
-                "attackMode": "RANGED",
-                "canMove": false,
-                "canAttack": false,
-                "isDisarmed": false,
-                "isStunned": false,
-                "hasHolyBuff": false,
-                "flag": null,
-                "name": "Kamandare_Fars",
-                "id": 129,
-                "collectionID": 0,
-                "cardIDInGame": null,
-                "price": 300,
-                "manaCost": 2,
+                "price": 550,
+                "manaCost": 4,
                 "currentCell": {
                   "x": 0,
                   "y": 0,
@@ -649,6 +723,109 @@
                 "cardIDInGame": null,
                 "price": 300,
                 "manaCost": 4,
+                "currentCell": {
+                  "x": 0,
+                  "y": 0,
+                  "effects": [],
+                  "collectable": null,
+                  "flag": null,
+                  "currentAttacker": null
+                }
+              }
+            },
+            {
+              "@type": "models.card.Minion",
+              "@val": {
+                "isCombo": false,
+                "maxHp": 16,
+                "maxAp": 8,
+                "hp": 16,
+                "ap": 8,
+                "specialPower": null,
+                "appliedEffects": [],
+                "attackRange": -1,
+                "attackMode": "MELEE",
+                "canMove": false,
+                "canAttack": false,
+                "isDisarmed": false,
+                "isStunned": false,
+                "hasHolyBuff": false,
+                "flag": null,
+                "name": "Dive_Gorazsavar",
+                "id": 163,
+                "collectionID": 0,
+                "cardIDInGame": null,
+                "price": 300,
+                "manaCost": 6,
+                "currentCell": {
+                  "x": 0,
+                  "y": 0,
+                  "effects": [],
+                  "collectable": null,
+                  "flag": null,
+                  "currentAttacker": null
+                }
+              }
+            },
+            {
+              "@type": "models.card.Minion",
+              "@val": {
+                "isCombo": false,
+                "maxHp": 6,
+                "maxAp": 1,
+                "hp": 6,
+                "ap": 1,
+                "specialPower": {
+                  "applyType": "ON_ATTACKER",
+                  "targetType": {
+                    "randomOrNot": "NOT_RANDOM",
+                    "targetAttackerRange": "ALL_THREE",
+                    "cellType": "SINGLE_CELL",
+                    "heroOrMinion": "MINION",
+                    "oppOrAlly": "OPP",
+                    "chooseType": "SELECTED_OPP"
+                  },
+                  "effects": [
+                    {
+                      "@type": "models.card.buffs.WeaknessHP",
+                      "@val": {
+                        "value": 6,
+                        "initialHP": 0,
+                        "duration": 2147483647,
+                        "buffMode": "EVIL",
+                        "cell": null,
+                        "attacker": null,
+                        "player": null,
+                        "match": null,
+                        "activationType": "ON_ATTACK"
+                      }
+                    }
+                  ],
+                  "desc": "Decrease HP of attacked minion 6 at next round.",
+                  "isCommandValid": true,
+                  "name": "Gorg's_Spell",
+                  "id": 179,
+                  "collectionID": 0,
+                  "cardIDInGame": null,
+                  "price": 0,
+                  "manaCost": 0,
+                  "currentCell": null
+                },
+                "appliedEffects": [],
+                "attackRange": -1,
+                "attackMode": "MELEE",
+                "canMove": false,
+                "canAttack": false,
+                "isDisarmed": false,
+                "isStunned": false,
+                "hasHolyBuff": false,
+                "flag": null,
+                "name": "Gorg",
+                "id": 180,
+                "collectionID": 0,
+                "cardIDInGame": null,
+                "price": 400,
+                "manaCost": 3,
                 "currentCell": {
                   "x": 0,
                   "y": 0,
@@ -1066,54 +1243,59 @@
             "applyType": null,
             "effects": [
               {
-                "@type": "models.card.buffs.IncreaseMana",
+                "@type": "models.card.buffs.WeaknessAP",
                 "@val": {
-                  "value": 1,
-                  "duration": 3,
-                  "buffMode": "GOOD",
+                  "value": 2,
+                  "initialAP": 0,
+                  "duration": 1,
+                  "buffMode": "EVIL",
                   "cell": null,
                   "attacker": null,
                   "player": null,
                   "match": null,
-                  "activationType": "NONE"
+                  "activationType": "ON_ATTACK"
                 }
               }
             ],
-            "targetType": null,
-            "desc": "Increases Mana in first three turns",
-            "name": "Taje_Danaee",
-            "id": 228,
+            "targetType": {
+              "randomOrNot": "RANDOM",
+              "targetAttackerRange": "ALL_THREE",
+              "cellType": "NONE",
+              "heroOrMinion": "BOTH",
+              "oppOrAlly": "OPP",
+              "chooseType": "NONE"
+            },
+            "desc": "Decrease 2 units of opp's (randomly chosen) AP for 1 turn, on attack.",
+            "name": "Terror_Hood",
+            "id": 232,
             "collectionID": 0,
             "cardIDInGame": null,
-            "price": 300,
+            "price": 5000,
             "manaCost": 0,
             "currentCell": null
           },
           "hero": {
             "primaryCooldown": 2,
             "cooldown": 0,
-            "maxHp": 50,
-            "maxAp": 4,
-            "hp": 50,
-            "ap": 4,
+            "maxHp": 30,
+            "maxAp": 2,
+            "hp": 30,
+            "ap": 2,
             "specialPower": {
               "applyType": "ON_ATTACKER",
               "targetType": {
                 "randomOrNot": "NOT_RANDOM",
                 "targetAttackerRange": "ALL_THREE",
-                "cellType": "SINGLE_CELL",
-                "heroOrMinion": "HERO",
-                "oppOrAlly": "ALLY",
-                "chooseType": "HIMSELF"
+                "cellType": "IN_ROW",
+                "heroOrMinion": "BOTH",
+                "oppOrAlly": "BOTH",
+                "chooseType": "SELECTED_ALLY"
               },
               "effects": [
                 {
-                  "@type": "models.card.buffs.PowerAP",
+                  "@type": "models.card.effects.DecreaseHP",
                   "@val": {
                     "value": 4,
-                    "initialAP": 0,
-                    "duration": 2147483647,
-                    "buffMode": "GOOD",
                     "cell": null,
                     "attacker": null,
                     "player": null,
@@ -1122,30 +1304,30 @@
                   }
                 }
               ],
-              "desc": "Casts one power buff with 4 ap increase on himself forever",
+              "desc": "Gives 4 damages to all opponent attackers in the same row as selected hero.",
               "isCommandValid": true,
-              "name": "Dive_Sefid's_Spell",
-              "id": 100,
+              "name": "Arash's_Spell",
+              "id": 118,
               "collectionID": 0,
               "cardIDInGame": null,
               "price": 0,
-              "manaCost": 1,
+              "manaCost": 2,
               "currentCell": null
             },
             "appliedEffects": [],
-            "attackRange": 1,
-            "attackMode": "MELEE",
+            "attackRange": 6,
+            "attackMode": "RANGED",
             "canMove": true,
             "canAttack": true,
             "isDisarmed": false,
             "isStunned": false,
             "hasHolyBuff": false,
             "flag": null,
-            "name": "Dive_Sefid",
-            "id": 101,
+            "name": "Arash",
+            "id": 119,
             "collectionID": 0,
             "cardIDInGame": null,
-            "price": 8000,
+            "price": 10000,
             "manaCost": -1,
             "currentCell": {
               "x": 0,
@@ -1164,6 +1346,7 @@
         "@root.collection.decks.0.hero"
       ],
       "minions": [
+        "@root.collection.decks.0.cards.7",
         "@root.collection.decks.0.cards.8",
         "@root.collection.decks.0.cards.9",
         "@root.collection.decks.0.cards.10",
@@ -1178,7 +1361,8 @@
         "@root.collection.decks.0.cards.19",
         "@root.collection.decks.0.cards.20",
         "@root.collection.decks.0.cards.21",
-        "@root.collection.decks.0.cards.22"
+        "@root.collection.decks.0.cards.22",
+        "@root.collection.decks.0.cards.23"
       ],
       "spells": [
         "@root.collection.decks.0.cards.0",
@@ -1187,8 +1371,7 @@
         "@root.collection.decks.0.cards.3",
         "@root.collection.decks.0.cards.4",
         "@root.collection.decks.0.cards.5",
-        "@root.collection.decks.0.cards.6",
-        "@root.collection.decks.0.cards.7"
+        "@root.collection.decks.0.cards.6"
       ],
       "usables": [
         "@root.collection.decks.0.usable"

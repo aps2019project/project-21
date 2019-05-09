@@ -15,6 +15,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Ghole_Sangandaz",
     "id": 158,
     "collectionID": 0,

@@ -163,6 +163,7 @@
         }
       ],
       "desc": "Having 12 continuous holy buffs.",
+      "isCommandValid": true,
       "name": "Folad_Zereh's_Spell",
       "id": 198,
       "collectionID": 0,
@@ -179,6 +180,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Folad_Zereh",
     "id": 199,
     "collectionID": 0,

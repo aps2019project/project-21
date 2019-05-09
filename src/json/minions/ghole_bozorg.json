@@ -15,6 +15,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Ghole_Bozorg",
     "id": 193,
     "collectionID": 0,

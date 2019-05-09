@@ -27,6 +27,7 @@
       }
     ],
     "desc": "Attack opp's hero 8 units.",
+    "isCommandValid": true,
     "name": "Lightning_Bolt",
     "id": 214,
     "collectionID": 0,

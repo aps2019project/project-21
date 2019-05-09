@@ -15,6 +15,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Sepahsalare_Fars",
     "id": 141,
     "collectionID": 0,

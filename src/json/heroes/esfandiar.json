@@ -1,6 +1,7 @@
 {
   "@type": "models.card.Hero",
   "@val": {
+    "primaryCooldown": 0,
     "cooldown": 0,
     "maxHp": 35,
     "maxAp": 3,
@@ -33,6 +34,7 @@
         }
       ],
       "desc": "Has 3 holy buffs continuously.",
+      "isCommandValid": true,
       "name": "Esfandiar's_Spell",
       "id": 124,
       "collectionID": 0,
@@ -49,6 +51,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Esfandiar",
     "id": 125,
     "collectionID": 0,

@@ -1,7 +1,8 @@
 {
   "@type": "models.card.Hero",
   "@val": {
-    "cooldown": 8,
+    "primaryCooldown": 8,
+    "cooldown": 0,
     "maxHp": 50,
     "maxAp": 4,
     "hp": 50,
@@ -31,6 +32,7 @@
         }
       ],
       "desc": "Stuns all opp attackers for one turn.",
+      "isCommandValid": true,
       "name": "Simorgh's_Spell",
       "id": 103,
       "collectionID": 0,
@@ -47,6 +49,7 @@
     "isDisarmed": false,
     "isStunned": false,
     "hasHolyBuff": false,
+    "flag": null,
     "name": "Simorgh",
     "id": 104,
     "collectionID": 0,
