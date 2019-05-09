@@ -11,7 +11,7 @@ public class BattleMenuRequest extends Request {
             gameInfoCheck();
         else if (commandLine.equalsIgnoreCase("show my minions"))
             showMyMinionsCheck();
-        else if (commandLine.equalsIgnoreCase("show opponent minions"))
+        else if (commandLine.equalsIgnoreCase("show opponents minions"))
             showOppMinionsCheck();
         else if (commandLine.startsWith("show card info "))
             showCardInfoCheck();

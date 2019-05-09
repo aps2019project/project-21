@@ -138,7 +138,7 @@ public class BattleMenu extends Menu {
     }
 
     private void showCardInfo() {
-        Card card = Card.getCardByID(request.getCommandArguments().get(0));
+        Card card = Card.getCardByIDInGame(request.getCommandArguments().get(0));
         if (card == null)
             return;
         view.showCardInfo(card);

@@ -10,8 +10,6 @@ import models.card.*;
 import models.match.GoalMode;
 import models.match.Match;
 import models.match.PlayerMatchInfo;
-import models.match.GoalMode;
-import models.match.Match;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -51,7 +49,45 @@ public class View {
     }
 
     public void printCardGraveyard(Card card) {
-
+        if (card == null)
+            return;
+        if (card instanceof Hero) {
+            System.out.println("Hero : " +
+                    " Name : " +
+                    card.getName() +
+                    " Cost : " +
+                    card.getPrice() +
+                    " Desc : " +
+                    card.getDesc());
+        } else if (card instanceof Spell) {
+            System.out.println("Spell : " +
+                    " Name : " +
+                    card.getName() +
+                    " MP : " +
+                    card.getManaCost() +
+                    " Cost : " +
+                    card.getPrice()
+                    + " Desc : " +
+                    card.getDesc());
+        } else if (card instanceof Minion) {
+            System.out.println("Minion : " +
+                    " Name : " +
+                    card.getName() +
+                    " HP : " +
+                    ((Minion) card).getHP() +
+                    " AP : " +
+                    ((Minion) card).getAP() +
+                    " MP : " +
+                    card.getManaCost() +
+                    " Range : " +
+                    ((Minion) card).getAttackRange() +
+                    " Combo-ability : " +
+                    ((Minion) card).isCombo() +
+                    " Cost : " +
+                    card.getPrice() +
+                    " Desc : " +
+                    card.getDesc());
+        }
     }
 
     private void printItem(Item item, String sellOrBuy, boolean showCollectionID) {
@@ -275,12 +311,26 @@ public class View {
         }
     }
 
-    public void showSearchInShop(String msg) {
-
+    public void showSearchInShop(Card card) {
+        if (card == null){
+            System.out.println("Card with this name doesn't exist");
+        } else {
+            System.out.println("Name : " +
+                    card.getName() +
+                    " - ID : " +
+                    card.getId());
+        }
     }
 
-    public void showCollectionSearchInShop(String msg) {
-
+    public void showCollectionSearchInShop(Card card) {
+        if (card == null){
+            System.out.println("Card not found");
+        } else {
+            System.out.println("Name" +
+                    card.getName() +
+                    "ID" +
+                    card.getId());
+        }
     }
 
     public void showGameInfo() {
@@ -392,8 +442,13 @@ public class View {
         }
     }
 
-    public void showItemInfo() {
-
+    public void showItemInfo(Item item) {
+        System.out.println("Name : " +
+                item.getName() +
+                "- Desc : "+
+                item.getDesc()+
+                "- SellCost : " +
+                item.getPrice());
     }
 
     public static void printException(Exception e) {
