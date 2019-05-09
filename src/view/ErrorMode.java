@@ -51,7 +51,18 @@ public enum ErrorMode {
     CARD_SELECTED("card successfully selected."),
     ATTACKER_CANT_MOVE("attacker cannot move."),
     INVALID_CELL("cell is invalid."),
+    SELECTED_CARD_NOT_MINION("selected card must be minion"),
+    NOT_COMBO("selected minion is not combo."),
+    NO_ATTACKER_SELECTED("you must select an attacker."),
+    HASNT_SPECIAL("this card has no special power"),
+    CARD_OR_COLLECTABLE_ID_INVALID("card or collectable or spell id not valid."),
+    NO_COLLECTABLE_SELECTED("no collectable is selected."),
+    COOLDOWN("hero is in cooldown."),
+    NO_SPELL_SELECTED("you must choose a spell."),
+    STUNNED("attacker is stunned."),
+    DISARMED("attacker is disarmed."),
     INVALID_COMMAND("invalid command");
+
 
 
     private String message;

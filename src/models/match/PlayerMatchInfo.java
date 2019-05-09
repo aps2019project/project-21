@@ -21,7 +21,6 @@ public class PlayerMatchInfo {
     private List<Attacker> groundedAttackers = new ArrayList<>();
     private List<Spell> usedSpells = new ArrayList<>();
     private List<Effect> effects = new ArrayList<>();
-    private int gatheredFlags = 0;
 
     public PlayerMatchInfo(Player player) {
         deck = CardMaker.deepCopy(player.getCollection().getMainDeck(), Deck.class);
@@ -123,23 +122,50 @@ public class PlayerMatchInfo {
         this.mp -= value;
     }
 
-    public int getGatheredFlags() {
-        return gatheredFlags;
-    }
-
-    public void increaseFlags() {
-        this.gatheredFlags++;
-    }
-
     public void kill(Attacker attacker) {
         if (attacker == null)
             return;
         groundedAttackers.remove(attacker);
         graveyard.add(attacker);
         attacker.getCurrentCell().setEmpty();
+        if (attacker.getFlag() != null) {
+            attacker.getFlag().setCurrentCell(attacker.getCurrentCell());
+            attacker.getCurrentCell().setFlag(attacker.getFlag());
+            attacker.setFlag(null);
+        }
     }
 
     public void setMp(int mp) {
         this.mp = Math.min(mp, MAX_MANA);
+    }
+
+    public List<Minion> getGroundedMinions() {
+        List<Minion> minions = new ArrayList<>();
+        for (Attacker attacker : groundedAttackers)
+            if (attacker instanceof Minion)
+                minions.add((Minion) attacker);
+        return minions;
+    }
+
+    public Minion getGroundedMinionByID(String id) {
+        for (Minion minion : getGroundedMinions())
+            if (minion.getCardIDInGame().equalsIgnoreCase(id))
+                return minion;
+        return null;
+    }
+
+    public Card getGraveyardCard(String cardID) {
+        for (Card card : graveyard)
+            if (card.getCardIDInGame().equalsIgnoreCase(cardID))
+                return card;
+        return null;
+    }
+
+    public int gatheredFlags() {
+        int ret = 0;
+        for (Attacker attacker : groundedAttackers)
+            if (attacker.getFlag() != null)
+                ret++;
+        return ret;
     }
 }

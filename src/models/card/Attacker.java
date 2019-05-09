@@ -1,5 +1,6 @@
 package models.card;
 
+import models.Item.Flag;
 import models.Player;
 import models.match.Cell;
 import models.match.Match;
@@ -24,6 +25,7 @@ public class Attacker extends Card {
     private boolean isDisarmed = false;
     private boolean isStunned = false;
     private boolean hasHolyBuff = false;
+    private Flag flag;
 
     Attacker() {
 
@@ -64,21 +66,9 @@ public class Attacker extends Card {
         appliedEffects.remove(effect);
     }
 
-    public void move(int x, int y) {
-
-    }
-
-    public void attack() {
-
-    }
-
-    public void counterAttack() {
-
-    }
-
     public void castSpecialPower(Match match, Player player, Cell target) {
-        //  check if he can use spell , has enough mana
-
+        if (this instanceof Hero)
+            ((Hero) this).resetCooldown();
         specialPower.castSpell(match, player, target);
     }
 
@@ -235,5 +225,35 @@ public class Attacker extends Card {
         if (hasSpecialPower())
             return this.specialPower.getDesc();
         return "";
+    }
+
+    public Flag getFlag() {
+        return flag;
+    }
+
+    public void setFlag(Flag flag) {
+        this.flag = flag;
+    }
+
+    public boolean isDisarmed() {
+        return isDisarmed;
+    }
+
+    public boolean isStunned() {
+        return isStunned;
+    }
+
+    public boolean isHasHolyBuff() {
+        return hasHolyBuff;
+    }
+
+    public void applyEffects() {
+        for (Effect effect : appliedEffects) {
+            effect.setAttacker(this);
+            effect.setCell(this.currentCell);
+            effect.setMatch(Match.getCurrentMatch());
+            effect.setPlayer(Match.getCurrentMatch().getThisTurnsPlayer());
+            effect.apply();
+        }
     }
 }

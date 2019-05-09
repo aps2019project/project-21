@@ -1,11 +1,7 @@
 package controller.menus;
 
-import controller.request.MainMenuRequest;
-import controller.request.Request;
-import models.card.Card;
+import controller.request.GraveyardRequest;
 import models.match.Match;
-import models.match.PlayerMatchInfo;
-import view.View;
 
 public class Graveyard extends Menu {
     private static Graveyard instance = new Graveyard();
@@ -24,14 +20,13 @@ public class Graveyard extends Menu {
             showMenu = false;
         }
 
-        request = new MainMenuRequest();
+        request = new GraveyardRequest();
 
         request.getNewCommand();
 
         request.extractType();
 
         switch (request.getType()) {
-            //  add cases
             case SHOW_INFO:
                 showInfo();
                 break;
@@ -41,31 +36,35 @@ public class Graveyard extends Menu {
             case EXIT:
                 exit();
                 break;
+            case BACK:
+                back();
+                break;
+            case HELP:
+                showMenu();
+                break;
+            case SHOW_MENU:
+                showMenu();
+                break;
+            case INVALID:
+                invalidCommand();
+                break;
         }
     }
 
     protected void showMenu() {
-        System.out.println("------graveyard--------");
-        System.out.println("options:\n1 - Show cards\n2 - Show info [card id]");
+        view.showMenu("Graveyard");
     }
 
     private void showInfo() {
-        Card card = Card.getCardByID(request.getCommandArguments().get(0));
-        view.printCardGraveyard(card);
+        Match.getCurrentMatch().showCardInfoInGraveyard(request.getCommandArguments().get(0));
     }
 
     private void showCards() {
-        PlayerMatchInfo player = Match.getCurrentMatch().getPlayersMatchInfo()[0];
-        for (Card card : player.getGraveyard()) {
-            view.printCardGraveyard(card);
-        }
+        Match.getCurrentMatch().showGraveyardCards();
     }
 
-    public View getView() {
-        return view;
+    private void back() {
+        MenuManager.getInstance().gotoBattle();
     }
 
-    public void setView(View view) {
-        this.view = view;
-    }
 }

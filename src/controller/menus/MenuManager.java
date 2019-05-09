@@ -44,17 +44,17 @@ public class MenuManager {
         }
     }
 
-    protected void gotoShop() {
+    void gotoShop() {
         menuType = MenuType.SHOP_MENU;
         ShopMenu.getInstance().showMenu = true;
     }
 
-    protected void gotoCollection() {
+    void gotoCollection() {
         menuType = MenuType.COLLECTION_MENU;
         CollectionMenu.getInstance().showMenu = true;
     }
 
-    protected void gotoBattle() {
+    void gotoBattle() {
         menuType = MenuType.BATTLE_MENU;
         BattleMenu.getInstance().showMenu = true;
     }
@@ -63,17 +63,17 @@ public class MenuManager {
         menuType = MenuType.EXIT;
     }
 
-    protected void gotoGraveyard() {
+    void gotoGraveyard() {
         menuType = MenuType.GRAVEYARD_MENU;
         Graveyard.getInstance().showMenu = true;
     }
 
-    protected void gotoAccount() {
+    void gotoAccount() {
         menuType = MenuType.ACCOUNT_MENU;
         AccountMenu.getInstance().showMenu = true;
     }
 
-    protected void gotoMainMenu() {
+    public void gotoMainMenu() {
         menuType = MenuType.MAIN_MENU;
         MainMenu.getInstance().showMenu = true;
     }

@@ -190,7 +190,7 @@ public class MainMenu extends Menu {
             view.printError(ErrorMode.AIPLAYER_IS_NULL);
             return false;
         }
-        GoalMode goalMode = GoalMode.KILL_HERO;
+        GoalMode goalMode;
         try {
             goalMode = GoalMode.valueOf(matcher.group(2));
         } catch (Exception e) {
@@ -239,7 +239,7 @@ public class MainMenu extends Menu {
             invalidCommand();
             return false;
         }
-        GoalMode goalMode = GoalMode.KILL_HERO;
+        GoalMode goalMode;
         try {
             goalMode = GoalMode.valueOf(matcher.group(1));
         } catch (Exception e) {
@@ -261,9 +261,4 @@ public class MainMenu extends Menu {
         this.gameType = GameType.CUSTOM;
         return true;
     }
-
-    private void runGame(Player first, Player second) {
-
-    }
-
 }

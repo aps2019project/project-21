@@ -1,14 +1,23 @@
 package models.Item;
 
-public class Flag extends Item {
-    private int x;
-    private int y;
+import models.match.Cell;
 
-    public int getX() {
-        return x;
+public class Flag extends Item {
+    private int holdingTime = 0;
+
+    public Flag(Cell cell) {
+        this.currentCell = cell;
     }
 
-    public int getY() {
-        return y;
+    public int getHoldingTime() {
+        return holdingTime;
+    }
+
+    public void setHoldingTime(int holdingTime) {
+        this.holdingTime = holdingTime;
+    }
+
+    public void increaseHoldingTime() {
+        this.holdingTime++;
     }
 }

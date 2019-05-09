@@ -1,7 +1,6 @@
 package controller.menus;
 
 import controller.request.ShopMenuRequest;
-import models.Item.Item;
 import models.Item.Usable;
 import models.Player;
 import models.card.Card;
@@ -18,14 +17,6 @@ public class ShopMenu extends Menu {
 
     private ShopMenu() {
 
-    }
-
-    private List<Card> getCards() {
-        return Card.getCards();
-    }
-
-    private List<Item> getItems() {
-        return Item.getItems();
     }
 
     public void main() {

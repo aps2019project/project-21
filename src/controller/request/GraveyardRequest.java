@@ -6,18 +6,25 @@ import java.util.regex.Pattern;
 public class GraveyardRequest extends Request {
     @Override
     public void extractType() {
-        // set field type in parent class
         type = RequestType.INVALID;
-        if (commandLine.equals("Show cards"))
+        if (commandLine.equalsIgnoreCase("show cards"))
             showCardsCheck();
-        else if (commandLine.startsWith("Show info"))
+        else if (commandLine.startsWith("show info"))
             showInfoCheck();
+        else if (commandLine.equalsIgnoreCase("back"))
+            backCheck();
+        else if (commandLine.equalsIgnoreCase("help"))
+            helpCheck();
+        else if (commandLine.equalsIgnoreCase("show menu"))
+            helpCheck();
+        else if (commandLine.equalsIgnoreCase("exit"))
+            exitCheck();
     }
 
     private void showInfoCheck() {
-        String regex = "Show info (\\d+)";
+        String regex = "Show info (\\w+)";
         Matcher matcher = Pattern.compile(regex).matcher(commandLine);
-        if (matcher.matches()){
+        if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
             type = RequestType.SHOW_INFO;
         }

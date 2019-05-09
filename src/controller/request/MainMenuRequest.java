@@ -16,6 +16,8 @@ public class MainMenuRequest extends Request {
             exitCheck();
         else if (commandLine.contains("help"))
             helpCheck();
+        else if (commandLine.equalsIgnoreCase("show menu"))
+            helpCheck();
     }
 
     private void shopCheck() {

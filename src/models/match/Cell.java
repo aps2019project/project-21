@@ -13,14 +13,6 @@ public class Cell {
     private int x;
     private int y;
 
-    public int getY() {
-        return y;
-    }
-
-    public int getX() {
-        return x;
-    }
-
     private ArrayList<Effect> effects = new ArrayList<>();
     private Collectable collectable;
     private Flag flag;
@@ -105,4 +97,13 @@ public class Cell {
                 + (first.y - second.y) * (first.y - second.y));
 
     }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
 }

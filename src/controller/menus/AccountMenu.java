@@ -37,7 +37,7 @@ public class AccountMenu extends Menu {
                 login();
                 break;
             case SHOW_LEADERBOARD:
-                view.scoreBoard();
+                view.showLeaderBoard();
                 break;
             case SAVE:
                 save();
@@ -65,6 +65,8 @@ public class AccountMenu extends Menu {
             case INVALID:
                 invalidCommand();
                 break;
+            case SHOW_MATCH_HISTORY:
+                showMatchHistory();
         }
     }
 
@@ -125,5 +127,9 @@ public class AccountMenu extends Menu {
             return;
         }
         MenuManager.getInstance().gotoMainMenu();
+    }
+
+    private void showMatchHistory(){
+        view.showMatchHistory(Player.getCurrentPlayer());
     }
 }

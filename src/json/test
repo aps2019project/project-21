@@ -5,28 +5,10 @@ battle
 2
 select user b
 start multiplayer game KILL_HERO
+
+start multiplayer game HOLD_FLAG
+
+start multiplayer game GATHER_FLAG 5
+
 show battlefield
 show hand
-
-end turn
-end turn
-end turn
-end turn
-end turn
-end turn
-end turn
-end turn
-end turn
-end turn
-
-insert Oghab in (2, 1)
-end turn
-insert Oghab in (2,7)
-insert Oghab in (2, 6)
-insert Oghab in (2, 5)
-end turn
-insert Oghab in (2,2)
-
-
-select a_Oghab_2
-

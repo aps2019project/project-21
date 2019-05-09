@@ -13,6 +13,7 @@ public class Spell extends Card {
     private TargetType targetType = new TargetType();
     private List<Effect> effects = new ArrayList<>();
     private String desc = "";
+    private boolean isCommandValid = true;
 
     public Spell() {
     }
@@ -49,16 +50,75 @@ public class Spell extends Card {
         }
     }
 
-    private List<Cell> getTargetCells(Match match, Player player, Cell targetCell) {
+    private List<Cell> getTargetCells(Match match, Player player, Cell cell) {
         List<Cell> cells = new ArrayList<>();
+        switch (targetType.getCellType()) {
+            case SINGLE_CELL:
+                cells.add(cell);
+                break;
+            case NONE:
+                return cells;
+            case SQUARE_3_3:
+                cells.add(cell);
+                break;
+            case SQUARE_2_2:
+                cells.add(cell);
+                break;
+            case IN_ROW:
+                cells.add(cell);
+                break;
+            case IN_COLUMN:
+                cells.add(cell);
+                break;
+        }
         return cells;
     }
 
-    private List<Attacker> getTargetAttackers(Match match, Player player, Cell targetCell) {
-//        List<Attacker> attackers = new ArrayList<>(match.getAllGroundedAttacker());
-//        List<Attacker> copy = new ArrayList<>(attackers);
-//        return attackers;
-        return null;
+    private List<Attacker> getTargetAttackers(Match match, Player player, Cell cell) {
+        List<Attacker> attackers = new ArrayList<>(match.getBothGroundedAttackers());
+        List<Attacker> copy = new ArrayList<>(attackers);
+
+        switch (targetType.getOppOrAlly()) {
+            case OPP:
+                for (Attacker attacker : copy)
+                    if (match.getCardsTeam(attacker) == match.getTeamOfPlayer(player))
+                        attackers.remove(attacker);
+                break;
+            case ALLY:
+                for (Attacker attacker : copy)
+                    if (match.getCardsTeam(attacker) != match.getTeamOfPlayer(player))
+                        attackers.remove(attacker);
+                break;
+        }
+
+        switch (targetType.getHeroOrMinion()) {
+            case MINION:
+                for (Attacker attacker : copy)
+                    if (!(attacker instanceof Minion))
+                        attackers.remove(attacker);
+                break;
+            case HERO:
+                for (Attacker attacker : copy)
+                    if (!(attacker instanceof Hero))
+                        attackers.remove(attacker);
+                break;
+        }
+
+        switch (targetType.getChooseType()) {
+            case SELECTED_OPP:
+                if (cell.isEmpty() || match.getCardsTeam(cell.getCurrentAttacker()) == match.getTeamOfPlayer(player))
+                    isCommandValid = false;
+                attackers = new ArrayList<>();
+                attackers.add(cell.getCurrentAttacker());
+                break;
+            case SELECTED_ALLY:
+                if (cell.isEmpty() || match.getCardsTeam(cell.getCurrentAttacker()) != match.getTeamOfPlayer(player))
+                    isCommandValid = false;
+                attackers = new ArrayList<>();
+                attackers.add(cell.getCurrentAttacker());
+                break;
+        }
+        return attackers;
     }
 
     public static List<Spell> getSpells() {

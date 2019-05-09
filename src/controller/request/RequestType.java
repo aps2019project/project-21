@@ -1,7 +1,6 @@
 package controller.request;
 
 public enum RequestType {
-    NULL,
     INVALID,
     SHOW_MENU,
     HELP,
@@ -53,17 +52,15 @@ public enum RequestType {
     USE,
     SHOW_NEXT_CARD,
     ENTER_GRAVEYARD,
-    END_GAME,
     SHOW_CARDS,
     SHOW_BATTLEFIELD,
     KILL,
     MP,
     SHOW_SELECTED,
     SHOW_TURN,
-    UNSELECT,
+    UN_SELECT,
+    SHOW_MATCH_HISTORY,
+    WITHDRAW,
+    USE_SPELL,
 
-    //  ALL COMMANDS
 }
-
-
-// HANDLE SIMILAR TYPES FOR DIFFERENT CLASSES

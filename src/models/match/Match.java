@@ -1,12 +1,12 @@
 package models.match;
 
+import controller.InputScanner;
+import controller.menus.MenuManager;
+import models.AIPlayer;
 import models.Item.Collectable;
 import models.Item.Flag;
 import models.Player;
-import models.card.AttackMode;
-import models.card.Attacker;
-import models.card.Card;
-import models.card.Spell;
+import models.card.*;
 import view.ErrorMode;
 import view.View;
 
@@ -17,6 +17,7 @@ import java.util.List;
 
 public class Match {
     private static final int MOVE_RANGE = 2;
+    private static final int DEFAULT_WINNING_PRIZE = 1000;
     private static Match currentMatch;
 
     private Player[] players = new Player[2];
@@ -25,16 +26,16 @@ public class Match {
     private GameMode gameMode;
     private GoalMode goalMode;
     private GameType gameType;
-    private int flagCount; //  only for gather flag
-    private int collectableCount = 2;
+    private int flagCount; //  only for gather flag and hold flag
+    private int collectableCount = 3;  //  how much should this be?
     private List<Flag> flags = new ArrayList<>();
-    private Flag flag;
     private LocalDateTime gameTime = LocalDateTime.now();
     private int turn;  //  0 for player1 and 1 for player2
     private int turnCount = 1;
     private Card selectedCard;
-    private Collectable selectedCollectable;
     private View view = View.getInstance();
+    private Player winner;
+    private Player loser;
 
     public static Match getCurrentMatch() {
         return currentMatch;
@@ -60,23 +61,40 @@ public class Match {
         initiateMatch();
     }
 
-    public void selectAttacker(String attackerID) {
+    private boolean selectAttacker(String attackerID) {
         for (Attacker attacker : info[turn].getGroundedAttackers())
             if (attacker.getCardIDInGame().equals(attackerID)) {
                 selectedCard = attacker;
-                return;
+                return true;
             }
-        view.printError(ErrorMode.CARD_ID_INVALID);
+        return false;
     }
 
-    public void selectCard(String cardID) {
-        //  TODO
+    private boolean selectCollectable(String cardID) {
+        for (Collectable collectable : info[turn].getAchievedCollectables())
+            if (collectable.getCardIDInGame().equalsIgnoreCase(cardID)) {
+                selectedCard = collectable;
+                return true;
+            }
+        return false;
     }
 
-    public void setSelectedCard(Card card) {
-        if (card == null)
-            return;
-        selectedCard = card;
+    private boolean selectSpell(String spellName) {
+        for (Card card : info[turn].getHand().getCards())
+            if (card instanceof Spell)
+                if (card.getName().equals(spellName)) {
+                    selectedCard = card;
+                    return true;
+                }
+        return false;
+    }
+
+    public void select(String cardID) {
+        if (selectAttacker(cardID) || selectCollectable(cardID) || selectSpell(cardID))
+            ;
+        else
+            view.printError(ErrorMode.CARD_OR_COLLECTABLE_ID_INVALID);
+
     }
 
     public int getTurn() {
@@ -84,7 +102,9 @@ public class Match {
     }
 
     public Collectable getSelectedCollectable() {
-        return selectedCollectable;
+        if (!(selectedCard instanceof Collectable))
+            return null;
+        return (Collectable) selectedCard;
     }
 
     public void moveCard(int x, int y) {
@@ -108,6 +128,10 @@ public class Match {
         }
         if (isPathClosed(attacker.getCurrentCell(), target)) {
             view.printError(ErrorMode.INVALID_MOVE_TARGET);
+            return;
+        }
+        if (attacker.isStunned()) {
+            view.printError(ErrorMode.STUNNED);
             return;
         }
 
@@ -156,20 +180,31 @@ public class Match {
             return;
         }
         Attacker attacker = (Attacker) selectedCard;
-        if (!attacker.canAttack()) {
+        if (!attacker.canAttack() || attacker.isStunned()) {
             System.out.println("card with id : " + selectedCard.getCardIDInGame() + " can't attack.");
             return;
         }
-        if (!isInRangeOfAttack(target)) {
+        if (!isInRangeOfAttack(target, attacker)) {
             view.printError(ErrorMode.UNAVAILABLE_FOR_ATTACK);
             return;
         }
+        if (attacker.isStunned()) {
+            view.printError(ErrorMode.STUNNED);
+            return;
+        }
         target.decreaseHP(attacker.getAP());
-        checkIfHeIsDead(target);
         counterAttack(target);
+        checkIfHeIsDead(target);
         attacker.setCannotAttack();
         attacker.setCannotMove();
-        //  TODO: cast OnAttack spells (for minions and one hero)
+
+        if (attacker instanceof Minion) {
+            Minion minion = (Minion) attacker;
+            if (minion.hasSpecialPower())
+                for (Effect effect : minion.getSpecialPower().getEffects())
+                    if (effect.getActivationType() == ActivationType.ON_ATTACK)
+                        minion.getSpecialPower().castSpell(this, players[turn], target.getCurrentCell());
+        }
     }
 
     private void checkIfHeIsDead(Attacker attacker) {
@@ -178,14 +213,20 @@ public class Match {
         if (attacker.getHP() <= 0) {
             info[getCardsTeam(attacker)].kill(attacker);
         }
+        if (attacker instanceof Minion) {
+            Minion minion = (Minion) attacker;
+            if (minion.hasSpecialPower())
+                for (Effect effect : minion.getSpecialPower().getEffects())
+                    if (effect.getActivationType() == ActivationType.ON_DEATH)
+                        minion.getSpecialPower().castSpell(this, players[turn], attacker.getCurrentCell());
+        }
     }
 
-    public boolean isInRangeOfAttack(Attacker target) {
-        if (!isSelectedCardAttacker())
+    public boolean isInRangeOfAttack(Attacker target, Attacker attacker) {
+        if (attacker == null || target == null)
             return false;
-        Attacker attacker = (Attacker) selectedCard;
         int dist = Cell.getManhattanDistance(target.getCurrentCell(),
-                ((Attacker) selectedCard).getCurrentCell());
+                (attacker).getCurrentCell());
         if (attacker.getAttackMode() == AttackMode.MELEE) {
             return dist <= 1;
         } else if (attacker.getAttackMode() == AttackMode.RANGED) {
@@ -201,67 +242,146 @@ public class Match {
     }
 
     public void counterAttack(Attacker opp) {
-        if (opp == null || getSelectedAttacker() == null)
+        if (opp == null || getSelectedAttacker() == null || opp.isDisarmed())
             return;
         getSelectedAttacker().decreaseHP(opp.getAP());
-        //  TODO: cast OnDefend spells
+        if (opp instanceof Minion) {
+            Minion minion = (Minion) opp;
+            if (minion.hasSpecialPower())
+                for (Effect effect : minion.getSpecialPower().getEffects())
+                    if (effect.getActivationType() == ActivationType.ON_DEFEND)
+                        minion.getSpecialPower().castSpell(this, players[turn], selectedCard.getCurrentCell());
+        }
     }
 
-    public void attackCombo(String opponentCardID, int[] myCardIDs) {
-        //  TODO:  check that they can do combo attack
+    public void attackCombo(String opponentCardID, String[] myCardIDs) {  // test
+        if (!isAnyCardSelected()) {
+            view.printError(ErrorMode.NO_CARD_IS_SELECTED);
+            return;
+        }
+        if (!(selectedCard instanceof Minion)) {
+            view.printError(ErrorMode.SELECTED_CARD_NOT_MINION);
+            return;
+        }
+        Minion selectedMinion = (Minion) selectedCard;
+        Minion[] minions = new Minion[myCardIDs.length];
+        for (int i = 0; i < myCardIDs.length; i++) {
+            Minion comboMinion = info[turn].getGroundedMinionByID(myCardIDs[i]);
+            if (comboMinion == null) {
+                view.printError(ErrorMode.SELECTED_CARD_NOT_MINION);
+                return;
+            }
+            if (!comboMinion.isCombo()) {
+                view.printError(ErrorMode.NOT_COMBO);
+                return;
+            }
+        }
+        Attacker target = getGroundedOppAttacker(opponentCardID);
+        if (target == null) {
+            view.printError(ErrorMode.INVALID_CARD_ID);
+            return;
+        }
+        if (!isInRangeOfOneOfThese(target, minions)) {
+            view.printError(ErrorMode.UNAVAILABLE_FOR_ATTACK);
+            return;
+        }
+        target.decreaseHP(selectedMinion.getAP());
+        selectedMinion.setCannotAttack();
+        selectedMinion.setCannotMove();
+        for (Minion minion : minions) {
+            target.decreaseHP(minion.getAP());
+            minion.setCannotAttack();
+            minion.setCannotMove();
+        }
+        counterAttack(target);
+        checkIfHeIsDead(target);
+        //  TODO: cast OnAttack spells (for minions and one hero)
+    }
+
+    private boolean isInRangeOfOneOfThese(Attacker target, Minion[] minions) {
+        for (Minion minion : minions)
+            if (isInRangeOfAttack(target, minion))
+                return true;
+        return false;
     }
 
     public void useSpell(int x, int y) {
+        if (!isAnyCardSelected()) {
+            view.printError(ErrorMode.NO_CARD_IS_SELECTED);
+            return;
+        }
+        if (!isSelectedCardSpell()) {
+            view.printError(ErrorMode.NO_SPELL_SELECTED);
+            return;
+        }
         Cell target = getCell(x, y);
-        if (target == null)
+        if (target == null) {
+            view.printError(ErrorMode.INVALID_CELL);
             return;
-        if (!isAttackTargetValid(target))
-            return;
-        if (!isSelectedCardSpell())
-            return;
+        }
         Spell spell = (Spell) selectedCard;
+        if (!info[turn].hasManaForThis(spell)) {
+            view.printError(ErrorMode.HAVE_NOT_MANA);
+            return;
+        }
         spell.castSpell(this, getThisTurnsPlayer(), target);
+        info[turn].getHand().remove(spell);
+        info[turn].decreaseMP(spell.getManaCost());
     }
 
     public void useCollectable(int x, int y) {
+        if (!isAnyCardSelected()) {
+            view.printError(ErrorMode.NO_CARD_IS_SELECTED);
+            return;
+        }
+        if (!(selectedCard instanceof Collectable)) {
+            view.printError(ErrorMode.NO_COLLECTABLE_SELECTED);
+            return;
+        }
+        Collectable collectable = (Collectable) selectedCard;
         Cell target = getCell(x, y);
         if (target == null)
             return;
-        if (!isAttackTargetValid(target))
-            return;
-        if (!isAnyCardSelected())
-            return;
-        Collectable collectable = (Collectable) selectedCard;
         collectable.castItem(this, getThisTurnsPlayer(), target);
     }
 
     public void useSpecialPower(int x, int y) {
-        if (!isAnyCardSelected())
+        if (!isAnyCardSelected()) {
+            view.printError(ErrorMode.NO_CARD_IS_SELECTED);
             return;
-        if (!isSelectedCardAttacker())
+        }
+        if (!isSelectedCardAttacker()) {
+            view.printError(ErrorMode.NO_ATTACKER_SELECTED);
             return;
-        Cell target = getCell(x, y);
+        }
         Attacker attacker = (Attacker) selectedCard;
-        if (target == null)
+        if (!attacker.hasSpecialPower()) {
+            view.printError(ErrorMode.HASNT_SPECIAL);
             return;
-        if (!isAttackTargetValid(target))
+        }
+        Cell target = getCell(x, y);
+        if (target == null) {
+            view.printError(ErrorMode.INVALID_CELL);
             return;
-        if (!attacker.hasSpecialPower())
+        }
+        if (!info[turn].hasManaForThis(attacker.getSpecialPower())) {
+            view.printError(ErrorMode.HAVE_NOT_MANA);
             return;
+        }
+        if (attacker instanceof Hero)
+            if (((Hero) attacker).getCooldown() > 0) {
+                view.printError(ErrorMode.COOLDOWN);
+                return;
+            }
         attacker.castSpecialPower(this, getThisTurnsPlayer(), target);
     }
 
     public void applyEffects() {
-        // TODO: heroes, minions, infos
-    }
-
-    private boolean isAttackTargetValid(Cell target) {
-        //  TODO
-        return true;
+        for (Attacker attacker : getBothGroundedAttackers())
+            attacker.applyEffects();
     }
 
     public void insertCard(String cardName, int x, int y) {
-        // TODO: if minion then cast OnSpawn spell
         Attacker attacker = info[turn].getHand().getAttacker(cardName);
         if (attacker == null) {
             view.printError(ErrorMode.NO_CARD_WITH_THIS_NAME);
@@ -283,7 +403,16 @@ public class Match {
         info[turn].decreaseMP(attacker.getManaCost());
         info[turn].pushToHand();
         Card.setCardIDInGame(players[turn], attacker);
-        info[turn].getGroundedAttackers().add(attacker);
+        System.out.println("card " + attacker.getName() + " with id: " + attacker.getCardIDInGame()
+                + " inserted to (" + x + ", " + y + ").");
+
+        if (attacker instanceof Minion) {
+            Minion minion = (Minion) attacker;
+            if (minion.hasSpecialPower())
+                for (Effect effect : minion.getSpecialPower().getEffects())
+                    if (effect.getActivationType() == ActivationType.ON_SPAWN)
+                        minion.getSpecialPower().castSpell(this, players[turn], attacker.getCurrentCell());
+        }
     }
 
     private void goOnCell(Attacker attacker, Cell cell) {
@@ -291,10 +420,14 @@ public class Match {
             return;
         attacker.setCurrentCell(cell);
         cell.setCurrentAttacker(attacker);
-        if (cell.hasCollectable())
+        if (cell.hasCollectable()) {
             info[getCardsTeam(attacker)].addCollectable(cell.getCollectable());
-        if (cell.hasFlag()) {
-            info[getCardsTeam(attacker)].increaseFlags();
+            setCardInGameID(cell.getCollectable());
+            cell.setCollectable(null);
+        }
+        if (cell.hasFlag() && attacker.getFlag() == null) {
+            cell.getFlag().setHoldingTime(0);
+            attacker.setFlag(cell.getFlag());
             cell.setFlag(null);
         }
     }
@@ -312,6 +445,9 @@ public class Match {
         for (Card card : info[turn].getAllUsedCards())
             if (card.getName().equals(name))
                 num++;
+        for (Collectable collectable : info[turn].getAchievedCollectables())
+            if (collectable.getName().equalsIgnoreCase(name))
+                num++;
         return num;
     }
 
@@ -328,53 +464,94 @@ public class Match {
         return attackers;
     }
 
-    public void swapTurn() {
+    private void swapTurn() {
         turn = 1 - turn;
         turnCount++;
     }
 
-    public void selectCollectable(int collectableID) {
+    private void aiPlay() {
+        System.out.println("AI playing...");
+        try {
 
+            selectedCard = info[1].getHero();
+            moveCard(2, selectedCard.getCurrentCell().getY() - 1);
+            for (Card card : info[1].getHand().getCards())
+                if (card instanceof Minion)
+                    if (info[1].hasManaForThis(card))
+                        insertCard(card.getName(), info[1].getHero().getCurrentCell().getX() - 1
+                                , info[1].getHero().getCurrentCell().getY());
+        } finally {
+            endTurn();
+        }
     }
 
-    public void play() {
-
+    private void isMatchEnded() {
+        if (goalMode == GoalMode.KILL_HERO) {
+            for (int i = 0; i < 2; i++)
+                if (!info[i].getHero().isAlive()) {
+                    endMatch(players[1 - i], players[i]);
+                    return;
+                }
+        } else if (goalMode == GoalMode.HOLD_FLAG) {
+            if (flags.get(0).getHoldingTime() >= 11)
+                if (whichTeamHasTheFlag() != -1) {
+                    endMatch(players[whichTeamHasTheFlag()], players[1 - whichTeamHasTheFlag()]);
+                    return;
+                }
+        } else if (goalMode == GoalMode.GATHER_FLAG) {
+            for (int i = 0; i < 2; i++)
+                if (2 * info[i].gatheredFlags() >= flagCount) {
+                    endMatch(players[i], players[1 - i]);
+                    return;
+                }
+        }
     }
 
-    private boolean isMatchEnded() {
-        //
-        return false;
+    private int whichTeamHasTheFlag() {
+        for (Attacker attacker : getBothGroundedAttackers())
+            if (attacker.getFlag() != null)
+                return getCardsTeam(attacker);
+        return -1;
     }
 
-    public void endMatch() {
-        saveMatchResults();
+    public void endMatch(Player winner, Player loser) {
+        this.winner = winner;
+        this.loser = loser;
+        winner.addDrake(getMatchWinningPrize());
+        saveMatchResults(winner, loser);
         showMatchResults();
+        String endGame;
+        do {
+            endGame = InputScanner.nextLine();
+        } while (!endGame.equalsIgnoreCase("end game"));
+
+        MenuManager.getInstance().gotoMainMenu();
     }
 
-    private void saveMatchResults() {
-        //
+    private int getMatchWinningPrize() {
+        if (gameMode == GameMode.SINGLE_PLAYER && gameType == GameType.STORY)
+            return ((AIPlayer) players[1]).getWinningPrize();
+        else
+            return DEFAULT_WINNING_PRIZE;
+    }
+
+    private void saveMatchResults(Player winner, Player loser) {
+        winner.incrementWins();
+        loser.incrementLosses();
+        winner.addToHistory(this);
+        loser.addToHistory(this);
     }
 
     private void showMatchResults() {
-        //
+        view.showMatchResults(this);
     }
 
     private boolean isAnyCardSelected() {
         return selectedCard != null;
     }
 
-    public Card getSelectedCard() {
-        return selectedCard;
-    }
-
     public Cell getCell(int x, int y) {
         return battlefield.getCell(x, y);
-    }
-
-    public List<Cell> getOppCells() {
-        List<Cell> cells = new ArrayList<>();
-        //  TODO
-        return null;
     }
 
     public PlayerMatchInfo getInfo(Player player) {
@@ -388,13 +565,11 @@ public class Match {
     }
 
     private boolean isSelectedCardSpell() {
-        //  TODO
-        return true;
+        return selectedCard instanceof Spell;
     }
 
     private boolean isSelectedCardCollectable() {
-        //  TODO
-        return true;
+        return selectedCard instanceof Collectable;
     }
 
     public Player getThisTurnsPlayer() {
@@ -432,16 +607,18 @@ public class Match {
         return flags;
     }
 
-    public Flag getFlag() {
-        return flag;
-    }
-
-    public String whoHasFlag() { //  for mode 2
+    public Attacker whoHasFlag() { //  for mode 2
+        for (Attacker attacker : getBothGroundedAttackers())
+            if (attacker.getFlag() != null)
+                return attacker;
         return null;
     }
 
-    public List<String> whoHasFlags() {  //  for mode 3
-        List<String> attackers = new ArrayList<>();
+    public List<Attacker> whoHasFlags() {  //  for mode 3
+        List<Attacker> attackers = new ArrayList<>();
+        for (Attacker attacker : getBothGroundedAttackers())
+            if (attacker.getFlag() != null)
+                attackers.add(attacker);
         return attackers;
     }
 
@@ -470,7 +647,9 @@ public class Match {
         while (cnt < flagCount) {
             Cell cell = battlefield.getRandomCell();
             if (!cell.hasFlag()) {
-                cell.setFlag(new Flag());
+                Flag flag = new Flag(cell);
+                cell.setFlag(flag);
+                flags.add(flag);
                 cnt++;
             }
         }
@@ -480,8 +659,10 @@ public class Match {
         int cnt = 0;
         while (cnt < collectableCount) {
             Cell cell = battlefield.getRandomCell();
-            if (!cell.hasCollectable()) {
-                cell.setCollectable(Collectable.getRandomCollectable());
+            if (!cell.hasCollectable() && !cell.hasFlag()) {
+                Collectable collectable = Collectable.getRandomCollectable();
+                cell.setCollectable(collectable);
+                collectable.setCurrentCell(cell);
                 cnt++;
             }
         }
@@ -503,7 +684,11 @@ public class Match {
                         System.out.print(" A ");
                     else if (isInTeam(attacker, players[1]))
                         System.out.print(" B ");
-                } else System.out.print(" O ");
+                } else if (getCell(i, j).hasCollectable())
+                    System.out.print(" C ");
+                else if (getCell(i, j).hasFlag())
+                    System.out.print(" F ");
+                else System.out.print(" O ");
                 if (j == 8)
                     System.out.print("|");
             }
@@ -518,7 +703,7 @@ public class Match {
     }
 
     public void kill() {
-        //  TODO
+        endMatch(players[turn], players[1 - turn]);
     }
 
     public int getCardsTeam(Card card) {  //  returns the turn number
@@ -544,15 +729,34 @@ public class Match {
     }
 
     public void endTurn() {
+        isMatchEnded();
         prepareNextRound();
         swapTurn();
+        if (gameMode == GameMode.SINGLE_PLAYER)
+            if (turn == 1)
+                aiPlay();
     }
 
     private void prepareNextRound() {
+        increaseFlagHoldingTime();
+        applyEffects();
         setCanMove();
         setCanAttack();
         increaseMana();
-        unselect();
+        unSelect();
+        if (turn % 2 == 0)
+            decreaseCooldown();
+    }
+
+    private void decreaseCooldown() {
+        for (Attacker attacker : getBothGroundedAttackers())
+            if (attacker instanceof Hero)
+                ((Hero) attacker).decreaseCooldown();
+    }
+
+    private void increaseFlagHoldingTime() {
+        if (whichTeamHasTheFlag() != -1)
+            flags.get(0).increaseHoldingTime();
     }
 
     private void setCanMove() {
@@ -567,14 +771,68 @@ public class Match {
 
     private void increaseMana() {
         for (PlayerMatchInfo pInfo : info)
-            pInfo.setMp(3 + (turnCount - 1) / 2);
+            pInfo.setMp(3 + (turnCount) / 2);
     }
 
     public void showTurn() {
         System.out.println(getThisTurnsPlayer().getUsername());
     }
 
-    public void unselect() {
+    public void unSelect() {
         this.selectedCard = null;
+    }
+
+    public void showGraveyardCards() {
+        for (Card card : info[turn].getGraveyard())
+            showCardInfoInGraveyard(card);
+    }
+
+    public void showCardInfoInGraveyard(String cardID) {
+        Card card = info[turn].getGraveyardCard(cardID);
+        if (card == null) {
+            view.printError(ErrorMode.CARD_ID_INVALID);
+            return;
+        }
+        view.printGraveyardCard(card);
+    }
+
+    public void showCardInfoInGraveyard(Card card) {
+        if (card == null)
+            return;
+        view.printGraveyardCard(card);
+    }
+
+    public Player getWinner() {
+        return winner;
+    }
+
+    public Player getLoser() {
+        return loser;
+    }
+
+    public Player getOpp(Player player) {
+        if (players[0].getUsername().equals(player.getUsername()))
+            return players[1];
+        else if (players[1].getUsername().equals(player.getUsername()))
+            return players[0];
+        else return null;
+    }
+
+    public LocalDateTime getGameTime() {
+        return gameTime;
+    }
+
+    public void withdraw() {
+        System.out.println("Are you really sure?");
+        String s = InputScanner.nextLine();
+        if (s.equalsIgnoreCase("yes"))
+            endMatch(players[1 - turn], players[turn]);
+    }
+
+    public int getTeamOfPlayer(Player player) {
+        for (int i = 0; i < 2; i++)
+            if (player.getUsername().equalsIgnoreCase(players[i].getUsername()))
+                return i;
+        return -1;
     }
 }

@@ -88,9 +88,6 @@ public class BattleMenu extends Menu {
             case ENTER_GRAVEYARD:
                 enterGraveyard();
                 break;
-            case END_GAME:
-                endGame();
-                break;
             case SHOW_MENU:
                 showMenu();
                 break;
@@ -115,8 +112,14 @@ public class BattleMenu extends Menu {
             case SHOW_TURN:
                 showTurn();
                 break;
-            case UNSELECT:
-                unselect();
+            case UN_SELECT:
+                unSelect();
+                break;
+            case WITHDRAW:
+                withdraw();
+                break;
+            case USE_SPELL:
+                useSpell();
                 break;
         }
     }
@@ -145,7 +148,7 @@ public class BattleMenu extends Menu {
     }
 
     private void select() {
-        Match.getCurrentMatch().selectAttacker(request.getCommandArguments().get(0));
+        Match.getCurrentMatch().select(request.getCommandArguments().get(0));
     }
 
     private void moveTo() {
@@ -160,11 +163,11 @@ public class BattleMenu extends Menu {
 
     private void attackCombo() {
         String opponentMinion = request.getCommandArguments().get(0);
-        int[] myMinion = new int[request.getCommandArguments().size() - 1];
+        String[] myMinions = new String[request.getCommandArguments().size() - 1];
         for (int i = 1; i < request.getCommandArguments().size(); i++) {
-            myMinion[i - 1] = Integer.parseInt(request.getCommandArguments().get(i));
+            myMinions[i - 1] = request.getCommandArguments().get(i);
         }
-        Match.getCurrentMatch().attackCombo(opponentMinion, myMinion);
+        Match.getCurrentMatch().attackCombo(opponentMinion, myMinions);
     }
 
     private void useSpecialPower() {
@@ -198,13 +201,13 @@ public class BattleMenu extends Menu {
     private void showCollectables() {
         PlayerMatchInfo info = Match.getCurrentMatch().getPlayersMatchInfo()[Match.getCurrentMatch().getTurn()];
         for (Collectable collectable : info.getAchievedCollectables()) {
-            view.showCollectables(collectable);
+            view.showCollectable(collectable);
         }
     }
 
     private void showInfo() {
         Collectable selected = Match.getCurrentMatch().getSelectedCollectable();
-        view.showCollectables(selected);
+        view.showCollectable(selected);
     }
 
     private void use() {
@@ -221,10 +224,6 @@ public class BattleMenu extends Menu {
 
     private void enterGraveyard() {
         MenuManager.getInstance().gotoGraveyard();
-    }
-
-    private void endGame() {
-        Match.getCurrentMatch().endMatch();
     }
 
     protected void showMenu() {
@@ -255,8 +254,18 @@ public class BattleMenu extends Menu {
         Match.getCurrentMatch().showTurn();
     }
 
-    private void unselect() {
-        Match.getCurrentMatch().unselect();
+    private void unSelect() {
+        Match.getCurrentMatch().unSelect();
+    }
+
+    private void withdraw() {
+        Match.getCurrentMatch().withdraw();
+    }
+
+    private void useSpell() {
+        int x = Integer.parseInt(request.getCommandArguments().get(0));
+        int y = Integer.parseInt(request.getCommandArguments().get(1));
+        Match.getCurrentMatch().useSpell(x, y);
     }
 }
 

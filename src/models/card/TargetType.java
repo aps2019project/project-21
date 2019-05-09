@@ -44,4 +44,8 @@ public class TargetType {
     public OppOrAlly getOppOrAlly() {
         return oppOrAlly;
     }
+
+    public ChooseType getChooseType() {
+        return chooseType;
+    }
 }

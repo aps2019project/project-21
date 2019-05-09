@@ -29,6 +29,8 @@ public class AccountMenuRequest extends Request {
             exitCheck();
         else if (commandLine.equalsIgnoreCase("hesoyam"))
             hesoyamCheck();
+        else if(commandLine.equalsIgnoreCase("show match history"))
+            showMatchHistoryCheck();
     }
 
     private void createAccountCheck() {
@@ -67,5 +69,9 @@ public class AccountMenuRequest extends Request {
 
     private void logoutCheck() {
         type = RequestType.LOGOUT;
+    }
+
+    private void showMatchHistoryCheck(){
+        type = RequestType.SHOW_MATCH_HISTORY;
     }
 }

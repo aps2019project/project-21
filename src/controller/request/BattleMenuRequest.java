@@ -35,14 +35,14 @@ public class BattleMenuRequest extends Request {
             showCollectablesCheck();
         else if (commandLine.equalsIgnoreCase("show info"))
             showInfoCheck();
+        else if (commandLine.contains("use spell"))
+            useSpellCheck();
         else if (commandLine.startsWith("use"))
             useCheck();
         else if (commandLine.equalsIgnoreCase("show next card"))
             showNextCardCheck();
         else if (commandLine.equalsIgnoreCase("enter graveyard"))
             enterGraveyardCheck();
-        else if (commandLine.equalsIgnoreCase("end Game"))
-            endGameCheck();
         else if (commandLine.equalsIgnoreCase("help"))
             helpCheck();
         else if (commandLine.equalsIgnoreCase("exit"))
@@ -61,8 +61,11 @@ public class BattleMenuRequest extends Request {
             showSelectedCheck();
         else if (commandLine.equalsIgnoreCase("show turn"))
             showTurnCheck();
-        else if (commandLine.equalsIgnoreCase("unselect"))
-            unselectCheck();
+        else if (commandLine.equalsIgnoreCase("unSelect"))
+            unSelectCheck();
+        else if (commandLine.equalsIgnoreCase("withdraw"))
+            withdrawCheck();
+
     }
 
     private void gameInfoCheck() {
@@ -78,7 +81,7 @@ public class BattleMenuRequest extends Request {
     }
 
     private void showCardInfoCheck() {
-        String regex = "show card info (\\d+)";
+        String regex = "show card info (\\w+)";
         Matcher matcher = Pattern.compile(regex).matcher(commandLine);
         if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
@@ -115,7 +118,7 @@ public class BattleMenuRequest extends Request {
     }
 
     private void attackComboCheck() {
-        String regex = "\\d+";
+        String regex = "\\w+";
         String[] split = commandLine.split(" ");
         int i = 2;
         for (; i < split.length; i++) {
@@ -123,11 +126,9 @@ public class BattleMenuRequest extends Request {
             if (!matcher.matches())
                 break;
         }
-        if (i == split.length) {
-            for (i = 2; i < split.length; i++) {
+        if (i == split.length)
+            for (i = 2; i < split.length; i++)
                 commandArguments.add(split[i]);
-            }
-        }
         type = RequestType.ATTACK_COMBO;
     }
 
@@ -169,7 +170,7 @@ public class BattleMenuRequest extends Request {
     }
 
     private void useCheck() {
-        String regex = "use location [(](\\d+),\\s?(\\d+)[)]";
+        String regex = "use [(](\\d+),\\s?(\\d+)[)]";
         Matcher matcher = Pattern.compile(regex).matcher(commandLine);
         if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
@@ -184,10 +185,6 @@ public class BattleMenuRequest extends Request {
 
     private void enterGraveyardCheck() {
         type = RequestType.ENTER_GRAVEYARD;
-    }
-
-    private void endGameCheck() {
-        type = RequestType.END_GAME;
     }
 
     private void showBattleFieldCheck() {
@@ -210,7 +207,21 @@ public class BattleMenuRequest extends Request {
         type = RequestType.SHOW_TURN;
     }
 
-    private void unselectCheck() {
-        type = RequestType.UNSELECT;
+    private void unSelectCheck() {
+        type = RequestType.UN_SELECT;
+    }
+
+    private void withdrawCheck() {
+        type = RequestType.WITHDRAW;
+    }
+
+    private void useSpellCheck() {
+        String regex = "use spell [(](\\d+),\\s?(\\d+)[)]";
+        Matcher matcher = Pattern.compile(regex).matcher(commandLine);
+        if (matcher.matches()) {
+            commandArguments.add(matcher.group(1));
+            commandArguments.add(matcher.group(2));
+            type = RequestType.USE_SPELL;
+        }
     }
 }

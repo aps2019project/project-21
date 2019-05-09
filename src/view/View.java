@@ -34,21 +34,22 @@ public class View {
     public void showUser(Player player) {
         if (player == null)
             return;
-        System.out.println("Username: " + player.getUsername() + " -Wins: " + player.getWins());
+        System.out.println("Username: " + player.getUsername() + " - Wins: " + player.getWins() +
+                " drake : " + player.getDrake());
     }
 
-    public void scoreBoard() {
+    public void showLeaderBoard() {
         Player[] players = new Player[Player.getPlayers().size()];
         Player.getPlayers().toArray(players);
-        Arrays.sort(players, Comparator.comparingInt(Player::getWins));
+        Arrays.sort(players, Comparator.comparingInt(Player::getWins).reversed());
 
         for (int i = 0; i < players.length; i++) {
-            System.out.print((i + 1) + "- ");
+            System.out.print((i + 1) + " - ");
             showUser(players[i]);
         }
     }
 
-    public void printCardGraveyard(Card card) {
+    public void printGraveyardCard(Card card) {
         if (card == null)
             return;
         if (card instanceof Hero) {
@@ -175,8 +176,9 @@ public class View {
                     "4. save\n" +
                     "5. logout\n" +
                     "6. main menu\n" +
-                    "7. help\n" +
-                    "8. exit\n");
+                    "7. show match history\n" +
+                    "8. help\n" +
+                    "9. exit\n");
         } else if (menuName.equals("MainMenu")) {
             System.out.print("------ MainMenu ------\n" +
                     "1. collection\n" +
@@ -215,32 +217,34 @@ public class View {
                     "9. exit\n");
         } else if (menuName.equals("Battle")) {
             System.out.print("------ Battle ------\n" +
-                    "1. Game info\n" +
-                    "2. Show my minions\n" +
-                    "3. Show opponent minions\n" +
-                    "4. Show card info [card id]\n" +
-                    "5. Select [card id]\n" +
-                    "6. Move to(x,y)\n" +
-                    "7. Attack [opponent card id]\n" +
-                    "8. Attack combo [opponent card id][my card id][...]\n" +
-                    "9. Use special power (x,y)\n" +
-                    "10. Show hand\n" +
-                    "11. Insert [card name] in (x,y)\n" +
-                    "12. End turn\n" +
-                    "13. Show collectables\n" +
-                    "14. Select [collectable id]\n" +
-                    "15. Show info\n" +
-                    "16. Use (x,y)\n" +
-                    "17. Show Next Card\n" +
-                    "18. Enter graveyard\n" +
-                    "19. Help\n" +
-                    "20. End Game\n" +
-                    "21. Exit\n" +
-                    "22. exit\n");
+                    "1. game info\n" +
+                    "2. show my minions\n" +
+                    "3. show opponent minions\n" +
+                    "4. show card info [card id]\n" +
+                    "5. select [card id]\n" +
+                    "6. move to(x,y)\n" +
+                    "7. attack [opponent card id]\n" +
+                    "8. attack combo [opponent card id][my card id][...]\n" +
+                    "9. use special power (x,y)\n" +
+                    "10. show hand\n" +
+                    "11. insert [card name] in (x,y)\n" +
+                    "12. end turn\n" +
+                    "13. show collectables\n" +
+                    "14. select [collectable id]\n" +
+                    "15. show info\n" +
+                    "16. use (x,y)\n" +
+                    "17. show Next Card\n" +
+                    "18. enter graveyard\n" +
+                    "19. help\n" +
+                    "20. end Game\n" +
+                    "21. withdraw\n" +
+                    "22. use spell (x,y)\n" +
+                    "23. back\n" +
+                    "24. exit\n");
         } else if (menuName.equals("Graveyard")) {
-            System.out.print("Graveyard :\n" +
-                    "1 - Show info [card id]\n" +
-                    "2 - Show cards\n");
+            System.out.print("------ Graveyard ------\n"
+                    + "1 - show info [card id]\n"
+                    + "2 - show cards\n");
         }
     }
 
@@ -312,7 +316,7 @@ public class View {
     }
 
     public void showSearchInShop(Card card) {
-        if (card == null){
+        if (card == null) {
             System.out.println("Card with this name doesn't exist");
         } else {
             System.out.println("Name : " +
@@ -323,7 +327,7 @@ public class View {
     }
 
     public void showCollectionSearchInShop(Card card) {
-        if (card == null){
+        if (card == null) {
             System.out.println("Card not found");
         } else {
             System.out.println("Name" +
@@ -341,12 +345,13 @@ public class View {
             for (PlayerMatchInfo p : match.getPlayersMatchInfo())
                 System.out.println(p.getHero().getCardIDInGame() + "'s hp: " + p.getHero().getHP());
         } else if (match.getGoalMode() == GoalMode.HOLD_FLAG) {
-            System.out.println(match.whoHasFlag());
-            System.out.println("flags position: (" + match.getFlag().getX() + ", "
-                    + match.getFlag().getY() + ")");
+            System.out.println(match.whoHasFlag().getName());
+            System.out.println("flags position: (" + match.getFlags().get(0).getCurrentCell().getX() + ", "
+                    + match.getFlags().get(0).getCurrentCell().getY() + ")");
         } else if (match.getGoalMode() == GoalMode.GATHER_FLAG) {
-            for (String name : match.whoHasFlags())
-                System.out.println(name);
+            System.out.println("These guys have the flags: ");
+            for (Attacker attacker : match.whoHasFlags())
+                System.out.println(attacker.getCardIDInGame() + " in team " + (match.getCardsTeam(attacker) + 1));
         }
     }
 
@@ -373,7 +378,7 @@ public class View {
             System.out.print("Hero : " +
                     " Name : " +
                     card.getName() +
-                    " Cost : " +
+                    " Price : " +
                     card.getPrice() +
                     " Desc : " +
                     card.getDesc());
@@ -383,7 +388,7 @@ public class View {
                     card.getName() +
                     " MP : " +
                     card.getManaCost() +
-                    " Cost : " +
+                    " Price : " +
                     card.getPrice()
                     + " Desc : " +
                     card.getDesc());
@@ -401,7 +406,7 @@ public class View {
                     ((Minion) card).getAttackRange() +
                     " Combo-ability : " +
                     ((Minion) card).isCombo() +
-                    " Cost : " +
+                    " Price : " +
                     card.getPrice() +
                     " Desc : " +
                     card.getDesc());
@@ -412,8 +417,11 @@ public class View {
         else System.out.println();
     }
 
-    public void showCollectables(Collectable collectable) {
-        showCardInfo(collectable);
+    public void showCollectable(Collectable collectable) {
+        if (collectable == null)
+            return;
+        System.out.println("achieved collectable : name: " + collectable.getName() +
+                " desc: " + collectable.getDesc() + " idInGame: " + collectable.getCardIDInGame());
     }
 
     public void showGeneralThings(String thingName) {
@@ -445,8 +453,8 @@ public class View {
     public void showItemInfo(Item item) {
         System.out.println("Name : " +
                 item.getName() +
-                "- Desc : "+
-                item.getDesc()+
+                "- Desc : " +
+                item.getDesc() +
                 "- SellCost : " +
                 item.getPrice());
     }
@@ -462,5 +470,25 @@ public class View {
         showCardInfo(card);
     }
 
+    public void showMatchResults(Match match) {
+        System.out.println("Player " + match.getWinner().getUsername() + " won " + match.getLoser().getUsername() + ".");
+        System.out.println("enter end game to go back to main menu.");
+    }
+
+    public void showMatchHistory(Player player) {
+        if (player == null)
+            return;
+        for (Match match : player.getMatchHistory())
+            showMatchHistory(match, player);
+    }
+
+    private void showMatchHistory(Match match, Player player) {
+        if (match == null || player == null)
+            return;
+        Player opp = match.getOpp(player);
+        System.out.println("Opponent: " + opp.getUsername() + " win\\loss: "
+                + match.getWinner().getUsername().equals(player.getUsername())
+                + " time: " + match.getGameTime());
+    }
 
 }

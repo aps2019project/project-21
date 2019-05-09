@@ -174,4 +174,8 @@ public class Card {
     public boolean hasCardInGameID() {
         return cardIDInGame != null;
     }
+
+    public Cell getCurrentCell() {
+        return currentCell;
+    }
 }

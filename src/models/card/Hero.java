@@ -6,13 +6,15 @@ import java.util.List;
 public class Hero extends Attacker {
     private static List<Hero> heroes = new ArrayList<>();
 
+    private int primaryCooldown;
     private int cooldown;
 
     public Hero(String name, int price, int maxHp, int maxAp,
                 int attackRange, AttackMode attackMode, Spell specialPower,
                 int cooldown) {
         super(name, price, -1, maxHp, maxAp, attackRange, attackMode, specialPower);
-        this.cooldown = cooldown;
+        this.primaryCooldown = cooldown;
+        this.cooldown = 0;
         super.canAttack = true;
         super.canMove = true;
     }
@@ -33,12 +35,12 @@ public class Hero extends Attacker {
         this.canAttack = canAttack;
     }
 
-    public int getCooldown() {
-        return cooldown;
+    public int getPrimaryCooldown() {
+        return primaryCooldown;
     }
 
-    public void setCooldown(int cooldown) {
-        this.cooldown = cooldown;
+    public void setPrimaryCooldown(int primaryCooldown) {
+        this.primaryCooldown = primaryCooldown;
     }
 
     public static List<Hero> getHeroes() {
@@ -79,5 +81,21 @@ public class Hero extends Attacker {
         super.reset();
         this.canAttack = true;
         this.canMove = true;
+    }
+
+    public int getCooldown() {
+        return cooldown;
+    }
+
+    public void setCooldown(int cooldown) {
+        this.cooldown = cooldown;
+    }
+
+    public void resetCooldown() {
+        this.cooldown = primaryCooldown;
+    }
+
+    public void decreaseCooldown() {
+        this.cooldown--;
     }
 }

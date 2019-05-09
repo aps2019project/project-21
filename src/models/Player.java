@@ -19,6 +19,7 @@ public class Player {
     private int drake;
     private List<Match> matchHistory = new ArrayList<>();
     private int wins;
+    private int losses;
     private int cardCurrentID;
 
     public int getCardCurrentID() {
@@ -220,6 +221,24 @@ public class Player {
 
     public boolean hasAValidMainDeck() {
         return collection.hasValidMainDeck();
+    }
+
+    public void incrementWins() {
+        this.wins++;
+    }
+
+    public void incrementLosses() {
+        this.losses++;
+    }
+
+    public void addToHistory(Match match) {
+        if (match == null)
+            return;
+        this.matchHistory.add(match);
+    }
+
+    public void addDrake(int value) {
+        this.drake += value;
     }
 }
 

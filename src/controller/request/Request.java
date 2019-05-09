@@ -9,8 +9,8 @@ import java.util.List;
 
 public abstract class Request {
     protected RequestType type = null;
-    protected String commandLine;
-    protected List<String> commandArguments = new ArrayList<>();
+    String commandLine;
+    List<String> commandArguments = new ArrayList<>();
 
     public void getNewCommand() {
         commandLine = InputScanner.nextLine();
@@ -22,19 +22,19 @@ public abstract class Request {
 
     public abstract void extractType();
 
-    protected void helpCheck() {
+    void helpCheck() {
         type = RequestType.HELP;
     }
 
-    protected void exitCheck() {
+    void exitCheck() {
         type = RequestType.EXIT;
     }
 
-    protected void showMenuCheck() {
+    void showMenuCheck() {
         type = RequestType.SHOW_MENU;
     }
 
-    protected void backCheck() {
+    void backCheck() {
         type = RequestType.BACK;
     }
 
@@ -42,7 +42,7 @@ public abstract class Request {
         this.type = type;
     }
 
-    public String getCommandLine() {
+    String getCommandLine() {
         return commandLine;
     }
 
