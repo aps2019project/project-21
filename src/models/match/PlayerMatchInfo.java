@@ -130,4 +130,16 @@ public class PlayerMatchInfo {
     public void increaseFlags() {
         this.gatheredFlags++;
     }
+
+    public void kill(Attacker attacker) {
+        if (attacker == null)
+            return;
+        groundedAttackers.remove(attacker);
+        graveyard.add(attacker);
+        attacker.getCurrentCell().setEmpty();
+    }
+
+    public void setMp(int mp) {
+        this.mp = Math.min(mp, MAX_MANA);
+    }
 }

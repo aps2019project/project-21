@@ -1,5 +1,7 @@
 package models.match;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Battlefield {
@@ -38,6 +40,14 @@ public class Battlefield {
     }
 
     public Cell[][] getCells() {
+        return cells;
+    }
+
+    public List<Cell> getCellsInList() {
+        List<Cell> cells = new ArrayList<>();
+        for (int i = 0; i < width; i++)
+            for (int j = 0; j < length; j++)
+                cells.add(this.cells[i][j]);
         return cells;
     }
 

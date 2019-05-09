@@ -300,10 +300,10 @@ public class View {
         }
     }
 
-    public void showMinions(Attacker attacker) {
+    public void showAttacker(Attacker attacker) {
         if (attacker == null)
             return;
-        System.out.print(attacker.getId() +
+        System.out.println(attacker.getCardIDInGame() +
                 " : " +
                 attacker.getName() +
                 " , health : " +
@@ -320,7 +320,7 @@ public class View {
         if (card == null)
             return;
         if (card instanceof Hero) {
-            System.out.println("Hero : " +
+            System.out.print("Hero : " +
                     " Name : " +
                     card.getName() +
                     " Cost : " +
@@ -328,7 +328,7 @@ public class View {
                     " Desc : " +
                     card.getDesc());
         } else if (card instanceof Spell) {
-            System.out.println("Spell : " +
+            System.out.print("Spell : " +
                     " Name : " +
                     card.getName() +
                     " MP : " +
@@ -338,7 +338,7 @@ public class View {
                     + " Desc : " +
                     card.getDesc());
         } else if (card instanceof Minion) {
-            System.out.println("Minion : " +
+            System.out.print("Minion : " +
                     " Name : " +
                     card.getName() +
                     " HP : " +
@@ -357,6 +357,9 @@ public class View {
                     card.getDesc());
         } else
             System.out.println("not a card");
+        if (card.hasCardInGameID())
+            System.out.println(" cardIDInGame : " + card.getCardIDInGame());
+        else System.out.println();
     }
 
     public void showCollectables(Collectable collectable) {

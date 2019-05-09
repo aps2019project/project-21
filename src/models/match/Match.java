@@ -3,6 +3,7 @@ package models.match;
 import models.Item.Collectable;
 import models.Item.Flag;
 import models.Player;
+import models.card.AttackMode;
 import models.card.Attacker;
 import models.card.Card;
 import models.card.Spell;
@@ -30,6 +31,7 @@ public class Match {
     private Flag flag;
     private LocalDateTime gameTime = LocalDateTime.now();
     private int turn;  //  0 for player1 and 1 for player2
+    private int turnCount = 1;
     private Card selectedCard;
     private Collectable selectedCollectable;
     private View view = View.getInstance();
@@ -104,15 +106,15 @@ public class Match {
             view.printError(ErrorMode.ATTACKER_CANT_MOVE);
             return;
         }
-        //  actually moving the attacker:
-        attacker.getCurrentCell().setEmpty();
-        attacker.setCurrentCell(target);
-        target.setCurrentAttacker(attacker);
-        System.out.println(selectedCard.getCardIDInGame() + " moved to " + x + " " + y);
-        if (target.hasCollectable()) {
-            info[turn].addCollectable(target.getCollectable());
-            target.setCollectable(null);
+        if (isPathClosed(attacker.getCurrentCell(), target)) {
+            view.printError(ErrorMode.INVALID_MOVE_TARGET);
+            return;
         }
+
+        attacker.getCurrentCell().setEmpty();
+        attacker.setCannotMove();
+        goOnCell(attacker, target);
+        System.out.println(selectedCard.getCardIDInGame() + " moved to (" + x + ", " + y + ")");
     }
 
     private boolean isMoveTargetValid(Cell target) {
@@ -126,6 +128,19 @@ public class Match {
         return true;
     }
 
+    private boolean isPathClosed(Cell source, Cell dest) {
+        if (Cell.getManhattanDistance(source, dest) == 0)
+            return false;
+        if (Cell.getManhattanDistance(source, dest) == 1)
+            return false;
+        for (Cell cell : battlefield.getCellsInList())
+            if (Cell.getManhattanDistance(cell, source) == 1
+                    && Cell.getManhattanDistance(cell, dest) == 1)
+                if (cell.isEmpty())
+                    return false;
+        return true;
+    }
+
     public void attack(String oppID) {
         if (!isAnyCardSelected()) {
             view.printError(ErrorMode.NO_CARD_IS_SELECTED);
@@ -136,12 +151,12 @@ public class Match {
             view.printError(ErrorMode.INVALID_CARD_ID);
             return;
         }
-        if (!(selectedCard instanceof Attacker)) {
+        if (!isSelectedCardAttacker()) {
             view.printError(ErrorMode.NO_CARD_IS_SELECTED);
             return;
         }
-        Attacker mine = (Attacker) selectedCard;
-        if (!mine.canAttack()) {
+        Attacker attacker = (Attacker) selectedCard;
+        if (!attacker.canAttack()) {
             System.out.println("card with id : " + selectedCard.getCardIDInGame() + " can't attack.");
             return;
         }
@@ -149,18 +164,33 @@ public class Match {
             view.printError(ErrorMode.UNAVAILABLE_FOR_ATTACK);
             return;
         }
-        target.decreaseHP(mine.getAP());  //  TODO check if he is dead
+        target.decreaseHP(attacker.getAP());
+        checkIfHeIsDead(target);
         counterAttack(target);
-        mine.setCannotAttack();
-        mine.setCannotMove();
+        attacker.setCannotAttack();
+        attacker.setCannotMove();
         //  TODO: cast OnAttack spells (for minions and one hero)
     }
 
+    private void checkIfHeIsDead(Attacker attacker) {
+        if (attacker == null)
+            return;
+        if (attacker.getHP() <= 0) {
+            info[getCardsTeam(attacker)].kill(attacker);
+        }
+    }
+
     public boolean isInRangeOfAttack(Attacker target) {
-        if (Cell.getManhattanDistance(target.getCurrentCell(),
-                ((Attacker) selectedCard).getCurrentCell()) > ((Attacker) selectedCard).getAttackRange())
+        if (!isSelectedCardAttacker())
             return false;
-        return true;
+        Attacker attacker = (Attacker) selectedCard;
+        int dist = Cell.getManhattanDistance(target.getCurrentCell(),
+                ((Attacker) selectedCard).getCurrentCell());
+        if (attacker.getAttackMode() == AttackMode.MELEE) {
+            return dist <= 1;
+        } else if (attacker.getAttackMode() == AttackMode.RANGED) {
+            return dist > 1 && dist <= attacker.getAttackRange();
+        } else return dist <= attacker.getAttackRange();
     }
 
     public Attacker getGroundedOppAttacker(String oppID) {
@@ -247,6 +277,7 @@ public class Match {
             return;
         }
         attacker = info[turn].getHand().pop(cardName);
+        info[turn].addToGroundedAttackers(attacker);
         setCardInGameID(attacker);
         goOnCell(attacker, cell);
         info[turn].decreaseMP(attacker.getManaCost());
@@ -266,7 +297,6 @@ public class Match {
         }
     }
 
-
     private void setCardInGameID(Card card) {
         if (card == null)
             return;
@@ -276,7 +306,7 @@ public class Match {
     }
 
     private int cardNameRank(String name) {
-        int num = 1;
+        int num = 0;
         for (Card card : info[turn].getAllUsedCards())
             if (card.getName().equals(name))
                 num++;
@@ -298,11 +328,7 @@ public class Match {
 
     public void swapTurn() {
         turn = 1 - turn;
-        prepareNextRound(turn);
-    }
-
-    private void prepareNextRound(int turn) {
-        //  TODO: cast passive effects (minions, usables)
+        turnCount++;
     }
 
     public void selectCollectable(int collectableID) {
@@ -354,8 +380,9 @@ public class Match {
     }
 
     private boolean isSelectedCardAttacker() {
-        // TODO
-        return true;
+        if (!isAnyCardSelected())
+            return false;
+        return selectedCard instanceof Attacker;
     }
 
     private boolean isSelectedCardSpell() {
@@ -506,5 +533,46 @@ public class Match {
         System.out.println(info[turn].getMp());
     }
 
+    public void showSelectedCard() {
+        if (selectedCard == null) {
+            view.printError(ErrorMode.NO_CARD_IS_SELECTED);
+            return;
+        }
+        view.showCardInfo(selectedCard);
+    }
 
+    public void endTurn() {
+        prepareNextRound();
+        swapTurn();
+    }
+
+    private void prepareNextRound() {
+        setCanMove();
+        setCanAttack();
+        increaseMana();
+        unselect();
+    }
+
+    private void setCanMove() {
+        for (Attacker attacker : getBothGroundedAttackers())
+            attacker.setCanMove();
+    }
+
+    private void setCanAttack() {
+        for (Attacker attacker : getBothGroundedAttackers())
+            attacker.setCanAttack();
+    }
+
+    private void increaseMana() {
+        for (PlayerMatchInfo pInfo : info)
+            pInfo.setMp(3 + (turnCount - 1) / 2);
+    }
+
+    public void showTurn() {
+        System.out.println(getThisTurnsPlayer().getUsername());
+    }
+
+    public void unselect() {
+        this.selectedCard = null;
+    }
 }

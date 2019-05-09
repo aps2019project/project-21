@@ -58,6 +58,9 @@ public enum RequestType {
     SHOW_BATTLEFIELD,
     KILL,
     MP,
+    SHOW_SELECTED,
+    SHOW_TURN,
+    UNSELECT,
 
     //  ALL COMMANDS
 }

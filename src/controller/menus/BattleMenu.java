@@ -109,6 +109,15 @@ public class BattleMenu extends Menu {
             case MP:
                 showMP();
                 break;
+            case SHOW_SELECTED:
+                showSelected();
+                break;
+            case SHOW_TURN:
+                showTurn();
+                break;
+            case UNSELECT:
+                unselect();
+                break;
         }
     }
 
@@ -119,13 +128,13 @@ public class BattleMenu extends Menu {
     private void showMyMinions() {
         Match match = Match.getCurrentMatch();
         for (Attacker attacker : match.getPlayersMatchInfo()[match.getTurn()].getGroundedAttackers())
-            view.showMinions(attacker);
+            view.showAttacker(attacker);
     }
 
     private void showOpponentMinions() {
         Match match = Match.getCurrentMatch();
         for (Attacker attacker : match.getPlayersMatchInfo()[1 - match.getTurn()].getGroundedAttackers())
-            view.showMinions(attacker);
+            view.showAttacker(attacker);
     }
 
     private void showCardInfo() {
@@ -183,7 +192,7 @@ public class BattleMenu extends Menu {
     }
 
     private void endTurn() {
-        Match.getCurrentMatch().swapTurn();
+        Match.getCurrentMatch().endTurn();
     }
 
     private void showCollectables() {
@@ -230,12 +239,24 @@ public class BattleMenu extends Menu {
         Match.getCurrentMatch().showBattleField();
     }
 
-    private void kill(){
+    private void kill() {
         Match.getCurrentMatch().kill();
     }
 
-    private void showMP(){
+    private void showMP() {
         Match.getCurrentMatch().showMP();
+    }
+
+    private void showSelected() {
+        Match.getCurrentMatch().showSelectedCard();
+    }
+
+    private void showTurn() {
+        Match.getCurrentMatch().showTurn();
+    }
+
+    private void unselect() {
+        Match.getCurrentMatch().unselect();
     }
 }
 

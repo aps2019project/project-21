@@ -11,7 +11,7 @@ public class BattleMenuRequest extends Request {
             gameInfoCheck();
         else if (commandLine.equalsIgnoreCase("show my minions"))
             showMyMinionsCheck();
-        else if (commandLine.equalsIgnoreCase("show opponents minions"))
+        else if (commandLine.equalsIgnoreCase("show opponent minions"))
             showOppMinionsCheck();
         else if (commandLine.startsWith("show card info "))
             showCardInfoCheck();
@@ -57,6 +57,12 @@ public class BattleMenuRequest extends Request {
             killCheck();
         else if (commandLine.equalsIgnoreCase("mp"))
             mpCheck();
+        else if (commandLine.equalsIgnoreCase("show selected"))
+            showSelectedCheck();
+        else if (commandLine.equalsIgnoreCase("show turn"))
+            showTurnCheck();
+        else if (commandLine.equalsIgnoreCase("unselect"))
+            unselectCheck();
     }
 
     private void gameInfoCheck() {
@@ -81,7 +87,7 @@ public class BattleMenuRequest extends Request {
     }
 
     private void selectCheck() {
-        String regex = "select (\\d+)";
+        String regex = "select (\\w+)";
         Matcher matcher = Pattern.compile(regex).matcher(commandLine);
         if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
@@ -90,7 +96,7 @@ public class BattleMenuRequest extends Request {
     }
 
     private void moveToCheck() {
-        String regex = "move to [(](\\d+),(\\d+)[)]";
+        String regex = "move to [(](\\d+),\\s?(\\d+)[)]";
         Matcher matcher = Pattern.compile(regex).matcher(commandLine);
         if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
@@ -100,7 +106,7 @@ public class BattleMenuRequest extends Request {
     }
 
     private void attackCheck() {
-        String regex = "attack (\\d+)";
+        String regex = "attack (\\w+)";
         Matcher matcher = Pattern.compile(regex).matcher(commandLine);
         if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
@@ -126,7 +132,7 @@ public class BattleMenuRequest extends Request {
     }
 
     private void useSpecialPowerCheck() {
-        String regex = "use special power [(](\\d+),(\\d+)[)]";
+        String regex = "use special power [(](\\d+),\\s?(\\d+)[)]";
         Matcher matcher = Pattern.compile(regex).matcher(commandLine);
         if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
@@ -140,7 +146,7 @@ public class BattleMenuRequest extends Request {
     }
 
     private void insertCheck() {
-        String regex = "insert (\\w+) in [(](\\d+), (\\d+)[)]";
+        String regex = "insert (\\w+) in [(](\\d+),\\s?(\\d+)[)]";
         Matcher matcher = Pattern.compile(regex).matcher(commandLine);
         if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
@@ -163,7 +169,7 @@ public class BattleMenuRequest extends Request {
     }
 
     private void useCheck() {
-        String regex = "use location [(](\\d+),(\\d+)[)]";
+        String regex = "use location [(](\\d+),\\s?(\\d+)[)]";
         Matcher matcher = Pattern.compile(regex).matcher(commandLine);
         if (matcher.matches()) {
             commandArguments.add(matcher.group(1));
@@ -192,7 +198,19 @@ public class BattleMenuRequest extends Request {
         type = RequestType.KILL;
     }
 
-    private void mpCheck(){
+    private void mpCheck() {
         type = RequestType.MP;
+    }
+
+    private void showSelectedCheck() {
+        type = RequestType.SHOW_SELECTED;
+    }
+
+    private void showTurnCheck() {
+        type = RequestType.SHOW_TURN;
+    }
+
+    private void unselectCheck() {
+        type = RequestType.UNSELECT;
     }
 }

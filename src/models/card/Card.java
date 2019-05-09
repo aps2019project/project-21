@@ -131,7 +131,7 @@ public class Card {
         else if (this instanceof Minion)
             return ((Minion) this).getDesc();
         else if (this instanceof Spell)
-            return ((Spell) this).getDesc();  // this cast is probably not redundant!
+            return ((Spell) this).getDesc();  // these cast is probably not redundant!
         else if (this instanceof Usable)
             return ((Usable) this).getDesc();
         //  shouldn't reach here
@@ -144,5 +144,9 @@ public class Card {
 
     public void setCurrentCell(Cell currentCell) {
         this.currentCell = currentCell;
+    }
+
+    public boolean hasCardInGameID() {
+        return cardIDInGame != null;
     }
 }

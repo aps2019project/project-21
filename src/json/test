@@ -7,4 +7,26 @@ select user b
 start multiplayer game KILL_HERO
 show battlefield
 show hand
-insert Oghab in (0, 4)
+
+end turn
+end turn
+end turn
+end turn
+end turn
+end turn
+end turn
+end turn
+end turn
+end turn
+
+insert Oghab in (2, 1)
+end turn
+insert Oghab in (2,7)
+insert Oghab in (2, 6)
+insert Oghab in (2, 5)
+end turn
+insert Oghab in (2,2)
+
+
+select a_Oghab_2
+
