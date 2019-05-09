@@ -456,9 +456,9 @@ public class View {
     }
 
     public static void printException(Exception e) {
-        System.out.println(e.getMessage());
-        for (StackTraceElement s : e.getStackTrace())
-            System.out.println(s);
+//        System.out.println(e.getMessage());
+//        for (StackTraceElement s : e.getStackTrace())
+//            System.out.println(s);
     }
 
     public void showMatchResults(Match match) {
