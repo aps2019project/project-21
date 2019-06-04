@@ -52,8 +52,6 @@ public class AccountMenu extends Menu {
                 hesoyam();
                 break;
             case HELP:
-                showMenu();
-                break;
             case SHOW_MENU:
                 showMenu();
                 break;
@@ -86,7 +84,7 @@ public class AccountMenu extends Menu {
     }
 
     private void createAccount() {
-        if (Player.getCurrentPlayer() != null){
+        if (Player.getCurrentPlayer() != null) {
             view.printError(ErrorMode.YOU_MUST_LOGOUT);
             return;
         }
@@ -129,7 +127,7 @@ public class AccountMenu extends Menu {
         MenuManager.getInstance().gotoMainMenu();
     }
 
-    private void showMatchHistory(){
+    private void showMatchHistory() {
         view.showMatchHistory(Player.getCurrentPlayer());
     }
 }
