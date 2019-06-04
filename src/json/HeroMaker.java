@@ -1,5 +1,6 @@
 package json;
 
+import javafx.scene.image.Image;
 import models.card.*;
 import models.card.buffs.*;
 import models.card.effects.DecreaseHP;
@@ -7,10 +8,12 @@ import models.card.effects.EffectName;
 import models.card.effects.GiveEffect;
 import models.card.target_enums.*;
 
+import java.io.FileInputStream;
+
 import static json.CardMaker.saveToFile;
 
 public class HeroMaker {
-    public static void main() {
+    public static void main() throws Exception {
         // ---------- 1 ----------
         Effect effect = new PowerAP(Integer.MAX_VALUE, 4);
         TargetType targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
@@ -19,6 +22,8 @@ public class HeroMaker {
                 targetType, effect, ApplyType.ON_ATTACKER, "Casts one power buff with 4 ap increase on himself forever");
         Hero hero = new Hero("Dive Sefid", 8000, 50,
                 4, 1, AttackMode.MELEE, specialPower, 2);
+        hero.setCardBackgroung(new Image(new FileInputStream("src/resources/card_backgrounds")));
+        hero.setCardImage(new Image(new FileInputStream("src/resources/generals")));
         saveToFile(hero);
 
 

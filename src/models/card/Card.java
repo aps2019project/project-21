@@ -1,5 +1,7 @@
 package models.card;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import models.Item.Item;
 import models.Item.Usable;
 import models.Player;
@@ -18,6 +20,13 @@ public class Card {
     protected int price;
     protected int manaCost;
     protected Cell currentCell;
+
+
+    private ImageView cardImage ;
+    private ImageView cardBackgroung;
+    private ImageView cardInGameView;
+
+
 
     public Card() {
 
@@ -177,5 +186,33 @@ public class Card {
 
     public Cell getCurrentCell() {
         return currentCell;
+    }
+
+
+    public ImageView getCardImage(){
+        return cardImage;
+    }
+
+    public ImageView getCardBackgroung(){
+        return cardBackgroung;
+    }
+
+    public ImageView getCardInGameView(){
+        return getCardInGameView();
+    }
+
+
+    public void setCardImage(Image image){
+        cardImage.setImage(image);
+    }
+
+
+    public void setCardBackgroung(Image image){
+        cardBackgroung.setImage(image);
+    }
+
+
+    public void setCardInGameView(Image image){
+        cardInGameView.setImage(image);
     }
 }
