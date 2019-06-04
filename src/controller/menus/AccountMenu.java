@@ -9,7 +9,7 @@ import view.View;
 public class AccountMenu extends Menu {
     private static AccountMenu instance = new AccountMenu();
 
-    static Menu getInstance() {
+    public static AccountMenu getInstance() {
         return instance;
     }
 
@@ -29,12 +29,18 @@ public class AccountMenu extends Menu {
 
         request.extractType();
 
+        handleRequest();
+
+
+    }
+
+    public void handleRequest(){
         switch (request.getType()) {
             case CREATE_ACCOUNT:
-                createAccount();
+//                createAccount();
                 break;
             case LOGIN:
-                login();
+//                login();
                 break;
             case SHOW_LEADERBOARD:
                 view.showLeaderBoard();
@@ -68,14 +74,14 @@ public class AccountMenu extends Menu {
         }
     }
 
-    private void login() {
-        String username = request.getCommandArguments().get(0);
+    public void login(String username, String password) {
+//        String username = request.getCommandArguments().get(0);
         if (!Player.hasThisPlayer(username)) {
             View.getInstance().printError(ErrorMode.INVALID_USERNAME);
             return;
         }
-        System.out.println("Password: ");
-        String password = InputScanner.nextLine();
+//        System.out.println("Password: ");
+//        String password = InputScanner.nextLine();
         boolean isLoginSuccessful = Player.login(username, password);
         if (!isLoginSuccessful)
             view.printError(ErrorMode.LOGIN_FAILED);
@@ -83,18 +89,18 @@ public class AccountMenu extends Menu {
             view.printError(ErrorMode.LOGIN_SUCCESSFUL);
     }
 
-    private void createAccount() {
+    public void createAccount(String username, String password) {
         if (Player.getCurrentPlayer() != null) {
             view.printError(ErrorMode.YOU_MUST_LOGOUT);
             return;
         }
-        String username = request.getCommandArguments().get(0);
+        //String username = request.getCommandArguments().get(0);
         if (Player.hasThisPlayer(username)) {
             View.getInstance().printError(ErrorMode.USERNAME_IS_TAKEN);
             return;
         }
-        System.out.println("Set Password:");
-        String password = InputScanner.nextLine();
+//        System.out.println("Set Password:");
+//        String password = InputScanner.nextLine();
         Player.createAccount(username, password);
     }
 

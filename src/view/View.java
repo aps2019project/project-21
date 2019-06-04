@@ -37,6 +37,7 @@ public class View extends Application {
     public void start(Stage primaryStage){
         primaryStage.setTitle("Duelyst");
         AccountView.getInstance().run(primaryStage);
+
         primaryStage.show();
     }
 
