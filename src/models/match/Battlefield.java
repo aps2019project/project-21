@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-class Battlefield {
+public class Battlefield {
     private int width;
     private int length;
     private Cell[][] cells;
@@ -31,7 +31,7 @@ class Battlefield {
         return cells;
     }
 
-    Cell getCell(int x, int y) {
+    public Cell getCell(int x, int y) {
         if (x < 0 || x >= width || y < 0 || y > length)
             return null;
         return cells[x][y];

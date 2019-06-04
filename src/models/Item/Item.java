@@ -53,6 +53,10 @@ public class Item extends Card {
         return items;
     }
 
+    public ApplyType getApplyType() {
+        return applyType;
+    }
+
     public void reset(){
         super.reset();
     }

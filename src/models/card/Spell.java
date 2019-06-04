@@ -52,6 +52,8 @@ public class Spell extends Card {
 
     private List<Cell> getTargetCells(Match match, Player player, Cell cell) {
         List<Cell> cells = new ArrayList<>();
+        int x = cell.getX();
+        int y = cell.getY();
         switch (targetType.getCellType()) {
             case SINGLE_CELL:
                 cells.add(cell);
@@ -59,17 +61,37 @@ public class Spell extends Card {
             case NONE:
                 return cells;
             case SQUARE_3_3:
-                cells.add(cell);
+                if (x > 0 && x < 4 && y < 8 && y > 0) {
+                    cells.add(match.getBattlefield().getCell(x - 1, y));
+                    cells.add(match.getBattlefield().getCell(x - 1, y - 1));
+                    cells.add(match.getBattlefield().getCell(x - 1, y + 1));
+                    cells.add(match.getBattlefield().getCell(x, y));
+                    cells.add(match.getBattlefield().getCell(x, y - 1));
+                    cells.add(match.getBattlefield().getCell(x, y + 1));
+                    cells.add(match.getBattlefield().getCell(x + 1, y));
+                    cells.add(match.getBattlefield().getCell(x + 1, y - 1));
+                    cells.add(match.getBattlefield().getCell(x + 1, y + 1));
+                } else {
+                    System.out.println("Invalid coordination");
+                }
                 break;
             case SQUARE_2_2:
+                if (x < 4 && y < 8) {
+                    cells.add(match.getBattlefield().getCell(x, y));
+                    cells.add(match.getBattlefield().getCell(x, y + 1));
+                    cells.add(match.getBattlefield().getCell(x + 1, y));
+                    cells.add(match.getBattlefield().getCell(x + 1, y + 1));
+                } else {
+                    System.out.println("Invalid coordination");
+                }
                 cells.add(cell);
                 break;
-            case IN_ROW:
+            /*case IN_ROW:
                 cells.add(cell);
                 break;
             case IN_COLUMN:
                 cells.add(cell);
-                break;
+                break;*/
         }
         return cells;
     }

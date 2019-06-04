@@ -61,6 +61,10 @@ public class Match {
         initiateMatch();
     }
 
+    public Battlefield getBattlefield() {
+        return battlefield;
+    }
+
     private boolean selectAttacker(String attackerID) {
         for (Attacker attacker : info[turn].getGroundedAttackers())
             if (attacker.getCardIDInGame().equals(attackerID)) {
@@ -386,11 +390,13 @@ public class Match {
             view.printError(ErrorMode.INVALID_CELL);
             return;
         }
+
         if (!info[turn].hasManaForThis(attacker)) {
             view.printError(ErrorMode.HAVE_NOT_MANA);
             return;
         }
-        attacker = info[turn].getHand().pop(cardName);
+
+        attacker = (Attacker) info[turn].getHand().pop(cardName);
         info[turn].addToGroundedAttackers(attacker);
         setCardInGameID(attacker);
         goOnCell(attacker, cell);
