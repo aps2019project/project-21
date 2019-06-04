@@ -30,6 +30,7 @@ public class HeroMaker {
                 targetType, effect, ApplyType.ON_ATTACKER, "Stuns all opp attackers for one turn.");
         hero = new Hero("Simorgh", 9000, 50,
                 4, 1, AttackMode.MELEE, specialPower, 8);
+
         saveToFile(hero);
 
 

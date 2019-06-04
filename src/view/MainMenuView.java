@@ -1,10 +1,9 @@
 package view;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
+import javafx.scene.layout.VBox;
 
 public class MainMenuView {
 
@@ -17,40 +16,43 @@ public class MainMenuView {
     private Group root = new Group();
     private Scene scene = new Scene(root, 1500, 1000);
 
-
-
-
+    private VBox options = new VBox();
     private Button collectionButton = new Button("COLLECTION");
     private Button shopButton = new Button("SHOP");
     private Button battleButton = new Button("BATTLE");
     private Button backButton = new Button("BACK");
     private Button exitButton = new Button("EXIT");
 
+    public void run() {
+        View.getInstance().setScene(scene);
 
-    public void run(Stage primaryStage) {
-        primaryStage.setScene(scene);
+        options.relocate(100, 100);
 
+        exitButton.setOnAction(event -> View.getInstance().exit());
 
-
-
-
-        exitButton.setOnAction(event -> primaryStage.close());
-
-        backButton.setOnAction(event -> {
-        });
+        backButton.setOnAction(event -> View.getInstance().back());
 
         battleButton.setOnAction(event -> {
+
         });
 
         collectionButton.setOnAction(event -> {
+
         });
 
         shopButton.setOnAction(event -> {
+
         });
 
+        options.getChildren().addAll(backButton, collectionButton, shopButton, battleButton, exitButton);
+        options.setSpacing(10);
 
-        root.getChildren().addAll();
+        hover();
 
 
+        root.getChildren().add(options);
+    }
+
+    private void hover() {
     }
 }

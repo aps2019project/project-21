@@ -1,8 +1,10 @@
 package view;
 
-import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.Collection;
 import models.Deck;
@@ -17,9 +19,14 @@ import models.match.PlayerMatchInfo;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Stack;
 
-public class View extends Application {
+public class View {
     private static View view = new View();
+
+    private Stack<Scene> scenes = new Stack<>();
+
+    private Stage primaryStage;
 
     public static View getInstance() {
         return view;
@@ -29,22 +36,49 @@ public class View extends Application {
 
     }
 
-    public void main(){
-        launch();
-    }
-
-    @Override
-    public void start(Stage primaryStage){
+    public void run() {
         primaryStage.setTitle("Duelyst");
         AccountView.getInstance().run(primaryStage);
+    }
 
-        primaryStage.show();
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
+
+    void setScene(Scene scene) {
+        this.primaryStage.setScene(scene);
+        this.scenes.push(scene);
+    }
+
+    void back() {
+        scenes.pop();
+        primaryStage.setScene(scenes.peek());
+    }
+
+    void exit() {
+        primaryStage.close();
+    }
+
+    public void errorPopup(String message) {
+        final Stage popup = new Stage();
+        popup.initModality(Modality.APPLICATION_MODAL);
+        popup.initOwner(primaryStage);
+        Label label = new Label(message);
+        Button ok = new Button("OK");
+        ok.setOnAction(event -> popup.close());
+        label.relocate(100, 50);
+        ok.relocate(100, 100);
+        Group group = new Group();
+        group.getChildren().addAll(label, ok);
+        Scene dialogScene = new Scene(group, 300, 150);
+        popup.setScene(dialogScene);
+        popup.show();
     }
 
     public void printError(ErrorMode error) {
         if (error == null)
             return;
-        System.out.println(error.getMessage());
+        errorPopup(error.getMessage());
     }
 
     private void showUser(Player player) {

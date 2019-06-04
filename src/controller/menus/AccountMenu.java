@@ -1,9 +1,9 @@
 package controller.menus;
 
-import controller.InputScanner;
 import controller.request.AccountMenuRequest;
 import models.Player;
 import view.ErrorMode;
+import view.MainMenuView;
 import view.View;
 
 public class AccountMenu extends Menu {
@@ -14,14 +14,9 @@ public class AccountMenu extends Menu {
     }
 
     private AccountMenu() {
-
     }
 
     void main() {
-        if (showMenu) {
-            showMenu();
-            showMenu = false;
-        }
 
         request = new AccountMenuRequest();
 
@@ -30,11 +25,9 @@ public class AccountMenu extends Menu {
         request.extractType();
 
         handleRequest();
-
-
     }
 
-    public void handleRequest(){
+    public void handleRequest() {
         switch (request.getType()) {
             case CREATE_ACCOUNT:
 //                createAccount();
@@ -56,10 +49,6 @@ public class AccountMenu extends Menu {
                 break;
             case HESOYAM:
                 hesoyam();
-                break;
-            case HELP:
-            case SHOW_MENU:
-                showMenu();
                 break;
             case BACK:
                 break;
@@ -108,7 +97,7 @@ public class AccountMenu extends Menu {
         Player.setCurrentPlayer(null);
     }
 
-    private void save() {
+    public void save() {
         if (Player.getCurrentPlayer() == null) {
             view.printError(ErrorMode.YOU_MUST_LOG_IN);
             return;
@@ -116,24 +105,20 @@ public class AccountMenu extends Menu {
         Player.savePlayer();
     }
 
-    protected void showMenu() {
-        view.showMenu("Account");
-    }
-
-    private void hesoyam() {
+    public void hesoyam() {
         if (Player.getCurrentPlayer() != null)
             Player.getCurrentPlayer().setDrake(Integer.MAX_VALUE);
     }
 
-    private void gotoMainMenu() {
+    public void gotoMainMenu() {
         if (Player.getCurrentPlayer() == null) {
-            view.printError(ErrorMode.YOU_MUST_LOG_IN);
+            view.errorPopup("YOU MUST LOGIN");
             return;
         }
-        MenuManager.getInstance().gotoMainMenu();
+        MainMenuView.getInstance().run();
     }
 
-    private void showMatchHistory() {
+    public void showMatchHistory() {
         view.showMatchHistory(Player.getCurrentPlayer());
     }
 }
