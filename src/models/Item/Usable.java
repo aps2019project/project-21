@@ -34,50 +34,52 @@ public class Usable extends Item {
     }
 
     private List<Attacker> getTargetAttackers(Match match, Player player, Cell cell) {
-        List<Attacker> attackers = new ArrayList<>(match.getBothGroundedAttackers());
-        List<Attacker> copy = new ArrayList<>(attackers);
+//        List<Attacker> attackers = new ArrayList<>(match.getBothGroundedAttackers());
+//        List<Attacker> copy = new ArrayList<>(attackers);
+//
+//        switch (targetType.getOppOrAlly()) {
+//            case OPP:
+//                for (Attacker attacker : copy)
+//                    if (match.getCardsTeam(attacker) == match.getTeamOfPlayer(player))
+//                        attackers.remove(attacker);
+//                break;
+//            case ALLY:
+//                for (Attacker attacker : copy)
+//                    if (match.getCardsTeam(attacker) != match.getTeamOfPlayer(player))
+//                        attackers.remove(attacker);
+//                break;
+//        }
+//
+//        switch (targetType.getHeroOrMinion()) {
+//            case MINION:
+//                for (Attacker attacker : copy)
+//                    if (!(attacker instanceof Minion))
+//                        attackers.remove(attacker);
+//                break;
+//            case HERO:
+//                for (Attacker attacker : copy)
+//                    if (!(attacker instanceof Hero))
+//                        attackers.remove(attacker);
+//                break;
+//        }
+//
+//        switch (targetType.getChooseType()) {
+//            case SELECTED_OPP:
+//                if (cell.isEmpty() || match.getCardsTeam(cell.getCurrentAttacker()) == match.getTeamOfPlayer(player))
+//                    isCommandValid = false;
+//                attackers = new ArrayList<>();
+//                attackers.add(cell.getCurrentAttacker());
+//                break;
+//            case SELECTED_ALLY:
+//                if (cell.isEmpty() || match.getCardsTeam(cell.getCurrentAttacker()) != match.getTeamOfPlayer(player))
+//                    isCommandValid = false;
+//                attackers = new ArrayList<>();
+//                attackers.add(cell.getCurrentAttacker());
+//                break;
+//        }
+//        return attackers;
 
-        switch (targetType.getOppOrAlly()) {
-            case OPP:
-                for (Attacker attacker : copy)
-                    if (match.getCardsTeam(attacker) == match.getTeamOfPlayer(player))
-                        attackers.remove(attacker);
-                break;
-            case ALLY:
-                for (Attacker attacker : copy)
-                    if (match.getCardsTeam(attacker) != match.getTeamOfPlayer(player))
-                        attackers.remove(attacker);
-                break;
-        }
-
-        switch (targetType.getHeroOrMinion()) {
-            case MINION:
-                for (Attacker attacker : copy)
-                    if (!(attacker instanceof Minion))
-                        attackers.remove(attacker);
-                break;
-            case HERO:
-                for (Attacker attacker : copy)
-                    if (!(attacker instanceof Hero))
-                        attackers.remove(attacker);
-                break;
-        }
-
-        switch (targetType.getChooseType()) {
-            case SELECTED_OPP:
-                if (cell.isEmpty() || match.getCardsTeam(cell.getCurrentAttacker()) == match.getTeamOfPlayer(player))
-                    isCommandValid = false;
-                attackers = new ArrayList<>();
-                attackers.add(cell.getCurrentAttacker());
-                break;
-            case SELECTED_ALLY:
-                if (cell.isEmpty() || match.getCardsTeam(cell.getCurrentAttacker()) != match.getTeamOfPlayer(player))
-                    isCommandValid = false;
-                attackers = new ArrayList<>();
-                attackers.add(cell.getCurrentAttacker());
-                break;
-        }
-        return attackers;
+    return null;
     }
 
     public static List<Usable> getUsables() {

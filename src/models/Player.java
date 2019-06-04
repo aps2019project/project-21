@@ -38,6 +38,10 @@ public class Player {
 
     }
 
+    public static boolean ifLoggedIN(){
+        return currentPlayer != null;
+    }
+
     public static void createAccount(String username, String password) {
         if (hasThisPlayer(username)) {
             View.getInstance().printError(ErrorMode.USERNAME_IS_TAKEN);

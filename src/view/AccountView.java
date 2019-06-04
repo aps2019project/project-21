@@ -6,7 +6,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import models.Player;
 
 public class AccountView {
     private Scene scene;
@@ -18,11 +20,15 @@ public class AccountView {
     private PasswordField passwordTextFilled = new PasswordField();
 
 
+    private VBox accountViewMenuItems = new VBox();
+    private Button mainMenuButton = new Button("MAIN MENU");
     private Button createAccountButton = new Button("CREATE ACCOUNT");
     private Button loginButton = new Button("LOGIN");
     private Button logoutButton = new Button("LOGOUT");
     private Button exitButton = new Button("EXIT");
-    private Button backButton = new Button("BACK");
+//    private Button backButton = new Button("BACK");
+
+
 
 
 
@@ -50,11 +56,17 @@ public class AccountView {
         loginButton.relocate(50, 80);
         logoutButton.relocate(50, 110);
         exitButton.relocate(50, 140);
-        backButton.relocate(50, 170);
+//        backButton.relocate(50, 170);
 
 
         userNameTextFilled.setPromptText("USERNAME");
         passwordTextFilled.setPromptText("PASSWORD");
+        userNameTextFilled.relocate(200, 200);
+        passwordTextFilled.relocate(200, 260);
+
+
+
+        accountViewMenuItems.getChildren().addAll(mainMenuButton, createAccountButton, loginButton, logoutButton, exitButton, userNameTextFilled, passwordTextFilled);
 
 
 
@@ -65,9 +77,11 @@ public class AccountView {
 
 
 
-
-
-
+        mainMenuButton.setOnAction(event -> {
+            if (Player.ifLoggedIN()) {
+                MainMenuView.getInstance().run(primaryStage);
+            }
+        });
 
         createAccountButton.setOnAction(event -> {
             AccountMenu.getInstance().createAccount(userNameTextFilled.getText(), passwordTextFilled.getText());
@@ -77,6 +91,11 @@ public class AccountView {
             AccountMenu.getInstance().login(userNameTextFilled.getText(), passwordTextFilled.getText());
         });
 
+        logoutButton.setOnAction(event -> {
+            AccountMenu.getInstance().logout();
+        });
+
+        exitButton.setOnAction(event -> primaryStage.close());
 
 
 
@@ -86,9 +105,7 @@ public class AccountView {
 
 
 
-
-
-        root.getChildren().addAll(createAccountButton, loginButton, logoutButton, exitButton, backButton, passwordTextFilled, userNameTextFilled);
+        root.getChildren().addAll(accountViewMenuItems);
 
     }
 

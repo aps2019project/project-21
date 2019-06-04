@@ -49,7 +49,7 @@ public class AccountMenu extends Menu {
                 save();
                 break;
             case LOGOUT:
-                logout();
+//                logout();
                 break;
             case MAIN_MENU:
                 gotoMainMenu();
@@ -104,7 +104,7 @@ public class AccountMenu extends Menu {
         Player.createAccount(username, password);
     }
 
-    private void logout() {
+    public void logout() {
         Player.setCurrentPlayer(null);
     }
 
