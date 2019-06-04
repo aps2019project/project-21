@@ -176,7 +176,7 @@ public class MainMenu extends Menu {
                 System.out.println("AI " + aiPlayer.getAiID() + ":");
                 view.showDeck(aiPlayer.getCollection().getMainDeck());
             }
-        System.out.println("enter start game command ...");
+        System.out.println("enter main game command ...");
         String commandLine = InputScanner.nextLine();
         String regex = "start game (\\d+) (\\w+)( (\\d+))?";
         Matcher matcher = Pattern.compile(regex).matcher(commandLine);

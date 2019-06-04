@@ -77,7 +77,7 @@ public class CardMaker {
             YaGson yaGson = new YaGson();
             return yaGson.fromJson(json, Hero.class);
         } catch (IOException e) {
-            View.printException(e);
+            View.printThrowable(e);
         }
         //  shouldn't reach here
         return null;
@@ -89,7 +89,7 @@ public class CardMaker {
             YaGson gson = new YaGson();
             return gson.fromJson(json, Spell.class);
         } catch (IOException e) {
-            View.printException(e);
+            View.printThrowable(e);
         }
         //  shouldn't reach here
         return null;
@@ -101,7 +101,7 @@ public class CardMaker {
             YaGson gson = new YaGson();
             return gson.fromJson(json, Minion.class);
         } catch (IOException e) {
-            View.printException(e);
+            View.printThrowable(e);
         }
         //  shouldn't reach here
         return null;
@@ -113,7 +113,7 @@ public class CardMaker {
             YaGson gson = new YaGson();
             return gson.fromJson(json, Usable.class);
         } catch (IOException e) {
-            View.printException(e);
+            View.printThrowable(e);
         }
         //  shouldn't reach here
         return null;
@@ -174,7 +174,7 @@ public class CardMaker {
 
             yaGson.toJson(object, isr);
         } catch (IOException e) {
-            View.printException(e);
+            View.printThrowable(e);
         }
 
         System.out.println("Items written to file");
@@ -185,7 +185,7 @@ public class CardMaker {
             YaGson gson = new YaGson();
             return gson.fromJson(gson.toJson(object, type), type);
         } catch (Exception e) {
-            View.printException(e);
+            View.printThrowable(e);
             return null;
         }
     }

@@ -1,5 +1,7 @@
 package controller.menus;
 
+import view.View;
+
 public class MenuManager {
     private static MenuManager instance = new MenuManager();
 
@@ -37,9 +39,7 @@ public class MenuManager {
                         break menuLoop;
                 }
             } catch (Throwable e) {
-                System.out.println(e.getMessage());
-                for (StackTraceElement s : e.getStackTrace())
-                    System.out.println(s);
+                View.printThrowable(e);
             }
         }
     }

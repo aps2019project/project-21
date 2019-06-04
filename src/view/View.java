@@ -1,5 +1,9 @@
 package view;
 
+import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import models.Collection;
 import models.Deck;
 import models.Item.Collectable;
@@ -14,15 +18,26 @@ import models.match.PlayerMatchInfo;
 import java.util.Arrays;
 import java.util.Comparator;
 
-public class View {
+public class View extends Application {
     private static View view = new View();
 
     public static View getInstance() {
         return view;
     }
 
-    private View() {
+    public View() {
 
+    }
+
+    public void main(){
+        launch();
+    }
+
+    @Override
+    public void start(Stage primaryStage){
+        primaryStage.setTitle("Duelyst");
+        AccountView.getInstance().run(primaryStage);
+        primaryStage.show();
     }
 
     public void printError(ErrorMode error) {
@@ -455,7 +470,7 @@ public class View {
                 item.getPrice());
     }
 
-    public static void printException(Exception e) {
+    public static void printThrowable(Throwable throwable) {
 //        System.out.println(e.getMessage());
 //        for (StackTraceElement s : e.getStackTrace())
 //            System.out.println(s);
