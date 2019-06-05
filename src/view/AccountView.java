@@ -10,7 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
@@ -73,8 +72,7 @@ public class AccountView {
                 Button button = (Button) node;
                 button.setOnMouseEntered(event -> button.setTranslateX(20));
                 button.setOnMouseExited(event -> button.setTranslateX(0));
-                button.setStyle("-fx-background-color: #00000000");
-                button.setTextFill(Color.WHITE);
+                button.setStyle("-fx-background-color: transparent; -fx-text-fill: #c2c2c2;");
             }
         }
 
