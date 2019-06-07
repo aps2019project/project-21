@@ -4,8 +4,6 @@ import json.CardMaker;
 import models.Item.Usable;
 import models.card.Card;
 import models.match.Match;
-import view.ErrorMode;
-import view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,15 +36,7 @@ public class Player {
 
     }
 
-    public static boolean ifLoggedIN(){
-        return currentPlayer != null;
-    }
-
     public static void createAccount(String username, String password) {
-        if (hasThisPlayer(username)) {
-            View.getInstance().printError(ErrorMode.USERNAME_IS_TAKEN);
-            return;
-        }
         Player newPlayer = new Player(username, password);
         players.add(newPlayer);
         savePlayer(newPlayer);
@@ -77,20 +67,28 @@ public class Player {
         return drake;
     }
 
-    public void setDrake(int drake) {
-        this.drake = drake;
+    public static void hesoyam() {
+        currentPlayer.drake = 20000000;
     }
 
     public List<Match> getMatchHistory() {
         return matchHistory;
     }
 
-    public static void setCurrentPlayer(Player currentPlayer) {
-        Player.currentPlayer = currentPlayer;
+    public static void logout() {
+        currentPlayer = null;
+    }
+
+    private static void setCurrentPlayer(Player player) {
+        currentPlayer = player;
     }
 
     public static Player getCurrentPlayer() {
         return currentPlayer;
+    }
+
+    public static boolean hasAnyoneLoggedIn() {
+        return currentPlayer != null;
     }
 
     public static Player getPlayerByUsername(String username) {

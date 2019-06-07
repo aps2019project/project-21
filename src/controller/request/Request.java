@@ -1,7 +1,7 @@
 package controller.request;
 
 import controller.InputScanner;
-import view.ErrorMode;
+import view.Message;
 import view.View;
 
 import java.util.ArrayList;
@@ -51,7 +51,7 @@ public abstract class Request {
     }
 
     protected void invalidCommand() {
-        View.getInstance().printError(ErrorMode.INVALID_COMMAND);
+        View.getInstance().printError(Message.INVALID_COMMAND);
     }
 }
 

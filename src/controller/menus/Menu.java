@@ -1,8 +1,7 @@
 package controller.menus;
 
 import controller.request.Request;
-import models.Player;
-import view.ErrorMode;
+import view.Message;
 import view.View;
 
 abstract class Menu {
@@ -10,13 +9,11 @@ abstract class Menu {
     protected Request request;
     protected boolean showMenu = true;
 
-    abstract void main();
-
     protected void exit(){
         MenuManager.getInstance().exit();
     }
 
     protected void invalidCommand(){
-        view.printError(ErrorMode.INVALID_COMMAND);
+        view.printError(Message.INVALID_COMMAND);
     }
 }

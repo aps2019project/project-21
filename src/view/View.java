@@ -1,9 +1,12 @@
 package view;
 
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.Collection;
@@ -32,13 +35,12 @@ public class View {
         return view;
     }
 
-    public View() {
-
+    private View() {
     }
 
     public void run() {
         primaryStage.setTitle("Duelyst");
-        AccountView.getInstance().run(primaryStage);
+        AccountView.getInstance().run();
     }
 
     public void setPrimaryStage(Stage primaryStage) {
@@ -59,26 +61,39 @@ public class View {
         primaryStage.close();
     }
 
-    public void errorPopup(String message) {
+    void removeNodeFromPane(Node node, Pane pane) {
+        pane.getChildren().remove(node);
+    }
+
+    void addNodeToPane(Node node, Pane pane) {
+        if (!pane.getChildren().contains(node))
+            pane.getChildren().add(node);
+    }
+
+    private void popup(String message) {
         final Stage popup = new Stage();
         popup.initModality(Modality.APPLICATION_MODAL);
         popup.initOwner(primaryStage);
         Label label = new Label(message);
         Button ok = new Button("OK");
-        ok.setOnAction(event -> popup.close());
         label.relocate(100, 50);
         ok.relocate(100, 100);
         Group group = new Group();
         group.getChildren().addAll(label, ok);
         Scene dialogScene = new Scene(group, 300, 150);
+        ok.setOnAction(event -> popup.close());
+        dialogScene.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER)
+                popup.close();
+        });
         popup.setScene(dialogScene);
         popup.show();
     }
 
-    public void printError(ErrorMode error) {
+    public void printError(Message error) {
         if (error == null)
             return;
-        errorPopup(error.getMessage());
+        popup(error.getMessage());
     }
 
     private void showUser(Player player) {

@@ -1,6 +1,6 @@
 package view;
 
-public enum ErrorMode {
+public enum Message {
     CARD_ID_INVALID("card id is invalid."),
     NO_CARD_IS_SELECTED("No card is selected."),
     USERNAME_IS_TAKEN("this username is taken."),
@@ -47,6 +47,7 @@ public enum ErrorMode {
     COOLDOWN("hero is in cooldown."),
     NO_SPELL_SELECTED("you must choose a spell."),
     STUNNED("attacker is stunned."),
+    PASSWORD_EMPTY("password is empty."),
     INVALID_COMMAND("invalid command");
 
     private String message;
@@ -55,7 +56,7 @@ public enum ErrorMode {
         return message;
     }
 
-    ErrorMode(String message) {
+    Message(String message) {
         this.message = message;
     }
 }

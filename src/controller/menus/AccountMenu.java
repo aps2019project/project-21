@@ -1,10 +1,8 @@
 package controller.menus;
 
-import controller.request.AccountMenuRequest;
 import models.Player;
-import view.ErrorMode;
 import view.MainMenuView;
-import view.View;
+import view.Message;
 
 public class AccountMenu extends Menu {
     private static AccountMenu instance = new AccountMenu();
@@ -16,109 +14,65 @@ public class AccountMenu extends Menu {
     private AccountMenu() {
     }
 
-    void main() {
-
-        request = new AccountMenuRequest();
-
-        request.getNewCommand();
-
-        request.extractType();
-
-        handleRequest();
-    }
-
-    public void handleRequest() {
-        switch (request.getType()) {
-            case CREATE_ACCOUNT:
-//                createAccount();
-                break;
-            case LOGIN:
-//                login();
-                break;
-            case SHOW_LEADERBOARD:
-                view.showLeaderBoard();
-                break;
-            case SAVE:
-                save();
-                break;
-            case LOGOUT:
-//                logout();
-                break;
-            case MAIN_MENU:
-                gotoMainMenu();
-                break;
-            case HESOYAM:
-                hesoyam();
-                break;
-            case BACK:
-                break;
-            case EXIT:
-                exit();
-                break;
-            case INVALID:
-                invalidCommand();
-                break;
-            case SHOW_MATCH_HISTORY:
-                showMatchHistory();
-        }
-    }
-
     public void login(String username, String password) {
-//        String username = request.getCommandArguments().get(0);
         if (!Player.hasThisPlayer(username)) {
-            View.getInstance().printError(ErrorMode.INVALID_USERNAME);
+            view.printError(Message.INVALID_USERNAME);
             return;
         }
-//        System.out.println("Password: ");
-//        String password = InputScanner.nextLine();
-        boolean isLoginSuccessful = Player.login(username, password);
-        if (!isLoginSuccessful)
-            view.printError(ErrorMode.LOGIN_FAILED);
-        else
-            view.printError(ErrorMode.LOGIN_SUCCESSFUL);
+        if (!Player.login(username, password))
+            view.printError(Message.LOGIN_FAILED);
     }
 
     public void createAccount(String username, String password) {
-        if (Player.getCurrentPlayer() != null) {
-            view.printError(ErrorMode.YOU_MUST_LOGOUT);
+        if (Player.hasAnyoneLoggedIn()) {
+            view.printError(Message.YOU_MUST_LOGOUT);
             return;
         }
-        //String username = request.getCommandArguments().get(0);
+        if (username.equals("")) {
+            view.printError(Message.INVALID_USERNAME);
+            return;
+        }
+        if (password.equals("")) {
+            view.printError(Message.PASSWORD_EMPTY);
+            return;
+        }
         if (Player.hasThisPlayer(username)) {
-            View.getInstance().printError(ErrorMode.USERNAME_IS_TAKEN);
+            view.printError(Message.USERNAME_IS_TAKEN);
             return;
         }
-//        System.out.println("Set Password:");
-//        String password = InputScanner.nextLine();
         Player.createAccount(username, password);
     }
 
     public void logout() {
-        Player.setCurrentPlayer(null);
+        Player.logout();
     }
 
     public void save() {
-        if (Player.getCurrentPlayer() == null) {
-            view.printError(ErrorMode.YOU_MUST_LOG_IN);
+        if (!Player.hasAnyoneLoggedIn()) {
+            view.printError(Message.YOU_MUST_LOG_IN);
             return;
         }
         Player.savePlayer();
     }
 
     public void hesoyam() {
-        if (Player.getCurrentPlayer() != null)
-            Player.getCurrentPlayer().setDrake(Integer.MAX_VALUE);
+        if (Player.hasAnyoneLoggedIn())
+            Player.hesoyam();
     }
 
     public void gotoMainMenu() {
-        if (Player.getCurrentPlayer() == null) {
-            view.errorPopup("YOU MUST LOGIN");
+        if (!Player.hasAnyoneLoggedIn()) {
+            view.printError(Message.YOU_MUST_LOG_IN);
             return;
         }
         MainMenuView.getInstance().run();
     }
 
     public void showMatchHistory() {
+        if (!Player.hasAnyoneLoggedIn()) {
+            view.printError(Message.YOU_MUST_LOG_IN);
+            return;
+        }
         view.showMatchHistory(Player.getCurrentPlayer());
     }
 }

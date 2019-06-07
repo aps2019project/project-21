@@ -7,7 +7,7 @@ import models.Item.Collectable;
 import models.Item.Flag;
 import models.Player;
 import models.card.*;
-import view.ErrorMode;
+import view.Message;
 import view.View;
 
 import java.time.LocalDateTime;
@@ -95,7 +95,7 @@ public class Match {
 
     public void select(String cardID) {
         if (!selectAttacker(cardID) && !selectCollectable(cardID) && !selectSpell(cardID))
-            view.printError(ErrorMode.CARD_OR_COLLECTABLE_ID_INVALID);
+            view.printError(Message.CARD_OR_COLLECTABLE_ID_INVALID);
     }
 
     public int getTurn() {
@@ -110,29 +110,29 @@ public class Match {
 
     public void moveCard(int x, int y) {
         if (!isAnyCardSelected()) {
-            view.printError(ErrorMode.NO_CARD_IS_SELECTED);
+            view.printError(Message.NO_CARD_IS_SELECTED);
             return;
         }
         Cell target = getCell(x, y);
         if (target == null)
             return;
         if (!isMoveTargetValid(target)) {
-            view.printError(ErrorMode.INVALID_MOVE_TARGET);
+            view.printError(Message.INVALID_MOVE_TARGET);
             return;
         }
         if (!isSelectedCardAttacker())
             return;
         Attacker attacker = (Attacker) selectedCard;
         if (!attacker.canMove()) {
-            view.printError(ErrorMode.ATTACKER_CANT_MOVE);
+            view.printError(Message.ATTACKER_CANT_MOVE);
             return;
         }
         if (isPathClosed(attacker.getCurrentCell(), target)) {
-            view.printError(ErrorMode.INVALID_MOVE_TARGET);
+            view.printError(Message.INVALID_MOVE_TARGET);
             return;
         }
         if (attacker.isStunned()) {
-            view.printError(ErrorMode.STUNNED);
+            view.printError(Message.STUNNED);
             return;
         }
 
@@ -166,16 +166,16 @@ public class Match {
 
     public void attack(String oppID) {
         if (!isAnyCardSelected()) {
-            view.printError(ErrorMode.NO_CARD_IS_SELECTED);
+            view.printError(Message.NO_CARD_IS_SELECTED);
             return;
         }
         Attacker target = getGroundedOppAttacker(oppID);
         if (target == null) {
-            view.printError(ErrorMode.INVALID_CARD_ID);
+            view.printError(Message.INVALID_CARD_ID);
             return;
         }
         if (!isSelectedCardAttacker()) {
-            view.printError(ErrorMode.NO_CARD_IS_SELECTED);
+            view.printError(Message.NO_CARD_IS_SELECTED);
             return;
         }
         Attacker attacker = (Attacker) selectedCard;
@@ -184,11 +184,11 @@ public class Match {
             return;
         }
         if (!isInRangeOfAttack(target, attacker)) {
-            view.printError(ErrorMode.UNAVAILABLE_FOR_ATTACK);
+            view.printError(Message.UNAVAILABLE_FOR_ATTACK);
             return;
         }
         if (attacker.isStunned()) {
-            view.printError(ErrorMode.STUNNED);
+            view.printError(Message.STUNNED);
             return;
         }
         target.decreaseHP(attacker.getAP());
@@ -255,11 +255,11 @@ public class Match {
 
     public void attackCombo(String opponentCardID, String[] myCardIDs) {  // test
         if (!isAnyCardSelected()) {
-            view.printError(ErrorMode.NO_CARD_IS_SELECTED);
+            view.printError(Message.NO_CARD_IS_SELECTED);
             return;
         }
         if (!(selectedCard instanceof Minion)) {
-            view.printError(ErrorMode.SELECTED_CARD_NOT_MINION);
+            view.printError(Message.SELECTED_CARD_NOT_MINION);
             return;
         }
         Minion selectedMinion = (Minion) selectedCard;
@@ -267,21 +267,21 @@ public class Match {
         for (String myCardID : myCardIDs) {
             Minion comboMinion = info[turn].getGroundedMinionByID(myCardID);
             if (comboMinion == null) {
-                view.printError(ErrorMode.SELECTED_CARD_NOT_MINION);
+                view.printError(Message.SELECTED_CARD_NOT_MINION);
                 return;
             }
             if (!comboMinion.isCombo()) {
-                view.printError(ErrorMode.NOT_COMBO);
+                view.printError(Message.NOT_COMBO);
                 return;
             }
         }
         Attacker target = getGroundedOppAttacker(opponentCardID);
         if (target == null) {
-            view.printError(ErrorMode.INVALID_CARD_ID);
+            view.printError(Message.INVALID_CARD_ID);
             return;
         }
         if (!isInRangeOfOneOfThese(target, minions)) {
-            view.printError(ErrorMode.UNAVAILABLE_FOR_ATTACK);
+            view.printError(Message.UNAVAILABLE_FOR_ATTACK);
             return;
         }
         target.decreaseHP(selectedMinion.getAP());
@@ -305,21 +305,21 @@ public class Match {
 
     public void useSpell(int x, int y) {
         if (!isAnyCardSelected()) {
-            view.printError(ErrorMode.NO_CARD_IS_SELECTED);
+            view.printError(Message.NO_CARD_IS_SELECTED);
             return;
         }
         if (!isSelectedCardSpell()) {
-            view.printError(ErrorMode.NO_SPELL_SELECTED);
+            view.printError(Message.NO_SPELL_SELECTED);
             return;
         }
         Cell target = getCell(x, y);
         if (target == null) {
-            view.printError(ErrorMode.INVALID_CELL);
+            view.printError(Message.INVALID_CELL);
             return;
         }
         Spell spell = (Spell) selectedCard;
         if (!info[turn].hasManaForThis(spell)) {
-            view.printError(ErrorMode.HAVE_NOT_MANA);
+            view.printError(Message.HAVE_NOT_MANA);
             return;
         }
         spell.castSpell(this, getThisTurnsPlayer(), target);
@@ -329,11 +329,11 @@ public class Match {
 
     public void useCollectable(int x, int y) {
         if (!isAnyCardSelected()) {
-            view.printError(ErrorMode.NO_CARD_IS_SELECTED);
+            view.printError(Message.NO_CARD_IS_SELECTED);
             return;
         }
         if (!(selectedCard instanceof Collectable)) {
-            view.printError(ErrorMode.NO_COLLECTABLE_SELECTED);
+            view.printError(Message.NO_COLLECTABLE_SELECTED);
             return;
         }
         Collectable collectable = (Collectable) selectedCard;
@@ -345,30 +345,30 @@ public class Match {
 
     public void useSpecialPower(int x, int y) {
         if (!isAnyCardSelected()) {
-            view.printError(ErrorMode.NO_CARD_IS_SELECTED);
+            view.printError(Message.NO_CARD_IS_SELECTED);
             return;
         }
         if (!isSelectedCardAttacker()) {
-            view.printError(ErrorMode.NO_ATTACKER_SELECTED);
+            view.printError(Message.NO_ATTACKER_SELECTED);
             return;
         }
         Attacker attacker = (Attacker) selectedCard;
         if (!attacker.hasSpecialPower()) {
-            view.printError(ErrorMode.HASNT_SPECIAL);
+            view.printError(Message.HASNT_SPECIAL);
             return;
         }
         Cell target = getCell(x, y);
         if (target == null) {
-            view.printError(ErrorMode.INVALID_CELL);
+            view.printError(Message.INVALID_CELL);
             return;
         }
         if (!info[turn].hasManaForThis(attacker.getSpecialPower())) {
-            view.printError(ErrorMode.HAVE_NOT_MANA);
+            view.printError(Message.HAVE_NOT_MANA);
             return;
         }
         if (attacker instanceof Hero)
             if (((Hero) attacker).getCooldown() > 0) {
-                view.printError(ErrorMode.COOLDOWN);
+                view.printError(Message.COOLDOWN);
                 return;
             }
         attacker.castSpecialPower(this, getThisTurnsPlayer(), target);
@@ -382,17 +382,17 @@ public class Match {
     public void insertCard(String cardName, int x, int y) {
         Attacker attacker = info[turn].getHand().getAttacker(cardName);
         if (attacker == null) {
-            view.printError(ErrorMode.NO_CARD_WITH_THIS_NAME);
+            view.printError(Message.NO_CARD_WITH_THIS_NAME);
             return;
         }
         Cell cell = getCell(x, y);
         if (cell == null || !cell.isEmpty() || !isInsertNear(cell)) {
-            view.printError(ErrorMode.INVALID_CELL);
+            view.printError(Message.INVALID_CELL);
             return;
         }
 
         if (!info[turn].hasManaForThis(attacker)) {
-            view.printError(ErrorMode.HAVE_NOT_MANA);
+            view.printError(Message.HAVE_NOT_MANA);
             return;
         }
 
@@ -713,7 +713,7 @@ public class Match {
 
     public void showSelectedCard() {
         if (selectedCard == null) {
-            view.printError(ErrorMode.NO_CARD_IS_SELECTED);
+            view.printError(Message.NO_CARD_IS_SELECTED);
             return;
         }
         view.showCardInfo(selectedCard);
@@ -781,7 +781,7 @@ public class Match {
     public void showCardInfoInGraveyard(String cardID) {
         Card card = info[turn].getGraveyardCard(cardID);
         if (card == null) {
-            view.printError(ErrorMode.CARD_ID_INVALID);
+            view.printError(Message.CARD_ID_INVALID);
             return;
         }
         view.printGraveyardCard(card);

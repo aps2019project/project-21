@@ -8,7 +8,7 @@ import models.match.GameMode;
 import models.match.GameType;
 import models.match.GoalMode;
 import models.match.Match;
-import view.ErrorMode;
+import view.Message;
 import view.View;
 
 import java.util.regex.Matcher;
@@ -97,7 +97,7 @@ public class MainMenu extends Menu {
         this.gameType = null;
         this.second = null;
         if (!Player.getCurrentPlayer().hasAValidMainDeck()) {
-            view.printError(ErrorMode.MAIN_DECK_IS_INVALID);
+            view.printError(Message.MAIN_DECK_IS_INVALID);
             return;
         }
         if (createNewMatch()) {
@@ -108,7 +108,7 @@ public class MainMenu extends Menu {
                 return;
             }
             if (!second.hasAValidMainDeck()) {
-                view.printError(ErrorMode.HIS_MAIN_DECK_INVALID);
+                view.printError(Message.HIS_MAIN_DECK_INVALID);
                 return;
             }
             Match match = new Match(Player.getCurrentPlayer(), second, gameMode, gameType, goalMode, flagCount);
@@ -159,7 +159,7 @@ public class MainMenu extends Menu {
         }
         AIPlayer aiPlayer = AIPlayer.getAIPlayer(Integer.parseInt(num));
         if (aiPlayer == null) {
-            View.getInstance().printError(ErrorMode.AIPLAYER_IS_NULL);
+            View.getInstance().printError(Message.AIPLAYER_IS_NULL);
             return false;
         }
         second = aiPlayer;
@@ -187,7 +187,7 @@ public class MainMenu extends Menu {
         int aiID = Integer.parseInt(matcher.group(1));
         AIPlayer aiPlayer = AIPlayer.getAIPlayer(aiID);
         if (aiPlayer == null) {
-            view.printError(ErrorMode.AIPLAYER_IS_NULL);
+            view.printError(Message.AIPLAYER_IS_NULL);
             return false;
         }
         GoalMode goalMode;

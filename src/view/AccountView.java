@@ -1,18 +1,24 @@
 package view;
 
 import controller.menus.AccountMenu;
+import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import models.Player;
 
 import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AccountView {
     private static AccountView instance = new AccountView();
@@ -26,68 +32,119 @@ public class AccountView {
 
     private Group root = new Group();
     private Scene scene = new Scene(root, 1500, 1000);
-    private VBox accountViewMenuItems = new VBox();
-    private TextField userNameTextFilled = new TextField();
-    private PasswordField passwordTextFilled = new PasswordField();
-    private Button mainMenuButton = new Button("MAIN MENU");
-    private Button createAccountButton = new Button("CREATE ACCOUNT");
-    private Button loginButton = new Button("LOGIN");
-    private Button logoutButton = new Button("LOGOUT");
-    private Button exitButton = new Button("EXIT");
+    private VBox beforeLoginOptions = new VBox();
+    private VBox afterLoginOptions = new VBox();
+    private TextField username = new TextField();
+    private PasswordField password = new PasswordField();
+    private Button gotoMainMenu = new Button("MAIN MENU");
+    private Button createAccount = new Button("CREATE ACCOUNT");
+    private Button login = new Button("LOGIN");
+    private Button logout = new Button("LOGOUT");
+    private Button exit = new Button("EXIT");
+    private Button save = new Button("SAVE");
+    private Button hesoyam = new Button("HESOYAM");
+    private Button showHistory = new Button("SHOW HISTORY");
+    private Label currentPlayer = new Label("");
 
-    void run(Stage primaryStage) {
-
+    void run() {
         View.getInstance().setScene(scene);
-        accountViewMenuItems.relocate(100, 100);
-
-        userNameTextFilled.setPromptText("USERNAME");
-        passwordTextFilled.setPromptText("PASSWORD");
-        userNameTextFilled.relocate(200, 200);
-        passwordTextFilled.relocate(200, 260);
-
-        accountViewMenuItems.getChildren().addAll(mainMenuButton, createAccountButton,
-                loginButton, logoutButton, exitButton, userNameTextFilled, passwordTextFilled);
-        accountViewMenuItems.setSpacing(10);
-
-        mainMenuButton.setOnAction(event -> AccountMenu.getInstance().gotoMainMenu());
-
-        createAccountButton.setOnAction(event -> AccountMenu.getInstance().createAccount(userNameTextFilled.getText(), passwordTextFilled.getText()));
-
-        loginButton.setOnAction(event -> AccountMenu.getInstance().login(userNameTextFilled.getText(), passwordTextFilled.getText()));
-
-        logoutButton.setOnAction(event -> AccountMenu.getInstance().logout());
-
-        exitButton.setOnAction(event -> primaryStage.close());
 
         setBackground();
 
+        draw();
+
         handleButtons();
 
-        root.getChildren().addAll(accountViewMenuItems);
+        setOnActions();
+
+        handleChanges();
+
+        root.getChildren().add(beforeLoginOptions);
+    }
+
+    private void draw() {
+        beforeLoginOptions.getChildren().addAll(createAccount, login, exit, username, password);
+        beforeLoginOptions.relocate(100, 100);
+        beforeLoginOptions.setSpacing(15);
+
+        afterLoginOptions.getChildren().addAll(gotoMainMenu, showHistory, save, logout, hesoyam, currentPlayer);
+        afterLoginOptions.relocate(100, 100);
+        afterLoginOptions.setSpacing(15);
+
+        username.setPromptText("USERNAME");
+        password.setPromptText("PASSWORD");
+        username.relocate(200, 200);
+        password.relocate(200, 260);
+        currentPlayer.setTextFill(Color.ORANGE);
+        currentPlayer.setFont(Font.font(15));
+    }
+
+    private void setOnActions() {
+        gotoMainMenu.setOnAction(event -> AccountMenu.getInstance().gotoMainMenu());
+        createAccount.setOnAction(event -> AccountMenu.getInstance()
+                .createAccount(username.getText(), password.getText()));
+        password.setOnAction(event -> AccountMenu.getInstance()
+                .login(username.getText(), password.getText()));
+        login.setOnAction(event -> AccountMenu.getInstance()
+                .login(username.getText(), password.getText()));
+        logout.setOnAction(event -> AccountMenu.getInstance().logout());
+        showHistory.setOnAction(event -> AccountMenu.getInstance().showMatchHistory());
+        save.setOnAction(event -> AccountMenu.getInstance().save());
+        hesoyam.setOnAction(event -> AccountMenu.getInstance().hesoyam());
+        exit.setOnAction(event -> View.getInstance().exit());
     }
 
     private void handleButtons() {
-        for (Node node : accountViewMenuItems.getChildren()) {
+        List<Node> nodes = new ArrayList<>(beforeLoginOptions.getChildren());
+        nodes.addAll(afterLoginOptions.getChildren());
+        for (Node node : nodes)
             if (node instanceof Button) {
                 Button button = (Button) node;
-                button.setOnMouseEntered(event -> button.setTranslateX(20));
-                button.setOnMouseExited(event -> button.setTranslateX(0));
+                button.setOnMouseEntered(event -> {
+                    button.setTranslateX(20);
+                    button.setTranslateY(5);
+                });
+                button.setOnMouseExited(event -> {
+                    button.setTranslateX(0);
+                    button.setTranslateY(0);
+                });
                 button.setStyle("-fx-background-color: transparent; -fx-text-fill: #c2c2c2;");
             }
-        }
-
     }
 
     private void setBackground() {
         try {
-            ImageView background = new ImageView(new Image(new FileInputStream("src/assets/background.jpg")));
+            ImageView background = new ImageView(new Image(new FileInputStream("src\\assets\\background.jpg")));
             background.fitWidthProperty().bind(scene.widthProperty());
             background.fitHeightProperty().bind(scene.heightProperty());
 
             root.getChildren().add(background);
-
         } catch (Exception e) {
             View.printThrowable(e);
         }
+    }
+
+    private void handleChanges() {
+        AnimationTimer handleChanges = new AnimationTimer() {
+            long last;
+
+            @Override
+            public void handle(long now) {
+                if (now - last > 100) {
+                    if (Player.hasAnyoneLoggedIn()) {
+                        currentPlayer.setText(Player.getCurrentPlayer().getUsername());
+                        root.getChildren().remove(beforeLoginOptions);
+                        if (!root.getChildren().contains(afterLoginOptions))
+                            root.getChildren().add(afterLoginOptions);
+                    } else {
+                        root.getChildren().remove(afterLoginOptions);
+                        if (!root.getChildren().contains(beforeLoginOptions))
+                            root.getChildren().add(beforeLoginOptions);
+                    }
+                    last = now;
+                }
+            }
+        };
+        handleChanges.start();
     }
 }
