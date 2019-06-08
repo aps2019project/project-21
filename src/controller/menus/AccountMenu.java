@@ -1,7 +1,6 @@
 package controller.menus;
 
 import models.Player;
-import view.MainMenuView;
 import view.Message;
 
 public class AccountMenu extends Menu {
@@ -58,14 +57,6 @@ public class AccountMenu extends Menu {
     public void hesoyam() {
         if (Player.hasAnyoneLoggedIn())
             Player.hesoyam();
-    }
-
-    public void gotoMainMenu() {
-        if (!Player.hasAnyoneLoggedIn()) {
-            view.printError(Message.YOU_MUST_LOG_IN);
-            return;
-        }
-        MainMenuView.getInstance().run();
     }
 
     public void showMatchHistory() {

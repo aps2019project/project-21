@@ -1,6 +1,5 @@
 package controller.menus;
 
-import controller.request.ShopMenuRequest;
 import models.Item.Usable;
 import models.Player;
 import models.card.Card;
@@ -17,55 +16,6 @@ public class ShopMenu extends Menu {
 
     private ShopMenu() {
 
-    }
-
-    public void main() {
-        if (showMenu) {
-            showMenu();
-            showMenu = false;
-        }
-
-        request = new ShopMenuRequest();
-
-        request.getNewCommand();
-
-        request.extractType();
-
-        switch (request.getType()) {
-            case SEARCH:
-                search();
-                break;
-            case SEARCH_COLLECTION:
-                searchCollection();
-                break;
-            case SHOW_COLLECTION:
-                showCollection();
-                break;
-            case SHOW:
-                show();
-                break;
-            case SELL:
-                sell();
-                break;
-            case BUY:
-                buy();
-                break;
-            case HELP:
-                showMenu();
-                break;
-            case SHOW_MENU:
-                showMenu();
-                break;
-            case BACK:
-                MenuManager.getInstance().gotoMainMenu();
-                break;
-            case EXIT:
-                exit();
-                break;
-            case INVALID:
-                invalidCommand();
-                break;
-        }
     }
 
     private void showCollection() {
@@ -128,9 +78,5 @@ public class ShopMenu extends Menu {
 
     private void show() {
         view.showShop();
-    }
-
-    protected void showMenu() {
-        view.showMenu("Shop");
     }
 }

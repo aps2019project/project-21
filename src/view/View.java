@@ -40,11 +40,19 @@ public class View {
 
     public void run() {
         primaryStage.setTitle("Duelyst");
-        AccountView.getInstance().run();
+        primaryStage.setMaximized(true);
+        Player.login("a", "a");
+        MainMenuView.getInstance().run();
+//        ShopView.getInstance().run();
     }
+
 
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
+    }
+
+    public Stage getPrimaryStage() {
+        return primaryStage;
     }
 
     void setScene(Scene scene) {
@@ -521,9 +529,9 @@ public class View {
     }
 
     public static void printThrowable(Throwable throwable) {
-//        System.out.println(e.getMessage());
-//        for (StackTraceElement s : e.getStackTrace())
-//            System.out.println(s);
+        System.out.println(throwable.getMessage());
+        for (StackTraceElement s : throwable.getStackTrace())
+            System.out.println(s);
     }
 
     public void showMatchResults(Match match) {

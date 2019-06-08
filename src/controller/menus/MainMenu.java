@@ -1,7 +1,6 @@
 package controller.menus;
 
 import controller.InputScanner;
-import controller.request.MainMenuRequest;
 import models.AIPlayer;
 import models.Player;
 import models.match.GameMode;
@@ -30,64 +29,12 @@ public class MainMenu extends Menu {
 
     }
 
-    public void main() {
-        if (showMenu) {
-            showMenu();
-            showMenu = false;
-        }
-
-        request = new MainMenuRequest();
-
-        request.getNewCommand();
-
-        request.extractType();
-
-        switch (request.getType()) {
-            case COLLECTION:
-                collection();
-                break;
-            case SHOP:
-                shop();
-                break;
-            case BATTLE:
-                battle();
-                break;
-            case BACK:
-                back();
-                break;
-            case HELP:
-                help();
-                break;
-            case SHOW_MENU:
-                showMenu();
-                break;
-            case EXIT:
-                exit();
-                break;
-            case INVALID:
-                invalidCommand();
-                break;
-        }
-    }
-
-    private void help() {
-
-    }
-
-    private void shop() {
+    private void gotoShop() {
         MenuManager.getInstance().gotoShop();
     }
 
-    private void collection() {
+    private void gotoCollection() {
         MenuManager.getInstance().gotoCollection();
-    }
-
-    protected void showMenu() {
-        view.showMenu("MainMenu");
-    }
-
-    private void back() {
-        MenuManager.getInstance().gotoAccount();
     }
 
     private void battle() {
