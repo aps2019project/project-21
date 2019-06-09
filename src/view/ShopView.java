@@ -1,6 +1,7 @@
 package view;
 
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -14,6 +15,8 @@ import models.card.Minion;
 import models.card.Spell;
 
 import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ShopView {
     private static ShopView instance = new ShopView();
@@ -26,12 +29,16 @@ public class ShopView {
     }
 
     private int buttonSelect = 1;
-    private int minionType = 1;
+    private int cardType = 1;
     private Group root = new Group();
     private Scene scene = new Scene(root);
     private Button back = new Button("BACK");
     private Button myCollection = new Button("COLLECTION");
     private Button shop = new Button("SHOP");
+    private Button minion = new Button("MINION");
+    private Button hero = new Button("HERO");
+    private Button spell = new Button("SPELL");
+    private Button item = new Button("ITEM");
     private TilePane items = new TilePane();
     private ScrollPane scrollPane = new ScrollPane();
 
@@ -45,6 +52,8 @@ public class ShopView {
         setBackground();
 
         draw();
+
+        handleButtons();
 
         setOnActions();
     }
@@ -65,19 +74,25 @@ public class ShopView {
         myCollection.relocate(100, 200);
         shop.relocate(100, 100);
 
-        showMyCollection();
+        minion.relocate(900, 50);
+        hero.relocate(300, 50);
+        spell.relocate(500, 50);
+        item.relocate(700, 50);
 
-//        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-//        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        root.getChildren().addAll(myCollection, shop, back, scrollPane);
+
+
+        showCards();
+
+        root.getChildren().addAll(spell, hero, minion, item, myCollection, shop, back, scrollPane);
     }
 
-    private void showMyCollection() {
+    private void showCards() {
 
         items.setHgap(20);
         items.setVgap(30);
         items.setPrefColumns(5);
 
+        showByType();
 
 /*
         for (int i = 0; i < 20; i++)
@@ -106,7 +121,7 @@ public class ShopView {
     private void showByType() {
         if (buttonSelect == 1) {
             Player thisPlayer = Player.getCurrentPlayer();
-            switch (minionType) {
+            switch (cardType) {
                 case 1:
                     for (Minion minion : thisPlayer.getCollection().getMinions()) {
                         CardView.showCard(minion, items);
@@ -129,15 +144,78 @@ public class ShopView {
                     break;
             }
         } else {
-
+            switch (cardType) {
+                case 1:
+                    for (Minion minion : Minion.getMinions()) {
+                        CardView.showCard(minion, items);
+                    }
+                    break;
+                case 2:
+                    for (Hero hero : Hero.getHeroes()) {
+                        CardView.showCard(hero, items);
+                    }
+                    break;
+                case 3:
+                    for (Spell spell : Spell.getSpells()) {
+                        CardView.showCard(spell, items);
+                    }
+                    break;
+                case 4:
+                    for (Usable usable : Usable.getUsables()) {
+                        CardView.showCard(usable, items);
+                    }
+                    break;
+            }
         }
     }
 
-    private void showAllCards() {
-
-    }
 
     private void setOnActions() {
         back.setOnAction(event -> View.getInstance().back());
+
+        minion.setOnAction(event -> {
+            cardType = 1;
+        });
+        hero.setOnAction(event -> {
+            cardType = 2;
+        });
+        spell.setOnAction(event -> {
+            cardType = 3;
+        });
+        item.setOnAction(event -> {
+            cardType = 4;
+        });
+
+        myCollection.setOnAction(event -> {
+            if (buttonSelect != 1 ){
+                buttonSelect = 1;
+                items.getChildren().clear();
+                showCards();
+            }
+        });
+        shop.setOnAction(event -> {
+            if (buttonSelect != 2){
+                buttonSelect = 2;
+                items.getChildren().clear();
+                showCards();
+            }
+        });
+    }
+
+    private void handleButtons() {
+        List<Node> nodes = new ArrayList<>(root.getChildren());
+        for (Node node : nodes)
+            if (node instanceof Button) {
+                Button button = (Button) node;
+                button.setOnMouseEntered(event -> {
+                    button.setTranslateX(20);
+                    button.setTranslateY(5);
+                });
+                button.setOnMouseExited(event -> {
+                    button.setTranslateX(0);
+                    button.setTranslateY(0);
+                });
+                button.setStyle("-fx-background-color: transparent; -fx-text-fill: black;");
+            }
     }
 }
