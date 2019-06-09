@@ -87,13 +87,13 @@ public class ShopView {
     }
 
     private void showCards() {
+        items.getChildren().clear();
 
-        items.setHgap(20);
-        items.setVgap(30);
-        items.setPrefColumns(5);
+        items.setHgap(0);
+        items.setVgap(0);
+        items.setPrefColumns(3);
 
         showByType();
-
 /*
         for (int i = 0; i < 20; i++)
             try {
@@ -119,6 +119,7 @@ public class ShopView {
     }
 
     private void showByType() {
+        items.getChildren().clear();
         if (buttonSelect == 1) {
             Player thisPlayer = Player.getCurrentPlayer();
             switch (cardType) {

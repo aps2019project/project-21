@@ -7,7 +7,10 @@ import models.Item.Usable;
 import models.Player;
 import models.match.Cell;
 import models.match.Match;
+import view.View;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +39,11 @@ public class Card {
         this.name = name.replaceAll("\\s+", "_");
         this.price = price;
         this.manaCost = manaCost;
+        try {
+            this.cardImage = new ImageView(new Image(new FileInputStream("src\\assets\\cards\\Jasose_Torani.png")));
+        } catch (IOException ex){
+            View.printThrowable(ex);
+        }
     }
 
     {
