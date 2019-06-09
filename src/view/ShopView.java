@@ -7,7 +7,11 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
+import models.Item.Usable;
 import models.Player;
+import models.card.Hero;
+import models.card.Minion;
+import models.card.Spell;
 
 import java.io.FileInputStream;
 
@@ -21,7 +25,8 @@ public class ShopView {
     private ShopView() {
     }
 
-    private int buttonSelect = -1;
+    private int buttonSelect = 1;
+    private int minionType = 1;
     private Group root = new Group();
     private Scene scene = new Scene(root);
     private Button back = new Button("BACK");
@@ -58,7 +63,7 @@ public class ShopView {
     private void draw() {
         back.relocate(100, 300);
         myCollection.relocate(100, 200);
-        shop.relocate(100,100);
+        shop.relocate(100, 100);
 
         showMyCollection();
 
@@ -67,13 +72,11 @@ public class ShopView {
         root.getChildren().addAll(myCollection, shop, back, scrollPane);
     }
 
-    private void showMyCollection(){
+    private void showMyCollection() {
 
         items.setHgap(20);
         items.setVgap(30);
         items.setPrefColumns(5);
-
-        Player thisPlayer = Player.getCurrentPlayer();
 
 
 /*
@@ -100,7 +103,37 @@ public class ShopView {
 
     }
 
-    private void showAllCards(){
+    private void showByType() {
+        if (buttonSelect == 1) {
+            Player thisPlayer = Player.getCurrentPlayer();
+            switch (minionType) {
+                case 1:
+                    for (Minion minion : thisPlayer.getCollection().getMinions()) {
+                        CardView.showCard(minion, items);
+                    }
+                    break;
+                case 2:
+                    for (Hero hero : thisPlayer.getCollection().getHeroes()) {
+                        CardView.showCard(hero, items);
+                    }
+                    break;
+                case 3:
+                    for (Spell spell : thisPlayer.getCollection().getSpells()) {
+                        CardView.showCard(spell, items);
+                    }
+                    break;
+                case 4:
+                    for (Usable usable : thisPlayer.getCollection().getUsables()) {
+                        CardView.showCard(usable, items);
+                    }
+                    break;
+            }
+        } else {
+
+        }
+    }
+
+    private void showAllCards() {
 
     }
 

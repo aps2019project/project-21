@@ -193,7 +193,7 @@ public class Card {
         return cardImage;
     }
 
-    public ImageView getCardBackgroung(){
+    public ImageView getCardBackground(){
         return cardBackgroung;
     }
 
@@ -215,4 +215,6 @@ public class Card {
     public void setCardInGameView(Image image){
         cardInGameView.setImage(image);
     }
+
+
 }
