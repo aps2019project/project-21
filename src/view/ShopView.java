@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
+import javafx.scene.paint.Color;
 import models.Item.Usable;
 import models.Player;
 import models.card.Card;
@@ -19,6 +20,7 @@ import models.card.Minion;
 import models.card.Spell;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +55,7 @@ public class ShopView {
     private Button buySell = new Button("SELL");
     private Group searchedCard = new Group();
     private Label drake = new Label("DRAKE : " + Player.getCurrentPlayer().getDrake());
+    private ImageView[] button = new ImageView[10];
 
 
     void run() {
@@ -83,15 +86,48 @@ public class ShopView {
     }
 
     private void draw() {
-        back.relocate(100, 475);
-        myCollection.relocate(100, 350);
-        shop.relocate(100, 225);
-        drake.relocate(100, 100);
+        try {
+            for (int i = 0; i < 10; i++) {
+                button[i] = new ImageView(new Image(new FileInputStream
+                        ("C:\\project-21\\src\\assets\\button.png")));
+                if (i == 0){
+                    button[i].relocate(20,80);
+                } else if (i == 1){
+                    button[i].relocate(20,205);
+                } else if (i == 2){
+                    button[i].relocate(20,330);
+                } else if (i == 3){
+                    button[i].relocate(20,455);
+                }else if (i == 4){
+                    button[i].relocate(270,30);
+                }else if (i == 5){
+                    button[i].relocate(470,30);
+                }else if (i == 6){
+                    button[i].relocate(670,30);
+                }else if (i == 7){
+                    button[i].relocate(870,30);
+                }else if (i == 8){
+                    button[i].relocate(930,580);
+                    button[i].setScaleX(0.5);
+                }else {
+                    button[i].relocate(1090,580);
+                }
 
-        minion.relocate(900, 50);
-        hero.relocate(300, 50);
-        spell.relocate(500, 50);
-        item.relocate(700, 50);
+                root.getChildren().add(button[i]);
+            }
+        } catch (IOException ex){
+            View.printThrowable(ex);
+        }
+        back.relocate(50, 475);
+        myCollection.relocate(50, 350);
+        shop.relocate(50, 225);
+        drake.relocate(50, 100);
+        drake.setTextFill(Color.WHITE);
+
+        minion.relocate(930, 50);
+        hero.relocate(330, 50);
+        spell.relocate(530, 50);
+        item.relocate(730, 50);
 
 
         search.relocate(1000, 100);
@@ -107,7 +143,7 @@ public class ShopView {
     private void showCards() {
         items.getChildren().clear();
 
-        items.setHgap(20);
+        items.setHgap(10);
         items.setVgap(30);
         items.setPrefColumns(3);
 
@@ -117,7 +153,7 @@ public class ShopView {
         scrollPane.setPannable(true);
         scrollPane.relocate(200, 100);
         scrollPane.setMaxHeight(500);
-        scrollPane.setMaxWidth(700);
+        scrollPane.setMaxWidth(800);
         scrollPane.setStyle("-fx-background-color: transparent");
         scrollPane.setStyle("}.scroll-pane > .viewport {\n" +
                 "   -fx-background-color: transparent;}\n" +
@@ -294,6 +330,7 @@ public class ShopView {
                     if (mes.equals("Sell successful")) {
                         drake.setText("DRAKE : " + Player.getCurrentPlayer().getDrake());
                     }
+                    showCards();
                 }
             }
             root.getChildren().remove(searchedCard);

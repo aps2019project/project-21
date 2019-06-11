@@ -8,9 +8,9 @@
 
 .button {
     -fx-background-color: transparent;
-    -fx-text-fill: black;
+    -fx-text-fill: white;
 }
 
 .button:hover {
-    -fx-text-fill: red;
+    -fx-text-fill: black;
 }
