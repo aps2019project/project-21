@@ -7,6 +7,7 @@ import models.match.GameMode;
 import models.match.GameType;
 import models.match.GoalMode;
 import models.match.Match;
+import view.BattleView;
 import view.Message;
 import view.View;
 
@@ -159,7 +160,8 @@ public class MainMenu extends Menu {
     public void startMatch() {
         Match match = new Match(Player.getCurrentPlayer(), second, gameMode, gameType, goalMode, flagCount);
         Match.setCurrentMatch(match);
-        //  view.goto battle
+        BattleView battleView = new BattleView();
+        battleView.run();
     }
 
     public void startStoryMatch(int num) {

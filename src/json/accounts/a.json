@@ -59,9 +59,7 @@
                 "price": 1600,
                 "manaCost": 2,
                 "currentCell": null,
-                "cardImage": null,
-                "cardBackgroung": null,
-                "cardInGameView": null
+                "imagePath": null
               }
             },
             {
@@ -101,9 +99,7 @@
                 "price": 1500,
                 "manaCost": 4,
                 "currentCell": null,
-                "cardImage": null,
-                "cardBackgroung": null,
-                "cardInGameView": null
+                "imagePath": null
               }
             },
             {
@@ -139,9 +135,7 @@
                 "price": 2100,
                 "manaCost": 0,
                 "currentCell": null,
-                "cardImage": null,
-                "cardBackgroung": null,
-                "cardInGameView": null
+                "imagePath": null
               }
             },
             {
@@ -181,9 +175,7 @@
                 "price": 1750,
                 "manaCost": 9,
                 "currentCell": null,
-                "cardImage": null,
-                "cardBackgroung": null,
-                "cardInGameView": null
+                "imagePath": null
               }
             },
             {
@@ -220,9 +212,7 @@
                 "price": 250,
                 "manaCost": 1,
                 "currentCell": null,
-                "cardImage": null,
-                "cardBackgroung": null,
-                "cardInGameView": null
+                "imagePath": null
               }
             },
             {
@@ -258,9 +248,7 @@
                 "price": 1500,
                 "manaCost": 2,
                 "currentCell": null,
-                "cardImage": null,
-                "cardBackgroung": null,
-                "cardInGameView": null
+                "imagePath": null
               }
             },
             {
@@ -306,9 +294,7 @@
                   "price": 0,
                   "manaCost": 0,
                   "currentCell": null,
-                  "cardImage": null,
-                  "cardBackgroung": null,
-                  "cardInGameView": null
+                  "imagePath": null
                 },
                 "appliedEffects": [],
                 "attackRange": 3,
@@ -333,9 +319,7 @@
                   "flag": null,
                   "currentAttacker": null
                 },
-                "cardImage": null,
-                "cardBackgroung": null,
-                "cardInGameView": null
+                "imagePath": "src\\assets\\cards\\Rakhsh.jpg"
               }
             },
             {
@@ -381,9 +365,7 @@
                   "price": 0,
                   "manaCost": 0,
                   "currentCell": null,
-                  "cardImage": null,
-                  "cardBackgroung": null,
-                  "cardInGameView": null
+                  "imagePath": null
                 },
                 "appliedEffects": [],
                 "attackRange": 3,
@@ -408,9 +390,7 @@
                   "flag": null,
                   "currentAttacker": null
                 },
-                "cardImage": null,
-                "cardBackgroung": null,
-                "cardInGameView": null
+                "imagePath": "src\\assets\\cards\\Rakhsh.jpg"
               }
             },
             {
@@ -456,9 +436,7 @@
                   "price": 0,
                   "manaCost": 0,
                   "currentCell": null,
-                  "cardImage": null,
-                  "cardBackgroung": null,
-                  "cardInGameView": null
+                  "imagePath": null
                 },
                 "appliedEffects": [],
                 "attackRange": -1,
@@ -483,9 +461,7 @@
                   "flag": null,
                   "currentAttacker": null
                 },
-                "cardImage": null,
-                "cardBackgroung": null,
-                "cardInGameView": null
+                "imagePath": "src\\assets\\cards\\Rakhsh.jpg"
               }
             },
             {
@@ -520,9 +496,7 @@
                   "flag": null,
                   "currentAttacker": null
                 },
-                "cardImage": null,
-                "cardBackgroung": null,
-                "cardInGameView": null
+                "imagePath": "src\\assets\\cards\\Rakhsh.jpg"
               }
             },
             {
@@ -557,9 +531,7 @@
                   "flag": null,
                   "currentAttacker": null
                 },
-                "cardImage": null,
-                "cardBackgroung": null,
-                "cardInGameView": null
+                "imagePath": "src\\assets\\cards\\Rakhsh.jpg"
               }
             },
             {
@@ -615,9 +587,7 @@
                   "price": 0,
                   "manaCost": 0,
                   "currentCell": null,
-                  "cardImage": null,
-                  "cardBackgroung": null,
-                  "cardInGameView": null
+                  "imagePath": null
                 },
                 "appliedEffects": [],
                 "attackRange": -1,
@@ -642,9 +612,7 @@
                   "flag": null,
                   "currentAttacker": null
                 },
-                "cardImage": null,
-                "cardBackgroung": null,
-                "cardInGameView": null
+                "imagePath": "src\\assets\\cards\\Rakhsh.jpg"
               }
             },
             {
@@ -679,9 +647,7 @@
                   "flag": null,
                   "currentAttacker": null
                 },
-                "cardImage": null,
-                "cardBackgroung": null,
-                "cardInGameView": null
+                "imagePath": "src\\assets\\cards\\Rakhsh.jpg"
               }
             },
             {
@@ -725,9 +691,7 @@
                   "price": 0,
                   "manaCost": 0,
                   "currentCell": null,
-                  "cardImage": null,
-                  "cardBackgroung": null,
-                  "cardInGameView": null
+                  "imagePath": null
                 },
                 "appliedEffects": [],
                 "attackRange": 5,
@@ -752,9 +716,7 @@
                   "flag": null,
                   "currentAttacker": null
                 },
-                "cardImage": null,
-                "cardBackgroung": null,
-                "cardInGameView": null
+                "imagePath": "src\\assets\\cards\\Rakhsh.jpg"
               }
             },
             {
@@ -789,9 +751,7 @@
                   "flag": null,
                   "currentAttacker": null
                 },
-                "cardImage": null,
-                "cardBackgroung": null,
-                "cardInGameView": null
+                "imagePath": "src\\assets\\cards\\Rakhsh.jpg"
               }
             },
             {
@@ -826,9 +786,7 @@
                   "flag": null,
                   "currentAttacker": null
                 },
-                "cardImage": null,
-                "cardBackgroung": null,
-                "cardInGameView": null
+                "imagePath": "src\\assets\\cards\\Rakhsh.jpg"
               }
             },
             {
@@ -874,9 +832,7 @@
                   "price": 0,
                   "manaCost": 0,
                   "currentCell": null,
-                  "cardImage": null,
-                  "cardBackgroung": null,
-                  "cardInGameView": null
+                  "imagePath": null
                 },
                 "appliedEffects": [],
                 "attackRange": 3,
@@ -901,9 +857,7 @@
                   "flag": null,
                   "currentAttacker": null
                 },
-                "cardImage": null,
-                "cardBackgroung": null,
-                "cardInGameView": null
+                "imagePath": "src\\assets\\cards\\Rakhsh.jpg"
               }
             },
             {
@@ -949,9 +903,7 @@
                   "price": 0,
                   "manaCost": 0,
                   "currentCell": null,
-                  "cardImage": null,
-                  "cardBackgroung": null,
-                  "cardInGameView": null
+                  "imagePath": null
                 },
                 "appliedEffects": [],
                 "attackRange": 3,
@@ -976,9 +928,7 @@
                   "flag": null,
                   "currentAttacker": null
                 },
-                "cardImage": null,
-                "cardBackgroung": null,
-                "cardInGameView": null
+                "imagePath": "src\\assets\\cards\\Rakhsh.jpg"
               }
             },
             {
@@ -1024,9 +974,7 @@
                   "price": 0,
                   "manaCost": 0,
                   "currentCell": null,
-                  "cardImage": null,
-                  "cardBackgroung": null,
-                  "cardInGameView": null
+                  "imagePath": null
                 },
                 "appliedEffects": [],
                 "attackRange": 3,
@@ -1051,9 +999,7 @@
                   "flag": null,
                   "currentAttacker": null
                 },
-                "cardImage": null,
-                "cardBackgroung": null,
-                "cardInGameView": null
+                "imagePath": "src\\assets\\cards\\Rakhsh.jpg"
               }
             },
             {
@@ -1099,9 +1045,7 @@
                   "price": 0,
                   "manaCost": 0,
                   "currentCell": null,
-                  "cardImage": null,
-                  "cardBackgroung": null,
-                  "cardInGameView": null
+                  "imagePath": null
                 },
                 "appliedEffects": [],
                 "attackRange": -1,
@@ -1126,9 +1070,7 @@
                   "flag": null,
                   "currentAttacker": null
                 },
-                "cardImage": null,
-                "cardBackgroung": null,
-                "cardInGameView": null
+                "imagePath": "src\\assets\\cards\\Rakhsh.jpg"
               }
             }
           ],
@@ -1166,9 +1108,7 @@
             "price": 4000,
             "manaCost": 0,
             "currentCell": null,
-            "cardImage": null,
-            "cardBackgroung": null,
-            "cardInGameView": null
+            "imagePath": null
           },
           "hero": {
             "primaryCooldown": 0,
@@ -1209,9 +1149,7 @@
               "price": 0,
               "manaCost": 2,
               "currentCell": null,
-              "cardImage": null,
-              "cardBackgroung": null,
-              "cardInGameView": null
+              "imagePath": null
             },
             "appliedEffects": [],
             "attackRange": 6,
@@ -1236,9 +1174,7 @@
               "flag": null,
               "currentAttacker": null
             },
-            "cardImage": null,
-            "cardBackgroung": null,
-            "cardInGameView": null
+            "imagePath": null
           },
           "collectables": []
         },
@@ -1301,9 +1237,7 @@
             "price": 0,
             "manaCost": 1,
             "currentCell": null,
-            "cardImage": null,
-            "cardBackgroung": null,
-            "cardInGameView": null
+            "imagePath": null
           },
           "appliedEffects": [],
           "attackRange": 1,
@@ -1328,9 +1262,7 @@
             "flag": null,
             "currentAttacker": null
           },
-          "cardImage": null,
-          "cardBackgroung": null,
-          "cardInGameView": null
+          "imagePath": null
         },
         {
           "primaryCooldown": 0,
@@ -1363,9 +1295,7 @@
             "flag": null,
             "currentAttacker": null
           },
-          "cardImage": null,
-          "cardBackgroung": null,
-          "cardInGameView": null
+          "imagePath": null
         },
         {
           "primaryCooldown": 0,
@@ -1409,9 +1339,7 @@
             "price": 0,
             "manaCost": 1,
             "currentCell": null,
-            "cardImage": null,
-            "cardBackgroung": null,
-            "cardInGameView": null
+            "imagePath": null
           },
           "appliedEffects": [],
           "attackRange": 3,
@@ -1436,9 +1364,7 @@
             "flag": null,
             "currentAttacker": null
           },
-          "cardImage": null,
-          "cardBackgroung": null,
-          "cardInGameView": null
+          "imagePath": null
         },
         "@root.collection.decks.0.hero"
       ],
@@ -1624,9 +1550,7 @@
             "price": 0,
             "manaCost": 0,
             "currentCell": null,
-            "cardImage": null,
-            "cardBackgroung": null,
-            "cardInGameView": null
+            "imagePath": null
           },
           "appliedEffects": [],
           "attackRange": -1,
@@ -1651,9 +1575,7 @@
             "flag": null,
             "currentAttacker": null
           },
-          "cardImage": null,
-          "cardBackgroung": null,
-          "cardInGameView": null
+          "imagePath": "src\\assets\\cards\\Rakhsh.jpg"
         },
         {
           "isCombo": false,
@@ -1826,9 +1748,7 @@
             "price": 0,
             "manaCost": 0,
             "currentCell": null,
-            "cardImage": null,
-            "cardBackgroung": null,
-            "cardInGameView": null
+            "imagePath": null
           },
           "appliedEffects": [],
           "attackRange": -1,
@@ -1853,9 +1773,7 @@
             "flag": null,
             "currentAttacker": null
           },
-          "cardImage": null,
-          "cardBackgroung": null,
-          "cardInGameView": null
+          "imagePath": "src\\assets\\cards\\Rakhsh.jpg"
         },
         {
           "isCombo": false,
@@ -1908,9 +1826,7 @@
             "price": 0,
             "manaCost": 0,
             "currentCell": null,
-            "cardImage": null,
-            "cardBackgroung": null,
-            "cardInGameView": null
+            "imagePath": null
           },
           "appliedEffects": [],
           "attackRange": -1,
@@ -1935,9 +1851,7 @@
             "flag": null,
             "currentAttacker": null
           },
-          "cardImage": null,
-          "cardBackgroung": null,
-          "cardInGameView": null
+          "imagePath": "src\\assets\\cards\\Rakhsh.jpg"
         },
         "@root.collection.decks.0.cards.19",
         "@root.collection.decks.0.cards.18",
@@ -1980,9 +1894,7 @@
           "price": 300,
           "manaCost": 0,
           "currentCell": null,
-          "cardImage": null,
-          "cardBackgroung": null,
-          "cardInGameView": null
+          "imagePath": null
         },
         {
           "applyType": null,
@@ -2010,13 +1922,11 @@
           "price": 300,
           "manaCost": 0,
           "currentCell": null,
-          "cardImage": null,
-          "cardBackgroung": null,
-          "cardInGameView": null
+          "imagePath": null
         }
       ]
     },
-    "drake": 15000,
+    "drake": 20000000,
     "matchHistory": [],
     "wins": 0,
     "losses": 0,

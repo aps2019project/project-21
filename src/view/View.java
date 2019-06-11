@@ -41,7 +41,7 @@ public class View {
     public void run() {
         primaryStage.setTitle("Duelyst");
         primaryStage.setMaximized(true);
-        Player.login("a", "a");
+//        Player.login("a", "a");
         MainMenuView.getInstance().run();
     }
 
