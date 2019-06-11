@@ -3,14 +3,13 @@ package controller.menus;
 import models.Item.Usable;
 import models.Player;
 import models.card.Card;
-import view.Message;
 
 import java.util.List;
 
 public class ShopMenu extends Menu {
     private static ShopMenu instance = new ShopMenu();
 
-    static Menu getInstance() {
+    public static Menu getInstance() {
         return instance;
     }
 
@@ -30,51 +29,34 @@ public class ShopMenu extends Menu {
             return card.getId();
     }
 
-    public static String searchCollection(String cardName) {
+    public static int searchCollection(String cardName) {
         List<Card> cards = Card.getAllCardByName(cardName, Player.getCurrentPlayer().getCollection().getCards());
         if (cards.isEmpty())
-            return "Card is'nt in collection";
+            return -1;
         else
-            /*
-            for (Card card : cards)
-                System.out.println(card.getCollectionID() + " ");
-             */
-            return "true";
+            return cards.get(0).getCollectionID();
     }
 
-    private void buy() {
-        String cardName = request.getCommandArguments().get(0);
+    public static String buy(String cardName) {
         Card card = Card.getCardByName(cardName);
-        if (card == null) {
-            view.printError(Message.NO_CARD_WITH_THIS_NAME);
-            return;
-        }
         if (Player.getCurrentPlayer().getDrake() < card.getPrice()) {
-            view.printError(Message.NOT_ENOUGH_MONEY);
-            return;
+            return "Not enough money";
         }
         if (card.getClass().equals(Usable.class) && !Player.getCurrentPlayer().hasLessThanThreeItems()) {
-            view.printError(Message.HAS_THREE_ITEMS);
-            return;
+            return "Has three items";
         }
         Player.getCurrentPlayer().buy(card);
-        view.printError(Message.BUY_SUCCESSFUL);
+        return "Buy successful";
     }
 
-    private void sell() {
-        String collectionID = request.getCommandArguments().get(0);
-        if (!collectionID.matches("\\d+")) {
-            view.printError(Message.INVALID_CARD_ID);
-            return;
-        }
+    public static String sell(int collectionID) {
         Card card = Player.getCurrentPlayer().getCollection()
-                .getCardByCollectionID(Integer.parseInt(collectionID));
+                .getCardByCollectionID(collectionID);
         if (card == null) {
-            view.printError(Message.YOU_DONT_HAVE_THIS_CARD);
-            return;
+            return "You don't have this card";
         }
         Player.getCurrentPlayer().sell(card);
-        view.printError(Message.SELL_SUCCESSFUL);
+        return "Sell successful";
     }
 
     private void show() {

@@ -5,6 +5,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -31,7 +32,8 @@ public class ShopView {
     private ShopView() {
     }
 
-    int selectedId = -1;
+    private int selectedId = -1;
+    private String selectedName = null;
 
     private int buttonSelect = 1;
     private int cardType = 1;
@@ -47,9 +49,10 @@ public class ShopView {
     private TilePane items = new TilePane();
     private ScrollPane scrollPane = new ScrollPane();
     private TextField search = new TextField();
-    private Button searchCard = new Button("search");
+    private Button searchCard = new Button("SEARCH(SELECT IF EXIST)");
     private Button buySell = new Button("SELL");
     private ImageView searchedCard = new ImageView();
+    private Label drake = new Label("DRAKE : " + Player.getCurrentPlayer().getDrake());
 
 
     void run() {
@@ -80,9 +83,10 @@ public class ShopView {
     }
 
     private void draw() {
-        back.relocate(100, 300);
-        myCollection.relocate(100, 200);
-        shop.relocate(100, 100);
+        back.relocate(100, 475);
+        myCollection.relocate(100, 350);
+        shop.relocate(100, 225);
+        drake.relocate(100, 100);
 
         minion.relocate(900, 50);
         hero.relocate(300, 50);
@@ -96,7 +100,7 @@ public class ShopView {
 
         showCards();
 
-        root.getChildren().addAll(spell, hero, minion, item, myCollection, shop,
+        root.getChildren().addAll(drake, spell, hero, minion, item, myCollection, shop,
                 back, search, buySell, searchCard, scrollPane, searchedCard);
     }
 
@@ -222,6 +226,10 @@ public class ShopView {
                 buySell.setText("SELL");
                 items.getChildren().clear();
                 showCards();
+
+                root.getChildren().remove(searchedCard);
+                selectedName = null;
+                selectedId = -1;
             }
         });
 
@@ -230,26 +238,77 @@ public class ShopView {
                 buttonSelect = 2;
                 buySell.setText("BUY");
                 items.getChildren().clear();
+
                 showCards();
+
+                root.getChildren().remove(searchedCard);
+                selectedName = null;
+                selectedId = -1;
             }
         });
 
         searchCard.setOnAction(event -> {
             String name = search.getCharacters().toString();
-            int message = ShopMenu.search(name);
-            if (message == -1){
-                View.getInstance().popup("No card with this name");
+            if (buttonSelect == 2) {
+                int message = ShopMenu.search(name);
+                if (message == -1) {
+                    View.getInstance().popup("No card with this name");
+                } else {
+                    selectedName = name;
+                    selectedId = -1;
+                    try {
+                        searchedCard = new ImageView(
+                                new Image(new FileInputStream("src\\assets\\cards\\Jasose_Torani.jpg")));
+                        searchedCard.relocate(950, 200);
+                        root.getChildren().add(searchedCard);
+                    } catch (IOException ex) {
+                        View.printThrowable(ex);
+                    }
+                }
             } else {
-                selectedId = message;
-                try {
-                    searchedCard = new ImageView(
-                            new Image(new FileInputStream("src\\assets\\cards\\Jasose_Torani.jpg")));
-                    searchedCard.relocate(950,200);
-                    root.getChildren().add(searchedCard);
-                } catch (IOException ex){
-                    View.printThrowable(ex);
+                int message = ShopMenu.searchCollection(name);
+                if (message == -1) {
+                    View.getInstance().popup("You haven't this card");
+                } else {
+                    selectedId = message;
+                    selectedName = null;
+                    try {
+                        searchedCard = new ImageView(
+                                new Image(new FileInputStream("src\\assets\\cards\\fuckingimage.png")));
+                        searchedCard.relocate(950, 200);
+                        root.getChildren().add(searchedCard);
+                    } catch (IOException ex) {
+                        View.printThrowable(ex);
+                    }
                 }
             }
+        });
+
+        buySell.setOnAction(event -> {
+            if (buttonSelect == 2) {
+                if (selectedName == null) {
+                    View.getInstance().popup("No card selected");
+                } else {
+                    String mes = ShopMenu.buy(selectedName);
+                    View.getInstance().popup(mes);
+                    if (mes.equals("Buy successful")){
+                        drake.setText("DRAKE : " + Player.getCurrentPlayer().getDrake());
+                    }
+                }
+            } else {
+                if (selectedId == -1) {
+                    View.getInstance().popup("No card selected");
+                } else {
+                    String mes = ShopMenu.sell(selectedId);
+                    View.getInstance().popup(mes);
+                    if (mes.equals("Sell successful")){
+                        drake.setText("DRAKE : " + Player.getCurrentPlayer().getDrake());
+                    }
+                }
+            }
+            root.getChildren().remove(searchedCard);
+            selectedName = null;
+            selectedId = -1;
         });
     }
 
