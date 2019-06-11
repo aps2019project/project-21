@@ -1,10 +1,12 @@
 package view;
 
+import controller.menus.ShopMenu;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
@@ -15,6 +17,7 @@ import models.card.Minion;
 import models.card.Spell;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +30,8 @@ public class ShopView {
 
     private ShopView() {
     }
+
+    int selectedId = -1;
 
     private int buttonSelect = 1;
     private int cardType = 1;
@@ -41,10 +46,15 @@ public class ShopView {
     private Button item = new Button("ITEM");
     private TilePane items = new TilePane();
     private ScrollPane scrollPane = new ScrollPane();
+    private TextField search = new TextField();
+    private Button searchCard = new Button("search");
+    private Button buySell = new Button("SELL");
+    private ImageView searchedCard = new ImageView();
 
 
     void run() {
         View.getInstance().setScene(scene);
+        scene.getStylesheets().add("view/style.css");
     }
 
     {
@@ -81,16 +91,21 @@ public class ShopView {
         item.relocate(700, 50);
 
 
+        search.relocate(1000, 100);
+        buySell.relocate(1000, 600);
+        searchCard.relocate(1100, 600);
+
         showCards();
 
-        root.getChildren().addAll(spell, hero, minion, item, myCollection, shop, back, scrollPane);
+        root.getChildren().addAll(spell, hero, minion, item, myCollection, shop,
+                back, search, buySell, searchCard, scrollPane, searchedCard);
     }
 
     private void showCards() {
         items.getChildren().clear();
 
-        items.setHgap(0);
-        items.setVgap(0);
+        items.setHgap(20);
+        items.setVgap(30);
         items.setPrefColumns(3);
 
         showByType();
@@ -109,7 +124,7 @@ public class ShopView {
         scrollPane.setPannable(true);
         scrollPane.relocate(200, 100);
         scrollPane.setMaxHeight(500);
-        scrollPane.setMaxWidth(1000);
+        scrollPane.setMaxWidth(700);
         scrollPane.setStyle("-fx-background-color: transparent");
         scrollPane.setStyle("}.scroll-pane > .viewport {\n" +
                 "   -fx-background-color: transparent;}\n" +
@@ -125,22 +140,26 @@ public class ShopView {
             switch (cardType) {
                 case 1:
                     for (Minion minion : thisPlayer.getCollection().getMinions()) {
-                        CardView.showCard(minion, items);
+                        if (minion != null)
+                            CardView.showCard(minion, items);
                     }
                     break;
                 case 2:
                     for (Hero hero : thisPlayer.getCollection().getHeroes()) {
-                        CardView.showCard(hero, items);
+                        if (hero != null)
+                            CardView.showCard(hero, items);
                     }
                     break;
                 case 3:
                     for (Spell spell : thisPlayer.getCollection().getSpells()) {
-                        CardView.showCard(spell, items);
+                        if (spell != null)
+                            CardView.showCard(spell, items);
                     }
                     break;
                 case 4:
                     for (Usable usable : thisPlayer.getCollection().getUsables()) {
-                        CardView.showCard(usable, items);
+                        if (usable != null)
+                            CardView.showCard(usable, items);
                     }
                     break;
             }
@@ -148,22 +167,26 @@ public class ShopView {
             switch (cardType) {
                 case 1:
                     for (Minion minion : Minion.getMinions()) {
-                        CardView.showCard(minion, items);
+                        if (minion != null)
+                            CardView.showCard(minion, items);
                     }
                     break;
                 case 2:
                     for (Hero hero : Hero.getHeroes()) {
-                        CardView.showCard(hero, items);
+                        if (hero != null)
+                            CardView.showCard(hero, items);
                     }
                     break;
                 case 3:
                     for (Spell spell : Spell.getSpells()) {
-                        CardView.showCard(spell, items);
+                        if (spell != null)
+                            CardView.showCard(spell, items);
                     }
                     break;
                 case 4:
                     for (Usable usable : Usable.getUsables()) {
-                        CardView.showCard(usable, items);
+                        if (usable != null)
+                            CardView.showCard(usable, items);
                     }
                     break;
             }
@@ -176,29 +199,57 @@ public class ShopView {
 
         minion.setOnAction(event -> {
             cardType = 1;
+            showCards();
         });
+
         hero.setOnAction(event -> {
             cardType = 2;
+            showCards();
         });
+
         spell.setOnAction(event -> {
             cardType = 3;
+            showCards();
         });
+
         item.setOnAction(event -> {
             cardType = 4;
+            showCards();
         });
 
         myCollection.setOnAction(event -> {
             if (buttonSelect != 1) {
                 buttonSelect = 1;
+                buySell.setText("SELL");
                 items.getChildren().clear();
                 showCards();
             }
         });
+
         shop.setOnAction(event -> {
             if (buttonSelect != 2) {
                 buttonSelect = 2;
+                buySell.setText("BUY");
                 items.getChildren().clear();
                 showCards();
+            }
+        });
+
+        searchCard.setOnAction(event -> {
+            String name = search.getCharacters().toString();
+            int message = ShopMenu.search(name);
+            if (message == -1){
+                View.getInstance().popup("No card with this name");
+            } else {
+                selectedId = message;
+                try {
+                    searchedCard = new ImageView(
+                            new Image(new FileInputStream("src\\assets\\cards\\Jasose_Torani.jpg")));
+                    searchedCard.relocate(950,200);
+                    root.getChildren().add(searchedCard);
+                } catch (IOException ex){
+                    View.printThrowable(ex);
+                }
             }
         });
     }

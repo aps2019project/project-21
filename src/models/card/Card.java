@@ -1,16 +1,11 @@
 package models.card;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import models.Item.Item;
 import models.Item.Usable;
 import models.Player;
 import models.match.Cell;
 import models.match.Match;
-import view.View;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,9 +20,7 @@ public class Card {
     protected Cell currentCell;
 
 
-    private ImageView cardImage ;
-    private ImageView cardBackgroung;
-    private ImageView cardInGameView;
+    private String imagePath;
 
 
 
@@ -39,11 +32,6 @@ public class Card {
         this.name = name.replaceAll("\\s+", "_");
         this.price = price;
         this.manaCost = manaCost;
-        try {
-            this.cardImage = new ImageView(new Image(new FileInputStream("src\\assets\\cards\\Jasose_Torani.png")));
-        } catch (IOException ex){
-            View.printThrowable(ex);
-        }
     }
 
     {
@@ -197,32 +185,11 @@ public class Card {
     }
 
 
-    public ImageView getCardImage(){
-        return cardImage;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public ImageView getCardBackground(){
-        return cardBackgroung;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
-
-    public ImageView getCardInGameView(){
-        return getCardInGameView();
-    }
-
-
-    public void setCardImage(Image image){
-        cardImage.setImage(image);
-    }
-
-
-    public void setCardBackgroung(Image image){
-        cardBackgroung.setImage(image);
-    }
-
-
-    public void setCardInGameView(Image image){
-        cardInGameView.setImage(image);
-    }
-
-
 }

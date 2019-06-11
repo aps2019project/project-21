@@ -22,23 +22,24 @@ public class ShopMenu extends Menu {
         view.showCollection(Player.getCurrentPlayer().getCollection());
     }
 
-    private void search() {
-        String cardName = request.getCommandArguments().get(0);
+    public static int search(String cardName) {
         Card card = Card.getCardByName(cardName);
         if (card == null)
-            view.printError(Message.NO_CARD_WITH_THIS_NAME);
+            return -1;
         else
-            System.out.println(card.getId());
+            return card.getId();
     }
 
-    private void searchCollection() {
-        String cardName = request.getCommandArguments().get(0);
+    public static String searchCollection(String cardName) {
         List<Card> cards = Card.getAllCardByName(cardName, Player.getCurrentPlayer().getCollection().getCards());
         if (cards.isEmpty())
-            view.printError(Message.CARD_IS_NOT_IN_COLLECTION);
+            return "Card is'nt in collection";
         else
+            /*
             for (Card card : cards)
                 System.out.println(card.getCollectionID() + " ");
+             */
+            return "true";
     }
 
     private void buy() {
