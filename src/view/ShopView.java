@@ -55,7 +55,27 @@ public class ShopView {
     private Button buySell = new Button("SELL");
     private Group searchedCard = new Group();
     private Label drake = new Label("DRAKE : " + Player.getCurrentPlayer().getDrake());
-    private ImageView[] button = new ImageView[10];
+    private ImageView[] button = new ImageView[11];
+    private Label selectedCard = new Label("<-- SELECTED CARD");
+
+
+    public static void setInstance(ShopView instance) {
+        ShopView.instance = instance;
+    }
+
+    void setSelectedId(int selectedId) {
+        this.selectedId = selectedId;
+    }
+
+
+    void setSelectedName(String selectedName) {
+        this.selectedName = selectedName;
+    }
+
+
+    int getButtonSelect() {
+        return buttonSelect;
+    }
 
 
     void run() {
@@ -72,6 +92,7 @@ public class ShopView {
         handleButtons();
 
         setOnActions();
+
     }
 
     private void setBackground() {
@@ -87,35 +108,42 @@ public class ShopView {
 
     private void draw() {
         try {
-            for (int i = 0; i < 10; i++) {
-                button[i] = new ImageView(new Image(new FileInputStream
-                        ("C:\\project-21\\src\\assets\\button.png")));
-                if (i == 0){
-                    button[i].relocate(20,80);
-                } else if (i == 1){
-                    button[i].relocate(20,205);
-                } else if (i == 2){
-                    button[i].relocate(20,330);
-                } else if (i == 3){
-                    button[i].relocate(20,455);
-                }else if (i == 4){
-                    button[i].relocate(270,30);
-                }else if (i == 5){
-                    button[i].relocate(470,30);
-                }else if (i == 6){
-                    button[i].relocate(670,30);
-                }else if (i == 7){
-                    button[i].relocate(870,30);
-                }else if (i == 8){
-                    button[i].relocate(930,580);
+            for (int i = 0; i < 11; i++) {
+                if (i != 10) {
+                    button[i] = new ImageView(new Image(new FileInputStream
+                            ("C:\\project-21\\src\\assets\\button.png")));
+                } else {
+                    button[i] = new ImageView(new Image(new FileInputStream
+                            ("C:\\project-21\\src\\assets\\red_button.png")));
+                }
+                if (i == 0) {
+                    button[i].relocate(20, 80);
+                } else if (i == 1) {
+                    button[i].relocate(20, 205);
+                } else if (i == 2) {
+                    button[i].relocate(20, 330);
+                } else if (i == 3) {
+                    button[i].relocate(20, 455);
+                } else if (i == 4) {
+                    button[i].relocate(270, 30);
+                } else if (i == 5) {
+                    button[i].relocate(470, 30);
+                } else if (i == 6) {
+                    button[i].relocate(670, 30);
+                } else if (i == 7) {
+                    button[i].relocate(870, 30);
+                } else if (i == 8) {
+                    button[i].relocate(930, 580);
                     button[i].setScaleX(0.5);
-                }else {
-                    button[i].relocate(1090,580);
+                } else if (i == 9) {
+                    button[i].relocate(1090, 580);
+                } else {
+                    button[i].relocate(1180, 280);
                 }
 
                 root.getChildren().add(button[i]);
             }
-        } catch (IOException ex){
+        } catch (IOException ex) {
             View.printThrowable(ex);
         }
         back.relocate(50, 475);
@@ -124,26 +152,30 @@ public class ShopView {
         drake.relocate(50, 100);
         drake.setTextFill(Color.WHITE);
 
+        selectedCard.relocate(1200, 300);
+        selectedCard.setTextFill(Color.WHITE);
+
+
         minion.relocate(930, 50);
         hero.relocate(330, 50);
         spell.relocate(530, 50);
         item.relocate(730, 50);
 
 
-        search.relocate(1000, 100);
+        search.relocate(1000, 500);
         buySell.relocate(1000, 600);
-        searchCard.relocate(1100,600);
+        searchCard.relocate(1100, 600);
 
         showCards();
 
-        root.getChildren().addAll(drake, spell, hero, minion, item, myCollection, shop,
+        root.getChildren().addAll(selectedCard, drake, spell, hero, minion, item, myCollection, shop,
                 back, search, buySell, searchCard, scrollPane);
     }
 
     private void showCards() {
         items.getChildren().clear();
 
-        items.setHgap(10);
+        items.setHgap(20);
         items.setVgap(30);
         items.setPrefColumns(3);
 
@@ -264,6 +296,15 @@ public class ShopView {
                 root.getChildren().remove(searchedCard);
                 selectedName = null;
                 selectedId = -1;
+                searchedCard.getChildren().clear();
+
+                try{
+                button[10].setImage(new Image(new FileInputStream
+                        ("C:\\project-21\\src\\assets\\red_button.png")));
+                } catch (IOException ex){
+                    View.printThrowable(ex);
+                }
+
             }
         });
 
@@ -278,6 +319,16 @@ public class ShopView {
                 root.getChildren().remove(searchedCard);
                 selectedName = null;
                 selectedId = -1;
+                searchedCard.getChildren().clear();
+
+
+                try{
+                    button[10].setImage(new Image(new FileInputStream
+                            ("C:\\project-21\\src\\assets\\red_button.png")));
+                } catch (IOException ex){
+                    View.printThrowable(ex);
+                }
+
             }
         });
 
@@ -291,8 +342,15 @@ public class ShopView {
                     selectedName = name;
                     selectedId = -1;
                     searchedCard = CardView.shopCardGroup(message);
-                    searchedCard.relocate(950, 200);
-                    root.getChildren().add(searchedCard);
+                    searchedCard.relocate(950, 100);
+                    root.getChildren().addAll(searchedCard);
+
+                    try{
+                        button[10].setImage(new Image(new FileInputStream
+                                ("C:\\project-21\\src\\assets\\button.png")));
+                    } catch (IOException ex){
+                        View.printThrowable(ex);
+                    }
                 }
             } else {
                 Card message = ShopMenu.searchCollection(name);
@@ -303,8 +361,16 @@ public class ShopView {
                     selectedName = null;
                     searchedCard = CardView.shopCardGroup(message);
 
-                    searchedCard.relocate(950, 200);
-                    root.getChildren().add(searchedCard);
+                    searchedCard.relocate(950, 100);
+                    root.getChildren().addAll(searchedCard);
+
+
+                    try{
+                        button[10].setImage(new Image(new FileInputStream
+                                ("C:\\project-21\\src\\assets\\button.png")));
+                    } catch (IOException ex){
+                        View.printThrowable(ex);
+                    }
 
                 }
             }
@@ -320,6 +386,14 @@ public class ShopView {
                     if (mes.equals("Buy successful")) {
                         drake.setText("DRAKE : " + Player.getCurrentPlayer().getDrake());
                     }
+
+                    try{
+                        button[10].setImage(new Image(new FileInputStream
+                                ("C:\\project-21\\src\\assets\\red_button.png")));
+                    } catch (IOException ex){
+                        View.printThrowable(ex);
+                    }
+
                 }
             } else {
                 if (selectedId == -1) {
@@ -331,6 +405,13 @@ public class ShopView {
                         drake.setText("DRAKE : " + Player.getCurrentPlayer().getDrake());
                     }
                     showCards();
+
+                    try{
+                        button[10].setImage(new Image(new FileInputStream
+                                ("C:\\project-21\\src\\assets\\red_button.png")));
+                    } catch (IOException ex){
+                        View.printThrowable(ex);
+                    }
                 }
             }
             root.getChildren().remove(searchedCard);
@@ -345,5 +426,25 @@ public class ShopView {
             if (node instanceof Button) {
                 Button button = (Button) node;
             }
+    }
+
+    void setSearchedCard(Group searchedCard) {
+        this.searchedCard = searchedCard;
+    }
+
+    public Group getRoot() {
+        return root;
+    }
+
+    public void setRoot(Group root) {
+        this.root = root;
+    }
+
+    Group getSearchedCard() {
+        return searchedCard;
+    }
+
+    public ImageView[] getButton() {
+        return button;
     }
 }

@@ -20,6 +20,9 @@ class CardView {
         Group ret = shopCardGroup(card);
         if (ret != null) {
             items.getChildren().add(ret);
+            ret.setOnMouseClicked(event -> {
+                selectCard(card);
+            });
         } else {
             System.out.print(card.getName());
         }
@@ -57,17 +60,17 @@ class CardView {
 
 
                 Label ap = new Label(Integer.toString(((Attacker) card).getAP()));
-                ap.relocate(55,170);
+                ap.relocate(55, 170);
                 ap.setTextFill(Color.WHITE);
                 ap.setFont(Font.font(14));
 
                 Image t = new Image(new FileInputStream("C:\\project-21\\src\\assets\\cards\\name.png"));
                 ImageView nameImage = new ImageView(t);
                 nameImage.setScaleX(0.45);
-                nameImage.relocate(28,125);
+                nameImage.relocate(28, 125);
 
-                Label name = new Label(card.getName() + "\n  " + ((card instanceof Hero)?"Hero":"Minion"));
-                name.relocate(87,135);
+                Label name = new Label(card.getName() + "\n  " + ((card instanceof Hero) ? "Hero" : "Minion"));
+                name.relocate(87, 135);
                 name.setTextFill(Color.WHITE);
                 name.setFont(Font.font(14));
 
@@ -78,6 +81,31 @@ class CardView {
             }
         }
         return null;
+    }
+
+    private static void selectCard(Card card) {
+        ShopView shopView = ShopView.getInstance();
+        if (shopView.getButtonSelect() == 1) {
+            shopView.setSelectedId(card.getCollectionID());
+            shopView.setSelectedName(null);
+        } else {
+            shopView.setSelectedId(-1);
+            shopView.setSelectedName(card.getName());
+        }
+        Group ret = shopCardGroup(card);
+        ret.relocate(950, 100);
+
+        shopView.getRoot().getChildren().remove(shopView.getSearchedCard());
+
+        try {
+            shopView.getButton()[10].setImage(new Image(new FileInputStream
+                    ("C:\\project-21\\src\\assets\\button.png")));
+        } catch (IOException ex){
+            View.printThrowable(ex);
+        }
+
+        shopView.setSearchedCard(ret);
+        shopView.getRoot().getChildren().addAll(shopView.getSearchedCard());
     }
 
 }
