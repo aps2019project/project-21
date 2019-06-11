@@ -84,7 +84,7 @@ public class ShopView {
         try {
             for (int i = 0; i < 10; i++) {
                 button[i] = new ImageView(new Image(new FileInputStream
-                        ("C:\\project-21\\src\\assets\\button.png")));
+                        ("src\\assets\\button.png")));
                 if (i == 0){
                     button[i].relocate(20,80);
                 } else if (i == 1){
@@ -127,7 +127,7 @@ public class ShopView {
 
         search.relocate(1000, 100);
         buySell.relocate(1000, 600);
-        searchCard.relocate(1100, 600);
+        searchCard.relocate(1100,600);
 
         showCards();
 
@@ -153,8 +153,8 @@ public class ShopView {
         scrollPane.setStyle("}.scroll-pane > .viewport {\n" +
                 "   -fx-background-color: transparent;}\n" +
                 "{");
-        scrollPane.setMaxWidth(700);
         items.setStyle("-fx-background-color: transparent");
+
     }
 
     private void showByType() {
