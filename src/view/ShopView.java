@@ -31,7 +31,8 @@ public class ShopView {
     private ShopView() {
     }
 
-    int selectedId = -1;
+    private int selectedId = -1;
+    private String selectedName = null;
 
     private int buttonSelect = 1;
     private int cardType = 1;
@@ -47,14 +48,13 @@ public class ShopView {
     private TilePane items = new TilePane();
     private ScrollPane scrollPane = new ScrollPane();
     private TextField search = new TextField();
-    private Button searchCard = new Button("search");
+    private Button searchCard = new Button("SEARCH(SELECT IF EXIST)");
     private Button buySell = new Button("SELL");
     private ImageView searchedCard = new ImageView();
 
 
     void run() {
         View.getInstance().setScene(scene);
-        scene.getStylesheets().add("view/style.css");
     }
 
     {
@@ -223,6 +223,10 @@ public class ShopView {
                 buySell.setText("SELL");
                 items.getChildren().clear();
                 showCards();
+
+                root.getChildren().remove(searchedCard);
+                selectedName = null;
+                selectedId = -1;
             }
         });
 
@@ -231,26 +235,71 @@ public class ShopView {
                 buttonSelect = 2;
                 buySell.setText("BUY");
                 items.getChildren().clear();
+
                 showCards();
+
+                root.getChildren().remove(searchedCard);
+                selectedName = null;
+                selectedId = -1;
             }
         });
 
         searchCard.setOnAction(event -> {
             String name = search.getCharacters().toString();
-            int message = ShopMenu.search(name);
-            if (message == -1){
-                View.getInstance().popup("No card with this name");
+            if (buttonSelect == 2) {
+                int message = ShopMenu.search(name);
+                if (message == -1) {
+                    View.getInstance().popup("No card with this name");
+                } else {
+                    selectedName = name;
+                    selectedId = -1;
+                    try {
+                        searchedCard = new ImageView(
+                                new Image(new FileInputStream("src\\assets\\cards\\Jasose_Torani.jpg")));
+                        searchedCard.relocate(950, 200);
+                        root.getChildren().add(searchedCard);
+                    } catch (IOException ex) {
+                        View.printThrowable(ex);
+                    }
+                }
             } else {
-                selectedId = message;
-                try {
-                    searchedCard = new ImageView(
-                            new Image(new FileInputStream("src\\assets\\cards\\Jasose_Torani.jpg")));
-                    searchedCard.relocate(950,200);
-                    root.getChildren().add(searchedCard);
-                } catch (IOException ex){
-                    View.printThrowable(ex);
+                int message = ShopMenu.searchCollection(name);
+                if (message == -1){
+                    View.getInstance().popup("You haven't this card");
+                } else {
+                    selectedId = message;
+                    selectedName = null;
+                    try {
+                        searchedCard = new ImageView(
+                                new Image(new FileInputStream("src\\assets\\cards\\fuckingimage.png")));
+                        searchedCard.relocate(950, 200);
+                        root.getChildren().add(searchedCard);
+                    } catch (IOException ex) {
+                        View.printThrowable(ex);
+                    }
                 }
             }
+        });
+
+        buySell.setOnAction(event -> {
+            if (buttonSelect == 2){
+                if (selectedName == null){
+                    View.getInstance().popup("No card selected");
+                } else {
+                    String mes = ShopMenu.buy(selectedName);
+                    View.getInstance().popup(mes);
+                }
+            } else {
+                if (selectedId == -1){
+                    View.getInstance().popup("No card selected");
+                } else {
+                    String mes = ShopMenu.sell(selectedId);
+                    View.getInstance().popup(mes);
+                }
+            }
+            root.getChildren().remove(searchedCard);
+            selectedName = null;
+            selectedId = -1;
         });
     }
 
