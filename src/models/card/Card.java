@@ -19,11 +19,6 @@ public class Card {
     protected int manaCost;
     protected Cell currentCell;
 
-
-    private String imagePath;
-
-
-
     public Card() {
 
     }
@@ -184,12 +179,4 @@ public class Card {
         return currentCell;
     }
 
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
-    }
 }

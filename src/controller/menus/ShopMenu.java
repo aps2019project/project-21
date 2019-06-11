@@ -21,20 +21,16 @@ public class ShopMenu extends Menu {
         view.showCollection(Player.getCurrentPlayer().getCollection());
     }
 
-    public static int search(String cardName) {
-        Card card = Card.getCardByName(cardName);
-        if (card == null)
-            return -1;
-        else
-            return card.getId();
+    public static Card search(String cardName) {
+        return Card.getCardByName(cardName);
     }
 
-    public static int searchCollection(String cardName) {
+    public static Card searchCollection(String cardName) {
         List<Card> cards = Card.getAllCardByName(cardName, Player.getCurrentPlayer().getCollection().getCards());
         if (cards.isEmpty())
-            return -1;
+            return null;
         else
-            return cards.get(0).getCollectionID();
+            return cards.get(0);
     }
 
     public static String buy(String cardName) {

@@ -13,12 +13,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
 import models.Item.Usable;
 import models.Player;
+import models.card.Card;
 import models.card.Hero;
 import models.card.Minion;
 import models.card.Spell;
 
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +36,7 @@ public class ShopView {
     private String selectedName = null;
 
     private int buttonSelect = 1;
-    private int cardType = 1;
+    private int cardType = 2;
     private Group root = new Group();
     private Scene scene = new Scene(root, 1536, 801.59);
     private Button back = new Button("BACK");
@@ -51,7 +51,7 @@ public class ShopView {
     private TextField search = new TextField();
     private Button searchCard = new Button("SEARCH(SELECT IF EXIST)");
     private Button buySell = new Button("SELL");
-    private ImageView searchedCard = new ImageView();
+    private Group searchedCard = new Group();
     private Label drake = new Label("DRAKE : " + Player.getCurrentPlayer().getDrake());
 
 
@@ -96,12 +96,12 @@ public class ShopView {
 
         search.relocate(1000, 100);
         buySell.relocate(1000, 600);
-        searchCard.relocate(1100, 600);
+        searchCard.relocate(1100,600);
 
         showCards();
 
         root.getChildren().addAll(drake, spell, hero, minion, item, myCollection, shop,
-                back, search, buySell, searchCard, scrollPane, searchedCard);
+                back, search, buySell, searchCard, scrollPane);
     }
 
     private void showCards() {
@@ -112,17 +112,7 @@ public class ShopView {
         items.setPrefColumns(3);
 
         showByType();
-/*
-        for (int i = 0; i < 20; i++)
-            try {
-                StackPane stackPane = new StackPane();
-                ImageView background = new ImageView(new Image(new FileInputStream("src\\assets\\card_background.png")));
-                stackPane.getChildren().addAll(background);
-                items.getChildren().addAll(stackPane);
-            } catch (Exception e) {
-                View.printThrowable(e);
-            }
-*/
+
         scrollPane.setContent(items);
         scrollPane.setPannable(true);
         scrollPane.relocate(200, 100);
@@ -143,26 +133,30 @@ public class ShopView {
             switch (cardType) {
                 case 1:
                     for (Minion minion : thisPlayer.getCollection().getMinions()) {
-                        if (minion != null)
+                        if (minion != null) {
                             CardView.showCard(minion, items);
+                        }
                     }
                     break;
                 case 2:
                     for (Hero hero : thisPlayer.getCollection().getHeroes()) {
-                        if (hero != null)
+                        if (hero != null) {
                             CardView.showCard(hero, items);
+                        }
                     }
                     break;
                 case 3:
                     for (Spell spell : thisPlayer.getCollection().getSpells()) {
-                        if (spell != null)
+                        if (spell != null) {
                             CardView.showCard(spell, items);
+                        }
                     }
                     break;
                 case 4:
                     for (Usable usable : thisPlayer.getCollection().getUsables()) {
-                        if (usable != null)
+                        if (usable != null) {
                             CardView.showCard(usable, items);
+                        }
                     }
                     break;
             }
@@ -170,26 +164,30 @@ public class ShopView {
             switch (cardType) {
                 case 1:
                     for (Minion minion : Minion.getMinions()) {
-                        if (minion != null)
+                        if (minion != null) {
                             CardView.showCard(minion, items);
+                        }
                     }
                     break;
                 case 2:
                     for (Hero hero : Hero.getHeroes()) {
-                        if (hero != null)
+                        if (hero != null) {
                             CardView.showCard(hero, items);
+                        }
                     }
                     break;
                 case 3:
                     for (Spell spell : Spell.getSpells()) {
-                        if (spell != null)
+                        if (spell != null) {
                             CardView.showCard(spell, items);
+                        }
                     }
                     break;
                 case 4:
                     for (Usable usable : Usable.getUsables()) {
-                        if (usable != null)
+                        if (usable != null) {
                             CardView.showCard(usable, items);
+                        }
                     }
                     break;
             }
@@ -250,36 +248,28 @@ public class ShopView {
         searchCard.setOnAction(event -> {
             String name = search.getCharacters().toString();
             if (buttonSelect == 2) {
-                int message = ShopMenu.search(name);
-                if (message == -1) {
+                Card message = ShopMenu.search(name);
+                if (message == null) {
                     View.getInstance().popup("No card with this name");
                 } else {
                     selectedName = name;
                     selectedId = -1;
-                    try {
-                        searchedCard = new ImageView(
-                                new Image(new FileInputStream("src\\assets\\cards\\Jasose_Torani.jpg")));
-                        searchedCard.relocate(950, 200);
-                        root.getChildren().add(searchedCard);
-                    } catch (IOException ex) {
-                        View.printThrowable(ex);
-                    }
+                    searchedCard = CardView.shopCardGroup(message);
+                    searchedCard.relocate(950, 200);
+                    root.getChildren().add(searchedCard);
                 }
             } else {
-                int message = ShopMenu.searchCollection(name);
-                if (message == -1) {
+                Card message = ShopMenu.searchCollection(name);
+                if (message == null) {
                     View.getInstance().popup("You haven't this card");
                 } else {
-                    selectedId = message;
+                    selectedId = message.getId();
                     selectedName = null;
-                    try {
-                        searchedCard = new ImageView(
-                                new Image(new FileInputStream("src\\assets\\cards\\fuckingimage.png")));
-                        searchedCard.relocate(950, 200);
-                        root.getChildren().add(searchedCard);
-                    } catch (IOException ex) {
-                        View.printThrowable(ex);
-                    }
+                    searchedCard = CardView.shopCardGroup(message);
+
+                    searchedCard.relocate(950, 200);
+                    root.getChildren().add(searchedCard);
+
                 }
             }
         });
@@ -291,7 +281,7 @@ public class ShopView {
                 } else {
                     String mes = ShopMenu.buy(selectedName);
                     View.getInstance().popup(mes);
-                    if (mes.equals("Buy successful")){
+                    if (mes.equals("Buy successful")) {
                         drake.setText("DRAKE : " + Player.getCurrentPlayer().getDrake());
                     }
                 }
@@ -301,7 +291,7 @@ public class ShopView {
                 } else {
                     String mes = ShopMenu.sell(selectedId);
                     View.getInstance().popup(mes);
-                    if (mes.equals("Sell successful")){
+                    if (mes.equals("Sell successful")) {
                         drake.setText("DRAKE : " + Player.getCurrentPlayer().getDrake());
                     }
                 }
