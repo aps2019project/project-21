@@ -89,9 +89,9 @@ public class ShopView {
     private void showCards() {
         items.getChildren().clear();
 
-        items.setHgap(0);
-        items.setVgap(0);
-        items.setPrefColumns(3);
+        items.setHgap(20);
+        items.setVgap(30);
+        items.setPrefColumns(5);
 
         showByType();
 /*
@@ -184,15 +184,19 @@ public class ShopView {
 
         minion.setOnAction(event -> {
             cardType = 1;
+            showCards();
         });
         hero.setOnAction(event -> {
             cardType = 2;
+            showCards();
         });
         spell.setOnAction(event -> {
             cardType = 3;
+            showCards();
         });
         item.setOnAction(event -> {
             cardType = 4;
+            showCards();
         });
 
         myCollection.setOnAction(event -> {
