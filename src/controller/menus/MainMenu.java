@@ -42,7 +42,7 @@ public class MainMenu extends Menu {
         }
         AIPlayer aiPlayer = AIPlayer.getAIPlayer(Integer.parseInt(num));
         if (aiPlayer == null) {
-            View.getInstance().printError(Message.AIPLAYER_IS_NULL);
+            View.getInstance().printMessage(Message.AIPLAYER_IS_NULL);
             return false;
         }
         second = aiPlayer;
@@ -70,7 +70,7 @@ public class MainMenu extends Menu {
         int aiID = Integer.parseInt(matcher.group(1));
         AIPlayer aiPlayer = AIPlayer.getAIPlayer(aiID);
         if (aiPlayer == null) {
-            view.printError(Message.AIPLAYER_IS_NULL);
+            view.printMessage(Message.AIPLAYER_IS_NULL);
             return false;
         }
         GoalMode goalMode;
@@ -99,11 +99,11 @@ public class MainMenu extends Menu {
     public boolean chooseOpp(String name) {
         second = Player.getPlayerByUsername(name);
         if (second == null) {
-            View.getInstance().printError(Message.NO_SUCH_USER);
+            View.getInstance().printMessage(Message.NO_SUCH_USER);
             return false;
         }
         if (!second.hasAValidMainDeck()) {
-            View.getInstance().printError(Message.DECK_IS_NOT_VALID);
+            View.getInstance().printMessage(Message.DECK_IS_NOT_VALID);
             return false;
         }
         return true;
@@ -114,12 +114,12 @@ public class MainMenu extends Menu {
         try {
             n = Integer.parseInt(num);
         } catch (Exception e) {
-            View.getInstance().printError(Message.INVALID_AI);
+            View.getInstance().printMessage(Message.INVALID_AI);
             return false;
         }
         AIPlayer aiPlayer = AIPlayer.getAIPlayer(n);
         if (aiPlayer == null) {
-            view.printError(Message.AIPLAYER_IS_NULL);
+            view.printMessage(Message.AIPLAYER_IS_NULL);
             return false;
         }
         second = aiPlayer;
@@ -169,7 +169,7 @@ public class MainMenu extends Menu {
             return;
         AIPlayer aiPlayer = AIPlayer.getAIPlayer(num);
         if (aiPlayer == null) {
-            View.getInstance().printError(Message.AIPLAYER_IS_NULL);
+            View.getInstance().printMessage(Message.AIPLAYER_IS_NULL);
             return;
         }
         second = aiPlayer;

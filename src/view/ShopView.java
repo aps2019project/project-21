@@ -2,7 +2,6 @@ package view;
 
 import controller.menus.ShopMenu;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -420,13 +419,6 @@ public class ShopView {
         });
     }
 
-    private void handleButtons() {
-        List<Node> nodes = new ArrayList<>(root.getChildren());
-        for (Node node : nodes)
-            if (node instanceof Button) {
-                Button button = (Button) node;
-            }
-    }
 
     void setSearchedCard(Group searchedCard) {
         this.searchedCard = searchedCard;
