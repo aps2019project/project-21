@@ -5,6 +5,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -51,6 +52,7 @@ public class ShopView {
     private Button searchCard = new Button("SEARCH(SELECT IF EXIST)");
     private Button buySell = new Button("SELL");
     private ImageView searchedCard = new ImageView();
+    private Label drake = new Label("DRAKE : " + Player.getCurrentPlayer().getDrake());
 
 
     void run() {
@@ -81,9 +83,10 @@ public class ShopView {
     }
 
     private void draw() {
-        back.relocate(100, 300);
-        myCollection.relocate(100, 200);
-        shop.relocate(100, 100);
+        back.relocate(100, 475);
+        myCollection.relocate(100, 350);
+        shop.relocate(100, 225);
+        drake.relocate(100, 100);
 
         minion.relocate(900, 50);
         hero.relocate(300, 50);
@@ -97,7 +100,7 @@ public class ShopView {
 
         showCards();
 
-        root.getChildren().addAll(spell, hero, minion, item, myCollection, shop,
+        root.getChildren().addAll(drake, spell, hero, minion, item, myCollection, shop,
                 back, search, buySell, searchCard, scrollPane, searchedCard);
     }
 
@@ -264,7 +267,7 @@ public class ShopView {
                 }
             } else {
                 int message = ShopMenu.searchCollection(name);
-                if (message == -1){
+                if (message == -1) {
                     View.getInstance().popup("You haven't this card");
                 } else {
                     selectedId = message;
@@ -282,19 +285,25 @@ public class ShopView {
         });
 
         buySell.setOnAction(event -> {
-            if (buttonSelect == 2){
-                if (selectedName == null){
+            if (buttonSelect == 2) {
+                if (selectedName == null) {
                     View.getInstance().popup("No card selected");
                 } else {
                     String mes = ShopMenu.buy(selectedName);
                     View.getInstance().popup(mes);
+                    if (mes.equals("Buy successful")){
+                        drake.setText("DRAKE : " + Player.getCurrentPlayer().getDrake());
+                    }
                 }
             } else {
-                if (selectedId == -1){
+                if (selectedId == -1) {
                     View.getInstance().popup("No card selected");
                 } else {
                     String mes = ShopMenu.sell(selectedId);
                     View.getInstance().popup(mes);
+                    if (mes.equals("Sell successful")){
+                        drake.setText("DRAKE : " + Player.getCurrentPlayer().getDrake());
+                    }
                 }
             }
             root.getChildren().remove(searchedCard);
