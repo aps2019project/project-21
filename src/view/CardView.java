@@ -31,20 +31,20 @@ class CardView {
             Group ret = new Group();
             try {
                 ImageView imageView = new ImageView(new Image(new FileInputStream
-                        ("C:\\project-21\\src\\assets\\cards\\shop_background.png")));
+                        ("src\\assets\\cards\\shop_background.png")));
 
                 ImageView image;
                 if (card instanceof Hero) {
                     image = new ImageView(new Image(new FileInputStream
-                            ("C:\\project-21\\src\\assets\\cards\\hero\\" + card.getName() + ".png")));
+                            ("src\\assets\\cards\\hero\\" + card.getName() + ".png")));
                 } else {
                     image = new ImageView(new Image(new FileInputStream
-                            ("C:\\project-21\\src\\assets\\cards\\minion\\" + card.getName() + ".png")));
+                            ("src\\assets\\cards\\minion\\" + card.getName() + ".png")));
                 }
                 image.relocate(0, -50);
 
                 ImageView mp = new ImageView(new Image(new FileInputStream
-                        ("C:\\project-21\\src\\assets\\cards\\mana.png")));
+                        ("src\\assets\\cards\\mana.png")));
                 Label MP = new Label(Integer.toString(card.getPrice()));
                 MP.setFont(Font.font(14));
                 MP.relocate(7, 22);
@@ -57,27 +57,27 @@ class CardView {
 
 
                 Label ap = new Label(Integer.toString(((Attacker) card).getAP()));
-                ap.relocate(55,170);
+                ap.relocate(55, 170);
                 ap.setTextFill(Color.WHITE);
                 ap.setFont(Font.font(14));
 
-                Image t = new Image(new FileInputStream("C:\\project-21\\src\\assets\\cards\\name.png"));
+                Image t = new Image(new FileInputStream("src\\assets\\cards\\name.png"));
                 ImageView nameImage = new ImageView(t);
                 nameImage.setScaleX(0.45);
-                nameImage.relocate(28,125);
+                nameImage.relocate(28, 125);
 
-                Label name = new Label(card.getName() + "\n  " + ((card instanceof Hero)?"Hero":"Minion"));
-                name.relocate(87,135);
+                Label name = new Label(card.getName() + "\n  " + ((card instanceof Hero) ? "Hero" : "Minion"));
+                name.relocate(87, 135);
                 name.setTextFill(Color.WHITE);
                 name.setFont(Font.font(14));
 
                 ret.getChildren().addAll(imageView, image, nameImage, mp, MP, hp, ap, name);
                 return ret;
             } catch (IOException ex) {
+                View.printThrowable(ex);
                 return null;
             }
         }
         return null;
     }
-
 }
