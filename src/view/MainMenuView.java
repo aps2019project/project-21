@@ -3,7 +3,6 @@ package view;
 import controller.menus.AccountMenu;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,8 +15,6 @@ import javafx.scene.paint.Color;
 import models.Player;
 
 import java.io.FileInputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainMenuView {
     private static MainMenuView instance = new MainMenuView();
@@ -62,8 +59,6 @@ public class MainMenuView {
         setBackground();
 
         draw();
-
-        handleButtons();
 
         setOnActions();
 
@@ -115,19 +110,9 @@ public class MainMenuView {
 
     private void createNewMatch() {
         if (!Player.getCurrentPlayer().hasAValidMainDeck())
-            View.getInstance().printError(Message.DECK_IS_NOT_VALID);
+            View.getInstance().printMessage(Message.DECK_IS_NOT_VALID);
         else
             CreateMatchView.getInstance().run();
-    }
-
-    private void handleButtons() {
-        List<Node> nodes = new ArrayList<>(beforeLoginOptions.getChildren());
-        nodes.addAll(afterLoginOptions.getChildren());
-        nodes.addAll(mainMenuOptions.getChildren());
-        for (Node node : nodes)
-            if (node instanceof Button) {
-                Button button = (Button) node;
-            }
     }
 
     private void setBackground() {

@@ -95,7 +95,7 @@ public class CollectionMenu extends Menu {
         List<Card> cards = Card.getAllCardByName(name,
                 Player.getCurrentPlayer().getCollection().getCards());
         if (cards.isEmpty()) {
-            view.printError(Message.NO_CARD_WITH_THIS_NAME);
+            view.printMessage(Message.NO_CARD_WITH_THIS_NAME);
             return;
         }
         for (Card card : cards)
@@ -109,7 +109,7 @@ public class CollectionMenu extends Menu {
     private void createDeck() {
         String name = request.getCommandArguments().get(0);
         if (Player.getCurrentPlayer().getCollection().hasThis(name)) {
-            view.printError(Message.DECK_ALREADY_EXISTS);
+            view.printMessage(Message.DECK_ALREADY_EXISTS);
             return;
         }
         Player.getCurrentPlayer().createDeck(name);
@@ -118,7 +118,7 @@ public class CollectionMenu extends Menu {
     private void deleteDeck() {
         String deckName = request.getCommandArguments().get(0);
         if (!Player.getCurrentPlayer().getCollection().hasThis(deckName)) {
-            view.printError(Message.NO_SUCH_DECK);
+            view.printMessage(Message.NO_SUCH_DECK);
             return;
         }
         Player.getCurrentPlayer().deleteDeck(deckName);
@@ -129,37 +129,37 @@ public class CollectionMenu extends Menu {
         String deckName = request.getCommandArguments().get(1);
         Deck deck = Player.getCurrentPlayer().getCollection().getDeck(deckName);
         if (deck == null) {
-            view.printError(Message.NO_SUCH_DECK);
+            view.printMessage(Message.NO_SUCH_DECK);
             return;
         }
         Card card = Player.getCurrentPlayer().getCollection().getCardByCollectionID(collectionID);
         if (card == null) {
-            view.printError(Message.CARD_IS_NOT_IN_COLLECTION);
+            view.printMessage(Message.CARD_IS_NOT_IN_COLLECTION);
             return;
         }
         if (deck.hasThisCard(card)) {
-            view.printError(Message.ALREADY_IN_DECK);
+            view.printMessage(Message.ALREADY_IN_DECK);
             return;
         }
         if (card.getClass().equals(Hero.class) && deck.hasHero()) {
-            view.printError(Message.DECK_HAS_HERO);
+            view.printMessage(Message.DECK_HAS_HERO);
             return;
         }
         if (card.getClass().equals(Usable.class) && deck.hasUsable()) {
-            view.printError(Message.DECK_HAS_ITEM);
+            view.printMessage(Message.DECK_HAS_ITEM);
             return;
         }
         if (deck.isFull()) {
-            view.printError(Message.DECK_IS_FULL);
+            view.printMessage(Message.DECK_IS_FULL);
             return;
         }
         if (card.getClass().equals(Hero.class)
                 && Player.getCurrentPlayer().getCollection().isThisHeroInADeck((Hero) card)) {
-            view.printError(Message.HERO_IS_USED_IN_A_DECK);
+            view.printMessage(Message.HERO_IS_USED_IN_A_DECK);
             return;
         }
         deck.addCard(card);
-        view.printError(Message.ADDED_SUCCESSFULLY);
+        view.printMessage(Message.ADDED_SUCCESSFULLY);
     }
 
     private void removeCardFromDeck() {
@@ -167,16 +167,16 @@ public class CollectionMenu extends Menu {
         String deckName = request.getCommandArguments().get(1);
         Deck deck = Player.getCurrentPlayer().getCollection().getDeck(deckName);
         if (deck == null) {
-            view.printError(Message.NO_SUCH_DECK);
+            view.printMessage(Message.NO_SUCH_DECK);
             return;
         }
         Card card = deck.getCardByCollectionID(collectionID);
         if (card == null) {
-            view.printError(Message.CARD_IS_NOT_IN_DECK);
+            view.printMessage(Message.CARD_IS_NOT_IN_DECK);
             return;
         }
         deck.remove(card);
-        view.printError(Message.DELETED_SUCCESSFULLY);
+        view.printMessage(Message.DELETED_SUCCESSFULLY);
     }
 
 
@@ -184,24 +184,24 @@ public class CollectionMenu extends Menu {
         String name = request.getCommandArguments().get(0);
         Deck deck = Player.getCurrentPlayer().getCollection().getDeck(name);
         if (deck == null) {
-            view.printError(Message.NO_SUCH_DECK);
+            view.printMessage(Message.NO_SUCH_DECK);
             return;
         }
         if (deck.isValid())
-            view.printError(Message.DECK_IS_TOTALLY_VALID);
+            view.printMessage(Message.DECK_IS_TOTALLY_VALID);
         else
-            view.printError(Message.DECK_IS_NOT_VALID);
+            view.printMessage(Message.DECK_IS_NOT_VALID);
     }
 
     private void selectDeck() {
         String name = request.getCommandArguments().get(0);
         Deck deck = Player.getCurrentPlayer().getCollection().getDeck(name);
         if (deck == null) {
-            view.printError(Message.NO_SUCH_DECK);
+            view.printMessage(Message.NO_SUCH_DECK);
             return;
         }
         if (!deck.isValid()) {
-            view.printError(Message.DECK_CANNOT_BE_MAIN);
+            view.printMessage(Message.DECK_CANNOT_BE_MAIN);
             return;
         }
         Player.getCurrentPlayer().setMainDeck(deck);
@@ -215,7 +215,7 @@ public class CollectionMenu extends Menu {
         String name = request.getCommandArguments().get(0);
         Deck deck = Player.getCurrentPlayer().getCollection().getDeck(name);
         if (deck == null) {
-            view.printError(Message.NO_SUCH_DECK);
+            view.printMessage(Message.NO_SUCH_DECK);
             return;
         }
         view.showDeck(deck);

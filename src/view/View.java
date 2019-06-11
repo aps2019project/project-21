@@ -97,10 +97,10 @@ public class View {
         popup.show();
     }
 
-    public void printError(Message error) {
-        if (error == null)
+    public void printMessage(Message msg) {
+        if (msg == null)
             return;
-        popup(error.getMessage());
+        popup(msg.getMessage());
     }
 
     private void showUser(Player player) {

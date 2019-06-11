@@ -7,13 +7,13 @@ import view.View;
 abstract class Menu {
     protected View view = View.getInstance();
     protected Request request;
-    protected boolean showMenu = true;
+    boolean showMenu = true;
 
     protected void exit(){
         MenuManager.getInstance().exit();
     }
 
-    protected void invalidCommand(){
-        view.printError(Message.INVALID_COMMAND);
+    void invalidCommand(){
+        view.printMessage(Message.INVALID_COMMAND);
     }
 }

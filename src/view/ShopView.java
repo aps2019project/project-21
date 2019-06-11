@@ -2,7 +2,6 @@ package view;
 
 import controller.menus.ShopMenu;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -19,8 +18,6 @@ import models.card.Minion;
 import models.card.Spell;
 
 import java.io.FileInputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ShopView {
     private static ShopView instance = new ShopView();
@@ -66,8 +63,6 @@ public class ShopView {
 
         draw();
 
-        handleButtons();
-
         setOnActions();
     }
 
@@ -96,7 +91,7 @@ public class ShopView {
 
         search.relocate(1000, 100);
         buySell.relocate(1000, 600);
-        searchCard.relocate(1100,600);
+        searchCard.relocate(1100, 600);
 
         showCards();
 
@@ -118,12 +113,7 @@ public class ShopView {
         scrollPane.relocate(200, 100);
         scrollPane.setMaxHeight(500);
         scrollPane.setMaxWidth(700);
-        scrollPane.setStyle("-fx-background-color: transparent");
-        scrollPane.setStyle("}.scroll-pane > .viewport {\n" +
-                "   -fx-background-color: transparent;}\n" +
-                "{");
         items.setStyle("-fx-background-color: transparent");
-
     }
 
     private void showByType() {
@@ -300,13 +290,5 @@ public class ShopView {
             selectedName = null;
             selectedId = -1;
         });
-    }
-
-    private void handleButtons() {
-        List<Node> nodes = new ArrayList<>(root.getChildren());
-        for (Node node : nodes)
-            if (node instanceof Button) {
-                Button button = (Button) node;
-            }
     }
 }

@@ -51,7 +51,7 @@ public abstract class Request {
     }
 
     protected void invalidCommand() {
-        View.getInstance().printError(Message.INVALID_COMMAND);
+        View.getInstance().printMessage(Message.INVALID_COMMAND);
     }
 }
 
