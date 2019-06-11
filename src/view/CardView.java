@@ -4,11 +4,12 @@ import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import models.card.*;
+import models.card.Attacker;
+import models.card.Card;
+import models.card.Hero;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -16,9 +17,12 @@ import java.io.IOException;
 
 class CardView {
     static void showCard(Card card, TilePane items) {
-        StackPane stackPane = new StackPane();
-        stackPane.getChildren().add(shopCardGroup(card));
-        items.getChildren().add(stackPane);
+        Group ret = shopCardGroup(card);
+        if (ret != null) {
+            items.getChildren().add(ret);
+        } else {
+            System.out.print(card.getName());
+        }
     }
 
 

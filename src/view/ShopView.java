@@ -263,7 +263,7 @@ public class ShopView {
                 if (message == null) {
                     View.getInstance().popup("You haven't this card");
                 } else {
-                    selectedId = message.getId();
+                    selectedId = message.getCollectionID();
                     selectedName = null;
                     searchedCard = CardView.shopCardGroup(message);
 
