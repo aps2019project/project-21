@@ -20,6 +20,9 @@ class CardView {
         Group ret = shopCardGroup(card);
         if (ret != null) {
             items.getChildren().add(ret);
+            ret.setOnMouseClicked(event -> {
+                selectCard(card);
+            });
         } else {
             System.out.print(card.getName());
         }

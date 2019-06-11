@@ -20,8 +20,6 @@ import models.card.Spell;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ShopView {
     private static ShopView instance = new ShopView();
@@ -88,7 +86,7 @@ public class ShopView {
 
         draw();
 
-        handleButtons();
+        //handleButtons();
 
         setOnActions();
 
@@ -436,7 +434,7 @@ public class ShopView {
         return searchedCard;
     }
 
-    public ImageView[] getButton() {
+    ImageView[] getButton() {
         return button;
     }
 }
