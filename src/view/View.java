@@ -43,7 +43,6 @@ public class View {
         primaryStage.setMaximized(true);
         Player.login("a", "a");
         MainMenuView.getInstance().run();
-//        ShopView.getInstance().run();
     }
 
 
@@ -78,7 +77,7 @@ public class View {
             pane.getChildren().add(node);
     }
 
-    private void popup(String message) {
+    void popup(String message) {
         final Stage popup = new Stage();
         popup.initModality(Modality.APPLICATION_MODAL);
         popup.initOwner(primaryStage);

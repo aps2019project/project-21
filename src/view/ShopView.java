@@ -31,7 +31,7 @@ public class ShopView {
     private int buttonSelect = 1;
     private int cardType = 1;
     private Group root = new Group();
-    private Scene scene = new Scene(root);
+    private Scene scene = new Scene(root, 1536, 801.59);
     private Button back = new Button("BACK");
     private Button myCollection = new Button("COLLECTION");
     private Button shop = new Button("SHOP");
@@ -45,10 +45,11 @@ public class ShopView {
 
     void run() {
         View.getInstance().setScene(scene);
-        scene.getStylesheets().add("view/style.css");
     }
 
     {
+        scene.getStylesheets().add("view/stylesheets/shop_view.css");
+
         setBackground();
 
         draw();
@@ -78,7 +79,6 @@ public class ShopView {
         hero.relocate(300, 50);
         spell.relocate(500, 50);
         item.relocate(700, 50);
-
 
 
         showCards();
@@ -188,14 +188,14 @@ public class ShopView {
         });
 
         myCollection.setOnAction(event -> {
-            if (buttonSelect != 1 ){
+            if (buttonSelect != 1) {
                 buttonSelect = 1;
                 items.getChildren().clear();
                 showCards();
             }
         });
         shop.setOnAction(event -> {
-            if (buttonSelect != 2){
+            if (buttonSelect != 2) {
                 buttonSelect = 2;
                 items.getChildren().clear();
                 showCards();
@@ -208,15 +208,6 @@ public class ShopView {
         for (Node node : nodes)
             if (node instanceof Button) {
                 Button button = (Button) node;
-                button.setOnMouseEntered(event -> {
-                    button.setTranslateX(20);
-                    button.setTranslateY(5);
-                });
-                button.setOnMouseExited(event -> {
-                    button.setTranslateX(0);
-                    button.setTranslateY(0);
-                });
-                button.setStyle("-fx-background-color: transparent; -fx-text-fill: black;");
             }
     }
 }

@@ -48,6 +48,8 @@ public enum Message {
     NO_SPELL_SELECTED("you must choose a spell."),
     STUNNED("attacker is stunned."),
     PASSWORD_EMPTY("password is empty."),
+    NO_SUCH_USER("NO SUCH USER"),
+    INVALID_AI("INVALID AI NUMBER"),
     INVALID_COMMAND("invalid command");
 
     private String message;

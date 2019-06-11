@@ -27,8 +27,7 @@ public class Initializer {
             AIPlayer.addAIPlayer(initAIPlayers());
 
             resetCollectionIDs();
-
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
@@ -41,7 +40,7 @@ public class Initializer {
         }
     }
 
-    private static List<Spell> initSpells() throws IOException {
+    private static List<Spell> initSpells() {
         List<Spell> spells = new ArrayList<>();
         File path = new File("src//json//spells");
         File[] files = path.listFiles();
@@ -53,7 +52,7 @@ public class Initializer {
         return spells;
     }
 
-    private static List<Hero> initHeroes() throws IOException {
+    private static List<Hero> initHeroes() {
         List<Hero> heroes = new ArrayList<>();
         File path = new File("src//json//heroes");
         File[] files = path.listFiles();
@@ -65,7 +64,7 @@ public class Initializer {
         return heroes;
     }
 
-    private static List<Minion> initMinions() throws IOException {
+    private static List<Minion> initMinions() {
         List<Minion> minions = new ArrayList<>();
         File path = new File("src//json//minions");
         File[] files = path.listFiles();
@@ -77,7 +76,7 @@ public class Initializer {
         return minions;
     }
 
-    private static List<Usable> initUsables() throws IOException {
+    private static List<Usable> initUsables() {
         List<Usable> usables = new ArrayList<>();
         File path = new File("src//json//usables");
         File[] files = path.listFiles();

@@ -5,7 +5,10 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -27,7 +30,7 @@ public class MainMenuView {
     }
 
     private Group root = new Group();
-    private Scene scene = new Scene(root);
+    private Scene scene = new Scene(root, 1536, 801.59);
     private VBox beforeLoginOptions = new VBox();
     private VBox afterLoginOptions = new VBox();
     private VBox mainMenuOptions = new VBox();
@@ -54,6 +57,8 @@ public class MainMenuView {
     }
 
     {
+        scene.getStylesheets().add("view/stylesheets/mainmenu_view.css");
+
         setBackground();
 
         draw();
@@ -104,9 +109,15 @@ public class MainMenuView {
         exit.setOnAction(event -> View.getInstance().exit());
         collection.setOnAction(event -> CollectionView.getInstance().run());
         shop.setOnAction(event -> ShopView.getInstance().run());
-        battle.setOnAction(event -> {
-        });
+        battle.setOnAction(event -> createNewMatch());
         back.setOnAction(event -> isInMainMenu = false);
+    }
+
+    private void createNewMatch() {
+        if (!Player.getCurrentPlayer().hasAValidMainDeck())
+            View.getInstance().printError(Message.DECK_IS_NOT_VALID);
+        else
+            CreateMatchView.getInstance().run();
     }
 
     private void handleButtons() {
@@ -116,15 +127,6 @@ public class MainMenuView {
         for (Node node : nodes)
             if (node instanceof Button) {
                 Button button = (Button) node;
-                button.setOnMouseEntered(event -> {
-                    button.setTranslateX(20);
-                    button.setTranslateY(5);
-                });
-                button.setOnMouseExited(event -> {
-                    button.setTranslateX(0);
-                    button.setTranslateY(0);
-                });
-                button.setStyle("-fx-background-color: transparent; -fx-text-fill: #c2c2c2;");
             }
     }
 

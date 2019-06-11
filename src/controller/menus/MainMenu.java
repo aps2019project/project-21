@@ -21,77 +21,12 @@ public class MainMenu extends Menu {
     private GoalMode goalMode;
     private int flagCount;
 
-    static Menu getInstance() {
+    public static MainMenu getInstance() {
         return instance;
     }
 
     private MainMenu() {
 
-    }
-
-    private void gotoShop() {
-        MenuManager.getInstance().gotoShop();
-    }
-
-    private void gotoCollection() {
-        MenuManager.getInstance().gotoCollection();
-    }
-
-    private void battle() {
-        this.flagCount = 0;
-        this.goalMode = null;
-        this.gameMode = null;
-        this.gameType = null;
-        this.second = null;
-        if (!Player.getCurrentPlayer().hasAValidMainDeck()) {
-            view.printError(Message.MAIN_DECK_IS_INVALID);
-            return;
-        }
-        if (createNewMatch()) {
-            if (second == null || goalMode == null
-                    || gameMode == null || gameType == null
-                    || Player.getCurrentPlayer() == null) {
-                invalidCommand();
-                return;
-            }
-            if (!second.hasAValidMainDeck()) {
-                view.printError(Message.HIS_MAIN_DECK_INVALID);
-                return;
-            }
-            Match match = new Match(Player.getCurrentPlayer(), second, gameMode, gameType, goalMode, flagCount);
-            Match.setCurrentMatch(match);
-            MenuManager.getInstance().gotoBattle();
-        }
-    }
-
-    private boolean createNewMatch() {
-        System.out.print("choose match mode: (enter 1 or 2) \n" +
-                "1. single player\n" +
-                "2. multi player\n");
-        String num = InputScanner.nextLine();
-        if (!num.matches("[1-2]")) {
-            invalidCommand();
-            return false;
-        }
-        if (num.equals("1"))
-            return createSinglePlayer();
-        else
-            return createMultiPlayer();
-    }
-
-    private boolean createSinglePlayer() {
-        System.out.print("choose gameType: (enter 1 or 2):\n" +
-                "1. story\n" +
-                "2. custom game\n");
-        String num = InputScanner.nextLine();
-        if (!num.matches("[1-2]")) {
-            invalidCommand();
-            return false;
-        }
-        if (num.equals("1"))
-            return createStoryMatch();
-        else
-            return createCustomMatch();
     }
 
     private boolean createStoryMatch() {
@@ -158,6 +93,88 @@ public class MainMenu extends Menu {
         this.gameMode = GameMode.SINGLE_PLAYER;
         this.flagCount = flagCount;
         return true;
+    }
+
+    public boolean chooseOpp(String name) {
+        second = Player.getPlayerByUsername(name);
+        if (second == null) {
+            View.getInstance().printError(Message.NO_SUCH_USER);
+            return false;
+        }
+        if (!second.hasAValidMainDeck()) {
+            View.getInstance().printError(Message.DECK_IS_NOT_VALID);
+            return false;
+        }
+        return true;
+    }
+
+    public boolean chooseAI(String num) {
+        int n;
+        try {
+            n = Integer.parseInt(num);
+        } catch (Exception e) {
+            View.getInstance().printError(Message.INVALID_AI);
+            return false;
+        }
+        AIPlayer aiPlayer = AIPlayer.getAIPlayer(n);
+        if (aiPlayer == null) {
+            view.printError(Message.AIPLAYER_IS_NULL);
+            return false;
+        }
+        second = aiPlayer;
+        return true;
+    }
+
+    public void setKillHero() {
+        goalMode = GoalMode.KILL_HERO;
+    }
+
+    public void setHoldFlag(String flagCount) {
+        goalMode = GoalMode.HOLD_FLAG;
+        try {
+            this.flagCount = Integer.parseInt(flagCount);
+        } catch (Exception e) {
+            this.flagCount = 1;
+        }
+    }
+
+    public void setGatherFlag(String flagCount) {
+        goalMode = GoalMode.GATHER_FLAG;
+        try {
+            this.flagCount = Integer.parseInt(flagCount);
+        } catch (Exception e) {
+            this.flagCount = 1;
+        }
+    }
+
+    public void setSingle() {
+        this.gameMode = GameMode.SINGLE_PLAYER;
+    }
+
+    public void setMultiplayer() {
+        this.gameMode = GameMode.MULTI_PLAYER;
+        gameType = null;
+    }
+
+    public void startMatch() {
+        Match match = new Match(Player.getCurrentPlayer(), second, gameMode, gameType, goalMode, flagCount);
+        Match.setCurrentMatch(match);
+        //  view.goto battle
+    }
+
+    public void startStoryMatch(int num) {
+        if (num > 3 || num < 1)
+            return;
+        AIPlayer aiPlayer = AIPlayer.getAIPlayer(num);
+        if (aiPlayer == null) {
+            View.getInstance().printError(Message.AIPLAYER_IS_NULL);
+            return;
+        }
+        second = aiPlayer;
+        goalMode = GoalMode.KILL_HERO;
+        gameMode = GameMode.SINGLE_PLAYER;
+        gameType = GameType.STORY;
+        startMatch();
     }
 
     private boolean createMultiPlayer() {
