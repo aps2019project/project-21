@@ -86,8 +86,6 @@ public class ShopView {
 
         draw();
 
-        //handleButtons();
-
         setOnActions();
 
     }
@@ -108,10 +106,10 @@ public class ShopView {
             for (int i = 0; i < 11; i++) {
                 if (i != 10) {
                     button[i] = new ImageView(new Image(new FileInputStream
-                            ("C:\\project-21\\src\\assets\\button.png")));
+                            ("src\\assets\\button.png")));
                 } else {
                     button[i] = new ImageView(new Image(new FileInputStream
-                            ("C:\\project-21\\src\\assets\\red_button.png")));
+                            ("src\\assets\\red_button.png")));
                 }
                 if (i == 0) {
                     button[i].relocate(20, 80);
@@ -297,7 +295,7 @@ public class ShopView {
 
                 try{
                 button[10].setImage(new Image(new FileInputStream
-                        ("C:\\project-21\\src\\assets\\red_button.png")));
+                        ("src\\assets\\red_button.png")));
                 } catch (IOException ex){
                     View.printThrowable(ex);
                 }
@@ -321,7 +319,7 @@ public class ShopView {
 
                 try{
                     button[10].setImage(new Image(new FileInputStream
-                            ("C:\\project-21\\src\\assets\\red_button.png")));
+                            ("src\\assets\\red_button.png")));
                 } catch (IOException ex){
                     View.printThrowable(ex);
                 }
@@ -344,7 +342,7 @@ public class ShopView {
 
                     try{
                         button[10].setImage(new Image(new FileInputStream
-                                ("C:\\project-21\\src\\assets\\button.png")));
+                                ("src\\assets\\button.png")));
                     } catch (IOException ex){
                         View.printThrowable(ex);
                     }
@@ -364,7 +362,7 @@ public class ShopView {
 
                     try{
                         button[10].setImage(new Image(new FileInputStream
-                                ("C:\\project-21\\src\\assets\\button.png")));
+                                ("src\\assets\\button.png")));
                     } catch (IOException ex){
                         View.printThrowable(ex);
                     }
@@ -386,7 +384,7 @@ public class ShopView {
 
                     try{
                         button[10].setImage(new Image(new FileInputStream
-                                ("C:\\project-21\\src\\assets\\red_button.png")));
+                                ("src\\assets\\red_button.png")));
                     } catch (IOException ex){
                         View.printThrowable(ex);
                     }
@@ -405,7 +403,7 @@ public class ShopView {
 
                     try{
                         button[10].setImage(new Image(new FileInputStream
-                                ("C:\\project-21\\src\\assets\\red_button.png")));
+                                ("src\\assets\\red_button.png")));
                     } catch (IOException ex){
                         View.printThrowable(ex);
                     }

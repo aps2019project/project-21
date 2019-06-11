@@ -100,7 +100,7 @@ class CardView {
 
         try {
             shopView.getButton()[10].setImage(new Image(new FileInputStream
-                    ("C:\\project-21\\src\\assets\\button.png")));
+                    ("src\\assets\\button.png")));
         } catch (IOException ex){
             View.printThrowable(ex);
         }
