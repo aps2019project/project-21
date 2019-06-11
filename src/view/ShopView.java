@@ -54,7 +54,6 @@ public class ShopView {
 
     void run() {
         View.getInstance().setScene(scene);
-        scene.getStylesheets().add("view/style.css");
     }
 
     {
