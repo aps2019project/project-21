@@ -17,9 +17,6 @@ public class ShopMenu extends Menu {
 
     }
 
-    private void showCollection() {
-        view.showCollection(Player.getCurrentPlayer().getCollection());
-    }
 
     public static Card search(String cardName) {
         return Card.getCardByName(cardName);
@@ -55,7 +52,4 @@ public class ShopMenu extends Menu {
         return "Sell successful";
     }
 
-    private void show() {
-        view.showShop();
-    }
 }

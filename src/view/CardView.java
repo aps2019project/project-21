@@ -7,9 +7,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import models.card.Attacker;
 import models.card.Card;
 import models.card.Hero;
+import models.card.Spell;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -69,19 +71,61 @@ class CardView {
                 nameImage.setScaleX(0.45);
                 nameImage.relocate(28, 125);
 
-                Label name = new Label(card.getName() + "\n  " + ((card instanceof Hero) ? "Hero" : "Minion"));
+                Label name = new Label(card.getName() + "\n" + ((card instanceof Hero) ? "Hero" : "Minion"));
+                name.setTextAlignment(TextAlignment.CENTER);
                 name.relocate(87, 135);
                 name.setTextFill(Color.WHITE);
                 name.setFont(Font.font(14));
 
-                ret.getChildren().addAll(imageView, image, nameImage, mp, MP, hp, ap, name);
+                Label desc = new Label(smallDesc(card.getDesc()));
+                desc.setFont(Font.font(15));
+                desc.relocate(20, 210);
+                desc.setTextFill(Color.WHITE);
+                desc.setTextAlignment(TextAlignment.CENTER);
+
+                ret.getChildren().addAll(imageView, desc, image, nameImage, mp, MP, hp, ap, name);
+                return ret;
+            } catch (IOException ex) {
+                View.printThrowable(ex);
+                return null;
+            }
+        } else {
+            Group ret = new Group();
+            try {
+                ImageView imageView = new ImageView(new Image(new FileInputStream
+                        ("src\\assets\\cards\\spell_background.png")));
+
+
+                ImageView mp = new ImageView(new Image(new FileInputStream
+                        ("src\\assets\\cards\\mana.png")));
+                Label MP = new Label(Integer.toString(card.getPrice()));
+                MP.setFont(Font.font(14));
+                MP.relocate(7, 22);
+
+                Label name = new Label(card.getName() + "\n" + ((card instanceof Spell) ? "Spell" : "Usable"));
+                name.setTextAlignment(TextAlignment.CENTER);
+                name.relocate(80, 100);
+                name.setTextFill(Color.WHITE);
+                name.setFont(Font.font(14));
+
+                Image t = new Image(new FileInputStream("src\\assets\\cards\\name.png"));
+                ImageView nameImage = new ImageView(t);
+                nameImage.relocate(20, 90);
+
+                Label desc = new Label(smallDesc(card.getDesc()));
+                desc.setFont(Font.font(15));
+                desc.relocate(20, 200);
+                desc.setTextFill(Color.WHITE);
+                desc.setTextAlignment(TextAlignment.CENTER);
+
+                ret.getChildren().addAll(imageView, desc, nameImage, mp, MP, name);
                 return ret;
             } catch (IOException ex) {
                 View.printThrowable(ex);
                 return null;
             }
         }
-        return null;
+
     }
 
     private static void selectCard(Card card) {
@@ -101,12 +145,32 @@ class CardView {
         try {
             shopView.getButton()[10].setImage(new Image(new FileInputStream
                     ("src\\assets\\button.png")));
-        } catch (IOException ex){
+        } catch (IOException ex) {
             View.printThrowable(ex);
         }
 
         shopView.setSearchedCard(ret);
         shopView.getRoot().getChildren().addAll(shopView.getSearchedCard());
+    }
+
+    static private String smallDesc(String desc){
+        String[] space = desc.split(" ");
+        StringBuilder ret = new StringBuilder();
+        int thisLine = 0;
+        int num = 0;
+        while (num != space.length){
+            if (space[num].length() + thisLine < 30){
+                ret.append(" ");
+                ret.append(space[num]);
+                thisLine += (1 + space[num].length());
+            } else {
+                ret.append("\n");
+                ret.append(space[num]);
+                thisLine = space[num].length();
+            }
+            num++;
+        }
+        return ret.toString();
     }
 
 }
