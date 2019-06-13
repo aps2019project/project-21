@@ -562,7 +562,7 @@ public class ShopView {
             } else {
                 Card message = ShopMenu.searchCollection(name);
                 if (message == null) {
-                    View.getInstance().popup("You haven't this card");
+                    View.getInstance().popup("You don't have this card.");
                 } else {
                     root.getChildren().remove(searchedCard);
 
@@ -597,7 +597,7 @@ public class ShopView {
             } else {
                 Card message = ShopMenu.searchCollection(name);
                 if (message == null) {
-                    View.getInstance().popup("You haven't this card");
+                    View.getInstance().popup("You don't have this card.");
                 } else {
                     root.getChildren().remove(searchedCard);
 
