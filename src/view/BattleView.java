@@ -2,19 +2,31 @@ package view;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.effect.PerspectiveTransform;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.shape.Rectangle;
+import models.card.Attacker;
+import models.match.Match;
 
 import java.io.FileInputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BattleView {
+    private static final int TILE_SIZE = 70;
+    private static final int VALLEY_SIZE = 4;
+
+    private Match match = Match.getCurrentMatch();
     private Group root = new Group();
     private Scene scene = new Scene(root, 1536, 801.59);
-    private int tileSize = 73;
-    private int valleySize = 5;
     private Group table = new Group();
+    private Rectangle[][] cells = new Rectangle[5][9];
+    private Map<Attacker, Container> map = new HashMap<>();
+    private Group groundedAttackers = new Group();
+    private Button endTurn = new Button("END TURN");
+    private Group hub = new Group();
 
     public void run() {
         View.getInstance().setScene(scene);
@@ -25,38 +37,82 @@ public class BattleView {
 
         setBackground();
 
-        drawField();
+        drawTable();
 
         drawHub();
+
+        setOnActions();
+
+        root.getChildren().addAll(hub, table);
     }
 
 
-    private void drawField() {
+    private void drawTable() {
+        table.relocate(450, 240);
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 9; j++) {
-                Rectangle rectangle = new Rectangle(tileSize, tileSize);
-                rectangle.relocate(j * (tileSize + valleySize), i * (tileSize + valleySize));
-                rectangle.setStyle("-fx-fill:  rgba(0,0,0,0.2)");
-                table.getChildren().add(rectangle);
+                Rectangle rect = new Rectangle(TILE_SIZE, TILE_SIZE);
+                rect.relocate(j * (TILE_SIZE + VALLEY_SIZE), i * (TILE_SIZE + VALLEY_SIZE));
+                rect.getStyleClass().add("rectangle");
+                int u = i;
+                int v = j;
+                rect.setOnMouseClicked(event -> {
+                    if (event.getButton() == MouseButton.PRIMARY)
+                        match.moveCard(u, v);
+                });
+                table.getChildren().add(rect);
+                cells[i][j] = rect;
             }
         }
-        PerspectiveTransform p = new PerspectiveTransform();
-        int dx = -30;
-        int dy = -5;
-        p.setUlx(500 + dx);
-        p.setUly(250 + dy);
-        p.setUrx(1100 + dx);
-        p.setUry(250 + dy);
-        p.setLlx(450 + dx);
-        p.setLly(600 + dy);
-        p.setLrx(1150 + dx);
-        p.setLry(600 + dy);
-        table.setEffect(p);
-        root.getChildren().add(table);
+
+        try {
+            for (Attacker a : match.getBothGroundedAttackers()) {
+                match.showBattleField();
+                Container c = new Container();
+                c.attacker = a;
+                c.idle = new ImageView(new Image(new FileInputStream("src/assets/gifs/hero_idle.gif")));
+                c.run = new ImageView(new Image(new FileInputStream("src/assets/gifs/hero_run.gif")));
+                c.attack = new ImageView(new Image(new FileInputStream("src/assets/gifs/hero_attack.gif")));
+                System.out.println(a.getCurrentCell().getX());
+                System.out.println(a.getCurrentCell().getY());
+                Rectangle r = cells[a.getCurrentCell().getX()][a.getCurrentCell().getY()];
+                c.currentRectangle = r;
+                c.g.relocate(r.getLayoutX(), r.getLayoutY() - 40);
+                c.g.getChildren().add(c.idle);
+                c.g.setOnMouseClicked(event -> {
+                    if (event.getButton() == MouseButton.PRIMARY) {
+                        match.setSelectedCard(a);
+                        c.currentRectangle.setStyle("-fx-fill: rgba(255, 255, 0, 0.2)");
+                    } else if (event.getButton() == MouseButton.SECONDARY) {
+                        match.setSelectedCard(null);
+                        c.currentRectangle.setStyle("-fx-fill: rgba(0, 0, 0, 0.1)");
+                    }
+                });
+                groundedAttackers.getChildren().add(c.g);
+                map.put(a, c);
+            }
+
+        } catch (Exception e) {
+            View.printThrowable(e);
+        }
+        table.getChildren().add(groundedAttackers);
+    }
+
+    public void moveAttacker(Attacker a) {
+        Container c = map.get(a);
+        if (c != null) {
+            Rectangle r = cells[a.getCurrentCell().getX()][a.getCurrentCell().getY()];
+            c.g.relocate(r.getLayoutX(), r.getLayoutY() - 40);
+        }
     }
 
     private void drawHub() {
+        endTurn.relocate(1300, 700);
+        hub.getChildren().addAll(endTurn);
+    }
 
+    private void setOnActions() {
+        endTurn.setOnAction(event -> match.endTurn());
     }
 
     private void setBackground() {

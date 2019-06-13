@@ -18,13 +18,13 @@ import java.util.List;
 public class Initializer {
     public static void main() {
         try {
-            Spell.addSpell(initSpells());
-            Hero.addHero(initHeroes());
-            Minion.addMinion(initMinions());
-            Collectable.addCollectable(initCollectables());
-            Usable.addUsable(initUsables());
             Player.addPlayer(initPlayers());
             AIPlayer.addAIPlayer(initAIPlayers());
+            Hero.addHero(initHeroes());
+            Minion.addMinion(initMinions());
+            Spell.addSpell(initSpells());
+            Collectable.addCollectable(initCollectables());
+            Usable.addUsable(initUsables());
 
             resetCollectionIDs();
         } catch (Exception e) {

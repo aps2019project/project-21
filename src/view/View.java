@@ -422,18 +422,20 @@ public class View {
         Match match = Match.getCurrentMatch();
         if (match == null)
             return;
+        String message = "";
         if (match.getGoalMode() == GoalMode.KILL_HERO) {
             for (PlayerMatchInfo p : match.getPlayersMatchInfo())
-                System.out.println(p.getHero().getCardIDInGame() + "'s hp: " + p.getHero().getHP());
+                message += p.getHero().getCardIDInGame() + "'s hp: " + p.getHero().getHP();
         } else if (match.getGoalMode() == GoalMode.HOLD_FLAG) {
-            System.out.println(match.whoHasFlag().getName());
-            System.out.println("flags position: (" + match.getFlags().get(0).getCurrentCell().getX() + ", "
-                    + match.getFlags().get(0).getCurrentCell().getY() + ")");
+            message += match.whoHasFlag().getName();
+            message += "flags position: (" + match.getFlags().get(0).getCurrentCell().getX() + ", "
+                    + match.getFlags().get(0).getCurrentCell().getY() + ")";
         } else if (match.getGoalMode() == GoalMode.GATHER_FLAG) {
-            System.out.println("These guys have the flags: ");
+            message += "These guys have the flags: ";
             for (Attacker attacker : match.whoHasFlags())
-                System.out.println(attacker.getCardIDInGame() + " in team " + (match.getCardsTeam(attacker) + 1));
+                message += attacker.getCardIDInGame() + " in team " + (match.getCardsTeam(attacker) + 1);
         }
+        view.popup(message);
     }
 
     public void showAttacker(Attacker attacker) {
