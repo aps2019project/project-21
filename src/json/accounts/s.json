@@ -1,7 +1,7 @@
 {
   "@type": "models.Player",
   "@val": {
-    "username": "a",
+    "username": "s",
     "password": "a",
     "collection": {
       "decks": [
