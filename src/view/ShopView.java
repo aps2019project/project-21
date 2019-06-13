@@ -87,7 +87,7 @@ public class ShopView {
     {
         try {
             left = new ImageView(new Image(new FileInputStream
-                    ("C:\\project-21\\src\\assets\\cards\\left.png")));
+                    ("src\\assets\\cards\\left.png")));
         } catch (IOException ex) {
             View.printThrowable(ex);
         }
@@ -104,7 +104,7 @@ public class ShopView {
 
     private void setBackground() {
         try {
-            ImageView background = new ImageView(new Image(new FileInputStream("C:\\project-21\\src\\assets\\cards" +
+            ImageView background = new ImageView(new Image(new FileInputStream("src\\assets\\cards" +
                     "\\shop.jpg")));
             background.fitWidthProperty().bind(scene.widthProperty());
             background.fitHeightProperty().bind(scene.heightProperty());
@@ -175,7 +175,7 @@ public class ShopView {
         for (int i = 0; i < 3; i++) {
             try {
                 button[i] = new ImageView(new Image(new FileInputStream
-                        ("C:\\project-21\\src\\assets\\cards\\button.png")));
+                        ("src\\assets\\cards\\button.png")));
                 button[i].relocate(0, 100 + 43 * i);
                 button[i].setScaleX(1.2);
                 root.getChildren().add(button[i]);
@@ -185,7 +185,7 @@ public class ShopView {
         }
 
         try {
-            button[1].setImage(new Image(new FileInputStream("C:\\project-21\\src\\assets\\cards\\onselect.png")));
+            button[1].setImage(new Image(new FileInputStream("src\\assets\\cards\\onselect.png")));
             button[1].setScaleX(1.5);
             myCollection.setScaleX(1.5);
         } catch (IOException ex) {
@@ -196,7 +196,7 @@ public class ShopView {
         for (int i = 0; i < 4; i++) {
             try {
                 types[i] = new ImageView(new Image(new FileInputStream
-                        ("C:\\project-21\\src\\assets\\cards\\button.png")));
+                        ("src\\assets\\cards\\button.png")));
                 types[i].relocate(0, 300 + 43 * i);
                 types[i].setScaleX(1.2);
                 root.getChildren().add(types[i]);
@@ -206,7 +206,7 @@ public class ShopView {
         }
 
         try {
-            types[1].setImage(new Image(new FileInputStream("C:\\project-21\\src\\assets\\cards\\onselect.png")));
+            types[1].setImage(new Image(new FileInputStream("src\\assets\\cards\\onselect.png")));
             types[1].setScaleX(1.5);
             hero.setScaleX(1.5);
         } catch (IOException ex) {
@@ -451,7 +451,7 @@ public class ShopView {
 
                     button[0].setScaleX(1.2);
                     button[0].setImage(new Image(new FileInputStream
-                            ("C:\\project-21\\src\\assets\\cards\\button.png")));
+                            ("src\\assets\\cards\\button.png")));
                     shop.setScaleX(1);
                 } catch (IOException ex) {
                     View.printThrowable(ex);
@@ -472,7 +472,7 @@ public class ShopView {
                 searchedCard.getChildren().clear();
 
                 try {
-                    button[1].setImage(new Image(new FileInputStream("C:\\project-21\\src\\assets\\cards\\onselect.png")));
+                    button[1].setImage(new Image(new FileInputStream("src\\assets\\cards\\onselect.png")));
                     button[1].setScaleX(1.5);
                     myCollection.setScaleX(1.5);
 
@@ -500,13 +500,13 @@ public class ShopView {
                 searchedCard.getChildren().clear();
 
                 try {
-                    button[0].setImage(new Image(new FileInputStream("C:\\project-21\\src\\assets\\cards\\onselect.png")));
+                    button[0].setImage(new Image(new FileInputStream("src\\assets\\cards\\onselect.png")));
                     button[0].setScaleX(1.5);
                     shop.setScaleX(1.5);
 
                     button[1].setScaleX(1.2);
                     button[1].setImage(new Image(new FileInputStream
-                            ("C:\\project-21\\src\\assets\\cards\\button.png")));
+                            ("src\\assets\\cards\\button.png")));
                     myCollection.setScaleX(1);
                 } catch (IOException ex) {
                     View.printThrowable(ex);
@@ -528,13 +528,13 @@ public class ShopView {
                 searchedCard.getChildren().clear();
 
                 try {
-                    button[0].setImage(new Image(new FileInputStream("C:\\project-21\\src\\assets\\cards\\onselect.png")));
+                    button[0].setImage(new Image(new FileInputStream("src\\assets\\cards\\onselect.png")));
                     button[0].setScaleX(1.5);
                     shop.setScaleX(1.5);
 
                     button[1].setScaleX(1.2);
                     button[1].setImage(new Image(new FileInputStream
-                            ("C:\\project-21\\src\\assets\\cards\\button.png")));
+                            ("src\\assets\\cards\\button.png")));
                     myCollection.setScaleX(1);
                 } catch (IOException ex) {
                     View.printThrowable(ex);
@@ -562,7 +562,7 @@ public class ShopView {
             } else {
                 Card message = ShopMenu.searchCollection(name);
                 if (message == null) {
-                    View.getInstance().popup("You haven't this card");
+                    View.getInstance().popup("You don't have this card.");
                 } else {
                     root.getChildren().remove(searchedCard);
 
@@ -597,7 +597,7 @@ public class ShopView {
             } else {
                 Card message = ShopMenu.searchCollection(name);
                 if (message == null) {
-                    View.getInstance().popup("You haven't this card");
+                    View.getInstance().popup("You don't have this card.");
                 } else {
                     root.getChildren().remove(searchedCard);
 
@@ -695,7 +695,7 @@ public class ShopView {
     private void setScale(int cardType, boolean direction) throws IOException {
         if (direction) {
             types[cardType - 1].setImage(new Image(new FileInputStream
-                    ("C:\\project-21\\src\\assets\\cards\\button.png")));
+                    ("src\\assets\\cards\\button.png")));
             types[cardType - 1].setScaleX(1.2);
             switch (cardType) {
                 case 1:
@@ -712,7 +712,7 @@ public class ShopView {
             }
         } else {
             types[cardType - 1].setImage(new Image(new FileInputStream
-                    ("C:\\project-21\\src\\assets\\cards\\onselect.png")));
+                    ("src\\assets\\cards\\onselect.png")));
             types[cardType - 1].setScaleX(1.5);
             switch (cardType) {
                 case 1:
