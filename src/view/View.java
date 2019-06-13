@@ -16,7 +16,6 @@ import models.Item.Item;
 import models.Item.Usable;
 import models.Player;
 import models.card.*;
-import models.match.GameMode;
 import models.match.GoalMode;
 import models.match.Match;
 import models.match.PlayerMatchInfo;
@@ -42,17 +41,17 @@ public class View {
     public void run() {
         primaryStage.setTitle("Duelyst");
         primaryStage.setMaximized(true);
-//        try {
-//            Thread.sleep(2000);
-//        } catch (Exception e) {
-//            View.printThrowable(e);
-//        }
-//        Player.login("a", "a");
-//        Match.setCurrentMatch(new Match(Player.getCurrentPlayer(), Player.getCurrentPlayer(), GameMode.MULTI_PLAYER,
-//                null, GoalMode.KILL_HERO, 0));
-        BattleView battleView = new BattleView();
-        battleView.run();
-//        MainMenuView.getInstance().run();
+        try {
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            View.printThrowable(e);
+        }
+        //Player.login("a", "a");
+        //Match.setCurrentMatch(new Match(Player.getCurrentPlayer(), Player.getCurrentPlayer(), GameMode.MULTI_PLAYER,
+         //       null, GoalMode.KILL_HERO, 0));
+        //BattleView battleView = new BattleView();
+        //battleView.run();
+        MainMenuView.getInstance().run();
     }
 
 

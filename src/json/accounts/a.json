@@ -1045,41 +1045,7 @@
               }
             }
           ],
-          "usable": {
-            "applyType": null,
-            "effects": [
-              {
-                "@type": "models.card.effects.GiveEffect",
-                "@val": {
-                  "duration": 12,
-                  "num": 0,
-                  "value": 0,
-                  "effectName": "HOLY",
-                  "cell": null,
-                  "attacker": null,
-                  "player": null,
-                  "match": null,
-                  "activationType": "NONE"
-                }
-              }
-            ],
-            "targetType": {
-              "randomOrNot": "NOT_RANDOM",
-              "targetAttackerRange": "ALL_THREE",
-              "cellType": "NONE",
-              "heroOrMinion": "HERO",
-              "oppOrAlly": "ALLY",
-              "chooseType": "NONE"
-            },
-            "desc": "Gives ally hero 12 holu buffs.",
-            "name": "Namoose_Separ",
-            "id": 101,
-            "collectionID": 307,
-            "cardIDInGame": null,
-            "price": 4000,
-            "manaCost": 0,
-            "currentCell": null
-          },
+          "usable": null,
           "hero": {
             "primaryCooldown": 0,
             "cooldown": 2,
@@ -1131,7 +1097,7 @@
             "flag": null,
             "name": "Arash",
             "id": 119,
-            "collectionID": 283,
+            "collectionID": 282,
             "cardIDInGame": null,
             "price": 10000,
             "manaCost": -1,
@@ -1163,73 +1129,6 @@
       ],
       "mainDeck": "@root.collection.decks.0",
       "heroes": [
-        {
-          "primaryCooldown": 0,
-          "cooldown": 2,
-          "maxHp": 50,
-          "maxAp": 4,
-          "hp": 50,
-          "ap": 4,
-          "specialPower": {
-            "applyType": "ON_ATTACKER",
-            "targetType": {
-              "randomOrNot": "NOT_RANDOM",
-              "targetAttackerRange": "ALL_THREE",
-              "cellType": "SINGLE_CELL",
-              "heroOrMinion": "HERO",
-              "oppOrAlly": "ALLY",
-              "chooseType": "HIMSELF"
-            },
-            "effects": [
-              {
-                "@type": "models.card.buffs.PowerAP",
-                "@val": {
-                  "value": 4,
-                  "initialAP": 0,
-                  "duration": 2147483647,
-                  "buffMode": "GOOD",
-                  "cell": null,
-                  "attacker": null,
-                  "player": null,
-                  "match": null,
-                  "activationType": "NONE"
-                }
-              }
-            ],
-            "desc": "Casts one power buff with 4 ap increase on himself forever",
-            "isCommandValid": true,
-            "name": "Dive_Sefid's_Spell",
-            "id": 100,
-            "collectionID": 0,
-            "cardIDInGame": null,
-            "price": 0,
-            "manaCost": 1,
-            "currentCell": null
-          },
-          "appliedEffects": [],
-          "attackRange": 1,
-          "attackMode": "MELEE",
-          "canMove": true,
-          "canAttack": true,
-          "isDisarmed": false,
-          "isStunned": false,
-          "hasHolyBuff": false,
-          "flag": null,
-          "name": "Dive_Sefid",
-          "id": 101,
-          "collectionID": 280,
-          "cardIDInGame": null,
-          "price": 8000,
-          "manaCost": -1,
-          "currentCell": {
-            "x": 0,
-            "y": 0,
-            "effects": [],
-            "collectable": null,
-            "flag": null,
-            "currentAttacker": null
-          }
-        },
         {
           "primaryCooldown": 0,
           "cooldown": 0,
@@ -1317,9 +1216,139 @@
           "flag": null,
           "name": "Afsaneh",
           "id": 122,
-          "collectionID": 386,
+          "collectionID": 283,
           "cardIDInGame": null,
           "price": 11000,
+          "manaCost": -1,
+          "currentCell": {
+            "x": 0,
+            "y": 0,
+            "effects": [],
+            "collectable": null,
+            "flag": null,
+            "currentAttacker": null
+          }
+        },
+        {
+          "primaryCooldown": 3,
+          "cooldown": 0,
+          "maxHp": 50,
+          "maxAp": 4,
+          "hp": 50,
+          "ap": 4,
+          "specialPower": {
+            "applyType": "ON_CELL",
+            "targetType": {
+              "randomOrNot": "NOT_RANDOM",
+              "targetAttackerRange": "ALL_THREE",
+              "cellType": "NONE",
+              "heroOrMinion": "BOTH",
+              "oppOrAlly": "OPP",
+              "chooseType": "SELECTED_OPP"
+            },
+            "effects": [
+              {
+                "@type": "models.card.buffs.Holy",
+                "@val": {
+                  "duration": 3,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "NONE"
+                }
+              }
+            ],
+            "desc": "Gives a selected cell holy buff for 3 turns.",
+            "isCommandValid": true,
+            "name": "Kaveh's_Spell",
+            "id": 115,
+            "collectionID": 0,
+            "cardIDInGame": null,
+            "price": 0,
+            "manaCost": 1,
+            "currentCell": null
+          },
+          "appliedEffects": [],
+          "attackRange": 1,
+          "attackMode": "MELEE",
+          "canMove": true,
+          "canAttack": true,
+          "isDisarmed": false,
+          "isStunned": false,
+          "hasHolyBuff": false,
+          "flag": null,
+          "name": "Kaveh",
+          "id": 116,
+          "collectionID": 386,
+          "cardIDInGame": null,
+          "price": 8000,
+          "manaCost": -1,
+          "currentCell": {
+            "x": 0,
+            "y": 0,
+            "effects": [],
+            "collectable": null,
+            "flag": null,
+            "currentAttacker": null
+          }
+        },
+        {
+          "primaryCooldown": 3,
+          "cooldown": 0,
+          "maxHp": 50,
+          "maxAp": 4,
+          "hp": 50,
+          "ap": 4,
+          "specialPower": {
+            "applyType": "ON_CELL",
+            "targetType": {
+              "randomOrNot": "NOT_RANDOM",
+              "targetAttackerRange": "ALL_THREE",
+              "cellType": "NONE",
+              "heroOrMinion": "BOTH",
+              "oppOrAlly": "OPP",
+              "chooseType": "SELECTED_OPP"
+            },
+            "effects": [
+              {
+                "@type": "models.card.buffs.Holy",
+                "@val": {
+                  "duration": 3,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "NONE"
+                }
+              }
+            ],
+            "desc": "Gives a selected cell holy buff for 3 turns.",
+            "isCommandValid": true,
+            "name": "Kaveh's_Spell",
+            "id": 115,
+            "collectionID": 0,
+            "cardIDInGame": null,
+            "price": 0,
+            "manaCost": 1,
+            "currentCell": null
+          },
+          "appliedEffects": [],
+          "attackRange": 1,
+          "attackMode": "MELEE",
+          "canMove": true,
+          "canAttack": true,
+          "isDisarmed": false,
+          "isStunned": false,
+          "hasHolyBuff": false,
+          "flag": null,
+          "name": "Kaveh",
+          "id": 116,
+          "collectionID": 388,
+          "cardIDInGame": null,
+          "price": 8000,
           "manaCost": -1,
           "currentCell": {
             "x": 0,
@@ -1824,7 +1853,41 @@
         "@root.collection.decks.0.cards.5"
       ],
       "usables": [
-        "@root.collection.decks.0.usable",
+        {
+          "applyType": null,
+          "effects": [
+            {
+              "@type": "models.card.effects.GiveEffect",
+              "@val": {
+                "duration": 12,
+                "num": 0,
+                "value": 0,
+                "effectName": "HOLY",
+                "cell": null,
+                "attacker": null,
+                "player": null,
+                "match": null,
+                "activationType": "NONE"
+              }
+            }
+          ],
+          "targetType": {
+            "randomOrNot": "NOT_RANDOM",
+            "targetAttackerRange": "ALL_THREE",
+            "cellType": "NONE",
+            "heroOrMinion": "HERO",
+            "oppOrAlly": "ALLY",
+            "chooseType": "NONE"
+          },
+          "desc": "Gives ally hero 12 holu buffs.",
+          "name": "Namoose_Separ",
+          "id": 101,
+          "collectionID": 307,
+          "cardIDInGame": null,
+          "price": 4000,
+          "manaCost": 0,
+          "currentCell": null
+        },
         {
           "applyType": null,
           "effects": [
@@ -1881,7 +1944,7 @@
         }
       ]
     },
-    "drake": 20000000,
+    "drake": 19992000,
     "matchHistory": [],
     "wins": 0,
     "losses": 0,

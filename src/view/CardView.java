@@ -138,28 +138,22 @@ class CardView {
             shopView.setSelectedName(card.getName());
         }
         Group ret = shopCardGroup(card);
-        ret.relocate(950, 100);
+        ret.relocate(1000, 100);
 
         shopView.getRoot().getChildren().remove(shopView.getSearchedCard());
 
-        try {
-            shopView.getButton()[10].setImage(new Image(new FileInputStream
-                    ("src\\assets\\button.png")));
-        } catch (IOException ex) {
-            View.printThrowable(ex);
-        }
 
         shopView.setSearchedCard(ret);
         shopView.getRoot().getChildren().addAll(shopView.getSearchedCard());
     }
 
-    static private String smallDesc(String desc){
+    static private String smallDesc(String desc) {
         String[] space = desc.split(" ");
         StringBuilder ret = new StringBuilder();
         int thisLine = 0;
         int num = 0;
-        while (num != space.length){
-            if (space[num].length() + thisLine < 30){
+        while (num != space.length) {
+            if (space[num].length() + thisLine < 30) {
                 ret.append(" ");
                 ret.append(space[num]);
                 thisLine += (1 + space[num].length());
