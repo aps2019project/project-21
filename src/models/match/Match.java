@@ -7,11 +7,11 @@ import models.Item.Collectable;
 import models.Item.Flag;
 import models.Player;
 import models.card.*;
+import view.BattleView;
 import view.Message;
 import view.View;
 
 import java.time.LocalDateTime;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +20,7 @@ public class Match {
     private static final int DEFAULT_WINNING_PRIZE = 1000;
     private static Match currentMatch;
 
+    private BattleView battleView;
     private Player[] players = new Player[2];
     private Battlefield battlefield;
     private PlayerMatchInfo[] info = new PlayerMatchInfo[2];
@@ -61,8 +62,16 @@ public class Match {
         initiateMatch();
     }
 
+    public void setBattleView(BattleView battleView) {
+        this.battleView = battleView;
+    }
+
     public Battlefield getBattlefield() {
         return battlefield;
+    }
+
+    public void setSelectedCard(Card card) {
+        selectedCard = card;
     }
 
     private boolean selectAttacker(String attackerID) {
@@ -140,6 +149,7 @@ public class Match {
         attacker.setCannotMove();
         goOnCell(attacker, target);
         System.out.println(selectedCard.getCardIDInGame() + " moved to (" + x + ", " + y + ")");
+        battleView.moveAttacker(attacker);
     }
 
     private boolean isMoveTargetValid(Cell target) {
@@ -726,6 +736,7 @@ public class Match {
         if (gameMode == GameMode.SINGLE_PLAYER)
             if (turn == 1)
                 aiPlay();
+        System.out.println("turn ended.");
     }
 
     private void prepareNextRound() {
