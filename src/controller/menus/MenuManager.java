@@ -1,7 +1,5 @@
 package controller.menus;
 
-import view.View;
-
 public class MenuManager {
     private static MenuManager instance = new MenuManager();
 
@@ -10,49 +8,6 @@ public class MenuManager {
     }
 
     private MenuType menuType = MenuType.ACCOUNT_MENU;
-
-    public void main() {
-
-//        menuLoop:
-//        while (true) {
-//            try {
-//                switch (menuType) {
-//                    case ACCOUNT_MENU:
-//                        AccountMenu.getInstance().main();
-//                        break;
-//                    case MAIN_MENU:
-//                        MainMenu.getInstance().main();
-//                        break;
-//                    case SHOP_MENU:
-//                        ShopMenu.getInstance().main();
-//                        break;
-//                    case BATTLE_MENU:
-//                        BattleMenu.getInstance().main();
-//                        break;
-//                    case GRAVEYARD_MENU:
-//                        Graveyard.getInstance().main();
-//                        break;
-//                    case COLLECTION_MENU:
-//                        CollectionMenu.getInstance().main();
-//                        break;
-//                    case EXIT:
-//                        break menuLoop;
-//                }
-//            } catch (Throwable e) {
-//                View.printThrowable(e);
-//            }
-//        }
-    }
-
-    void gotoShop() {
-        menuType = MenuType.SHOP_MENU;
-        ShopMenu.getInstance().showMenu = true;
-    }
-
-    void gotoCollection() {
-        menuType = MenuType.COLLECTION_MENU;
-        CollectionMenu.getInstance().showMenu = true;
-    }
 
     void gotoBattle() {
         menuType = MenuType.BATTLE_MENU;
@@ -66,11 +21,6 @@ public class MenuManager {
     void gotoGraveyard() {
         menuType = MenuType.GRAVEYARD_MENU;
         Graveyard.getInstance().showMenu = true;
-    }
-
-    void gotoAccount() {
-        menuType = MenuType.ACCOUNT_MENU;
-        AccountMenu.getInstance().showMenu = true;
     }
 
     public void gotoMainMenu() {

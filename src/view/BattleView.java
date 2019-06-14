@@ -1,5 +1,6 @@
 package view;
 
+import controller.menus.BattleMenu;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -27,6 +28,7 @@ public class BattleView {
     private Group groundedAttackers = new Group();
     private Button endTurn = new Button("END TURN");
     private Group hub = new Group();
+    private Rectangle selectedRect;
 
     public void run() {
         View.getInstance().setScene(scene);
@@ -38,6 +40,8 @@ public class BattleView {
         setBackground();
 
         drawTable();
+
+        handleSelection();
 
         drawHub();
 
@@ -54,14 +58,8 @@ public class BattleView {
                 Rectangle rect = new Rectangle(TILE_SIZE, TILE_SIZE);
                 rect.relocate(j * (TILE_SIZE + VALLEY_SIZE), i * (TILE_SIZE + VALLEY_SIZE));
                 rect.getStyleClass().add("rectangle");
-                int u = i;
-                int v = j;
-                rect.setOnMouseClicked(event -> {
-                    if (event.getButton() == MouseButton.PRIMARY)
-                        match.moveCard(u, v);
-                });
-                table.getChildren().add(rect);
                 cells[i][j] = rect;
+                table.getChildren().add(rect);
             }
         }
 
@@ -80,13 +78,13 @@ public class BattleView {
                 c.g.relocate(r.getLayoutX(), r.getLayoutY() - 40);
                 c.g.getChildren().add(c.idle);
                 c.g.setOnMouseClicked(event -> {
-                    if (event.getButton() == MouseButton.PRIMARY) {
-                        match.setSelectedCard(a);
-                        c.currentRectangle.setStyle("-fx-fill: rgba(255, 255, 0, 0.2)");
-                    } else if (event.getButton() == MouseButton.SECONDARY) {
-                        match.setSelectedCard(null);
-                        c.currentRectangle.setStyle("-fx-fill: rgba(0, 0, 0, 0.1)");
-                    }
+//                    if (event.getButton() == MouseButton.PRIMARY) {
+//                        match.setSelectedCard(a);
+//                        c.currentRectangle.setStyle("-fx-fill: rgba(255, 255, 0, 0.2)");
+//                    } else if (event.getButton() == MouseButton.SECONDARY) {
+//                        match.setSelectedCard(null);
+//                        c.currentRectangle.setStyle("-fx-fill: rgba(0, 0, 0, 0.1)");
+//                    }
                 });
                 groundedAttackers.getChildren().add(c.g);
                 map.put(a, c);
@@ -96,6 +94,46 @@ public class BattleView {
             View.printThrowable(e);
         }
         table.getChildren().add(groundedAttackers);
+    }
+
+    private void handleSelection() {
+        for (int i = 0; i < 5; i++)
+            for (int j = 0; j < 9; j++) {
+                Rectangle rect = cells[i][j];
+                int u = i;
+                int v = j;
+                rect.setOnMouseClicked(event -> {
+                    if (event.getButton() == MouseButton.PRIMARY) {
+                        if (match.isAnyCardSelected()) {
+                            BattleMenu.getInstance().moveOrAttack(u, v);
+                            deselect();
+                        } else {
+                            if (BattleMenu.getInstance().selectAttacker(getAttacker(u, v))) {
+                                if (selectedRect != null)
+                                    selectedRect.setStyle("-fx-fill: rgba(0, 0, 0, 0.1)");
+                                rect.setStyle("-fx-fill: rgba(255, 255, 0, 0.2)");
+                                selectedRect = rect;
+                            }
+                        }
+                    } else if (event.getButton() == MouseButton.SECONDARY) {
+                        deselect();
+                    }
+                });
+            }
+    }
+
+    private void deselect() {
+        if (selectedRect != null)
+            selectedRect.setStyle("-fx-fill: rgba(0, 0, 0, 0.1)");
+        match.deselect();
+    }
+
+    private Attacker getAttacker(int r, int c) {
+        for (Map.Entry<Attacker, Container> entry : map.entrySet())
+            if (entry.getKey().getCurrentCell().getX() == r
+                    && entry.getKey().getCurrentCell().getY() == c)
+                return entry.getKey();
+        return null;
     }
 
     public void moveAttacker(Attacker a) {

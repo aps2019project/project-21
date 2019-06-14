@@ -14,7 +14,6 @@ public class ShopMenu extends Menu {
     }
 
     private ShopMenu() {
-
     }
 
 
@@ -51,5 +50,4 @@ public class ShopMenu extends Menu {
         Player.getCurrentPlayer().sell(card);
         return "Sell successful";
     }
-
 }

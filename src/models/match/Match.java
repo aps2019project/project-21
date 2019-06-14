@@ -28,7 +28,7 @@ public class Match {
     private GoalMode goalMode;
     private GameType gameType;
     private int flagCount; //  only for gather flag and hold flag
-    private int collectableCount = 3;  //  how much should this be?
+    private int collectableCount = 3;
     private List<Flag> flags = new ArrayList<>();
     private LocalDateTime gameTime = LocalDateTime.now();
     private int turn;  //  0 for player1 and 1 for player2
@@ -74,10 +74,14 @@ public class Match {
         selectedCard = card;
     }
 
-    private boolean selectAttacker(String attackerID) {
-        for (Attacker attacker : info[turn].getGroundedAttackers())
-            if (attacker.getCardIDInGame().equals(attackerID)) {
-                selectedCard = attacker;
+    public void deselect() {
+        selectedCard = null;
+    }
+
+    private boolean selectAttacker(String cardID) {
+        for (Attacker a : info[turn].getGroundedAttackers())
+            if (a.getCardIDInGame().equals(cardID)) {
+                selectedCard = a;
                 return true;
             }
         return false;
@@ -172,6 +176,10 @@ public class Match {
                 if (cell.isEmpty())
                     return false;
         return true;
+    }
+
+    public void attack(int x, int y) {
+        attack(getCell(x, y).getCurrentAttacker().getCardIDInGame());
     }
 
     public void attack(String oppID) {
@@ -556,11 +564,11 @@ public class Match {
         view.showMatchResults(this);
     }
 
-    private boolean isAnyCardSelected() {
+    public boolean isAnyCardSelected() {
         return selectedCard != null;
     }
 
-    private Cell getCell(int x, int y) {
+    public Cell getCell(int x, int y) {
         return battlefield.getCell(x, y);
     }
 

@@ -1,6 +1,5 @@
 package controller.menus;
 
-import controller.request.BattleMenuRequest;
 import models.Item.Collectable;
 import models.card.Attacker;
 import models.card.Card;
@@ -10,118 +9,11 @@ import models.match.PlayerMatchInfo;
 public class BattleMenu extends Menu {
     private static BattleMenu instance = new BattleMenu();
 
-    static Menu getInstance() {
+    public static BattleMenu getInstance() {
         return instance;
     }
 
     private BattleMenu() {
-
-    }
-
-    public void main() {
-        if (showMenu) {
-            showMenu();
-            showMenu = false;
-        }
-
-        request = new BattleMenuRequest();
-
-        request.getNewCommand();
-
-        request.extractType();
-
-        switch (request.getType()) {
-            case HELP:
-                showMenu();
-                break;
-            case GAME_INFO:
-                showGameInfo();
-                break;
-            case EXIT:
-                exit();
-                break;
-            case SHOW_MY_MINIONS:
-                showMyMinions();
-                break;
-            case SHOW_OPPONENT_MINIONS:
-                showOpponentMinions();
-                break;
-            case SHOW_CARD_INFO:
-                showCardInfo();
-                break;
-            case SELECT:
-                select();
-                break;
-            case MOVE_TO:
-                moveTo();
-                break;
-            case ATTACK:
-                attack();
-                break;
-            case ATTACK_COMBO:
-                attackCombo();
-                break;
-            case USE_SPECIAL_POWER:
-                useSpecialPower();
-                break;
-            case SHOW_HAND:
-                showHand();
-                break;
-            case INSERT_IN:
-                insertCardIn();
-                break;
-            case END_TURN:
-                endTurn();
-                break;
-            case SHOW_COLLECTABLES:
-                showCollectables();
-                break;
-            case SHOW_INFO:
-                showInfo();
-                break;
-            case USE:
-                use();
-                break;
-            case SHOW_NEXT_CARD:
-                showNextCard();
-                break;
-            case ENTER_GRAVEYARD:
-                enterGraveyard();
-                break;
-            case SHOW_MENU:
-                showMenu();
-                break;
-            case INVALID:
-                invalidCommand();
-                break;
-            case BACK:
-                back();
-                break;
-            case SHOW_BATTLEFIELD:
-                showBattlefield();
-                break;
-            case KILL:
-                kill();
-                break;
-            case MP:
-                showMP();
-                break;
-            case SHOW_SELECTED:
-                showSelected();
-                break;
-            case SHOW_TURN:
-                showTurn();
-                break;
-            case UN_SELECT:
-                unSelect();
-                break;
-            case WITHDRAW:
-                withdraw();
-                break;
-            case USE_SPELL:
-                useSpell();
-                break;
-        }
     }
 
     private void showGameInfo() {
@@ -151,14 +43,26 @@ public class BattleMenu extends Menu {
         Match.getCurrentMatch().select(request.getCommandArguments().get(0));
     }
 
-    private void moveTo() {
-        int x = Integer.parseInt(request.getCommandArguments().get(0));
-        int y = Integer.parseInt(request.getCommandArguments().get(1));
+    public boolean selectAttacker(Attacker attacker) {
+        if (attacker == null)
+            return false;
+        Match.getCurrentMatch().select(attacker.getCardIDInGame());
+        return true;
+    }
+
+    public void moveOrAttack(int x, int y) {
+        if (Match.getCurrentMatch().getCell(x, y).isEmpty())
+            moveTo(x, y);
+        else
+            attack(x, y);
+    }
+
+    private void moveTo(int x, int y) {
         Match.getCurrentMatch().moveCard(x, y);
     }
 
-    private void attack() {
-        Match.getCurrentMatch().attack(request.getCommandArguments().get(0));
+    private void attack(int x, int y) {
+        Match.getCurrentMatch().attack(x, y);
     }
 
     private void attackCombo() {
