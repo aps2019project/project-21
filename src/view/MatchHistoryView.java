@@ -25,6 +25,7 @@ class MatchHistoryView {
     private Button back = new Button("BACK");
     private TilePane games = new TilePane();
     private ScrollPane scrollPane = new ScrollPane();
+    private ImageView volume = new ImageView();
 
     public static MatchHistoryView getInstance() {
         return instance;
@@ -39,6 +40,14 @@ class MatchHistoryView {
     }
 
     {
+        try {
+            volume.setImage(new Image(new FileInputStream("src\\assets\\volume.png")));
+            volume.setScaleX(0.1);
+            volume.setScaleY(0.1);
+            volume.relocate(1000,450);
+        } catch (IOException ex){
+            View.printThrowable(ex);
+        }
         scene.getStylesheets().addAll("view/stylesheets/match_history.css");
 
         setBackground();
@@ -63,6 +72,8 @@ class MatchHistoryView {
     }
 
     private void draw() {
+        root.getChildren().addAll(volume);
+        
         back.relocate(200, 100);
 
         root.getChildren().addAll(back);
@@ -157,6 +168,8 @@ class MatchHistoryView {
 
     private void handleButtons() {
         back.setOnAction(event -> View.getInstance().back());
+
+        volume.setOnMouseClicked(event -> VolumeController.getInstance().run());
     }
 
 }

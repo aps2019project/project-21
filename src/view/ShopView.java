@@ -59,6 +59,7 @@ public class ShopView {
     private ImageView[] button = new ImageView[3];
     private ImageView[] types = new ImageView[4];
     private ImageView[] rightButtons = new ImageView[2];
+    private ImageView volume = new ImageView();
 
     public static void setInstance(ShopView instance) {
         ShopView.instance = instance;
@@ -84,6 +85,15 @@ public class ShopView {
     }
 
     {
+        try {
+            volume.setImage(new Image(new FileInputStream("src\\assets\\volume.png")));
+            volume.setScaleY(0.1);
+            volume.setScaleX(0.1);
+        } catch (IOException ex){
+            View.printThrowable(ex);
+        }
+        volume.relocate(1000, 450);
+
         try {
             left = new ImageView(new Image(new FileInputStream
                     ("src\\assets\\cards\\left.png")));
@@ -114,6 +124,8 @@ public class ShopView {
     }
 
     private void draw() {
+        root.getChildren().addAll(volume);
+
         for (int i = 0; i < 2; i++) {
             try {
                 rightButtons[i] = new ImageView(new Image(new FileInputStream
@@ -702,6 +714,8 @@ public class ShopView {
             selectedName = null;
             selectedId = -1;
         });
+
+        volume.setOnMouseClicked(event -> VolumeController.getInstance().run());
     }
 
 
