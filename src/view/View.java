@@ -88,7 +88,7 @@ public class View {
             pane.getChildren().add(node);
     }
 
-    public void popup(String message) {
+    void popup(String message) {
         final Stage popup = new Stage();
         popup.initModality(Modality.APPLICATION_MODAL);
         popup.initOwner(primaryStage);
@@ -105,6 +105,7 @@ public class View {
                 popup.close();
         });
         popup.setScene(dialogScene);
+        VoicePlay.notification();
         popup.show();
     }
 
