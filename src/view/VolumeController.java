@@ -37,7 +37,7 @@ public class VolumeController {
         stage.setScene(scene);
     }
 
-    public void run(){
+    public void run() {
 
         MediaPlayer mediaPlayer = VoicePlay.getThisMediaPlayer();
         MediaView mediaView = new MediaView(mediaPlayer);
@@ -50,6 +50,7 @@ public class VolumeController {
         );
 
         stage.show();
+
     }
 
     private void setBackground() {
