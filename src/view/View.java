@@ -7,8 +7,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import models.Collection;
 import models.Deck;
 import models.Item.Collectable;
@@ -16,6 +18,7 @@ import models.Item.Item;
 import models.Item.Usable;
 import models.Player;
 import models.card.*;
+import models.match.GameMode;
 import models.match.GoalMode;
 import models.match.Match;
 import models.match.PlayerMatchInfo;
@@ -41,19 +44,19 @@ public class View {
     public void run() {
         primaryStage.setTitle("Duelyst");
         primaryStage.setMaximized(true);
-        /*try {
+        primaryStage.setResizable(false);
+        try {
             Thread.sleep(2000);
         } catch (Exception e) {
             View.printThrowable(e);
         }
         Player.login("a", "a");
-        Match.setCurrentMatch(new Match(Player.getCurrentPlayer(), Player.getCurrentPlayer(), GameMode.MULTI_PLAYER,
+        Match.setCurrentMatch(new Match(Player.getCurrentPlayer(), Player.getPlayerByUsername("b"), GameMode.MULTI_PLAYER,
                 null, GoalMode.KILL_HERO, 0));
         BattleView battleView = new BattleView();
         Match.getCurrentMatch().setBattleView(battleView);
         battleView.run();
-        */
-        MainMenuView.getInstance().run();
+//        MainMenuView.getInstance().run();
     }
 
 
@@ -92,6 +95,7 @@ public class View {
         final Stage popup = new Stage();
         popup.initModality(Modality.APPLICATION_MODAL);
         popup.initOwner(primaryStage);
+        popup.setResizable(false);
         Label label = new Label(message);
         Button ok = new Button("OK");
         label.relocate(100, 50);

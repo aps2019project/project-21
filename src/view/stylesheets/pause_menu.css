@@ -1,0 +1,9 @@
+.button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 20;
+}
+
+.button:hover {
+    -fx-text-fill: red;
+}

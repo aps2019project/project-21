@@ -17,22 +17,21 @@ import models.match.Match;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-class matchHistoryView {
-    private static matchHistoryView instance = new matchHistoryView();
+class MatchHistoryView {
+    private static MatchHistoryView instance = new MatchHistoryView();
 
     private Group root = new Group();
     private Scene scene = new Scene(root, 1536, 801.59);
     private Button back = new Button("BACK");
     private TilePane games = new TilePane();
     private ScrollPane scrollPane = new ScrollPane();
-    private ImageView volume = new ImageView();
 
-    public static matchHistoryView getInstance() {
+    public static MatchHistoryView getInstance() {
         return instance;
     }
 
-    public static void setInstance(matchHistoryView instance) {
-        matchHistoryView.instance = instance;
+    public static void setInstance(MatchHistoryView instance) {
+        MatchHistoryView.instance = instance;
     }
 
     void run() {
@@ -40,15 +39,6 @@ class matchHistoryView {
     }
 
     {
-        try {
-            volume.setImage(new Image(new FileInputStream("src\\assets\\volume.png")));
-            volume.setScaleY(0.1);
-            volume.setScaleX(0.1);
-        } catch (IOException ex){
-            View.printThrowable(ex);
-        }
-        volume.relocate(1000, 450);
-
         scene.getStylesheets().addAll("view/stylesheets/match_history.css");
 
         setBackground();
@@ -56,8 +46,6 @@ class matchHistoryView {
         draw();
 
         showHistory();
-
-        run();
 
         handleButtons();
     }
@@ -75,8 +63,6 @@ class matchHistoryView {
     }
 
     private void draw() {
-        root.getChildren().addAll(volume);
-
         back.relocate(200, 100);
 
         root.getChildren().addAll(back);
@@ -170,11 +156,7 @@ class matchHistoryView {
     }
 
     private void handleButtons() {
-        back.setOnAction(event -> {
-            View.getInstance().back();
-        });
-
-        volume.setOnMouseClicked(event -> VolumeController.getInstance().run());
+        back.setOnAction(event -> View.getInstance().back());
     }
 
 }

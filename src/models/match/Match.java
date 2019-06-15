@@ -78,7 +78,7 @@ public class Match {
         selectedCard = null;
     }
 
-    private boolean selectAttacker(String cardID) {
+    public boolean selectAttacker(String cardID) {
         for (Attacker a : info[turn].getGroundedAttackers())
             if (a.getCardIDInGame().equals(cardID)) {
                 selectedCard = a;

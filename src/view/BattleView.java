@@ -1,13 +1,20 @@
 package view;
 
 import controller.menus.BattleMenu;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import models.card.Attacker;
 import models.match.Match;
 
@@ -27,6 +34,7 @@ public class BattleView {
     private Map<Attacker, Container> map = new HashMap<>();
     private Group groundedAttackers = new Group();
     private Button endTurn = new Button("END TURN");
+    private Button pause = new Button("PAUSE");
     private Group hub = new Group();
     private Rectangle selectedRect;
 
@@ -74,7 +82,6 @@ public class BattleView {
                 System.out.println(a.getCurrentCell().getX());
                 System.out.println(a.getCurrentCell().getY());
                 Rectangle r = cells[a.getCurrentCell().getX()][a.getCurrentCell().getY()];
-                c.currentRectangle = r;
                 c.g.relocate(r.getLayoutX(), r.getLayoutY() - 40);
                 c.g.getChildren().add(c.idle);
                 c.g.setOnMouseClicked(event -> {
@@ -150,11 +157,47 @@ public class BattleView {
 
     private void drawHub() {
         endTurn.relocate(1300, 700);
-        hub.getChildren().addAll(endTurn);
+        pause.relocate(1300, 750);
+        hub.getChildren().addAll(endTurn, pause);
     }
 
     private void setOnActions() {
         endTurn.setOnAction(event -> match.endTurn());
+        pause.setOnAction(event -> pause());
+        scene.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ESCAPE)
+                pause();
+        });
+    }
+
+    private void pause() {
+        final Stage pause = new Stage();
+        pause.initModality(Modality.APPLICATION_MODAL);
+        pause.initStyle(StageStyle.TRANSPARENT);
+        pause.initOwner(View.getInstance().getPrimaryStage());
+        pause.setMaximized(true);
+        pause.setResizable(false);
+        Button resume = new Button("RESUME");
+        resume.setOnAction(event -> pause.close());
+        Button back = new Button("BACK");
+        back.setOnAction(event -> {
+            pause.close();
+            View.getInstance().back();
+        });
+        VBox vBox = new VBox();
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setSpacing(30);
+        vBox.setStyle("-fx-background-color: transparent");
+        vBox.getChildren().addAll(resume, back);
+        Scene scene = new Scene(vBox, 303, 150);
+        scene.getStylesheets().add("view/stylesheets/pause_menu.css");
+        scene.setFill(new Color(0, 0, 0, 0.6));
+        scene.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ESCAPE)
+                pause.close();
+        });
+        pause.setScene(scene);
+        pause.show();
     }
 
     private void setBackground() {
