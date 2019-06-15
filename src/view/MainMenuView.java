@@ -101,7 +101,7 @@ public class MainMenuView {
                 .login(username.getText(), password.getText()));
         logout.setOnAction(event -> AccountMenu.getInstance().logout());
         showHistory.setOnAction(event ->{
-            matchHistoryView.getInstance().run();
+            MatchHistoryView.getInstance().run();
             VoicePlay.setThisMenu("match history");
         });
         save.setOnAction(event -> AccountMenu.getInstance().save());

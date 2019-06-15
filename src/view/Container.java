@@ -7,7 +7,6 @@ import models.card.Attacker;
 
 public class Container {
     Attacker attacker;
-    Rectangle currentRectangle;
     ImageView idle;
     ImageView run;
     ImageView attack;
