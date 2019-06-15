@@ -11,8 +11,7 @@ public class Hand {
 
     private List<Card> cards = new ArrayList<>();
 
-    Hand() {
-
+    private Hand() {
     }
 
     public static Hand extractHand(Deck deck) {

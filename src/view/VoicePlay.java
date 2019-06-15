@@ -14,7 +14,7 @@ class VoicePlay {
     private static MediaPlayer shop = new MediaPlayer(new Media(file1.toURI().toString()));
     private static MediaPlayer matchHistory = new MediaPlayer(new Media(file2.toURI().toString()));
 
-    {
+    static {
         mainMenu.setVolume(backgroundVolume);
         mainMenu.setCycleCount(MediaPlayer.INDEFINITE);
 
@@ -26,31 +26,30 @@ class VoicePlay {
 
     }
 
-    static void buttonPlay(){
+    static void buttonPlay() {
         File file = new File("src\\assets\\button.m4a");
         MediaPlayer click = new MediaPlayer(new Media(file.toURI().toString()));
         click.play();
 
     }
 
-    static void notification(){
+    static void notification() {
         File file = new File("src\\assets\\notification.m4a");
         MediaPlayer click = new MediaPlayer(new Media(file.toURI().toString()));
         click.play();
     }
 
-    static void setThisMenu(String n){
-        if (n.equals("main menu")){
+    static void setThisMenu(String n) {
+        if (n.equals("main menu")) {
             mainMenu.play();
             shop.pause();
             matchHistory.pause();
-        } else if (n.equals("shop")){
+        } else if (n.equals("shop")) {
             mainMenu.pause();
             shop.play();
-        } else if (n.equals("match history")){
+        } else if (n.equals("match history")) {
             matchHistory.play();
             mainMenu.pause();
         }
     }
-
 }

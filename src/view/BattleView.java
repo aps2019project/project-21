@@ -9,14 +9,18 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import models.Player;
 import models.card.Attacker;
+import models.card.Card;
 import models.match.Match;
+import models.match.PlayerMatchInfo;
 
 import java.io.FileInputStream;
 import java.util.HashMap;
@@ -37,6 +41,7 @@ public class BattleView {
     private Button pause = new Button("PAUSE");
     private Group hub = new Group();
     private Rectangle selectedRect;
+    private HBox hand = new HBox();
 
     public void run() {
         View.getInstance().setScene(scene);
@@ -82,7 +87,7 @@ public class BattleView {
                 System.out.println(a.getCurrentCell().getX());
                 System.out.println(a.getCurrentCell().getY());
                 Rectangle r = cells[a.getCurrentCell().getX()][a.getCurrentCell().getY()];
-                c.g.relocate(r.getLayoutX(), r.getLayoutY() - 40);
+                c.g.relocate(r.getLayoutX() - 10, r.getLayoutY() - 40);
                 c.g.getChildren().add(c.idle);
                 c.g.setOnMouseClicked(event -> {
 //                    if (event.getButton() == MouseButton.PRIMARY) {
@@ -158,7 +163,23 @@ public class BattleView {
     private void drawHub() {
         endTurn.relocate(1300, 700);
         pause.relocate(1300, 750);
-        hub.getChildren().addAll(endTurn, pause);
+        drawHand();
+        hub.getChildren().addAll(endTurn, pause, hand);
+
+    }
+
+    private void drawHand() {
+        hand.relocate(350, 650);
+        hand.setSpacing(50);
+        PlayerMatchInfo info = match.getInfo(Player.getCurrentPlayer());
+        for (Card c : info.getHand().getCards()) {
+            try {
+                ImageView imageView = new ImageView(new Image(new FileInputStream("src/assets/gifs/minion.gif")));
+                hand.getChildren().add(imageView);
+            } catch (Exception e) {
+                View.printThrowable(e);
+            }
+        }
     }
 
     private void setOnActions() {
