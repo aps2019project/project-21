@@ -22,7 +22,10 @@ class CardView {
         Group ret = shopCardGroup(card);
         if (ret != null) {
             items.getChildren().add(ret);
-            ret.setOnMouseClicked(event -> selectCard(card));
+            ret.setOnMouseClicked(event -> {
+                selectCard(card);
+                VoicePlay.buttonPlay();
+            });
         } else {
             System.out.print(card.getName());
         }

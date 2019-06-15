@@ -51,6 +51,7 @@ public class MainMenuView {
 
     void run() {
         View.getInstance().setScene(scene);
+        VoicePlay.setThisMenu("main menu");
     }
 
     {
@@ -68,6 +69,7 @@ public class MainMenuView {
     }
 
     private void draw() {
+
         beforeLoginOptions.getChildren().addAll(createAccount, login, exit, username, password);
         beforeLoginOptions.relocate(100, 100);
         beforeLoginOptions.setSpacing(15);
@@ -98,12 +100,18 @@ public class MainMenuView {
         login.setOnAction(event -> AccountMenu.getInstance()
                 .login(username.getText(), password.getText()));
         logout.setOnAction(event -> AccountMenu.getInstance().logout());
-        showHistory.setOnAction(event ->matchHistoryView.getInstance().run());
+        showHistory.setOnAction(event ->{
+            matchHistoryView.getInstance().run();
+            VoicePlay.setThisMenu("match history");
+        });
         save.setOnAction(event -> AccountMenu.getInstance().save());
         hesoyam.setOnAction(event -> AccountMenu.getInstance().hesoyam());
         exit.setOnAction(event -> View.getInstance().exit());
         collection.setOnAction(event -> CollectionView.getInstance().run());
-        shop.setOnAction(event -> ShopView.getInstance().run());
+        shop.setOnAction(event -> {
+            ShopView.getInstance().run();
+            VoicePlay.setThisMenu("shop");
+        });
         battle.setOnAction(event -> createNewMatch());
         back.setOnAction(event -> isInMainMenu = false);
     }

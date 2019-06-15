@@ -60,7 +60,6 @@ public class ShopView {
     private ImageView[] types = new ImageView[4];
     private ImageView[] rightButtons = new ImageView[2];
 
-
     public static void setInstance(ShopView instance) {
         ShopView.instance = instance;
     }
@@ -121,12 +120,12 @@ public class ShopView {
                         ("src\\assets\\cards\\button.png")));
                 root.getChildren().add(rightButtons[i]);
 
-                if (i == 0){
-                    rightButtons[i].relocate(930,580);
+                if (i == 0) {
+                    rightButtons[i].relocate(930, 580);
                 } else {
-                    rightButtons[i].relocate(1130,580);
+                    rightButtons[i].relocate(1130, 580);
                 }
-            } catch (IOException ex){
+            } catch (IOException ex) {
                 View.printThrowable(ex);
             }
         }
@@ -308,9 +307,17 @@ public class ShopView {
 
 
     private void setOnActions() {
-        button[2].setOnMouseClicked(event -> View.getInstance().back());
+        button[2].setOnMouseClicked(event ->{
+            VoicePlay.buttonPlay();
+            View.getInstance().back();
+            VoicePlay.setThisMenu("main menu");
+        });
 
-        back.setOnMouseClicked(event -> View.getInstance().back());
+        back.setOnMouseClicked(event -> {
+            VoicePlay.buttonPlay();
+            View.getInstance().back();
+            VoicePlay.setThisMenu("main menu");
+        });
 
 
         minion.setOnMouseClicked(event -> {
@@ -320,6 +327,7 @@ public class ShopView {
 
                     cardType = 1;
                     showCards();
+                    VoicePlay.buttonPlay();
 
                     setScale(cardType, false);
                 } catch (IOException ex) {
@@ -335,6 +343,7 @@ public class ShopView {
 
                     cardType = 1;
                     showCards();
+                    VoicePlay.buttonPlay();
 
                     setScale(cardType, false);
                 } catch (IOException ex) {
@@ -350,6 +359,7 @@ public class ShopView {
 
                     cardType = 2;
                     showCards();
+                    VoicePlay.buttonPlay();
 
                     setScale(cardType, false);
                 } catch (IOException ex) {
@@ -365,6 +375,7 @@ public class ShopView {
 
                     cardType = 2;
                     showCards();
+                    VoicePlay.buttonPlay();
 
                     setScale(cardType, false);
                 } catch (IOException ex) {
@@ -380,6 +391,7 @@ public class ShopView {
 
                     cardType = 3;
                     showCards();
+                    VoicePlay.buttonPlay();
 
                     setScale(cardType, false);
                 } catch (IOException ex) {
@@ -395,6 +407,7 @@ public class ShopView {
 
                     cardType = 3;
                     showCards();
+                    VoicePlay.buttonPlay();
 
                     setScale(cardType, false);
                 } catch (IOException ex) {
@@ -410,6 +423,7 @@ public class ShopView {
 
                     cardType = 4;
                     showCards();
+                    VoicePlay.buttonPlay();
 
                     setScale(cardType, false);
                 } catch (IOException ex) {
@@ -425,6 +439,7 @@ public class ShopView {
 
                     cardType = 4;
                     showCards();
+                    VoicePlay.buttonPlay();
 
                     setScale(cardType, false);
                 } catch (IOException ex) {
@@ -444,6 +459,7 @@ public class ShopView {
                 selectedName = null;
                 selectedId = -1;
                 searchedCard.getChildren().clear();
+                VoicePlay.buttonPlay();
                 try {
                     button[1].setImage(new Image(new FileInputStream("src\\assets\\cards\\onselect.png")));
                     button[1].setScaleX(1.5);
@@ -470,6 +486,7 @@ public class ShopView {
                 selectedName = null;
                 selectedId = -1;
                 searchedCard.getChildren().clear();
+                VoicePlay.buttonPlay();
 
                 try {
                     button[1].setImage(new Image(new FileInputStream("src\\assets\\cards\\onselect.png")));
@@ -487,6 +504,7 @@ public class ShopView {
         });
 
         button[0].setOnMouseClicked(event -> {
+
             if (buttonSelect != 2) {
                 buttonSelect = 2;
                 buySell.setText("BUY");
@@ -498,6 +516,7 @@ public class ShopView {
                 selectedName = null;
                 selectedId = -1;
                 searchedCard.getChildren().clear();
+                VoicePlay.buttonPlay();
 
                 try {
                     button[0].setImage(new Image(new FileInputStream("src\\assets\\cards\\onselect.png")));
@@ -515,6 +534,7 @@ public class ShopView {
         });
 
         shop.setOnMouseClicked(event -> {
+
             if (buttonSelect != 2) {
                 buttonSelect = 2;
                 buySell.setText("BUY");
@@ -526,6 +546,7 @@ public class ShopView {
                 selectedName = null;
                 selectedId = -1;
                 searchedCard.getChildren().clear();
+                VoicePlay.buttonPlay();
 
                 try {
                     button[0].setImage(new Image(new FileInputStream("src\\assets\\cards\\onselect.png")));
@@ -544,6 +565,8 @@ public class ShopView {
 
         searchCard.setOnMouseClicked(event -> {
             String name = search.getCharacters().toString();
+            VoicePlay.buttonPlay();
+
             if (buttonSelect == 2) {
                 Card message = ShopMenu.search(name);
                 if (message == null) {
@@ -578,6 +601,8 @@ public class ShopView {
         });
 
         rightButtons[1].setOnMouseClicked(event -> {
+            VoicePlay.buttonPlay();
+
             String name = search.getCharacters().toString();
             if (buttonSelect == 2) {
                 Card message = ShopMenu.search(name);
@@ -613,6 +638,8 @@ public class ShopView {
         });
 
         buySell.setOnMouseClicked(event -> {
+            VoicePlay.buttonPlay();
+
             if (buttonSelect == 2) {
                 if (selectedName == null) {
                     View.getInstance().popup("No card selected");
@@ -644,6 +671,8 @@ public class ShopView {
         });
 
         rightButtons[0].setOnMouseClicked(event -> {
+            VoicePlay.buttonPlay();
+
             if (buttonSelect == 2) {
                 if (selectedName == null) {
                     View.getInstance().popup("No card selected");
@@ -729,5 +758,6 @@ public class ShopView {
             }
         }
     }
+
 
 }
