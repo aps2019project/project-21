@@ -845,4 +845,10 @@ public class Match {
                 return i;
         return -1;
     }
+
+    public Player[] getPlayers() {
+        return players;
+    }
+
+
 }
