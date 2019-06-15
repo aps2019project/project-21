@@ -136,12 +136,16 @@ public class BattleView {
         return null;
     }
 
-    public void moveAttacker(Attacker a) {
+    public void showMove(Attacker a) {
         Container c = map.get(a);
         if (c != null) {
             Rectangle r = cells[a.getCurrentCell().getX()][a.getCurrentCell().getY()];
             c.g.relocate(r.getLayoutX(), r.getLayoutY() - 40);
         }
+    }
+
+    public void showAttack(Attacker a) {
+
     }
 
     private void drawHub() {
