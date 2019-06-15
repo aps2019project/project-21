@@ -27,6 +27,7 @@ public class BattleView {
     private Map<Attacker, Container> map = new HashMap<>();
     private Group groundedAttackers = new Group();
     private Button endTurn = new Button("END TURN");
+    private Button pause = new Button("PAUSE");
     private Group hub = new Group();
     private Rectangle selectedRect;
 
@@ -150,11 +151,17 @@ public class BattleView {
 
     private void drawHub() {
         endTurn.relocate(1300, 700);
-        hub.getChildren().addAll(endTurn);
+        pause.relocate(1300, 750);
+        hub.getChildren().addAll(endTurn, pause);
     }
 
     private void setOnActions() {
         endTurn.setOnAction(event -> match.endTurn());
+        pause.setOnAction(event -> pause());
+    }
+
+    private void pause() {
+
     }
 
     private void setBackground() {

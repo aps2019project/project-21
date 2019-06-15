@@ -46,8 +46,7 @@ public class BattleMenu extends Menu {
     public boolean selectAttacker(Attacker attacker) {
         if (attacker == null)
             return false;
-        Match.getCurrentMatch().select(attacker.getCardIDInGame());
-        return true;
+        return Match.getCurrentMatch().selectAttacker(attacker.getCardIDInGame());
     }
 
     public void moveOrAttack(int x, int y) {

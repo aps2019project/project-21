@@ -98,7 +98,7 @@ public class MainMenuView {
         login.setOnAction(event -> AccountMenu.getInstance()
                 .login(username.getText(), password.getText()));
         logout.setOnAction(event -> AccountMenu.getInstance().logout());
-        showHistory.setOnAction(event ->matchHistoryView.getInstance().run());
+        showHistory.setOnAction(event -> MatchHistoryView.getInstance().run());
         save.setOnAction(event -> AccountMenu.getInstance().save());
         hesoyam.setOnAction(event -> AccountMenu.getInstance().hesoyam());
         exit.setOnAction(event -> View.getInstance().exit());

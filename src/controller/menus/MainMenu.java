@@ -91,6 +91,7 @@ public class MainMenu extends Menu {
         Match match = new Match(Player.getCurrentPlayer(), second, gameMode, gameType, goalMode, flagCount);
         Match.setCurrentMatch(match);
         BattleView battleView = new BattleView();
+        match.setBattleView(battleView);
         battleView.run();
     }
 
