@@ -153,7 +153,7 @@ public class Match {
         attacker.setCannotMove();
         goOnCell(attacker, target);
         System.out.println(selectedCard.getCardIDInGame() + " moved to (" + x + ", " + y + ")");
-        battleView.moveAttacker(attacker);
+        battleView.showMove(attacker);
     }
 
     private boolean isMoveTargetValid(Cell target) {
@@ -214,6 +214,8 @@ public class Match {
         checkIfHeIsDead(target);
         attacker.setCannotAttack();
         attacker.setCannotMove();
+        System.out.println("attacked.");
+        battleView.showAttack(attacker);
 
         if (attacker instanceof Minion) {
             Minion minion = (Minion) attacker;
