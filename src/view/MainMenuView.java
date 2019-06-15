@@ -47,6 +47,7 @@ public class MainMenuView {
     private Button shop = new Button("SHOP");
     private Button battle = new Button("BATTLE");
     private Button back = new Button("BACK");
+    private Button volume = new Button("VOLUME");
 
 
     void run() {
@@ -69,7 +70,6 @@ public class MainMenuView {
     }
 
     private void draw() {
-
         beforeLoginOptions.getChildren().addAll(createAccount, login, exit, username, password);
         beforeLoginOptions.relocate(100, 100);
         beforeLoginOptions.setSpacing(15);
@@ -78,7 +78,7 @@ public class MainMenuView {
         afterLoginOptions.relocate(100, 100);
         afterLoginOptions.setSpacing(15);
 
-        mainMenuOptions.getChildren().addAll(collection, shop, battle, back);
+        mainMenuOptions.getChildren().addAll(collection, shop, battle, volume, back);
         mainMenuOptions.relocate(100, 100);
         mainMenuOptions.setSpacing(15);
 
@@ -89,6 +89,7 @@ public class MainMenuView {
         username.relocate(200, 200);
         password.relocate(200, 260);
         currentPlayer.setTextFill(Color.ORANGE);
+
     }
 
     private void setOnActions() {
@@ -114,6 +115,7 @@ public class MainMenuView {
         });
         battle.setOnAction(event -> createNewMatch());
         back.setOnAction(event -> isInMainMenu = false);
+        volume.setOnAction(event -> VolumeController.getInstance().run());
     }
 
     private void createNewMatch() {
