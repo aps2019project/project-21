@@ -425,6 +425,8 @@ public class Match {
         Card.setCardIDInGame(players[turn], attacker);
         System.out.println("card " + attacker.getName() + " with id: " + attacker.getCardIDInGame()
                 + " inserted to (" + x + ", " + y + ").");
+        battleView.drawHand();
+        battleView.drawAttackers();
 
         if (attacker instanceof Minion) {
             Minion minion = (Minion) attacker;

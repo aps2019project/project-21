@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -35,12 +36,13 @@ public class BattleView {
     private Scene scene = new Scene(root, 1536, 801.59);
     private Group table = new Group();
     private Rectangle[][] cells = new Rectangle[5][9];
-    private Map<Attacker, Container> map = new HashMap<>();
+    private Map<Attacker, Container> attackers = new HashMap<>();
     private Group groundedAttackers = new Group();
     private Button endTurn = new Button("END TURN");
     private Button pause = new Button("PAUSE");
     private Group hub = new Group();
     private Rectangle selectedRect;
+    private Container selectedInHand;
     private HBox hand = new HBox();
 
     public void run() {
@@ -75,36 +77,7 @@ public class BattleView {
                 table.getChildren().add(rect);
             }
         }
-
-        try {
-            for (Attacker a : match.getBothGroundedAttackers()) {
-                match.showBattleField();
-                Container c = new Container();
-                c.attacker = a;
-                c.idle = new ImageView(new Image(new FileInputStream("src/assets/gifs/hero_idle.gif")));
-                c.run = new ImageView(new Image(new FileInputStream("src/assets/gifs/hero_run.gif")));
-                c.attack = new ImageView(new Image(new FileInputStream("src/assets/gifs/hero_attack.gif")));
-                System.out.println(a.getCurrentCell().getX());
-                System.out.println(a.getCurrentCell().getY());
-                Rectangle r = cells[a.getCurrentCell().getX()][a.getCurrentCell().getY()];
-                c.g.relocate(r.getLayoutX() - 10, r.getLayoutY() - 40);
-                c.g.getChildren().add(c.idle);
-                c.g.setOnMouseClicked(event -> {
-//                    if (event.getButton() == MouseButton.PRIMARY) {
-//                        match.setSelectedCard(a);
-//                        c.currentRectangle.setStyle("-fx-fill: rgba(255, 255, 0, 0.2)");
-//                    } else if (event.getButton() == MouseButton.SECONDARY) {
-//                        match.setSelectedCard(null);
-//                        c.currentRectangle.setStyle("-fx-fill: rgba(0, 0, 0, 0.1)");
-//                    }
-                });
-                groundedAttackers.getChildren().add(c.g);
-                map.put(a, c);
-            }
-
-        } catch (Exception e) {
-            View.printThrowable(e);
-        }
+        drawAttackers();
         table.getChildren().add(groundedAttackers);
     }
 
@@ -118,6 +91,9 @@ public class BattleView {
                     if (event.getButton() == MouseButton.PRIMARY) {
                         if (match.isAnyCardSelected()) {
                             BattleMenu.getInstance().moveOrAttack(u, v);
+                            deselect();
+                        } else if (selectedInHand != null) {
+                            BattleMenu.getInstance().insertCardIn(selectedInHand.getCard().getName(), u, v);
                             deselect();
                         } else {
                             if (BattleMenu.getInstance().selectAttacker(getAttacker(u, v))) {
@@ -137,11 +113,15 @@ public class BattleView {
     private void deselect() {
         if (selectedRect != null)
             selectedRect.setStyle("-fx-fill: rgba(0, 0, 0, 0.1)");
+        if (selectedInHand != null)
+            selectedInHand.getRect().setStyle("-fx-fill: rgba(0,0,0,0.35);");
+        selectedRect = null;
+        selectedInHand = null;
         match.deselect();
     }
 
     private Attacker getAttacker(int r, int c) {
-        for (Map.Entry<Attacker, Container> entry : map.entrySet())
+        for (Map.Entry<Attacker, Container> entry : attackers.entrySet())
             if (entry.getKey().getCurrentCell().getX() == r
                     && entry.getKey().getCurrentCell().getY() == c)
                 return entry.getKey();
@@ -149,15 +129,41 @@ public class BattleView {
     }
 
     public void showMove(Attacker a) {
-        Container c = map.get(a);
+        Container c = attackers.get(a);
         if (c != null) {
             Rectangle r = cells[a.getCurrentCell().getX()][a.getCurrentCell().getY()];
-            c.g.relocate(r.getLayoutX(), r.getLayoutY() - 40);
+            c.getGroup().relocate(r.getLayoutX() - 28, r.getLayoutY() - 60);
         }
     }
 
     public void showAttack(Attacker a) {
 
+    }
+
+    public void drawAttackers() {
+        groundedAttackers.getChildren().clear();
+        attackers = new HashMap<>();
+        for (Attacker a : match.getBothGroundedAttackers()) {
+            match.showBattleField();
+            Container c = new Container();
+            c.setCard(a);
+            c.setImages();
+            System.out.println(a.getCurrentCell().getX());
+            System.out.println(a.getCurrentCell().getY());
+            Rectangle r = cells[a.getCurrentCell().getX()][a.getCurrentCell().getY()];
+            c.getGroup().relocate(r.getLayoutX() - 28, r.getLayoutY() - 60);
+            c.getGroup().setOnMouseClicked(event -> {
+//                    if (event.getButton() == MouseButton.PRIMARY) {
+//                        match.setSelectedCard(a);
+//                        c.currentRectangle.setStyle("-fx-fill: rgba(255, 255, 0, 0.2)");
+//                    } else if (event.getButton() == MouseButton.SECONDARY) {
+//                        match.setSelectedCard(null);
+//                        c.currentRectangle.setStyle("-fx-fill: rgba(0, 0, 0, 0.1)");
+//                    }
+            });
+            groundedAttackers.getChildren().add(c.getGroup());
+            attackers.put(a, c);
+        }
     }
 
     private void drawHub() {
@@ -168,14 +174,35 @@ public class BattleView {
 
     }
 
-    private void drawHand() {
-        hand.relocate(350, 650);
-        hand.setSpacing(50);
+    public void drawHand() {
+        hand.getChildren().clear();
+        hand.relocate(400, 600);
+        hand.setSpacing(10);
+
         PlayerMatchInfo info = match.getInfo(Player.getCurrentPlayer());
         for (Card c : info.getHand().getCards()) {
             try {
-                ImageView imageView = new ImageView(new Image(new FileInputStream("src/assets/gifs/minion.gif")));
-                hand.getChildren().add(imageView);
+                Container co = new Container();
+                co.setCard(c);
+                Rectangle r = new Rectangle(100, 100);
+                r.relocate(0, 25);
+                r.setStyle("-fx-fill:  rgba(0,0,0,0.35);");
+                co.setRect(r);
+                co.setImages();
+                Label name = new Label(c.getName());
+                name.setTextFill(Color.WHITE);
+                name.relocate(10, 53);
+                hand.getChildren().add(co.getGroup());
+                co.getGroup().setOnMouseClicked(event -> {
+                    if (event.getButton() == MouseButton.PRIMARY) {
+                        deselect();
+                        selectedInHand = co;
+                        co.getRect().setStyle("-fx-fill: rgba(255,255,0,0.35);");
+                    } else if (event.getButton() == MouseButton.SECONDARY) {
+                        deselect();
+                    }
+                });
+
             } catch (Exception e) {
                 View.printThrowable(e);
             }

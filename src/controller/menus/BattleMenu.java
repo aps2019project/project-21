@@ -90,10 +90,7 @@ public class BattleMenu extends Menu {
         view.showCardInfo(nextCard);
     }
 
-    private void insertCardIn() {
-        String name = request.getCommandArguments().get(0);
-        int x = Integer.parseInt(request.getCommandArguments().get(1));
-        int y = Integer.parseInt(request.getCommandArguments().get(2));
+    public void insertCardIn(String name, int x, int y) {
         Match.getCurrentMatch().insertCard(name, x, y);
     }
 
