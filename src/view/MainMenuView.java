@@ -117,15 +117,8 @@ public class MainMenuView {
         back.setOnAction(event -> isInMainMenu = false);
         volume.setOnAction(event -> VolumeController.getInstance().run());
     }
-
-    private void createNewMatch() {
-        if (!Player.getCurrentPlayer().hasAValidMainDeck())
-            View.getInstance().printMessage(Message.DECK_IS_NOT_VALID);
-        else
-            CreateMatchView.getInstance().run();
-    }
-
-    private void setBackground() {
+    
+     private void setBackground() {
         try {
             ImageView background = new ImageView(new Image(new FileInputStream("src\\assets\\mainmenu.jpg")));
             background.fitWidthProperty().bind(scene.widthProperty());
@@ -134,6 +127,13 @@ public class MainMenuView {
         } catch (Exception e) {
             View.printThrowable(e);
         }
+    }
+
+    private void createNewMatch() {
+        if (!Player.getCurrentPlayer().hasAValidMainDeck())
+            View.getInstance().printMessage(Message.DECK_IS_NOT_VALID);
+        else
+            CreateMatchView.getInstance().run();
     }
 
     private void handleChanges() {
