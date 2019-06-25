@@ -321,4 +321,11 @@ public class MinionMaker {
                 6, -1, AttackMode.MELEE, null, true);
         saveToFile(minion);
     }
+
+    public static void custumMinion(String name, int cost, int manaCost, int hp,
+                                    int ap, int range, AttackMode attackMode, Spell spell){
+        Minion minion = new Minion(name, cost, manaCost, hp,
+                ap, range, attackMode, spell);
+        saveToFile(minion);
+    }
 }
