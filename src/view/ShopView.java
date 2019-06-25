@@ -257,28 +257,28 @@ public class ShopView {
                 case 1:
                     for (Minion minion : thisPlayer.getCollection().getMinions()) {
                         if (minion != null) {
-                            CardView.showCard(minion, items);
+                            CardView.showCard(minion, items, true);
                         }
                     }
                     break;
                 case 2:
                     for (Hero hero : thisPlayer.getCollection().getHeroes()) {
                         if (hero != null) {
-                            CardView.showCard(hero, items);
+                            CardView.showCard(hero, items, true);
                         }
                     }
                     break;
                 case 3:
                     for (Spell spell : thisPlayer.getCollection().getSpells()) {
                         if (spell != null) {
-                            CardView.showCard(spell, items);
+                            CardView.showCard(spell, items, true);
                         }
                     }
                     break;
                 case 4:
                     for (Usable usable : thisPlayer.getCollection().getUsables()) {
                         if (usable != null) {
-                            CardView.showCard(usable, items);
+                            CardView.showCard(usable, items, true);
                         }
                     }
                     break;
@@ -288,28 +288,28 @@ public class ShopView {
                 case 1:
                     for (Minion minion : Minion.getMinions()) {
                         if (minion != null) {
-                            CardView.showCard(minion, items);
+                            CardView.showCard(minion, items, true);
                         }
                     }
                     break;
                 case 2:
                     for (Hero hero : Hero.getHeroes()) {
                         if (hero != null) {
-                            CardView.showCard(hero, items);
+                            CardView.showCard(hero, items, true);
                         }
                     }
                     break;
                 case 3:
                     for (Spell spell : Spell.getSpells()) {
                         if (spell != null) {
-                            CardView.showCard(spell, items);
+                            CardView.showCard(spell, items, true);
                         }
                     }
                     break;
                 case 4:
                     for (Usable usable : Usable.getUsables()) {
                         if (usable != null) {
-                            CardView.showCard(usable, items);
+                            CardView.showCard(usable, items, true);
                         }
                     }
                     break;
