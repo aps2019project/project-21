@@ -40,6 +40,7 @@ public class MainMenuView {
     private Button exit = new Button("EXIT");
     private Button save = new Button("SAVE");
     private Button hesoyam = new Button("HESOYAM");
+    private Button customCard = new Button("CUSTOM CARD");
     private Button showHistory = new Button("SHOW HISTORY");
     private Label currentPlayer = new Label("");
     private boolean isInMainMenu = false;
@@ -78,7 +79,7 @@ public class MainMenuView {
         afterLoginOptions.relocate(100, 100);
         afterLoginOptions.setSpacing(15);
 
-        mainMenuOptions.getChildren().addAll(collection, shop, battle, volume, back);
+        mainMenuOptions.getChildren().addAll(collection, shop, battle, customCard, volume, back);
         mainMenuOptions.relocate(100, 100);
         mainMenuOptions.setSpacing(15);
 
@@ -101,7 +102,7 @@ public class MainMenuView {
         login.setOnAction(event -> AccountMenu.getInstance()
                 .login(username.getText(), password.getText()));
         logout.setOnAction(event -> AccountMenu.getInstance().logout());
-        showHistory.setOnAction(event ->{
+        showHistory.setOnAction(event -> {
             MatchHistoryView.getInstance().run();
             VoicePlay.setThisMenu("match history");
         });
@@ -113,6 +114,7 @@ public class MainMenuView {
             ShopView.getInstance().run();
             VoicePlay.setThisMenu("shop");
         });
+        customCard.setOnAction(event -> CustomCardView.getInstance().run());
         battle.setOnAction(event -> createNewMatch());
         back.setOnAction(event -> isInMainMenu = false);
         volume.setOnAction(event -> VolumeController.getInstance().run());
