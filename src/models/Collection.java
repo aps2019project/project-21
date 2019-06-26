@@ -66,7 +66,7 @@ public class Collection {
             }
     }
 
-    void deleteDeck(String deckName) {
+    public void deleteDeck(String deckName) {
         if (!hasThis(deckName))
             return;
         List<Deck> copy = new ArrayList<>(decks);
