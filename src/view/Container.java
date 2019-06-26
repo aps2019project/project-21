@@ -127,6 +127,20 @@ public class Container {
         add(run);
     }
 
+    public void setAsRun(){
+        group.getChildren().removeAll(run, idle, gif, death, attack);
+        group.getChildren().addAll(run);
+    }
+
+    public void reverseRun(){
+        run.setScaleX(-1);
+    }
+
+    public void setAsGif(){
+        group.getChildren().removeAll(run, idle, gif, death, attack);
+        group.getChildren().addAll(gif);
+    }
+
     public ImageView getAttack() {
         return attack;
     }

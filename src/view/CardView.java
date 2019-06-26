@@ -19,7 +19,7 @@ import java.io.IOException;
 
 class CardView {
     static void showCard(Card card, TilePane items, boolean shop) {
-        Group ret = new Group();
+        Group ret;
         if (shop) {
             ret = shopCardGroup(card);
         } else {

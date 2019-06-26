@@ -49,19 +49,19 @@ public class BattleMenu extends Menu {
         return Match.getCurrentMatch().selectAttacker(attacker.getCardIDInGame());
     }
 
-    public void moveOrAttack(int x, int y) {
+    public int moveOrAttack(int x, int y) {
         if (Match.getCurrentMatch().getCell(x, y).isEmpty())
-            moveTo(x, y);
+            return moveTo(x, y);
         else
-            attack(x, y);
+            return 2 + attack(x, y);
     }
 
-    private void moveTo(int x, int y) {
-        Match.getCurrentMatch().moveCard(x, y);
+    private int moveTo(int x, int y) {
+        return Match.getCurrentMatch().moveCard(x, y);
     }
 
-    private void attack(int x, int y) {
-        Match.getCurrentMatch().attack(x, y);
+    private int attack(int x, int y) {
+        return Match.getCurrentMatch().attack(x, y);
     }
 
     private void attackCombo() {
@@ -167,5 +167,7 @@ public class BattleMenu extends Menu {
         int y = Integer.parseInt(request.getCommandArguments().get(1));
         Match.getCurrentMatch().useSpell(x, y);
     }
+
+
 }
 

@@ -121,39 +121,50 @@ public class Match {
         return (Collectable) selectedCard;
     }
 
-    public void moveCard(int x, int y) {
+    public int moveCard(int x, int y) {
         if (!isAnyCardSelected()) {
+            selectedCard = null;
             view.printMessage(Message.NO_CARD_IS_SELECTED);
-            return;
+            return 1;
         }
         Cell target = getCell(x, y);
-        if (target == null)
-            return;
+        if (target == null) {
+            selectedCard = null;
+            return 1;
+        }
         if (!isMoveTargetValid(target)) {
             view.printMessage(Message.INVALID_MOVE_TARGET);
-            return;
+            selectedCard = null;
+            return 1;
         }
-        if (!isSelectedCardAttacker())
-            return;
+        if (!isSelectedCardAttacker()) {
+            selectedCard = null;
+            return 1;
+        }
         Attacker attacker = (Attacker) selectedCard;
         if (!attacker.canMove()) {
             view.printMessage(Message.ATTACKER_CANT_MOVE);
-            return;
+            selectedCard = null;
+            return 1;
         }
         if (isPathClosed(attacker.getCurrentCell(), target)) {
             view.printMessage(Message.INVALID_MOVE_TARGET);
-            return;
+            selectedCard = null;
+            return 1;
         }
         if (attacker.isStunned()) {
             view.printMessage(Message.STUNNED);
-            return;
+            selectedCard = null;
+            return 1;
         }
 
         attacker.getCurrentCell().setEmpty();
         attacker.setCannotMove();
         goOnCell(attacker, target);
         System.out.println(selectedCard.getCardIDInGame() + " moved to (" + x + ", " + y + ")");
-        battleView.showMove(attacker);
+        selectedCard = null;
+        System.out.println("RETURN 0");
+        return 0;
     }
 
     private boolean isMoveTargetValid(Cell target) {
@@ -178,36 +189,36 @@ public class Match {
         return true;
     }
 
-    public void attack(int x, int y) {
-        attack(getCell(x, y).getCurrentAttacker().getCardIDInGame());
+    public int attack(int x, int y) {
+        return attack(getCell(x, y).getCurrentAttacker().getCardIDInGame());
     }
 
-    public void attack(String oppID) {
+    public int attack(String oppID) {
         if (!isAnyCardSelected()) {
             view.printMessage(Message.NO_CARD_IS_SELECTED);
-            return;
+            return 1;
         }
         Attacker target = getGroundedOppAttacker(oppID);
         if (target == null) {
             view.printMessage(Message.INVALID_CARD_ID);
-            return;
+            return 1;
         }
         if (!isSelectedCardAttacker()) {
             view.printMessage(Message.NO_CARD_IS_SELECTED);
-            return;
+            return 1;
         }
         Attacker attacker = (Attacker) selectedCard;
         if (!attacker.canAttack() || attacker.isStunned()) {
             System.out.println("card with id : " + selectedCard.getCardIDInGame() + " can't attack.");
-            return;
+            return 1;
         }
         if (!isInRangeOfAttack(target, attacker)) {
             view.printMessage(Message.UNAVAILABLE_FOR_ATTACK);
-            return;
+            return 1;
         }
         if (attacker.isStunned()) {
             view.printMessage(Message.STUNNED);
-            return;
+            return 1;
         }
         target.decreaseHP(attacker.getAP());
         counterAttack(target);
@@ -215,7 +226,6 @@ public class Match {
         attacker.setCannotAttack();
         attacker.setCannotMove();
         System.out.println("attacked.");
-        battleView.showAttack(attacker);
 
         if (attacker instanceof Minion) {
             Minion minion = (Minion) attacker;
@@ -224,6 +234,7 @@ public class Match {
                     if (effect.getActivationType() == ActivationType.ON_ATTACK)
                         minion.getSpecialPower().castSpell(this, players[turn], target.getCurrentCell());
         }
+        return 0;
     }
 
     private void checkIfHeIsDead(Attacker attacker) {

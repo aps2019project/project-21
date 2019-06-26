@@ -1,6 +1,7 @@
 package view;
 
 import controller.menus.BattleMenu;
+import javafx.animation.TranslateTransition;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -17,6 +18,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import models.Player;
 import models.card.Attacker;
 import models.card.Card;
@@ -42,6 +44,7 @@ public class BattleView {
     private Button pause = new Button("PAUSE");
     private Group hub = new Group();
     private Rectangle selectedRect;
+    private Cell select = new Cell(-1, -1);
     private Container selectedInHand;
     private HBox hand = new HBox();
 
@@ -90,8 +93,17 @@ public class BattleView {
                 rect.setOnMouseClicked(event -> {
                     if (event.getButton() == MouseButton.PRIMARY) {
                         if (match.isAnyCardSelected()) {
-                            BattleMenu.getInstance().moveOrAttack(u, v);
-                            deselect();
+                            int r = BattleMenu.getInstance().moveOrAttack(u, v);
+                            if (r == 0) {
+                                moveAnimation(u, v);
+                                deselect();
+                            } else if (r == 1) {
+                                deselect();
+                            } else if (r == 2) {
+                                //TODO attack animation
+                            } else {
+                                deselect();
+                            }
                         } else if (selectedInHand != null) {
                             BattleMenu.getInstance().insertCardIn(selectedInHand.getCard().getName(), u, v);
                             deselect();
@@ -101,6 +113,8 @@ public class BattleView {
                                     selectedRect.setStyle("-fx-fill: rgba(0, 0, 0, 0.1)");
                                 rect.setStyle("-fx-fill: rgba(255, 255, 0, 0.2)");
                                 selectedRect = rect;
+                                select.setX(u);
+                                select.setY(v);
                             }
                         }
                     } else if (event.getButton() == MouseButton.SECONDARY) {
@@ -110,12 +124,30 @@ public class BattleView {
             }
     }
 
+    private void moveAnimation(int u, int v) {
+        Container thi = getContainer(u, v);
+        if (thi != null) {
+            thi.setAsRun();
+            if (v - select.getY() < 0)
+                thi.reverseRun();
+            Duration duration = Duration.millis(2500);
+            TranslateTransition t = new TranslateTransition(duration, thi.getGroup());
+            t.setByY((TILE_SIZE + VALLEY_SIZE) * (u - select.getX()));
+            t.setByX((TILE_SIZE + VALLEY_SIZE) * (v - select.getY()));
+            t.play();
+            t.setOnFinished(event -> thi.setAsGif());
+            if (v - select.getY() < 0)
+                thi.reverseRun();
+        }
+    }
+
     private void deselect() {
         if (selectedRect != null)
             selectedRect.setStyle("-fx-fill: rgba(0, 0, 0, 0.1)");
         if (selectedInHand != null)
             selectedInHand.getRect().setStyle("-fx-fill: rgba(0,0,0,0.35);");
         selectedRect = null;
+        select.setX(-1);
         selectedInHand = null;
         match.deselect();
     }
@@ -128,15 +160,15 @@ public class BattleView {
         return null;
     }
 
-    public void showMove(Attacker a) {
-        Container c = attackers.get(a);
-        if (c != null) {
-            Rectangle r = cells[a.getCurrentCell().getX()][a.getCurrentCell().getY()];
-            c.getGroup().relocate(r.getLayoutX() - 28, r.getLayoutY() - 60);
-        }
+    private Container getContainer(int r, int c) {
+        for (Map.Entry<Attacker, Container> entry : attackers.entrySet())
+            if (entry.getKey().getCurrentCell().getX() == r
+                    && entry.getKey().getCurrentCell().getY() == c)
+                return entry.getValue();
+        return null;
     }
 
-    public void showAttack(Attacker a) {
+    public void attackAnimation(Attacker a) {
 
     }
 

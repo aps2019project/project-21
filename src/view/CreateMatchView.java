@@ -144,7 +144,8 @@ public class CreateMatchView {
 
     private void setBackground() {
         try {
-            ImageView background = new ImageView(new Image(new FileInputStream("src/assets/resources/scenes/load/scene_load_background.jpg")));
+            ImageView background = new ImageView(new Image(new FileInputStream
+                    ("src\\assets\\resources\\scenes\\load\\scene_load_background.jpg")));
             background.fitWidthProperty().bind(scene.widthProperty());
             background.fitHeightProperty().bind(scene.heightProperty());
             root.getChildren().add(background);

@@ -42,7 +42,7 @@ public class View {
         primaryStage.setTitle("Duelyst");
         primaryStage.setMaximized(true);
 //        try {
-//            Thread.sleep(2500);
+//            Thread.sleep(3000);
 //        } catch (Exception e) {
 //            View.printThrowable(e);
 //        }
