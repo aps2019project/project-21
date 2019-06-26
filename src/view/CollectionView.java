@@ -10,6 +10,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import models.Collection;
 import models.Deck;
@@ -62,16 +63,21 @@ public class CollectionView extends Application {
 
 
 
-    private Group showDecks(TilePane bloodyTilePane){
+    private Group showDecks(){
         Group root = new Group();
-        cardsTilePane.getChildren().clear();
+        VBox vBox = new VBox();
+        //cardsTilePane.getChildren().clear();
         for (Deck deck : Player.getCurrentPlayer().getCollection().getDecks()
              ) {
+            TilePane bloodyTilePane = new TilePane();
             for (Card card:deck.getAllCards()
                  ) {
                 CardView.showCard(card, bloodyTilePane, false);
             }
+            vBox.getChildren().add(bloodyTilePane);
+
         }
+        root.getChildren().add(vBox);
         return root;
     }
 
@@ -152,6 +158,16 @@ public class CollectionView extends Application {
                 //Player.getCurrentPlayer().getCollection().getDecks();
             }
         });
+
+
+        showAllDecksButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                primaryStage.setScene(decksScene);
+            }
+        });
+
+
 
 //        try {
 //            com.sun.net.httpserver.HttpServer server = com.sun.jersey.api.container.httpserver.HttpServerFactory.create("http://localhost:9998/");
