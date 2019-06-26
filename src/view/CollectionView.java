@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import models.Collection;
 import models.Deck;
 import models.Player;
+import models.card.Card;
 
 public class CollectionView extends Application {
     private static CollectionView instance = new CollectionView();
@@ -29,8 +30,10 @@ public class CollectionView extends Application {
 
 
     private Group root = new Group();
+    private Group deckGroup = new Group();
     private Scene scene = new Scene(root, 1500, 100);
 
+    private Scene decksScene = new Scene(showDecks());
 
     private Button exitButton = new Button("EXIT");
     private Button deleteDeckButton = new Button("DELETE DECK");
@@ -58,6 +61,19 @@ public class CollectionView extends Application {
 
 
 
+
+    private Group showDecks(TilePane bloodyTilePane){
+        Group root = new Group();
+        cardsTilePane.getChildren().clear();
+        for (Deck deck : Player.getCurrentPlayer().getCollection().getDecks()
+             ) {
+            for (Card card:deck.getAllCards()
+                 ) {
+                CardView.showCard(card, bloodyTilePane, false);
+            }
+        }
+        return root;
+    }
 
     //deleteDeckButton.set(new EventHandler<MouseEvent>( ) {
 //        @Override
