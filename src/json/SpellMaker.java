@@ -9,6 +9,7 @@ import models.card.effects.IncreaseAP;
 import models.card.effects.PositiveDispel;
 import models.card.target_enums.*;
 
+import javax.swing.text.EditorKit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -227,5 +228,12 @@ public class SpellMaker {
                 ApplyType.ON_ATTACKER, "Stun an opp.");
         saveToFile(spell);
 
+    }
+
+    public static void custumSpell(String name, int cost, int manaCost, TargetType targetType,
+                                   List<Effect> effects, ApplyType applyType, String decs){
+        Spell spell = new Spell(name, cost, manaCost, targetType, effects,
+                applyType, decs);
+        saveToFile(spell);
     }
 }

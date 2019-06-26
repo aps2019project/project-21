@@ -18,8 +18,13 @@ import java.io.IOException;
 
 
 class CardView {
-    static void showCard(Card card, TilePane items) {
-        Group ret = shopCardGroup(card);
+    static void showCard(Card card, TilePane items, boolean shop) {
+        Group ret = new Group();
+        if (shop) {
+            ret = shopCardGroup(card);
+        } else {
+            ret = collectionCardGroup(card);
+        }
         if (ret != null) {
             items.getChildren().add(ret);
             ret.setOnMouseClicked(event -> {
@@ -28,6 +33,102 @@ class CardView {
             });
         } else {
             System.out.print(card.getName());
+        }
+    }
+
+    private static Group collectionCardGroup(Card card){
+        if (card instanceof Attacker) {
+            Group ret = new Group();
+            try {
+                ImageView imageView = new ImageView(new Image(new FileInputStream
+                        ("src\\assets\\cards\\shop_background.png")));
+
+                ImageView image;
+                if (card instanceof Hero) {
+                    image = new ImageView(new Image(new FileInputStream
+                            ("src\\assets\\cards\\hero\\" + card.getName() + ".png")));
+                } else {
+                    image = new ImageView(new Image(new FileInputStream
+                            ("src\\assets\\cards\\minion\\" + card.getName() + ".png")));
+                }
+                image.relocate(0, -50);
+
+                ImageView mp = new ImageView(new Image(new FileInputStream
+                        ("src\\assets\\cards\\mana.png")));
+                Label MP = new Label(Integer.toString(card.getManaCost()));
+                MP.setFont(Font.font(14));
+                MP.relocate(7, 22);
+
+                Label hp = new Label("");
+                hp.relocate(167, 170);
+                hp.setTextFill(Color.WHITE);
+                hp.setFont(Font.font(14));
+                hp.setText(Integer.toString(((Attacker) card).getHP()));
+
+
+                Label ap = new Label(Integer.toString(((Attacker) card).getAP()));
+                ap.relocate(55, 170);
+                ap.setTextFill(Color.WHITE);
+                ap.setFont(Font.font(14));
+
+                Image t = new Image(new FileInputStream("src\\assets\\cards\\name.png"));
+                ImageView nameImage = new ImageView(t);
+                nameImage.setScaleX(0.45);
+                nameImage.relocate(28, 125);
+
+                Label name = new Label(card.getName() + "\n" + ((card instanceof Hero) ? "Hero" : "Minion"));
+                name.setTextAlignment(TextAlignment.CENTER);
+                name.relocate(87, 135);
+                name.setTextFill(Color.WHITE);
+                name.setFont(Font.font(14));
+
+                Label desc = new Label(smallDesc(card.getDesc()));
+                desc.setFont(Font.font(15));
+                desc.relocate(20, 210);
+                desc.setTextFill(Color.WHITE);
+                desc.setTextAlignment(TextAlignment.CENTER);
+
+                ret.getChildren().addAll(imageView, desc, image, nameImage, mp, MP, hp, ap, name);
+                return ret;
+            } catch (IOException ex) {
+                View.printThrowable(ex);
+                return null;
+            }
+        } else {
+            Group ret = new Group();
+            try {
+                ImageView imageView = new ImageView(new Image(new FileInputStream
+                        ("src\\assets\\cards\\spell_background.png")));
+
+
+                ImageView mp = new ImageView(new Image(new FileInputStream
+                        ("src\\assets\\cards\\mana.png")));
+                Label MP = new Label(Integer.toString(card.getManaCost()));
+                MP.setFont(Font.font(14));
+                MP.relocate(7, 22);
+
+                Label name = new Label(card.getName() + "\n" + ((card instanceof Spell) ? "Spell" : "Usable"));
+                name.setTextAlignment(TextAlignment.CENTER);
+                name.relocate(80, 100);
+                name.setTextFill(Color.WHITE);
+                name.setFont(Font.font(14));
+
+                Image t = new Image(new FileInputStream("src\\assets\\cards\\name.png"));
+                ImageView nameImage = new ImageView(t);
+                nameImage.relocate(20, 90);
+
+                Label desc = new Label(smallDesc(card.getDesc()));
+                desc.setFont(Font.font(15));
+                desc.relocate(20, 200);
+                desc.setTextFill(Color.WHITE);
+                desc.setTextAlignment(TextAlignment.CENTER);
+
+                ret.getChildren().addAll(imageView, desc, nameImage, mp, MP, name);
+                return ret;
+            } catch (IOException ex) {
+                View.printThrowable(ex);
+                return null;
+            }
         }
     }
 

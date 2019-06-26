@@ -73,20 +73,8 @@ public class Cell {
     boolean hasCollectable() {
         return this.collectable != null;
     }
-
-    public ArrayList<Effect> getEffects() {
-        return effects;
-    }
-
-    public Collectable getCollectable() {
-        return collectable;
-    }
-
-    public Flag getFlag() {
-        return flag;
-    }
-
-    public Attacker getCurrentAttacker() {
+    
+     public Attacker getCurrentAttacker() {
         return currentAttacker;
     }
 
@@ -100,6 +88,20 @@ public class Cell {
 
     public int getY() {
         return y;
+    }
+    
+    //  TODO : add some parameters to this. You know!
+
+    public ArrayList<Effect> getEffects() {
+        return effects;
+    }
+
+    public Collectable getCollectable() {
+        return collectable;
+    }
+
+    public Flag getFlag() {
+        return flag;
     }
 
     public int getX() {

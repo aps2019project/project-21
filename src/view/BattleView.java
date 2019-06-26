@@ -170,8 +170,25 @@ public class BattleView {
         endTurn.relocate(1300, 700);
         pause.relocate(1300, 750);
         drawHand();
+        drawGeneralsIcon();
         hub.getChildren().addAll(endTurn, pause, hand);
 
+    }
+
+    private void drawGeneralsIcon() {
+        try {
+            ImageView icon1 = new ImageView(new Image(new FileInputStream("src/assets/generals/general_portrait_image_hex_f1.png")));
+            ImageView icon2 = new ImageView(new Image(new FileInputStream("src/assets/generals/general_portrait_image_hex_f4-alt.png")));
+            icon1.setScaleX(0.4);
+            icon1.setScaleY(icon1.getScaleX());
+            icon2.setScaleX(icon1.getScaleY());
+            icon2.setScaleY(icon2.getScaleX());
+            icon1.relocate(0, -150);
+            icon2.relocate(1100, -150);
+            hub.getChildren().addAll(icon1, icon2);
+        } catch (Exception ex) {
+            View.printThrowable(ex);
+        }
     }
 
     public void drawHand() {

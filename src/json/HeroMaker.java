@@ -116,4 +116,10 @@ public class HeroMaker {
                 7, 4, AttackMode.HYBRID, null, 0);
         saveToFile(hero);
     }
+
+    public static void custumHero(String name, int ap, int hp, AttackMode attackMode,
+                                  int range, Spell spell, int cooldown, int cost){
+        Hero hero = new Hero(name, cost, hp, ap, range, attackMode, spell, cooldown);
+        saveToFile(hero);
+    }
 }
