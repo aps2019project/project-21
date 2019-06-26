@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -44,10 +45,27 @@ public class CollectionView extends Application {
     private Button removeFromDeckButton = new Button("REMOVE FROM DECK");
     private Button addToDeckButton = new Button("ADD TO DECK");
     private Button showAllDecksButton = new Button("SHOW ALL DECKS");
+    private Button[] selectDeckButtons = new Button[];
     private TilePane cardsTilePane = new TilePane();
     private ScrollPane scrollPane = new ScrollPane();
     private TextField inputTextField = new TextField();
+    private Deck selectedDeck;
 
+
+    {
+        int i = 0;
+        for (Deck deck:Player.getCurrentPlayer().getCollection().getDecks()
+             ) {
+            selectDeckButtons[i] = new Button("SELECT");
+            selectDeckButtons[i].setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    selectedDeck = deck;
+                }
+            });
+            i++;
+        }
+    }
 
 
     {
@@ -74,7 +92,8 @@ public class CollectionView extends Application {
                  ) {
                 CardView.showCard(card, bloodyTilePane, false);
             }
-            vBox.getChildren().add(bloodyTilePane);
+            vBox.getChildren().addAll(bloodyTilePane, new Label(deck.getName()), new Button("SELECT"));
+
 
         }
         root.getChildren().add(vBox);
@@ -116,7 +135,7 @@ public class CollectionView extends Application {
             @Override
             public void handle(ActionEvent event) {
                 //Collection.deleteDeck("ii");
-                Player.getCurrentPlayer().getCollection().deleteDeck("h");
+                Player.getCurrentPlayer().getCollection().deleteDeck(selectedDeck.getName());
             }
         });
 
@@ -147,7 +166,8 @@ public class CollectionView extends Application {
         selectDeckButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                // Player.getCurrentPlayer().setMainDeck(thatBloodyDeck);
+                Player.getCurrentPlayer().getCollection().setMainDeck(selectedDeck);
+                selectedDeck = null;
             }
         });
 

@@ -81,7 +81,7 @@ public class Collection {
         return mainDeck;
     }
 
-    void setMainDeck(Deck mainDeck) {
+    public void setMainDeck(Deck mainDeck) {
         this.mainDeck = mainDeck;
     }
 
