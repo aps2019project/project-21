@@ -18,6 +18,8 @@ import models.Deck;
 import models.Player;
 import models.card.Card;
 
+import java.util.ArrayList;
+
 public class CollectionView extends Application {
     private static CollectionView instance = new CollectionView();
 
@@ -45,7 +47,8 @@ public class CollectionView extends Application {
     private Button removeFromDeckButton = new Button("REMOVE FROM DECK");
     private Button addToDeckButton = new Button("ADD TO DECK");
     private Button showAllDecksButton = new Button("SHOW ALL DECKS");
-    private Button[] selectDeckButtons = new Button[];
+//    private Button[] selectDeckButtons = new Button[];
+    private ArrayList<Button> selectDeckButtons = new ArrayList<>();
     private TilePane cardsTilePane = new TilePane();
     private ScrollPane scrollPane = new ScrollPane();
     private TextField inputTextField = new TextField();
@@ -56,8 +59,9 @@ public class CollectionView extends Application {
         int i = 0;
         for (Deck deck:Player.getCurrentPlayer().getCollection().getDecks()
              ) {
-            selectDeckButtons[i] = new Button("SELECT");
-            selectDeckButtons[i].setOnAction(new EventHandler<ActionEvent>() {
+//            selectDeckButtons[i] = new Button("SELECT");
+            selectDeckButtons.add(new Button("SELECT"));
+            selectDeckButtons.get(i).setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     selectedDeck = deck;
@@ -99,6 +103,21 @@ public class CollectionView extends Application {
         root.getChildren().add(vBox);
         return root;
     }
+
+
+
+
+    private Group showCollectionCards(){
+        Group root = new Group();
+        for (Card card:Player.getCurrentPlayer().getCollection().getCards()
+             ) {
+
+        }
+        return root;
+    }
+
+
+
 
     //deleteDeckButton.set(new EventHandler<MouseEvent>( ) {
 //        @Override
