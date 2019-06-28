@@ -1,6 +1,5 @@
 package controller.menus;
 
-import controller.request.CollectionMenuRequest;
 import json.CardMaker;
 import models.Deck;
 import models.Item.Usable;
@@ -14,76 +13,23 @@ import java.util.List;
 public class CollectionMenu extends Menu {
     private static CollectionMenu instance = new CollectionMenu();
 
-    static Menu getInstance() {
+    public static CollectionMenu getInstance() {
         return instance;
     }
 
     private CollectionMenu() {
-
     }
 
-    public void main() {
-        if (showMenu) {
-            showMenu();
-            showMenu = false;
-        }
+    public void exportDeck(String deckName) {
+        if (!Player.hasAnyoneLoggedIn())
+            return;
+        Player.getCurrentPlayer().exportDeck(deckName);
+    }
 
-        request = new CollectionMenuRequest();
-
-        request.getNewCommand();
-
-        request.extractType();
-
-        switch (request.getType()) {
-            case SHOW_COLLECTION:
-                show();
-                break;
-            case SEARCH_COLLECTION:
-                search();
-                break;
-            case SAVE:
-                save();
-                break;
-            case CREATE_DECK:
-                createDeck();
-                break;
-            case DELETE_DECK:
-                deleteDeck();
-                break;
-            case ADD_TO_DECK:
-                addCardToDeck();
-                break;
-            case REMOVE_FROM_DECK:
-                removeCardFromDeck();
-                break;
-            case VALIDATE_DECK:
-                isDeckValid();
-                break;
-            case SELECT_DECK:
-                selectDeck();
-                break;
-            case SHOW_ALL_DECKS:
-                showAllDecks();
-                break;
-            case SHOW_DECK:
-                showDeck();
-                break;
-            case HELP:
-                showMenu();
-                break;
-            case SHOW_MENU:
-                showMenu();
-                break;
-            case BACK:
-                back();
-                break;
-            case EXIT:
-                exit();
-                break;
-            case INVALID:
-                invalidCommand();
-                break;
-        }
+    public void importDeck(String filename) {
+        if (!Player.hasAnyoneLoggedIn())
+            return;
+        Player.getCurrentPlayer().importDeck(filename);
     }
 
     private void show() {
@@ -124,9 +70,7 @@ public class CollectionMenu extends Menu {
         Player.getCurrentPlayer().deleteDeck(deckName);
     }
 
-    private void addCardToDeck() {
-        int collectionID = Integer.parseInt(request.getCommandArguments().get(0));
-        String deckName = request.getCommandArguments().get(1);
+    public void addCardToDeck(int collectionID, String deckName) {
         Deck deck = Player.getCurrentPlayer().getCollection().getDeck(deckName);
         if (deck == null) {
             view.printMessage(Message.NO_SUCH_DECK);
@@ -219,13 +163,5 @@ public class CollectionMenu extends Menu {
             return;
         }
         view.showDeck(deck);
-    }
-
-    protected void showMenu() {
-        view.showMenu("Collection");
-    }
-
-    private void back() {
-        MenuManager.getInstance().gotoMainMenu();
     }
 }

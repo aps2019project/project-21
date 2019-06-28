@@ -202,12 +202,12 @@ public class BattleView {
         endTurn.relocate(1300, 700);
         pause.relocate(1300, 750);
         drawHand();
-        drawGeneralsIcon();
+        drawGeneralsIcons();
         hub.getChildren().addAll(endTurn, pause, hand);
 
     }
 
-    private void drawGeneralsIcon() {
+    private void drawGeneralsIcons() {
         try {
             ImageView icon1 = new ImageView(new Image(new FileInputStream("src/assets/generals/general_portrait_image_hex_f1.png")));
             ImageView icon2 = new ImageView(new Image(new FileInputStream("src/assets/generals/general_portrait_image_hex_f4-alt.png")));

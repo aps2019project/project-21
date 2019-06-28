@@ -505,7 +505,6 @@ public class Match {
     private void aiPlay() {
         System.out.println("AI playing...");
         try {
-
             selectedCard = info[1].getHero();
             moveCard(2, selectedCard.getCurrentCell().getY() - 1);
             for (Card card : info[1].getHand().getCards())

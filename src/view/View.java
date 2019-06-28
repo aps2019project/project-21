@@ -87,7 +87,7 @@ public class View {
             pane.getChildren().add(node);
     }
 
-    void popup(String message) {
+    public void popup(String message) {
         final Stage popup = new Stage();
         popup.initModality(Modality.APPLICATION_MODAL);
         popup.initOwner(primaryStage);
