@@ -12,6 +12,12 @@ public class GiveEffect extends Effect {
     private int value;
     private EffectName effectName;
 
+    public GiveEffect(int duration, EffectName effectName) {
+        super();
+        this.duration = duration;
+        this.effectName = effectName;
+    }
+
     public GiveEffect(int duration, int num, EffectName effectName) {
         super();
         this.duration = duration;
@@ -19,9 +25,8 @@ public class GiveEffect extends Effect {
         this.effectName = effectName;
     }
 
-    public GiveEffect(int duration, EffectName effectName) {
+    public GiveEffect(EffectName effectName) {
         super();
-        this.duration = duration;
         this.effectName = effectName;
     }
 
@@ -29,11 +34,6 @@ public class GiveEffect extends Effect {
         super();
         this.duration = duration;
         this.value = value;
-        this.effectName = effectName;
-    }
-
-    public GiveEffect(EffectName effectName) {
-        super();
         this.effectName = effectName;
     }
 
