@@ -59,18 +59,6 @@ class MatchHistoryView {
         handleButtons();
     }
 
-    private void setBackground() {
-        try {
-            ImageView background = new ImageView(new Image(new FileInputStream("src\\assets\\MatchHistory" +
-                    "\\background.jpg")));
-            background.fitWidthProperty().bind(scene.widthProperty());
-            background.fitHeightProperty().bind(scene.heightProperty());
-            root.getChildren().add(background);
-        } catch (Exception e) {
-            View.printThrowable(e);
-        }
-    }
-
     private void draw() {
         root.getChildren().addAll(volume);
         
