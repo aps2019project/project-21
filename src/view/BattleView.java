@@ -51,6 +51,7 @@ public class BattleView {
     private Container selectedInHand;
     private HBox hand = new HBox();
     private HBox manaBar = new HBox();
+    private Button graveyard = new Button("GRAVEYARD");
 
     public void run() {
         View.getInstance().setScene(scene);
@@ -149,16 +150,24 @@ public class BattleView {
     }
 
     private void updateAttackers() {
+        if (match.getWinner() != null){
+            if (match.getWinner().getUsername().equals(Player.getCurrentPlayer().getUsername())){
+                View.getInstance().popup("YOU WIN");
+            } else {
+                View.getInstance().popup("YOU LOOSE");
+            }
+        }
         for (Attacker attacker : attackers.keySet()) {
             Container container = attackers.get(attacker);
-            if (attacker.getHP() < 1){
-                container.setAsDeath();
+            if (attacker.getHP() < 1) {
+                groundedAttackers.getChildren().removeAll(container.getGroup());
             }
             container.getAp().setText(Integer.toString(attacker.getAP()));
             container.getHp().setText(Integer.toString(attacker.getHP()));
             System.out.println(attacker.getName() + " " + attacker.getHP());
+            System.out.println("\n");
         }
-        System.out.println("\n");
+
     }
 
     private void moveAnimation(int u, int v) {
@@ -209,7 +218,7 @@ public class BattleView {
         Container thi = getContainer(select.getX(), select.getY());
         if (thi != null) {
             thi.setAsAttack();
-            if (select.getY() > v){
+            if (select.getY() > v) {
                 thi.attackReverse();
             }
             Duration duration = Duration.millis(1000);
@@ -217,7 +226,7 @@ public class BattleView {
             t.setByY(0);
             t.setByY(0);
             t.play();
-            if (select.getY() > v){
+            if (select.getY() > v) {
                 thi.attackReverse();
             }
             t.setOnFinished(event -> thi.setAsGif());

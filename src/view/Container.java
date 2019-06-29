@@ -13,13 +13,13 @@ import models.card.Card;
 import java.io.FileInputStream;
 
 public class Container {
+    private static ImageView death;
     private Rectangle rect;
     private Card card;
     private ImageView gif;
     private ImageView idle;
     private ImageView run;
     private ImageView attack;
-    private ImageView death;
     private Label name = new Label();
     private Label hp = new Label();
     private Label ap = new Label();
@@ -47,7 +47,7 @@ public class Container {
         group.setOnMouseExited(event -> group.getChildren().remove(hover));
     }
 
-    public void setImages() {
+    void setImages() {
         try {
             String type = card.getClass().getSimpleName();
             System.out.println(type);
@@ -79,11 +79,11 @@ public class Container {
         group.getChildren().add(gif);
     }
 
-    public Rectangle getRect() {
+    Rectangle getRect() {
         return rect;
     }
 
-    public void setRect(Rectangle rect) {
+    void setRect(Rectangle rect) {
         group.getChildren().remove(this.rect);
         this.rect = rect;
         add(rect);
@@ -109,7 +109,7 @@ public class Container {
         return idle;
     }
 
-    public void setIdle(ImageView idle) {
+    private void setIdle(ImageView idle) {
         group.getChildren().remove(this.idle);
         this.idle = idle;
         add(idle);
@@ -119,7 +119,6 @@ public class Container {
         return run;
     }
     
-    //  this is a bullshit comment.
 
     public void setRun(ImageView run) {
         group.getChildren().remove(this.run);
@@ -127,17 +126,22 @@ public class Container {
         add(run);
     }
 
-    public void setAsRun(){
+    void setAsRun(){
         group.getChildren().removeAll(run, idle, gif, death, attack);
         group.getChildren().addAll(run);
     }
 
-    public void setAsAttack(){
+    void setAsIdle(){
+        group.getChildren().removeAll(run, idle, gif, death, attack);
+        group.getChildren().addAll(idle);
+    }
+
+    void setAsAttack(){
         group.getChildren().removeAll(run, idle, gif, death, attack);
         group.getChildren().addAll(attack);
     }
 
-    public void reverseRun(){
+    void reverseRun(){
         run.setScaleX(-1);
     }
 
@@ -145,7 +149,7 @@ public class Container {
         attack.setScaleX(-1);
     }
 
-    public void setAsGif(){
+    void setAsGif(){
         group.getChildren().removeAll(run, idle, gif, death, attack);
         group.getChildren().addAll(gif);
     }
