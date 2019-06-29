@@ -132,13 +132,27 @@ public class Container {
         group.getChildren().addAll(run);
     }
 
+    public void setAsAttack(){
+        group.getChildren().removeAll(run, idle, gif, death, attack);
+        group.getChildren().addAll(attack);
+    }
+
     public void reverseRun(){
         run.setScaleX(-1);
+    }
+
+    void attackReverse(){
+        attack.setScaleX(-1);
     }
 
     public void setAsGif(){
         group.getChildren().removeAll(run, idle, gif, death, attack);
         group.getChildren().addAll(gif);
+    }
+
+    void setAsDeath(){
+        group.getChildren().removeAll(run, idle, gif, death, attack);
+        group.getChildren().addAll(death);
     }
 
     public ImageView getAttack() {
