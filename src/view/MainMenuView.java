@@ -3,6 +3,7 @@ package view;
 import controller.menus.AccountMenu;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import models.Player;
 
 import java.io.FileInputStream;
@@ -72,16 +74,16 @@ public class MainMenuView {
 
     private void draw() {
         beforeLoginOptions.getChildren().addAll(createAccount, login, exit, username, password);
-        beforeLoginOptions.relocate(100, 100);
-        beforeLoginOptions.setSpacing(15);
+        beforeLoginOptions.relocate(150, 170);
+        beforeLoginOptions.setSpacing(5);
 
         afterLoginOptions.getChildren().addAll(gotoMainMenu, showHistory, save, logout, hesoyam, currentPlayer);
-        afterLoginOptions.relocate(100, 100);
-        afterLoginOptions.setSpacing(15);
+        afterLoginOptions.relocate(beforeLoginOptions.getLayoutX(), beforeLoginOptions.getLayoutY());
+        afterLoginOptions.setSpacing(5);
 
         mainMenuOptions.getChildren().addAll(collection, shop, battle, customCard, volume, back);
-        mainMenuOptions.relocate(100, 100);
-        mainMenuOptions.setSpacing(15);
+        mainMenuOptions.relocate(beforeLoginOptions.getLayoutX(), beforeLoginOptions.getLayoutY());
+        mainMenuOptions.setSpacing(5);
 
         username.setPromptText("USERNAME");
         username.setText("a");
@@ -91,6 +93,18 @@ public class MainMenuView {
         password.relocate(200, 260);
         currentPlayer.setTextFill(Color.ORANGE);
 
+        VBox[] vBoxes = {beforeLoginOptions, afterLoginOptions, mainMenuOptions};
+        for (Node node : vBoxes) {
+            if (node instanceof VBox) {
+                VBox vBox = (VBox) node;
+                for (Node node1 : vBox.getChildren()) {
+                    if (node1 instanceof Button) {
+                        Button button = (Button) node1;
+                        button.setFont(Font.font(20));
+                    }
+                }
+            }
+        }
     }
 
     private void setOnActions() {
@@ -119,13 +133,33 @@ public class MainMenuView {
         back.setOnAction(event -> isInMainMenu = false);
         volume.setOnAction(event -> VolumeController.getInstance().run());
     }
-    
-     private void setBackground() {
+
+    private void setBackground() {
         try {
-            ImageView background = new ImageView(new Image(new FileInputStream("src\\assets\\mainmenu.jpg")));
+            ImageView background = new ImageView(new Image(
+                    new FileInputStream("src/assets/resources/scenes/obsidian_woods/obsidian_woods_background@2x.jpg")));
             background.fitWidthProperty().bind(scene.widthProperty());
             background.fitHeightProperty().bind(scene.heightProperty());
-            root.getChildren().add(background);
+            ImageView pillar = new ImageView(new Image(
+                    new FileInputStream("src/assets/resources/scenes/obsidian_woods/obsidian_woods_pillar@2x.png")));
+            pillar.setFitWidth(350);
+            pillar.setFitHeight(540);
+            pillar.relocate(scene.getWidth() - pillar.getFitWidth() + 93, 250);
+            ImageView cliff = new ImageView(new Image(
+                    new FileInputStream("src/assets/resources/scenes/obsidian_woods/obsidian_woods_cliff@2x.png")));
+            cliff.setFitWidth(scene.getWidth());
+            cliff.setFitHeight(330);
+            cliff.relocate(0, scene.getHeight() - cliff.getFitHeight() + 50);
+            ImageView vignette = new ImageView(new Image(
+                    new FileInputStream("src/assets/resources/scenes/obsidian_woods/obsidian_woods_vignette.png")));
+            vignette.setFitWidth(500);
+            vignette.setFitHeight(500);
+            ImageView brand = new ImageView(new Image(
+                    new FileInputStream("src/assets/resources/ui/brand_duelyst@2x.png")));
+            brand.setFitWidth(250);
+            brand.setFitHeight(54);
+            brand.relocate(100, 85);
+            root.getChildren().addAll(background, pillar, cliff, vignette, brand);
         } catch (Exception e) {
             View.printThrowable(e);
         }

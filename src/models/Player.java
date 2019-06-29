@@ -67,8 +67,8 @@ public class Player {
         return drake;
     }
 
-    public static void hesoyam() {
-        currentPlayer.drake = 20000000;
+    public void hesoyam() {
+        drake = 20000000;
     }
 
     public List<Match> getMatchHistory() {
@@ -190,6 +190,14 @@ public class Player {
 
     public void addDrake(int value) {
         this.drake += value;
+    }
+
+    public void exportDeck(String deckName) {
+        collection.exportDeck(deckName);
+    }
+
+    public void importDeck(String filename) {
+        collection.importDeck(filename);
     }
 }
 

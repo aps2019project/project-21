@@ -30,15 +30,15 @@ public class Buff extends Effect {
         return duration;
     }
 
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
     public BuffMode getBuffMode() {
         return buffMode;
     }
 
     public void setBuffMode(BuffMode buffMode) {
         this.buffMode = buffMode;
+    }
+
+	public void setDuration(int duration) {
+        this.duration = duration;
     }
 }

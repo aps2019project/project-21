@@ -24,6 +24,14 @@ public class Effect {
 
     }
 
+    public void setActivationType(ActivationType activationType) {
+        this.activationType = activationType;
+    }
+
+    public ActivationType getActivationType() {
+        return activationType;
+    }
+
     public void setAttacker(Attacker attacker) {
         this.attacker = attacker;
     }
@@ -38,13 +46,5 @@ public class Effect {
 
     public void setPlayer(Player player) {
         this.player = player;
-    }
-
-    public void setActivationType(ActivationType activationType) {
-        this.activationType = activationType;
-    }
-
-    public ActivationType getActivationType() {
-        return activationType;
     }
 }

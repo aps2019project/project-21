@@ -1,11 +1,15 @@
 package models;
 
+import controller.menus.CollectionMenu;
+import json.CardMaker;
 import models.Item.Usable;
 import models.card.Card;
 import models.card.Hero;
 import models.card.Minion;
 import models.card.Spell;
+import view.View;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,26 +23,26 @@ public class Collection {
     private List<Usable> usables = new ArrayList<>();
 
     void addCard(Card card) {
-        if (card.getClass().equals(Hero.class)) {
+        if (card instanceof Hero) {
             heroes.add((Hero) card);
-        } else if (card.getClass().equals(Spell.class)) {
+        } else if (card instanceof Spell) {
             spells.add((Spell) card);
-        } else if (card.getClass().equals(Minion.class))
+        } else if (card instanceof Minion)
             minions.add((Minion) card);
-        else if (card.getClass().equals(Usable.class))
+        else if (card instanceof Usable)
             usables.add((Usable) card);
         card.setCollectionID();
     }
 
     void removeCard(Card card) {
-        if (card.getClass().equals(Minion.class))
-            this.minions.remove((Minion) card);
-        else if (card.getClass().equals(Spell.class))
-            this.spells.remove((Spell) card);
-        else if (card.getClass().equals(Hero.class))
-            this.heroes.remove((Hero) card);
-        else if (card.getClass().equals(Usable.class))
-            this.usables.remove((Usable) card);
+        if (card instanceof Minion)
+            this.minions.remove(card);
+        else if (card instanceof Spell)
+            this.spells.remove(card);
+        else if (card instanceof Hero)
+            this.heroes.remove(card);
+        else if (card instanceof Usable)
+            this.usables.remove(card);
         for (Deck deck : decks)
             deck.remove(card);
     }
@@ -173,5 +177,61 @@ public class Collection {
                 mainDeck = deck;
                 return;
             }
+    }
+
+    private List<Card> getAllCards() {
+        List<Card> cards = new ArrayList<>();
+        cards.addAll(heroes);
+        cards.addAll(minions);
+        cards.addAll(usables);
+        cards.addAll(spells);
+        return cards;
+    }
+
+    private boolean isFree(Card card) {
+        if (card instanceof Hero)
+            for (Deck deck : decks)
+                if (deck.hasThisCard(card))
+                    return false;
+        return true;
+    }
+
+    private Card getFreeCardByName(String name) {
+        for (Card card : getAllCards())
+            if (card.getName().equals(name) && isFree(card))
+                return card;
+        return null;
+    }
+
+    void importDeck(String filename) {
+        Deck deck = null;
+        try {
+            deck = CardMaker.deckReader(filename);
+        } catch (IOException e) {
+            View.printThrowable(e);
+        }
+        if (deck == null) {
+            View.getInstance().popup("NO DECK SAVED AS " + filename);
+            return;
+        }
+        if (hasThis(deck.getName())) {
+            View.getInstance().popup("YOU ALREADY HAVE A DECK WITH THIS NAME!");
+            return;
+        }
+        Deck newDeck = new Deck(deck.getName());
+        addDeck(newDeck);
+        for (Card card : deck.getAllCards()) {
+            Card cardInCollection = getFreeCardByName(card.getName());
+            if (cardInCollection != null)
+                CollectionMenu.getInstance().addCardToDeck(cardInCollection.getCollectionID(), newDeck.getName());
+        }
+    }
+
+    void exportDeck(String deckName) {
+        Deck deck = getDeck(deckName);
+        if (deck == null)
+            return;
+        String path = CardMaker.saveToFile(deck);
+        View.getInstance().popup("Deck " + deckName + " saved in: " + path);
     }
 }

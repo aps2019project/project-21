@@ -9,11 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import models.Collection;
 import models.Deck;
 import models.Player;
 import models.card.Card;
@@ -31,8 +29,6 @@ public class CollectionView extends Application {
     }
 
 
-
-
     private Group root = new Group();
     private Group deckGroup = new Group();
     private Scene scene = new Scene(root, 1500, 100);
@@ -47,7 +43,7 @@ public class CollectionView extends Application {
     private Button removeFromDeckButton = new Button("REMOVE FROM DECK");
     private Button addToDeckButton = new Button("ADD TO DECK");
     private Button showAllDecksButton = new Button("SHOW ALL DECKS");
-//    private Button[] selectDeckButtons = new Button[];
+    //    private Button[] selectDeckButtons = new Button[];
     private ArrayList<Button> selectDeckButtons = new ArrayList<>();
     private TilePane cardsTilePane = new TilePane();
     private ScrollPane scrollPane = new ScrollPane();
@@ -57,8 +53,8 @@ public class CollectionView extends Application {
 
     {
         int i = 0;
-        for (Deck deck:Player.getCurrentPlayer().getCollection().getDecks()
-             ) {
+        for (Deck deck : Player.getCurrentPlayer().getCollection().getDecks()
+        ) {
 //            selectDeckButtons[i] = new Button("SELECT");
             selectDeckButtons.add(new Button("SELECT"));
             selectDeckButtons.get(i).setOnAction(new EventHandler<ActionEvent>() {
@@ -82,18 +78,15 @@ public class CollectionView extends Application {
     }
 
 
-
-
-
-    private Group showDecks(){
+    private Group showDecks() {
         Group root = new Group();
         VBox vBox = new VBox();
         //cardsTilePane.getChildren().clear();
         for (Deck deck : Player.getCurrentPlayer().getCollection().getDecks()
-             ) {
+        ) {
             TilePane bloodyTilePane = new TilePane();
-            for (Card card:deck.getAllCards()
-                 ) {
+            for (Card card : deck.getAllCards()
+            ) {
                 CardView.showCard(card, bloodyTilePane, false);
             }
             vBox.getChildren().addAll(bloodyTilePane, new Label(deck.getName()), new Button("SELECT"));
@@ -105,18 +98,14 @@ public class CollectionView extends Application {
     }
 
 
-
-
-    private Group showCollectionCards(){
+    private Group showCollectionCards() {
         Group root = new Group();
-        for (Card card:Player.getCurrentPlayer().getCollection().getCards()
-             ) {
+        for (Card card : Player.getCurrentPlayer().getCollection().getCards()
+        ) {
 
         }
         return root;
     }
-
-
 
 
     //deleteDeckButton.set(new EventHandler<MouseEvent>( ) {
@@ -143,9 +132,6 @@ public class CollectionView extends Application {
     }
 
 
-
-
-
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -159,13 +145,11 @@ public class CollectionView extends Application {
         });
 
 
-
         exitButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
             }
         });
-
 
 
         helpButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -207,7 +191,6 @@ public class CollectionView extends Application {
         });
 
 
-
 //        try {
 //            com.sun.net.httpserver.HttpServer server = com.sun.jersey.api.container.httpserver.HttpServerFactory.create("http://localhost:9998/");
 //            server.start();
@@ -222,10 +205,6 @@ public class CollectionView extends Application {
 //        } catch (java.io.IOException ioe) {
 //            ioe.printStackTrace(System.err);
 //        }
-
-
-
-
 
 
         root.getChildren().addAll(exitButton, deleteDeckButton, helpButton, selectDeckButton, createDeckButton, removeFromDeckButton, addToDeckButton, showAllDecksButton);

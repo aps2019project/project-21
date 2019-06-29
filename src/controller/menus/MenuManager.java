@@ -14,6 +14,11 @@ public class MenuManager {
         BattleMenu.getInstance().showMenu = true;
     }
 
+
+	public void gotoMainMenu() {
+        menuType = MenuType.MAIN_MENU;
+        MainMenu.getInstance().showMenu = true;
+    }
     protected void exit() {
         menuType = MenuType.EXIT;
     }
@@ -21,10 +26,5 @@ public class MenuManager {
     void gotoGraveyard() {
         menuType = MenuType.GRAVEYARD_MENU;
         Graveyard.getInstance().showMenu = true;
-    }
-
-    public void gotoMainMenu() {
-        menuType = MenuType.MAIN_MENU;
-        MainMenu.getInstance().showMenu = true;
     }
 }

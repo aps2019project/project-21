@@ -3,6 +3,7 @@ package json;
 import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
 import models.AIPlayer;
+import models.Deck;
 import models.Item.Collectable;
 import models.Item.Usable;
 import models.Player;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CardMaker {
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) throws Exception {
         HeroMaker.main();
         MinionMaker.main();
         SpellMaker.main();
@@ -139,7 +140,14 @@ public class CardMaker {
         return gson.fromJson(json, AIPlayer.class);
     }
 
-    public static void saveToFile(Object object) {
+    public static Deck deckReader(String filename) throws IOException {
+        String path = "src//json//decks//" + filename;
+        String json = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
+        YaGson gson = new YaGson();
+        return gson.fromJson(json, Deck.class);
+    }
+
+    public static String saveToFile(Object object) {
         String folder = "";
         if (object.getClass().equals(Spell.class))
             folder = "spells";
@@ -155,6 +163,8 @@ public class CardMaker {
             folder = "accounts";
         else if (object.getClass().equals(AIPlayer.class))
             folder = "aiplayers";
+        else if (object.getClass().equals(Deck.class))
+            folder = "decks";
         else
             System.out.println("Card class not found!");
         String name = "";
@@ -178,8 +188,8 @@ public class CardMaker {
         } catch (IOException e) {
             View.printThrowable(e);
         }
-
         System.out.println("Items written to file");
+        return path;
     }
 
     public static <T> T deepCopy(T object, Class<T> type) {
