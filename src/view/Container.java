@@ -118,7 +118,7 @@ public class Container {
     public ImageView getRun() {
         return run;
     }
-    
+
 
     public void setRun(ImageView run) {
         group.getChildren().remove(this.run);

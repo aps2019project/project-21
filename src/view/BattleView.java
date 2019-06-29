@@ -1,8 +1,8 @@
 package view;
 
 import controller.menus.BattleMenu;
+import javafx.animation.AnimationTimer;
 import javafx.animation.TranslateTransition;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -12,7 +12,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -43,8 +45,7 @@ public class BattleView {
     private Rectangle[][] cells = new Rectangle[5][9];
     private Map<Attacker, Container> attackers = new HashMap<>();
     private Group groundedAttackers = new Group();
-    private Button endTurn = new Button("END TURN");
-    private Button pause = new Button("PAUSE");
+    private StackPane endTurn = new StackPane();
     private Group hub = new Group();
     private Rectangle selectedRect;
     private Cell select = new Cell(-1, -1);
@@ -150,8 +151,8 @@ public class BattleView {
     }
 
     private void updateAttackers() {
-        if (match.getWinner() != null){
-            if (match.getWinner().getUsername().equals(Player.getCurrentPlayer().getUsername())){
+        if (match.getWinner() != null) {
+            if (match.getWinner().getUsername().equals(Player.getCurrentPlayer().getUsername())) {
                 View.getInstance().popup("YOU WIN");
             } else {
                 View.getInstance().popup("YOU LOOSE");
@@ -191,7 +192,7 @@ public class BattleView {
         if (selectedRect != null)
             selectedRect.setStyle("-fx-fill: rgba(0, 0, 0, 0.1)");
         if (selectedInHand != null)
-            selectedInHand.getRect().setStyle("-fx-fill: rgba(0,0,0,0.35);");
+            selectedInHand.getRect().setStyle("-fx-fill: rgba(0,0,0,0.1);");
         selectedRect = null;
         select.setX(-1);
         selectedInHand = null;
@@ -261,18 +262,21 @@ public class BattleView {
 
     private void drawHub() {
         endTurn.relocate(1300, 700);
-        endTurn.setPadding(new Insets(10, 10, 10, 10));
         try {
-            BackgroundImage backgroundImage = new BackgroundImage(new Image(new FileInputStream("src/assets/resources/ui/button_end_turn_mine_glow@2x.png")),
-                    BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(100, 100, false, false, true, true));
-            endTurn.setBackground(new Background(backgroundImage));
+            ImageView endTurnImage = new ImageView(new Image(new FileInputStream("src/assets/resources/ui/button_end_turn_mine_glow@2x.png")));
+            endTurnImage.setFitWidth(200);
+            endTurnImage.setFitHeight(80);
+            Label label = new Label("END TURN");
+            label.setTextFill(Color.WHITE);
+            label.setFont(Font.font(20));
+
+            endTurn.getChildren().addAll(endTurnImage, label);
         } catch (Exception e) {
             View.printThrowable(e);
         }
-        pause.relocate(1300, 750);
         drawHand();
         drawInfoBars();
-        hub.getChildren().addAll(endTurn, pause, hand, manaBar);
+        hub.getChildren().addAll(endTurn, hand, manaBar);
     }
 
     private void drawInfoBars() {
@@ -343,6 +347,19 @@ public class BattleView {
             hp2.setFont(Font.font(20));
             hp2.relocate(1305, 147);
             hub.getChildren().addAll(hp1, hp2);
+
+            new AnimationTimer() {
+                long last;
+
+                @Override
+                public void handle(long now) {
+                    if (now - last > 100) {
+                        hp1.setText(Integer.toString(match.getPlayersMatchInfo()[0].getHero().getHP()));
+                        hp2.setText(Integer.toString(match.getPlayersMatchInfo()[1].getHero().getHP()));
+                        last = now;
+                    }
+                }
+            }.start();
         } catch (Exception ex) {
             View.printThrowable(ex);
         }
@@ -350,8 +367,27 @@ public class BattleView {
 
     public void drawHand() {
         hand.getChildren().clear();
-        hand.relocate(400, 600);
+        hand.relocate(300, 625);
         hand.setSpacing(10);
+
+        try {
+            StackPane s = new StackPane();
+            ImageView replaceBackground = new ImageView(new Image(new FileInputStream("src/assets/resources/ui/replace_background@2x.png")));
+            ImageView outerRing = new ImageView(new Image(new FileInputStream("src/assets/resources/ui/replace_outer_ring_smoke@2x.png")));
+            replaceBackground.setFitWidth(150);
+            replaceBackground.setFitHeight(replaceBackground.getFitWidth());
+            outerRing.setFitWidth(replaceBackground.getFitWidth());
+            outerRing.setFitHeight(replaceBackground.getFitWidth());
+            Card nextInHand = match.getInfo(Player.getCurrentPlayer()).getDeck().getCards().get(0);
+            Container co = new Container();
+            co.setCard(nextInHand);
+            co.setImages();
+
+            s.getChildren().addAll(replaceBackground, outerRing, co.getGroup());
+            hand.getChildren().add(s);
+        } catch (IOException e) {
+            View.printThrowable(e);
+        }
 
         PlayerMatchInfo info = match.getInfo(Player.getCurrentPlayer());
         for (Card c : info.getHand().getCards()) {
@@ -359,8 +395,8 @@ public class BattleView {
                 Container co = new Container();
                 co.setCard(c);
                 Rectangle r = new Rectangle(100, 100);
+                r.getStyleClass().add("rectangle");
                 r.relocate(0, 25);
-                r.setStyle("-fx-fill:  rgba(0,0,0,0.35);");
                 co.setRect(r);
                 co.setImages();
                 Label name = new Label(c.getName());
@@ -376,7 +412,6 @@ public class BattleView {
                         deselect();
                     }
                 });
-
             } catch (Exception e) {
                 View.printThrowable(e);
             }
@@ -384,8 +419,7 @@ public class BattleView {
     }
 
     private void setOnActions() {
-        endTurn.setOnAction(event -> match.endTurn());
-        pause.setOnAction(event -> pause());
+        endTurn.setOnMouseClicked(event -> match.endTurn());
         scene.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ESCAPE)
                 pause();

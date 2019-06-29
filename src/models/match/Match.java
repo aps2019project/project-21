@@ -509,7 +509,8 @@ public class Match {
         try {
             selectedCard = info[1].getHero();
             moveCard(2, selectedCard.getCurrentCell().getY() - 1);
-            for (Card card : info[1].getHand().getCards())
+            List<Card> hand = new ArrayList<>(info[1].getHand().getCards());
+            for (Card card : hand)
                 if (card instanceof Minion)
                     if (info[1].hasManaForThis(card))
                         insertCard(card.getName(), info[1].getHero().getCurrentCell().getX() - 1
@@ -530,7 +531,6 @@ public class Match {
             if (flags.get(0).getHoldingTime() >= 11)
                 if (whichTeamHasTheFlag() != -1) {
                     endMatch(players[whichTeamHasTheFlag()], players[1 - whichTeamHasTheFlag()]);
-                    return;
                 }
         } else if (goalMode == GoalMode.GATHER_FLAG) {
             for (int i = 0; i < 2; i++)
