@@ -67,8 +67,8 @@ public class Player {
         return drake;
     }
 
-    public static void hesoyam() {
-        currentPlayer.drake = 20000000;
+    public void hesoyam() {
+        drake = 20000000;
     }
 
     public List<Match> getMatchHistory() {

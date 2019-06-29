@@ -56,7 +56,7 @@ public class AccountMenu extends Menu {
 
     public void hesoyam() {
         if (Player.hasAnyoneLoggedIn())
-            Player.hesoyam();
+            Player.getCurrentPlayer().hesoyam();
     }
 
     public void showMatchHistory() {

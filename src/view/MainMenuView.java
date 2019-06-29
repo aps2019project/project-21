@@ -75,15 +75,15 @@ public class MainMenuView {
     private void draw() {
         beforeLoginOptions.getChildren().addAll(createAccount, login, exit, username, password);
         beforeLoginOptions.relocate(150, 170);
-        beforeLoginOptions.setSpacing(10);
+        beforeLoginOptions.setSpacing(5);
 
         afterLoginOptions.getChildren().addAll(gotoMainMenu, showHistory, save, logout, hesoyam, currentPlayer);
         afterLoginOptions.relocate(beforeLoginOptions.getLayoutX(), beforeLoginOptions.getLayoutY());
-        afterLoginOptions.setSpacing(10);
+        afterLoginOptions.setSpacing(5);
 
         mainMenuOptions.getChildren().addAll(collection, shop, battle, customCard, volume, back);
         mainMenuOptions.relocate(beforeLoginOptions.getLayoutX(), beforeLoginOptions.getLayoutY());
-        mainMenuOptions.setSpacing(10);
+        mainMenuOptions.setSpacing(5);
 
         username.setPromptText("USERNAME");
         username.setText("a");

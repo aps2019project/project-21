@@ -1,5 +1,6 @@
 package view;
 
+import controller.menus.AccountMenu;
 import controller.menus.ShopMenu;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
@@ -89,7 +90,7 @@ public class ShopView {
             volume.setImage(new Image(new FileInputStream("src\\assets\\volume.png")));
             volume.setScaleY(0.1);
             volume.setScaleX(0.1);
-        } catch (IOException ex){
+        } catch (IOException ex) {
             View.printThrowable(ex);
         }
         volume.relocate(1000, 450);
@@ -319,13 +320,15 @@ public class ShopView {
 
 
     private void setOnActions() {
-        button[2].setOnMouseClicked(event ->{
+        button[2].setOnMouseClicked(event -> {
+            AccountMenu.getInstance().save();
             VoicePlay.buttonPlay();
             View.getInstance().back();
             VoicePlay.setThisMenu("main menu");
         });
 
         back.setOnMouseClicked(event -> {
+            AccountMenu.getInstance().save();
             VoicePlay.buttonPlay();
             View.getInstance().back();
             VoicePlay.setThisMenu("main menu");

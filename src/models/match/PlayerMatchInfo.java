@@ -36,7 +36,7 @@ public class PlayerMatchInfo {
         return achievedCollectables;
     }
 
-    int getMp() {
+    public int getMp() {
         return mp;
     }
 
@@ -168,4 +168,6 @@ public class PlayerMatchInfo {
                 ret++;
         return ret;
     }
+
+
 }

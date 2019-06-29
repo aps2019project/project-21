@@ -2,6 +2,7 @@ package view;
 
 import controller.menus.BattleMenu;
 import javafx.animation.TranslateTransition;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -11,10 +12,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -26,6 +27,7 @@ import models.match.Match;
 import models.match.PlayerMatchInfo;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,6 +49,7 @@ public class BattleView {
     private Cell select = new Cell(-1, -1);
     private Container selectedInHand;
     private HBox hand = new HBox();
+    private HBox manaBar = new HBox();
 
     public void run() {
         View.getInstance().setScene(scene);
@@ -200,11 +203,55 @@ public class BattleView {
 
     private void drawHub() {
         endTurn.relocate(1300, 700);
+        endTurn.setPadding(new Insets(10, 10, 10, 10));
+        try {
+            BackgroundImage backgroundImage = new BackgroundImage(new Image(new FileInputStream("src/assets/resources/ui/button_end_turn_mine_glow@2x.png")),
+                    BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(100, 100, false, false, true, true));
+            endTurn.setBackground(new Background(backgroundImage));
+        } catch (Exception e) {
+            View.printThrowable(e);
+        }
         pause.relocate(1300, 750);
         drawHand();
-        drawGeneralsIcons();
-        hub.getChildren().addAll(endTurn, pause, hand);
+        drawInfoBars();
+        hub.getChildren().addAll(endTurn, pause, hand, manaBar);
+    }
 
+    private void drawInfoBars() {
+        drawMana();
+        drawGeneralsIcons();
+
+        Label you = new Label("YOU");
+        you.setTextFill(Color.WHITE);
+        you.setFont(Font.font(20));
+        you.relocate(290, 85);
+        Label opponent = new Label("OPPONENT");
+        opponent.setTextFill(Color.WHITE);
+        opponent.setFont(Font.font(20));
+        opponent.relocate(1130, 85);
+        hub.getChildren().addAll(you, opponent);
+    }
+
+    private void drawMana() {
+        manaBar.getChildren().clear();
+        manaBar.relocate(285, 115);
+        try {
+            int mana = match.getInfo(Player.getCurrentPlayer()).getMp();
+            for (int i = 0; i < mana; i++) {
+                ImageView activeMana = new ImageView(new Image(new FileInputStream("src/assets/resources/ui/icon_mana@2x.png")));
+                activeMana.setFitWidth(31);
+                activeMana.setFitHeight(34.5);
+                manaBar.getChildren().add(activeMana);
+            }
+            for (int i = mana; i < 9; i++) {
+                ImageView inactiveMana = new ImageView(new Image(new FileInputStream("src/assets/resources/ui/icon_mana_inactive@2x.png")));
+                inactiveMana.setFitWidth(31);
+                inactiveMana.setFitHeight(34.5);
+                manaBar.getChildren().add(inactiveMana);
+            }
+        } catch (IOException e) {
+            View.printThrowable(e);
+        }
     }
 
     private void drawGeneralsIcons() {
@@ -218,6 +265,26 @@ public class BattleView {
             icon1.relocate(0, -150);
             icon2.relocate(1100, -150);
             hub.getChildren().addAll(icon1, icon2);
+
+            ImageView hpIcon1 = new ImageView(new Image(new FileInputStream("src/assets/resources/ui/icon_general_hp@2x.png")));
+            hpIcon1.relocate(186, 128);
+            hpIcon1.setFitWidth(62);
+            hpIcon1.setFitHeight(68);
+            ImageView hpIcon2 = new ImageView(new Image(new FileInputStream("src/assets/resources/ui/icon_general_hp@2x.png")));
+            hpIcon2.relocate(1285.8, 128);
+            hpIcon2.setFitWidth(62);
+            hpIcon2.setFitHeight(68);
+            hub.getChildren().addAll(hpIcon1, hpIcon2);
+
+            Label hp1 = new Label(Integer.toString(match.getPlayersMatchInfo()[0].getHero().getHP()));
+            hp1.setTextFill(Color.WHITE);
+            hp1.setFont(Font.font(20));
+            hp1.relocate(206, 147);
+            Label hp2 = new Label(Integer.toString(match.getPlayersMatchInfo()[1].getHero().getHP()));
+            hp2.setTextFill(Color.WHITE);
+            hp2.setFont(Font.font(20));
+            hp2.relocate(1305, 147);
+            hub.getChildren().addAll(hp1, hp2);
         } catch (Exception ex) {
             View.printThrowable(ex);
         }
