@@ -436,8 +436,6 @@ public class Match {
         Card.setCardIDInGame(players[turn], attacker);
         System.out.println("card " + attacker.getName() + " with id: " + attacker.getCardIDInGame()
                 + " inserted to (" + x + ", " + y + ").");
-        battleView.drawHand();
-        battleView.drawAttackers();
 
         if (attacker instanceof Minion) {
             Minion minion = (Minion) attacker;
@@ -446,6 +444,10 @@ public class Match {
                     if (effect.getActivationType() == ActivationType.ON_SPAWN)
                         minion.getSpecialPower().castSpell(this, players[turn], attacker.getCurrentCell());
         }
+
+        battleView.drawHand();
+        battleView.drawAttackers();
+        battleView.drawMana();
     }
 
     private void goOnCell(Attacker attacker, Cell cell) {
@@ -759,6 +761,7 @@ public class Match {
             if (turn == 1)
                 aiPlay();
         System.out.println("turn ended.");
+        battleView.drawMana();
     }
 
     private void prepareNextRound() {

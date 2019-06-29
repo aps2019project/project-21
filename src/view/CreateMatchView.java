@@ -1,16 +1,30 @@
 package view;
 
+import com.sun.javafx.tk.FontLoader;
+import com.sun.javafx.tk.Toolkit;
 import controller.menus.MainMenu;
 import javafx.animation.AnimationTimer;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import models.AIPlayer;
+import models.Player;
 
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 public class CreateMatchView {
@@ -25,31 +39,29 @@ public class CreateMatchView {
 
     private Group root = new Group();
     private Scene scene = new Scene(root, 1536, 801.59);
-    private Stack<VBox> vBoxes = new Stack<>();
-    private VBox singleOrMultiplayer = new VBox();
+    private Stack<Parent> boxes = new Stack<>();
+    private HBox singleOrMultiplayer = new HBox();
     private VBox chooseOpp = new VBox();
-    private VBox goalMode = new VBox();
-    private VBox gameType = new VBox();
-    private VBox storyMode = new VBox();
+    private HBox goalMode = new HBox();
+    private HBox gameType = new HBox();
+    private HBox storyMode = new HBox();
     private VBox customMode = new VBox();
-    private Button back = new Button("BACK");
-    private Button single = new Button("SINGLE");
-    private Button multiplayer = new Button("MULTIPLAYER");
-    private TextField opp = new TextField();
-    private Button killHero = new Button("KILL HERO");
-    private Button holdFlag = new Button("HOLD FLAG");
-    private Button gatherFlag = new Button("GATHER FLAG");
-    private TextField flagCount = new TextField();
-    private Button story = new Button("STORY");
-    private Button custom = new Button("CUSTOM");
-    private Button story1 = new Button("STORY 1");
-    private Button story2 = new Button("STORY 2");
-    private Button story3 = new Button("STORY 3");
-    private TextField aiNum = new TextField();
+    private ImageView back = new ImageView();
+    private Group single = new Group();
+    private Group multiplayer = new Group();
+    private Group killHero = new Group();
+    private Group holdFlag = new Group();
+    private Group gatherFlag = new Group();
+    private Label flagCount = new Label("1");
+    private Group story = new Group();
+    private Group custom = new Group();
+    private Group story1 = new Group();
+    private Group story2 = new Group();
+    private Group story3 = new Group();
 
     void run() {
         View.getInstance().setScene(scene);
-        vBoxes.push(singleOrMultiplayer);
+        boxes.push(singleOrMultiplayer);
     }
 
     {
@@ -65,87 +77,224 @@ public class CreateMatchView {
     }
 
     private void draw() {
-        back.relocate(100, 500);
+        try {
+            back = new ImageView(new Image(new FileInputStream
+                    ("src/assets/resources/ui/button_back_corner@2x.png")));
+            back.setFitWidth(90);
+            back.setFitHeight(95);
+        } catch (IOException e) {
+            View.printThrowable(e);
+        }
+
+        drawSingleOrMultiplayer();
+
+        drawMultiplayerChooseOpp();
+
+        drawGoalMode();
+
+        drawGameType();
+
+        drawStoryMode();
+
+        drawCustomMode();
+
         root.getChildren().add(back);
+    }
 
-        singleOrMultiplayer.setSpacing(15);
-        singleOrMultiplayer.relocate(100, 100);
+    private void drawSingleOrMultiplayer() {
+        single = makePanel("src/assets/resources/play/play_mode_sandbox@2x.jpg", "SINGLE");
+        multiplayer = makePanel("src/assets/resources/play/play_mode_rankedladder@2x.jpg", "MULTIPLAYER");
+        singleOrMultiplayer.relocate(470, 200);
+        singleOrMultiplayer.setSpacing(100);
         singleOrMultiplayer.getChildren().addAll(single, multiplayer);
+    }
 
-        chooseOpp.setSpacing(15);
-        chooseOpp.relocate(100, 100);
-        opp.setPromptText("OPP");
-        chooseOpp.getChildren().addAll(opp);
-
-        flagCount.setPromptText("FLAG COUNT");
-        goalMode.setSpacing(15);
-        goalMode.relocate(100, 100);
-        goalMode.getChildren().addAll(flagCount, killHero, holdFlag, gatherFlag);
-
-        gameType.setSpacing(15);
-        gameType.relocate(100, 100);
+    private void drawGameType() {
+        story = makePanel("src/assets/resources/codex/chapters_coming_soon_preview@2x.jpg", "STORY");
+        custom = makePanel("src/assets/resources/codex/chapter21_preview@2x.jpg", "CUSTOM");
+        gameType.relocate(470, 200);
+        gameType.setSpacing(100);
         gameType.getChildren().addAll(story, custom);
+    }
 
-        storyMode.setSpacing(15);
-        storyMode.relocate(100, 100);
+    private void drawStoryMode() {
+        story1 = makePanel("src/assets/resources/challenges/gate_013@2x.jpg", "STORY 1");
+        story2 = makePanel("src/assets/resources/challenges/gate_014@2x.jpg", "STORY 2");
+        story3 = makePanel("src/assets/resources/challenges/gate_015@2x.jpg", "STORY 3");
+        storyMode.setSpacing(100);
+        storyMode.relocate(310, 200);
         storyMode.getChildren().addAll(story1, story2, story3);
+    }
 
-        customMode.setSpacing(15);
-        customMode.relocate(100, 100);
-        customMode.getChildren().addAll(aiNum);
+    private void drawCustomMode() {
+        customMode = drawChooseOpponent(new ArrayList<>(AIPlayer.getAiPlayers()));
+        customMode.setSpacing(5);
+        customMode.relocate(650, 200);
+        customMode.setStyle("-fx-background-color: rgba(0, 0, 0, 0.5)");
+    }
+
+    private void drawMultiplayerChooseOpp() {
+        List<Player> opponents = new ArrayList<>();
+        for (Player player : Player.getPlayers())
+            if (!player.getUsername().equals(Player.getCurrentPlayer().getUsername()))
+                opponents.add(player);
+        chooseOpp = drawChooseOpponent(opponents);
+        chooseOpp.setSpacing(5);
+        chooseOpp.relocate(650, 200);
+    }
+
+    private VBox drawChooseOpponent(List<Player> playerList) {
+        VBox vBox = new VBox();
+        StackPane s = new StackPane();
+        Rectangle r = new Rectangle(200, 50);
+        r.setStyle("-fx-fill: rgba(0, 0, 0, 0.7)");
+        Label label = new Label("CHOOSE YOUR OPPONENT:");
+        label.setFont(Font.font(12));
+        label.setStyle("-fx-text-fill: rgba(255, 255, 255, 0.85)");
+        s.getChildren().addAll(r, label);
+        vBox.getChildren().add(s);
+        for (Player player : playerList) {
+            s = new StackPane();
+            r = new Rectangle(200, 50);
+            r.setStyle("-fx-fill: rgba(0, 0, 0, 0.3)");
+            Label heroName = new Label();
+            if (player instanceof AIPlayer)
+                heroName.setText(player.getCollection().getMainDeck().getHero().getName());
+            else
+                heroName.setText(player.getUsername());
+            heroName.setFont(Font.font(20));
+            heroName.setStyle("-fx-text-fill: rgba(255, 255, 255, 0.85)");
+            s.getChildren().addAll(r, heroName);
+            s.setOnMouseClicked(event -> {
+                if (player instanceof AIPlayer) {
+                    if (MainMenu.getInstance().chooseAI(((AIPlayer) player).getAiID()))
+                        boxes.push(goalMode);
+                } else if (MainMenu.getInstance().chooseOpp(player.getUsername()))
+                    boxes.push(goalMode);
+            });
+            s.setOnMouseEntered(event -> heroName.setStyle("-fx-text-fill: orange"));
+            s.setOnMouseExited(event -> heroName.setStyle("-fx-text-fill: rgba(255, 255, 255, 0.85)"));
+            vBox.getChildren().add(s);
+        }
+        return vBox;
+    }
+
+    private void drawGoalMode() {
+        killHero = makePanel("src/assets/resources/challenges/gate_000@2x.jpg", "KILL HERO");
+        holdFlag = makePanel("src/assets/resources/challenges/gate_001@2x.jpg", "HOLD FLAG");
+        gatherFlag = makePanel("src/assets/resources/challenges/gate_005@2x.jpg", "GATHER FLAG");
+        goalMode.setSpacing(90);
+        goalMode.relocate(110, 200);
+        Group group = new Group();
+        try {
+            ImageView image = new ImageView(new Image(new FileInputStream
+                    ("src/assets/resources/ui/button_secondary@2x.png")));
+            image.setFitWidth(210);
+            image.setFitHeight(70);
+            ImageView rightArrow = new ImageView(new Image(new FileInputStream
+                    ("src/assets/resources/ui/dialogue_carat@2x.png")));
+            rightArrow.relocate(200, -5);
+            ImageView leftArrow = new ImageView(new Image(new FileInputStream
+                    ("src/assets/resources/ui/dialogue_carat@2x.png")));
+            leftArrow.relocate(-50, -5);
+            leftArrow.setScaleX(-1);
+            flagCount.setTextFill(Color.CYAN);
+            flagCount.setFont(Font.font(30));
+            flagCount.relocate(95, 12);
+            rightArrow.setOnMouseClicked(event -> flagCount.setText(Integer.toString(Math.min(Integer.parseInt(flagCount.getText()) + 1, 7))));
+            leftArrow.setOnMouseClicked(event -> flagCount.setText(Integer.toString(Math.max(Integer.parseInt(flagCount.getText()) - 1, 0))));
+            group.getChildren().addAll(image, rightArrow, leftArrow, flagCount);
+        } catch (IOException e) {
+            View.printThrowable(e);
+        }
+        goalMode.setAlignment(Pos.CENTER);
+        goalMode.getChildren().addAll(group, killHero, holdFlag, gatherFlag);
+    }
+
+    private Group makePanel(String imagePath, String name) {
+        Group group = new Group();
+        try {
+            ImageView image = new ImageView(new Image(new FileInputStream
+                    (imagePath)));
+            image.setFitWidth(237);
+            image.setFitHeight(435);
+            ImageView trimPlate = new ImageView(new Image(new FileInputStream
+                    ("src/assets/resources/ui/sliding_panel/panel_trim_plate@2x.png")));
+            trimPlate.setFitWidth(237);
+            trimPlate.setFitHeight(49);
+            trimPlate.relocate(0, image.getFitHeight() - 20);
+            Rectangle transparent = new Rectangle(237, 70);
+            transparent.setStyle("-fx-fill: rgba(0, 0, 0, 0.6)");
+            transparent.relocate(0, image.getFitHeight() - transparent.getHeight());
+            FontLoader fontLoader = Toolkit.getToolkit().getFontLoader();
+            Label label = new Label(name);
+            label.setStyle("-fx-text-fill: rgba(255, 255, 255, 0.8)");
+            label.setFont(Font.font(20));
+            label.relocate(transparent.getWidth() / 2 - fontLoader.computeStringWidth(label.getText(), label.getFont()) / 2, transparent.getLayoutY() + 15);
+            group.getChildren().addAll(image, transparent, trimPlate, label);
+        } catch (IOException e) {
+            View.printThrowable(e);
+        }
+        return group;
     }
 
     private void setOnActions() {
-        single.setOnAction(event -> {
+        back.setOnMouseClicked(event -> back());
+        single.setOnMouseClicked(event -> {
             MainMenu.getInstance().setSingle();
-            vBoxes.push(gameType);
+            boxes.push(gameType);
         });
-        back.setOnAction(event -> back());
-        multiplayer.setOnAction(event -> {
+        multiplayer.setOnMouseClicked(event -> {
             MainMenu.getInstance().setMultiplayer();
-            vBoxes.push(chooseOpp);
+            boxes.push(chooseOpp);
         });
-        opp.setOnAction(event -> {
-            if (MainMenu.getInstance().chooseOpp(opp.getText()))
-                vBoxes.push(goalMode);
-        });
-        killHero.setOnAction(event -> {
+        Group[] groups = {single, multiplayer, story, custom, story1, story2, story3, killHero,
+                holdFlag, gatherFlag};
+        for (Group g : groups) {
+            g.setOnMouseEntered(event -> {
+                g.setScaleX(1.07);
+                g.setScaleY(1.07);
+            });
+            g.setOnMouseExited(event -> {
+                g.setScaleX(1);
+                g.setScaleY(1);
+            });
+        }
+        killHero.setOnMouseClicked(event -> {
             MainMenu.getInstance().setKillHero();
             MainMenu.getInstance().startMatch();
         });
-        holdFlag.setOnAction(event -> {
+        holdFlag.setOnMouseClicked(event -> {
             MainMenu.getInstance().setHoldFlag(flagCount.getText());
             MainMenu.getInstance().startMatch();
         });
-        gatherFlag.setOnAction(event -> {
+        gatherFlag.setOnMouseClicked(event -> {
             MainMenu.getInstance().setGatherFlag(flagCount.getText());
             MainMenu.getInstance().startMatch();
         });
-        story.setOnAction(event -> vBoxes.push(storyMode));
-        story1.setOnAction(event -> MainMenu.getInstance().startStoryMatch(1));
-        story2.setOnAction(event -> MainMenu.getInstance().startStoryMatch(2));
-        story3.setOnAction(event -> MainMenu.getInstance().startStoryMatch(3));
-        custom.setOnAction(event -> vBoxes.push(customMode));
-        aiNum.setOnAction(event -> {
-            if (MainMenu.getInstance().chooseAI(aiNum.getText()))
-                vBoxes.push(goalMode);
-        });
+        story.setOnMouseClicked(event -> boxes.push(storyMode));
+        story1.setOnMouseClicked(event -> MainMenu.getInstance().startStoryMatch(1));
+        story2.setOnMouseClicked(event -> MainMenu.getInstance().startStoryMatch(2));
+        story3.setOnMouseClicked(event -> MainMenu.getInstance().startStoryMatch(3));
+        custom.setOnMouseClicked(event -> boxes.push(customMode));
     }
 
     private void back() {
-        if (vBoxes.size() <= 1) {
-            if (!vBoxes.isEmpty())
-                vBoxes.pop();
+        if (boxes.size() <= 1) {
+            if (!boxes.isEmpty())
+                boxes.pop();
             MainMenuView.getInstance().run();
         } else
-            root.getChildren().remove(vBoxes.pop());
+            root.getChildren().remove(boxes.pop());
     }
 
 
     private void setBackground() {
         try {
             ImageView background = new ImageView(new Image(new FileInputStream
-                    ("src\\assets\\resources\\scenes\\load\\scene_load_background.jpg")));
+                    ("src/assets/resources/scenes/load/scene_load_background@2x.jpg")));
+            BoxBlur boxBlur = new BoxBlur();
+            background.setEffect(boxBlur);
             background.fitWidthProperty().bind(scene.widthProperty());
             background.fitHeightProperty().bind(scene.heightProperty());
             root.getChildren().add(background);
@@ -161,11 +310,11 @@ public class CreateMatchView {
             @Override
             public void handle(long now) {
                 if (now - last > 100) {
-                    if (vBoxes.size() > 1)
-                        root.getChildren().remove(vBoxes.get(vBoxes.size() - 2));
-                    if (!vBoxes.isEmpty())
-                        if (!root.getChildren().contains(vBoxes.peek()))
-                            root.getChildren().add(vBoxes.peek());
+                    if (boxes.size() > 1)
+                        root.getChildren().remove(boxes.get(boxes.size() - 2));
+                    if (!boxes.isEmpty())
+                        if (!root.getChildren().contains(boxes.peek()))
+                            root.getChildren().add(boxes.peek());
                     last = now;
                 }
             }

@@ -232,7 +232,7 @@ public class BattleView {
         hub.getChildren().addAll(you, opponent);
     }
 
-    private void drawMana() {
+    public void drawMana() {
         manaBar.getChildren().clear();
         manaBar.relocate(285, 115);
         try {
@@ -369,15 +369,10 @@ public class BattleView {
             ImageView background = new ImageView(new Image(new FileInputStream("src/assets/resources/maps/vanar/background.jpg")));
             background.fitWidthProperty().bind(scene.widthProperty());
             background.fitHeightProperty().bind(scene.heightProperty());
-            root.getChildren().add(background);
-        } catch (Exception e) {
-            View.printThrowable(e);
-        }
-        try {
             ImageView midground = new ImageView(new Image(new FileInputStream("src/assets/resources/maps/vanar/midground@2x.png")));
             midground.fitWidthProperty().bind(scene.widthProperty());
             midground.fitHeightProperty().bind(scene.heightProperty());
-            root.getChildren().add(midground);
+            root.getChildren().addAll(background, midground);
         } catch (Exception e) {
             View.printThrowable(e);
         }

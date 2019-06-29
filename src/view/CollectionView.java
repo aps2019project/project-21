@@ -1,6 +1,5 @@
 package view;
 
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -11,14 +10,13 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import models.Deck;
 import models.Player;
 import models.card.Card;
 
 import java.util.ArrayList;
 
-public class CollectionView extends Application {
+public class CollectionView {
     private static CollectionView instance = new CollectionView();
 
     public static CollectionView getInstance() {
@@ -50,11 +48,13 @@ public class CollectionView extends Application {
     private TextField inputTextField = new TextField();
     private Deck selectedDeck;
 
+    void run() {
+        View.getInstance().setScene(scene);
+    }
 
     {
         int i = 0;
-        for (Deck deck : Player.getCurrentPlayer().getCollection().getDecks()
-        ) {
+        for (Deck deck : Player.getCurrentPlayer().getCollection().getDecks()) {
 //            selectDeckButtons[i] = new Button("SELECT");
             selectDeckButtons.add(new Button("SELECT"));
             selectDeckButtons.get(i).setOnAction(new EventHandler<ActionEvent>() {
@@ -127,15 +127,7 @@ public class CollectionView extends Application {
     //});
 
 
-    void run() {
-        View.getInstance().setScene(scene);
-    }
-
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-
-
+    {
         deleteDeckButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -186,7 +178,7 @@ public class CollectionView extends Application {
         showAllDecksButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                primaryStage.setScene(decksScene);
+                View.getInstance().setScene(decksScene);
             }
         });
 
@@ -208,7 +200,5 @@ public class CollectionView extends Application {
 
 
         root.getChildren().addAll(exitButton, deleteDeckButton, helpButton, selectDeckButton, createDeckButton, removeFromDeckButton, addToDeckButton, showAllDecksButton);
-
     }
-
 }

@@ -39,15 +39,8 @@ public class MainMenu extends Menu {
         return true;
     }
 
-    public boolean chooseAI(String num) {
-        int n;
-        try {
-            n = Integer.parseInt(num);
-        } catch (Exception e) {
-            View.getInstance().printMessage(Message.INVALID_AI);
-            return false;
-        }
-        AIPlayer aiPlayer = AIPlayer.getAIPlayer(n);
+    public boolean chooseAI(int num) {
+        AIPlayer aiPlayer = AIPlayer.getAIPlayer(num);
         if (aiPlayer == null) {
             view.printMessage(Message.AIPLAYER_IS_NULL);
             return false;

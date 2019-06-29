@@ -3,6 +3,7 @@ package view;
 import controller.menus.AccountMenu;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
+import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -17,6 +18,7 @@ import javafx.scene.text.Font;
 import models.Player;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 
 public class MainMenuView {
     private static MainMenuView instance = new MainMenuView();
@@ -75,15 +77,15 @@ public class MainMenuView {
     private void draw() {
         beforeLoginOptions.getChildren().addAll(createAccount, login, exit, username, password);
         beforeLoginOptions.relocate(150, 170);
-        beforeLoginOptions.setSpacing(5);
+        beforeLoginOptions.setSpacing(7);
 
         afterLoginOptions.getChildren().addAll(gotoMainMenu, showHistory, save, logout, hesoyam, currentPlayer);
         afterLoginOptions.relocate(beforeLoginOptions.getLayoutX(), beforeLoginOptions.getLayoutY());
-        afterLoginOptions.setSpacing(5);
+        afterLoginOptions.setSpacing(7);
 
         mainMenuOptions.getChildren().addAll(collection, shop, battle, customCard, volume, back);
         mainMenuOptions.relocate(beforeLoginOptions.getLayoutX(), beforeLoginOptions.getLayoutY());
-        mainMenuOptions.setSpacing(5);
+        mainMenuOptions.setSpacing(7);
 
         username.setPromptText("USERNAME");
         username.setText("a");
@@ -100,7 +102,7 @@ public class MainMenuView {
                 for (Node node1 : vBox.getChildren()) {
                     if (node1 instanceof Button) {
                         Button button = (Button) node1;
-                        button.setFont(Font.font(20));
+                        button.setFont(Font.font(17));
                     }
                 }
             }

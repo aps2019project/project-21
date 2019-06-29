@@ -1,10 +1,12 @@
 package view;
 
 import javafx.scene.Group;
+import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -16,11 +18,12 @@ import models.Item.Item;
 import models.Item.Usable;
 import models.Player;
 import models.card.*;
-import models.match.GameMode;
 import models.match.GoalMode;
 import models.match.Match;
 import models.match.PlayerMatchInfo;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Stack;
@@ -42,18 +45,18 @@ public class View {
     public void run() {
         primaryStage.setTitle("Duelyst");
         primaryStage.setMaximized(true);
-        try {
-            Thread.sleep(2000);
-        } catch (Exception e) {
-            View.printThrowable(e);
-        }
-        Player.login("a", "a");
-        Match.setCurrentMatch(new Match(Player.getCurrentPlayer(), Player.getPlayerByUsername("b"), GameMode.MULTI_PLAYER,
-                null, GoalMode.KILL_HERO, 0));
-        BattleView battleView = new BattleView();
-        Match.getCurrentMatch().setBattleView(battleView);
-        battleView.run();
-//        MainMenuView.getInstance().run();
+//        try {
+//            Thread.sleep(2000);
+//        } catch (Exception e) {
+//            View.printThrowable(e);
+//        }
+//        Player.login("a", "a");
+//        Match.setCurrentMatch(new Match(Player.getCurrentPlayer(), Player.getPlayerByUsername("b"), GameMode.MULTI_PLAYER,
+//                null, GoalMode.KILL_HERO, 0));
+//        BattleView battleView = new BattleView();
+//        Match.getCurrentMatch().setBattleView(battleView);
+//        battleView.run();
+        MainMenuView.getInstance().run();
     }
 
 
@@ -61,13 +64,20 @@ public class View {
         this.primaryStage = primaryStage;
     }
 
-    public Stage getPrimaryStage() {
+    Stage getPrimaryStage() {
         return primaryStage;
     }
 
     void setScene(Scene scene) {
         this.primaryStage.setScene(scene);
         this.scenes.push(scene);
+        try {
+            Image cursor = new Image(
+                    new FileInputStream("src/assets/resources/ui/mouse_auto@2x.png"));
+            scene.setCursor(new ImageCursor(cursor));
+        } catch (IOException e) {
+            View.printThrowable(e);
+        }
     }
 
     void back() {
@@ -105,6 +115,13 @@ public class View {
             if (event.getCode() == KeyCode.ENTER)
                 popup.close();
         });
+        try {
+            Image cursor = new Image(
+                    new FileInputStream("src/assets/resources/ui/mouse_auto@2x.png"));
+            dialogScene.setCursor(new ImageCursor(cursor));
+        } catch (IOException e) {
+            View.printThrowable(e);
+        }
         popup.setScene(dialogScene);
         VoicePlay.notification();
         popup.show();
@@ -544,7 +561,8 @@ public class View {
 
     public static void printThrowable(Throwable throwable) {
         System.out.println(throwable.getMessage());
-        throwable.printStackTrace();
+        for (StackTraceElement s : throwable.getStackTrace())
+            System.out.println(s);
     }
 
     public void showMatchResults(Match match) {
