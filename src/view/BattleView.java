@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import models.Player;
+import models.card.AttackMode;
 import models.card.Attacker;
 import models.card.Card;
 import models.match.Match;
@@ -103,7 +104,27 @@ public class BattleView {
                             } else if (r == 1) {
                                 deselect();
                             } else if (r == 2) {
-                                //TODO attack animation
+                                attackAnimation(u, v);
+                                Attacker attacker = getAttacker(u, v);
+                                if (attacker.getAttackMode() == AttackMode.MELEE &&
+                                        (u - select.getX()) < 2 && (u - select.getX()) > -2 &&
+                                        (v - select.getY()) < 2 && (v - select.getY()) > -2) {
+                                    int o = select.getX(), t = select.getY();
+                                    select = new Cell(u, v);
+                                    attackAnimation(o, t);
+                                } else if (attacker.getAttackMode() == AttackMode.RANGED &&
+                                        ((u - select.getX()) > 1 || (u - select.getX()) < -1 ||
+                                                (v - select.getY()) > 1 || (v - select.getY()) < -1)) {
+                                    int o = select.getX(), t = select.getY();
+                                    select = new Cell(u, v);
+                                    attackAnimation(o, t);
+                                } else if (attacker.getAttackMode() == AttackMode.HYBRID) {
+                                    int o = select.getX(), t = select.getY();
+                                    select = new Cell(u, v);
+                                    attackAnimation(o, t);
+                                }
+                                updateAttackers();
+                                deselect();
                             } else {
                                 deselect();
                             }
@@ -125,6 +146,19 @@ public class BattleView {
                     }
                 });
             }
+    }
+
+    private void updateAttackers() {
+        for (Attacker attacker : attackers.keySet()) {
+            Container container = attackers.get(attacker);
+            if (attacker.getHP() < 1){
+                container.setAsDeath();
+            }
+            container.getAp().setText(Integer.toString(attacker.getAP()));
+            container.getHp().setText(Integer.toString(attacker.getHP()));
+            System.out.println(attacker.getName() + " " + attacker.getHP());
+        }
+        System.out.println("\n");
     }
 
     private void moveAnimation(int u, int v) {
@@ -171,8 +205,23 @@ public class BattleView {
         return null;
     }
 
-    public void attackAnimation(Attacker a) {
-
+    private void attackAnimation(int u, int v) {
+        Container thi = getContainer(select.getX(), select.getY());
+        if (thi != null) {
+            thi.setAsAttack();
+            if (select.getY() > v){
+                thi.attackReverse();
+            }
+            Duration duration = Duration.millis(1000);
+            TranslateTransition t = new TranslateTransition(duration, thi.getGroup());
+            t.setByY(0);
+            t.setByY(0);
+            t.play();
+            if (select.getY() > v){
+                thi.attackReverse();
+            }
+            t.setOnFinished(event -> thi.setAsGif());
+        }
     }
 
     public void drawAttackers() {
