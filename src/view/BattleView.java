@@ -8,7 +8,6 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -46,8 +45,7 @@ public class BattleView {
     private Rectangle[][] cells = new Rectangle[5][9];
     private Map<Attacker, Container> attackers = new HashMap<>();
     private Group groundedAttackers = new Group();
-    private Button endTurn = new Button("END TURN");
-    private Button pause = new Button("PAUSE");
+    private StackPane endTurn = new StackPane();
     private Group hub = new Group();
     private Rectangle selectedRect;
     private Cell select = new Cell(-1, -1);
@@ -202,7 +200,7 @@ public class BattleView {
         if (selectedRect != null)
             selectedRect.setStyle("-fx-fill: rgba(0, 0, 0, 0.1)");
         if (selectedInHand != null)
-            selectedInHand.getRect().setStyle("-fx-fill: rgba(0,0,0,0.35);");
+            selectedInHand.getRect().setStyle("-fx-fill: rgba(0,0,0,0.1);");
         selectedRect = null;
         select.setX(-1);
         selectedInHand = null;
@@ -275,7 +273,6 @@ public class BattleView {
         endTurn.setPadding(new Insets(10, 10, 10, 10));
 
         endTurn.relocate(1300, 700);
-        endTurn.setPadding(new Insets(10, 10, 10, 10));
         try {
             BackgroundImage backgroundImage = new BackgroundImage(new Image(new FileInputStream("src/assets/resources/ui/button_end_turn_mine_glow@2x.png")),
                     BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(100, 100, false, false, true, true));
@@ -284,13 +281,21 @@ public class BattleView {
             BackgroundImage backgroundImag = new BackgroundImage(new Image(new FileInputStream("src/assets/resources/ui/button_end_turn_mine_glow@2x.png")),
                     BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(100, 100, false, false, true, true));
             graveyard.setBackground(new Background(backgroundImag));
+            ImageView endTurnImage = new ImageView(new Image(new FileInputStream("src/assets/resources/ui/button_end_turn_mine_glow@2x.png")));
+            endTurnImage.setFitWidth(200);
+            endTurnImage.setFitHeight(80);
+            Label label = new Label("END TURN");
+            label.setTextFill(Color.WHITE);
+            label.setFont(Font.font(20));
+
+            endTurn.getChildren().addAll(endTurnImage, label);
         } catch (Exception e) {
             View.printThrowable(e);
         }
         pause.relocate(1300, 750);
         drawHand();
         drawInfoBars();
-        hub.getChildren().addAll(graveyard, endTurn, pause, hand, manaBar);
+        hub.getChildren().addAll(endTurn, pause, hand, manaBar);
     }
 
     private void drawInfoBars() {
@@ -352,11 +357,11 @@ public class BattleView {
             hpIcon2.setFitHeight(68);
             hub.getChildren().addAll(hpIcon1, hpIcon2);
 
-            hp1.setText(Integer.toString(match.getPlayersMatchInfo()[0].getHero().getHP()));
+            Label hp1 = new Label(Integer.toString(match.getPlayersMatchInfo()[0].getHero().getHP()));
             hp1.setTextFill(Color.WHITE);
             hp1.setFont(Font.font(20));
             hp1.relocate(206, 147);
-            hp2.setText(Integer.toString(match.getPlayersMatchInfo()[1].getHero().getHP()));
+            Label hp2 = new Label(Integer.toString(match.getPlayersMatchInfo()[1].getHero().getHP()));
             hp2.setTextFill(Color.WHITE);
             hp2.setFont(Font.font(20));
             hp2.relocate(1305, 147);
@@ -371,12 +376,32 @@ public class BattleView {
         hand.relocate(400, 600);
         hand.setSpacing(10);
 
+        try {
+            StackPane s = new StackPane();
+            ImageView replaceBackground = new ImageView(new Image(new FileInputStream("src/assets/resources/ui/replace_background@2x.png")));
+            ImageView outerRing = new ImageView(new Image(new FileInputStream("src/assets/resources/ui/replace_outer_ring_smoke@2x.png")));
+            replaceBackground.setFitWidth(150);
+            replaceBackground.setFitHeight(replaceBackground.getFitWidth());
+            outerRing.setFitWidth(replaceBackground.getFitWidth());
+            outerRing.setFitHeight(replaceBackground.getFitWidth());
+            Card nextInHand = match.getInfo(Player.getCurrentPlayer()).getDeck().getCards().get(0);
+            Container co = new Container();
+            co.setCard(nextInHand);
+            co.setImages();
+
+            s.getChildren().addAll(replaceBackground, outerRing, co.getGroup());
+            hand.getChildren().add(s);
+        } catch (IOException e) {
+            View.printThrowable(e);
+        }
+
         PlayerMatchInfo info = match.getInfo(Player.getCurrentPlayer());
         for (Card c : info.getHand().getCards()) {
             try {
                 Container co = new Container();
                 co.setCard(c);
                 Rectangle r = new Rectangle(100, 100);
+                r.getStyleClass().add("rectangle");
                 r.relocate(0, 25);
                 r.setStyle("-fx-fill:  rgba(0,0,0,0.35);");
                 co.setRect(r);
@@ -425,11 +450,13 @@ public class BattleView {
             pause.close();
             View.getInstance().back();
         });
+        Button gameInfo = new Button("GAME INFO");
+        gameInfo.setOnAction(event -> BattleMenu.getInstance().showGameInfo());
         VBox vBox = new VBox();
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(30);
         vBox.setStyle("-fx-background-color: transparent");
-        vBox.getChildren().addAll(resume, back);
+        vBox.getChildren().addAll(resume, gameInfo, back);
         Scene scene = new Scene(vBox, 303, 150);
         scene.getStylesheets().add("view/stylesheets/pause_menu.css");
         scene.setFill(new Color(0, 0, 0, 0.6));
@@ -497,9 +524,5 @@ public class BattleView {
         } catch (Exception e) {
             View.printThrowable(e);
         }
-    }
-
-    public Cell getSelect() {
-        return select;
     }
 }

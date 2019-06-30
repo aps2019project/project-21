@@ -1,5 +1,7 @@
 package view;
 
-public class HeroCardView extends CardsView {
+import javafx.scene.shape.Rectangle;
+
+public class HeroCardView extends Rectangle {
 
 }
