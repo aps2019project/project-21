@@ -84,6 +84,8 @@ public class PlayerMatchInfo {
         if (collectable == null)
             return;
         this.achievedCollectables.add(collectable);
+        // todo better implementation
+        increaseMana(1);
     }
 
     void pushToHand() {
@@ -116,7 +118,7 @@ public class PlayerMatchInfo {
         return card.getManaCost() <= mp;
     }
 
-    void decreaseMP(int value) {
+    public void decreaseMP(int value) {
         if (value > mp)
             return;
         this.mp -= value;
@@ -135,7 +137,7 @@ public class PlayerMatchInfo {
         }
     }
 
-    void setMp(int mp) {
+    public void setMp(int mp) {
         this.mp = Math.min(mp, MAX_MANA);
     }
 

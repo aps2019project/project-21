@@ -52,6 +52,7 @@ public class CollectionTest {
     private TextField deckName = new TextField();
     private Button importDeck = new Button();
     private Button exportDeck = new Button();
+    private TextField search = new TextField();
 
     void run() {
         View.getInstance().setScene(scene);
@@ -95,23 +96,25 @@ public class CollectionTest {
     }
 
     private void drawButtons() {
-        add.relocate(10, 500);
+        add.relocate(10, 400);
         add.setText("ADD CARD");
-        remove.relocate(10, 580);
+        remove.relocate(10, 480);
         remove.setText("REMOVE CARD");
-        deleteDeck.relocate(10, 660);
+        deleteDeck.relocate(10, 560);
         deleteDeck.setText("DELETE DECK");
-        createDeck.relocate(10, 740);
+        createDeck.relocate(10, 640);
         createDeck.setText("CREATE DECK");
-        deckName.relocate(130, 740);
+        deckName.relocate(130, 640);
         deckName.setPromptText("DECK NAME");
-        setAsMain.relocate(290, 740);
+        setAsMain.relocate(290, 640);
         setAsMain.setText("SET AS MAIN DECK");
-        importDeck.relocate(400, 740);
+        importDeck.relocate(400, 640);
         importDeck.setText("IMPORT DECK");
-        exportDeck.relocate(500, 740);
+        exportDeck.relocate(500, 640);
         exportDeck.setText("EXPORT DECK");
-        root.getChildren().addAll(add, remove, deleteDeck, createDeck, deckName, setAsMain, importDeck, exportDeck);
+        search.relocate(600, 640);
+        search.setPromptText("SEARCH");
+        root.getChildren().addAll(add, remove, deleteDeck, createDeck, deckName, setAsMain, importDeck, exportDeck, search);
     }
 
     private void drawBack() {
@@ -164,7 +167,7 @@ public class CollectionTest {
         StackPane s = new StackPane();
         Rectangle r = new Rectangle(200, 50);
         r.setStyle("-fx-fill: rgba(0, 0, 0, 0.7)");
-        Label label = new Label("YOUR DECKS:");
+        Label label = new Label("ALL CARDS");
         label.setFont(Font.font(12));
         label.setStyle("-fx-text-fill: rgba(255, 255, 255, 0.85)");
         s.getChildren().addAll(r, label);
@@ -234,6 +237,13 @@ public class CollectionTest {
             if (selectedDeck != null) {
                 CollectionMenu.getInstance().exportDeck(((Label) selectedDeck.getChildren().get(1)).getText());
             }
+        });
+        search.setOnAction(event -> {
+            for (Card c : collection.getCards())
+                if (c.getName().equalsIgnoreCase(search.getText())) {
+                    selectedCard = c;
+                    return;
+                }
         });
     }
 

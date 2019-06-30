@@ -28,7 +28,6 @@ public class Attacker extends Card {
     private Flag flag;
 
     Attacker() {
-
     }
 
     Attacker(String name, int price, int manaCost, int maxHp, int maxAp,
@@ -69,6 +68,8 @@ public class Attacker extends Card {
     public void castSpecialPower(Match match, Player player, Cell target) {
         if (this instanceof Hero)
             ((Hero) this).resetCooldown();
+        if (specialPower.getManaCost() >= 0)
+            match.getInfo(player).decreaseMP(specialPower.manaCost);
         specialPower.castSpell(match, player, target);
     }
 
@@ -248,7 +249,8 @@ public class Attacker extends Card {
     }
 
     public void applyEffects() {
-        for (Effect effect : appliedEffects) {
+        List<Effect> effectsCopy = new ArrayList<>(appliedEffects);
+        for (Effect effect : effectsCopy) {
             effect.setAttacker(this);
             effect.setCell(this.currentCell);
             effect.setMatch(Match.getCurrentMatch());

@@ -31,6 +31,8 @@ import java.util.Stack;
 public class View {
     private static View view = new View();
 
+    private boolean isAIPlaying;
+
     private Stack<Scene> scenes = new Stack<>();
 
     private Stage primaryStage;
@@ -59,6 +61,9 @@ public class View {
         MainMenuView.getInstance().run();
     }
 
+    public void setAIPlaying(boolean AIPlaying) {
+        isAIPlaying = AIPlaying;
+    }
 
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -99,6 +104,8 @@ public class View {
     }
 
     public void popup(String message) {
+        if (isAIPlaying)
+            return;
         final Stage popup = new Stage();
         popup.initModality(Modality.APPLICATION_MODAL);
         popup.initOwner(primaryStage);

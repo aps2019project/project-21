@@ -9,12 +9,6 @@ public class Hero extends Attacker {
     private int primaryCooldown;
     private int cooldown;
 
-
-//    {
-//        heroInGameView.relocate(currentCell.getX(), currentCell.getY());
-//    }
-
-
     public Hero(String name, int price, int maxHp, int maxAp,
                 int attackRange, AttackMode attackMode, Spell specialPower,
                 int cooldown) {
@@ -68,16 +62,12 @@ public class Hero extends Attacker {
         return cooldown;
     }
 
-    public void setCooldown(int cooldown) {
-        this.cooldown = cooldown;
-    }
-
     void resetCooldown() {
         this.cooldown = primaryCooldown;
     }
 
     public void decreaseCooldown() {
-        this.cooldown--;
+        this.cooldown = Math.max(0, this.cooldown - 1);
     }
 
 
