@@ -43,6 +43,11 @@ public class BattleMenu extends Menu {
         Match.getCurrentMatch().select(request.getCommandArguments().get(0));
     }
 
+    public void useSpell(String spell, int x, int y) {
+        Match.getCurrentMatch().selectSpell(spell);
+        Match.getCurrentMatch().useSpell(x, y);
+    }
+
     public boolean selectAttacker(Attacker attacker) {
         if (attacker == null)
             return false;
@@ -132,10 +137,6 @@ public class BattleMenu extends Menu {
 
     private void back() {
         MenuManager.getInstance().gotoMainMenu();
-    }
-
-    private void showBattlefield() {
-        Match.getCurrentMatch().showBattleField();
     }
 
     private void kill() {

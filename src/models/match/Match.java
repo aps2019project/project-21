@@ -97,7 +97,7 @@ public class Match {
         return false;
     }
 
-    private boolean selectSpell(String spellName) {
+    public boolean selectSpell(String spellName) {
         for (Card card : info[turn].getHand().getCards())
             if (card instanceof Spell)
                 if (card.getName().equals(spellName)) {
@@ -357,6 +357,9 @@ public class Match {
         spell.castSpell(this, getThisTurnsPlayer(), target);
         info[turn].getHand().remove(spell);
         info[turn].decreaseMP(spell.getManaCost());
+        battleView.drawMana();
+        battleView.drawHand();
+        battleView.drawSpellEffect(spell, x, y);
     }
 
     public void useCollectable(int x, int y) {
@@ -433,7 +436,6 @@ public class Match {
         setCardInGameID(attacker);
         goOnCell(attacker, cell);
         info[turn].decreaseMP(attacker.getManaCost());
-        info[turn].pushToHand();
         Card.setCardIDInGame(players[turn], attacker);
         System.out.println("card " + attacker.getName() + " with id: " + attacker.getCardIDInGame()
                 + " inserted to (" + x + ", " + y + ").");
@@ -532,7 +534,7 @@ public class Match {
     private void isMatchEnded() {
         if (goalMode == GoalMode.KILL_HERO) {
             for (int i = 0; i < 2; i++)
-                if (!info[i].getHero().isAlive()) {
+                if (info[i].getHero() == null || !info[i].getHero().isAlive()) {
                     endMatch(players[1 - i], players[i]);
                     return;
                 }
@@ -778,6 +780,7 @@ public class Match {
         increaseFlagHoldingTime();
         applyEffects();
         setCanMove();
+        info[turn].pushToHand();
         setCanAttack();
         increaseMana();
         unSelect();

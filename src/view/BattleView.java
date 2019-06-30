@@ -1,6 +1,7 @@
 package view;
 
 import controller.menus.BattleMenu;
+import javafx.animation.AnimationTimer;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -25,6 +26,7 @@ import models.Player;
 import models.card.AttackMode;
 import models.card.Attacker;
 import models.card.Card;
+import models.card.Spell;
 import models.match.Match;
 import models.match.PlayerMatchInfo;
 
@@ -133,8 +135,12 @@ public class BattleView {
                                 deselect();
                             }
                         } else if (selectedInHand != null) {
-                            BattleMenu.getInstance().insertCardIn(selectedInHand.getCard().getName(), u, v);
-                            drawAttackers();
+                            if (selectedInHand.getCard() instanceof Attacker) {
+                                BattleMenu.getInstance().insertCardIn(selectedInHand.getCard().getName(), u, v);
+                                drawAttackers();
+                            } else if (selectedInHand.getCard() instanceof Spell) {
+                                BattleMenu.getInstance().useSpell(selectedInHand.getCard().getName(), u, v);
+                            }
                             deselect();
                         } else {
                             if (BattleMenu.getInstance().selectAttacker(getAttacker(u, v))) {
@@ -490,10 +496,10 @@ public class BattleView {
         t1.getChildren().addAll(one);
         t1.setPrefColumns(1);
         t1.setStyle("-fx-background-color: transparent");
-        for (Card card : match.getPlayersMatchInfo()[0].getGraveyard()){
+        for (Card card : match.getPlayersMatchInfo()[0].getGraveyard()) {
             t1.getChildren().add(CardView.shopCardGroup(card));
         }
-        on.relocate(400,100);
+        on.relocate(400, 100);
 
         ScrollPane tw = new ScrollPane();
         TilePane t2 = new TilePane();
@@ -503,15 +509,15 @@ public class BattleView {
         t2.getChildren().addAll(two);
         t2.setPrefColumns(1);
         t2.setStyle("-fx-background-color: transparent");
-        for (Card card : match.getPlayersMatchInfo()[1].getGraveyard()){
+        for (Card card : match.getPlayersMatchInfo()[1].getGraveyard()) {
             t2.getChildren().add(CardView.shopCardGroup(card));
         }
-        tw.relocate(900,100);
+        tw.relocate(900, 100);
 
 
         root.getChildren().addAll(back, on, tw);
 
-        Scene scene1 = new Scene(root,1536, 801.59);
+        Scene scene1 = new Scene(root, 1536, 801.59);
         scene1.getStylesheets().add("view/stylesheets/pause_menu.css");
         scene1.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ESCAPE)
@@ -536,5 +542,28 @@ public class BattleView {
 
     public Cell getSelect() {
         return select;
+    }
+
+    public void drawSpellEffect(Spell spell, int x, int y) {
+        Rectangle rectangle = cells[x][y];
+        String n = Integer.toString(Math.abs(spell.getName().hashCode()) % 4 + 1);
+        try {
+            ImageView effect = new ImageView(new Image(new FileInputStream("src/assets/gifs/" + "spell" + "_effect_" + n + ".gif")));
+            effect.relocate(rectangle.getLayoutX() - 50, rectangle.getLayoutY() - 90);
+            table.getChildren().add(effect);
+            new AnimationTimer() {
+                long time = System.currentTimeMillis();
+
+                @Override
+                public void handle(long now) {
+                    if (System.currentTimeMillis() - time > 1000) {
+                        table.getChildren().remove(effect);
+                        this.stop();
+                    }
+                }
+            }.start();
+        } catch (IOException e) {
+            View.printThrowable(e);
+        }
     }
 }
