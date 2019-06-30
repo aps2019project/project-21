@@ -54,6 +54,7 @@ public class CollectionTest {
     private Button exportDeck = new Button();
     private TextField search = new TextField();
 
+
     void run() {
         View.getInstance().setScene(scene);
     }
