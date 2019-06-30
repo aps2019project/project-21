@@ -20,6 +20,7 @@ public class Container {
     private ImageView idle;
     private ImageView run;
     private ImageView attack;
+    private ImageView flag;
     private Label name = new Label();
     private Label hp = new Label();
     private Label ap = new Label();
@@ -57,6 +58,11 @@ public class Container {
                 setIdle(new ImageView(new Image(new FileInputStream("src/assets/gifs/" + type + "_idle_" + n + ".gif"))));
                 setRun(new ImageView(new Image(new FileInputStream("src/assets/gifs/" + type + "_run_" + n + ".gif"))));
                 setAttack(new ImageView(new Image(new FileInputStream("src/assets/gifs/" + type + "_attack_" + n + ".gif"))));
+                flag = new ImageView(new Image(new FileInputStream
+                        ("src/assets/flag.png")));
+                flag.setScaleX(1.0/2);
+                flag.setScaleY(1.0/10);
+                flag.relocate(0,-20);
             } else {
                 setIdle(new ImageView(new Image(new FileInputStream("src/assets/gifs/" + type + "_idle_" + n + ".gif"))));
                 setAttack(new ImageView(new Image(new FileInputStream("src/assets/gifs/" + type + "_active_" + n + ".gif"))));
@@ -77,6 +83,14 @@ public class Container {
             group.getChildren().add(gif);
         } else
             group.getChildren().add(node);
+    }
+
+    public void addFlag(){
+        group.getChildren().addAll(flag);
+    }
+
+    public void removeFlag(){
+        group.getChildren().removeAll(flag);
     }
 
     private void idle() {

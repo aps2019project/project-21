@@ -108,4 +108,9 @@ public class Cell {
         return x;
     }
 
+    public void dieAttacker(){
+        currentAttacker = null;
+        effects = new ArrayList<>();
+    }
+
 }
