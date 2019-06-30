@@ -28,7 +28,7 @@ public class PlayerMatchInfo {
         hand = Hand.extractHand(deck);
     }
 
-    List<Card> getGraveyard() {
+    public List<Card> getGraveyard() {
         return graveyard;
     }
 
