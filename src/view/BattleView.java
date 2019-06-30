@@ -67,9 +67,7 @@ public class BattleView {
 
     public void run() {
         View.getInstance().setScene(scene);
-    }
 
-    {
         scene.getStylesheets().add("view/stylesheets/battle_view.css");
 
         setBackground();
@@ -191,6 +189,7 @@ public class BattleView {
                 Container container = attackers.get(attacker);
                 if (attacker.getHP() < 1) {
                     groundedAttackers.getChildren().removeAll(container.getGroup());
+                    attackers.remove(attacker);
                 }
                 container.getAp().setText(Integer.toString(attacker.getAP()));
                 container.getHp().setText(Integer.toString(attacker.getHP()));

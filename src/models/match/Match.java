@@ -245,6 +245,9 @@ public class Match {
         if (attacker == null)
             return;
         if (attacker.getHP() <= 0) {
+            int i = info[getCardsTeam(attacker)].getGroundedAttackers().indexOf(attacker);
+            getCell(info[getCardsTeam(attacker)].getGroundedAttackers().get(i).getCurrentCell().getX(),
+                    info[getCardsTeam(attacker)].getGroundedAttackers().get(i).getCurrentCell().getY()).dieAttacker();
             info[getCardsTeam(attacker)].kill(attacker);
         }
         if (attacker instanceof Minion) {
