@@ -29,6 +29,7 @@ public class Container {
     private Group hover = new Group();
     private Group group = new Group();
 
+
     {
         name.relocate(30, 15);
         name.setTextFill(Color.RED);
