@@ -134,6 +134,7 @@ public class BattleView {
                             }
                         } else if (selectedInHand != null) {
                             BattleMenu.getInstance().insertCardIn(selectedInHand.getCard().getName(), u, v);
+                            drawAttackers();
                             deselect();
                         } else {
                             if (BattleMenu.getInstance().selectAttacker(getAttacker(u, v))) {
