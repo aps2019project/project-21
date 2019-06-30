@@ -262,7 +262,7 @@ public class BattleView {
         return null;
     }
 
-    private void attackAnimation(int u, int v) {
+    public void attackAnimation(int u, int v) {
         Container thi = getContainer(select.getX(), select.getY());
         if (thi != null) {
             thi.setAsAttack();
@@ -651,5 +651,9 @@ public class BattleView {
         } catch (IOException e) {
             View.printThrowable(e);
         }
+    }
+
+    public void setSelect(Cell select) {
+        this.select = select;
     }
 }

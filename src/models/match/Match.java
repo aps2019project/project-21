@@ -15,6 +15,7 @@ import view.View;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Match {
     private static final int MOVE_RANGE = 2;
@@ -512,6 +513,7 @@ public class Match {
     }
 
     private void aiPlay() {
+        View.getInstance().setAIPlaying(true);
         System.out.println("AI playing...");
         try {
             selectedCard = info[1].getHero();
@@ -520,8 +522,29 @@ public class Match {
             battleView.getSelect().setX(2);
             battleView.getSelect().setY(info[1].getHero().getCurrentCell().getY() + 1);
             TranslateTransition t = battleView.moveAnimation(2, info[1].getHero().getCurrentCell().getY());
-            t.setOnFinished(event -> battleView.drawAttackers());
+            if (t != null)
+                t.setOnFinished(event -> battleView.drawAttackers());
             battleView.updateAttackers();
+
+            attack(info[0].getHero().getCardIDInGame());
+            selectedCard = info[1].getHero();
+            battleView.setSelect(new view.Cell(selectedCard.getCurrentCell().getX(), selectedCard.getCurrentCell().getY()));
+            battleView.attackAnimation(info[0].getHero().getCurrentCell().getX(), info[0].getHero().getCurrentCell().getY());
+
+            for (Attacker attacker : info[1].getGroundedAttackers()) {
+                if (attacker.canMove()) {
+                    selectedCard = attacker;
+                    int random = new Random().nextInt(2) * 2 - 1;
+                    moveCard(attacker.getCurrentCell().getX() + random, attacker.getCurrentCell().getY());
+                    battleView.getSelect().setX(attacker.getCurrentCell().getX() - random);
+                    battleView.getSelect().setY(attacker.getCurrentCell().getY());
+                    TranslateTransition t1 = battleView.moveAnimation(attacker.getCurrentCell().getX(), attacker.getCurrentCell().getY());
+                    if (t1 != null)
+                        t1.setOnFinished(event -> battleView.drawAttackers());
+                    battleView.updateAttackers();
+                }
+            }
+
             for (Card card : info[1].getHand().getCards())
                 if (card instanceof Minion)
                     if (info[1].hasManaForThis(card)) {
@@ -532,6 +555,7 @@ public class Match {
         } finally {
             System.out.println(info[1].getHero().getCurrentCell().getY());
             endTurn();
+            View.getInstance().setAIPlaying(false);
         }
     }
 

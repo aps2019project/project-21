@@ -62,16 +62,12 @@ public class Hero extends Attacker {
         return cooldown;
     }
 
-    public void setCooldown(int cooldown) {
-        this.cooldown = cooldown;
-    }
-
     void resetCooldown() {
         this.cooldown = primaryCooldown;
     }
 
     public void decreaseCooldown() {
-        this.cooldown--;
+        this.cooldown = Math.max(0, this.cooldown - 1);
     }
 
 

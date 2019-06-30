@@ -28,7 +28,6 @@ public class Attacker extends Card {
     private Flag flag;
 
     Attacker() {
-
     }
 
     Attacker(String name, int price, int manaCost, int maxHp, int maxAp,
@@ -250,7 +249,8 @@ public class Attacker extends Card {
     }
 
     public void applyEffects() {
-        for (Effect effect : appliedEffects) {
+        List<Effect> effectsCopy = new ArrayList<>(appliedEffects);
+        for (Effect effect : effectsCopy) {
             effect.setAttacker(this);
             effect.setCell(this.currentCell);
             effect.setMatch(Match.getCurrentMatch());
