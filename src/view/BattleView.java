@@ -158,11 +158,13 @@ public class BattleView {
             boolean one = match.getPlayersMatchInfo()[0].getHero().getHP() < 1;
         } catch (Exception ex) {
             View.getInstance().popup(match.getPlayers()[1].getUsername() + " win!");
+            View.getInstance().back();
         }
         try {
             boolean two = match.getPlayersMatchInfo()[1].getHero().getHP() < 1;
         } catch (Exception ex) {
             View.getInstance().popup(match.getPlayers()[0].getUsername() + " win!");
+            View.getInstance().back();
         } finally {
             hp1.setText(Integer.toString(match.getPlayersMatchInfo()[0].getHero().getHP()));
             hp2.setText(Integer.toString(match.getPlayersMatchInfo()[1].getHero().getHP()));
