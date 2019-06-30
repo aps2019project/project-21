@@ -134,6 +134,7 @@ public class View {
         popup.show();
     }
 
+
     public void printMessage(Message msg) {
         if (msg == null)
             return;
