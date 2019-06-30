@@ -51,12 +51,20 @@ public class Container {
         try {
             String type = card.getClass().getSimpleName();
             System.out.println(type);
-            setIdle(new ImageView(new Image(new FileInputStream("src/assets/gifs/" + type + "_idle.gif"))));
-            setRun(new ImageView(new Image(new FileInputStream("src/assets/gifs/" + type + "_run.gif"))));
-            setAttack(new ImageView(new Image(new FileInputStream("src/assets/gifs/" + type + "_attack.gif"))));
+            String n = Integer.toString(Math.abs(card.getName().hashCode()) % 4 + 1);
+
+            if (card instanceof Attacker) {
+                setIdle(new ImageView(new Image(new FileInputStream("src/assets/gifs/" + type + "_idle_" + n + ".gif"))));
+                setRun(new ImageView(new Image(new FileInputStream("src/assets/gifs/" + type + "_run_" + n + ".gif"))));
+                setAttack(new ImageView(new Image(new FileInputStream("src/assets/gifs/" + type + "_attack_" + n + ".gif"))));
+            } else {
+                setIdle(new ImageView(new Image(new FileInputStream("src/assets/gifs/" + type + "_idle_" + n + ".gif"))));
+                setAttack(new ImageView(new Image(new FileInputStream("src/assets/gifs/" + type + "_active_" + n + ".gif"))));
+            }
             idle();
         } catch (Exception e) {
-//            View.printThrowable(e);
+            System.err.println(card.getName());
+            View.printThrowable(e);
         }
     }
 
@@ -126,35 +134,35 @@ public class Container {
         add(run);
     }
 
-    void setAsRun(){
+    void setAsRun() {
         group.getChildren().removeAll(run, idle, gif, death, attack);
         group.getChildren().addAll(run);
     }
 
-    void setAsIdle(){
+    void setAsIdle() {
         group.getChildren().removeAll(run, idle, gif, death, attack);
         group.getChildren().addAll(idle);
     }
 
-    void setAsAttack(){
+    void setAsAttack() {
         group.getChildren().removeAll(run, idle, gif, death, attack);
         group.getChildren().addAll(attack);
     }
 
-    void reverseRun(){
+    void reverseRun() {
         run.setScaleX(-1);
     }
 
-    void attackReverse(){
+    void attackReverse() {
         attack.setScaleX(-1);
     }
 
-    void setAsGif(){
+    void setAsGif() {
         group.getChildren().removeAll(run, idle, gif, death, attack);
         group.getChildren().addAll(gif);
     }
 
-    void setAsDeath(){
+    void setAsDeath() {
         group.getChildren().removeAll(run, idle, gif, death, attack);
         group.getChildren().addAll(death);
     }

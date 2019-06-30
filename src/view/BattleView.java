@@ -168,7 +168,6 @@ public class BattleView {
             System.out.println(attacker.getName() + " " + attacker.getHP());
             System.out.println("\n");
         }
-
     }
 
     private void moveAnimation(int u, int v) {
@@ -261,7 +260,7 @@ public class BattleView {
     }
 
     private void drawHub() {
-        endTurn.relocate(1300, 700);
+        endTurn.relocate(1200, 600);
         try {
             ImageView endTurnImage = new ImageView(new Image(new FileInputStream("src/assets/resources/ui/button_end_turn_mine_glow@2x.png")));
             endTurnImage.setFitWidth(200);
@@ -318,8 +317,11 @@ public class BattleView {
 
     private void drawGeneralsIcons() {
         try {
-            ImageView icon1 = new ImageView(new Image(new FileInputStream("src/assets/generals/general_portrait_image_hex_f1.png")));
-            ImageView icon2 = new ImageView(new Image(new FileInputStream("src/assets/generals/general_portrait_image_hex_f4-alt.png")));
+            String n = Integer.toString(Math.abs(match.getPlayers()[0].getUsername().hashCode()) % 7 + 1);
+            String m = Integer.toString(Math.abs(match.getPlayers()[1].getUsername().hashCode()) % 7 + 1);
+
+            ImageView icon1 = new ImageView(new Image(new FileInputStream("src/assets/generals/general_" + n + ".png")));
+            ImageView icon2 = new ImageView(new Image(new FileInputStream("src/assets/generals/general_" + m + ".png")));
             icon1.setScaleX(0.4);
             icon1.setScaleY(icon1.getScaleX());
             icon2.setScaleX(icon1.getScaleY());
