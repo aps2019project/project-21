@@ -165,6 +165,7 @@ public class Match {
         System.out.println(selectedCard.getCardIDInGame() + " moved to (" + x + ", " + y + ")");
         selectedCard = null;
         System.out.println("RETURN 0");
+        battleView.drawCollectables();
         return 0;
     }
 
@@ -407,6 +408,8 @@ public class Match {
                 return;
             }
         attacker.castSpecialPower(this, getThisTurnsPlayer(), target);
+        battleView.drawSpellEffect(attacker.getSpecialPower(), x, y);
+        battleView.drawMana();
     }
 
     private void applyEffects() {
@@ -468,6 +471,7 @@ public class Match {
             attacker.setFlag(cell.getFlag());
             cell.setFlag(null);
         }
+        battleView.drawMana();
     }
 
     private void setCardInGameID(Card card) {
@@ -490,7 +494,7 @@ public class Match {
     }
 
     private boolean isInsertNear(Cell cell) {
-        for (Attacker attacker : getBothGroundedAttackers())
+        for (Attacker attacker : getPlayersMatchInfo()[turn].getGroundedAttackers())
             if (Cell.getEuclideanDistance(attacker.getCurrentCell(), cell) < 1.43d)
                 return true;
         return false;
@@ -777,6 +781,7 @@ public class Match {
     }
 
     private void prepareNextRound() {
+        battleView.drawCollectables();
         increaseFlagHoldingTime();
         applyEffects();
         setCanMove();

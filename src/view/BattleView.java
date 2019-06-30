@@ -22,11 +22,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import models.Item.Collectable;
 import models.Player;
-import models.card.AttackMode;
-import models.card.Attacker;
-import models.card.Card;
-import models.card.Spell;
+import models.card.*;
 import models.match.Match;
 import models.match.PlayerMatchInfo;
 
@@ -57,6 +55,8 @@ public class BattleView {
     private HBox hand = new HBox();
     private HBox manaBar = new HBox();
     private Button graveyard = new Button("GRAVEYARD");
+    private Label cooldown = new Label();
+    private Group collectables = new Group();
 
     public void run() {
         View.getInstance().setScene(scene);
@@ -80,6 +80,7 @@ public class BattleView {
 
 
     private void drawTable() {
+        table.getChildren().add(collectables);
         table.relocate(450, 240);
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 9; j++) {
@@ -91,6 +92,7 @@ public class BattleView {
             }
         }
         drawAttackers();
+        drawCollectables();
         table.getChildren().add(groundedAttackers);
     }
 
@@ -139,7 +141,10 @@ public class BattleView {
                                 BattleMenu.getInstance().insertCardIn(selectedInHand.getCard().getName(), u, v);
                                 drawAttackers();
                             } else if (selectedInHand.getCard() instanceof Spell) {
-                                BattleMenu.getInstance().useSpell(selectedInHand.getCard().getName(), u, v);
+                                if (selectedInHand.getCard().getName().equalsIgnoreCase(match.getPlayersMatchInfo()[0].getHero().getSpecialPower().getName())) {
+                                    BattleMenu.getInstance().useSpecialPower(u, v);
+                                } else
+                                    BattleMenu.getInstance().useSpell(selectedInHand.getCard().getName(), u, v);
                             }
                             deselect();
                         } else {
@@ -186,6 +191,29 @@ public class BattleView {
             }
         }
 
+    }
+
+    public void drawCollectables() {
+        collectables.getChildren().clear();
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 9; j++) {
+                Collectable c = match.getBattlefield().getCell(i, j).getCollectable();
+                if (c != null) {
+                    drawCollectable(i, j);
+                }
+            }
+        }
+    }
+
+    private void drawCollectable(int x, int y) {
+        Rectangle rectangle = cells[x][y];
+        try {
+            ImageView collectable = new ImageView(new Image(new FileInputStream("src/assets/gifs/collectable.gif")));
+            collectable.relocate(rectangle.getLayoutX() + 10, rectangle.getLayoutY());
+            collectables.getChildren().add(collectable);
+        } catch (IOException e) {
+            View.printThrowable(e);
+        }
     }
 
     public TranslateTransition moveAnimation(int u, int v) {
@@ -306,6 +334,8 @@ public class BattleView {
         }
         pause.relocate(1300, 750);
         drawHand();
+        drawSpecialPower();
+        handleChanges();
         drawInfoBars();
         hub.getChildren().addAll(endTurn, pause, hand, manaBar, graveyard);
     }
@@ -372,11 +402,11 @@ public class BattleView {
             hpIcon2.setFitHeight(68);
             hub.getChildren().addAll(hpIcon1, hpIcon2);
 
-            Label hp1 = new Label(Integer.toString(match.getPlayersMatchInfo()[0].getHero().getHP()));
+            hp1 = new Label(Integer.toString(match.getPlayersMatchInfo()[0].getHero().getHP()));
             hp1.setTextFill(Color.WHITE);
             hp1.setFont(Font.font(20));
             hp1.relocate(206, 147);
-            Label hp2 = new Label(Integer.toString(match.getPlayersMatchInfo()[1].getHero().getHP()));
+            hp2 = new Label(Integer.toString(match.getPlayersMatchInfo()[1].getHero().getHP()));
             hp2.setTextFill(Color.WHITE);
             hp2.setFont(Font.font(20));
             hp2.relocate(1305, 147);
@@ -437,6 +467,62 @@ public class BattleView {
                 View.printThrowable(e);
             }
         }
+    }
+
+    private void drawSpecialPower() {
+        try {
+            Card c = Match.getCurrentMatch().getPlayersMatchInfo()[0].getHero().getSpecialPower();
+            Container co = new Container();
+            co.setCard(c);
+            Rectangle r = new Rectangle(100, 100);
+            r.getStyleClass().add("rectangle");
+            co.getGroup().relocate(180, 300);
+            co.setRect(r);
+            co.setImages();
+            Label name = new Label(c.getName());
+            name.setTextFill(Color.WHITE);
+            root.getChildren().add(co.getGroup());
+            name.relocate(10, 53);
+            co.getGroup().setOnMouseClicked(event -> {
+                if (event.getButton() == MouseButton.PRIMARY) {
+                    deselect();
+                    selectedInHand = co;
+                    co.getRect().setStyle("-fx-fill: rgba(255,255,0,0.35);");
+                } else if (event.getButton() == MouseButton.SECONDARY) {
+                    deselect();
+                }
+            });
+        } catch (Exception e) {
+            View.printThrowable(e);
+        }
+
+        cooldown.relocate(200, 350);
+        cooldown.setFont(Font.font(30));
+        cooldown.setTextFill(Color.PURPLE);
+        root.getChildren().add(cooldown);
+    }
+
+    private void handleChanges() {
+        new AnimationTimer() {
+            long last;
+
+            @Override
+            public void handle(long now) {
+                if (now - last > 2000) {
+                    Hero hero = Match.getCurrentMatch().getPlayersMatchInfo()[0].getHero();
+                    if (hero != null) {
+                        cooldown.setText(Integer.toString(hero.getCooldown()));
+                        hp1.setText(Integer.toString(hero.getHP()));
+                    }
+                    hero = Match.getCurrentMatch().getPlayersMatchInfo()[1].getHero();
+
+                    if (hero != null) {
+                        hp2.setText(Integer.toString(hero.getHP()));
+                    }
+                    last = now;
+                }
+            }
+        }.start();
     }
 
     private void setOnActions() {

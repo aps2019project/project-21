@@ -69,6 +69,8 @@ public class Attacker extends Card {
     public void castSpecialPower(Match match, Player player, Cell target) {
         if (this instanceof Hero)
             ((Hero) this).resetCooldown();
+        if (specialPower.getManaCost() >= 0)
+            match.getInfo(player).decreaseMP(specialPower.manaCost);
         specialPower.castSpell(match, player, target);
     }
 

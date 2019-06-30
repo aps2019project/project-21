@@ -9,12 +9,6 @@ public class Hero extends Attacker {
     private int primaryCooldown;
     private int cooldown;
 
-
-//    {
-//        heroInGameView.relocate(currentCell.getX(), currentCell.getY());
-//    }
-
-
     public Hero(String name, int price, int maxHp, int maxAp,
                 int attackRange, AttackMode attackMode, Spell specialPower,
                 int cooldown) {

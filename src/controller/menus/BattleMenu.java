@@ -78,9 +78,8 @@ public class BattleMenu extends Menu {
         Match.getCurrentMatch().attackCombo(opponentMinion, myMinions);
     }
 
-    private void useSpecialPower() {
-        int x = Integer.parseInt(request.getCommandArguments().get(0));
-        int y = Integer.parseInt(request.getCommandArguments().get(1));
+    public void useSpecialPower(int x, int y) {
+        Match.getCurrentMatch().selectAttacker(Match.getCurrentMatch().getPlayersMatchInfo()[0].getHero().getCardIDInGame());
         Match.getCurrentMatch().useSpecialPower(x, y);
     }
 

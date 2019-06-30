@@ -1804,30 +1804,30 @@
             "currentCell": null
           },
           "hero": {
-            "primaryCooldown": 0,
-            "cooldown": 2,
-            "maxHp": 50,
-            "maxAp": 4,
-            "hp": 50,
-            "ap": 4,
+            "primaryCooldown": 2,
+            "cooldown": 0,
+            "maxHp": 40,
+            "maxAp": 3,
+            "hp": 40,
+            "ap": 3,
             "specialPower": {
               "applyType": "ON_ATTACKER",
               "targetType": {
                 "randomOrNot": "NOT_RANDOM",
                 "targetAttackerRange": "ALL_THREE",
-                "cellType": "SINGLE_CELL",
-                "heroOrMinion": "HERO",
-                "oppOrAlly": "ALLY",
-                "chooseType": "HIMSELF"
+                "cellType": "NONE",
+                "heroOrMinion": "BOTH",
+                "oppOrAlly": "OPP",
+                "chooseType": "SELECTED_OPP"
               },
               "effects": [
                 {
-                  "@type": "models.card.buffs.PowerAP",
+                  "@type": "models.card.effects.GiveEffect",
                   "@val": {
-                    "value": 4,
-                    "initialAP": 0,
-                    "duration": 2147483647,
-                    "buffMode": "GOOD",
+                    "duration": 0,
+                    "num": 0,
+                    "value": 0,
+                    "effectName": "POSITIVE_DISPEL",
                     "cell": null,
                     "attacker": null,
                     "player": null,
@@ -1836,10 +1836,10 @@
                   }
                 }
               ],
-              "desc": "Casts one power buff with 4 ap increase on himself forever",
+              "desc": "Dispels an opponent attacker.",
               "isCommandValid": true,
-              "name": "Dive_Sefid's_Spell",
-              "id": 100,
+              "name": "Afsaneh's_Spell",
+              "id": 121,
               "collectionID": 0,
               "cardIDInGame": null,
               "price": 0,
@@ -1847,19 +1847,19 @@
               "currentCell": null
             },
             "appliedEffects": [],
-            "attackRange": 1,
-            "attackMode": "MELEE",
+            "attackRange": 3,
+            "attackMode": "RANGED",
             "canMove": true,
             "canAttack": true,
             "isDisarmed": false,
             "isStunned": false,
             "hasHolyBuff": false,
             "flag": null,
-            "name": "Dive_Sefid",
-            "id": 101,
-            "collectionID": 370,
+            "name": "Afsaneh",
+            "id": 122,
+            "collectionID": 373,
             "cardIDInGame": null,
-            "price": 8000,
+            "price": 11000,
             "manaCost": -1,
             "currentCell": {
               "x": 0,
@@ -1882,7 +1882,73 @@
       ],
       "mainDeck": "@root.collection.decks.1",
       "heroes": [
-        "@root.collection.decks.1.hero",
+        {
+          "primaryCooldown": 0,
+          "cooldown": 2,
+          "maxHp": 50,
+          "maxAp": 4,
+          "hp": 50,
+          "ap": 4,
+          "specialPower": {
+            "applyType": "ON_ATTACKER",
+            "targetType": {
+              "randomOrNot": "NOT_RANDOM",
+              "targetAttackerRange": "ALL_THREE",
+              "cellType": "SINGLE_CELL",
+              "heroOrMinion": "HERO",
+              "oppOrAlly": "ALLY",
+              "chooseType": "HIMSELF"
+            },
+            "effects": [
+              {
+                "@type": "models.card.buffs.PowerAP",
+                "@val": {
+                  "value": 4,
+                  "initialAP": 0,
+                  "duration": 2147483647,
+                  "buffMode": "GOOD",
+                  "cell": null,
+                  "attacker": null,
+                  "player": null,
+                  "match": null,
+                  "activationType": "NONE"
+                }
+              }
+            ],
+            "desc": "Casts one power buff with 4 ap increase on himself forever",
+            "isCommandValid": true,
+            "name": "Dive_Sefid's_Spell",
+            "id": 100,
+            "collectionID": 0,
+            "cardIDInGame": null,
+            "price": 0,
+            "manaCost": 1,
+            "currentCell": null
+          },
+          "appliedEffects": [],
+          "attackRange": 1,
+          "attackMode": "MELEE",
+          "canMove": true,
+          "canAttack": true,
+          "isDisarmed": false,
+          "isStunned": false,
+          "hasHolyBuff": false,
+          "flag": null,
+          "name": "Dive_Sefid",
+          "id": 101,
+          "collectionID": 370,
+          "cardIDInGame": null,
+          "price": 8000,
+          "manaCost": -1,
+          "currentCell": {
+            "x": 0,
+            "y": 0,
+            "effects": [],
+            "collectable": null,
+            "flag": null,
+            "currentAttacker": null
+          }
+        },
         {
           "primaryCooldown": 0,
           "cooldown": 0,
@@ -1916,73 +1982,7 @@
           }
         },
         "@root.collection.decks.0.hero",
-        {
-          "primaryCooldown": 2,
-          "cooldown": 0,
-          "maxHp": 40,
-          "maxAp": 3,
-          "hp": 40,
-          "ap": 3,
-          "specialPower": {
-            "applyType": "ON_ATTACKER",
-            "targetType": {
-              "randomOrNot": "NOT_RANDOM",
-              "targetAttackerRange": "ALL_THREE",
-              "cellType": "NONE",
-              "heroOrMinion": "BOTH",
-              "oppOrAlly": "OPP",
-              "chooseType": "SELECTED_OPP"
-            },
-            "effects": [
-              {
-                "@type": "models.card.effects.GiveEffect",
-                "@val": {
-                  "duration": 0,
-                  "num": 0,
-                  "value": 0,
-                  "effectName": "POSITIVE_DISPEL",
-                  "cell": null,
-                  "attacker": null,
-                  "player": null,
-                  "match": null,
-                  "activationType": "NONE"
-                }
-              }
-            ],
-            "desc": "Dispels an opponent attacker.",
-            "isCommandValid": true,
-            "name": "Afsaneh's_Spell",
-            "id": 121,
-            "collectionID": 0,
-            "cardIDInGame": null,
-            "price": 0,
-            "manaCost": 1,
-            "currentCell": null
-          },
-          "appliedEffects": [],
-          "attackRange": 3,
-          "attackMode": "RANGED",
-          "canMove": true,
-          "canAttack": true,
-          "isDisarmed": false,
-          "isStunned": false,
-          "hasHolyBuff": false,
-          "flag": null,
-          "name": "Afsaneh",
-          "id": 122,
-          "collectionID": 373,
-          "cardIDInGame": null,
-          "price": 11000,
-          "manaCost": -1,
-          "currentCell": {
-            "x": 0,
-            "y": 0,
-            "effects": [],
-            "collectable": null,
-            "flag": null,
-            "currentAttacker": null
-          }
-        }
+        "@root.collection.decks.1.hero"
       ],
       "minions": [
         "@root.collection.decks.0.cards.6",
