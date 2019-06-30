@@ -8,6 +8,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -46,6 +47,7 @@ public class BattleView {
     private Map<Attacker, Container> attackers = new HashMap<>();
     private Group groundedAttackers = new Group();
     private StackPane endTurn = new StackPane();
+    private Button pause = new Button("PAUSE");
     private Group hub = new Group();
     private Rectangle selectedRect;
     private Cell select = new Cell(-1, -1);
@@ -427,7 +429,7 @@ public class BattleView {
     }
 
     private void setOnActions() {
-        endTurn.setOnAction(event -> match.endTurn());
+        endTurn.setOnMouseClicked(event -> match.endTurn());
         pause.setOnAction(event -> pause());
         graveyard.setOnAction(event -> graveyard());
         scene.setOnKeyPressed(event -> {
@@ -524,5 +526,9 @@ public class BattleView {
         } catch (Exception e) {
             View.printThrowable(e);
         }
+    }
+
+    public Cell getSelect() {
+        return select;
     }
 }
