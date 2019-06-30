@@ -271,10 +271,10 @@ public class BattleView {
     }
 
     private void drawHub() {
-        graveyard.relocate(1300, 600);
+        graveyard.relocate(1200, 500);
         endTurn.setPadding(new Insets(10, 10, 10, 10));
 
-        endTurn.relocate(1300, 700);
+        endTurn.relocate(1200, 600);
         try {
             BackgroundImage backgroundImage = new BackgroundImage(new Image(new FileInputStream("src/assets/resources/ui/button_end_turn_mine_glow@2x.png")),
                     BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(100, 100, false, false, true, true));
@@ -297,7 +297,7 @@ public class BattleView {
         pause.relocate(1300, 750);
         drawHand();
         drawInfoBars();
-        hub.getChildren().addAll(endTurn, pause, hand, manaBar);
+        hub.getChildren().addAll(endTurn, pause, hand, manaBar, graveyard);
     }
 
     private void drawInfoBars() {
@@ -472,6 +472,7 @@ public class BattleView {
 
     private void graveyard() {
         Button back = new Button("BACK");
+        back.setTextFill(Color.BLACK);
         back.setOnAction(event -> {
             View.getInstance().setScene(scene);
         });
