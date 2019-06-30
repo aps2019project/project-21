@@ -1,20 +1,19 @@
 package view;
 
 import controller.menus.BattleMenu;
-import javafx.animation.AnimationTimer;
 import javafx.animation.TranslateTransition;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -38,6 +37,8 @@ public class BattleView {
     private static final int TILE_SIZE = 70;
     private static final int VALLEY_SIZE = 4;
 
+    private Label hp1 = new Label();
+    private Label hp2 = new Label();
     private Match match = Match.getCurrentMatch();
     private Group root = new Group();
     private Scene scene = new Scene(root, 1536, 801.59);
@@ -46,6 +47,7 @@ public class BattleView {
     private Map<Attacker, Container> attackers = new HashMap<>();
     private Group groundedAttackers = new Group();
     private StackPane endTurn = new StackPane();
+    private Button pause = new Button("PAUSE");
     private Group hub = new Group();
     private Rectangle selectedRect;
     private Cell select = new Cell(-1, -1);
@@ -150,27 +152,34 @@ public class BattleView {
             }
     }
 
-    private void updateAttackers() {
-        if (match.getWinner() != null) {
-            if (match.getWinner().getUsername().equals(Player.getCurrentPlayer().getUsername())) {
-                View.getInstance().popup("YOU WIN");
-            } else {
-                View.getInstance().popup("YOU LOOSE");
+    public void updateAttackers() {
+        try {
+            boolean one = match.getPlayersMatchInfo()[0].getHero().getHP() < 1;
+        } catch (Exception ex) {
+            View.getInstance().popup(match.getPlayers()[1].getUsername() + " win!");
+        }
+        try {
+            boolean two = match.getPlayersMatchInfo()[1].getHero().getHP() < 1;
+        } catch (Exception ex) {
+            View.getInstance().popup(match.getPlayers()[0].getUsername() + " win!");
+        } finally {
+            hp1.setText(Integer.toString(match.getPlayersMatchInfo()[0].getHero().getHP()));
+            hp2.setText(Integer.toString(match.getPlayersMatchInfo()[1].getHero().getHP()));
+            for (Attacker attacker : attackers.keySet()) {
+                Container container = attackers.get(attacker);
+                if (attacker.getHP() < 1) {
+                    groundedAttackers.getChildren().removeAll(container.getGroup());
+                }
+                container.getAp().setText(Integer.toString(attacker.getAP()));
+                container.getHp().setText(Integer.toString(attacker.getHP()));
+                System.out.println(attacker.getName() + " " + attacker.getHP());
+                System.out.println("\n");
             }
         }
-        for (Attacker attacker : attackers.keySet()) {
-            Container container = attackers.get(attacker);
-            if (attacker.getHP() < 1) {
-                groundedAttackers.getChildren().removeAll(container.getGroup());
-            }
-            container.getAp().setText(Integer.toString(attacker.getAP()));
-            container.getHp().setText(Integer.toString(attacker.getHP()));
-            System.out.println(attacker.getName() + " " + attacker.getHP());
-            System.out.println("\n");
-        }
+
     }
 
-    private void moveAnimation(int u, int v) {
+    public TranslateTransition moveAnimation(int u, int v) {
         Container thi = getContainer(u, v);
         if (thi != null) {
             thi.setAsRun();
@@ -184,7 +193,9 @@ public class BattleView {
             t.setOnFinished(event -> thi.setAsGif());
             if (v - select.getY() < 0)
                 thi.reverseRun();
+            return t;
         }
+        return null;
     }
 
     private void deselect() {
@@ -261,7 +272,18 @@ public class BattleView {
 
     private void drawHub() {
         endTurn.relocate(1200, 600);
+        graveyard.relocate(1200, 500);
+        endTurn.setPadding(new Insets(10, 10, 10, 10));
+
+        endTurn.relocate(1200, 600);
         try {
+            BackgroundImage backgroundImage = new BackgroundImage(new Image(new FileInputStream("src/assets/resources/ui/button_end_turn_mine_glow@2x.png")),
+                    BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(100, 100, false, false, true, true));
+            endTurn.setBackground(new Background(backgroundImage));
+
+            BackgroundImage backgroundImag = new BackgroundImage(new Image(new FileInputStream("src/assets/resources/ui/button_end_turn_mine_glow@2x.png")),
+                    BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(100, 100, false, false, true, true));
+            graveyard.setBackground(new Background(backgroundImag));
             ImageView endTurnImage = new ImageView(new Image(new FileInputStream("src/assets/resources/ui/button_end_turn_mine_glow@2x.png")));
             endTurnImage.setFitWidth(200);
             endTurnImage.setFitHeight(80);
@@ -273,9 +295,10 @@ public class BattleView {
         } catch (Exception e) {
             View.printThrowable(e);
         }
+        pause.relocate(1300, 750);
         drawHand();
         drawInfoBars();
-        hub.getChildren().addAll(endTurn, hand, manaBar);
+        hub.getChildren().addAll(endTurn, pause, hand, manaBar, graveyard);
     }
 
     private void drawInfoBars() {
@@ -349,19 +372,6 @@ public class BattleView {
             hp2.setFont(Font.font(20));
             hp2.relocate(1305, 147);
             hub.getChildren().addAll(hp1, hp2);
-
-            new AnimationTimer() {
-                long last;
-
-                @Override
-                public void handle(long now) {
-                    if (now - last > 100) {
-                        hp1.setText(Integer.toString(match.getPlayersMatchInfo()[0].getHero().getHP()));
-                        hp2.setText(Integer.toString(match.getPlayersMatchInfo()[1].getHero().getHP()));
-                        last = now;
-                    }
-                }
-            }.start();
         } catch (Exception ex) {
             View.printThrowable(ex);
         }
@@ -422,6 +432,8 @@ public class BattleView {
 
     private void setOnActions() {
         endTurn.setOnMouseClicked(event -> match.endTurn());
+        pause.setOnAction(event -> pause());
+        graveyard.setOnAction(event -> graveyard());
         scene.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ESCAPE)
                 pause();
@@ -460,6 +472,51 @@ public class BattleView {
         pause.show();
     }
 
+    private void graveyard() {
+        Button back = new Button("BACK");
+        back.setTextFill(Color.BLACK);
+        back.setOnAction(event -> {
+            View.getInstance().setScene(scene);
+        });
+        Group root = new Group();
+        ScrollPane on = new ScrollPane();
+        TilePane t1 = new TilePane();
+        on.setContent(t1);
+        Label one = new Label("NAME : " + match.getPlayers()[0].getUsername());
+        on.setMaxHeight(500);
+        t1.getChildren().addAll(one);
+        t1.setPrefColumns(1);
+        t1.setStyle("-fx-background-color: transparent");
+        for (Card card : match.getPlayersMatchInfo()[0].getGraveyard()){
+            t1.getChildren().add(CardView.shopCardGroup(card));
+        }
+        on.relocate(400,100);
+
+        ScrollPane tw = new ScrollPane();
+        TilePane t2 = new TilePane();
+        tw.setContent(t2);
+        tw.setMaxHeight(500);
+        Label two = new Label("NAME : " + match.getPlayers()[1].getUsername());
+        t2.getChildren().addAll(two);
+        t2.setPrefColumns(1);
+        t2.setStyle("-fx-background-color: transparent");
+        for (Card card : match.getPlayersMatchInfo()[1].getGraveyard()){
+            t2.getChildren().add(CardView.shopCardGroup(card));
+        }
+        tw.relocate(900,100);
+
+
+        root.getChildren().addAll(back, on, tw);
+
+        Scene scene1 = new Scene(root,1536, 801.59);
+        scene1.getStylesheets().add("view/stylesheets/pause_menu.css");
+        scene1.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ESCAPE)
+                View.getInstance().setScene(scene);
+        });
+        View.getInstance().setScene(scene1);
+    }
+
     private void setBackground() {
         try {
             ImageView background = new ImageView(new Image(new FileInputStream("src/assets/resources/maps/vanar/background.jpg")));
@@ -472,5 +529,9 @@ public class BattleView {
         } catch (Exception e) {
             View.printThrowable(e);
         }
+    }
+
+    public Cell getSelect() {
+        return select;
     }
 }

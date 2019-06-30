@@ -2,6 +2,7 @@ package models.match;
 
 import controller.InputScanner;
 import controller.menus.MenuManager;
+import javafx.animation.TranslateTransition;
 import models.AIPlayer;
 import models.Item.Collectable;
 import models.Item.Flag;
@@ -446,7 +447,7 @@ public class Match {
         }
 
         battleView.drawHand();
-        battleView.drawAttackers();
+        //battleView.drawAttackers();
         battleView.drawMana();
     }
 
@@ -508,14 +509,22 @@ public class Match {
         System.out.println("AI playing...");
         try {
             selectedCard = info[1].getHero();
-            moveCard(2, selectedCard.getCurrentCell().getY() - 1);
-            List<Card> hand = new ArrayList<>(info[1].getHand().getCards());
-            for (Card card : hand)
+            moveCard(2, info[1].getHero().getCurrentCell().getY() - 1);
+
+            battleView.getSelect().setX(2);
+            battleView.getSelect().setY(info[1].getHero().getCurrentCell().getY() + 1);
+            TranslateTransition t = battleView.moveAnimation(2, info[1].getHero().getCurrentCell().getY());
+            t.setOnFinished(event -> battleView.drawAttackers());
+            battleView.updateAttackers();
+            for (Card card : info[1].getHand().getCards())
                 if (card instanceof Minion)
-                    if (info[1].hasManaForThis(card))
+                    if (info[1].hasManaForThis(card)) {
                         insertCard(card.getName(), info[1].getHero().getCurrentCell().getX() - 1
                                 , info[1].getHero().getCurrentCell().getY());
+                        break;
+                    }
         } finally {
+            System.out.println(info[1].getHero().getCurrentCell().getY());
             endTurn();
         }
     }
@@ -531,6 +540,7 @@ public class Match {
             if (flags.get(0).getHoldingTime() >= 11)
                 if (whichTeamHasTheFlag() != -1) {
                     endMatch(players[whichTeamHasTheFlag()], players[1 - whichTeamHasTheFlag()]);
+                    return;
                 }
         } else if (goalMode == GoalMode.GATHER_FLAG) {
             for (int i = 0; i < 2; i++)
