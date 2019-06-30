@@ -28,10 +28,10 @@ class CardView {
         if (ret != null) {
             items.getChildren().add(ret);
             ret.setOnMouseClicked(event -> {
-                if (shop){
+                if (shop) {
                     selectCard(card);
                     VoicePlay.buttonPlay();
-                }else{
+                } else {
                     CollectionTest.getInstance().setSelectedCard(card);
                 }
             });
@@ -40,7 +40,7 @@ class CardView {
         }
     }
 
-    private static Group collectionCardGroup(Card card){
+    private static Group collectionCardGroup(Card card) {
         if (card instanceof Attacker) {
             Group ret = new Group();
             try {
@@ -143,13 +143,21 @@ class CardView {
                 ImageView imageView = new ImageView(new Image(new FileInputStream
                         ("src\\assets\\cards\\shop_background.png")));
 
-                ImageView image;
+                ImageView image = new ImageView();
                 if (card instanceof Hero) {
-                    image = new ImageView(new Image(new FileInputStream
-                            ("src\\assets\\cards\\hero\\" + card.getName() + ".png")));
+                    try {
+                        image = new ImageView(new Image(new FileInputStream
+                                ("src\\assets\\cards\\hero\\" + card.getName() + ".png")));
+                    } catch (IOException ex) {
+
+                    }
                 } else {
-                    image = new ImageView(new Image(new FileInputStream
-                            ("src\\assets\\cards\\minion\\" + card.getName() + ".png")));
+                    try {
+                        image = new ImageView(new Image(new FileInputStream
+                                ("src\\assets\\cards\\minion\\" + card.getName() + ".png")));
+                    } catch (IOException ex) {
+
+                    }
                 }
                 image.relocate(0, -50);
 
