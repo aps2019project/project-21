@@ -30,7 +30,6 @@ public class CustomCardView {
         View.getInstance().setScene(scene);
     }
 
-
     private Group root = new Group();
     private Scene scene = new Scene(root, 1536, 801.59);
     private Label back = new Label("BACK");
