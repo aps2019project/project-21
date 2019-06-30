@@ -3,7 +3,6 @@ package view;
 import controller.menus.AccountMenu;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
-import javafx.scene.ImageCursor;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,7 +17,6 @@ import javafx.scene.text.Font;
 import models.Player;
 
 import java.io.FileInputStream;
-import java.io.IOException;
 
 public class MainMenuView {
     private static MainMenuView instance = new MainMenuView();
@@ -201,5 +199,9 @@ public class MainMenuView {
             }
         };
         handleChanges.start();
+    }
+
+    public Scene getScene() {
+        return scene;
     }
 }

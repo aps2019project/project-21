@@ -23,6 +23,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import models.Item.Collectable;
+import models.Item.Flag;
 import models.Player;
 import models.card.*;
 import models.match.Match;
@@ -36,6 +37,11 @@ import java.util.Map;
 public class BattleView {
     private static final int TILE_SIZE = 70;
     private static final int VALLEY_SIZE = 4;
+    private static BattleView currentBattleView;
+
+    {
+        currentBattleView = this;
+    }
 
     private Label hp1 = new Label();
     private Label hp2 = new Label();
@@ -57,6 +63,7 @@ public class BattleView {
     private Button graveyard = new Button("GRAVEYARD");
     private Label cooldown = new Label();
     private Group collectables = new Group();
+    private Group flags = new Group();
 
     public void run() {
         View.getInstance().setScene(scene);
@@ -80,7 +87,7 @@ public class BattleView {
 
 
     private void drawTable() {
-        table.getChildren().add(collectables);
+        table.getChildren().addAll(collectables, flags);
         table.relocate(450, 240);
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 9; j++) {
@@ -93,6 +100,7 @@ public class BattleView {
         }
         drawAttackers();
         drawCollectables();
+        drawFlags();
         table.getChildren().add(groundedAttackers);
     }
 
@@ -166,16 +174,16 @@ public class BattleView {
 
     public void updateAttackers() {
         try {
-            boolean one = match.getPlayersMatchInfo()[0].getHero().getHP() < 1;
+//            boolean one = match.getPlayersMatchInfo()[0].getHero().getHP() < 1;
         } catch (Exception ex) {
-            View.getInstance().popup(match.getPlayers()[1].getUsername() + " win!");
-            View.getInstance().back();
+//            View.getInstance().popup(match.getPlayers()[1].getUsername() + " win!");
+//            View.getInstance().back();
         }
         try {
-            boolean two = match.getPlayersMatchInfo()[1].getHero().getHP() < 1;
+//            boolean two = match.getPlayersMatchInfo()[1].getHero().getHP() < 1;
         } catch (Exception ex) {
-            View.getInstance().popup(match.getPlayers()[0].getUsername() + " win!");
-            View.getInstance().back();
+//            View.getInstance().popup(match.getPlayers()[0].getUsername() + " win!");
+//            View.getInstance().back();
         } finally {
             hp1.setText(Integer.toString(match.getPlayersMatchInfo()[0].getHero().getHP()));
             hp2.setText(Integer.toString(match.getPlayersMatchInfo()[1].getHero().getHP()));
@@ -190,19 +198,38 @@ public class BattleView {
                 System.out.println("\n");
             }
         }
+    }
 
+    public void drawFlags() {
+        flags.getChildren().clear();
+        for (int i = 0; i < 5; i++)
+            for (int j = 0; j < 9; j++) {
+                Flag f = match.getBattlefield().getCell(i, j).getFlag();
+                if (f != null) {
+                    drawFlag(i, j);
+                }
+            }
+    }
+
+    private void drawFlag(int x, int y) {
+        Rectangle rectangle = cells[x][y];
+        try {
+            ImageView flag = new ImageView(new Image(new FileInputStream("src/assets/gifs/flag.gif")));
+            flag.relocate(rectangle.getLayoutX() + 10, rectangle.getLayoutY());
+            flags.getChildren().add(flag);
+        } catch (IOException e) {
+            View.printThrowable(e);
+        }
     }
 
     public void drawCollectables() {
         collectables.getChildren().clear();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++)
             for (int j = 0; j < 9; j++) {
                 Collectable c = match.getBattlefield().getCell(i, j).getCollectable();
-                if (c != null) {
+                if (c != null)
                     drawCollectable(i, j);
-                }
             }
-        }
     }
 
     private void drawCollectable(int x, int y) {

@@ -73,7 +73,7 @@ public class View {
         return primaryStage;
     }
 
-    void setScene(Scene scene) {
+    public void setScene(Scene scene) {
         this.primaryStage.setScene(scene);
         this.scenes.push(scene);
         try {
@@ -85,7 +85,7 @@ public class View {
         }
     }
 
-    void back() {
+    public void back() {
         scenes.pop();
         primaryStage.setScene(scenes.peek());
     }
@@ -574,8 +574,7 @@ public class View {
     }
 
     public void showMatchResults(Match match) {
-        System.out.println("Player " + match.getWinner().getUsername() + " won " + match.getLoser().getUsername() + ".");
-        System.out.println("enter end game to go back to main menu.");
+        popup("Player " + match.getWinner().getUsername() + " won " + match.getLoser().getUsername() + ".");
     }
 
     public void showMatchHistory(Player player) {

@@ -184,7 +184,7 @@ public class CardMaker {
             YaGsonBuilder yaGsonBuilder = new YaGsonBuilder();
             yaGsonBuilder.serializeNulls();
 
-            YaGson yaGson = yaGsonBuilder.setPrettyPrinting().create();
+            YaGson yaGson = yaGsonBuilder.setPrettyPrinting().serializeSpecialFloatingPointValues().create();
 
             yaGson.toJson(object, isr);
         } catch (IOException e) {

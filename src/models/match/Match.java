@@ -1,7 +1,6 @@
 package models.match;
 
 import controller.InputScanner;
-import controller.menus.MenuManager;
 import javafx.animation.TranslateTransition;
 import models.AIPlayer;
 import models.Item.Collectable;
@@ -9,6 +8,7 @@ import models.Item.Flag;
 import models.Player;
 import models.card.*;
 import view.BattleView;
+import view.MainMenuView;
 import view.Message;
 import view.View;
 
@@ -167,6 +167,7 @@ public class Match {
         selectedCard = null;
         System.out.println("RETURN 0");
         battleView.drawCollectables();
+        battleView.drawFlags();
         return 0;
     }
 
@@ -594,12 +595,7 @@ public class Match {
         winner.addDrake(getMatchWinningPrize());
         saveMatchResults(winner, loser);
         showMatchResults();
-        String endGame;
-        do {
-            endGame = InputScanner.nextLine();
-        } while (!endGame.equalsIgnoreCase("end game"));
-
-        MenuManager.getInstance().gotoMainMenu();
+        View.getInstance().setScene(MainMenuView.getInstance().getScene());
     }
 
     private int getMatchWinningPrize() {
@@ -806,6 +802,7 @@ public class Match {
 
     private void prepareNextRound() {
         battleView.drawCollectables();
+        battleView.drawFlags();
         increaseFlagHoldingTime();
         applyEffects();
         setCanMove();

@@ -97,10 +97,13 @@ public class MainMenu extends Menu {
         }
         if (num == 1)
             goalMode = GoalMode.KILL_HERO;
-        else if (num == 2)
+        else if (num == 2) {
             goalMode = GoalMode.HOLD_FLAG;
-        else
+            flagCount = 1;
+        } else {
             goalMode = GoalMode.GATHER_FLAG;
+            flagCount = 3;
+        }
         second = aiPlayer;
         gameMode = GameMode.SINGLE_PLAYER;
         gameType = GameType.STORY;
