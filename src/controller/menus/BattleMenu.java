@@ -16,7 +16,7 @@ public class BattleMenu extends Menu {
     private BattleMenu() {
     }
 
-    private void showGameInfo() {
+    public void showGameInfo() {
         view.showGameInfo();
     }
 

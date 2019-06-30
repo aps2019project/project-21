@@ -105,7 +105,7 @@ public class View {
         popup.setResizable(false);
         Label label = new Label(message);
         Button ok = new Button("OK");
-        label.relocate(100, 50);
+        label.relocate(10, 50);
         ok.relocate(100, 100);
         Group group = new Group();
         group.getChildren().addAll(label, ok);
@@ -448,7 +448,8 @@ public class View {
             for (PlayerMatchInfo p : match.getPlayersMatchInfo())
                 message += p.getHero().getCardIDInGame() + "'s hp: " + p.getHero().getHP();
         } else if (match.getGoalMode() == GoalMode.HOLD_FLAG) {
-            message += match.whoHasFlag().getName();
+            if (match.whoHasFlag() != null)
+                message += match.whoHasFlag().getName();
             message += "flags position: (" + match.getFlags().get(0).getCurrentCell().getX() + ", "
                     + match.getFlags().get(0).getCurrentCell().getY() + ")";
         } else if (match.getGoalMode() == GoalMode.GATHER_FLAG) {

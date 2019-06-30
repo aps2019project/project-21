@@ -28,8 +28,12 @@ class CardView {
         if (ret != null) {
             items.getChildren().add(ret);
             ret.setOnMouseClicked(event -> {
-                selectCard(card);
-                VoicePlay.buttonPlay();
+                if (shop){
+                    selectCard(card);
+                    VoicePlay.buttonPlay();
+                }else{
+                    CollectionTest.getInstance().setSelectedCard(card);
+                }
             });
         } else {
             System.out.print(card.getName());
@@ -42,7 +46,6 @@ class CardView {
             try {
                 ImageView imageView = new ImageView(new Image(new FileInputStream
                         ("src\\assets\\cards\\shop_background.png")));
-
                 ImageView image;
                 if (card instanceof Hero) {
                     image = new ImageView(new Image(new FileInputStream

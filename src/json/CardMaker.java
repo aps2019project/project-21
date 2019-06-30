@@ -172,6 +172,8 @@ public class CardMaker {
             name = ((Card) object).getName();
         else if (object instanceof Player)
             name = ((Player) object).getUsername();
+        else if (object instanceof Deck)
+            name = ((Deck) object).getName();
         String path = "src//json//" + folder + "//"
                 + name.toLowerCase().replaceAll("\\s+", "_") + ".json";
 

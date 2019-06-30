@@ -70,16 +70,13 @@ public class ShopView {
         this.selectedId = selectedId;
     }
 
-
     void setSelectedName(String selectedName) {
         this.selectedName = selectedName;
     }
 
-
     int getButtonSelect() {
         return buttonSelect;
     }
-
 
     void run() {
         View.getInstance().setScene(scene);
@@ -147,7 +144,6 @@ public class ShopView {
         left.setScaleX(2);
         left.relocate(-20, 0);
 
-
         back.setTextFill(Color.WHITE);
         myCollection.setTextFill(Color.WHITE);
         shop.setTextFill(Color.WHITE);
@@ -158,7 +154,6 @@ public class ShopView {
         drake.relocate(50, 50);
         drake.setTextFill(Color.WHITE);
         drake.setScaleX(1.5);
-
 
         minion.relocate(50, 322);
         minion.setTextFill(Color.WHITE);
@@ -318,7 +313,6 @@ public class ShopView {
         }
     }
 
-
     private void setOnActions() {
         button[2].setOnMouseClicked(event -> {
             AccountMenu.getInstance().save();
@@ -333,7 +327,6 @@ public class ShopView {
             View.getInstance().back();
             VoicePlay.setThisMenu("main menu");
         });
-
 
         minion.setOnMouseClicked(event -> {
             if (cardType != 1) {
@@ -595,7 +588,6 @@ public class ShopView {
                     searchedCard.relocate(1000, 100);
 
                     root.getChildren().addAll(searchedCard);
-
                 }
             } else {
                 Card message = ShopMenu.searchCollection(name);
@@ -610,7 +602,6 @@ public class ShopView {
 
                     searchedCard.relocate(1000, 100);
                     root.getChildren().addAll(searchedCard);
-
                 }
             }
         });
@@ -632,7 +623,6 @@ public class ShopView {
                     searchedCard.relocate(1000, 100);
 
                     root.getChildren().addAll(searchedCard);
-
                 }
             } else {
                 Card message = ShopMenu.searchCollection(name);
@@ -647,7 +637,6 @@ public class ShopView {
 
                     searchedCard.relocate(1000, 100);
                     root.getChildren().addAll(searchedCard);
-
                 }
             }
         });
@@ -664,8 +653,6 @@ public class ShopView {
                     if (mes.equals("Buy successful")) {
                         drake.setText("DRAKE : " + Player.getCurrentPlayer().getDrake());
                     }
-
-
                 }
             } else {
                 if (selectedId == -1) {
@@ -677,7 +664,6 @@ public class ShopView {
                         drake.setText("DRAKE : " + Player.getCurrentPlayer().getDrake());
                     }
                     showCards();
-
                 }
             }
             root.getChildren().remove(searchedCard);
@@ -697,8 +683,6 @@ public class ShopView {
                     if (mes.equals("Buy successful")) {
                         drake.setText("DRAKE : " + Player.getCurrentPlayer().getDrake());
                     }
-
-
                 }
             } else {
                 if (selectedId == -1) {
@@ -720,7 +704,6 @@ public class ShopView {
 
         volume.setOnMouseClicked(event -> VolumeController.getInstance().run());
     }
-
 
     void setSearchedCard(Group searchedCard) {
         this.searchedCard = searchedCard;
@@ -775,6 +758,4 @@ public class ShopView {
             }
         }
     }
-
-
 }

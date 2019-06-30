@@ -288,7 +288,7 @@ public class BattleView {
         you.setFont(Font.font(20));
         you.relocate(290, 85);
         Label opponent = new Label("OPPONENT");
-        opponent.setTextFill(Color.WHITE);
+        opponent.setTextFill(Color.BLACK);
         opponent.setFont(Font.font(20));
         opponent.relocate(1130, 85);
         hub.getChildren().addAll(you, opponent);
@@ -440,11 +440,13 @@ public class BattleView {
             pause.close();
             View.getInstance().back();
         });
+        Button gameInfo = new Button("GAME INFO");
+        gameInfo.setOnAction(event -> BattleMenu.getInstance().showGameInfo());
         VBox vBox = new VBox();
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(30);
         vBox.setStyle("-fx-background-color: transparent");
-        vBox.getChildren().addAll(resume, back);
+        vBox.getChildren().addAll(resume, gameInfo, back);
         Scene scene = new Scene(vBox, 303, 150);
         scene.getStylesheets().add("view/stylesheets/pause_menu.css");
         scene.setFill(new Color(0, 0, 0, 0.6));

@@ -17,12 +17,12 @@ public class CustomCardView {
         return instance;
     }
 
-    public void run(){
+    public void run() {
         View.getInstance().setScene(scene);
     }
 
     private Group root = new Group();
-    private Scene scene = new Scene(root,1536, 801.59);
+    private Scene scene = new Scene(root, 1536, 801.59);
     private Label back = new Label("BACK");
     private Label ok = new Label("OK");
     private Label name = new Label("Name");
@@ -34,10 +34,10 @@ public class CustomCardView {
 
     {
         try {
-            volume.setImage(new Image(new FileInputStream("src\\assets\\volume.png")));
+            volume.setImage(new Image(new FileInputStream("src/assets/volume.png")));
             volume.setScaleY(0.1);
             volume.setScaleX(0.1);
-        } catch (IOException ex){
+        } catch (IOException ex) {
             View.printThrowable(ex);
         }
         volume.relocate(1000, 450);

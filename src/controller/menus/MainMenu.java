@@ -25,7 +25,6 @@ public class MainMenu extends Menu {
     private MainMenu() {
     }
 
-
     public boolean chooseOpp(String name) {
         second = Player.getPlayerByUsername(name);
         if (second == null) {
@@ -96,8 +95,13 @@ public class MainMenu extends Menu {
             View.getInstance().printMessage(Message.AIPLAYER_IS_NULL);
             return;
         }
+        if (num == 1)
+            goalMode = GoalMode.KILL_HERO;
+        else if (num == 2)
+            goalMode = GoalMode.HOLD_FLAG;
+        else
+            goalMode = GoalMode.GATHER_FLAG;
         second = aiPlayer;
-        goalMode = GoalMode.KILL_HERO;
         gameMode = GameMode.SINGLE_PLAYER;
         gameType = GameType.STORY;
         startMatch();

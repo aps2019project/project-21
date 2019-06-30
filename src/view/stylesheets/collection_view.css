@@ -1,0 +1,19 @@
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.deck:hover {
+    -fx-text-fill: rgba(255, 114, 0, 0.53);
+}
+
+.button{
+    -fx-background-color: transparent;
+}
+
+.button:hover {
+    -fx-text-fill: red;
+}
