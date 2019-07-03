@@ -31,8 +31,8 @@ class CardView {
                 if (shop) {
                     selectCard(card);
                     VoicePlay.buttonPlay();
+                    CollectionView.getInstance().setSelectedCard(card);
                 } else {
-                    CollectionTest.getInstance().setSelectedCard(card);
                 }
             });
         } else {
@@ -46,7 +46,7 @@ class CardView {
             try {
                 ImageView imageView = new ImageView(new Image(new FileInputStream
                         ("src\\assets\\cards\\shop_background.png")));
-                ImageView image;
+                ImageView image = new ImageView();
                 if (card instanceof Hero) {
                     image = new ImageView(new Image(new FileInputStream
                             ("src\\assets\\cards\\hero\\" + card.getName() + ".png")));

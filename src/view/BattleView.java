@@ -37,11 +37,6 @@ import java.util.Map;
 public class BattleView {
     private static final int TILE_SIZE = 70;
     private static final int VALLEY_SIZE = 4;
-    private static BattleView currentBattleView;
-
-    {
-        currentBattleView = this;
-    }
 
     private Label hp1 = new Label();
     private Label hp2 = new Label();
@@ -596,9 +591,7 @@ public class BattleView {
     private void graveyard() {
         Button back = new Button("BACK");
         back.setTextFill(Color.BLACK);
-        back.setOnAction(event -> {
-            View.getInstance().setScene(scene);
-        });
+        back.setOnAction(event -> View.getInstance().back());
         Group root = new Group();
         ScrollPane on = new ScrollPane();
         TilePane t1 = new TilePane();

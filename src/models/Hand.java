@@ -24,7 +24,9 @@ public class Hand {
     public void pushToHandFromDeck(Deck deck) {
         if (this.cards.size() >= 5)
             return;
-        this.cards.add(deck.pop());
+        Card card = deck.pop();
+        if (card != null)
+            this.cards.add(card);
     }
 
     public void remove(Card Card) {

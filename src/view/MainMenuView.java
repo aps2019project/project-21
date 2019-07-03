@@ -123,7 +123,7 @@ public class MainMenuView {
         save.setOnAction(event -> AccountMenu.getInstance().save());
         hesoyam.setOnAction(event -> AccountMenu.getInstance().hesoyam());
         exit.setOnAction(event -> View.getInstance().exit());
-        collection.setOnAction(event -> CollectionTest.getInstance().run());
+        collection.setOnAction(event -> CollectionView.getInstance().run());
         shop.setOnAction(event -> {
             ShopView.getInstance().run();
             VoicePlay.setThisMenu("shop");

@@ -35,6 +35,8 @@ public class Deck {
     }
 
     Card pop() {
+        if (cards.isEmpty())
+            return null;
         return cards.remove(0);
     }
 
