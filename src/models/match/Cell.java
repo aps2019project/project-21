@@ -5,10 +5,11 @@ import models.Item.Flag;
 import models.card.Attacker;
 import models.card.Effect;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cell {
+public class Cell implements Serializable {
 
     private int x;
     private int y;
@@ -73,8 +74,8 @@ public class Cell {
     boolean hasCollectable() {
         return this.collectable != null;
     }
-    
-     public Attacker getCurrentAttacker() {
+
+    public Attacker getCurrentAttacker() {
         return currentAttacker;
     }
 
@@ -89,7 +90,7 @@ public class Cell {
     public int getY() {
         return y;
     }
-    
+
     //  TODO : add some parameters to this. You know!
 
     public ArrayList<Effect> getEffects() {
@@ -108,7 +109,7 @@ public class Cell {
         return x;
     }
 
-    public void dieAttacker(){
+    public void dieAttacker() {
         currentAttacker = null;
         effects = new ArrayList<>();
     }

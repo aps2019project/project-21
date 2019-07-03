@@ -4,6 +4,7 @@ import models.Player;
 import models.match.Cell;
 import models.match.Match;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 

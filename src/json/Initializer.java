@@ -18,7 +18,7 @@ import java.util.List;
 public class Initializer {
     public static void main() {
         try {
-            Player.addPlayer(initPlayers());
+//            Player.addPlayer(initPlayers());
             AIPlayer.addAIPlayer(initAIPlayers());
             Hero.addHero(initHeroes());
             Minion.addMinion(initMinions());
@@ -100,7 +100,7 @@ public class Initializer {
         return collectables;
     }
 
-    private static List<Player> initPlayers() throws IOException {
+    public static List<Player> initPlayers() throws IOException {
         List<Player> players = new ArrayList<>();
         File path = new File("src//json//accounts");
         File[] files = path.listFiles();

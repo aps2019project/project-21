@@ -11,12 +11,13 @@ import view.MainMenuView;
 import view.Message;
 import view.View;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Match {
+public class Match implements Serializable {
     private static Match currentMatch;
     private static final int MOVE_RANGE = 2;
     private static final int DEFAULT_WINNING_PRIZE = 1000;

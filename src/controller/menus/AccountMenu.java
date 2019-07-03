@@ -1,6 +1,9 @@
 package controller.menus;
 
 import models.Player;
+import network.Client;
+import network.message.CreateAccountMessage;
+import network.message.LoginMessage;
 import view.Message;
 
 public class AccountMenu extends Menu {
@@ -14,12 +17,8 @@ public class AccountMenu extends Menu {
     }
 
     public void login(String username, String password) {
-        if (!Player.hasThisPlayer(username)) {
-            view.printMessage(Message.INVALID_USERNAME);
-            return;
-        }
-        if (!Player.login(username, password))
-            view.printMessage(Message.LOGIN_FAILED);
+        LoginMessage loginMessage = new LoginMessage(username, password);
+        Client.write(loginMessage);
     }
 
     public void createAccount(String username, String password) {
@@ -35,15 +34,15 @@ public class AccountMenu extends Menu {
             view.printMessage(Message.PASSWORD_EMPTY);
             return;
         }
-        if (Player.hasThisPlayer(username)) {
-            view.printMessage(Message.USERNAME_IS_TAKEN);
-            return;
-        }
-        Player.createAccount(username, password);
+        CreateAccountMessage createAccountMessage = new CreateAccountMessage(username, password);
+        Client.write(createAccountMessage);
     }
 
     public void logout() {
+        network.message.Message logoutMessage = network.message.Message.makeLogout();
+        Client.write(logoutMessage);
         Player.logout();
+//        Player.logout();
     }
 
     public void save() {

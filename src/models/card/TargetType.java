@@ -2,7 +2,9 @@ package models.card;
 
 import models.card.target_enums.*;
 
-public class TargetType {
+import java.io.Serializable;
+
+public class TargetType  implements Serializable {
     private RandomOrNot randomOrNot = RandomOrNot.NOT_RANDOM;
     private TargetAttackerRange targetAttackerRange = TargetAttackerRange.ALL_THREE;
     private CellType cellType = CellType.NONE;

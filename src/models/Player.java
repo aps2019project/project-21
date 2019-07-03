@@ -5,31 +5,40 @@ import models.Item.Usable;
 import models.card.Card;
 import models.match.Match;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player {
+public class Player implements Serializable {
+    private static int loginCount = 0;
     private static List<Player> players = new ArrayList<>();
     private static Player currentPlayer;
     private String username = "";
     private String password = "";
     private Collection collection = new Collection();
     private int drake;
-    private List<Match> matchHistory = new ArrayList<>();
+    private transient List<Match> matchHistory = new ArrayList<>();
     private int wins;
     private int losses;
-    private int cardCurrentID;
-
-    public int getWins() {
-        return wins;
-    }
+    private String authToken;
 
     public Player(String username, String password) {
         this.wins = 0;
         this.drake = 15000;
         this.username = username;
         this.password = password;
-        this.cardCurrentID = 0;
+    }
+
+    private void setAuthToken() {
+        authToken = Integer.toString(loginCount++);
+    }
+
+    public String getAuthToken() {
+        return authToken;
+    }
+
+    public int getWins() {
+        return wins;
     }
 
     public Player() {
@@ -75,11 +84,27 @@ public class Player {
         return matchHistory;
     }
 
+    private static Player getPlayerByAuthToken(String authToken) {
+        if (authToken == null)
+            return null;
+        for (Player player : players)
+            if (authToken.equals(player.authToken))
+                return player;
+        return null;
+    }
+
+    public static void logout(String authToken) {
+        Player player = getPlayerByAuthToken(authToken);
+        if (player != null)
+            player.authToken = null;
+        logout();
+    }
+
     public static void logout() {
         currentPlayer = null;
     }
 
-    private static void setCurrentPlayer(Player player) {
+    public static void setCurrentPlayer(Player player) {
         currentPlayer = player;
     }
 
@@ -108,11 +133,12 @@ public class Player {
             return false;
         if (!player.password.equals(password))
             return false;
+        player.setAuthToken();
         setCurrentPlayer(player);
         return true;
     }
 
-    private static void addPlayer(Player player) {
+    public static void addPlayer(Player player) {
         if (player == null)
             return;
         players.add(player);

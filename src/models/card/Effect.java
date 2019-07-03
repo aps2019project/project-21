@@ -4,7 +4,9 @@ import models.Player;
 import models.match.Cell;
 import models.match.Match;
 
-public class Effect {
+import java.io.Serializable;
+
+public class Effect  implements Serializable {
     protected Cell cell;
     protected Attacker attacker;
     protected Player player;

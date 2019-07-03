@@ -189,9 +189,8 @@ public class BattleView {
         for (int i = 0; i < 5; i++)
             for (int j = 0; j < 9; j++) {
                 Flag f = match.getBattlefield().getCell(i, j).getFlag();
-                if (f != null) {
+                if (f != null)
                     drawFlag(i, j);
-                }
             }
     }
 

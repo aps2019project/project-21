@@ -1,10 +1,11 @@
 package models.match;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Battlefield {
+public class Battlefield implements Serializable {
     private int width;
     private int length;
     private Cell[][] cells;

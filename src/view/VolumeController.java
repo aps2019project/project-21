@@ -50,7 +50,6 @@ public class VolumeController {
         );
 
         stage.show();
-
     }
 
     private void setBackground() {
@@ -71,15 +70,12 @@ public class VolumeController {
 
         mediaPlayer.volumeProperty().bindBidirectional(volumeSlider.valueProperty());
 
-
-
         VBox controls = new VBox(5);
         controls.getChildren().addAll(
                 volumeSlider
         );
         controls.setAlignment(Pos.CENTER);
         VBox.setVgrow(volumeSlider, Priority.ALWAYS);
-
 
         return controls;
     }

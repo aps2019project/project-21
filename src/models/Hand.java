@@ -3,10 +3,11 @@ package models;
 import models.card.Attacker;
 import models.card.Card;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Hand {
+public class Hand  implements Serializable {
     private static final int HAND_CAPACITY = 5;
 
     private List<Card> cards = new ArrayList<>();

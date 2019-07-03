@@ -7,10 +7,11 @@ import models.Item.Collectable;
 import models.Player;
 import models.card.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerMatchInfo {
+public class PlayerMatchInfo implements Serializable {
     private static final int MAX_MANA = 9;
 
     private int mp = 7;

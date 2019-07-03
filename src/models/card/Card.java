@@ -6,10 +6,11 @@ import models.Player;
 import models.match.Cell;
 import models.match.Match;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Card {
+public class Card  implements Serializable {
     private static int cardCount = 100;
     protected String name;
     protected int id;

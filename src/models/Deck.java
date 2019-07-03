@@ -7,11 +7,12 @@ import models.card.Hero;
 import models.card.Minion;
 import models.card.Spell;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Deck {
+public class Deck  implements Serializable {
     private static final int MAX_NUM_CARDS = 20; // minions and spells
     private String name;
     private List<Card> cards = new ArrayList<>();  // minions and spells

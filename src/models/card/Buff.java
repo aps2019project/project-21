@@ -2,7 +2,9 @@ package models.card;
 
 import models.match.Cell;
 
-public class Buff extends Effect {
+import java.io.Serializable;
+
+public class Buff extends Effect  implements Serializable {
     protected int duration;
     protected BuffMode buffMode;
 

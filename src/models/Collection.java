@@ -10,10 +10,11 @@ import models.card.Spell;
 import view.View;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Collection {
+public class Collection implements Serializable {
     private List<Deck> decks = new ArrayList<>();
     private Deck mainDeck;
 
