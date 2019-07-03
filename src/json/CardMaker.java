@@ -7,7 +7,10 @@ import models.Deck;
 import models.Item.Collectable;
 import models.Item.Usable;
 import models.Player;
-import models.card.*;
+import models.card.Card;
+import models.card.Hero;
+import models.card.Minion;
+import models.card.Spell;
 import view.View;
 
 import java.io.FileOutputStream;
@@ -16,8 +19,6 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CardMaker {
     public static void main(String[] args) throws Exception {
@@ -26,52 +27,7 @@ public class CardMaker {
         SpellMaker.main();
         UsableMaker.main();
         CollectableMaker.main();
-//        AIPlayerMaker.main();
-    }
-
-    private static void usableMaker() throws IOException {
-//        Effect effect = new GiveEffect(12, EffectName.HOLY);
-//        Usable usable = new Usable("Kamane Demool", 30000, TargetType.NOT_MELEE_HERO, effect,
-//                "disarms the enemy for one turn on attack.(only for ranged and hybrid hero.)");
-//        saveToFile(usable);
-    }
-
-    private static void collectableMaker() throws IOException {
-
-    }
-
-    private static void heroMaker() throws IOException {
-//        Effect effect = new PowerHP(Integer.MAX_VALUE, 4, PowerMode.AP);
-//        Spell specialPower = new Spell("Dive Sefid's Spell", 0, 1,
-//                TargetType.HIMSELF, effect, "casts power buff 4 on himself forever");
-//        Hero hero = new Hero("Dive Sefid", 8000, 50, 4, -1, AttackMode.MELEE, specialPower, 2);
-//        saveToFile(hero);
-    }
-
-    private static void spellMaker() throws IOException {
-        List<Effect> effects = new ArrayList<>();
-        //effects.add(new PowerHP(Integer.MAX_VALUE, 8, PowerMode.AP, ApplyType.ON_ALLY));
-        //effects.add(new Disarm(Integer.MAX_VALUE, ApplyType.ON_OPP));
-        //effects.add(new Effect(ApplyType.ON_BOTH, EffectType.POSITIVE_DISPEL));
-        //effects.add(new DecreaseHP(8,ApplyType.ON_OPP_HERO));
-        //effects.add(new Flame(2));
-        //effects.add(new Poison(4, ApplyType.ON_OPP));
-        //effects.add(new WeaknessHP(Integer.MAX_VALUE, Integer.MAX_VALUE, WeaknessMode.AP, ApplyType.ON_OPP));
-//        effects.add(new Stun(2));
-//        TargetType targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
-//                CellType.SINGLE_CELL, HeroOrMinion.BOTH, OppOrAlly.OPP);
-//        Spell spell = new Spell("Shock", 1200, 1, targetType, effects,
-//                "stun an opp");
-//        saveToFile(spell);
-    }
-
-    private static void minionMaker() throws IOException {
-//        Effect effect = new Stun(1);
-//        Spell specialPower = new Spell("shamshirzane fars spell", 0, 0,
-//                TargetType.SINGLE_OPP, effect, "Stuns the attacked opp for one turn.");
-//        Minion minion = new Minion("Shamshirzane Fars", 400, 2, 6, 4,
-//                0, AttackMode.MELEE, specialPower);
-//        saveToFile(minion);
+        AIPlayerMaker.main();
     }
 
     static Hero heroReader(String path) {

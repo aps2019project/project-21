@@ -32,7 +32,9 @@ import models.match.PlayerMatchInfo;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class BattleView {
     private static final int TILE_SIZE = 70;
@@ -149,7 +151,7 @@ public class BattleView {
                             }
                             deselect();
                         } else {
-                            if (BattleMenu.getInstance().selectAttacker(getAttacker(u, v))) {
+                            if (getAttacker(u, v) != null && BattleMenu.getInstance().selectAttacker(getAttacker(u, v).getCardIDInGame())) {
                                 if (selectedRect != null)
                                     selectedRect.setStyle("-fx-fill: rgba(0, 0, 0, 0.1)");
                                 rect.setStyle("-fx-fill: rgba(255, 255, 0, 0.2)");
@@ -166,31 +168,19 @@ public class BattleView {
     }
 
     public void updateAttackers() {
-        try {
-//            boolean one = match.getPlayersMatchInfo()[0].getHero().getHP() < 1;
-        } catch (Exception ex) {
-//            View.getInstance().popup(match.getPlayers()[1].getUsername() + " win!");
-//            View.getInstance().back();
-        }
-        try {
-//            boolean two = match.getPlayersMatchInfo()[1].getHero().getHP() < 1;
-        } catch (Exception ex) {
-//            View.getInstance().popup(match.getPlayers()[0].getUsername() + " win!");
-//            View.getInstance().back();
-        } finally {
-            hp1.setText(Integer.toString(match.getPlayersMatchInfo()[0].getHero().getHP()));
-            hp2.setText(Integer.toString(match.getPlayersMatchInfo()[1].getHero().getHP()));
-            for (Attacker attacker : attackers.keySet()) {
-                Container container = attackers.get(attacker);
-                if (attacker.getHP() < 1) {
-                    groundedAttackers.getChildren().removeAll(container.getGroup());
-                    attackers.remove(attacker);
-                }
-                container.getAp().setText(Integer.toString(attacker.getAP()));
-                container.getHp().setText(Integer.toString(attacker.getHP()));
-                System.out.println(attacker.getName() + " " + attacker.getHP());
-                System.out.println("\n");
+        hp1.setText(Integer.toString(match.getPlayersMatchInfo()[0].getHero().getHP()));
+        hp2.setText(Integer.toString(match.getPlayersMatchInfo()[1].getHero().getHP()));
+        Set<Attacker> copy = new HashSet<>(attackers.keySet());
+        for (Attacker attacker : copy) {
+            Container container = attackers.get(attacker);
+            if (attacker.getHP() < 1) {
+                groundedAttackers.getChildren().removeAll(container.getGroup());
+                attackers.remove(attacker);
             }
+            container.getAp().setText(Integer.toString(attacker.getAP()));
+            container.getHp().setText(Integer.toString(attacker.getHP()));
+            System.out.println(attacker.getName() + " " + attacker.getHP());
+            System.out.println("\n");
         }
     }
 

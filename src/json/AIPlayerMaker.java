@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AIPlayerMaker {
-    public static void main(String[] a) {
+    public static void main() {
         // ---------- 1 ----------
         Hero hero = CardMaker.heroReader("src//json//heroes//dive_sefid.json");
         Usable usable = CardMaker.usableReader("src//json//usables//taje_danaee.json");
@@ -135,6 +135,5 @@ public class AIPlayerMaker {
         deck = new Deck("ai3Deck", cards, usable, hero);
         aiPlayer = new AIPlayer(3, deck, 1500);
         CardMaker.saveToFile(aiPlayer);
-
     }
 }

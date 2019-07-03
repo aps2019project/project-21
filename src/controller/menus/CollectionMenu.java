@@ -1,6 +1,5 @@
 package controller.menus;
 
-import json.CardMaker;
 import models.Deck;
 import models.Item.Usable;
 import models.Player;
@@ -8,8 +7,6 @@ import models.card.Card;
 import models.card.Hero;
 import view.Message;
 import view.View;
-
-import java.util.List;
 
 public class CollectionMenu extends Menu {
     private static CollectionMenu instance = new CollectionMenu();
@@ -31,22 +28,6 @@ public class CollectionMenu extends Menu {
         if (!Player.hasAnyoneLoggedIn())
             return;
         Player.getCurrentPlayer().importDeck(filename);
-    }
-
-    private void search() {
-        String name = request.getCommandArguments().get(0);
-        List<Card> cards = Card.getAllCardByName(name,
-                Player.getCurrentPlayer().getCollection().getCards());
-        if (cards.isEmpty()) {
-            view.printMessage(Message.NO_CARD_WITH_THIS_NAME);
-            return;
-        }
-        for (Card card : cards)
-            System.out.println("collectionID: " + card.getCollectionID());
-    }
-
-    private void save() {
-        CardMaker.saveToFile(Player.getCurrentPlayer());
     }
 
     public void createDeck(String name) {

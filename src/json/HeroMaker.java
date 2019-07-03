@@ -10,7 +10,7 @@ import models.card.target_enums.*;
 import static json.CardMaker.saveToFile;
 
 public class HeroMaker {
-    public static void main() throws Exception {
+    public static void main() {
         // ---------- 1 ----------
         Effect effect = new PowerAP(Integer.MAX_VALUE, 4);
         TargetType targetType = new TargetType(RandomOrNot.NOT_RANDOM, TargetAttackerRange.ALL_THREE,
@@ -118,7 +118,7 @@ public class HeroMaker {
     }
 
     public static void custumHero(String name, int ap, int hp, AttackMode attackMode,
-                                  int range, Spell spell, int cooldown, int cost){
+                                  int range, Spell spell, int cooldown, int cost) {
         Hero hero = new Hero(name, cost, hp, ap, range, attackMode, spell, cooldown);
         saveToFile(hero);
     }

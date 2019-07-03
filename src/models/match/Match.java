@@ -1,6 +1,5 @@
 package models.match;
 
-import controller.InputScanner;
 import javafx.animation.TranslateTransition;
 import models.AIPlayer;
 import models.Item.Collectable;
@@ -18,9 +17,9 @@ import java.util.List;
 import java.util.Random;
 
 public class Match {
+    private static Match currentMatch;
     private static final int MOVE_RANGE = 2;
     private static final int DEFAULT_WINNING_PRIZE = 1000;
-    private static Match currentMatch;
 
     private BattleView battleView;
     private Player[] players = new Player[2];
@@ -557,7 +556,6 @@ public class Match {
                         break;
                     }
         } finally {
-            System.out.println(info[1].getHero().getCurrentCell().getY());
             endTurn();
             View.getInstance().setAIPlaying(false);
         }
@@ -574,7 +572,6 @@ public class Match {
             if (flags.get(0).getHoldingTime() >= 11)
                 if (whichTeamHasTheFlag() != -1) {
                     endMatch(players[whichTeamHasTheFlag()], players[1 - whichTeamHasTheFlag()]);
-                    return;
                 }
         } else if (goalMode == GoalMode.GATHER_FLAG) {
             for (int i = 0; i < 2; i++)
@@ -892,10 +889,7 @@ public class Match {
     }
 
     public void withdraw() {
-        System.out.println("Are you really sure?");
-        String s = InputScanner.nextLine();
-        if (s.equalsIgnoreCase("yes"))
-            endMatch(players[1 - turn], players[turn]);
+        endMatch(players[1 - turn], players[turn]);
     }
 
     public int getTeamOfPlayer(Player player) {

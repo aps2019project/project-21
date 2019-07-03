@@ -46,14 +46,6 @@ public class AccountMenu extends Menu {
         Player.logout();
     }
 
-public void showMatchHistory() {
-        if (!Player.hasAnyoneLoggedIn()) {
-            view.printMessage(Message.YOU_MUST_LOG_IN);
-            return;
-        }
-        view.showMatchHistory(Player.getCurrentPlayer());
-    }
-
     public void save() {
         if (!Player.hasAnyoneLoggedIn()) {
             view.printMessage(Message.YOU_MUST_LOG_IN);
