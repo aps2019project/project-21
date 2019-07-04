@@ -1,11 +1,11 @@
 package network.message;
 
-public class LoginMessage extends Message {
+public class CreateAccountRequest extends Request {
     private String username;
     private String password;
 
-    public LoginMessage(String username, String password) {
-        super.msgType = MessageType.LOGIN;
+    public CreateAccountRequest(String username, String password) {
+        super.reqType = RequestType.CREATE_ACCOUNT;
         this.username = username;
         this.password = password;
     }

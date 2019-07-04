@@ -16,7 +16,6 @@ import models.card.Spell;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-
 class CardView {
     static void showCard(Card card, TilePane items, boolean shop) {
         Group ret;
@@ -46,7 +45,7 @@ class CardView {
             try {
                 ImageView imageView = new ImageView(new Image(new FileInputStream
                         ("src\\assets\\cards\\shop_background.png")));
-                ImageView image = new ImageView();
+                ImageView image;
                 if (card instanceof Hero) {
                     image = new ImageView(new Image(new FileInputStream
                             ("src\\assets\\cards\\hero\\" + card.getName() + ".png")));
@@ -135,7 +134,6 @@ class CardView {
         }
     }
 
-
     static Group shopCardGroup(Card card) {
         if (card instanceof Attacker) {
             Group ret = new Group();
@@ -149,14 +147,14 @@ class CardView {
                         image = new ImageView(new Image(new FileInputStream
                                 ("src\\assets\\cards\\hero\\" + card.getName() + ".png")));
                     } catch (IOException ex) {
-
+                        //
                     }
                 } else {
                     try {
                         image = new ImageView(new Image(new FileInputStream
                                 ("src\\assets\\cards\\minion\\" + card.getName() + ".png")));
                     } catch (IOException ex) {
-
+                        //
                     }
                 }
                 image.relocate(0, -50);
@@ -279,5 +277,4 @@ class CardView {
         }
         return ret.toString();
     }
-
 }

@@ -170,7 +170,7 @@ public class CreateMatchView {
                     if (MainMenu.getInstance().chooseAI(((AIPlayer) player).getAiID()))
                         boxes.push(goalMode);
                 } else if (MainMenu.getInstance().chooseOpp(player.getUsername()))
-                    boxes.push(goalMode);
+                    MainMenu.getInstance().startMatch();
             });
             s.setOnMouseEntered(event -> heroName.setStyle("-fx-text-fill: orange"));
             s.setOnMouseExited(event -> heroName.setStyle("-fx-text-fill: rgba(255, 255, 255, 0.85)"));
@@ -246,7 +246,7 @@ public class CreateMatchView {
         });
         multiplayer.setOnMouseClicked(event -> {
             MainMenu.getInstance().setMultiplayer();
-            boxes.push(chooseOpp);
+            boxes.push(goalMode);
         });
         Group[] groups = {single, multiplayer, story, custom, story1, story2, story3, killHero,
                 holdFlag, gatherFlag};
@@ -262,15 +262,15 @@ public class CreateMatchView {
         }
         killHero.setOnMouseClicked(event -> {
             MainMenu.getInstance().setKillHero();
-            MainMenu.getInstance().startMatch();
+            goalModeAction();
         });
         holdFlag.setOnMouseClicked(event -> {
             MainMenu.getInstance().setHoldFlag(flagCount.getText());
-            MainMenu.getInstance().startMatch();
+            goalModeAction();
         });
         gatherFlag.setOnMouseClicked(event -> {
             MainMenu.getInstance().setGatherFlag(flagCount.getText());
-            MainMenu.getInstance().startMatch();
+            goalModeAction();
         });
         story.setOnMouseClicked(event -> boxes.push(storyMode));
         story1.setOnMouseClicked(event -> MainMenu.getInstance().startStoryMatch(1));
@@ -279,11 +279,18 @@ public class CreateMatchView {
         custom.setOnMouseClicked(event -> boxes.push(customMode));
     }
 
+    private void goalModeAction() {
+        if (boxes.contains(customMode))
+            MainMenu.getInstance().startMatch();
+        else
+            new WaitingForOppView().run();
+    }
+
     private void back() {
         if (boxes.size() <= 1) {
             if (!boxes.isEmpty())
                 boxes.pop();
-            MainMenuView.getInstance().run();
+            View.getInstance().back();
         } else
             root.getChildren().remove(boxes.pop());
     }

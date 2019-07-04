@@ -2,8 +2,9 @@ package controller.menus;
 
 import models.Player;
 import network.Client;
-import network.message.CreateAccountMessage;
-import network.message.LoginMessage;
+import network.message.CreateAccountRequest;
+import network.message.LoginRequest;
+import network.message.Request;
 import view.Message;
 
 public class AccountMenu extends Menu {
@@ -17,7 +18,7 @@ public class AccountMenu extends Menu {
     }
 
     public void login(String username, String password) {
-        LoginMessage loginMessage = new LoginMessage(username, password);
+        LoginRequest loginMessage = new LoginRequest(username, password);
         Client.write(loginMessage);
     }
 
@@ -34,13 +35,13 @@ public class AccountMenu extends Menu {
             view.printMessage(Message.PASSWORD_EMPTY);
             return;
         }
-        CreateAccountMessage createAccountMessage = new CreateAccountMessage(username, password);
+        CreateAccountRequest createAccountMessage = new CreateAccountRequest(username, password);
         Client.write(createAccountMessage);
     }
 
     public void logout() {
-        network.message.Message logoutMessage = network.message.Message.makeLogout();
-        Client.write(logoutMessage);
+        Request logoutRequest = Request.makeLogout();
+        Client.write(logoutRequest);
         Player.logout();
     }
 
@@ -49,7 +50,7 @@ public class AccountMenu extends Menu {
             view.printMessage(Message.YOU_MUST_LOG_IN);
             return;
         }
-        Client.write(network.message.Message.makeAccount(Player.getCurrentPlayer()));
+        Client.write(Request.makeAccount(Player.getCurrentPlayer()));
     }
 
     public void hesoyam() {

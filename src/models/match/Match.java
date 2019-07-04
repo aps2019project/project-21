@@ -48,18 +48,18 @@ public class Match implements Serializable {
         return this.info;
     }
 
-    public Match(Player playerOne, Player playerTwo, GameMode gameMode, GameType gameType, GoalMode goalMode, int flagCount) {
+    public Match(Player playerOne, Player playerTwo, MatchRequest matchRequest) {
         this.players[0] = playerOne;
         this.players[1] = playerTwo;
         this.battlefield = new Battlefield();
         this.turn = 0;
         this.info[0] = new PlayerMatchInfo(playerOne);
         this.info[1] = new PlayerMatchInfo(playerTwo);
-        this.gameMode = gameMode;
-        this.gameType = gameType;
-        this.goalMode = goalMode;
-        this.flagCount = flagCount;
-        if (goalMode == GoalMode.HOLD_FLAG)
+        this.gameMode = matchRequest.getGameMode();
+        this.gameType = matchRequest.getGameType();
+        this.goalMode = matchRequest.getGoalMode();
+        this.flagCount = matchRequest.getFlagCount();
+        if (this.goalMode == GoalMode.HOLD_FLAG)
             this.flagCount = 1;
         initiateMatch();
     }

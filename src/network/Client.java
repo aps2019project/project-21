@@ -6,8 +6,9 @@ import javafx.util.Pair;
 import json.Initializer;
 import models.GlobalChat;
 import models.Player;
-import network.message.Message;
+import network.message.Request;
 import view.View;
+import view.WaitingForOppView;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -29,9 +30,11 @@ public class Client extends Application {
         }
         System.out.println("connected to host.");
 
-        new Thread(Initializer::main).start();
+        Thread initializer = new Thread(Initializer::main);
+        initializer.start();
 
-        new Thread(Client::receiveMessages).start();
+        Thread contactHost = new Thread(Client::receiveMessages);
+        contactHost.start();
 
         launch(args);
     }
@@ -45,10 +48,10 @@ public class Client extends Application {
 
     private static void receiveMessages() {
         while (!socket.isClosed()) {
-            Message message = read();
-            if (message != null)
-                System.out.println("message received:  " + message.getMsgType());
-            handleMessage(message);
+            Request request = read();
+            if (request != null)
+                System.out.println("request received:  " + request.getReqType());
+            handleMessage(request);
         }
         try {
             socket.close();
@@ -59,44 +62,47 @@ public class Client extends Application {
         }
     }
 
-    private static void handleMessage(Message message) {
-        if (message == null)
+    private static void handleMessage(Request request) {
+        if (request == null)
             return;
-        switch (message.getMsgType()) {
+        switch (request.getReqType()) {
             case PLAYER:
-                Player player = (Player) message.getObj();
+                Player player = (Player) request.getObj();
                 Player.addPlayer(player);
                 Player.setCurrentPlayer(player);
                 break;
             case GLOBAL_CHAT:
-                GlobalChat.init((GlobalChat) message.getObj());
+                GlobalChat.init((GlobalChat) request.getObj());
                 break;
             case GLOBAL_CHAT_MESSAGE:
-                GlobalChat.getInstance().addMessage((Pair<String, String>) message.getObj());
+                GlobalChat.getInstance().addMessage((Pair<String, String>) request.getObj());
                 break;
             case MESSAGE:
-                String msg = (String) message.getObj();
-                View.getInstance().addpopupMessage(msg);
+                String msg = (String) request.getObj();
+                View.getInstance().addPopupMessage(msg);
+                break;
+            case INTRODUCE_OPP:
+                WaitingForOppView.getCurrent().takeOppName((String) request.getObj());
                 break;
         }
     }
 
-    public static void write(Message message) {
+    public static void write(Request request) {
         System.out.println("writing...");
         try {
             if (Player.hasAnyoneLoggedIn())
-                message.setAuthToken(Player.getCurrentPlayer().getAuthToken());
-            oos.writeObject(message);
+                request.setAuthToken(Player.getCurrentPlayer().getAuthToken());
+            oos.writeObject(request);
             oos.flush();
         } catch (IOException ex) {
             View.printThrowable(ex);
         }
     }
 
-    private static Message read() {
+    private static Request read() {
         System.out.println("reading...");
         try {
-            return (Message) ois.readObject();
+            return (Request) ois.readObject();
         } catch (Exception ex) {
             View.printThrowable(ex);
             return null;

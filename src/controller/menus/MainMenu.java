@@ -2,27 +2,25 @@ package controller.menus;
 
 import models.AIPlayer;
 import models.Player;
-import models.match.GameMode;
-import models.match.GameType;
-import models.match.GoalMode;
-import models.match.Match;
+import models.match.*;
 import view.BattleView;
 import view.Message;
 import view.View;
 
 public class MainMenu extends Menu {
     private static MainMenu instance = new MainMenu();
+    private MatchRequest matchRequest = new MatchRequest();
     private Player second;
-    private GameMode gameMode;
-    private GameType gameType;
-    private GoalMode goalMode;
-    private int flagCount;
 
     public static MainMenu getInstance() {
         return instance;
     }
 
     private MainMenu() {
+    }
+
+    public MatchRequest getMatchRequest() {
+        return matchRequest;
     }
 
     public boolean chooseOpp(String name) {
@@ -49,38 +47,38 @@ public class MainMenu extends Menu {
     }
 
     public void setKillHero() {
-        goalMode = GoalMode.KILL_HERO;
+        matchRequest.setGoalMode(GoalMode.KILL_HERO);
     }
 
     public void setHoldFlag(String flagCount) {
-        goalMode = GoalMode.HOLD_FLAG;
+        matchRequest.setGoalMode(GoalMode.HOLD_FLAG);
         try {
-            this.flagCount = Integer.parseInt(flagCount);
+            matchRequest.setFlagCount(Integer.parseInt(flagCount));
         } catch (Exception e) {
-            this.flagCount = 1;
+            matchRequest.setFlagCount(1);
         }
     }
 
     public void setGatherFlag(String flagCount) {
-        goalMode = GoalMode.GATHER_FLAG;
+        matchRequest.setGoalMode(GoalMode.GATHER_FLAG);
         try {
-            this.flagCount = Integer.parseInt(flagCount);
+            matchRequest.setFlagCount(Integer.parseInt(flagCount));
         } catch (Exception e) {
-            this.flagCount = 1;
+            matchRequest.setFlagCount(1);
         }
     }
 
     public void setSingle() {
-        this.gameMode = GameMode.SINGLE_PLAYER;
+        matchRequest.setGameMode(GameMode.SINGLE_PLAYER);
     }
 
     public void setMultiplayer() {
-        this.gameMode = GameMode.MULTI_PLAYER;
-        gameType = null;
+        matchRequest.setGameMode(GameMode.MULTI_PLAYER);
+        matchRequest.setGameType(null);
     }
 
     public void startMatch() {
-        Match match = new Match(Player.getCurrentPlayer(), second, gameMode, gameType, goalMode, flagCount);
+        Match match = new Match(Player.getCurrentPlayer(), second, matchRequest);
         Match.setCurrentMatch(match);
         BattleView battleView = new BattleView();
         match.setBattleView(battleView);
@@ -96,17 +94,17 @@ public class MainMenu extends Menu {
             return;
         }
         if (num == 1)
-            goalMode = GoalMode.KILL_HERO;
+            matchRequest.setGoalMode(GoalMode.KILL_HERO);
         else if (num == 2) {
-            goalMode = GoalMode.HOLD_FLAG;
-            flagCount = 1;
+            matchRequest.setGoalMode(GoalMode.HOLD_FLAG);
+            matchRequest.setFlagCount(1);
         } else {
-            goalMode = GoalMode.GATHER_FLAG;
-            flagCount = 3;
+            matchRequest.setGoalMode(GoalMode.GATHER_FLAG);
+            matchRequest.setFlagCount(3);
         }
         second = aiPlayer;
-        gameMode = GameMode.SINGLE_PLAYER;
-        gameType = GameType.STORY;
+        matchRequest.setGameMode(GameMode.SINGLE_PLAYER);
+        matchRequest.setGameType(GameType.STORY);
         startMatch();
     }
 }

@@ -34,6 +34,7 @@ public class Host {
 
         try {
             server = new ServerSocket(7777);
+            System.out.println("host is up.");
 
             while (!server.isClosed()) {
                 Socket client = server.accept();

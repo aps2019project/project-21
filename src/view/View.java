@@ -121,7 +121,7 @@ public class View {
         popup.show();
     }
 
-    public void addpopupMessage(String message) {
+    public void addPopupMessage(String message) {
         messagesQueue.add(message);
     }
 
@@ -575,6 +575,7 @@ public class View {
     }
 
     public static void printThrowable(Throwable throwable) {
+        throwable.printStackTrace();
         System.out.println(throwable.getMessage());
         for (StackTraceElement s : throwable.getStackTrace())
             System.out.println(s);
@@ -599,5 +600,4 @@ public class View {
                 + match.getWinner().getUsername().equals(player.getUsername())
                 + " time: " + match.getGameTime());
     }
-
 }

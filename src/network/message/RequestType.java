@@ -1,6 +1,6 @@
 package network.message;
 
-public enum MessageType {
+public enum RequestType {
     LOGIN,
     LOGOUT,
     CREATE_ACCOUNT,
@@ -8,7 +8,9 @@ public enum MessageType {
     PLAYER,
     GLOBAL_CHAT_MESSAGE,
     GLOBAL_CHAT,
-
+    MATCH_REQUEST,
+    READY,
+    INTRODUCE_OPP,
 
     ;
 }

@@ -89,7 +89,7 @@ public class Player implements Serializable {
         return matchHistory;
     }
 
-    private static Player getPlayerByAuthToken(String authToken) {
+    public static Player getPlayerByAuthToken(String authToken) {
         if (authToken == null)
             return null;
         for (Player player : players)
