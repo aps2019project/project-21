@@ -2,6 +2,7 @@ package json;
 
 import models.AIPlayer;
 import models.Collection;
+import models.GlobalChat;
 import models.Item.Collectable;
 import models.Item.Usable;
 import models.Player;
@@ -25,6 +26,7 @@ public class Initializer {
             Spell.addSpell(initSpells());
             Collectable.addCollectable(initCollectables());
             Usable.addUsable(initUsables());
+//            GlobalChat.init(initGlobalChat());
 
             resetCollectionIDs();
         } catch (Exception e) {
@@ -38,6 +40,18 @@ public class Initializer {
             for (Card card : collection.getCards())
                 card.setCollectionID();
         }
+    }
+
+    public static GlobalChat initGlobalChat() throws IOException {
+        GlobalChat globalChat = new GlobalChat();
+        File path = new File("src//json//global_chat");
+        File[] files = path.listFiles();
+        if (files == null)
+            return globalChat;
+        for (File file : files)
+            if (file.isFile())
+                globalChat = CardMaker.globalChatReader(file.getPath());
+        return globalChat;
     }
 
     private static List<Spell> initSpells() {

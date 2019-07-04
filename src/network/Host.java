@@ -1,6 +1,7 @@
 package network;
 
 import json.Initializer;
+import models.GlobalChat;
 import models.Player;
 import view.View;
 
@@ -20,10 +21,12 @@ public class Host {
         new Thread(() -> {
             try {
                 Player.addPlayer(Initializer.initPlayers());
+                GlobalChat.init(Initializer.initGlobalChat());
             } catch (IOException ex) {
                 View.printThrowable(ex);
             }
         }).start();
+        Player.setAuthNulls();
     }
 
     private void run() {

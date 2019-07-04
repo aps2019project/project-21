@@ -51,6 +51,7 @@
                   }
                 ],
                 "desc": "Decrease HP 6 units but increase AP 8 units of an ally minion.",
+                "isCommandValid": true,
                 "name": "Sacrifice",
                 "id": 117,
                 "collectionID": 183,
@@ -89,6 +90,7 @@
                   }
                 ],
                 "desc": "Attack all opps in a column 6 units.",
+                "isCommandValid": true,
                 "name": "All_Attack",
                 "id": 115,
                 "collectionID": 184,
@@ -123,6 +125,7 @@
                   }
                 ],
                 "desc": "Dispel an opp or an ally.",
+                "isCommandValid": true,
                 "name": "Dispel",
                 "id": 111,
                 "collectionID": 185,
@@ -161,6 +164,7 @@
                   }
                 ],
                 "desc": "Kill a minion around king randomly chosen.",
+                "isCommandValid": true,
                 "name": "Kings_Guard",
                 "id": 118,
                 "collectionID": 186,
@@ -196,6 +200,7 @@
                   }
                 ],
                 "desc": "Increase AP 2 units.",
+                "isCommandValid": true,
                 "name": "Empower",
                 "id": 102,
                 "collectionID": 187,
@@ -230,6 +235,7 @@
                   }
                 ],
                 "desc": "Dispel A 2*2 Square.",
+                "isCommandValid": true,
                 "name": "Area_Dispel",
                 "id": 101,
                 "collectionID": 188,
@@ -274,6 +280,7 @@
                     }
                   ],
                   "desc": "Increase HP 10 units.",
+                  "isCommandValid": true,
                   "name": "Oghab's_Spell",
                   "id": 131,
                   "collectionID": 0,
@@ -290,6 +297,7 @@
                 "isDisarmed": false,
                 "isStunned": false,
                 "hasHolyBuff": false,
+                "flag": null,
                 "name": "Oghab",
                 "id": 132,
                 "collectionID": 166,
@@ -341,6 +349,7 @@
                     }
                   ],
                   "desc": "Increase HP 10 units.",
+                  "isCommandValid": true,
                   "name": "Oghab's_Spell",
                   "id": 131,
                   "collectionID": 0,
@@ -357,6 +366,7 @@
                 "isDisarmed": false,
                 "isStunned": false,
                 "hasHolyBuff": false,
+                "flag": null,
                 "name": "Oghab",
                 "id": 132,
                 "collectionID": 168,
@@ -408,6 +418,7 @@
                     }
                   ],
                   "desc": "Attack 5 more for each time it attacked that card.",
+                  "isCommandValid": true,
                   "name": "Pahlavane_Fars's_Spell",
                   "id": 109,
                   "collectionID": 0,
@@ -424,6 +435,7 @@
                 "isDisarmed": false,
                 "isStunned": false,
                 "hasHolyBuff": false,
+                "flag": null,
                 "name": "Pahlavane_Fars",
                 "id": 110,
                 "collectionID": 167,
@@ -457,6 +469,7 @@
                 "isDisarmed": false,
                 "isStunned": false,
                 "hasHolyBuff": false,
+                "flag": null,
                 "name": "Shah_Ghol",
                 "id": 160,
                 "collectionID": 169,
@@ -490,6 +503,7 @@
                 "isDisarmed": false,
                 "isStunned": false,
                 "hasHolyBuff": false,
+                "flag": null,
                 "name": "Shahzade_Torani",
                 "id": 125,
                 "collectionID": 170,
@@ -551,6 +565,7 @@
                     }
                   ],
                   "desc": "Disarm 1 turn and poison 4 turns.",
+                  "isCommandValid": true,
                   "name": "Jasose_Torani's_Spell",
                   "id": 120,
                   "collectionID": 0,
@@ -567,6 +582,7 @@
                 "isDisarmed": false,
                 "isStunned": false,
                 "hasHolyBuff": false,
+                "flag": null,
                 "name": "Jasose_Torani",
                 "id": 121,
                 "collectionID": 171,
@@ -600,6 +616,7 @@
                 "isDisarmed": false,
                 "isStunned": false,
                 "hasHolyBuff": false,
+                "flag": null,
                 "name": "Kamandare_Fars",
                 "id": 100,
                 "collectionID": 172,
@@ -649,6 +666,7 @@
                     }
                   ],
                   "desc": "Stun 8 neighbourhood minions.",
+                  "isCommandValid": true,
                   "name": "Nane_Sarma's_Spell",
                   "id": 151,
                   "collectionID": 0,
@@ -665,6 +683,7 @@
                 "isDisarmed": false,
                 "isStunned": false,
                 "hasHolyBuff": false,
+                "flag": null,
                 "name": "Nane_Sarma",
                 "id": 152,
                 "collectionID": 173,
@@ -698,6 +717,7 @@
                 "isDisarmed": false,
                 "isStunned": false,
                 "hasHolyBuff": false,
+                "flag": null,
                 "name": "Neyzedare_Fars",
                 "id": 105,
                 "collectionID": 174,
@@ -731,6 +751,7 @@
                 "isDisarmed": false,
                 "isStunned": false,
                 "hasHolyBuff": false,
+                "flag": null,
                 "name": "Ghole_Bozorg",
                 "id": 178,
                 "collectionID": 175,
@@ -782,6 +803,7 @@
                     }
                   ],
                   "desc": "Increase HP 10 units.",
+                  "isCommandValid": true,
                   "name": "Oghab's_Spell",
                   "id": 160,
                   "collectionID": 0,
@@ -798,6 +820,7 @@
                 "isDisarmed": false,
                 "isStunned": false,
                 "hasHolyBuff": false,
+                "flag": null,
                 "name": "Oghab",
                 "id": 161,
                 "collectionID": 182,
@@ -849,6 +872,7 @@
                     }
                   ],
                   "desc": "Increase HP 10 units.",
+                  "isCommandValid": true,
                   "name": "Oghab's_Spell",
                   "id": 160,
                   "collectionID": 0,
@@ -865,6 +889,7 @@
                 "isDisarmed": false,
                 "isStunned": false,
                 "hasHolyBuff": false,
+                "flag": null,
                 "name": "Oghab",
                 "id": 161,
                 "collectionID": 181,
@@ -916,6 +941,7 @@
                     }
                   ],
                   "desc": "Increase HP 10 units.",
+                  "isCommandValid": true,
                   "name": "Oghab's_Spell",
                   "id": 160,
                   "collectionID": 0,
@@ -932,6 +958,7 @@
                 "isDisarmed": false,
                 "isStunned": false,
                 "hasHolyBuff": false,
+                "flag": null,
                 "name": "Oghab",
                 "id": 161,
                 "collectionID": 180,
@@ -983,6 +1010,7 @@
                     }
                   ],
                   "desc": "Attack 5 more for each time it attacked that card.",
+                  "isCommandValid": true,
                   "name": "Pahlavane_Fars's_Spell",
                   "id": 138,
                   "collectionID": 0,
@@ -999,6 +1027,7 @@
                 "isDisarmed": false,
                 "isStunned": false,
                 "hasHolyBuff": false,
+                "flag": null,
                 "name": "Pahlavane_Fars",
                 "id": 139,
                 "collectionID": 179,
@@ -1052,6 +1081,7 @@
             "currentCell": null
           },
           "hero": {
+            "primaryCooldown": 0,
             "cooldown": 2,
             "maxHp": 30,
             "maxAp": 2,
@@ -1081,6 +1111,7 @@
                 }
               ],
               "desc": "Gives 4 damages to all opponent attackers in the same row as selected hero.",
+              "isCommandValid": true,
               "name": "Arash's_Spell",
               "id": 118,
               "collectionID": 0,
@@ -1097,6 +1128,7 @@
             "isDisarmed": false,
             "isStunned": false,
             "hasHolyBuff": false,
+            "flag": null,
             "name": "Arash",
             "id": 119,
             "collectionID": 165,
@@ -1132,6 +1164,7 @@
       "mainDeck": "@root.collection.decks.0",
       "heroes": [
         {
+          "primaryCooldown": 0,
           "cooldown": 2,
           "maxHp": 50,
           "maxAp": 4,
@@ -1164,6 +1197,7 @@
               }
             ],
             "desc": "Casts one power buff with 4 ap increase on himself forever",
+            "isCommandValid": true,
             "name": "Dive_Sefid's_Spell",
             "id": 100,
             "collectionID": 0,
@@ -1180,6 +1214,7 @@
           "isDisarmed": false,
           "isStunned": false,
           "hasHolyBuff": false,
+          "flag": null,
           "name": "Dive_Sefid",
           "id": 101,
           "collectionID": 162,
@@ -1196,6 +1231,7 @@
           }
         },
         {
+          "primaryCooldown": 0,
           "cooldown": 0,
           "maxHp": 55,
           "maxAp": 7,
@@ -1210,6 +1246,7 @@
           "isDisarmed": false,
           "isStunned": false,
           "hasHolyBuff": false,
+          "flag": null,
           "name": "Rostam",
           "id": 127,
           "collectionID": 163,
@@ -1226,6 +1263,7 @@
           }
         },
         {
+          "primaryCooldown": 0,
           "cooldown": 2,
           "maxHp": 40,
           "maxAp": 3,
@@ -1258,6 +1296,7 @@
               }
             ],
             "desc": "Dispels an opponent attacker.",
+            "isCommandValid": true,
             "name": "Afsaneh's_Spell",
             "id": 121,
             "collectionID": 0,
@@ -1274,6 +1313,7 @@
           "isDisarmed": false,
           "isStunned": false,
           "hasHolyBuff": false,
+          "flag": null,
           "name": "Afsaneh",
           "id": 122,
           "collectionID": 164,
@@ -1465,6 +1505,7 @@
               }
             ],
             "desc": "Having 12 continuous holy buffs.",
+            "isCommandValid": true,
             "name": "Folad_Zereh's_Spell",
             "id": 183,
             "collectionID": 0,
@@ -1481,6 +1522,7 @@
           "isDisarmed": false,
           "isStunned": false,
           "hasHolyBuff": false,
+          "flag": null,
           "name": "Folad_Zereh",
           "id": 184,
           "collectionID": 176,
@@ -1659,6 +1701,7 @@
               }
             ],
             "desc": "Having 12 continuous holy buffs.",
+            "isCommandValid": true,
             "name": "Folad_Zereh's_Spell",
             "id": 183,
             "collectionID": 0,
@@ -1675,6 +1718,7 @@
           "isDisarmed": false,
           "isStunned": false,
           "hasHolyBuff": false,
+          "flag": null,
           "name": "Folad_Zereh",
           "id": 184,
           "collectionID": 177,
@@ -1733,6 +1777,7 @@
               }
             ],
             "desc": "Disarm 1 turn and poison 4 turns.",
+            "isCommandValid": true,
             "name": "Jasose_Torani's_Spell",
             "id": 149,
             "collectionID": 0,
@@ -1749,6 +1794,7 @@
           "isDisarmed": false,
           "isStunned": false,
           "hasHolyBuff": false,
+          "flag": null,
           "name": "Jasose_Torani",
           "id": 150,
           "collectionID": 178,
@@ -1838,6 +1884,7 @@
     "drake": 15000,
     "matchHistory": [],
     "wins": 0,
-    "cardCurrentID": 0
+    "losses": 0,
+    "authToken": null
   }
 }

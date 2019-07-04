@@ -6,6 +6,8 @@ public enum MessageType {
     CREATE_ACCOUNT,
     MESSAGE,
     PLAYER,
+    GLOBAL_CHAT_MESSAGE,
+    GLOBAL_CHAT,
 
 
     ;

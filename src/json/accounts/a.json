@@ -3121,9 +3121,9 @@
       ]
     },
     "drake": 19988000,
-    "matchHistory": [],
+    "matchHistory": null,
     "wins": 0,
     "losses": 0,
-    "cardCurrentID": 0
+    "authToken": null
   }
 }

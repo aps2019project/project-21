@@ -45,12 +45,13 @@ public class MainMenuView {
     private Button customCard = new Button("CUSTOM CARD");
     private Button showHistory = new Button("SHOW HISTORY");
     private Label currentPlayer = new Label("");
-    private boolean isInMainMenu = false;
+    private boolean isInMainMenu;
     private Button collection = new Button("COLLECTION");
     private Button shop = new Button("SHOP");
     private Button battle = new Button("BATTLE");
     private Button back = new Button("BACK");
     private Button volume = new Button("VOLUME");
+    private Button globalChat = new Button("GLOBAL CHAT");
 
 
     void run() {
@@ -77,7 +78,7 @@ public class MainMenuView {
         beforeLoginOptions.relocate(150, 170);
         beforeLoginOptions.setSpacing(7);
 
-        afterLoginOptions.getChildren().addAll(gotoMainMenu, showHistory, save, logout, hesoyam, currentPlayer);
+        afterLoginOptions.getChildren().addAll(gotoMainMenu, showHistory, save, logout, hesoyam, globalChat, currentPlayer);
         afterLoginOptions.relocate(beforeLoginOptions.getLayoutX(), beforeLoginOptions.getLayoutY());
         afterLoginOptions.setSpacing(7);
 
@@ -132,6 +133,7 @@ public class MainMenuView {
         battle.setOnAction(event -> createNewMatch());
         back.setOnAction(event -> isInMainMenu = false);
         volume.setOnAction(event -> VolumeController.getInstance().run());
+        globalChat.setOnAction(event -> GlobalChatView.getInstance().run());
     }
 
     private void setBackground() {

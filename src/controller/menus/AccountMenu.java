@@ -42,7 +42,6 @@ public class AccountMenu extends Menu {
         network.message.Message logoutMessage = network.message.Message.makeLogout();
         Client.write(logoutMessage);
         Player.logout();
-//        Player.logout();
     }
 
     public void save() {
@@ -50,7 +49,7 @@ public class AccountMenu extends Menu {
             view.printMessage(Message.YOU_MUST_LOG_IN);
             return;
         }
-        Player.savePlayer();
+        Client.write(network.message.Message.makeAccount(Player.getCurrentPlayer()));
     }
 
     public void hesoyam() {

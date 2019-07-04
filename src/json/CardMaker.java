@@ -4,6 +4,7 @@ import com.gilecode.yagson.YaGson;
 import com.gilecode.yagson.YaGsonBuilder;
 import models.AIPlayer;
 import models.Deck;
+import models.GlobalChat;
 import models.Item.Collectable;
 import models.Item.Usable;
 import models.Player;
@@ -21,7 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class CardMaker {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         HeroMaker.main();
         MinionMaker.main();
         SpellMaker.main();
@@ -103,6 +104,12 @@ public class CardMaker {
         return gson.fromJson(json, Deck.class);
     }
 
+    public static GlobalChat globalChatReader(String path) throws IOException {
+        String json = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
+        YaGson gson = new YaGson();
+        return gson.fromJson(json, GlobalChat.class);
+    }
+
     public static String saveToFile(Object object) {
         String folder = "";
         if (object.getClass().equals(Spell.class))
@@ -121,6 +128,8 @@ public class CardMaker {
             folder = "aiplayers";
         else if (object.getClass().equals(Deck.class))
             folder = "decks";
+        else if (object.getClass().equals(GlobalChat.class))
+            folder = "global_chat";
         else
             System.out.println("Card class not found!");
         String name = "";
@@ -130,6 +139,8 @@ public class CardMaker {
             name = ((Player) object).getUsername();
         else if (object instanceof Deck)
             name = ((Deck) object).getName();
+        else if (object instanceof GlobalChat)
+            name = "global_chat";
         String path = "src//json//" + folder + "//"
                 + name.toLowerCase().replaceAll("\\s+", "_") + ".json";
 

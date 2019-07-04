@@ -1,14 +1,13 @@
 package view;
 
+import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
 import javafx.scene.ImageCursor;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.Collection;
@@ -24,19 +23,9 @@ import models.match.PlayerMatchInfo;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Stack;
+import java.util.*;
 
 public class View {
-    private static View view = new View();
-
-    private boolean isAIPlaying;
-
-    private Stack<Scene> scenes = new Stack<>();
-
-    private Stage primaryStage;
-
     public static View getInstance() {
         return view;
     }
@@ -44,9 +33,16 @@ public class View {
     private View() {
     }
 
+    private static View view = new View();
+    private boolean isAIPlaying;
+    private Stack<Scene> scenes = new Stack<>();
+    private Stage primaryStage;
+    private Queue<String> messagesQueue = new ArrayDeque<>();
+
     public void run() {
         primaryStage.setTitle("Duelyst");
         primaryStage.setMaximized(true);
+        handlePopups();
 //        try {
 //            Thread.sleep(2000);
 //        } catch (Exception e) {
@@ -94,15 +90,6 @@ public class View {
         primaryStage.close();
     }
 
-    void removeNodeFromPane(Node node, Pane pane) {
-        pane.getChildren().remove(node);
-    }
-
-    void addNodeToPane(Node node, Pane pane) {
-        if (!pane.getChildren().contains(node))
-            pane.getChildren().add(node);
-    }
-
     public void popup(String message) {
         if (isAIPlaying)
             return;
@@ -132,6 +119,25 @@ public class View {
         popup.setScene(dialogScene);
         VoicePlay.notification();
         popup.show();
+    }
+
+    public void addpopupMessage(String message) {
+        messagesQueue.add(message);
+    }
+
+    private void handlePopups() {
+        new AnimationTimer() {
+            long last;
+
+            @Override
+            public void handle(long now) {
+                if (now - last > 100) {  //  try blocking queue
+                    if (!messagesQueue.isEmpty())
+                        popup(messagesQueue.poll());
+                    last = now;
+                }
+            }
+        }.start();
     }
 
 

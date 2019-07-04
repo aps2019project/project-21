@@ -29,6 +29,11 @@ public class Player implements Serializable {
         this.password = password;
     }
 
+    public static void setAuthNulls() {
+        for (Player player : players)
+            player.authToken = null;
+    }
+
     private void setAuthToken() {
         authToken = Integer.toString(loginCount++);
     }
@@ -98,6 +103,7 @@ public class Player implements Serializable {
         if (player != null)
             player.authToken = null;
         logout();
+        Player.savePlayer(player);
     }
 
     public static void logout() {
@@ -151,7 +157,7 @@ public class Player implements Serializable {
             addPlayer(player);
     }
 
-    private static void savePlayer(Player player) {
+    public static void savePlayer(Player player) {
         CardMaker.saveToFile(player);
     }
 

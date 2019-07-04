@@ -2,7 +2,9 @@ package network;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 import json.Initializer;
+import models.GlobalChat;
 import models.Player;
 import network.message.Message;
 import view.View;
@@ -44,22 +46,43 @@ public class Client extends Application {
     private static void receiveMessages() {
         while (!socket.isClosed()) {
             Message message = read();
-            System.out.println("message received:  " + message.getMsgType());
+            if (message != null)
+                System.out.println("message received:  " + message.getMsgType());
             handleMessage(message);
+        }
+        try {
+            socket.close();
+            oos.close();
+            ois.close();
+        } catch (IOException ex) {
+            View.printThrowable(ex);
         }
     }
 
     private static void handleMessage(Message message) {
+        if (message == null)
+            return;
         switch (message.getMsgType()) {
             case PLAYER:
                 Player player = (Player) message.getObj();
                 Player.addPlayer(player);
                 Player.setCurrentPlayer(player);
                 break;
+            case GLOBAL_CHAT:
+                GlobalChat.init((GlobalChat) message.getObj());
+                break;
+            case GLOBAL_CHAT_MESSAGE:
+                GlobalChat.getInstance().addMessage((Pair<String, String>) message.getObj());
+                break;
+            case MESSAGE:
+                String msg = (String) message.getObj();
+                View.getInstance().addpopupMessage(msg);
+                break;
         }
     }
 
     public static void write(Message message) {
+        System.out.println("writing...");
         try {
             if (Player.hasAnyoneLoggedIn())
                 message.setAuthToken(Player.getCurrentPlayer().getAuthToken());
@@ -70,7 +93,8 @@ public class Client extends Application {
         }
     }
 
-    public static Message read() {
+    private static Message read() {
+        System.out.println("reading...");
         try {
             return (Message) ois.readObject();
         } catch (Exception ex) {

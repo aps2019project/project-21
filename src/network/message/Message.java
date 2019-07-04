@@ -1,5 +1,6 @@
 package network.message;
 
+import models.GlobalChat;
 import models.Player;
 
 import java.io.Serializable;
@@ -7,14 +8,9 @@ import java.io.Serializable;
 public class Message implements Serializable {
     protected String authToken;
     protected MessageType msgType;
-    protected String message;
     protected Object obj;
 
     public Message() {
-    }
-
-    public Message(String message) {
-        this.message = message;
     }
 
     public static Message makeAccount(Player player) {
@@ -24,9 +20,30 @@ public class Message implements Serializable {
         return message;
     }
 
-    public static Message makeLogout(){
+    public static Message makeLogout() {
         Message message = new Message();
         message.msgType = MessageType.LOGOUT;
+        return message;
+    }
+
+    public static Message makeGlobalChatMessage(GlobalChat globalChat) {
+        Message message = new Message();
+        message.msgType = MessageType.GLOBAL_CHAT_MESSAGE;
+        message.obj = globalChat.getLastMessage();
+        return message;
+    }
+
+    public static Message makeGlobalChat(GlobalChat globalChat) {
+        Message message = new Message();
+        message.msgType = MessageType.GLOBAL_CHAT;
+        message.obj = globalChat;
+        return message;
+    }
+
+    public static Message makeMessage(String msg) {
+        Message message = new Message();
+        message.msgType = MessageType.MESSAGE;
+        message.obj = msg;
         return message;
     }
 
@@ -40,10 +57,6 @@ public class Message implements Serializable {
 
     public MessageType getMsgType() {
         return msgType;
-    }
-
-    public String getMessage() {
-        return message;
     }
 
     public void setAuthToken(String authToken) {
