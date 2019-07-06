@@ -11,6 +11,12 @@ public enum RequestType {
     MATCH_REQUEST,
     READY,
     INTRODUCE_OPP,
+    WITHDRAW,
+    START_MATCH_FIRST,
+    START_MATCH_SECOND,
+    BATTLE_ACTION,
+    MATCH_INFO,
+    TAKE_ONLINE_USERS,
 
     ;
 }

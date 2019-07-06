@@ -1,6 +1,9 @@
 package controller.menus;
 
+import models.BattleAction;
 import models.match.Match;
+import network.Client;
+import network.message.Request;
 
 public class BattleMenu extends Menu {
     private static BattleMenu instance = new BattleMenu();
@@ -17,37 +20,51 @@ public class BattleMenu extends Menu {
     }
 
     public void useSpell(String spell, int x, int y) {
-        Match.getCurrentMatch().selectSpell(spell);
-        Match.getCurrentMatch().useSpell(x, y);
+        BattleAction battleAction = new BattleAction("useSpell", spell, Integer.toString(x), Integer.toString(y));
+        Client.write(Request.makeBattleActionRequest(battleAction));
     }
 
-    public boolean selectAttacker(String cardIDInGame) {
+    public void selectAttacker(String cardIDInGame, int x, int y) {
         if (cardIDInGame == null)
-            return false;
-        return Match.getCurrentMatch().selectAttacker(cardIDInGame);
+            return;
+        BattleAction battleAction = new BattleAction("selectAttacker", cardIDInGame, Integer.toString(x), Integer.toString(y));
+        Client.write(Request.makeBattleActionRequest(battleAction));
     }
 
-    public int moveOrAttack(int x, int y) {
+    public void moveOrAttack(int x, int y) {
         if (Match.getCurrentMatch().getCell(x, y).isEmpty())
-            return moveTo(x, y);
+            moveTo(x, y);
         else
-            return 2 + attack(x, y);
+            attack(x, y);
     }
 
-    private int moveTo(int x, int y) {
-        return Match.getCurrentMatch().moveCard(x, y);
+    private void moveTo(int x, int y) {
+        BattleAction battleAction = new BattleAction("moveTo", Integer.toString(x), Integer.toString(y));
+        Client.write(Request.makeBattleActionRequest(battleAction));
     }
 
-    private int attack(int x, int y) {
-        return Match.getCurrentMatch().attack(x, y);
+    private void attack(int x, int y) {
+        BattleAction battleAction = new BattleAction("attack", Integer.toString(x), Integer.toString(y));
+        Client.write(Request.makeBattleActionRequest(battleAction));
     }
 
     public void useSpecialPower(int x, int y) {
-        Match.getCurrentMatch().selectAttacker(Match.getCurrentMatch().getPlayersMatchInfo()[0].getHero().getCardIDInGame());
-        Match.getCurrentMatch().useSpecialPower(x, y);
+        BattleAction battleAction = new BattleAction("useSpecialPower", Integer.toString(x), Integer.toString(y));
+        Client.write(Request.makeBattleActionRequest(battleAction));
     }
 
     public void insertCardIn(String name, int x, int y) {
-        Match.getCurrentMatch().insertCard(name, x, y);
+        BattleAction battleAction = new BattleAction("insertCardIn", name, Integer.toString(x), Integer.toString(y));
+        Client.write(Request.makeBattleActionRequest(battleAction));
+    }
+
+    public void deselect(){
+        BattleAction battleAction = new BattleAction("deselect");
+        Client.write(Request.makeBattleActionRequest(battleAction));
+    }
+
+    public void endTurn(){
+        BattleAction battleAction = new BattleAction("endTurn");
+        Client.write(Request.makeBattleActionRequest(battleAction));
     }
 }

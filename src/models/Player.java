@@ -17,7 +17,7 @@ public class Player implements Serializable {
     private String password = "";
     private Collection collection = new Collection();
     private int drake;
-    private transient List<Match> matchHistory = new ArrayList<>();
+    private List<Match> matchHistory = new ArrayList<>();
     private int wins;
     private int losses;
     private String authToken;
@@ -47,7 +47,14 @@ public class Player implements Serializable {
     }
 
     public Player() {
+    }
 
+    public static List<String> getOnlineUsersName() {
+        List<String> usernames = new ArrayList<>();
+        for (Player player : players)
+            if (player.authToken != null)
+                usernames.add(player.getUsername());
+        return usernames;
     }
 
     public static void createAccount(String username, String password) {
@@ -158,6 +165,11 @@ public class Player implements Serializable {
     }
 
     public static void savePlayer(Player player) {
+        List<Player> copy = new ArrayList<>(players);
+        for (Player p : copy)
+            if (p.username.equals(player.username))
+                players.remove(p);
+        addPlayer(player);
         CardMaker.saveToFile(player);
     }
 
@@ -217,6 +229,8 @@ public class Player implements Serializable {
     public void addToHistory(Match match) {
         if (match == null)
             return;
+        if (matchHistory == null)
+            matchHistory = new ArrayList<>();
         this.matchHistory.add(match);
     }
 

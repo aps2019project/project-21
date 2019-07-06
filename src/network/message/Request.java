@@ -1,10 +1,13 @@
 package network.message;
 
+import models.BattleAction;
 import models.GlobalChat;
 import models.Player;
 import models.match.MatchRequest;
+import models.match.PlayerMatchInfo;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Request implements Serializable {
     protected String authToken;
@@ -65,6 +68,47 @@ public class Request implements Serializable {
     public static Request makeReadyRequest() {
         Request request = new Request();
         request.reqType = RequestType.READY;
+        return request;
+    }
+
+    public static Request makeWithdrawRequest() {
+        Request request = new Request();
+        request.reqType = RequestType.WITHDRAW;
+        return request;
+    }
+
+    public static Request makeStartMatchRequestFirst(Player opponent) {
+        Request request = new Request();
+        request.reqType = RequestType.START_MATCH_FIRST;
+        request.obj = opponent;
+        return request;
+    }
+
+    public static Request makeStartMatchRequestSecond(Player opponent) {
+        Request request = new Request();
+        request.reqType = RequestType.START_MATCH_SECOND;
+        request.obj = opponent;
+        return request;
+    }
+
+    public static Request makeBattleActionRequest(BattleAction battleAction) {
+        Request request = new Request();
+        request.reqType = RequestType.BATTLE_ACTION;
+        request.obj = battleAction;
+        return request;
+    }
+
+    public static Request makeMatchInfoRequest(PlayerMatchInfo[] infos) {
+        Request request = new Request();
+        request.reqType = RequestType.MATCH_INFO;
+        request.obj = infos;
+        return request;
+    }
+
+    public static Request makeOnlineUsersRequest(List<String> usernames) {
+        Request request = new Request();
+        request.reqType = RequestType.TAKE_ONLINE_USERS;
+        request.obj = usernames;
         return request;
     }
 

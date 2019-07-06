@@ -1,0 +1,67 @@
+{
+  "@type": "models.GlobalChat",
+  "@val": {
+    "messages": [
+      {
+        "key": "a",
+        "value": "sdgfh"
+      },
+      {
+        "key": "a",
+        "value": "asdfgthry"
+      },
+      {
+        "key": "a",
+        "value": "asdf"
+      },
+      {
+        "key": "a",
+        "value": "sdfsd"
+      },
+      {
+        "key": "a",
+        "value": "sdfsdfsdf"
+      },
+      {
+        "key": "a",
+        "value": "sdfsdf"
+      },
+      {
+        "key": "a",
+        "value": "hi there!"
+      },
+      {
+        "key": "a",
+        "value": "cdvgtrfhddh"
+      },
+      {
+        "key": "a",
+        "value": "gsdbgf"
+      },
+      {
+        "key": "a",
+        "value": "htrdfcfv bgf"
+      },
+      {
+        "key": "a",
+        "value": ""
+      },
+      {
+        "key": "b",
+        "value": "dxsfg;"
+      },
+      {
+        "key": "b",
+        "value": "sdfsdf"
+      },
+      {
+        "key": "b",
+        "value": "sdfsdf"
+      },
+      {
+        "key": "b",
+        "value": "sdfsd"
+      }
+    ]
+  }
+}

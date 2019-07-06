@@ -54,7 +54,7 @@ public class Initializer {
         return globalChat;
     }
 
-    private static List<Spell> initSpells() {
+    public static List<Spell> initSpells() {
         List<Spell> spells = new ArrayList<>();
         File path = new File("src//json//spells");
         File[] files = path.listFiles();
@@ -66,7 +66,7 @@ public class Initializer {
         return spells;
     }
 
-    private static List<Hero> initHeroes() {
+    public static List<Hero> initHeroes() {
         List<Hero> heroes = new ArrayList<>();
         File path = new File("src//json//heroes");
         File[] files = path.listFiles();
@@ -78,7 +78,7 @@ public class Initializer {
         return heroes;
     }
 
-    private static List<Minion> initMinions() {
+    public static List<Minion> initMinions() {
         List<Minion> minions = new ArrayList<>();
         File path = new File("src//json//minions");
         File[] files = path.listFiles();
@@ -90,7 +90,7 @@ public class Initializer {
         return minions;
     }
 
-    private static List<Usable> initUsables() {
+    public static List<Usable> initUsables() {
         List<Usable> usables = new ArrayList<>();
         File path = new File("src//json//usables");
         File[] files = path.listFiles();
@@ -102,7 +102,7 @@ public class Initializer {
         return usables;
     }
 
-    private static List<Collectable> initCollectables() throws IOException {
+    public static List<Collectable> initCollectables() throws IOException {
         List<Collectable> collectables = new ArrayList<>();
         File path = new File("src//json//collectables");
         File[] files = path.listFiles();

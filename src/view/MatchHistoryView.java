@@ -37,6 +37,7 @@ class MatchHistoryView {
 
     void run() {
         View.getInstance().setScene(scene);
+        showMatchHistory();
     }
 
     {
@@ -44,8 +45,8 @@ class MatchHistoryView {
             volume.setImage(new Image(new FileInputStream("src\\assets\\volume.png")));
             volume.setScaleX(0.1);
             volume.setScaleY(0.1);
-            volume.relocate(1000,450);
-        } catch (IOException ex){
+            volume.relocate(1000, 450);
+        } catch (IOException ex) {
             View.printThrowable(ex);
         }
         scene.getStylesheets().addAll("view/stylesheets/match_history.css");
@@ -54,20 +55,20 @@ class MatchHistoryView {
 
         draw();
 
-        showHistory();
+        drawScrollPane();
 
         handleButtons();
     }
 
     private void draw() {
         root.getChildren().addAll(volume);
-        
+
         back.relocate(200, 100);
 
         root.getChildren().addAll(back);
     }
 
-    private void showHistory() {
+    private void drawScrollPane() {
         try {
             Background t = new Background(new BackgroundImage(new Image(new FileInputStream
                     ("src\\assets\\MatchHistory\\TilePane.png")), BackgroundRepeat.REPEAT,
@@ -81,12 +82,7 @@ class MatchHistoryView {
         games.setVgap(10);
         games.setPrefColumns(1);
 
-        Player thisPlayer = Player.getCurrentPlayer();
-
-        for (Match match : thisPlayer.getMatchHistory()) {
-            games.getChildren().add(matchGroup(match));
-        }
-
+        showMatchHistory();
 
         scrollPane.setContent(games);
         scrollPane.setPannable(true);
@@ -99,6 +95,14 @@ class MatchHistoryView {
                 "{");
 
         root.getChildren().addAll(scrollPane);
+    }
+
+    private void showMatchHistory(){
+        games.getChildren().clear();
+        Player thisPlayer = Player.getCurrentPlayer();
+
+        for (Match match : thisPlayer.getMatchHistory())
+            games.getChildren().add(matchGroup(match));
     }
 
     private Group matchGroup(Match match) {
@@ -160,7 +164,6 @@ class MatchHistoryView {
         volume.setOnMouseClicked(event -> VolumeController.getInstance().run());
     }
 
-    
 
     private void setBackground() {
         try {

@@ -22,6 +22,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import models.BattleAction;
 import models.Item.Collectable;
 import models.Item.Flag;
 import models.Player;
@@ -35,6 +36,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ArrayBlockingQueue;
 
 public class BattleView {
     private static final int TILE_SIZE = 70;
@@ -61,6 +63,7 @@ public class BattleView {
     private Label cooldown = new Label();
     private Group collectables = new Group();
     private Group flags = new Group();
+    private ArrayBlockingQueue<BattleAction> battleActions = new ArrayBlockingQueue<>(10000);
 
     public void run() {
         View.getInstance().setScene(scene);
@@ -72,6 +75,8 @@ public class BattleView {
         drawTable();
 
         handleSelection();
+
+        handleBattleActions();
 
         drawHub();
 
@@ -108,37 +113,17 @@ public class BattleView {
                 rect.setOnMouseClicked(event -> {
                     if (event.getButton() == MouseButton.PRIMARY) {
                         if (match.isAnyCardSelected()) {
-                            int r = BattleMenu.getInstance().moveOrAttack(u, v);
-                            if (r == 0) {
-                                moveAnimation(u, v);
-                                deselect();
-                            } else if (r == 1) {
-                                deselect();
-                            } else if (r == 2) {
-                                attackAnimation(u, v);
-                                Attacker attacker = getAttacker(u, v);
-                                if (attacker.getAttackMode() == AttackMode.MELEE &&
-                                        (u - select.getX()) < 2 && (u - select.getX()) > -2 &&
-                                        (v - select.getY()) < 2 && (v - select.getY()) > -2) {
-                                    int o = select.getX(), t = select.getY();
-                                    select = new Cell(u, v);
-                                    attackAnimation(o, t);
-                                } else if (attacker.getAttackMode() == AttackMode.RANGED &&
-                                        ((u - select.getX()) > 1 || (u - select.getX()) < -1 ||
-                                                (v - select.getY()) > 1 || (v - select.getY()) < -1)) {
-                                    int o = select.getX(), t = select.getY();
-                                    select = new Cell(u, v);
-                                    attackAnimation(o, t);
-                                } else if (attacker.getAttackMode() == AttackMode.HYBRID) {
-                                    int o = select.getX(), t = select.getY();
-                                    select = new Cell(u, v);
-                                    attackAnimation(o, t);
-                                }
-                                updateAttackers();
-                                deselect();
-                            } else {
-                                deselect();
-                            }
+//                            int r =
+                            BattleMenu.getInstance().moveOrAttack(u, v);
+//                            if (r == 0) {
+//
+//                            } else if (r == 1) {
+//
+//                            } else if (r == 2) {
+//
+//                            } else {
+//
+//                            }
                         } else if (selectedInHand != null) {
                             if (selectedInHand.getCard() instanceof Attacker) {
                                 BattleMenu.getInstance().insertCardIn(selectedInHand.getCard().getName(), u, v);
@@ -151,20 +136,60 @@ public class BattleView {
                             }
                             deselect();
                         } else {
-                            if (getAttacker(u, v) != null && BattleMenu.getInstance().selectAttacker(getAttacker(u, v).getCardIDInGame())) {
-                                if (selectedRect != null)
-                                    selectedRect.setStyle("-fx-fill: rgba(0, 0, 0, 0.1)");
-                                rect.setStyle("-fx-fill: rgba(255, 255, 0, 0.2)");
-                                selectedRect = rect;
-                                select.setX(u);
-                                select.setY(v);
-                            }
+                            if (getAttacker(u, v) != null)
+                                BattleMenu.getInstance().selectAttacker(getAttacker(u, v).getCardIDInGame(), u, v);
                         }
                     } else if (event.getButton() == MouseButton.SECONDARY) {
                         deselect();
                     }
                 });
             }
+    }
+
+    public void selectAttackerBoolean(int u, int v) {
+        if (selectedRect != null)
+            selectedRect.setStyle("-fx-fill: rgba(0, 0, 0, 0.1)");
+        cells[u][v].setStyle("-fx-fill: rgba(255, 255, 0, 0.2)");
+        selectedRect = cells[u][v];
+        select.setX(u);
+        select.setY(v);
+    }
+
+    public void moveOrAttack0(int u, int v) {
+        moveAnimation(u, v);
+        deselect();
+    }
+
+    public void moveOrAttack1(int u, int v) {
+        deselect();
+    }
+
+    public void moveOrAttack2(int u, int v) {
+        attackAnimation(u, v);
+        Attacker attacker = getAttacker(u, v);
+        if (attacker.getAttackMode() == AttackMode.MELEE &&
+                (u - select.getX()) < 2 && (u - select.getX()) > -2 &&
+                (v - select.getY()) < 2 && (v - select.getY()) > -2) {
+            int o = select.getX(), t = select.getY();
+            select = new Cell(u, v);
+            attackAnimation(o, t);
+        } else if (attacker.getAttackMode() == AttackMode.RANGED &&
+                ((u - select.getX()) > 1 || (u - select.getX()) < -1 ||
+                        (v - select.getY()) > 1 || (v - select.getY()) < -1)) {
+            int o = select.getX(), t = select.getY();
+            select = new Cell(u, v);
+            attackAnimation(o, t);
+        } else if (attacker.getAttackMode() == AttackMode.HYBRID) {
+            int o = select.getX(), t = select.getY();
+            select = new Cell(u, v);
+            attackAnimation(o, t);
+        }
+        updateAttackers();
+        deselect();
+    }
+
+    public void moveOrAttack3(int u, int v) {
+        deselect();
     }
 
     public void updateAttackers() {
@@ -253,7 +278,7 @@ public class BattleView {
         selectedRect = null;
         select.setX(-1);
         selectedInHand = null;
-        match.deselect();
+        BattleMenu.getInstance().deselect();
     }
 
     private Attacker getAttacker(int r, int c) {
@@ -303,15 +328,6 @@ public class BattleView {
             System.out.println(a.getCurrentCell().getY());
             Rectangle r = cells[a.getCurrentCell().getX()][a.getCurrentCell().getY()];
             c.getGroup().relocate(r.getLayoutX() - 28, r.getLayoutY() - 60);
-            c.getGroup().setOnMouseClicked(event -> {
-//                    if (event.getButton() == MouseButton.PRIMARY) {
-//                        match.setSelectedCard(a);
-//                        c.currentRectangle.setStyle("-fx-fill: rgba(255, 255, 0, 0.2)");
-//                    } else if (event.getButton() == MouseButton.SECONDARY) {
-//                        match.setSelectedCard(null);
-//                        c.currentRectangle.setStyle("-fx-fill: rgba(0, 0, 0, 0.1)");
-//                    }
-            });
             groundedAttackers.getChildren().add(c.getGroup());
             attackers.put(a, c);
         }
@@ -536,7 +552,7 @@ public class BattleView {
     }
 
     private void setOnActions() {
-        endTurn.setOnMouseClicked(event -> match.endTurn());
+        endTurn.setOnMouseClicked(event -> BattleMenu.getInstance().endTurn());
         pause.setOnAction(event -> pause());
         graveyard.setOnAction(event -> graveyard());
         scene.setOnKeyPressed(event -> {
@@ -663,5 +679,26 @@ public class BattleView {
 
     public void setSelect(Cell select) {
         this.select = select;
+    }
+
+    private void handleBattleActions() {
+        new AnimationTimer() {
+            long last;
+
+            @Override
+            public void handle(long now) {
+                if (now - last > 100) {
+                    if (!battleActions.isEmpty()) {
+                        BattleAction battleAction = battleActions.poll();
+                        match.action(battleAction);
+                    }
+                    last = now;
+                }
+            }
+        }.start();
+    }
+
+    public void addBattleAction(BattleAction battleAction) {
+        this.battleActions.add(battleAction);
     }
 }

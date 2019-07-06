@@ -575,10 +575,11 @@ public class View {
     }
 
     public static void printThrowable(Throwable throwable) {
+        System.out.println("error occurred:");
         throwable.printStackTrace();
-        System.out.println(throwable.getMessage());
-        for (StackTraceElement s : throwable.getStackTrace())
-            System.out.println(s);
+//        System.out.println(throwable.getMessage());
+//        for (StackTraceElement s : throwable.getStackTrace())
+//            System.out.println(s);
     }
 
     public void showMatchResults(Match match) {

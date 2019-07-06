@@ -9,6 +9,8 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import models.Player;
+import models.match.Match;
 import network.Client;
 import network.message.Request;
 
@@ -22,6 +24,8 @@ public class WaitingForOppView {
     private Button withdraw = new Button("WITHDRAW");
     private String oppName;
     private Label oppNameLabel = new Label();
+    private Player opponent;
+    private boolean amIFirst;
 
     public static WaitingForOppView getCurrent() {
         return current;
@@ -100,9 +104,30 @@ public class WaitingForOppView {
                         if (!root.getChildren().contains(oppNameLabel))
                             root.getChildren().addAll(oppNameLabel);
                     }
+                    if (opponent != null) {
+                        startMatch();
+                        this.stop();
+                    }
                     last = now;
                 }
             }
         }.start();
+    }
+
+    private void startMatch() {
+        Match match;
+        if (amIFirst)
+            match = new Match(Player.getCurrentPlayer(), opponent, MainMenu.getInstance().getMatchRequest());
+        else
+            match = new Match(opponent, Player.getCurrentPlayer(), MainMenu.getInstance().getMatchRequest());
+        Match.setCurrentMatch(match);
+        BattleView battleView = new BattleView();
+        match.setBattleView(battleView);
+        battleView.run();
+    }
+
+    public void setOpponent(Player opponent, boolean amIFirst) {
+        this.opponent = opponent;
+        this.amIFirst = amIFirst;
     }
 }

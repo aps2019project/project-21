@@ -21,7 +21,7 @@ public class ClientHandler extends Thread {
     private Socket client;
     private ObjectInputStream ois;
     private ObjectOutputStream oos;
-    private Request lastMsg;
+    private Request lastReq;
     private String currentAuthToken;
     private MatchRequest matchRequest;
     private MatchHandler matchHandler;
@@ -43,7 +43,7 @@ public class ClientHandler extends Thread {
         while (!client.isClosed()) {
             try {
                 Request request = read();
-                lastMsg = request;
+                lastReq = request;
                 if (request != null)
                     System.out.println("request received:  " + request.getReqType());
                 handleRequest(request);
@@ -59,8 +59,9 @@ public class ClientHandler extends Thread {
         } catch (IOException ex) {
             View.printThrowable(ex);
         }
-        if (lastMsg != null && lastMsg.getAuthToken() != null)
-            Player.logout(lastMsg.getAuthToken());
+        if (currentAuthToken != null)
+            Player.logout(currentAuthToken);
+        sendOnlineUsersToAll();
         clientHandlers.remove(this);
     }
 
@@ -82,6 +83,7 @@ public class ClientHandler extends Thread {
                     else {
                         Player player = Player.getPlayerByUsername(loginMsg.getUsername());
                         if (player != null) {
+                            sendOnlineUsersToAll();
                             write(Request.makeAccount(player));
                             currentAuthToken = player.getAuthToken();
                             System.out.println(player.getUsername() + " logged in.");
@@ -90,6 +92,7 @@ public class ClientHandler extends Thread {
                     break;
                 case LOGOUT:
                     Player.logout(request.getAuthToken());
+                    sendOnlineUsersToAll();
                     currentAuthToken = null;
                     break;
                 case CREATE_ACCOUNT:
@@ -101,6 +104,7 @@ public class ClientHandler extends Thread {
                     Player.createAccount(createAccountMsg.getUsername(), createAccountMsg.getPassword());
                     Player player = Player.getPlayerByUsername(createAccountMsg.getUsername());
                     if (player != null) {
+                        sendOnlineUsersToAll();
                         write(Request.makeAccount(player));
                         currentAuthToken = player.getAuthToken();
                         System.out.println(player.getUsername() + " created account.");
@@ -113,7 +117,7 @@ public class ClientHandler extends Thread {
                     Pair<String, String> msgPair = (Pair<String, String>) request.getObj();
                     GlobalChat.getInstance().addMessage(msgPair);
                     GlobalChat.save();
-                    sendGlobalChatMessageToOthers();
+                    sendGlobalChatRequestToOthers();
                     break;
                 case MATCH_REQUEST:
                     matchRequest = (MatchRequest) request.getObj();
@@ -143,7 +147,16 @@ public class ClientHandler extends Thread {
         matchHandler.start();
     }
 
-    private void sendGlobalChatMessageToOthers() { // what if two clients are for one user?
+    private void sendOnlineUsersToAll() {
+        sendRequestToAll(Request.makeOnlineUsersRequest(Player.getOnlineUsersName()));
+    }
+
+    private void sendRequestToAll(Request request) {
+        for (ClientHandler cl : clientHandlers)
+            cl.write(request);
+    }
+
+    private void sendGlobalChatRequestToOthers() { // what if two clients are for one user?
         for (ClientHandler cl : clientHandlers)
             if (!currentAuthToken.equals(cl.currentAuthToken))
                 cl.write(Request.makeGlobalChatMessage(GlobalChat.getInstance()));
@@ -153,11 +166,11 @@ public class ClientHandler extends Thread {
         write(Request.makeMessage(msg.getMessage()));
     }
 
-    private Player getPlayer() {
+    public Player getPlayer() {
         return Player.getPlayerByAuthToken(currentAuthToken);
     }
 
-    private void write(Request request) {
+    public void write(Request request) {
         System.out.println("writing...");
         try {
             oos.writeObject(request);

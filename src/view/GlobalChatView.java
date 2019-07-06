@@ -6,15 +6,20 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.util.Pair;
 import models.GlobalChat;
 
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GlobalChatView {
     private static GlobalChatView instance = new GlobalChatView();
@@ -31,6 +36,9 @@ public class GlobalChatView {
     private VBox messages = new VBox();
     private TextField input = new TextField();
     private Button back = new Button("BACK");
+    private ScrollPane scrollPane = new ScrollPane();
+    private VBox onlineUsers = new VBox();
+    private List<String> onlineUsersName = new ArrayList<>();
 
     void run() {
         View.getInstance().setScene(scene);
@@ -39,7 +47,7 @@ public class GlobalChatView {
     {
         scene.getStylesheets().add("view/stylesheets/global_chat_view.css");
 
-//        setBackground();
+        setBackground();
 
         draw();
 
@@ -50,9 +58,51 @@ public class GlobalChatView {
 
     private void draw() {
         back.relocate(10, 10);
-        messages.relocate(100, 100);
-        input.relocate(100, 700);
-        root.getChildren().addAll(messages, input, back);
+        drawMessagePane();
+        drawOnlineUsersPane();
+        root.getChildren().addAll(back, scrollPane, onlineUsers);
+    }
+
+    private void drawOnlineUsersPane() {
+        onlineUsers.relocate(950, 100);
+        onlineUsers.getChildren().clear();
+
+        for (String username : onlineUsersName)
+            drawOnlineUser(username);
+    }
+
+    private void drawOnlineUser(String username) {
+        Group group = new Group();
+        Rectangle rectangle = new Rectangle(250, 50);
+        rectangle.relocate(60, 0);
+        rectangle.setStyle("-fx-fill: rgba(255,255,255,0.45)");
+        Label name = new Label(username);
+        name.setStyle("-fx-text-fill: #4c80ff");
+        name.setFont(Font.font(12));
+        name.relocate(75, 3);
+        group.getChildren().addAll(rectangle, name);
+        try {
+            String n = Integer.toString(Math.abs(username.hashCode()) % 17 + 1);
+            ImageView icon = new ImageView(new Image(new FileInputStream("src/assets/profile_icons/icon_" + n + ".png")));
+            icon.setFitHeight(50);
+            icon.setFitWidth(50);
+            group.getChildren().add(icon);
+        } catch (IOException ex) {
+            View.printThrowable(ex);
+        }
+        onlineUsers.getChildren().add(group);
+    }
+
+    private void drawMessagePane() {
+        input.relocate(510, 700);
+        input.setPrefWidth(250);
+        messages.setSpacing(15);
+        scrollPane.relocate(450, 100);
+        scrollPane.setContent(messages);
+        scrollPane.setMaxHeight(560);
+        scrollPane.setMaxWidth(350);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        root.getChildren().addAll(input);
 
         drawMessages();
     }
@@ -65,12 +115,29 @@ public class GlobalChatView {
     private void drawMessage(Pair<String, String> msgPair) {
         if (msgPair == null)
             return;
-        HBox hBox = new HBox();
-        hBox.setSpacing(20);
+        Group group = new Group();
+
+        Rectangle rectangle = new Rectangle(250, 50);
+        rectangle.relocate(60, 0);
+        rectangle.setStyle("-fx-fill: rgba(255,255,255,0.45)");
         Label name = new Label(msgPair.getKey());
+        name.setStyle("-fx-text-fill: #4c80ff");
+        name.setFont(Font.font(12));
+        name.relocate(75, 3);
         Label msg = new Label(msgPair.getValue());
-        hBox.getChildren().addAll(name, msg);
-        messages.getChildren().add(hBox);
+        msg.relocate(75, 22);
+        msg.setFont(Font.font(16));
+        group.getChildren().addAll(rectangle, name, msg);
+        try {
+            String n = Integer.toString(Math.abs(msgPair.getKey().hashCode()) % 17 + 1);
+            ImageView icon = new ImageView(new Image(new FileInputStream("src/assets/profile_icons/icon_" + n + ".png")));
+            icon.setFitHeight(50);
+            icon.setFitWidth(50);
+            group.getChildren().add(icon);
+        } catch (IOException ex) {
+            View.printThrowable(ex);
+        }
+        messages.getChildren().add(group);
     }
 
     private void updateMessages() {
@@ -89,7 +156,7 @@ public class GlobalChatView {
     private void setBackground() {
         try {
             ImageView background = new ImageView(new Image(new FileInputStream
-                    ("src/assets/resources/scenes/load/scene_load_background@2x.jpg")));
+                    ("src/assets/resources/maps/battlemap3_background@2x.png")));
             background.fitWidthProperty().bind(scene.widthProperty());
             background.fitHeightProperty().bind(scene.heightProperty());
             root.getChildren().add(background);
@@ -110,5 +177,10 @@ public class GlobalChatView {
                 }
             }
         }.start();
+    }
+
+    public void setOnlineUsersName(List<String> onlineUsersName) {
+        this.onlineUsersName = onlineUsersName;
+        drawOnlineUsersPane();
     }
 }

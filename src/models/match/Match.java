@@ -1,7 +1,9 @@
 package models.match;
 
+import controller.menus.BattleHostRequests;
 import javafx.animation.TranslateTransition;
 import models.AIPlayer;
+import models.BattleAction;
 import models.Item.Collectable;
 import models.Item.Flag;
 import models.Player;
@@ -12,6 +14,7 @@ import view.Message;
 import view.View;
 
 import java.io.Serializable;
+import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +25,7 @@ public class Match implements Serializable {
     private static final int MOVE_RANGE = 2;
     private static final int DEFAULT_WINNING_PRIZE = 1000;
 
-    private BattleView battleView;
+    private transient BattleView battleView;
     private Player[] players = new Player[2];
     private Battlefield battlefield;
     private PlayerMatchInfo[] info = new PlayerMatchInfo[2];
@@ -36,9 +39,14 @@ public class Match implements Serializable {
     private int turn;  //  0 for player1 and 1 for player2
     private int turnCount = 1;
     private Card selectedCard;
-    private View view = View.getInstance();
+    private transient View view = View.getInstance();
     private Player winner;
     private Player loser;
+    private BattleHostRequests battleHostRequests;
+
+    public BattleView getBattleView() {
+        return battleView;
+    }
 
     public static Match getCurrentMatch() {
         return currentMatch;
@@ -62,6 +70,17 @@ public class Match implements Serializable {
         if (this.goalMode == GoalMode.HOLD_FLAG)
             this.flagCount = 1;
         initiateMatch();
+        battleHostRequests = new BattleHostRequests(this);
+    }
+
+    public void action(BattleAction battleAction) {
+        try {
+            Method method = BattleHostRequests.class.getDeclaredMethod(battleAction.getMethod(), battleAction.getArgsClasses());
+            method.setAccessible(true);
+            method.invoke(battleHostRequests, battleAction.getArguments());
+        } catch (Exception ex) {
+            View.printThrowable(ex);
+        }
     }
 
     public void setBattleView(BattleView battleView) {
@@ -80,13 +99,13 @@ public class Match implements Serializable {
         selectedCard = null;
     }
 
-    public boolean selectAttacker(String cardID) {
+    public void selectAttacker(String cardID, int x, int y) {
         for (Attacker a : info[turn].getGroundedAttackers())
             if (a.getCardIDInGame().equals(cardID)) {
                 selectedCard = a;
-                return true;
+                battleView.selectAttackerBoolean(x, y);
+                return;
             }
-        return false;
     }
 
     private boolean selectCollectable(String cardID) {
@@ -108,11 +127,6 @@ public class Match implements Serializable {
         return false;
     }
 
-    public void select(String cardID) {
-        if (!selectAttacker(cardID) && !selectCollectable(cardID) && !selectSpell(cardID))
-            view.printMessage(Message.CARD_OR_COLLECTABLE_ID_INVALID);
-    }
-
     public int getTurn() {
         return turn;
     }
@@ -123,41 +137,41 @@ public class Match implements Serializable {
         return (Collectable) selectedCard;
     }
 
-    public int moveCard(int x, int y) {
+    public void moveCard(int x, int y) {
         if (!isAnyCardSelected()) {
             selectedCard = null;
             view.printMessage(Message.NO_CARD_IS_SELECTED);
-            return 1;
+            battleView.moveOrAttack1(x, y);
         }
         Cell target = getCell(x, y);
         if (target == null) {
             selectedCard = null;
-            return 1;
+            battleView.moveOrAttack1(x, y);
         }
         if (!isMoveTargetValid(target)) {
             view.printMessage(Message.INVALID_MOVE_TARGET);
             selectedCard = null;
-            return 1;
+            battleView.moveOrAttack1(x, y);
         }
         if (!isSelectedCardAttacker()) {
             selectedCard = null;
-            return 1;
+            battleView.moveOrAttack1(x, y);
         }
         Attacker attacker = (Attacker) selectedCard;
         if (!attacker.canMove()) {
             view.printMessage(Message.ATTACKER_CANT_MOVE);
             selectedCard = null;
-            return 1;
+            battleView.moveOrAttack1(x, y);
         }
         if (isPathClosed(attacker.getCurrentCell(), target)) {
             view.printMessage(Message.INVALID_MOVE_TARGET);
             selectedCard = null;
-            return 1;
+            battleView.moveOrAttack1(x, y);
         }
         if (attacker.isStunned()) {
             view.printMessage(Message.STUNNED);
             selectedCard = null;
-            return 1;
+            battleView.moveOrAttack1(x, y);
         }
 
         attacker.getCurrentCell().setEmpty();
@@ -168,7 +182,7 @@ public class Match implements Serializable {
         System.out.println("RETURN 0");
         battleView.drawCollectables();
         battleView.drawFlags();
-        return 0;
+        battleView.moveOrAttack0(x, y);
     }
 
     private boolean isMoveTargetValid(Cell target) {
@@ -193,8 +207,12 @@ public class Match implements Serializable {
         return true;
     }
 
-    public int attack(int x, int y) {
-        return attack(getCell(x, y).getCurrentAttacker().getCardIDInGame());
+    public void attack(int x, int y) {
+        int r = attack(getCell(x, y).getCurrentAttacker().getCardIDInGame());
+        if (r == 1)
+            battleView.moveOrAttack3(x, y);
+        else if (r == 0)
+            battleView.moveOrAttack2(x, y);
     }
 
     public int attack(String oppID) {
@@ -424,6 +442,9 @@ public class Match implements Serializable {
 
     public void insertCard(String cardName, int x, int y) {
         Attacker attacker = info[turn].getHand().getAttacker(cardName);
+        for (Card card : info[turn].getHand().getCards())
+            System.out.println("hand: " + card.getName());
+        System.out.println(cardName);
         if (attacker == null) {
             view.printMessage(Message.NO_CARD_WITH_THIS_NAME);
             return;
@@ -457,7 +478,7 @@ public class Match implements Serializable {
         }
 
         battleView.drawHand();
-        //battleView.drawAttackers();
+        battleView.drawAttackers();
         battleView.drawMana();
     }
 
@@ -904,5 +925,7 @@ public class Match implements Serializable {
         return players;
     }
 
-
+    public void setInfo(PlayerMatchInfo[] info) {
+        this.info = info;
+    }
 }
