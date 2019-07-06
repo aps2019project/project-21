@@ -7,6 +7,7 @@ import models.match.MatchRequest;
 import network.message.CreateAccountRequest;
 import network.message.LoginRequest;
 import network.message.Request;
+import view.GlobalChatView;
 import view.View;
 
 import java.io.IOException;
@@ -18,10 +19,10 @@ import java.util.List;
 
 public class ClientHandler extends Thread {
     private static List<ClientHandler> clientHandlers = new ArrayList<>();
+
     private Socket client;
     private ObjectInputStream ois;
     private ObjectOutputStream oos;
-    private Request lastReq;
     private String currentAuthToken;
     private MatchRequest matchRequest;
     private MatchHandler matchHandler;
@@ -43,26 +44,31 @@ public class ClientHandler extends Thread {
         while (!client.isClosed()) {
             try {
                 Request request = read();
-                lastReq = request;
                 if (request != null)
                     System.out.println("request received:  " + request.getReqType());
                 handleRequest(request);
             } catch (Exception ex) {
-                View.printThrowable(ex);
+                View.err("client disconnected.");
                 break;
             }
         }
+        finish();
+    }
+
+    private void finish() {
         try {
             client.close();
             ois.close();
             oos.close();
         } catch (IOException ex) {
-            View.printThrowable(ex);
+            //
         }
         if (currentAuthToken != null)
             Player.logout(currentAuthToken);
-        sendOnlineUsersToAll();
         clientHandlers.remove(this);
+        sendOnlineUsersToAll();
+        if (matchHandler != null)
+            matchHandler.finish();
     }
 
     private void handleRequest(Request request) {
@@ -126,6 +132,12 @@ public class ClientHandler extends Thread {
                 case READY:
                     matchHandler.addRequest(this, request);
                     break;
+                case WITHDRAW:
+                    setMatchNull();
+                    break;
+                case TAKE_ONLINE_USERS:
+                    GlobalChatView.getInstance().setOnlineUsersName((List<String>) request.getObj());
+                    break;
             }
     }
 
@@ -148,7 +160,9 @@ public class ClientHandler extends Thread {
     }
 
     private void sendOnlineUsersToAll() {
-        sendRequestToAll(Request.makeOnlineUsersRequest(Player.getOnlineUsersName()));
+        Request request = Request.makeOnlineUsersRequest(Player.getOnlineUsersName());
+        sendRequestToAll(request);
+        handleRequest(request);  // for host itself!
     }
 
     private void sendRequestToAll(Request request) {
@@ -170,7 +184,12 @@ public class ClientHandler extends Thread {
         return Player.getPlayerByAuthToken(currentAuthToken);
     }
 
-    public void write(Request request) {
+    void setMatchNull() {
+        this.matchRequest = null;
+        this.matchHandler = null;
+    }
+
+    void write(Request request) {
         System.out.println("writing...");
         try {
             oos.writeObject(request);

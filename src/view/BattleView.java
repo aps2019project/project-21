@@ -63,7 +63,7 @@ public class BattleView {
     private Label cooldown = new Label();
     private Group collectables = new Group();
     private Group flags = new Group();
-    private ArrayBlockingQueue<BattleAction> battleActions = new ArrayBlockingQueue<>(10000);
+    private ArrayBlockingQueue<BattleAction> battleActions = new ArrayBlockingQueue<>(1000);
 
     public void run() {
         View.getInstance().setScene(scene);

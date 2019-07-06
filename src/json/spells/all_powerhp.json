@@ -34,6 +34,7 @@
     "cardIDInGame": null,
     "price": 2000,
     "manaCost": 4,
-    "currentCell": null
+    "currentCell": null,
+    "count": 10
   }
 }

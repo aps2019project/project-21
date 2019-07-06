@@ -1,6 +1,8 @@
 package network;
 
+import com.gilecode.yagson.YaGson;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 import json.Initializer;
@@ -18,16 +20,30 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class Client extends Application {
+    private static final int DEFAULT_PORT = 8000;
     private static Socket socket;
     private static ObjectInputStream ois;
     private static ObjectOutputStream oos;
 
     public static void main(String[] args) {
+        int port;
+
         try {
-            socket = new Socket("localhost", 7777);
+            String json = new String(Files.readAllBytes(Paths.get("src/json/port/port.config")), StandardCharsets.UTF_8);
+            port = new YaGson().fromJson(json, int.class);
+        } catch (IOException e) {
+            View.printThrowable(e);
+            port = DEFAULT_PORT;
+        }
+
+        try {
+            socket = new Socket("localhost", port);
             oos = new ObjectOutputStream(socket.getOutputStream());
             ois = new ObjectInputStream(socket.getInputStream());
         } catch (IOException ex) {
@@ -85,18 +101,12 @@ public class Client extends Application {
             case GLOBAL_CHAT:
                 GlobalChat.init((GlobalChat) request.getObj());
                 break;
-            case GLOBAL_CHAT_MESSAGE:
-                GlobalChat.getInstance().addMessage((Pair<String, String>) request.getObj());
-                break;
             case MESSAGE:
                 String msg = (String) request.getObj();
                 View.getInstance().addPopupMessage(msg);
                 break;
             case INTRODUCE_OPP:
                 WaitingForOppView.getCurrent().takeOppName((String) request.getObj());
-                break;
-            case WITHDRAW:
-                //
                 break;
             case START_MATCH_FIRST:
                 WaitingForOppView.getCurrent().setOpponent((Player) request.getObj(), true);
@@ -109,6 +119,12 @@ public class Client extends Application {
                 break;
             case MATCH_INFO:
                 Match.getCurrentMatch().setInfo((PlayerMatchInfo[]) request.getObj());
+                break;
+            case WITHDRAW:
+                Platform.runLater(() -> View.getInstance().back());
+                break;
+            case GLOBAL_CHAT_MESSAGE:
+                GlobalChat.getInstance().addMessage((Pair<String, String>) request.getObj());
                 break;
             case TAKE_ONLINE_USERS:
                 GlobalChatView.getInstance().setOnlineUsersName((List<String>) request.getObj());
@@ -133,7 +149,7 @@ public class Client extends Application {
         try {
             return (Request) ois.readObject();
         } catch (Exception ex) {
-            View.printThrowable(ex);
+            View.err("cannot read.");
             return null;
         }
     }

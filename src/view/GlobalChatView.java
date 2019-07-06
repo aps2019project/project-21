@@ -58,14 +58,21 @@ public class GlobalChatView {
 
     private void draw() {
         back.relocate(10, 10);
+        back.setFont(Font.font(20));
         drawMessagePane();
         drawOnlineUsersPane();
         root.getChildren().addAll(back, scrollPane, onlineUsers);
     }
 
     private void drawOnlineUsersPane() {
-        onlineUsers.relocate(950, 100);
+        onlineUsers.relocate(1000, 100);
+        onlineUsers.setSpacing(15);
         onlineUsers.getChildren().clear();
+        Label label = new Label("ONLINE USERS");
+        label.setStyle("-fx-text-fill: white");
+        label.setFont(Font.font(30));
+        label.relocate(50, 0);
+        onlineUsers.getChildren().add(label);
 
         for (String username : onlineUsersName)
             drawOnlineUser(username);
@@ -73,14 +80,11 @@ public class GlobalChatView {
 
     private void drawOnlineUser(String username) {
         Group group = new Group();
-        Rectangle rectangle = new Rectangle(250, 50);
-        rectangle.relocate(60, 0);
-        rectangle.setStyle("-fx-fill: rgba(255,255,255,0.45)");
         Label name = new Label(username);
-        name.setStyle("-fx-text-fill: #4c80ff");
-        name.setFont(Font.font(12));
-        name.relocate(75, 3);
-        group.getChildren().addAll(rectangle, name);
+        name.setStyle("-fx-text-fill: white");
+        name.setFont(Font.font(22));
+        name.relocate(80, 5);
+        group.getChildren().addAll(name);
         try {
             String n = Integer.toString(Math.abs(username.hashCode()) % 17 + 1);
             ImageView icon = new ImageView(new Image(new FileInputStream("src/assets/profile_icons/icon_" + n + ".png")));
@@ -173,6 +177,7 @@ public class GlobalChatView {
             public void handle(long now) {
                 if (now - last > 100) {
                     updateMessages();
+                    drawOnlineUsersPane();
                     last = now;
                 }
             }
@@ -181,6 +186,5 @@ public class GlobalChatView {
 
     public void setOnlineUsersName(List<String> onlineUsersName) {
         this.onlineUsersName = onlineUsersName;
-        drawOnlineUsersPane();
     }
 }

@@ -3,10 +3,12 @@ package models;
 import json.CardMaker;
 import models.Item.Usable;
 import models.card.Card;
+import models.match.GameMode;
 import models.match.Match;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Player implements Serializable {
@@ -29,6 +31,13 @@ public class Player implements Serializable {
         this.password = password;
     }
 
+    public static List<Player> getPlayersSortedForScoreboard() {
+        List<Player> list = new ArrayList<>(players);
+        list.sort(Comparator.comparingInt(Player::getMultiplayerWins).reversed()
+                .thenComparing(Player::getMultiplayerLosses).thenComparing(Player::getUsername));
+        return list;
+    }
+
     public static void setAuthNulls() {
         for (Player player : players)
             player.authToken = null;
@@ -44,6 +53,26 @@ public class Player implements Serializable {
 
     public int getWins() {
         return wins;
+    }
+
+    public int getMultiplayerWins() {
+        int ret = 0;
+        for (Match match : matchHistory)
+            if (match.getGameMode() == GameMode.MULTI_PLAYER)
+                if (match.getWinner() != null)
+                    if (this.username.equals(match.getWinner().username))
+                        ret++;
+        return ret;
+    }
+
+    public int getMultiplayerLosses() {
+        int ret = 0;
+        for (Match match : matchHistory)
+            if (match.getGameMode() == GameMode.MULTI_PLAYER)
+                if (match.getLoser() != null)
+                    if (this.username.equals(match.getLoser().username))
+                        ret++;
+        return ret;
     }
 
     public Player() {

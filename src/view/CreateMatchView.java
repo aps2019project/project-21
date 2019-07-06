@@ -77,14 +77,7 @@ public class CreateMatchView {
     }
 
     private void draw() {
-        try {
-            back = new ImageView(new Image(new FileInputStream
-                    ("src/assets/resources/ui/button_back_corner@2x.png")));
-            back.setFitWidth(90);
-            back.setFitHeight(95);
-        } catch (IOException e) {
-            View.printThrowable(e);
-        }
+        drawBack();
 
         drawSingleOrMultiplayer();
 
@@ -99,6 +92,17 @@ public class CreateMatchView {
         drawCustomMode();
 
         root.getChildren().add(back);
+    }
+
+    private void drawBack() {
+        try {
+            back = new ImageView(new Image(new FileInputStream
+                    ("src/assets/resources/ui/button_back_corner@2x.png")));
+            back.setFitWidth(90);
+            back.setFitHeight(95);
+        } catch (IOException e) {
+            View.printThrowable(e);
+        }
     }
 
     private void drawSingleOrMultiplayer() {

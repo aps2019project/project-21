@@ -30,6 +30,7 @@
       "collectable": null,
       "flag": null,
       "currentAttacker": null
-    }
+    },
+    "count": 10
   }
 }

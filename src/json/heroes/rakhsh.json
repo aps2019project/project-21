@@ -39,7 +39,8 @@
       "cardIDInGame": null,
       "price": 0,
       "manaCost": 1,
-      "currentCell": null
+      "currentCell": null,
+      "count": 0
     },
     "appliedEffects": [],
     "attackRange": 1,
@@ -63,6 +64,7 @@
       "collectable": null,
       "flag": null,
       "currentAttacker": null
-    }
+    },
+    "count": 10
   }
 }

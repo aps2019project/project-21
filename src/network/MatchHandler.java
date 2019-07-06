@@ -16,12 +16,12 @@ public class MatchHandler extends Thread {
     private Player player1;
     private Player player2;
     private MatchRequest matchRequest;
-    private ArrayBlockingQueue<Pair<ClientHandler, Request>> requests = new ArrayBlockingQueue<>(10000);
+    private ArrayBlockingQueue<Pair<ClientHandler, Request>> requests = new ArrayBlockingQueue<>(1000);
     private int readyCount;
     private Match match;
     private boolean isEnded;
 
-    public MatchHandler(ClientHandler first, ClientHandler second, MatchRequest matchRequest) {
+    MatchHandler(ClientHandler first, ClientHandler second, MatchRequest matchRequest) {
         this.first = first;
         this.second = second;
         this.matchRequest = matchRequest;
@@ -54,8 +54,8 @@ public class MatchHandler extends Thread {
                 break;
             case WITHDRAW:
                 isEnded = true;
-                first.write(Request.makeWithdrawRequest());
-                second.write(Request.makeWithdrawRequest());
+                getOther(cl).write(Request.makeWithdrawRequest());
+                finish();
                 break;
             case BATTLE_ACTION:
                 handleAction((BattleAction) request.getObj());
@@ -63,10 +63,20 @@ public class MatchHandler extends Thread {
         }
     }
 
+    void finish() {
+        first.setMatchNull();
+        second.setMatchNull();
+    }
+
     private void handleAction(BattleAction battleAction) {
         first.write(Request.makeBattleActionRequest(battleAction));
         second.write(Request.makeBattleActionRequest(battleAction));
-//        match.action(battleAction);
+    }
+
+    private ClientHandler getOther(ClientHandler cl) {
+        if (first.getPlayer() == cl.getPlayer())
+            return second;
+        return first;
     }
 
     private void startMatch() {
@@ -87,7 +97,7 @@ public class MatchHandler extends Thread {
 //        battleView.run();
     }
 
-    public void addRequest(ClientHandler cl, Request request) {
+    void addRequest(ClientHandler cl, Request request) {
         System.out.println(5555);
         requests.add(new Pair<>(cl, request));
     }

@@ -799,18 +799,6 @@ public class Match implements Serializable {
         return -1;
     }
 
-    public void showMP() {
-        System.out.println(info[turn].getMp());
-    }
-
-    public void showSelectedCard() {
-        if (selectedCard == null) {
-            view.printMessage(Message.NO_CARD_IS_SELECTED);
-            return;
-        }
-        view.showCardInfo(selectedCard);
-    }
-
     public void endTurn() {
         isMatchEnded();
         prepareNextRound();
@@ -862,32 +850,8 @@ public class Match implements Serializable {
             pInfo.setMp(3 + (turnCount) / 2);
     }
 
-    public void showTurn() {
-        System.out.println(getThisTurnsPlayer().getUsername());
-    }
-
-    public void unSelect() {
+    private void unSelect() {
         this.selectedCard = null;
-    }
-
-    public void showGraveyardCards() {
-        for (Card card : info[turn].getGraveyard())
-            showCardInfoInGraveyard(card);
-    }
-
-    public void showCardInfoInGraveyard(String cardID) {
-        Card card = info[turn].getGraveyardCard(cardID);
-        if (card == null) {
-            view.printMessage(Message.CARD_ID_INVALID);
-            return;
-        }
-        view.printGraveyardCard(card);
-    }
-
-    private void showCardInfoInGraveyard(Card card) {
-        if (card == null)
-            return;
-        view.printGraveyardCard(card);
     }
 
     public Player getWinner() {
@@ -927,5 +891,9 @@ public class Match implements Serializable {
 
     public void setInfo(PlayerMatchInfo[] info) {
         this.info = info;
+    }
+
+    public GameMode getGameMode() {
+        return gameMode;
     }
 }

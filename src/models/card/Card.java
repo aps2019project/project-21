@@ -19,6 +19,7 @@ public class Card  implements Serializable {
     protected int price;
     protected int manaCost;
     protected Cell currentCell;
+    protected int count;  // = capacity
 
     public Card() {
 
@@ -180,4 +181,11 @@ public class Card  implements Serializable {
         return currentCell;
     }
 
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
 }
