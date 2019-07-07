@@ -7211,7 +7211,7 @@
         "view": null,
         "winner": "@root",
         "loser": "@root.matchHistory.0.players.1",
-        "battleHostRequests": null
+        "hostBattleMenu": null
       },
       "@.0",
       {
@@ -11238,7 +11238,7 @@
         "view": null,
         "winner": "@root",
         "loser": "@root.matchHistory.2.players.1",
-        "battleHostRequests": null
+        "hostBattleMenu": null
       },
       "@.2"
     ],

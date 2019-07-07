@@ -17,6 +17,8 @@ public enum RequestType {
     BATTLE_ACTION,
     MATCH_INFO,
     TAKE_ONLINE_USERS,
+    BUY,
+    SELL,
 
     ;
 }

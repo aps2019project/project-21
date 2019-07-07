@@ -72,21 +72,19 @@ public class Host extends Application {
     }
 
     private static void initialize() {
-        new Thread(() -> {
-            try {
-                Player.addPlayer(initPlayers());
-                Player.setCurrentPlayer(Player.getPlayerByUsername("host"));
-                Player.setAuthNulls();
-                GlobalChat.init(initGlobalChat());
-                Hero.addHero(initHeroes());
-                Minion.addMinion(initMinions());
-                Spell.addSpell(initSpells());
-                Collectable.addCollectable(initCollectables());
-                Usable.addUsable(initUsables());
-            } catch (IOException ex) {
-                View.printThrowable(ex);
-            }
-        }).start();
+        try {
+            Player.addPlayer(initPlayers());
+            Player.setCurrentPlayer(Player.getPlayerByUsername("host"));
+            Player.setAuthNulls();
+            GlobalChat.init(initGlobalChat());
+            Hero.addHero(initHeroes());
+            Minion.addMinion(initMinions());
+            Spell.addSpell(initSpells());
+            Collectable.addCollectable(initCollectables());
+            Usable.addUsable(initUsables());
+        } catch (IOException ex) {
+            View.printThrowable(ex);
+        }
     }
 
     private void finish() {

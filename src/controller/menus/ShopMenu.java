@@ -3,20 +3,12 @@ package controller.menus;
 import models.Item.Usable;
 import models.Player;
 import models.card.Card;
+import network.Client;
+import network.message.Request;
 
 import java.util.List;
 
 public class ShopMenu extends Menu {
-    private static ShopMenu instance = new ShopMenu();
-
-    public static Menu getInstance() {
-        return instance;
-    }
-
-    private ShopMenu() {
-    }
-
-
     public static Card search(String cardName) {
         return Card.getCardByName(cardName);
     }
@@ -37,8 +29,8 @@ public class ShopMenu extends Menu {
         if (card.getClass().equals(Usable.class) && !Player.getCurrentPlayer().hasLessThanThreeItems()) {
             return "Has three items";
         }
-        Player.getCurrentPlayer().buy(card);
-        return "Buy successful";
+        Client.write(Request.makeBuyRequest(cardName));
+        return null;
     }
 
     public static String sell(int collectionID) {
@@ -47,7 +39,7 @@ public class ShopMenu extends Menu {
         if (card == null) {
             return "You don't have this card";
         }
-        Player.getCurrentPlayer().sell(card);
-        return "Sell successful";
+        Client.write(Request.makeSellRequest(Integer.toString(collectionID)));
+        return null;
     }
 }

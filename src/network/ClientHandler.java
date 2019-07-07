@@ -1,5 +1,6 @@
 package network;
 
+import controller.menus.HostShopMenu;
 import javafx.util.Pair;
 import models.GlobalChat;
 import models.Player;
@@ -90,7 +91,7 @@ public class ClientHandler extends Thread {
                         Player player = Player.getPlayerByUsername(loginMsg.getUsername());
                         if (player != null) {
                             sendOnlineUsersToAll();
-                            write(Request.makeAccount(player));
+                            write(Request.makePlayer(player));
                             currentAuthToken = player.getAuthToken();
                             System.out.println(player.getUsername() + " logged in.");
                         }
@@ -111,7 +112,7 @@ public class ClientHandler extends Thread {
                     Player player = Player.getPlayerByUsername(createAccountMsg.getUsername());
                     if (player != null) {
                         sendOnlineUsersToAll();
-                        write(Request.makeAccount(player));
+                        write(Request.makePlayer(player));
                         currentAuthToken = player.getAuthToken();
                         System.out.println(player.getUsername() + " created account.");
                     }
@@ -137,6 +138,12 @@ public class ClientHandler extends Thread {
                     break;
                 case TAKE_ONLINE_USERS:
                     GlobalChatView.getInstance().setOnlineUsersName((List<String>) request.getObj());
+                    break;
+                case BUY:
+                    HostShopMenu.buy(getPlayer(), (String) request.getObj());
+                    break;
+                case SELL:
+                    HostShopMenu.sell(getPlayer(), Integer.parseInt((String) request.getObj()));
                     break;
             }
     }
@@ -189,7 +196,11 @@ public class ClientHandler extends Thread {
         this.matchHandler = null;
     }
 
-    void write(Request request) {
+    public static List<ClientHandler> getClientHandlers() {
+        return clientHandlers;
+    }
+
+    public void write(Request request) {
         System.out.println("writing...");
         try {
             oos.writeObject(request);

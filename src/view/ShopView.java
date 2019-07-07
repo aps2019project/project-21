@@ -84,7 +84,7 @@ public class ShopView {
 
     {
         try {
-            volume.setImage(new Image(new FileInputStream("src\\assets\\volume.png")));
+            volume.setImage(new Image(new FileInputStream("src/assets/volume.png")));
             volume.setScaleY(0.1);
             volume.setScaleX(0.1);
         } catch (IOException ex) {
@@ -106,7 +106,6 @@ public class ShopView {
         draw();
 
         setOnActions();
-
     }
 
     private void setBackground() {
@@ -237,10 +236,6 @@ public class ShopView {
         scrollPane.relocate(220, 70);
         scrollPane.setMaxHeight(500);
         scrollPane.setMaxWidth(800);
-        scrollPane.setStyle("-fx-background-color: transparent");
-        scrollPane.setStyle("}.scroll-pane > .viewport {\n" +
-                "   -fx-background-color: transparent;}\n" +
-                "{");
         items.setStyle("-fx-background-color: transparent");
 
     }
@@ -253,28 +248,28 @@ public class ShopView {
                 case 1:
                     for (Minion minion : thisPlayer.getCollection().getMinions()) {
                         if (minion != null) {
-                            CardView.showCard(minion, items, true);
+                            CardView.showCard(minion, items, true, false);
                         }
                     }
                     break;
                 case 2:
                     for (Hero hero : thisPlayer.getCollection().getHeroes()) {
                         if (hero != null) {
-                            CardView.showCard(hero, items, true);
+                            CardView.showCard(hero, items, true, false);
                         }
                     }
                     break;
                 case 3:
                     for (Spell spell : thisPlayer.getCollection().getSpells()) {
                         if (spell != null) {
-                            CardView.showCard(spell, items, true);
+                            CardView.showCard(spell, items, true, false);
                         }
                     }
                     break;
                 case 4:
                     for (Usable usable : thisPlayer.getCollection().getUsables()) {
                         if (usable != null) {
-                            CardView.showCard(usable, items, true);
+                            CardView.showCard(usable, items, true, false);
                         }
                     }
                     break;
@@ -284,28 +279,28 @@ public class ShopView {
                 case 1:
                     for (Minion minion : Minion.getMinions()) {
                         if (minion != null) {
-                            CardView.showCard(minion, items, true);
+                            CardView.showCard(minion, items, true, false);
                         }
                     }
                     break;
                 case 2:
                     for (Hero hero : Hero.getHeroes()) {
                         if (hero != null) {
-                            CardView.showCard(hero, items, true);
+                            CardView.showCard(hero, items, true, false);
                         }
                     }
                     break;
                 case 3:
                     for (Spell spell : Spell.getSpells()) {
                         if (spell != null) {
-                            CardView.showCard(spell, items, true);
+                            CardView.showCard(spell, items, true, false);
                         }
                     }
                     break;
                 case 4:
                     for (Usable usable : Usable.getUsables()) {
                         if (usable != null) {
-                            CardView.showCard(usable, items, true);
+                            CardView.showCard(usable, items, true, false);
                         }
                     }
                     break;
@@ -584,7 +579,7 @@ public class ShopView {
 
                     selectedName = name;
                     selectedId = -1;
-                    searchedCard = CardView.shopCardGroup(message);
+                    searchedCard = CardView.shopCardGroup(message, false);
                     searchedCard.relocate(1000, 100);
 
                     root.getChildren().addAll(searchedCard);
@@ -598,7 +593,7 @@ public class ShopView {
 
                     selectedId = message.getCollectionID();
                     selectedName = null;
-                    searchedCard = CardView.shopCardGroup(message);
+                    searchedCard = CardView.shopCardGroup(message, false);
 
                     searchedCard.relocate(1000, 100);
                     root.getChildren().addAll(searchedCard);
@@ -619,7 +614,7 @@ public class ShopView {
 
                     selectedName = name;
                     selectedId = -1;
-                    searchedCard = CardView.shopCardGroup(message);
+                    searchedCard = CardView.shopCardGroup(message, false);
                     searchedCard.relocate(1000, 100);
 
                     root.getChildren().addAll(searchedCard);
@@ -633,7 +628,7 @@ public class ShopView {
 
                     selectedId = message.getCollectionID();
                     selectedName = null;
-                    searchedCard = CardView.shopCardGroup(message);
+                    searchedCard = CardView.shopCardGroup(message, false);
 
                     searchedCard.relocate(1000, 100);
                     root.getChildren().addAll(searchedCard);
@@ -650,9 +645,8 @@ public class ShopView {
                 } else {
                     String mes = ShopMenu.buy(selectedName);
                     View.getInstance().popup(mes);
-                    if (mes.equals("Buy successful")) {
-                        drake.setText("DRAKE : " + Player.getCurrentPlayer().getDrake());
-                    }
+                    drake.setText("DRAKE : " + Player.getCurrentPlayer().getDrake());
+                    showCards();
                 }
             } else {
                 if (selectedId == -1) {
@@ -660,9 +654,7 @@ public class ShopView {
                 } else {
                     String mes = ShopMenu.sell(selectedId);
                     View.getInstance().popup(mes);
-                    if (mes.equals("Sell successful")) {
-                        drake.setText("DRAKE : " + Player.getCurrentPlayer().getDrake());
-                    }
+                    drake.setText("DRAKE : " + Player.getCurrentPlayer().getDrake());
                     showCards();
                 }
             }
@@ -680,7 +672,7 @@ public class ShopView {
                 } else {
                     String mes = ShopMenu.buy(selectedName);
                     View.getInstance().popup(mes);
-                    if (mes.equals("Buy successful")) {
+                    if (mes != null && mes.equals("Buy successful")) {
                         drake.setText("DRAKE : " + Player.getCurrentPlayer().getDrake());
                     }
                 }
@@ -690,7 +682,7 @@ public class ShopView {
                 } else {
                     String mes = ShopMenu.sell(selectedId);
                     View.getInstance().popup(mes);
-                    if (mes.equals("Sell successful")) {
+                    if (mes != null && mes.equals("Sell successful")) {
                         drake.setText("DRAKE : " + Player.getCurrentPlayer().getDrake());
                     }
                     showCards();

@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Card  implements Serializable {
+public class Card implements Serializable {
     private static int cardCount = 100;
     protected String name;
     protected int id;
@@ -100,19 +100,19 @@ public class Card  implements Serializable {
         return getCardByID(Integer.parseInt(id));
     }
 
-    public static Card getCardByIDInGame(String id){
+    public static Card getCardByIDInGame(String id) {
         List<Card> cards = Match.getCurrentMatch().getPlayersMatchInfo()[0].getAllCards();
         List<Card> cards1 = Match.getCurrentMatch().getPlayersMatchInfo()[1].getAllCards();
-        for(Card card : cards){
-            if(card.getCardIDInGame() == null)
+        for (Card card : cards) {
+            if (card.getCardIDInGame() == null)
                 continue;
-            if(card.getCardIDInGame().equals(id))
+            if (card.getCardIDInGame().equals(id))
                 return card;
         }
-        for(Card card : cards1){
-            if(card.getCardIDInGame() == null)
+        for (Card card : cards1) {
+            if (card.getCardIDInGame() == null)
                 continue;
-            if(card.getCardIDInGame().equals(id))
+            if (card.getCardIDInGame().equals(id))
                 return card;
         }
         return null;
@@ -183,6 +183,14 @@ public class Card  implements Serializable {
 
     public int getCount() {
         return count;
+    }
+
+    public void decreaseCount() {
+        count = Math.max(0, count - 1);
+    }
+
+    public void increaseCount() {
+        count++;
     }
 
     public void setCount(int count) {

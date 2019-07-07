@@ -5,6 +5,8 @@ import models.Item.Usable;
 import models.card.Card;
 import models.match.GameMode;
 import models.match.Match;
+import network.ClientHandler;
+import network.message.Request;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -43,8 +45,12 @@ public class Player implements Serializable {
             player.authToken = null;
     }
 
-    private void setAuthToken() {
+    private void takeAuthToken() {
         authToken = Integer.toString(loginCount++);
+    }
+
+    public void setAuthToken(String authToken) {
+        this.authToken = authToken;
     }
 
     public String getAuthToken() {
@@ -175,9 +181,20 @@ public class Player implements Serializable {
             return false;
         if (!player.password.equals(password))
             return false;
-        player.setAuthToken();
+        player.takeAuthToken();
         setCurrentPlayer(player);
         return true;
+    }
+
+    public static void update(Player player) {
+        Player p = getPlayerByUsername(player.username);
+        if (p == null) {
+            addPlayer(player);
+            return;
+        }
+        players.remove(p);
+        player.setAuthToken(p.authToken);
+        addPlayer(player);
     }
 
     public static void addPlayer(Player player) {
@@ -212,14 +229,30 @@ public class Player implements Serializable {
         return this.collection.hasLessThanThreeItems();
     }
 
+    private ClientHandler getCL() {
+        for (ClientHandler cl : ClientHandler.getClientHandlers())
+            if (cl.getPlayer() != null && username.equals(cl.getPlayer().getUsername()))
+                return cl;
+        return null;
+    }
+
     public void buy(Card card) {
         if (card == null || drake < card.getPrice())
             return;
         if (card.getClass().equals(Usable.class) && !hasLessThanThreeItems())
             return;
+        if (card.getCount() <= 0) {
+            this.getCL().write(Request.makeMessage("OUT OF STOCK!"));
+            return;
+        }
         drake -= card.getPrice();
+        card.decreaseCount();
+        CardMaker.saveToFile(card);
         card = CardMaker.deepCopy(card, Card.class);
         collection.addCard(card);
+        this.getCL().write(Request.makeMessage("BUY SUCCESSFUL"));
+        this.getCL().write(Request.makePlayer(this));
+        savePlayer(this);
     }
 
     public void sell(Card card) {
@@ -229,6 +262,9 @@ public class Player implements Serializable {
             return;
         collection.removeCard(card);
         drake += card.getPrice();
+        Card.getCardByName(card.getName()).increaseCount();  // todo: test this for custom cards.
+        this.getCL().write(Request.makeMessage("SELL SUCCESSFUL"));
+        this.getCL().write(Request.makePlayer(this));
     }
 
     public void createDeck(String deckName) {

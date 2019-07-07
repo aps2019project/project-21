@@ -17,10 +17,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 class CardView {
-    static void showCard(Card card, TilePane items, boolean shop) {
+    static void showCard(Card card, TilePane items, boolean shop, boolean host) {
         Group ret;
         if (shop) {
-            ret = shopCardGroup(card);
+            ret = shopCardGroup(card, host);
         } else {
             ret = collectionCardGroup(card);
         }
@@ -134,7 +134,7 @@ class CardView {
         }
     }
 
-    static Group shopCardGroup(Card card) {
+    static Group shopCardGroup(Card card, boolean host) {
         if (card instanceof Attacker) {
             Group ret = new Group();
             try {
@@ -162,6 +162,8 @@ class CardView {
                 ImageView mp = new ImageView(new Image(new FileInputStream
                         ("src\\assets\\cards\\mana.png")));
                 Label MP = new Label(Integer.toString(card.getPrice()));
+                if (host)
+                    MP.setText(Integer.toString(card.getCount()));
                 MP.setFont(Font.font(14));
                 MP.relocate(7, 22);
 
@@ -210,6 +212,8 @@ class CardView {
                 ImageView mp = new ImageView(new Image(new FileInputStream
                         ("src\\assets\\cards\\mana.png")));
                 Label MP = new Label(Integer.toString(card.getPrice()));
+                if (host)
+                    MP.setText(Integer.toString(card.getCount()));
                 MP.setFont(Font.font(14));
                 MP.relocate(7, 22);
 
@@ -248,7 +252,7 @@ class CardView {
             shopView.setSelectedId(-1);
             shopView.setSelectedName(card.getName());
         }
-        Group ret = shopCardGroup(card);
+        Group ret = shopCardGroup(card, false);
         ret.relocate(1000, 100);
 
         shopView.getRoot().getChildren().remove(shopView.getSearchedCard());

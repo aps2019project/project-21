@@ -53,7 +53,7 @@ public class HostView {
     }
 
     private void draw() {
-        options.getChildren().addAll(shop, scoreboard, onlineUsers);
+        options.getChildren().addAll(shop, scoreboard, onlineUsers, exit);
         options.relocate(150, 170);
         options.setSpacing(7);
 
@@ -69,7 +69,7 @@ public class HostView {
         save.setOnAction(event -> AccountMenu.getInstance().save());
         exit.setOnAction(event -> View.getInstance().exit());
         shop.setOnAction(event -> {
-            ShopView.getInstance().run();
+            HostShopView.run();
             VoicePlay.setThisMenu("shop");
         });
         scoreboard.setOnAction(event -> Scoreboard.run());

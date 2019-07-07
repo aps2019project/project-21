@@ -2,10 +2,10 @@ package controller.menus;
 
 import models.match.Match;
 
-public class BattleHostRequests extends Menu {
+public class HostBattleMenu extends Menu {
     private Match match;
 
-    public BattleHostRequests(Match match) {
+    public HostBattleMenu(Match match) {
         this.match = match;
     }
 

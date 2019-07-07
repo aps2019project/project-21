@@ -1,6 +1,6 @@
 package models.match;
 
-import controller.menus.BattleHostRequests;
+import controller.menus.HostBattleMenu;
 import javafx.animation.TranslateTransition;
 import models.AIPlayer;
 import models.BattleAction;
@@ -42,7 +42,7 @@ public class Match implements Serializable {
     private transient View view = View.getInstance();
     private Player winner;
     private Player loser;
-    private BattleHostRequests battleHostRequests;
+    private HostBattleMenu hostBattleMenu;
 
     public BattleView getBattleView() {
         return battleView;
@@ -70,14 +70,14 @@ public class Match implements Serializable {
         if (this.goalMode == GoalMode.HOLD_FLAG)
             this.flagCount = 1;
         initiateMatch();
-        battleHostRequests = new BattleHostRequests(this);
+        hostBattleMenu = new HostBattleMenu(this);
     }
 
     public void action(BattleAction battleAction) {
         try {
-            Method method = BattleHostRequests.class.getDeclaredMethod(battleAction.getMethod(), battleAction.getArgsClasses());
+            Method method = HostBattleMenu.class.getDeclaredMethod(battleAction.getMethod(), battleAction.getArgsClasses());
             method.setAccessible(true);
-            method.invoke(battleHostRequests, battleAction.getArguments());
+            method.invoke(hostBattleMenu, battleAction.getArguments());
         } catch (Exception ex) {
             View.printThrowable(ex);
         }

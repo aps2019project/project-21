@@ -67,7 +67,7 @@ public class Scoreboard {
         Label wins = new Label("WINS");
         Label losses = new Label("LOSSES");
 
-        hBox.getChildren().addAll(makeStackPane(new Label(""), 50), makeStackPane(name, 100),
+        hBox.getChildren().addAll( makeStackPane(name, 151),
                 makeStackPane(wins, 100), makeStackPane(losses, 100));
         scoreboard.getChildren().add(hBox);
 
@@ -77,6 +77,8 @@ public class Scoreboard {
     }
 
     private static void drawPlayer(Player player) {
+        if (player.getUsername().equals("host"))
+            return;
         HBox hBox = new HBox();
         hBox.setSpacing(1);
 

@@ -95,7 +95,7 @@ public class Client extends Application {
         switch (request.getReqType()) {
             case PLAYER:
                 Player player = (Player) request.getObj();
-                Player.addPlayer(player);
+                Player.update(player);
                 Player.setCurrentPlayer(player);
                 break;
             case GLOBAL_CHAT:

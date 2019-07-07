@@ -607,7 +607,7 @@ public class BattleView {
         t1.setPrefColumns(1);
         t1.setStyle("-fx-background-color: transparent");
         for (Card card : match.getPlayersMatchInfo()[0].getGraveyard()) {
-            t1.getChildren().add(CardView.shopCardGroup(card));
+            t1.getChildren().add(CardView.shopCardGroup(card, false));
         }
         on.relocate(400, 100);
 
@@ -620,7 +620,7 @@ public class BattleView {
         t2.setPrefColumns(1);
         t2.setStyle("-fx-background-color: transparent");
         for (Card card : match.getPlayersMatchInfo()[1].getGraveyard()) {
-            t2.getChildren().add(CardView.shopCardGroup(card));
+            t2.getChildren().add(CardView.shopCardGroup(card, false));
         }
         tw.relocate(900, 100);
 

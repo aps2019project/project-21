@@ -100,7 +100,7 @@ public class View {
     }
 
     public void popup(String message) {
-        if (isAIPlaying)
+        if (isAIPlaying || message == null)
             return;
         final Stage popup = new Stage();
         popup.initModality(Modality.APPLICATION_MODAL);
@@ -162,7 +162,7 @@ public class View {
         String message = "";
         if (match.getGoalMode() == GoalMode.KILL_HERO) {
             for (PlayerMatchInfo p : match.getPlayersMatchInfo())
-                message += p.getHero().getCardIDInGame() + "'s hp: " + p.getHero().getHP();
+                message = message.concat(p.getHero().getCardIDInGame() + "'s hp: " + p.getHero().getHP());
         } else if (match.getGoalMode() == GoalMode.HOLD_FLAG) {
             if (match.whoHasFlag() != null)
                 message += match.whoHasFlag().getName();
@@ -171,7 +171,7 @@ public class View {
         } else if (match.getGoalMode() == GoalMode.GATHER_FLAG) {
             message += "These guys have the flags: ";
             for (Attacker attacker : match.whoHasFlags())
-                message += attacker.getCardIDInGame() + " in team " + (match.getCardsTeam(attacker) + 1);
+                message = message.concat(attacker.getCardIDInGame() + " in team " + (match.getCardsTeam(attacker) + 1));
         }
         view.popup(message);
     }

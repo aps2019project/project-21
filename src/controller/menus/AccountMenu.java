@@ -50,7 +50,7 @@ public class AccountMenu extends Menu {
             view.printMessage(Message.YOU_MUST_LOG_IN);
             return;
         }
-        Client.write(Request.makeAccount(Player.getCurrentPlayer()));
+        Client.write(Request.makePlayer(Player.getCurrentPlayer()));
     }
 
     public void hesoyam() {

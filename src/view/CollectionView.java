@@ -153,13 +153,13 @@ public class CollectionView {
     private void drawCards() {
         tilePane.getChildren().clear();
         for (Card c : collection.getCards())
-            CardView.showCard(c, tilePane, true);
+            CardView.showCard(c, tilePane, true, false);
     }
 
     private void drawCards(Deck deck) {
         tilePane.getChildren().clear();
         for (Card c : deck.getAllCards())
-            CardView.showCard(c, tilePane, true);
+            CardView.showCard(c, tilePane, true, false);
     }
 
     private void drawDecks() {
@@ -259,7 +259,7 @@ public class CollectionView {
                 if (now - last > 100) {
                     if (selectedCard != null) {
                         selectedCardTilePane.getChildren().clear();
-                        CardView.showCard(selectedCard, selectedCardTilePane, false);
+                        CardView.showCard(selectedCard, selectedCardTilePane, true, false);
                     }
                     last = now;
                 }

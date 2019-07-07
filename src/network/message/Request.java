@@ -17,7 +17,7 @@ public class Request implements Serializable {
     public Request() {
     }
 
-    public static Request makeAccount(Player player) {
+    public static Request makePlayer(Player player) {
         Request request = new Request();
         request.reqType = RequestType.PLAYER;
         request.obj = player;
@@ -109,6 +109,20 @@ public class Request implements Serializable {
         Request request = new Request();
         request.reqType = RequestType.TAKE_ONLINE_USERS;
         request.obj = usernames;
+        return request;
+    }
+
+    public static Request makeBuyRequest(String cardName) {
+        Request request = new Request();
+        request.reqType = RequestType.BUY;
+        request.obj = cardName;
+        return request;
+    }
+
+    public static Request makeSellRequest(String collectionID) {
+        Request request = new Request();
+        request.reqType = RequestType.SELL;
+        request.obj = collectionID;
         return request;
     }
 
