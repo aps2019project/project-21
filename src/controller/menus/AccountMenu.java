@@ -46,11 +46,8 @@ public class AccountMenu extends Menu {
     }
 
     public void save() {
-        if (!Player.hasAnyoneLoggedIn()) {
+        if (!Player.hasAnyoneLoggedIn())
             view.printMessage(Message.YOU_MUST_LOG_IN);
-            return;
-        }
-        Client.write(Request.makePlayer(Player.getCurrentPlayer()));
     }
 
     public void hesoyam() {

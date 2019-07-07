@@ -646,6 +646,8 @@ public class ShopView {
                     String mes = ShopMenu.buy(selectedName);
                     View.getInstance().popup(mes);
                     drake.setText("DRAKE : " + Player.getCurrentPlayer().getDrake());
+                    System.out.println("this is the drake: ");
+                    System.out.println(Player.getCurrentPlayer().getDrake());
                     showCards();
                 }
             } else {
@@ -672,9 +674,10 @@ public class ShopView {
                 } else {
                     String mes = ShopMenu.buy(selectedName);
                     View.getInstance().popup(mes);
-                    if (mes != null && mes.equals("Buy successful")) {
-                        drake.setText("DRAKE : " + Player.getCurrentPlayer().getDrake());
-                    }
+                    drake.setText("DRAKE : " + Player.getCurrentPlayer().getDrake());
+                    System.out.println("this is the drake: ");
+                    System.out.println(Player.getCurrentPlayer().getDrake());
+                    showCards();
                 }
             } else {
                 if (selectedId == -1) {
@@ -682,11 +685,8 @@ public class ShopView {
                 } else {
                     String mes = ShopMenu.sell(selectedId);
                     View.getInstance().popup(mes);
-                    if (mes != null && mes.equals("Sell successful")) {
-                        drake.setText("DRAKE : " + Player.getCurrentPlayer().getDrake());
-                    }
+                    drake.setText("DRAKE : " + Player.getCurrentPlayer().getDrake());
                     showCards();
-
                 }
             }
             root.getChildren().remove(searchedCard);

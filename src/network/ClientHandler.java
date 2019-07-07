@@ -117,9 +117,6 @@ public class ClientHandler extends Thread {
                         System.out.println(player.getUsername() + " created account.");
                     }
                     break;
-                case PLAYER:
-                    Player.savePlayer((Player) request.getObj());
-                    break;
                 case GLOBAL_CHAT_MESSAGE:
                     Pair<String, String> msgPair = (Pair<String, String>) request.getObj();
                     GlobalChat.getInstance().addMessage(msgPair);
@@ -144,6 +141,9 @@ public class ClientHandler extends Thread {
                     break;
                 case SELL:
                     HostShopMenu.sell(getPlayer(), Integer.parseInt((String) request.getObj()));
+                    break;
+                default:
+                    View.err("request case not detected.");
                     break;
             }
     }
@@ -203,6 +203,7 @@ public class ClientHandler extends Thread {
     public void write(Request request) {
         System.out.println("writing...");
         try {
+            oos.reset();
             oos.writeObject(request);
             oos.flush();
         } catch (IOException ex) {

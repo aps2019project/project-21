@@ -95,6 +95,7 @@ public class Client extends Application {
         switch (request.getReqType()) {
             case PLAYER:
                 Player player = (Player) request.getObj();
+                System.out.println(player.getDrake());
                 Player.update(player);
                 Player.setCurrentPlayer(player);
                 break;
@@ -133,14 +134,15 @@ public class Client extends Application {
     }
 
     public static void write(Request request) {
-        System.out.println("writing...");
+        System.out.println("writing " + request.getReqType());
         try {
             if (Player.hasAnyoneLoggedIn())
                 request.setAuthToken(Player.getCurrentPlayer().getAuthToken());
+            oos.reset();
             oos.writeObject(request);
             oos.flush();
         } catch (IOException ex) {
-            View.printThrowable(ex);
+            View.err("cannot write to host.");
         }
     }
 
@@ -149,7 +151,9 @@ public class Client extends Application {
         try {
             return (Request) ois.readObject();
         } catch (Exception ex) {
-            View.err("cannot read.");
+            View.err("cannot read from host.");
+            View.printThrowable(ex);
+            finish();
             return null;
         }
     }

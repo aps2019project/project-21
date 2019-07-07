@@ -78,7 +78,7 @@ public class HostShopView {
         scrollPane.setMaxWidth(1300);
     }
 
-    private static void drawCards() {
+    public static void drawCards() {
         tilePane.getChildren().clear();
         for (Card c : Card.getCards())
             CardView.showCard(c, tilePane, true, true);

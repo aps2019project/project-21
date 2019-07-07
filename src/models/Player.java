@@ -1,5 +1,6 @@
 package models;
 
+import javafx.application.Platform;
 import json.CardMaker;
 import models.Item.Usable;
 import models.card.Card;
@@ -7,6 +8,7 @@ import models.match.GameMode;
 import models.match.Match;
 import network.ClientHandler;
 import network.message.Request;
+import view.HostShopView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -193,11 +195,10 @@ public class Player implements Serializable {
             return;
         }
         players.remove(p);
-        player.setAuthToken(p.authToken);
         addPlayer(player);
     }
 
-    public static void addPlayer(Player player) {
+    private static void addPlayer(Player player) {
         if (player == null)
             return;
         players.add(player);
@@ -210,12 +211,12 @@ public class Player implements Serializable {
             addPlayer(player);
     }
 
-    public static void savePlayer(Player player) {
-        List<Player> copy = new ArrayList<>(players);
-        for (Player p : copy)
-            if (p.username.equals(player.username))
-                players.remove(p);
-        addPlayer(player);
+    private static void savePlayer(Player player) {
+//        List<Player> copy = new ArrayList<>(players);
+//        for (Player p : copy)
+//            if (p.username.equals(player.username))
+//                players.remove(p);
+//        addPlayer(player);
         CardMaker.saveToFile(player);
     }
 
@@ -253,6 +254,7 @@ public class Player implements Serializable {
         this.getCL().write(Request.makeMessage("BUY SUCCESSFUL"));
         this.getCL().write(Request.makePlayer(this));
         savePlayer(this);
+        Platform.runLater(HostShopView::drawCards);
     }
 
     public void sell(Card card) {
@@ -265,6 +267,8 @@ public class Player implements Serializable {
         Card.getCardByName(card.getName()).increaseCount();  // todo: test this for custom cards.
         this.getCL().write(Request.makeMessage("SELL SUCCESSFUL"));
         this.getCL().write(Request.makePlayer(this));
+        savePlayer(this);
+        Platform.runLater(HostShopView::drawCards);
     }
 
     public void createDeck(String deckName) {
