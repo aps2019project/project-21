@@ -39,8 +39,8 @@ public class Host extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        View.getInstance().setPrimaryStage(primaryStage);
-        View.getInstance().runForHost();
+        View.setPrimaryStage(primaryStage);
+        View.runForHost(primaryStage);
         primaryStage.show();
     }
 

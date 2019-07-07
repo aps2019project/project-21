@@ -19,7 +19,7 @@ public class HostShopView {
     private static ImageView back = new ImageView();
 
     static void run() {
-        View.getInstance().setScene(scene);
+        View.setScene(scene);
     }
 
     static {
@@ -85,6 +85,6 @@ public class HostShopView {
     }
 
     private static void setOnActions() {
-        back.setOnMouseClicked(event -> View.getInstance().back());
+        back.setOnMouseClicked(event -> View.back());
     }
 }

@@ -41,7 +41,7 @@ public class GlobalChatView {
     private List<String> onlineUsersName = new ArrayList<>();
 
     void run() {
-        View.getInstance().setScene(scene);
+        View.setScene(scene);
     }
 
     {
@@ -150,7 +150,7 @@ public class GlobalChatView {
     }
 
     private void setOnActions() {
-        back.setOnAction(event -> View.getInstance().back());
+        back.setOnAction(event -> View.back());
         input.setOnAction(event -> {
             GlobalChatMenu.getInstance().addMessage(input.getText());
             input.setText("");

@@ -36,7 +36,7 @@ class MatchHistoryView {
     }
 
     void run() {
-        View.getInstance().setScene(scene);
+        View.setScene(scene);
         showMatchHistory();
     }
 
@@ -159,7 +159,7 @@ class MatchHistoryView {
     }
 
     private void handleButtons() {
-        back.setOnAction(event -> View.getInstance().back());
+        back.setOnAction(event -> View.back());
 
         volume.setOnMouseClicked(event -> VolumeController.getInstance().run());
     }

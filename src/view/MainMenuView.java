@@ -55,7 +55,7 @@ public class MainMenuView {
 
 
     void run() {
-        View.getInstance().setScene(scene);
+        View.setScene(scene);
         VoicePlay.setThisMenu("main menu");
     }
 
@@ -123,7 +123,7 @@ public class MainMenuView {
         });
         save.setOnAction(event -> AccountMenu.getInstance().save());
         hesoyam.setOnAction(event -> AccountMenu.getInstance().hesoyam());
-        exit.setOnAction(event -> View.getInstance().exit());
+        exit.setOnAction(event -> View.exit());
         collection.setOnAction(event -> CollectionView.getInstance().run());
         shop.setOnAction(event -> {
             ShopView.getInstance().run();
@@ -169,7 +169,7 @@ public class MainMenuView {
 
     private void createNewMatch() {
         if (!Player.getCurrentPlayer().hasAValidMainDeck())
-            View.getInstance().printMessage(Message.DECK_IS_NOT_VALID);
+            View.printMessage(Message.DECK_IS_NOT_VALID);
         else
             CreateMatchView.getInstance().run();
     }

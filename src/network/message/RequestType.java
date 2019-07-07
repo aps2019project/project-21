@@ -15,7 +15,7 @@ public enum RequestType {
     START_MATCH_FIRST,
     START_MATCH_SECOND,
     BATTLE_ACTION,
-    MATCH_INFO,
+    MATCH,
     TAKE_ONLINE_USERS,
     BUY,
     SELL,

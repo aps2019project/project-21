@@ -29,7 +29,7 @@ public class CustomCardView {
     }
 
     public void run() {
-        View.getInstance().setScene(scene);
+        View.setScene(scene);
     }
 
     private boolean tr = true;
@@ -158,7 +158,7 @@ public class CustomCardView {
                 duration = Integer.parseInt(D.getCharacters().toString());
                 value = Integer.parseInt(E.getCharacters().toString());
             } catch (Exception ex) {
-                View.getInstance().popup("Invalid fields");
+                View.popup("Invalid fields");
                 s.close();
             }
 //                int friend = -1;
@@ -167,7 +167,7 @@ public class CustomCardView {
 //                } else if (F.getCharacters().toString().equals("enemy")) {
 //                    friend = 1;
 //                } else {
-//                    View.getInstance().popup("Invalid fields");
+//                    View.popup("Invalid fields");
 //                    s.close();
 //                }
             if (s.isShowing()) {
@@ -215,7 +215,7 @@ public class CustomCardView {
                     bfs.add(bu);
                     buffs.getChildren().addAll(new Label(nam));
                 } else {
-                    View.getInstance().popup("Invalid type");
+                    View.popup("Invalid type");
                 }
                 s.close();
             }
@@ -236,7 +236,7 @@ public class CustomCardView {
 
     private void setOnAction() {
         back.setOnMouseClicked(event -> {
-            View.getInstance().back();
+            View.back();
         });
 
         ok.setOnMouseClicked(event -> {
@@ -255,8 +255,8 @@ public class CustomCardView {
 //                    Player.getCurrentPlayer().getCollection().getCards().add(c);
 //                }
                 } else {
-                    View.getInstance().popup("An error occurred");
-                    View.getInstance().back();
+                    View.popup("An error occurred");
+                    View.back();
                 }
             } else {
                 spc.add((Spell) c);
@@ -278,7 +278,7 @@ public class CustomCardView {
 
     private Card create(Spell spc) {
         if (Name.getCharacters().toString().length() == 0) {
-            View.getInstance().popup("Name is null");
+            View.popup("Name is null");
             return null;
         } else {
             String typ = Type.getCharacters().toString();

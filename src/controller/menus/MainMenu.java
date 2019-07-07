@@ -26,11 +26,11 @@ public class MainMenu extends Menu {
     public boolean chooseOpp(String name) {
         second = Player.getPlayerByUsername(name);
         if (second == null) {
-            View.getInstance().printMessage(Message.NO_SUCH_USER);
+            View.printMessage(Message.NO_SUCH_USER);
             return false;
         }
         if (!second.hasAValidMainDeck()) {
-            View.getInstance().printMessage(Message.DECK_IS_NOT_VALID);
+            View.printMessage(Message.DECK_IS_NOT_VALID);
             return false;
         }
         return true;
@@ -39,7 +39,7 @@ public class MainMenu extends Menu {
     public boolean chooseAI(int num) {
         AIPlayer aiPlayer = AIPlayer.getAIPlayer(num);
         if (aiPlayer == null) {
-            view.printMessage(Message.AIPLAYER_IS_NULL);
+            View.printMessage(Message.AIPLAYER_IS_NULL);
             return false;
         }
         second = aiPlayer;
@@ -90,7 +90,7 @@ public class MainMenu extends Menu {
             return;
         AIPlayer aiPlayer = AIPlayer.getAIPlayer(num);
         if (aiPlayer == null) {
-            View.getInstance().printMessage(Message.AIPLAYER_IS_NULL);
+            View.printMessage(Message.AIPLAYER_IS_NULL);
             return;
         }
         if (num == 1)

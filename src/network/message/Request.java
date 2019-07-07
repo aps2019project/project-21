@@ -3,8 +3,8 @@ package network.message;
 import models.BattleAction;
 import models.GlobalChat;
 import models.Player;
+import models.match.Match;
 import models.match.MatchRequest;
-import models.match.PlayerMatchInfo;
 
 import java.io.Serializable;
 import java.util.List;
@@ -98,10 +98,10 @@ public class Request implements Serializable {
         return request;
     }
 
-    public static Request makeMatchInfoRequest(PlayerMatchInfo[] infos) {
+    public static Request makeMatchRequest(Match match) {
         Request request = new Request();
-        request.reqType = RequestType.MATCH_INFO;
-        request.obj = infos;
+        request.reqType = RequestType.MATCH;
+        request.obj = match;
         return request;
     }
 

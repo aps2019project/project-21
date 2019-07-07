@@ -8,6 +8,8 @@ import models.Item.Collectable;
 import models.Item.Flag;
 import models.Player;
 import models.card.*;
+import network.Client;
+import network.message.Request;
 import view.BattleView;
 import view.MainMenuView;
 import view.Message;
@@ -39,10 +41,17 @@ public class Match implements Serializable {
     private int turn;  //  0 for player1 and 1 for player2
     private int turnCount = 1;
     private Card selectedCard;
-    private transient View view = View.getInstance();
     private Player winner;
     private Player loser;
     private HostBattleMenu hostBattleMenu;
+
+    public void setPlayerOne(Player player) {
+        players[0] = player;
+    }
+
+    public void setPlayerTwo(Player player) {
+        players[1] = player;
+    }
 
     public BattleView getBattleView() {
         return battleView;
@@ -140,7 +149,7 @@ public class Match implements Serializable {
     public void moveCard(int x, int y) {
         if (!isAnyCardSelected()) {
             selectedCard = null;
-            view.printMessage(Message.NO_CARD_IS_SELECTED);
+            View.printMessage(Message.NO_CARD_IS_SELECTED);
             battleView.moveOrAttack1(x, y);
         }
         Cell target = getCell(x, y);
@@ -149,7 +158,7 @@ public class Match implements Serializable {
             battleView.moveOrAttack1(x, y);
         }
         if (!isMoveTargetValid(target)) {
-            view.printMessage(Message.INVALID_MOVE_TARGET);
+            View.printMessage(Message.INVALID_MOVE_TARGET);
             selectedCard = null;
             battleView.moveOrAttack1(x, y);
         }
@@ -159,17 +168,17 @@ public class Match implements Serializable {
         }
         Attacker attacker = (Attacker) selectedCard;
         if (!attacker.canMove()) {
-            view.printMessage(Message.ATTACKER_CANT_MOVE);
+            View.printMessage(Message.ATTACKER_CANT_MOVE);
             selectedCard = null;
             battleView.moveOrAttack1(x, y);
         }
         if (isPathClosed(attacker.getCurrentCell(), target)) {
-            view.printMessage(Message.INVALID_MOVE_TARGET);
+            View.printMessage(Message.INVALID_MOVE_TARGET);
             selectedCard = null;
             battleView.moveOrAttack1(x, y);
         }
         if (attacker.isStunned()) {
-            view.printMessage(Message.STUNNED);
+            View.printMessage(Message.STUNNED);
             selectedCard = null;
             battleView.moveOrAttack1(x, y);
         }
@@ -217,16 +226,16 @@ public class Match implements Serializable {
 
     public int attack(String oppID) {
         if (!isAnyCardSelected()) {
-            view.printMessage(Message.NO_CARD_IS_SELECTED);
+            View.printMessage(Message.NO_CARD_IS_SELECTED);
             return 1;
         }
         Attacker target = getGroundedOppAttacker(oppID);
         if (target == null) {
-            view.printMessage(Message.INVALID_CARD_ID);
+            View.printMessage(Message.INVALID_CARD_ID);
             return 1;
         }
         if (!isSelectedCardAttacker()) {
-            view.printMessage(Message.NO_CARD_IS_SELECTED);
+            View.printMessage(Message.NO_CARD_IS_SELECTED);
             return 1;
         }
         Attacker attacker = (Attacker) selectedCard;
@@ -235,11 +244,11 @@ public class Match implements Serializable {
             return 1;
         }
         if (!isInRangeOfAttack(target, attacker)) {
-            view.printMessage(Message.UNAVAILABLE_FOR_ATTACK);
+            View.printMessage(Message.UNAVAILABLE_FOR_ATTACK);
             return 1;
         }
         if (attacker.isStunned()) {
-            view.printMessage(Message.STUNNED);
+            View.printMessage(Message.STUNNED);
             return 1;
         }
         target.decreaseHP(attacker.getAP());
@@ -311,11 +320,11 @@ public class Match implements Serializable {
 
     public void attackCombo(String opponentCardID, String[] myCardIDs) {  // test
         if (!isAnyCardSelected()) {
-            view.printMessage(Message.NO_CARD_IS_SELECTED);
+            View.printMessage(Message.NO_CARD_IS_SELECTED);
             return;
         }
         if (!(selectedCard instanceof Minion)) {
-            view.printMessage(Message.SELECTED_CARD_NOT_MINION);
+            View.printMessage(Message.SELECTED_CARD_NOT_MINION);
             return;
         }
         Minion selectedMinion = (Minion) selectedCard;
@@ -323,21 +332,21 @@ public class Match implements Serializable {
         for (String myCardID : myCardIDs) {
             Minion comboMinion = info[turn].getGroundedMinionByID(myCardID);
             if (comboMinion == null) {
-                view.printMessage(Message.SELECTED_CARD_NOT_MINION);
+                View.printMessage(Message.SELECTED_CARD_NOT_MINION);
                 return;
             }
             if (!comboMinion.isCombo()) {
-                view.printMessage(Message.NOT_COMBO);
+                View.printMessage(Message.NOT_COMBO);
                 return;
             }
         }
         Attacker target = getGroundedOppAttacker(opponentCardID);
         if (target == null) {
-            view.printMessage(Message.INVALID_CARD_ID);
+            View.printMessage(Message.INVALID_CARD_ID);
             return;
         }
         if (!isInRangeOfOneOfThese(target, minions)) {
-            view.printMessage(Message.UNAVAILABLE_FOR_ATTACK);
+            View.printMessage(Message.UNAVAILABLE_FOR_ATTACK);
             return;
         }
         target.decreaseHP(selectedMinion.getAP());
@@ -361,21 +370,21 @@ public class Match implements Serializable {
 
     public void useSpell(int x, int y) {
         if (!isAnyCardSelected()) {
-            view.printMessage(Message.NO_CARD_IS_SELECTED);
+            View.printMessage(Message.NO_CARD_IS_SELECTED);
             return;
         }
         if (!isSelectedCardSpell()) {
-            view.printMessage(Message.NO_SPELL_SELECTED);
+            View.printMessage(Message.NO_SPELL_SELECTED);
             return;
         }
         Cell target = getCell(x, y);
         if (target == null) {
-            view.printMessage(Message.INVALID_CELL);
+            View.printMessage(Message.INVALID_CELL);
             return;
         }
         Spell spell = (Spell) selectedCard;
         if (!info[turn].hasManaForThis(spell)) {
-            view.printMessage(Message.HAVE_NOT_MANA);
+            View.printMessage(Message.HAVE_NOT_MANA);
             return;
         }
         spell.castSpell(this, getThisTurnsPlayer(), target);
@@ -388,11 +397,11 @@ public class Match implements Serializable {
 
     public void useCollectable(int x, int y) {
         if (!isAnyCardSelected()) {
-            view.printMessage(Message.NO_CARD_IS_SELECTED);
+            View.printMessage(Message.NO_CARD_IS_SELECTED);
             return;
         }
         if (!(selectedCard instanceof Collectable)) {
-            view.printMessage(Message.NO_COLLECTABLE_SELECTED);
+            View.printMessage(Message.NO_COLLECTABLE_SELECTED);
             return;
         }
         Collectable collectable = (Collectable) selectedCard;
@@ -404,30 +413,30 @@ public class Match implements Serializable {
 
     public void useSpecialPower(int x, int y) {
         if (!isAnyCardSelected()) {
-            view.printMessage(Message.NO_CARD_IS_SELECTED);
+            View.printMessage(Message.NO_CARD_IS_SELECTED);
             return;
         }
         if (!isSelectedCardAttacker()) {
-            view.printMessage(Message.NO_ATTACKER_SELECTED);
+            View.printMessage(Message.NO_ATTACKER_SELECTED);
             return;
         }
         Attacker attacker = (Attacker) selectedCard;
         if (!attacker.hasSpecialPower()) {
-            view.printMessage(Message.HASNT_SPECIAL);
+            View.printMessage(Message.HASNT_SPECIAL);
             return;
         }
         Cell target = getCell(x, y);
         if (target == null) {
-            view.printMessage(Message.INVALID_CELL);
+            View.printMessage(Message.INVALID_CELL);
             return;
         }
         if (!info[turn].hasManaForThis(attacker.getSpecialPower())) {
-            view.printMessage(Message.HAVE_NOT_MANA);
+            View.printMessage(Message.HAVE_NOT_MANA);
             return;
         }
         if (attacker instanceof Hero)
             if (((Hero) attacker).getCooldown() > 0) {
-                view.printMessage(Message.COOLDOWN);
+                View.printMessage(Message.COOLDOWN);
                 return;
             }
         attacker.castSpecialPower(this, getThisTurnsPlayer(), target);
@@ -446,17 +455,17 @@ public class Match implements Serializable {
             System.out.println("hand: " + card.getName());
         System.out.println(cardName);
         if (attacker == null) {
-            view.printMessage(Message.NO_CARD_WITH_THIS_NAME);
+            View.printMessage(Message.NO_CARD_WITH_THIS_NAME);
             return;
         }
         Cell cell = getCell(x, y);
         if (cell == null || !cell.isEmpty() || !isInsertNear(cell)) {
-            view.printMessage(Message.INVALID_CELL);
+            View.printMessage(Message.INVALID_CELL);
             return;
         }
 
         if (!info[turn].hasManaForThis(attacker)) {
-            view.printMessage(Message.HAVE_NOT_MANA);
+            View.printMessage(Message.HAVE_NOT_MANA);
             return;
         }
 
@@ -538,7 +547,7 @@ public class Match implements Serializable {
     }
 
     private void aiPlay() {
-        View.getInstance().setAIPlaying(true);
+        View.setAIPlaying(true);
         System.out.println("AI playing...");
         try {
             selectedCard = info[1].getHero();
@@ -579,7 +588,7 @@ public class Match implements Serializable {
                     }
         } finally {
             endTurn();
-            View.getInstance().setAIPlaying(false);
+            View.setAIPlaying(false);
         }
     }
 
@@ -617,7 +626,8 @@ public class Match implements Serializable {
         winner.addDrake(getMatchWinningPrize());
         saveMatchResults(winner, loser);
         showMatchResults();
-        View.getInstance().setScene(MainMenuView.getInstance().getScene());
+        View.setScene(MainMenuView.getInstance().getScene());
+        Client.write(Request.makePlayer(Player.getCurrentPlayer()));
     }
 
     private int getMatchWinningPrize() {
@@ -635,7 +645,7 @@ public class Match implements Serializable {
     }
 
     private void showMatchResults() {
-        view.showMatchResults(this);
+        View.showMatchResults(this);
     }
 
     public boolean isAnyCardSelected() {

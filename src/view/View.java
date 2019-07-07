@@ -22,19 +22,10 @@ import java.util.Queue;
 import java.util.Stack;
 
 public class View {
-    public static View getInstance() {
-        return view;
-    }
-
-    private View() {
-    }
-
-    private static View view = new View();
-
-    private boolean isAIPlaying;
-    private Stack<Scene> scenes = new Stack<>();
-    private Stage primaryStage;
-    private Queue<String> messagesQueue = new ArrayDeque<>();
+    private static boolean isAIPlaying;
+    private static Stack<Scene> scenes = new Stack<>();
+    private static Stage primaryStage;
+    private static Queue<String> messagesQueue = new ArrayDeque<>();
 
     public static void printThrowable(Throwable throwable) {
         System.err.println("error occurred:");
@@ -47,33 +38,35 @@ public class View {
         System.err.flush();
     }
 
-    public void run() {
+    public static void run(Stage primaryStage) {
+        View.primaryStage = primaryStage;
         primaryStage.setTitle("Duelyst");
         primaryStage.setMaximized(true);
         handlePopups();
         MainMenuView.getInstance().run();
     }
 
-    public void runForHost() {
+    public static void runForHost(Stage primaryStage) {
+        View.primaryStage = primaryStage;
         primaryStage.setTitle("Host");
-        primaryStage.setMaximized(true);
-//        primaryStage.setIconified(true);
+//        primaryStage.setMaximized(true);
+        primaryStage.setIconified(true);
         handlePopups();
         HostView.getInstance().run();
     }
 
-    public void setScene(Scene scene) {
-        this.primaryStage.setScene(scene);
-        this.scenes.push(scene);
+    public static void setScene(Scene scene) {
+        primaryStage.setScene(scene);
+        scenes.push(scene);
         setCursor(scene);
     }
 
-    public void back() {
+    public static void back() {
         scenes.pop();
         primaryStage.setScene(scenes.peek());
     }
 
-    void setCursor(Scene scene) {
+    static void setCursor(Scene scene) {
         try {
             Image cursor = new Image(
                     new FileInputStream("src/assets/resources/ui/mouse_auto@2x.png"));
@@ -83,23 +76,23 @@ public class View {
         }
     }
 
-    public void setAIPlaying(boolean AIPlaying) {
+    public static void setAIPlaying(boolean AIPlaying) {
         isAIPlaying = AIPlaying;
     }
 
-    public void setPrimaryStage(Stage primaryStage) {
-        this.primaryStage = primaryStage;
+    public static void setPrimaryStage(Stage primaryStage) {
+        primaryStage = primaryStage;
     }
 
-    Stage getPrimaryStage() {
+    static Stage getPrimaryStage() {
         return primaryStage;
     }
 
-    void exit() {
+    static void exit() {
         primaryStage.close();
     }
 
-    public void popup(String message) {
+    public static void popup(String message) {
         if (isAIPlaying || message == null)
             return;
         final Stage popup = new Stage();
@@ -130,11 +123,11 @@ public class View {
         popup.show();
     }
 
-    public void addPopupMessage(String message) {
+    public static void addPopupMessage(String message) {
         messagesQueue.add(message);
     }
 
-    private void handlePopups() {
+    private static void handlePopups() {
         new AnimationTimer() {
             long last;
 
@@ -149,13 +142,13 @@ public class View {
         }.start();
     }
 
-    public void printMessage(Message msg) {
+    public static void printMessage(Message msg) {
         if (msg == null)
             return;
         popup(msg.getMessage());
     }
 
-    public void showGameInfo() {
+    public static void showGameInfo() {
         Match match = Match.getCurrentMatch();
         if (match == null)
             return;
@@ -173,10 +166,10 @@ public class View {
             for (Attacker attacker : match.whoHasFlags())
                 message = message.concat(attacker.getCardIDInGame() + " in team " + (match.getCardsTeam(attacker) + 1));
         }
-        view.popup(message);
+        popup(message);
     }
 
-    public void showMatchResults(Match match) {
+    public static void showMatchResults(Match match) {
         popup("Player " + match.getWinner().getUsername() + " won " + match.getLoser().getUsername() + ".");
     }
 }

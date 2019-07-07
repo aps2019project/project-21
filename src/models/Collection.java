@@ -212,11 +212,11 @@ public class Collection implements Serializable {
             View.printThrowable(e);
         }
         if (deck == null) {
-            View.getInstance().popup("NO DECK SAVED AS " + filename);
+            View.popup("NO DECK SAVED AS " + filename);
             return;
         }
         if (hasThis(deck.getName())) {
-            View.getInstance().popup("YOU ALREADY HAVE A DECK WITH THIS NAME!");
+            View.popup("YOU ALREADY HAVE A DECK WITH THIS NAME!");
             return;
         }
         Deck newDeck = new Deck(deck.getName());
@@ -233,6 +233,6 @@ public class Collection implements Serializable {
         if (deck == null)
             return;
         String path = CardMaker.saveToFile(deck);
-        View.getInstance().popup("Deck " + deckName + " saved in: " + path);
+        View.popup("Deck " + deckName + " saved in: " + path);
     }
 }

@@ -1,6 +1,8 @@
 package controller.menus;
 
+import javafx.application.Platform;
 import models.match.Match;
+import view.View;
 
 public class HostBattleMenu extends Menu {
     private Match match;
@@ -10,7 +12,7 @@ public class HostBattleMenu extends Menu {
     }
 
     public void showGameInfo() {
-        view.showGameInfo();
+        View.showGameInfo();
     }
 
     public void useSpell(String spell, String x, String y) {
@@ -47,5 +49,6 @@ public class HostBattleMenu extends Menu {
 
     public void endTurn() {
         match.endTurn();
+        Platform.runLater(match.getBattleView()::turnChange);
     }
 }

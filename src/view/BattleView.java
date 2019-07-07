@@ -1,6 +1,6 @@
 package view;
 
-import controller.menus.BattleMenu;
+import controller.menus.MultiPlayerBattleMenu;
 import javafx.animation.AnimationTimer;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Insets;
@@ -64,9 +64,10 @@ public class BattleView {
     private Group collectables = new Group();
     private Group flags = new Group();
     private ArrayBlockingQueue<BattleAction> battleActions = new ArrayBlockingQueue<>(1000);
+    private Rectangle invisible = new Rectangle(scene.getWidth(), scene.getHeight());
 
     public void run() {
-        View.getInstance().setScene(scene);
+        View.setScene(scene);
 
         scene.getStylesheets().add("view/stylesheets/battle_view.css");
 
@@ -82,7 +83,11 @@ public class BattleView {
 
         setOnActions();
 
+        drawInvisible();
+
         root.getChildren().addAll(hub, table);
+
+        turnChange();
     }
 
 
@@ -114,7 +119,7 @@ public class BattleView {
                     if (event.getButton() == MouseButton.PRIMARY) {
                         if (match.isAnyCardSelected()) {
 //                            int r =
-                            BattleMenu.getInstance().moveOrAttack(u, v);
+                            MultiPlayerBattleMenu.getInstance().moveOrAttack(u, v);
 //                            if (r == 0) {
 //
 //                            } else if (r == 1) {
@@ -126,24 +131,28 @@ public class BattleView {
 //                            }
                         } else if (selectedInHand != null) {
                             if (selectedInHand.getCard() instanceof Attacker) {
-                                BattleMenu.getInstance().insertCardIn(selectedInHand.getCard().getName(), u, v);
+                                MultiPlayerBattleMenu.getInstance().insertCardIn(selectedInHand.getCard().getName(), u, v);
                                 drawAttackers();
                             } else if (selectedInHand.getCard() instanceof Spell) {
                                 if (selectedInHand.getCard().getName().equalsIgnoreCase(match.getPlayersMatchInfo()[0].getHero().getSpecialPower().getName())) {
-                                    BattleMenu.getInstance().useSpecialPower(u, v);
+                                    MultiPlayerBattleMenu.getInstance().useSpecialPower(u, v);
                                 } else
-                                    BattleMenu.getInstance().useSpell(selectedInHand.getCard().getName(), u, v);
+                                    MultiPlayerBattleMenu.getInstance().useSpell(selectedInHand.getCard().getName(), u, v);
                             }
                             deselect();
                         } else {
                             if (getAttacker(u, v) != null)
-                                BattleMenu.getInstance().selectAttacker(getAttacker(u, v).getCardIDInGame(), u, v);
+                                MultiPlayerBattleMenu.getInstance().selectAttacker(getAttacker(u, v).getCardIDInGame(), u, v);
                         }
                     } else if (event.getButton() == MouseButton.SECONDARY) {
                         deselect();
                     }
                 });
             }
+    }
+
+    private void drawInvisible() {
+        invisible.setStyle("-fx-fill: rgba(255,255,255,0.15)");
     }
 
     public void selectAttackerBoolean(int u, int v) {
@@ -278,7 +287,7 @@ public class BattleView {
         selectedRect = null;
         select.setX(-1);
         selectedInHand = null;
-        BattleMenu.getInstance().deselect();
+        MultiPlayerBattleMenu.getInstance().deselect();
     }
 
     private Attacker getAttacker(int r, int c) {
@@ -552,7 +561,7 @@ public class BattleView {
     }
 
     private void setOnActions() {
-        endTurn.setOnMouseClicked(event -> BattleMenu.getInstance().endTurn());
+        endTurn.setOnMouseClicked(event -> MultiPlayerBattleMenu.getInstance().endTurn());
         pause.setOnAction(event -> pause());
         graveyard.setOnAction(event -> graveyard());
         scene.setOnKeyPressed(event -> {
@@ -565,7 +574,7 @@ public class BattleView {
         final Stage pause = new Stage();
         pause.initModality(Modality.APPLICATION_MODAL);
         pause.initStyle(StageStyle.TRANSPARENT);
-        pause.initOwner(View.getInstance().getPrimaryStage());
+        pause.initOwner(View.getPrimaryStage());
         pause.setMaximized(true);
         pause.setResizable(false);
         Button resume = new Button("RESUME");
@@ -573,10 +582,10 @@ public class BattleView {
         Button back = new Button("BACK");
         back.setOnAction(event -> {
             pause.close();
-            View.getInstance().back();
+            View.back();
         });
         Button gameInfo = new Button("GAME INFO");
-        gameInfo.setOnAction(event -> BattleMenu.getInstance().showGameInfo());
+        gameInfo.setOnAction(event -> MultiPlayerBattleMenu.getInstance().showGameInfo());
         VBox vBox = new VBox();
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(30);
@@ -596,7 +605,7 @@ public class BattleView {
     private void graveyard() {
         Button back = new Button("BACK");
         back.setTextFill(Color.BLACK);
-        back.setOnAction(event -> View.getInstance().back());
+        back.setOnAction(event -> View.back());
         Group root = new Group();
         ScrollPane on = new ScrollPane();
         TilePane t1 = new TilePane();
@@ -631,9 +640,9 @@ public class BattleView {
         scene1.getStylesheets().add("view/stylesheets/pause_menu.css");
         scene1.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ESCAPE)
-                View.getInstance().setScene(scene);
+                View.setScene(scene);
         });
-        View.getInstance().setScene(scene1);
+        View.setScene(scene1);
     }
 
     private void setBackground() {
@@ -700,5 +709,14 @@ public class BattleView {
 
     public void addBattleAction(BattleAction battleAction) {
         this.battleActions.add(battleAction);
+    }
+
+    public void turnChange() {
+        if (match.getThisTurnsPlayer().getUsername().equals(Player.getCurrentPlayer().getUsername())) {
+            root.getChildren().remove(invisible);
+        } else {
+            if (!root.getChildren().contains(invisible))
+                root.getChildren().add(invisible);
+        }
     }
 }

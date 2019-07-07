@@ -171,6 +171,4 @@ public class PlayerMatchInfo implements Serializable {
                 ret++;
         return ret;
     }
-
-
 }

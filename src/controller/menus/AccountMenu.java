@@ -5,7 +5,7 @@ import network.Client;
 import network.message.CreateAccountRequest;
 import network.message.LoginRequest;
 import network.message.Request;
-import view.Message;
+import view.View;
 
 public class AccountMenu extends Menu {
     private static AccountMenu instance = new AccountMenu();
@@ -24,15 +24,15 @@ public class AccountMenu extends Menu {
 
     public void createAccount(String username, String password) {
         if (Player.hasAnyoneLoggedIn()) {
-            view.printMessage(Message.YOU_MUST_LOGOUT);
+            View.printMessage(view.Message.YOU_MUST_LOGOUT);
             return;
         }
         if (username.equals("")) {
-            view.printMessage(Message.INVALID_USERNAME);
+            View.printMessage(view.Message.INVALID_USERNAME);
             return;
         }
         if (password.equals("")) {
-            view.printMessage(Message.PASSWORD_EMPTY);
+            View.printMessage(view.Message.PASSWORD_EMPTY);
             return;
         }
         CreateAccountRequest createAccountMessage = new CreateAccountRequest(username, password);
@@ -47,7 +47,7 @@ public class AccountMenu extends Menu {
 
     public void save() {
         if (!Player.hasAnyoneLoggedIn())
-            view.printMessage(Message.YOU_MUST_LOG_IN);
+            View.printMessage(view.Message.YOU_MUST_LOG_IN);
     }
 
     public void hesoyam() {

@@ -4,19 +4,20 @@ import models.BattleAction;
 import models.match.Match;
 import network.Client;
 import network.message.Request;
+import view.View;
 
-public class BattleMenu extends Menu {
-    private static BattleMenu instance = new BattleMenu();
+public class MultiPlayerBattleMenu extends Menu {
+    private static MultiPlayerBattleMenu instance = new MultiPlayerBattleMenu();
 
-    public static BattleMenu getInstance() {
+    public static MultiPlayerBattleMenu getInstance() {
         return instance;
     }
 
-    private BattleMenu() {
+    private MultiPlayerBattleMenu() {
     }
 
     public void showGameInfo() {
-        view.showGameInfo();
+        View.showGameInfo();
     }
 
     public void useSpell(String spell, int x, int y) {
@@ -58,12 +59,12 @@ public class BattleMenu extends Menu {
         Client.write(Request.makeBattleActionRequest(battleAction));
     }
 
-    public void deselect(){
+    public void deselect() {
         BattleAction battleAction = new BattleAction("deselect");
         Client.write(Request.makeBattleActionRequest(battleAction));
     }
 
-    public void endTurn(){
+    public void endTurn() {
         BattleAction battleAction = new BattleAction("endTurn");
         Client.write(Request.makeBattleActionRequest(battleAction));
     }

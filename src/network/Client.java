@@ -10,9 +10,9 @@ import models.BattleAction;
 import models.GlobalChat;
 import models.Player;
 import models.match.Match;
-import models.match.PlayerMatchInfo;
 import network.message.Request;
 import view.GlobalChatView;
+import view.ShopView;
 import view.View;
 import view.WaitingForOppView;
 
@@ -74,8 +74,8 @@ public class Client extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        View.getInstance().setPrimaryStage(primaryStage);
-        View.getInstance().run();
+        View.setPrimaryStage(primaryStage);
+        View.run(primaryStage);
         primaryStage.show();
     }
 
@@ -98,13 +98,18 @@ public class Client extends Application {
                 System.out.println(player.getDrake());
                 Player.update(player);
                 Player.setCurrentPlayer(player);
+                try {
+                    Platform.runLater(ShopView.getInstance()::showCards);
+                } catch (Exception e) {
+                    View.printThrowable(e);
+                }
                 break;
             case GLOBAL_CHAT:
                 GlobalChat.init((GlobalChat) request.getObj());
                 break;
             case MESSAGE:
                 String msg = (String) request.getObj();
-                View.getInstance().addPopupMessage(msg);
+                View.addPopupMessage(msg);
                 break;
             case INTRODUCE_OPP:
                 WaitingForOppView.getCurrent().takeOppName((String) request.getObj());
@@ -115,14 +120,15 @@ public class Client extends Application {
             case START_MATCH_SECOND:
                 WaitingForOppView.getCurrent().setOpponent((Player) request.getObj(), false);
                 break;
+            case MATCH:
+                WaitingForOppView.getCurrent().setMatch((Match) request.getObj());
+                Platform.runLater(WaitingForOppView.getCurrent()::startMatch);
+                break;
             case BATTLE_ACTION:
                 Match.getCurrentMatch().getBattleView().addBattleAction((BattleAction) request.getObj());
                 break;
-            case MATCH_INFO:
-                Match.getCurrentMatch().setInfo((PlayerMatchInfo[]) request.getObj());
-                break;
             case WITHDRAW:
-                Platform.runLater(() -> View.getInstance().back());
+                Platform.runLater(View::back);
                 break;
             case GLOBAL_CHAT_MESSAGE:
                 GlobalChat.getInstance().addMessage((Pair<String, String>) request.getObj());

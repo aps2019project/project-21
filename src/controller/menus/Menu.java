@@ -2,6 +2,7 @@ package controller.menus;
 
 import view.View;
 
-abstract class Menu {
-    protected View view = View.getInstance();
+import java.io.Serializable;
+
+abstract class Menu implements Serializable {
 }

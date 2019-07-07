@@ -212,12 +212,16 @@ public class Player implements Serializable {
     }
 
     private static void savePlayer(Player player) {
-//        List<Player> copy = new ArrayList<>(players);
-//        for (Player p : copy)
-//            if (p.username.equals(player.username))
-//                players.remove(p);
-//        addPlayer(player);
         CardMaker.saveToFile(player);
+    }
+
+    public static void saveOldPlayer(Player player) {
+        List<Player> copy = new ArrayList<>(players);
+        for (Player p : copy)
+            if (p.username.equals(player.username))
+                players.remove(p);
+        addPlayer(player);
+        savePlayer(player);
     }
 
     public static void savePlayer() {

@@ -35,13 +35,14 @@ public class WaitingForOppView {
     private Group after = new Group();
     private StackPane ready = new StackPane();
     private StackPane withdraw = new StackPane();
+    private Match match;
 
     private String oppName;
     private Player opponent;
     private boolean amIFirst;
 
     void run() {
-        View.getInstance().setScene(scene);
+        View.setScene(scene);
         scene.setCursor(Cursor.WAIT);
     }
 
@@ -152,11 +153,11 @@ public class WaitingForOppView {
 
     private void setOnActions() {
         back.setOnMouseClicked(event -> {
-            View.getInstance().back();
+            View.back();
             Client.write(Request.makeWithdrawRequest());
         });
         withdraw.setOnMouseClicked(event -> {
-            View.getInstance().back();
+            View.back();
             Client.write(Request.makeWithdrawRequest());
         });
         ready.setOnMouseClicked(event -> Client.write(Request.makeReadyRequest()));
@@ -204,24 +205,23 @@ public class WaitingForOppView {
                         if (!root.getChildren().contains(after))
                             root.getChildren().addAll(after);
                         root.getChildren().remove(before);
-                        View.getInstance().setCursor(scene);
+                        View.setCursor(scene);
                     }
-                    if (opponent != null) {
-                        startMatch();
-                        this.stop();
-                    }
+//                    if (opponent != null) {
+//                        startMatch();
+//                        this.stop();
+//                    }
                     last = now;
                 }
             }
         }.start();
     }
 
-    private void startMatch() {
-        Match match;
+    public void startMatch() {
         if (amIFirst)
-            match = new Match(Player.getCurrentPlayer(), opponent, MainMenu.getInstance().getMatchRequest());
+            match.setPlayerOne(Player.getCurrentPlayer());
         else
-            match = new Match(opponent, Player.getCurrentPlayer(), MainMenu.getInstance().getMatchRequest());
+            match.setPlayerTwo(Player.getCurrentPlayer());
         Match.setCurrentMatch(match);
         BattleView battleView = new BattleView();
         match.setBattleView(battleView);
@@ -231,5 +231,9 @@ public class WaitingForOppView {
     public void setOpponent(Player opponent, boolean amIFirst) {
         this.opponent = opponent;
         this.amIFirst = amIFirst;
+    }
+
+    public void setMatch(Match match) {
+        this.match = match;
     }
 }

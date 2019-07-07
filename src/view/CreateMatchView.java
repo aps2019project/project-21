@@ -60,7 +60,7 @@ public class CreateMatchView {
     private Group story3 = new Group();
 
     void run() {
-        View.getInstance().setScene(scene);
+        View.setScene(scene);
         boxes.push(singleOrMultiplayer);
     }
 
@@ -294,7 +294,7 @@ public class CreateMatchView {
         if (boxes.size() <= 1) {
             if (!boxes.isEmpty())
                 boxes.pop();
-            View.getInstance().back();
+            View.back();
         } else
             root.getChildren().remove(boxes.pop());
     }

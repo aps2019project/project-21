@@ -1,12 +1,13 @@
 package network;
 
+import javafx.application.Platform;
 import javafx.util.Pair;
 import models.BattleAction;
 import models.Player;
 import models.match.Match;
 import models.match.MatchRequest;
 import network.message.Request;
-import view.View;
+import view.Scoreboard;
 
 import java.util.concurrent.ArrayBlockingQueue;
 
@@ -17,7 +18,7 @@ public class MatchHandler extends Thread {
     private Player player2;
     private MatchRequest matchRequest;
     private ArrayBlockingQueue<Pair<ClientHandler, Request>> requests = new ArrayBlockingQueue<>(1000);
-    private int readyCount;
+    private int readyCount = 0;
     private Match match;
     private boolean isEnded;
 
@@ -60,6 +61,13 @@ public class MatchHandler extends Thread {
             case BATTLE_ACTION:
                 handleAction((BattleAction) request.getObj());
                 break;
+            case PLAYER:
+                Player.saveOldPlayer((Player) request.getObj());
+                readyCount--;
+                if (readyCount <= 0)
+                    finish();
+                Platform.runLater(Scoreboard::drawScoreboard);
+                break;
         }
     }
 
@@ -85,13 +93,8 @@ public class MatchHandler extends Thread {
         Match.setCurrentMatch(match);
         first.write(Request.makeStartMatchRequestFirst(player2));
         second.write(Request.makeStartMatchRequestSecond(player1));
-        try {
-            Thread.sleep(250);
-        } catch (Exception e) {
-            View.printThrowable(e);
-        }
-        first.write(Request.makeMatchInfoRequest(match.getPlayersMatchInfo()));
-        second.write(Request.makeMatchInfoRequest(match.getPlayersMatchInfo()));
+        first.write(Request.makeMatchRequest(match));
+        second.write(Request.makeMatchRequest(match));
 //        BattleView battleView = new BattleView();
 //        match.setBattleView(battleView);
 //        battleView.run();

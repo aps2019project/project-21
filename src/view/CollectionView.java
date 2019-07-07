@@ -56,7 +56,7 @@ public class CollectionView {
 
 
     void run() {
-        View.getInstance().setScene(scene);
+        View.setScene(scene);
     }
 
     {
@@ -206,7 +206,7 @@ public class CollectionView {
     }
 
     private void setOnActions() {
-        back.setOnMouseClicked(event -> View.getInstance().back());
+        back.setOnMouseClicked(event -> View.back());
         add.setOnMouseClicked(event -> {
             if (selectedDeck == null || selectedCard == null)
                 return;

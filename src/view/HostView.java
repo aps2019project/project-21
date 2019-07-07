@@ -34,7 +34,7 @@ public class HostView {
     private Button onlineUsers = new Button("ONLINE USERS");
 
     void run() {
-        View.getInstance().setScene(scene);
+        View.setScene(scene);
         VoicePlay.setThisMenu("main menu");
     }
 
@@ -67,7 +67,7 @@ public class HostView {
 
     private void setOnActions() {
         save.setOnAction(event -> AccountMenu.getInstance().save());
-        exit.setOnAction(event -> View.getInstance().exit());
+        exit.setOnAction(event -> View.exit());
         shop.setOnAction(event -> {
             HostShopView.run();
             VoicePlay.setThisMenu("shop");

@@ -27,7 +27,7 @@ public class Scoreboard {
     private static ScrollPane scrollPane = new ScrollPane();
 
     public static void run() {
-        View.getInstance().setScene(scene);
+        View.setScene(scene);
     }
 
     static {
@@ -56,7 +56,7 @@ public class Scoreboard {
         drawScoreboard();
     }
 
-    private static void drawScoreboard() {
+    public static void drawScoreboard() {
         scoreboard.getChildren().clear();
         scoreboard.setSpacing(5);
 
@@ -109,7 +109,7 @@ public class Scoreboard {
     }
 
     private static void setOnActions() {
-        back.setOnAction(event -> View.getInstance().back());
+        back.setOnAction(event -> View.back());
     }
 
     private static void handleChanges() {
