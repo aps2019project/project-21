@@ -19,6 +19,8 @@ public enum RequestType {
     TAKE_ONLINE_USERS,
     BUY,
     SELL,
+    HESOYAM,
+    SCOREBOARD,
 
     ;
 }

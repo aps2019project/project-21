@@ -71,8 +71,10 @@ public class ClientHandler extends Thread {
             Player.logout(currentAuthToken);
         clientHandlers.remove(this);
         sendOnlineUsersToAll();
+        sendScoreboardToAll();
         if (matchHandler != null)
             matchHandler.finish();
+        Platform.runLater(Scoreboard::drawScoreboardForHost);
     }
 
     private void handleRequest(Request request) {
@@ -94,16 +96,20 @@ public class ClientHandler extends Thread {
                         Player player = Player.getPlayerByUsername(loginMsg.getUsername());
                         if (player != null) {
                             sendOnlineUsersToAll();
+                            sendScoreboardToAll();
                             write(Request.makePlayer(player));
                             currentAuthToken = player.getAuthToken();
                             System.out.println(player.getUsername() + " logged in.");
+                            Platform.runLater(Scoreboard::drawScoreboardForHost);
                         }
                     }
                     break;
                 case LOGOUT:
                     Player.logout(request.getAuthToken());
                     sendOnlineUsersToAll();
+                    sendScoreboardToAll();
                     currentAuthToken = null;
+                    Platform.runLater(Scoreboard::drawScoreboardForHost);
                     break;
                 case CREATE_ACCOUNT:
                     CreateAccountRequest createAccountMsg = (CreateAccountRequest) request;
@@ -115,10 +121,11 @@ public class ClientHandler extends Thread {
                     Player player = Player.getPlayerByUsername(createAccountMsg.getUsername());
                     if (player != null) {
                         sendOnlineUsersToAll();
+                        sendScoreboardToAll();
                         write(Request.makePlayer(player));
                         currentAuthToken = player.getAuthToken();
                         System.out.println(player.getUsername() + " created account.");
-                        Platform.runLater(Scoreboard::drawScoreboard);
+                        Platform.runLater(Scoreboard::drawScoreboardForHost);
                     }
                     break;
                 case GLOBAL_CHAT_MESSAGE:
@@ -145,6 +152,11 @@ public class ClientHandler extends Thread {
                     break;
                 case SELL:
                     HostShopMenu.sell(getPlayer(), Integer.parseInt((String) request.getObj()));
+                    break;
+                case HESOYAM:
+                    Player player1 = getPlayer();
+                    if (player1 != null)
+                        player1.hesoyam();
                     break;
                 default:
                     View.err("request case not detected.");
@@ -179,6 +191,10 @@ public class ClientHandler extends Thread {
         Request request = Request.makeOnlineUsersRequest(Player.getOnlineUsersName());
         sendRequestToAll(request);
         handleRequest(request);  // for host itself!
+    }
+
+    void sendScoreboardToAll() {
+        sendRequestToAll(Request.makeScoreboardRequest());
     }
 
     private void sendRequestToAll(Request request) {

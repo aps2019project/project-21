@@ -51,7 +51,7 @@ public class MainMenuView {
     private Button back = new Button("BACK");
     private Button volume = new Button("VOLUME");
     private Button globalChat = new Button("GLOBAL CHAT");
-
+    private Button scoreboard = new Button("SCOREBOARD");
 
     void run() {
         View.setScene(scene);
@@ -77,7 +77,7 @@ public class MainMenuView {
         beforeLoginOptions.relocate(150, 170);
         beforeLoginOptions.setSpacing(7);
 
-        afterLoginOptions.getChildren().addAll(gotoMainMenu, showHistory, save, logout, hesoyam, globalChat);
+        afterLoginOptions.getChildren().addAll(gotoMainMenu, scoreboard, showHistory, save, logout, hesoyam, globalChat);
         afterLoginOptions.relocate(beforeLoginOptions.getLayoutX(), beforeLoginOptions.getLayoutY());
         afterLoginOptions.setSpacing(7);
 
@@ -136,6 +136,7 @@ public class MainMenuView {
         back.setOnAction(event -> isInMainMenu = false);
         volume.setOnAction(event -> VolumeController.getInstance().run());
         globalChat.setOnAction(event -> GlobalChatView.run());
+        scoreboard.setOnAction(event -> Scoreboard.run());
     }
 
     private void setBackground() {

@@ -73,6 +73,14 @@ public class VoicePlay {
         playSoundEffect("spell");
     }
 
+    public static void move() {
+        playSoundEffect("move");
+    }
+
+    public static void victory() {
+        playSoundEffect("victory");
+    }
+
     private static void playSoundEffect(String name) {
         File file = new File("src/assets/sounds/" + name + ".m4a");
         MediaPlayer mediaPlayer = new MediaPlayer(new Media(file.toURI().toString()));

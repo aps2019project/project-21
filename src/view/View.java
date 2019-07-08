@@ -10,7 +10,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import models.card.Attacker;
@@ -104,13 +109,29 @@ public class View {
         popup.initOwner(primaryStage);
         popup.setResizable(false);
         Label label = new Label(message);
-        Button ok = new Button("OK");
-        label.relocate(10, 50);
-        ok.relocate(100, 100);
+        Label okLabel = new Label("OK");
+        okLabel.setFont(Font.font(20));
+        okLabel.setTextFill(Color.WHITE);
         Group group = new Group();
-        group.getChildren().addAll(label, ok);
-        Scene dialogScene = new Scene(group, 300, 150);
-        ok.setOnAction(event -> popup.close());
+        Rectangle background = new Rectangle(500, 210);
+        background.setStyle("-fx-fill: white");
+        group.getChildren().add(background);
+        StackPane s = new StackPane();
+        label.relocate(10, 50);
+        s.relocate(120, 120);
+        try {
+            ImageView i = new ImageView(new Image(new FileInputStream("src/assets/resources/ui/button_cancel.png")));
+            i.setFitHeight(50);
+            i.setFitWidth(150);
+            i.setOnMouseClicked(event -> popup.close());
+            group.getChildren().add(i);
+            s.getChildren().addAll(i, okLabel);
+
+        } catch (IOException e) {
+            View.printThrowable(e);
+        }
+        group.getChildren().addAll(label, s);
+        Scene dialogScene = new Scene(group, 380, 171);
         dialogScene.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER)
                 popup.close();

@@ -200,6 +200,7 @@ public class Match implements Serializable {
         battleView.drawCollectables();
         battleView.drawFlags();
         battleView.moveOrAttack0(x, y);
+        VoicePlay.move();
     }
 
     private boolean isMoveTargetValid(Cell target) {
@@ -629,6 +630,7 @@ public class Match implements Serializable {
     }
 
     private void endMatch(Player winner, Player loser) {
+        VoicePlay.victory();
         this.winner = winner;
         this.loser = loser;
         winner.addDrake(getMatchWinningPrize());

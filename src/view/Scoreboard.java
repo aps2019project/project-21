@@ -39,8 +39,6 @@ public class Scoreboard {
 
         setOnActions();
 
-        handleChanges();
-
         root.getChildren().addAll(back, scrollPane);
     }
 
@@ -53,10 +51,10 @@ public class Scoreboard {
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.relocate(580, 150);
-        drawScoreboard();
+        drawScoreboardForHost();
     }
 
-    public static void drawScoreboard() {
+    public static void drawScoreboard(List<Player> sortedPlayers) {
         scoreboard.getChildren().clear();
         scoreboard.setSpacing(5);
 
@@ -67,13 +65,16 @@ public class Scoreboard {
         Label wins = new Label("WINS");
         Label losses = new Label("LOSSES");
 
-        hBox.getChildren().addAll( makeStackPane(name, 151),
-                makeStackPane(wins, 100), makeStackPane(losses, 100));
+        hBox.getChildren().addAll(makeStackPane(name, 151, -1),
+                makeStackPane(wins, 100, -1), makeStackPane(losses, 100, -1));
         scoreboard.getChildren().add(hBox);
 
-        List<Player> players = Player.getPlayersSortedForScoreboard();
-        for (Player player : players)
+        for (Player player : sortedPlayers)
             drawPlayer(player);
+    }
+
+    public static void drawScoreboardForHost() {
+        drawScoreboard(Player.getPlayersSortedForScoreboard());
     }
 
     private static void drawPlayer(Player player) {
@@ -87,7 +88,10 @@ public class Scoreboard {
             ImageView icon = new ImageView(new Image(new FileInputStream("src/assets/profile_icons/icon_" + n + ".png")));
             icon.setFitHeight(40);
             icon.setFitWidth(40);
-            hBox.getChildren().add(makeStackPane(icon, 50));
+            int status = 0;
+            if (player.isOnline())
+                status = 1;
+            hBox.getChildren().add(makeStackPane(icon, 50, status));
         } catch (IOException ex) {
             View.printThrowable(ex);
         }
@@ -96,24 +100,26 @@ public class Scoreboard {
         Label wins = new Label(Integer.toString(player.getMultiplayerWins()));
         Label losses = new Label(Integer.toString(player.getMultiplayerLosses()));
 
-        hBox.getChildren().addAll(makeStackPane(name, 100), makeStackPane(wins, 100), makeStackPane(losses, 100));
+        hBox.getChildren().addAll(makeStackPane(name, 100, -1)
+                , makeStackPane(wins, 100, -1), makeStackPane(losses, 100, -1));
         scoreboard.getChildren().add(hBox);
     }
 
-    private static StackPane makeStackPane(Node node, int width) {
+    private static StackPane makeStackPane(Node node, int width, int onlineStatus) {
         StackPane stackPane = new StackPane();
         Rectangle rectangle = new Rectangle(width, 50);
-        rectangle.setStyle("-fx-fill: rgba(255,255,255,0.45)");
+        if (onlineStatus == -1)
+            rectangle.setStyle("-fx-fill: rgba(255,255,255,0.45)");
+        else if (onlineStatus == 0)
+            rectangle.setStyle("-fx-fill: rgba(255,0,3,0.25)");
+        else if (onlineStatus == 1)
+            rectangle.setStyle("-fx-fill: rgba(6,255,18,0.25)");
         stackPane.getChildren().addAll(rectangle, node);
         return stackPane;
     }
 
     private static void setOnActions() {
         back.setOnAction(event -> View.back());
-    }
-
-    private static void handleChanges() {
-
     }
 
     private static void setBackground() {

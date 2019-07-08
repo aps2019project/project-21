@@ -126,6 +126,19 @@ public class Request implements Serializable {
         return request;
     }
 
+    public static Request makeHesoyamRequest() {
+        Request request = new Request();
+        request.reqType = RequestType.HESOYAM;
+        return request;
+    }
+
+    public static Request makeScoreboardRequest() {
+        Request request = new Request();
+        request.reqType = RequestType.SCOREBOARD;
+        request.obj = Player.getPlayersSortedForScoreboard();
+        return request;
+    }
+
     public Object getObj() {
         return obj;
     }

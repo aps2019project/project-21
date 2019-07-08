@@ -11,10 +11,7 @@ import models.GlobalChat;
 import models.Player;
 import models.match.Match;
 import network.message.Request;
-import view.GlobalChatView;
-import view.ShopView;
-import view.View;
-import view.WaitingForOppView;
+import view.*;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -131,6 +128,9 @@ public class Client extends Application {
                 break;
             case TAKE_ONLINE_USERS:
                 GlobalChatView.setOnlineUsersName((List<String>) request.getObj());
+                break;
+            case SCOREBOARD:
+                Platform.runLater(() -> Scoreboard.drawScoreboard((List<Player>) request.getObj()));
                 break;
         }
     }

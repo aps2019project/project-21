@@ -42,6 +42,10 @@ public class Player implements Serializable {
         return list;
     }
 
+    public boolean isOnline() {
+        return authToken != null;
+    }
+
     public static void setAuthNulls() {
         for (Player player : players)
             player.authToken = null;
@@ -128,6 +132,7 @@ public class Player implements Serializable {
 
     public void hesoyam() {
         drake = 20000000;
+        this.getCL().write(Request.makePlayer(this));
     }
 
     public List<Match> getMatchHistory() {

@@ -61,9 +61,11 @@ public class MatchHandler extends Thread {
             case PLAYER:
                 Player.saveOldPlayer((Player) request.getObj());
                 readyCount--;
-                if (readyCount <= 0)
+                if (readyCount <= 0) {
                     finish();
-                Platform.runLater(Scoreboard::drawScoreboard);
+                    first.sendScoreboardToAll();
+                }
+                Platform.runLater(Scoreboard::drawScoreboardForHost);
                 break;
         }
     }

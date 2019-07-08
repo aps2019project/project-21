@@ -2,6 +2,7 @@ package view;
 
 import controller.menus.AccountMenu;
 import controller.menus.ShopMenu;
+import javafx.animation.AnimationTimer;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -107,6 +108,23 @@ public class ShopView {
         draw();
 
         setOnActions();
+
+        handleDrake();
+    }
+
+    private void handleDrake() {
+        new AnimationTimer() {
+            long last;
+
+            @Override
+            public void handle(long now) {
+                if (now - last > 500) {
+                    if (Player.hasAnyoneLoggedIn())
+                        drake.setText(Integer.toString(Player.getCurrentPlayer().getDrake()));
+                    last = now;
+                }
+            }
+        }.start();
     }
 
     private void setBackground() {
