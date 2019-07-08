@@ -235,7 +235,6 @@ public class CreateMatchView {
             label.setStyle("-fx-text-fill: rgba(255, 255, 255, 0.8)");
             label.setFont(Font.font(20));
             label.relocate(transparent.getWidth() / 2 - fontLoader.computeStringWidth(label.getText(), label.getFont()) / 2, transparent.getLayoutY() + 15);
-            View.giveGlowEffect(label);
             group.getChildren().addAll(image, transparent, trimPlate, label);
         } catch (IOException e) {
             View.printThrowable(e);
@@ -248,10 +247,12 @@ public class CreateMatchView {
         single.setOnMouseClicked(event -> {
             MainMenu.getInstance().setSingle();
             boxes.push(gameType);
+            VoicePlay.select();
         });
         multiplayer.setOnMouseClicked(event -> {
             MainMenu.getInstance().setMultiplayer();
             boxes.push(goalMode);
+            VoicePlay.select();
         });
         Group[] groups = {single, multiplayer, story, custom, story1, story2, story3, killHero,
                 holdFlag, gatherFlag};
@@ -259,6 +260,7 @@ public class CreateMatchView {
             g.setOnMouseEntered(event -> {
                 g.setScaleX(1.07);
                 g.setScaleY(1.07);
+                VoicePlay.hover();
             });
             g.setOnMouseExited(event -> {
                 g.setScaleX(1);
@@ -268,20 +270,38 @@ public class CreateMatchView {
         killHero.setOnMouseClicked(event -> {
             MainMenu.getInstance().setKillHero();
             goalModeAction();
+            VoicePlay.select();
         });
         holdFlag.setOnMouseClicked(event -> {
             MainMenu.getInstance().setHoldFlag(flagCount.getText());
             goalModeAction();
+            VoicePlay.select();
         });
         gatherFlag.setOnMouseClicked(event -> {
             MainMenu.getInstance().setGatherFlag(flagCount.getText());
             goalModeAction();
+            VoicePlay.select();
         });
-        story.setOnMouseClicked(event -> boxes.push(storyMode));
-        story1.setOnMouseClicked(event -> MainMenu.getInstance().startStoryMatch(1));
-        story2.setOnMouseClicked(event -> MainMenu.getInstance().startStoryMatch(2));
-        story3.setOnMouseClicked(event -> MainMenu.getInstance().startStoryMatch(3));
-        custom.setOnMouseClicked(event -> boxes.push(customMode));
+        story.setOnMouseClicked(event -> {
+            boxes.push(storyMode);
+            VoicePlay.select();
+        });
+        story1.setOnMouseClicked(event -> {
+            MainMenu.getInstance().startStoryMatch(1);
+            VoicePlay.select();
+        });
+        story2.setOnMouseClicked(event -> {
+            MainMenu.getInstance().startStoryMatch(2);
+            VoicePlay.select();
+        });
+        story3.setOnMouseClicked(event -> {
+            MainMenu.getInstance().startStoryMatch(3);
+            VoicePlay.select();
+        });
+        custom.setOnMouseClicked(event -> {
+            boxes.push(customMode);
+            VoicePlay.select();
+        });
     }
 
     private void goalModeAction() {
@@ -296,8 +316,10 @@ public class CreateMatchView {
             if (!boxes.isEmpty())
                 boxes.pop();
             View.back();
-        } else
+        } else {
             root.getChildren().remove(boxes.pop());
+            VoicePlay.back();
+        }
     }
 
 

@@ -13,10 +13,7 @@ import models.Player;
 import models.card.*;
 import network.Client;
 import network.message.Request;
-import view.BattleView;
-import view.MainMenuView;
-import view.Message;
-import view.View;
+import view.*;
 
 import java.io.Serializable;
 import java.lang.reflect.Method;
@@ -268,6 +265,7 @@ public class Match implements Serializable {
         attacker.setCannotAttack();
         attacker.setCannotMove();
         System.out.println("attacked.");
+        VoicePlay.attack();
 
         if (attacker instanceof Minion) {
             Minion minion = (Minion) attacker;
@@ -404,6 +402,7 @@ public class Match implements Serializable {
         battleView.drawMana();
         battleView.drawHand();
         battleView.drawSpellEffect(spell, x, y);
+        VoicePlay.spell();
     }
 
     public void useCollectable(int x, int y) {
@@ -500,6 +499,7 @@ public class Match implements Serializable {
         battleView.drawHand();
         battleView.drawAttackers();
         battleView.drawMana();
+        VoicePlay.insert();
     }
 
     private void goOnCell(Attacker attacker, Cell cell) {
@@ -564,32 +564,19 @@ public class Match implements Serializable {
     private void aiPlay() {
         System.out.println("AI playing...");
         try {
-            selectedCard = info[1].getHero();
-            moveCard(2, info[1].getHero().getCurrentCell().getY() - 1);
-
-            battleView.getSelect().setX(2);
-            battleView.getSelect().setY(info[1].getHero().getCurrentCell().getY() + 1);
-            TranslateTransition t = battleView.moveAnimation(2, info[1].getHero().getCurrentCell().getY());
-            if (t != null)
-                t.setOnFinished(event -> battleView.drawAttackers());
-            battleView.updateAttackers();
-
-            attack(info[0].getHero().getCardIDInGame());
-            selectedCard = info[1].getHero();
-            battleView.setSelect(new view.Cell(selectedCard.getCurrentCell().getX(), selectedCard.getCurrentCell().getY()));
-            battleView.attackAnimation(info[0].getHero().getCurrentCell().getX(), info[0].getHero().getCurrentCell().getY());
+            Hero hero = info[1].getHero();
+            if (hero != null) {
+                selectAttacker(hero.getCardIDInGame(), hero.getCurrentCell().getX(), hero.getCurrentCell().getY());
+                moveCard(2, info[1].getHero().getCurrentCell().getY() - 1);
+            }
 
             for (Attacker attacker : info[1].getGroundedAttackers()) {
+                if (attacker == null)
+                    continue;
                 if (attacker.canMove()) {
-                    selectedCard = attacker;
+                    selectAttacker(attacker.getCardIDInGame(), attacker.getCurrentCell().getX(), attacker.getCurrentCell().getY());
                     int random = new Random().nextInt(2) * 2 - 1;
                     moveCard(attacker.getCurrentCell().getX() + random, attacker.getCurrentCell().getY());
-                    battleView.getSelect().setX(attacker.getCurrentCell().getX() - random);
-                    battleView.getSelect().setY(attacker.getCurrentCell().getY());
-                    TranslateTransition t1 = battleView.moveAnimation(attacker.getCurrentCell().getX(), attacker.getCurrentCell().getY());
-                    if (t1 != null)
-                        t1.setOnFinished(event -> battleView.drawAttackers());
-                    battleView.updateAttackers();
                 }
             }
 
@@ -841,6 +828,7 @@ public class Match implements Serializable {
                 aiPlay();
         System.out.println("turn ended.");
         battleView.drawMana();
+        VoicePlay.endturn();
     }
 
     private void prepareNextRound() {

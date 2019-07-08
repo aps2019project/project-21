@@ -103,7 +103,7 @@ public class MainMenuView {
                     if (node1 instanceof Button) {
                         Button button = (Button) node1;
                         button.setFont(Font.font(17));
-                        View.giveGlowEffect(button);
+                        View.buttonEffect(button);
                     }
                 }
             }

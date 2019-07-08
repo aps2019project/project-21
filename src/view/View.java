@@ -1,6 +1,7 @@
 package view;
 
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.ImageCursor;
 import javafx.scene.Node;
@@ -60,11 +61,13 @@ public class View {
         primaryStage.setScene(scene);
         scenes.push(scene);
         setCursor(scene);
+        VoicePlay.setScene();
     }
 
     public static void back() {
         scenes.pop();
         primaryStage.setScene(scenes.peek());
+        VoicePlay.back();
     }
 
     static void setCursor(Scene scene) {
@@ -179,5 +182,20 @@ public class View {
         node.setEffect(glow);
         node.setOnMouseEntered(event -> glow.setLevel(1));
         node.setOnMouseExited(event -> glow.setLevel(0));
+    }
+
+    static void buttonEffect(Button button) {
+        Glow glow = new Glow();
+        button.setEffect(glow);
+        button.setOnMouseClicked(event -> {
+            Platform.runLater(VoicePlay::select);
+        });
+        button.setOnMouseEntered(event -> {
+            glow.setLevel(1);
+            VoicePlay.hover();
+        });
+        button.setOnMouseExited(event -> {
+            glow.setLevel(0);
+        });
     }
 }
