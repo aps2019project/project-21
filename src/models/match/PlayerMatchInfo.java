@@ -14,7 +14,7 @@ import java.util.List;
 public class PlayerMatchInfo implements Serializable {
     private static final int MAX_MANA = 9;
 
-    private int mp = 7;
+    private int mp = 3;
     private Deck deck;
     private Hand hand;
     private List<Card> graveyard = new ArrayList<>();

@@ -35,10 +35,11 @@ public class WaitingForOppView {
     private Group after = new Group();
     private StackPane ready = new StackPane();
     private StackPane withdraw = new StackPane();
+    private ImageView readyImg;
+    private ImageView disabledReadyImg;
     private Match match;
 
     private String oppName;
-    private Player opponent;
     private boolean amIFirst;
 
     void run() {
@@ -98,22 +99,25 @@ public class WaitingForOppView {
         after.getChildren().addAll(withdraw, ready);
 
         try {
-            ImageView confirm = new ImageView(new Image(new FileInputStream("src/assets/resources/ui/button_confirm@2x.png")));
-            confirm.setFitWidth(210);
-            confirm.setFitHeight(70);
+            readyImg = new ImageView(new Image(new FileInputStream("src/assets/resources/ui/button_confirm@2x.png")));
+            readyImg.setFitWidth(210);
+            readyImg.setFitHeight(70);
+            disabledReadyImg = new ImageView(new Image(new FileInputStream("src/assets/resources/ui/button_end_turn_enemy@2x.png")));
+            disabledReadyImg.setFitWidth(210);
+            disabledReadyImg.setFitHeight(70);
             Label readyLabel = new Label("READY");
             readyLabel.setFont(Font.font(20));
             readyLabel.setStyle("-fx-text-fill: white");
-            ready.getChildren().addAll(confirm, readyLabel);
+            ready.getChildren().addAll(readyImg, readyLabel);
             ready.relocate(470, 650);
 
-            ImageView cancel = new ImageView(new Image(new FileInputStream("src/assets/resources/ui/button_cancel@2x.png")));
-            cancel.setFitWidth(210);
-            cancel.setFitHeight(70);
+            ImageView withdrawImg = new ImageView(new Image(new FileInputStream("src/assets/resources/ui/button_cancel@2x.png")));
+            withdrawImg.setFitWidth(210);
+            withdrawImg.setFitHeight(70);
             Label withdrawLabel = new Label("WITHDRAW");
             withdrawLabel.setFont(Font.font(20));
             withdrawLabel.setStyle("-fx-text-fill: white");
-            withdraw.getChildren().addAll(cancel, withdrawLabel);
+            withdraw.getChildren().addAll(withdrawImg, withdrawLabel);
             withdraw.relocate(820, 650);
         } catch (IOException ex) {
             View.printThrowable(ex);
@@ -160,7 +164,11 @@ public class WaitingForOppView {
             View.back();
             Client.write(Request.makeWithdrawRequest());
         });
-        ready.setOnMouseClicked(event -> Client.write(Request.makeReadyRequest()));
+        ready.setOnMouseClicked(event -> {
+            ready.getChildren().remove(readyImg);
+            ready.getChildren().add(disabledReadyImg);
+            Client.write(Request.makeReadyRequest());
+        });
     }
 
     private void sendRequestToHost() {
@@ -207,10 +215,6 @@ public class WaitingForOppView {
                         root.getChildren().remove(before);
                         View.setCursor(scene);
                     }
-//                    if (opponent != null) {
-//                        startMatch();
-//                        this.stop();
-//                    }
                     last = now;
                 }
             }
@@ -228,8 +232,7 @@ public class WaitingForOppView {
         battleView.run();
     }
 
-    public void setOpponent(Player opponent, boolean amIFirst) {
-        this.opponent = opponent;
+    public void setAmIFirst(boolean amIFirst) {
         this.amIFirst = amIFirst;
     }
 

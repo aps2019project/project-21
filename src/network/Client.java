@@ -64,9 +64,10 @@ public class Client extends Application {
 
     private static void finish() {
         try {
+            Platform.runLater(() -> View.popup("NOT CONNECTED TO HOST"));
+            ois.close();
             socket.close();
             oos.close();
-            ois.close();
         } catch (IOException ex) {
             //
         }
@@ -95,14 +96,9 @@ public class Client extends Application {
         switch (request.getReqType()) {
             case PLAYER:
                 Player player = (Player) request.getObj();
-                System.out.println(player.getDrake());
                 Player.update(player);
                 Player.setCurrentPlayer(player);
-                try {
-                    Platform.runLater(ShopView.getInstance()::showCards);
-                } catch (Exception e) {
-                    View.printThrowable(e);
-                }
+                Platform.runLater(ShopView.getInstance()::showCards);
                 break;
             case GLOBAL_CHAT:
                 GlobalChat.init((GlobalChat) request.getObj());
@@ -115,10 +111,10 @@ public class Client extends Application {
                 WaitingForOppView.getCurrent().takeOppName((String) request.getObj());
                 break;
             case START_MATCH_FIRST:
-                WaitingForOppView.getCurrent().setOpponent((Player) request.getObj(), true);
+                WaitingForOppView.getCurrent().setAmIFirst(true);
                 break;
             case START_MATCH_SECOND:
-                WaitingForOppView.getCurrent().setOpponent((Player) request.getObj(), false);
+                WaitingForOppView.getCurrent().setAmIFirst(false);
                 break;
             case MATCH:
                 WaitingForOppView.getCurrent().setMatch((Match) request.getObj());
@@ -134,7 +130,7 @@ public class Client extends Application {
                 GlobalChat.getInstance().addMessage((Pair<String, String>) request.getObj());
                 break;
             case TAKE_ONLINE_USERS:
-                GlobalChatView.getInstance().setOnlineUsersName((List<String>) request.getObj());
+                GlobalChatView.setOnlineUsersName((List<String>) request.getObj());
                 break;
         }
     }

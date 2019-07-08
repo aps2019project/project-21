@@ -1,6 +1,8 @@
 package view;
 
+import controller.menus.BattleMenu;
 import controller.menus.MultiPlayerBattleMenu;
+import controller.menus.SinglePlayerBattleMenu;
 import javafx.animation.AnimationTimer;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Insets;
@@ -27,6 +29,7 @@ import models.Item.Collectable;
 import models.Item.Flag;
 import models.Player;
 import models.card.*;
+import models.match.GameMode;
 import models.match.Match;
 import models.match.PlayerMatchInfo;
 
@@ -65,11 +68,14 @@ public class BattleView {
     private Group flags = new Group();
     private ArrayBlockingQueue<BattleAction> battleActions = new ArrayBlockingQueue<>(1000);
     private Rectangle invisible = new Rectangle(scene.getWidth(), scene.getHeight());
+    private BattleMenu battleMenu;
 
     public void run() {
         View.setScene(scene);
 
         scene.getStylesheets().add("view/stylesheets/battle_view.css");
+
+        initBattleMenu();
 
         setBackground();
 
@@ -90,6 +96,12 @@ public class BattleView {
         turnChange();
     }
 
+    private void initBattleMenu() {
+        if (match.getGameMode() == GameMode.SINGLE_PLAYER)
+            battleMenu = new SinglePlayerBattleMenu();
+        else
+            battleMenu = new MultiPlayerBattleMenu();
+    }
 
     private void drawTable() {
         table.getChildren().addAll(collectables, flags);
@@ -119,7 +131,7 @@ public class BattleView {
                     if (event.getButton() == MouseButton.PRIMARY) {
                         if (match.isAnyCardSelected()) {
 //                            int r =
-                            MultiPlayerBattleMenu.getInstance().moveOrAttack(u, v);
+                            battleMenu.moveOrAttack(u, v);
 //                            if (r == 0) {
 //
 //                            } else if (r == 1) {
@@ -131,18 +143,18 @@ public class BattleView {
 //                            }
                         } else if (selectedInHand != null) {
                             if (selectedInHand.getCard() instanceof Attacker) {
-                                MultiPlayerBattleMenu.getInstance().insertCardIn(selectedInHand.getCard().getName(), u, v);
+                                battleMenu.insertCardIn(selectedInHand.getCard().getName(), u, v);
                                 drawAttackers();
                             } else if (selectedInHand.getCard() instanceof Spell) {
                                 if (selectedInHand.getCard().getName().equalsIgnoreCase(match.getPlayersMatchInfo()[0].getHero().getSpecialPower().getName())) {
-                                    MultiPlayerBattleMenu.getInstance().useSpecialPower(u, v);
+                                    battleMenu.useSpecialPower(u, v);
                                 } else
-                                    MultiPlayerBattleMenu.getInstance().useSpell(selectedInHand.getCard().getName(), u, v);
+                                    battleMenu.useSpell(selectedInHand.getCard().getName(), u, v);
                             }
                             deselect();
                         } else {
                             if (getAttacker(u, v) != null)
-                                MultiPlayerBattleMenu.getInstance().selectAttacker(getAttacker(u, v).getCardIDInGame(), u, v);
+                                battleMenu.selectAttacker(getAttacker(u, v).getCardIDInGame(), u, v);
                         }
                     } else if (event.getButton() == MouseButton.SECONDARY) {
                         deselect();
@@ -287,7 +299,7 @@ public class BattleView {
         selectedRect = null;
         select.setX(-1);
         selectedInHand = null;
-        MultiPlayerBattleMenu.getInstance().deselect();
+        battleMenu.deselect();
     }
 
     private Attacker getAttacker(int r, int c) {
@@ -561,7 +573,7 @@ public class BattleView {
     }
 
     private void setOnActions() {
-        endTurn.setOnMouseClicked(event -> MultiPlayerBattleMenu.getInstance().endTurn());
+        endTurn.setOnMouseClicked(event -> battleMenu.endTurn());
         pause.setOnAction(event -> pause());
         graveyard.setOnAction(event -> graveyard());
         scene.setOnKeyPressed(event -> {
@@ -585,7 +597,7 @@ public class BattleView {
             View.back();
         });
         Button gameInfo = new Button("GAME INFO");
-        gameInfo.setOnAction(event -> MultiPlayerBattleMenu.getInstance().showGameInfo());
+        gameInfo.setOnAction(event -> battleMenu.showGameInfo());
         VBox vBox = new VBox();
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(30);

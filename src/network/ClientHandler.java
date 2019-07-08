@@ -1,6 +1,7 @@
 package network;
 
 import controller.menus.HostShopMenu;
+import javafx.application.Platform;
 import javafx.util.Pair;
 import models.GlobalChat;
 import models.Player;
@@ -9,6 +10,7 @@ import network.message.CreateAccountRequest;
 import network.message.LoginRequest;
 import network.message.Request;
 import view.GlobalChatView;
+import view.Scoreboard;
 import view.View;
 
 import java.io.IOException;
@@ -17,6 +19,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ClientHandler extends Thread {
     private static List<ClientHandler> clientHandlers = new ArrayList<>();
@@ -115,6 +118,7 @@ public class ClientHandler extends Thread {
                         write(Request.makePlayer(player));
                         currentAuthToken = player.getAuthToken();
                         System.out.println(player.getUsername() + " created account.");
+                        Platform.runLater(Scoreboard::drawScoreboard);
                     }
                     break;
                 case GLOBAL_CHAT_MESSAGE:
@@ -134,7 +138,7 @@ public class ClientHandler extends Thread {
                     setMatchNull();
                     break;
                 case TAKE_ONLINE_USERS:
-                    GlobalChatView.getInstance().setOnlineUsersName((List<String>) request.getObj());
+                    GlobalChatView.setOnlineUsersName((List<String>) request.getObj());
                     break;
                 case BUY:
                     HostShopMenu.buy(getPlayer(), (String) request.getObj());
@@ -158,7 +162,12 @@ public class ClientHandler extends Thread {
     }
 
     private void prepareMatchHandler(ClientHandler other) {
-        MatchHandler matchHandler = new MatchHandler(this, other, matchRequest);
+        int rand = new Random().nextInt(2);
+        MatchHandler matchHandler;
+        if (rand == 0)
+            matchHandler = new MatchHandler(this, other, matchRequest);
+        else
+            matchHandler = new MatchHandler(other, this, matchRequest);
         this.matchHandler = matchHandler;
         other.matchHandler = matchHandler;
         this.write(Request.makeIntroduceOppRequest(other.getPlayer().getUsername()));

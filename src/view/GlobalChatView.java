@@ -22,29 +22,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GlobalChatView {
-    private static GlobalChatView instance = new GlobalChatView();
+    private static Group root = new Group();
+    private static Scene scene = new Scene(root, 1536, 801.59);
+    private static VBox messages = new VBox();
+    private static TextField input = new TextField();
+    private static Button back = new Button("BACK");
+    private static ScrollPane scrollPane = new ScrollPane();
+    private static VBox onlineUsers = new VBox();
+    private static List<String> onlineUsersName = new ArrayList<>();
 
-    private GlobalChatView() {
-    }
-
-    public static GlobalChatView getInstance() {
-        return instance;
-    }
-
-    private Group root = new Group();
-    private Scene scene = new Scene(root, 1536, 801.59);
-    private VBox messages = new VBox();
-    private TextField input = new TextField();
-    private Button back = new Button("BACK");
-    private ScrollPane scrollPane = new ScrollPane();
-    private VBox onlineUsers = new VBox();
-    private List<String> onlineUsersName = new ArrayList<>();
-
-    void run() {
+    static void run() {
         View.setScene(scene);
     }
 
-    {
+    static {
         scene.getStylesheets().add("view/stylesheets/global_chat_view.css");
 
         setBackground();
@@ -56,7 +47,7 @@ public class GlobalChatView {
         handleChanges();
     }
 
-    private void draw() {
+    private static void draw() {
         back.relocate(10, 10);
         back.setFont(Font.font(20));
         drawMessagePane();
@@ -64,7 +55,7 @@ public class GlobalChatView {
         root.getChildren().addAll(back, scrollPane, onlineUsers);
     }
 
-    private void drawOnlineUsersPane() {
+    private static void drawOnlineUsersPane() {
         onlineUsers.relocate(1000, 100);
         onlineUsers.setSpacing(15);
         onlineUsers.getChildren().clear();
@@ -78,7 +69,7 @@ public class GlobalChatView {
             drawOnlineUser(username);
     }
 
-    private void drawOnlineUser(String username) {
+    private static void drawOnlineUser(String username) {
         Group group = new Group();
         Label name = new Label(username);
         name.setStyle("-fx-text-fill: white");
@@ -97,7 +88,7 @@ public class GlobalChatView {
         onlineUsers.getChildren().add(group);
     }
 
-    private void drawMessagePane() {
+    private static void drawMessagePane() {
         input.relocate(510, 700);
         input.setPrefWidth(250);
         messages.setSpacing(15);
@@ -111,12 +102,12 @@ public class GlobalChatView {
         drawMessages();
     }
 
-    private void drawMessages() {
+    private static void drawMessages() {
         for (Pair<String, String> msgPair : GlobalChat.getInstance().getMessages())
             drawMessage(msgPair);
     }
 
-    private void drawMessage(Pair<String, String> msgPair) {
+    private static void drawMessage(Pair<String, String> msgPair) {
         if (msgPair == null)
             return;
         Group group = new Group();
@@ -144,12 +135,12 @@ public class GlobalChatView {
         messages.getChildren().add(group);
     }
 
-    private void updateMessages() {
+    private static void updateMessages() {
         if (messages.getChildren().size() < GlobalChat.getInstance().getMessages().size())
             drawMessage(GlobalChat.getInstance().getMessages().get(messages.getChildren().size()));
     }
 
-    private void setOnActions() {
+    private static void setOnActions() {
         back.setOnAction(event -> View.back());
         input.setOnAction(event -> {
             GlobalChatMenu.getInstance().addMessage(input.getText());
@@ -157,7 +148,7 @@ public class GlobalChatView {
         });
     }
 
-    private void setBackground() {
+    private static void setBackground() {
         try {
             ImageView background = new ImageView(new Image(new FileInputStream
                     ("src/assets/resources/maps/battlemap3_background@2x.png")));
@@ -169,7 +160,7 @@ public class GlobalChatView {
         }
     }
 
-    private void handleChanges() {
+    private static void handleChanges() {
         new AnimationTimer() {
             long last;
 
@@ -184,7 +175,11 @@ public class GlobalChatView {
         }.start();
     }
 
-    public void setOnlineUsersName(List<String> onlineUsersName) {
-        this.onlineUsersName = onlineUsersName;
+    public static void setOnlineUsersName(List<String> onlineUsersName) {
+        GlobalChatView.onlineUsersName = onlineUsersName;
+    }
+
+    public static void hideInputTextfield() {  // for host
+        root.getChildren().remove(input);
     }
 }

@@ -51,7 +51,7 @@ public class Container {
         try {
             String type = card.getClass().getSimpleName();
             System.out.println(type);
-            String n = Integer.toString(Math.abs(card.getName().hashCode()) % 5 + 1);
+            String n = Integer.toString(Math.abs(card.getName().hashCode()) / 2 % 5 + 1);
 
             if (card instanceof Attacker) {
                 setIdle(new ImageView(new Image(new FileInputStream("src/assets/gifs/" + type + "_idle_" + n + ".gif"))));

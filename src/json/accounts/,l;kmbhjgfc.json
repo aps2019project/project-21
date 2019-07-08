@@ -1,0 +1,20 @@
+{
+  "@type": "models.Player",
+  "@val": {
+    "username": ",l;kmbhjgfc",
+    "password": "a",
+    "collection": {
+      "decks": [],
+      "mainDeck": null,
+      "heroes": [],
+      "minions": [],
+      "spells": [],
+      "usables": []
+    },
+    "drake": 15000,
+    "matchHistory": [],
+    "wins": 0,
+    "losses": 0,
+    "authToken": null
+  }
+}

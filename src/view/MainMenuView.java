@@ -12,7 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import models.Player;
 
@@ -78,11 +77,11 @@ public class MainMenuView {
         beforeLoginOptions.relocate(150, 170);
         beforeLoginOptions.setSpacing(7);
 
-        afterLoginOptions.getChildren().addAll(gotoMainMenu, showHistory, save, logout, hesoyam, globalChat, currentPlayer);
+        afterLoginOptions.getChildren().addAll(gotoMainMenu, showHistory, save, logout, hesoyam, globalChat);
         afterLoginOptions.relocate(beforeLoginOptions.getLayoutX(), beforeLoginOptions.getLayoutY());
         afterLoginOptions.setSpacing(7);
 
-        mainMenuOptions.getChildren().addAll(collection, shop, battle, customCard, volume, back);
+        mainMenuOptions.getChildren().addAll(battle, collection, shop, customCard, volume, back);
         mainMenuOptions.relocate(beforeLoginOptions.getLayoutX(), beforeLoginOptions.getLayoutY());
         mainMenuOptions.setSpacing(7);
 
@@ -92,7 +91,9 @@ public class MainMenuView {
         password.setText("a");
         username.relocate(200, 200);
         password.relocate(200, 260);
-        currentPlayer.setTextFill(Color.ORANGE);
+
+        currentPlayer.relocate(1250, 760);
+        currentPlayer.setStyle("-fx-text-fill: #ffce4e");
 
         VBox[] vBoxes = {beforeLoginOptions, afterLoginOptions, mainMenuOptions};
         for (Node node : vBoxes) {
@@ -102,6 +103,7 @@ public class MainMenuView {
                     if (node1 instanceof Button) {
                         Button button = (Button) node1;
                         button.setFont(Font.font(17));
+                        View.giveGlowEffect(button);
                     }
                 }
             }
@@ -133,7 +135,7 @@ public class MainMenuView {
         battle.setOnAction(event -> createNewMatch());
         back.setOnAction(event -> isInMainMenu = false);
         volume.setOnAction(event -> VolumeController.getInstance().run());
-        globalChat.setOnAction(event -> GlobalChatView.getInstance().run());
+        globalChat.setOnAction(event -> GlobalChatView.run());
     }
 
     private void setBackground() {
@@ -191,7 +193,10 @@ public class MainMenuView {
                         root.getChildren().remove(mainMenuOptions);
                         if (!root.getChildren().contains(afterLoginOptions))
                             root.getChildren().add(afterLoginOptions);
+                        if (!root.getChildren().contains(currentPlayer))
+                            root.getChildren().add(currentPlayer);
                     } else {
+                        root.getChildren().remove(currentPlayer);
                         root.getChildren().remove(afterLoginOptions);
                         if (!root.getChildren().contains(beforeLoginOptions))
                             root.getChildren().add(beforeLoginOptions);

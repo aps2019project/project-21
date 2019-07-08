@@ -33,9 +33,7 @@ public class MatchHandler extends Thread {
     @Override
     public void run() {
         while (!isEnded) {
-            System.out.println(4444);
             while (requests.isEmpty()) ;
-            System.out.println(3333);
             Pair<ClientHandler, Request> requestPair = requests.poll();
             ClientHandler cl = requestPair.getKey();
             Request request = requestPair.getValue();
@@ -48,7 +46,6 @@ public class MatchHandler extends Thread {
             return;
         switch (request.getReqType()) {
             case READY:
-                System.out.println("2222");
                 readyCount++;
                 if (readyCount >= 2)
                     startMatch();
@@ -88,20 +85,15 @@ public class MatchHandler extends Thread {
     }
 
     private void startMatch() {
-        System.out.println("3333");
         match = new Match(player1, player2, matchRequest);
         Match.setCurrentMatch(match);
         first.write(Request.makeStartMatchRequestFirst(player2));
         second.write(Request.makeStartMatchRequestSecond(player1));
         first.write(Request.makeMatchRequest(match));
         second.write(Request.makeMatchRequest(match));
-//        BattleView battleView = new BattleView();
-//        match.setBattleView(battleView);
-//        battleView.run();
     }
 
     void addRequest(ClientHandler cl, Request request) {
-        System.out.println(5555);
         requests.add(new Pair<>(cl, request));
     }
 }

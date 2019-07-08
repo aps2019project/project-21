@@ -6,7 +6,7 @@ import javafx.scene.media.MediaPlayer;
 import java.io.File;
 
 class VoicePlay {
-    private static final double backgroundVolume = 0.7;
+    private static final double backgroundVolume = 0.3;
     private static File file = new File("src\\assets\\mainMenu.m4a");
     private static File file1 = new File("src\\assets\\shop.m4a");
     private static File file2 = new File("src\\assets\\matchHistory.m4a");
@@ -31,7 +31,6 @@ class VoicePlay {
         File file = new File("src\\assets\\button.m4a");
         MediaPlayer click = new MediaPlayer(new Media(file.toURI().toString()));
         click.play();
-
     }
 
     static void notification() {
@@ -41,29 +40,34 @@ class VoicePlay {
     }
 
     static void setThisMenu(String n) {
-        if (n.equals("main menu")) {
-            mainMenu.play();
-            shop.pause();
-            matchHistory.pause();
-            thisMenu = "main menu";
-        } else if (n.equals("shop")) {
-            mainMenu.pause();
-            shop.play();
-            thisMenu = "shop";
-        } else if (n.equals("match history")) {
-            matchHistory.play();
-            mainMenu.pause();
-            thisMenu = "match history";
+        switch (n) {
+            case "main menu":
+                mainMenu.play();
+                shop.pause();
+                matchHistory.pause();
+                thisMenu = "main menu";
+                break;
+            case "shop":
+                mainMenu.pause();
+                shop.play();
+                thisMenu = "shop";
+                break;
+            case "match history":
+                matchHistory.play();
+                mainMenu.pause();
+                thisMenu = "match history";
+                break;
         }
     }
 
     static MediaPlayer getThisMediaPlayer() {
-        if (thisMenu.equals("main menu")) {
-            return mainMenu;
-        } else if (thisMenu.equals("shop")) {
-            return shop;
-        } else if (thisMenu.equals("match history")) {
-            return matchHistory;
+        switch (thisMenu) {
+            case "main menu":
+                return mainMenu;
+            case "shop":
+                return shop;
+            case "match history":
+                return matchHistory;
         }
         return mainMenu;
     }

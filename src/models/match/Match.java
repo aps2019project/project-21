@@ -1,7 +1,10 @@
 package models.match;
 
 import controller.menus.HostBattleMenu;
+import controller.menus.MainMenu;
 import javafx.animation.TranslateTransition;
+import javafx.scene.Group;
+import javafx.util.Duration;
 import models.AIPlayer;
 import models.BattleAction;
 import models.Item.Collectable;
@@ -151,42 +154,50 @@ public class Match implements Serializable {
             selectedCard = null;
             View.printMessage(Message.NO_CARD_IS_SELECTED);
             battleView.moveOrAttack1(x, y);
+            return;
         }
         Cell target = getCell(x, y);
         if (target == null) {
             selectedCard = null;
             battleView.moveOrAttack1(x, y);
+            return;
         }
         if (!isMoveTargetValid(target)) {
             View.printMessage(Message.INVALID_MOVE_TARGET);
             selectedCard = null;
             battleView.moveOrAttack1(x, y);
+            return;
         }
         if (!isSelectedCardAttacker()) {
             selectedCard = null;
             battleView.moveOrAttack1(x, y);
+            return;
         }
         Attacker attacker = (Attacker) selectedCard;
         if (!attacker.canMove()) {
             View.printMessage(Message.ATTACKER_CANT_MOVE);
             selectedCard = null;
             battleView.moveOrAttack1(x, y);
+            return;
         }
         if (isPathClosed(attacker.getCurrentCell(), target)) {
             View.printMessage(Message.INVALID_MOVE_TARGET);
             selectedCard = null;
             battleView.moveOrAttack1(x, y);
+            return;
         }
         if (attacker.isStunned()) {
             View.printMessage(Message.STUNNED);
             selectedCard = null;
             battleView.moveOrAttack1(x, y);
+            return;
         }
 
         attacker.getCurrentCell().setEmpty();
         attacker.setCannotMove();
         goOnCell(attacker, target);
-        System.out.println(selectedCard.getCardIDInGame() + " moved to (" + x + ", " + y + ")");
+        if (selectedCard != null)
+            System.out.println(selectedCard.getCardIDInGame() + " moved to (" + x + ", " + y + ")");
         selectedCard = null;
         System.out.println("RETURN 0");
         battleView.drawCollectables();
@@ -544,10 +555,13 @@ public class Match implements Serializable {
     private void swapTurn() {
         turn = 1 - turn;
         turnCount++;
+        if (getThisTurnsPlayer().getUsername().equals(Player.getCurrentPlayer().getUsername()))
+            View.setIsOppPlaying(false);
+        else
+            View.setIsOppPlaying(true);
     }
 
     private void aiPlay() {
-        View.setAIPlaying(true);
         System.out.println("AI playing...");
         try {
             selectedCard = info[1].getHero();
@@ -579,16 +593,23 @@ public class Match implements Serializable {
                 }
             }
 
-            for (Card card : info[1].getHand().getCards())
-                if (card instanceof Minion)
-                    if (info[1].hasManaForThis(card)) {
-                        insertCard(card.getName(), info[1].getHero().getCurrentCell().getX() - 1
-                                , info[1].getHero().getCurrentCell().getY());
-                        break;
-                    }
+            Duration duration = Duration.millis(2500);
+            TranslateTransition t2 = new TranslateTransition(duration, new Group());
+            t2.play();
+
+            t2.setOnFinished(event -> {
+                for (Card card : info[1].getHand().getCards())
+                    if (card instanceof Minion)
+                        if (info[1].hasManaForThis(card)) {
+                            turn = 1;
+                            insertCard(card.getName(), info[1].getHero().getCurrentCell().getX() - 1
+                                    , info[1].getHero().getCurrentCell().getY());
+                            turn = 0;
+                            break;
+                        }
+            });
         } finally {
             endTurn();
-            View.setAIPlaying(false);
         }
     }
 
@@ -628,6 +649,7 @@ public class Match implements Serializable {
         showMatchResults();
         View.setScene(MainMenuView.getInstance().getScene());
         Client.write(Request.makePlayer(Player.getCurrentPlayer()));
+        MainMenu.reset();
     }
 
     private int getMatchWinningPrize() {
@@ -645,6 +667,7 @@ public class Match implements Serializable {
     }
 
     private void showMatchResults() {
+        View.setIsOppPlaying(false);
         View.showMatchResults(this);
     }
 

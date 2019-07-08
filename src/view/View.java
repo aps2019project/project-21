@@ -3,9 +3,11 @@ package view;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
 import javafx.scene.ImageCursor;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Modality;
@@ -22,13 +24,13 @@ import java.util.Queue;
 import java.util.Stack;
 
 public class View {
-    private static boolean isAIPlaying;
+    private static boolean isOppPlaying;
     private static Stack<Scene> scenes = new Stack<>();
     private static Stage primaryStage;
     private static Queue<String> messagesQueue = new ArrayDeque<>();
 
     public static void printThrowable(Throwable throwable) {
-        System.err.println("error occurred:");
+        System.err.println("exception:");
         throwable.printStackTrace();
         System.err.flush();
     }
@@ -49,7 +51,6 @@ public class View {
     public static void runForHost(Stage primaryStage) {
         View.primaryStage = primaryStage;
         primaryStage.setTitle("Host");
-//        primaryStage.setMaximized(true);
         primaryStage.setIconified(true);
         handlePopups();
         HostView.getInstance().run();
@@ -76,12 +77,12 @@ public class View {
         }
     }
 
-    public static void setAIPlaying(boolean AIPlaying) {
-        isAIPlaying = AIPlaying;
+    public static void setIsOppPlaying(boolean isOppPlaying) {
+        View.isOppPlaying = isOppPlaying;
     }
 
     public static void setPrimaryStage(Stage primaryStage) {
-        primaryStage = primaryStage;
+        View.primaryStage = primaryStage;
     }
 
     static Stage getPrimaryStage() {
@@ -93,7 +94,7 @@ public class View {
     }
 
     public static void popup(String message) {
-        if (isAIPlaying || message == null)
+        if (isOppPlaying || message == null)
             return;
         final Stage popup = new Stage();
         popup.initModality(Modality.APPLICATION_MODAL);
@@ -171,5 +172,12 @@ public class View {
 
     public static void showMatchResults(Match match) {
         popup("Player " + match.getWinner().getUsername() + " won " + match.getLoser().getUsername() + ".");
+    }
+
+    static void giveGlowEffect(Node node) {
+        Glow glow = new Glow();
+        node.setEffect(glow);
+        node.setOnMouseEntered(event -> glow.setLevel(1));
+        node.setOnMouseExited(event -> glow.setLevel(0));
     }
 }

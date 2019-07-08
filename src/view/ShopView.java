@@ -80,6 +80,7 @@ public class ShopView {
 
     void run() {
         View.setScene(scene);
+        drake.setText(Integer.toString(Player.getCurrentPlayer().getDrake()));
     }
 
     {

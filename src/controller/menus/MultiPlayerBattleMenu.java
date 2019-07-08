@@ -6,14 +6,8 @@ import network.Client;
 import network.message.Request;
 import view.View;
 
-public class MultiPlayerBattleMenu extends Menu {
-    private static MultiPlayerBattleMenu instance = new MultiPlayerBattleMenu();
-
-    public static MultiPlayerBattleMenu getInstance() {
-        return instance;
-    }
-
-    private MultiPlayerBattleMenu() {
+public class MultiPlayerBattleMenu extends BattleMenu {
+    public MultiPlayerBattleMenu() {
     }
 
     public void showGameInfo() {
@@ -39,12 +33,12 @@ public class MultiPlayerBattleMenu extends Menu {
             attack(x, y);
     }
 
-    private void moveTo(int x, int y) {
+    void moveTo(int x, int y) {
         BattleAction battleAction = new BattleAction("moveTo", Integer.toString(x), Integer.toString(y));
         Client.write(Request.makeBattleActionRequest(battleAction));
     }
 
-    private void attack(int x, int y) {
+    void attack(int x, int y) {
         BattleAction battleAction = new BattleAction("attack", Integer.toString(x), Integer.toString(y));
         Client.write(Request.makeBattleActionRequest(battleAction));
     }

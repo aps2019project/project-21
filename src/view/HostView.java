@@ -6,6 +6,7 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -35,7 +36,6 @@ public class HostView {
 
     void run() {
         View.setScene(scene);
-        VoicePlay.setThisMenu("main menu");
     }
 
     {
@@ -61,6 +61,7 @@ public class HostView {
             if (node1 instanceof Button) {
                 Button button = (Button) node1;
                 button.setFont(Font.font(17));
+                View.giveGlowEffect(button);
             }
         }
     }
@@ -68,14 +69,12 @@ public class HostView {
     private void setOnActions() {
         save.setOnAction(event -> AccountMenu.getInstance().save());
         exit.setOnAction(event -> View.exit());
-        shop.setOnAction(event -> {
-            HostShopView.run();
-            VoicePlay.setThisMenu("shop");
-        });
+        shop.setOnAction(event -> HostShopView.run());
         scoreboard.setOnAction(event -> Scoreboard.run());
         onlineUsers.setOnAction(event -> {
-            GlobalChatView.getInstance().run();
-            GlobalChatView.getInstance().setOnlineUsersName(Player.getOnlineUsersName());
+            GlobalChatView.run();
+            GlobalChatView.setOnlineUsersName(Player.getOnlineUsersName());
+            GlobalChatView.hideInputTextfield();
         });
     }
 

@@ -16,6 +16,10 @@ public class MainMenu extends Menu {
         return instance;
     }
 
+    public static void reset() {
+        instance = new MainMenu();
+    }
+
     private MainMenu() {
     }
 

@@ -99,6 +99,7 @@ public class Player implements Serializable {
         players.add(newPlayer);
         savePlayer(newPlayer);
         setCurrentPlayer(newPlayer);
+        newPlayer.takeAuthToken();
     }
 
     public static List<Player> getPlayers() {

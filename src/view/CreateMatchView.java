@@ -235,6 +235,7 @@ public class CreateMatchView {
             label.setStyle("-fx-text-fill: rgba(255, 255, 255, 0.8)");
             label.setFont(Font.font(20));
             label.relocate(transparent.getWidth() / 2 - fontLoader.computeStringWidth(label.getText(), label.getFont()) / 2, transparent.getLayoutY() + 15);
+            View.giveGlowEffect(label);
             group.getChildren().addAll(image, transparent, trimPlate, label);
         } catch (IOException e) {
             View.printThrowable(e);
@@ -284,9 +285,9 @@ public class CreateMatchView {
     }
 
     private void goalModeAction() {
-        if (boxes.contains(customMode))
+        if (boxes.contains(customMode))  // single player
             MainMenu.getInstance().startMatch();
-        else
+        else  // multiplayer
             new WaitingForOppView().run();
     }
 
