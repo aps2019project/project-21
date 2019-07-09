@@ -5,6 +5,7 @@ import controller.menus.MainMenu;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Group;
 import javafx.util.Duration;
+import json.CardMaker;
 import models.AIPlayer;
 import models.BattleAction;
 import models.Item.Collectable;
@@ -44,6 +45,8 @@ public class Match implements Serializable {
     private Player winner;
     private Player loser;
     private HostBattleMenu hostBattleMenu;
+    private Match initialCopy;
+    private List<BattleAction> battleActions = new ArrayList<>();
 
     public void setPlayerOne(Player player) {
         players[0] = player;
@@ -80,10 +83,16 @@ public class Match implements Serializable {
             this.flagCount = 1;
         initiateMatch();
         hostBattleMenu = new HostBattleMenu(this);
+        this.initialCopy = CardMaker.deepCopy(this, Match.class);
+    }
+
+    public Match getInitialCopy() {
+        return initialCopy;
     }
 
     public void action(BattleAction battleAction) {
         try {
+            battleActions.add(battleAction);
             Method method = HostBattleMenu.class.getDeclaredMethod(battleAction.getMethod(), battleAction.getArgsClasses());
             method.setAccessible(true);
             method.invoke(hostBattleMenu, battleAction.getArguments());
@@ -891,6 +900,10 @@ public class Match implements Serializable {
         else if (players[1].getUsername().equals(player.getUsername()))
             return players[0];
         else return null;
+    }
+
+    public List<BattleAction> getBattleActions() {
+        return battleActions;
     }
 
     public LocalDateTime getGameTime() {

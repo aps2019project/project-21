@@ -1,5 +1,6 @@
 package view;
 
+import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,11 +12,14 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import json.CardMaker;
+import models.BattleAction;
 import models.Player;
 import models.match.Match;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.List;
 
 class MatchHistoryView {
     private static MatchHistoryView instance = new MatchHistoryView();
@@ -89,15 +93,11 @@ class MatchHistoryView {
         scrollPane.relocate(200, 150);
         scrollPane.setMaxHeight(500);
         scrollPane.setMaxWidth(1100);
-        scrollPane.setStyle("-fx-background-color: transparent");
-        scrollPane.setStyle("}.scroll-pane > .viewport {\n" +
-                "   -fx-background-color: transparent;}\n" +
-                "{");
 
         root.getChildren().addAll(scrollPane);
     }
 
-    private void showMatchHistory(){
+    private void showMatchHistory() {
         games.getChildren().clear();
         Player thisPlayer = Player.getCurrentPlayer();
 
@@ -143,19 +143,55 @@ class MatchHistoryView {
         } catch (IOException ex) {
             View.printThrowable(ex);
         }
-        imageView.relocate(300, -10);
+        imageView.relocate(250, 0);
 
         Label time = new Label(match.getGameTime().toString());
-        time.relocate(500, 10);
+        time.relocate(400, 10);
         time.setFont(Font.font(18));
         time.setTextFill(Color.WHITE);
+
+        Button button = new Button("REPLAY");
+        button.relocate(650, 0);
+        button.setTextFill(Color.WHITE);
+        button.setFont(Font.font(17));
+        button.setOnAction(event -> replay(match));
 
         Rectangle rectangle = new Rectangle();
         rectangle.setWidth(800);
         rectangle.setHeight(50);
         rectangle.setFill(Color.rgb(128, 0, 255));
-        ret.getChildren().addAll(rectangle, name, imageView, time);
+        ret.getChildren().addAll(rectangle, name, imageView, time, button);
         return ret;
+    }
+
+    private void replay(Match m) {
+        Match match = CardMaker.deepCopy(m.getInitialCopy(), Match.class);
+        if (match == null) {
+            View.err("match is null for replay.");
+            return;
+        }
+        Match.setCurrentMatch(match);
+        BattleView battleView = new BattleView();
+        match.setBattleView(battleView);
+        battleView.run();
+        List<BattleAction> battleActionList = m.getBattleActions();
+        new AnimationTimer() {
+            int ind = 0;
+            long last;
+
+            @Override
+            public void handle(long now) {
+                if (now - last > 990000000) {
+                    if (ind >= battleActionList.size()) {
+                        stop();
+                        return;
+                    }
+                    BattleAction b = battleActionList.get(ind++);
+                    match.action(b);
+                    last = now;
+                }
+            }
+        }.start();
     }
 
     private void handleButtons() {
@@ -163,7 +199,6 @@ class MatchHistoryView {
 
         volume.setOnMouseClicked(event -> VolumeController.getInstance().run());
     }
-
 
     private void setBackground() {
         try {
@@ -176,5 +211,4 @@ class MatchHistoryView {
             View.printThrowable(e);
         }
     }
-
 }

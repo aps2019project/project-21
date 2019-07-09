@@ -58,7 +58,8 @@
                 "cardIDInGame": null,
                 "price": 1600,
                 "manaCost": 2,
-                "currentCell": null
+                "currentCell": null,
+                "count": 0
               }
             },
             {
@@ -97,7 +98,8 @@
                 "cardIDInGame": null,
                 "price": 1500,
                 "manaCost": 4,
-                "currentCell": null
+                "currentCell": null,
+                "count": 0
               }
             },
             {
@@ -132,7 +134,8 @@
                 "cardIDInGame": null,
                 "price": 2100,
                 "manaCost": 0,
-                "currentCell": null
+                "currentCell": null,
+                "count": 0
               }
             },
             {
@@ -171,7 +174,8 @@
                 "cardIDInGame": null,
                 "price": 1750,
                 "manaCost": 9,
-                "currentCell": null
+                "currentCell": null,
+                "count": 0
               }
             },
             {
@@ -207,7 +211,8 @@
                 "cardIDInGame": null,
                 "price": 250,
                 "manaCost": 1,
-                "currentCell": null
+                "currentCell": null,
+                "count": 0
               }
             },
             {
@@ -242,7 +247,8 @@
                 "cardIDInGame": null,
                 "price": 1500,
                 "manaCost": 2,
-                "currentCell": null
+                "currentCell": null,
+                "count": 0
               }
             },
             {
@@ -287,7 +293,8 @@
                   "cardIDInGame": null,
                   "price": 0,
                   "manaCost": 0,
-                  "currentCell": null
+                  "currentCell": null,
+                  "count": 0
                 },
                 "appliedEffects": [],
                 "attackRange": 3,
@@ -311,7 +318,8 @@
                   "collectable": null,
                   "flag": null,
                   "currentAttacker": null
-                }
+                },
+                "count": 0
               }
             },
             {
@@ -356,7 +364,8 @@
                   "cardIDInGame": null,
                   "price": 0,
                   "manaCost": 0,
-                  "currentCell": null
+                  "currentCell": null,
+                  "count": 0
                 },
                 "appliedEffects": [],
                 "attackRange": 3,
@@ -380,7 +389,8 @@
                   "collectable": null,
                   "flag": null,
                   "currentAttacker": null
-                }
+                },
+                "count": 0
               }
             },
             {
@@ -425,7 +435,8 @@
                   "cardIDInGame": null,
                   "price": 0,
                   "manaCost": 0,
-                  "currentCell": null
+                  "currentCell": null,
+                  "count": 0
                 },
                 "appliedEffects": [],
                 "attackRange": -1,
@@ -449,7 +460,8 @@
                   "collectable": null,
                   "flag": null,
                   "currentAttacker": null
-                }
+                },
+                "count": 0
               }
             },
             {
@@ -483,7 +495,8 @@
                   "collectable": null,
                   "flag": null,
                   "currentAttacker": null
-                }
+                },
+                "count": 0
               }
             },
             {
@@ -517,7 +530,8 @@
                   "collectable": null,
                   "flag": null,
                   "currentAttacker": null
-                }
+                },
+                "count": 0
               }
             },
             {
@@ -572,7 +586,8 @@
                   "cardIDInGame": null,
                   "price": 0,
                   "manaCost": 0,
-                  "currentCell": null
+                  "currentCell": null,
+                  "count": 0
                 },
                 "appliedEffects": [],
                 "attackRange": -1,
@@ -596,7 +611,8 @@
                   "collectable": null,
                   "flag": null,
                   "currentAttacker": null
-                }
+                },
+                "count": 0
               }
             },
             {
@@ -630,7 +646,8 @@
                   "collectable": null,
                   "flag": null,
                   "currentAttacker": null
-                }
+                },
+                "count": 0
               }
             },
             {
@@ -673,7 +690,8 @@
                   "cardIDInGame": null,
                   "price": 0,
                   "manaCost": 0,
-                  "currentCell": null
+                  "currentCell": null,
+                  "count": 0
                 },
                 "appliedEffects": [],
                 "attackRange": 5,
@@ -697,7 +715,8 @@
                   "collectable": null,
                   "flag": null,
                   "currentAttacker": null
-                }
+                },
+                "count": 0
               }
             },
             {
@@ -731,7 +750,8 @@
                   "collectable": null,
                   "flag": null,
                   "currentAttacker": null
-                }
+                },
+                "count": 0
               }
             },
             {
@@ -765,7 +785,8 @@
                   "collectable": null,
                   "flag": null,
                   "currentAttacker": null
-                }
+                },
+                "count": 0
               }
             },
             {
@@ -810,7 +831,8 @@
                   "cardIDInGame": null,
                   "price": 0,
                   "manaCost": 0,
-                  "currentCell": null
+                  "currentCell": null,
+                  "count": 0
                 },
                 "appliedEffects": [],
                 "attackRange": 3,
@@ -834,7 +856,8 @@
                   "collectable": null,
                   "flag": null,
                   "currentAttacker": null
-                }
+                },
+                "count": 0
               }
             },
             {
@@ -879,7 +902,8 @@
                   "cardIDInGame": null,
                   "price": 0,
                   "manaCost": 0,
-                  "currentCell": null
+                  "currentCell": null,
+                  "count": 0
                 },
                 "appliedEffects": [],
                 "attackRange": 3,
@@ -903,7 +927,8 @@
                   "collectable": null,
                   "flag": null,
                   "currentAttacker": null
-                }
+                },
+                "count": 0
               }
             },
             {
@@ -948,7 +973,8 @@
                   "cardIDInGame": null,
                   "price": 0,
                   "manaCost": 0,
-                  "currentCell": null
+                  "currentCell": null,
+                  "count": 0
                 },
                 "appliedEffects": [],
                 "attackRange": 3,
@@ -972,7 +998,8 @@
                   "collectable": null,
                   "flag": null,
                   "currentAttacker": null
-                }
+                },
+                "count": 0
               }
             },
             {
@@ -1017,7 +1044,8 @@
                   "cardIDInGame": null,
                   "price": 0,
                   "manaCost": 0,
-                  "currentCell": null
+                  "currentCell": null,
+                  "count": 0
                 },
                 "appliedEffects": [],
                 "attackRange": -1,
@@ -1041,7 +1069,8 @@
                   "collectable": null,
                   "flag": null,
                   "currentAttacker": null
-                }
+                },
+                "count": 0
               }
             }
           ],
@@ -1078,7 +1107,8 @@
             "cardIDInGame": null,
             "price": 4000,
             "manaCost": 0,
-            "currentCell": null
+            "currentCell": null,
+            "count": 0
           },
           "hero": {
             "primaryCooldown": 0,
@@ -1118,7 +1148,8 @@
               "cardIDInGame": null,
               "price": 0,
               "manaCost": 2,
-              "currentCell": null
+              "currentCell": null,
+              "count": 0
             },
             "appliedEffects": [],
             "attackRange": 6,
@@ -1142,7 +1173,8 @@
               "collectable": null,
               "flag": null,
               "currentAttacker": null
-            }
+            },
+            "count": 0
           },
           "collectables": []
         },
@@ -1183,7 +1215,8 @@
                 "cardIDInGame": null,
                 "price": 600,
                 "manaCost": 3,
-                "currentCell": null
+                "currentCell": null,
+                "count": 0
               }
             },
             {
@@ -1226,7 +1259,8 @@
                   "cardIDInGame": null,
                   "price": 0,
                   "manaCost": 0,
-                  "currentCell": null
+                  "currentCell": null,
+                  "count": 0
                 },
                 "appliedEffects": [],
                 "attackRange": -1,
@@ -1250,7 +1284,8 @@
                   "collectable": null,
                   "flag": null,
                   "currentAttacker": null
-                }
+                },
+                "count": 0
               }
             },
             {
@@ -1284,7 +1319,8 @@
                   "collectable": null,
                   "flag": null,
                   "currentAttacker": null
-                }
+                },
+                "count": 0
               }
             },
             {
@@ -1318,7 +1354,8 @@
                   "collectable": null,
                   "flag": null,
                   "currentAttacker": null
-                }
+                },
+                "count": 0
               }
             },
             {
@@ -1352,7 +1389,8 @@
                   "collectable": null,
                   "flag": null,
                   "currentAttacker": null
-                }
+                },
+                "count": 0
               }
             },
             {
@@ -1395,7 +1433,8 @@
                   "cardIDInGame": null,
                   "price": 0,
                   "manaCost": 0,
-                  "currentCell": null
+                  "currentCell": null,
+                  "count": 0
                 },
                 "appliedEffects": [],
                 "attackRange": -1,
@@ -1419,7 +1458,8 @@
                   "collectable": null,
                   "flag": null,
                   "currentAttacker": null
-                }
+                },
+                "count": 0
               }
             },
             {
@@ -1453,7 +1493,8 @@
                   "collectable": null,
                   "flag": null,
                   "currentAttacker": null
-                }
+                },
+                "count": 0
               }
             },
             "@root.collection.decks.0.cards.15",
@@ -1629,7 +1670,8 @@
                   "cardIDInGame": null,
                   "price": 0,
                   "manaCost": 0,
-                  "currentCell": null
+                  "currentCell": null,
+                  "count": 0
                 },
                 "appliedEffects": [],
                 "attackRange": -1,
@@ -1653,7 +1695,8 @@
                   "collectable": null,
                   "flag": null,
                   "currentAttacker": null
-                }
+                },
+                "count": 0
               }
             },
             "@root.collection.decks.0.cards.14",
@@ -1695,7 +1738,8 @@
                 "cardIDInGame": null,
                 "price": 600,
                 "manaCost": 3,
-                "currentCell": null
+                "currentCell": null,
+                "count": 0
               }
             },
             "@root.collection.decks.0.cards.5",
@@ -1734,7 +1778,8 @@
                 "cardIDInGame": null,
                 "price": 900,
                 "manaCost": 5,
-                "currentCell": null
+                "currentCell": null,
+                "count": 0
               }
             },
             {
@@ -1771,7 +1816,8 @@
                 "cardIDInGame": null,
                 "price": 600,
                 "manaCost": 3,
-                "currentCell": null
+                "currentCell": null,
+                "count": 0
               }
             },
             "@root.collection.decks.0.cards.1"
@@ -1801,7 +1847,8 @@
             "cardIDInGame": null,
             "price": 300,
             "manaCost": 0,
-            "currentCell": null
+            "currentCell": null,
+            "count": 0
           },
           "hero": {
             "primaryCooldown": 2,
@@ -1844,7 +1891,8 @@
               "cardIDInGame": null,
               "price": 0,
               "manaCost": 1,
-              "currentCell": null
+              "currentCell": null,
+              "count": 0
             },
             "appliedEffects": [],
             "attackRange": 3,
@@ -1868,7 +1916,8 @@
               "collectable": null,
               "flag": null,
               "currentAttacker": null
-            }
+            },
+            "count": 0
           },
           "collectables": []
         },
@@ -1923,7 +1972,8 @@
             "cardIDInGame": null,
             "price": 0,
             "manaCost": 1,
-            "currentCell": null
+            "currentCell": null,
+            "count": 0
           },
           "appliedEffects": [],
           "attackRange": 1,
@@ -1947,7 +1997,8 @@
             "collectable": null,
             "flag": null,
             "currentAttacker": null
-          }
+          },
+          "count": 0
         },
         {
           "primaryCooldown": 0,
@@ -1979,7 +2030,8 @@
             "collectable": null,
             "flag": null,
             "currentAttacker": null
-          }
+          },
+          "count": 0
         },
         "@root.collection.decks.0.hero",
         "@root.collection.decks.1.hero"
@@ -2166,7 +2218,8 @@
             "cardIDInGame": null,
             "price": 0,
             "manaCost": 0,
-            "currentCell": null
+            "currentCell": null,
+            "count": 0
           },
           "appliedEffects": [],
           "attackRange": -1,
@@ -2190,7 +2243,8 @@
             "collectable": null,
             "flag": null,
             "currentAttacker": null
-          }
+          },
+          "count": 0
         },
         {
           "isCombo": false,
@@ -2242,7 +2296,8 @@
             "cardIDInGame": null,
             "price": 0,
             "manaCost": 0,
-            "currentCell": null
+            "currentCell": null,
+            "count": 0
           },
           "appliedEffects": [],
           "attackRange": -1,
@@ -2266,7 +2321,8 @@
             "collectable": null,
             "flag": null,
             "currentAttacker": null
-          }
+          },
+          "count": 0
         },
         "@root.collection.decks.0.cards.19",
         "@root.collection.decks.0.cards.18",
@@ -2301,7 +2357,8 @@
             "collectable": null,
             "flag": null,
             "currentAttacker": null
-          }
+          },
+          "count": 0
         },
         {
           "isCombo": false,
@@ -2332,7 +2389,8 @@
             "collectable": null,
             "flag": null,
             "currentAttacker": null
-          }
+          },
+          "count": 0
         },
         {
           "isCombo": false,
@@ -2374,7 +2432,8 @@
             "cardIDInGame": null,
             "price": 0,
             "manaCost": 0,
-            "currentCell": null
+            "currentCell": null,
+            "count": 0
           },
           "appliedEffects": [],
           "attackRange": 3,
@@ -2398,7 +2457,8 @@
             "collectable": null,
             "flag": null,
             "currentAttacker": null
-          }
+          },
+          "count": 0
         },
         "@root.collection.decks.1.cards.2",
         "@root.collection.decks.1.cards.1",
@@ -2435,7 +2495,8 @@
             "collectable": null,
             "flag": null,
             "currentAttacker": null
-          }
+          },
+          "count": 0
         },
         {
           "isCombo": false,
@@ -2475,7 +2536,8 @@
             "cardIDInGame": null,
             "price": 0,
             "manaCost": 0,
-            "currentCell": null
+            "currentCell": null,
+            "count": 0
           },
           "appliedEffects": [],
           "attackRange": -1,
@@ -2499,7 +2561,8 @@
             "collectable": null,
             "flag": null,
             "currentAttacker": null
-          }
+          },
+          "count": 0
         },
         {
           "isCombo": false,
@@ -2541,7 +2604,8 @@
             "cardIDInGame": null,
             "price": 0,
             "manaCost": 0,
-            "currentCell": null
+            "currentCell": null,
+            "count": 0
           },
           "appliedEffects": [],
           "attackRange": -1,
@@ -2565,7 +2629,8 @@
             "collectable": null,
             "flag": null,
             "currentAttacker": null
-          }
+          },
+          "count": 0
         },
         {
           "isCombo": false,
@@ -2607,7 +2672,8 @@
             "cardIDInGame": null,
             "price": 0,
             "manaCost": 0,
-            "currentCell": null
+            "currentCell": null,
+            "count": 0
           },
           "appliedEffects": [],
           "attackRange": -1,
@@ -2631,7 +2697,8 @@
             "collectable": null,
             "flag": null,
             "currentAttacker": null
-          }
+          },
+          "count": 0
         },
         {
           "isCombo": false,
@@ -2673,7 +2740,8 @@
             "cardIDInGame": null,
             "price": 0,
             "manaCost": 0,
-            "currentCell": null
+            "currentCell": null,
+            "count": 0
           },
           "appliedEffects": [],
           "attackRange": 3,
@@ -2697,7 +2765,8 @@
             "collectable": null,
             "flag": null,
             "currentAttacker": null
-          }
+          },
+          "count": 0
         },
         {
           "isCombo": false,
@@ -2739,7 +2808,8 @@
             "cardIDInGame": null,
             "price": 0,
             "manaCost": 0,
-            "currentCell": null
+            "currentCell": null,
+            "count": 0
           },
           "appliedEffects": [],
           "attackRange": 3,
@@ -2763,7 +2833,8 @@
             "collectable": null,
             "flag": null,
             "currentAttacker": null
-          }
+          },
+          "count": 0
         },
         {
           "isCombo": false,
@@ -2794,7 +2865,8 @@
             "collectable": null,
             "flag": null,
             "currentAttacker": null
-          }
+          },
+          "count": 0
         },
         {
           "isCombo": false,
@@ -2825,7 +2897,8 @@
             "collectable": null,
             "flag": null,
             "currentAttacker": null
-          }
+          },
+          "count": 0
         },
         {
           "isCombo": false,
@@ -2865,7 +2938,8 @@
             "cardIDInGame": null,
             "price": 0,
             "manaCost": 0,
-            "currentCell": null
+            "currentCell": null,
+            "count": 0
           },
           "appliedEffects": [],
           "attackRange": 5,
@@ -2889,7 +2963,8 @@
             "collectable": null,
             "flag": null,
             "currentAttacker": null
-          }
+          },
+          "count": 0
         },
         {
           "isCombo": false,
@@ -2931,7 +3006,8 @@
             "cardIDInGame": null,
             "price": 0,
             "manaCost": 0,
-            "currentCell": null
+            "currentCell": null,
+            "count": 0
           },
           "appliedEffects": [],
           "attackRange": -1,
@@ -2955,7 +3031,8 @@
             "collectable": null,
             "flag": null,
             "currentAttacker": null
-          }
+          },
+          "count": 0
         },
         {
           "isCombo": false,
@@ -2997,7 +3074,8 @@
             "cardIDInGame": null,
             "price": 0,
             "manaCost": 0,
-            "currentCell": null
+            "currentCell": null,
+            "count": 0
           },
           "appliedEffects": [],
           "attackRange": 3,
@@ -3021,7 +3099,8 @@
             "collectable": null,
             "flag": null,
             "currentAttacker": null
-          }
+          },
+          "count": 0
         },
         {
           "isCombo": false,
@@ -3052,7 +3131,8 @@
             "collectable": null,
             "flag": null,
             "currentAttacker": null
-          }
+          },
+          "count": 0
         }
       ],
       "spells": [
@@ -3085,7 +3165,8 @@
           "cardIDInGame": null,
           "price": 10000,
           "manaCost": 5,
-          "currentCell": null
+          "currentCell": null,
+          "count": 0
         }
       ],
       "usables": [
@@ -3115,15 +3196,16 @@
           "cardIDInGame": null,
           "price": 300,
           "manaCost": 0,
-          "currentCell": null
+          "currentCell": null,
+          "count": 0
         },
         "@root.collection.decks.1.usable"
       ]
     },
-    "drake": 19988000,
+    "drake": 20000000,
     "matchHistory": [],
-    "wins": 0,
+    "wins": 1,
     "losses": 0,
-    "cardCurrentID": 0
+    "authToken": null
   }
 }
