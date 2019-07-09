@@ -6,7 +6,6 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
@@ -32,7 +31,7 @@ public class HostView {
     private Button save = new Button("SAVE");
     private Button shop = new Button("SHOP");
     private Button scoreboard = new Button("SCOREBOARD");
-    private Button onlineUsers = new Button("ONLINE USERS");
+    private Button globalChat = new Button("GLOBAL CHAT");
 
     void run() {
         View.setScene(scene);
@@ -53,7 +52,7 @@ public class HostView {
     }
 
     private void draw() {
-        options.getChildren().addAll(shop, scoreboard, onlineUsers, exit);
+        options.getChildren().addAll(shop, scoreboard, globalChat, exit);
         options.relocate(150, 170);
         options.setSpacing(7);
 
@@ -71,7 +70,7 @@ public class HostView {
         exit.setOnAction(event -> View.exit());
         shop.setOnAction(event -> HostShopView.run());
         scoreboard.setOnAction(event -> Scoreboard.run());
-        onlineUsers.setOnAction(event -> {
+        globalChat.setOnAction(event -> {
             GlobalChatView.run();
             GlobalChatView.setOnlineUsersName(Player.getOnlineUsersName());
             GlobalChatView.hideInputTextfield();

@@ -101,6 +101,13 @@ public class Match implements Serializable {
         }
     }
 
+    public void saveAndExit() {  // only for single player mode
+        players[0].addToHistory(this);
+//        View.setScene(MainMenuView.getInstance().getScene());
+        Client.write(Request.makePlayer(Player.getCurrentPlayer()));
+        MainMenu.reset();
+    }
+
     public void setBattleView(BattleView battleView) {
         this.battleView = battleView;
     }
@@ -660,7 +667,9 @@ public class Match implements Serializable {
     private void saveMatchResults(Player winner, Player loser) {
         winner.incrementWins();
         loser.incrementLosses();
+        winner.getMatchHistory().remove(this);
         winner.addToHistory(this);
+        loser.getMatchHistory().remove(this);
         loser.addToHistory(this);
     }
 

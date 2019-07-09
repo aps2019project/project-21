@@ -5,7 +5,6 @@ import controller.menus.MultiPlayerBattleMenu;
 import controller.menus.SinglePlayerBattleMenu;
 import javafx.animation.AnimationTimer;
 import javafx.animation.TranslateTransition;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -16,7 +15,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -55,19 +57,20 @@ public class BattleView {
     private Map<Attacker, Container> attackers = new HashMap<>();
     private Group groundedAttackers = new Group();
     private StackPane endTurn = new StackPane();
-    private Button pause = new Button("PAUSE");
     private Group hub = new Group();
     private Rectangle selectedRect;
     private Cell select = new Cell(-1, -1);
     private Container selectedInHand;
     private HBox hand = new HBox();
     private HBox manaBar = new HBox();
-    private Button graveyard = new Button("GRAVEYARD");
+    private StackPane graveyard = new StackPane();
     private Label cooldown = new Label();
     private Group collectables = new Group();
     private Group flags = new Group();
     private ArrayBlockingQueue<BattleAction> battleActions = new ArrayBlockingQueue<>(1000);
     private Rectangle invisible = new Rectangle(scene.getWidth(), scene.getHeight());
+    private ImageView endTurnImage;
+    private ImageView endTurnGlow;
     private BattleMenu battleMenu;
 
     public void run() {
@@ -272,7 +275,7 @@ public class BattleView {
         }
     }
 
-    public TranslateTransition moveAnimation(int u, int v) {
+    private void moveAnimation(int u, int v) {
         Container thi = getContainer(u, v);
         if (thi != null) {
             thi.setAsRun();
@@ -286,9 +289,8 @@ public class BattleView {
             t.setOnFinished(event -> thi.setAsGif());
             if (v - select.getY() < 0)
                 thi.reverseRun();
-            return t;
+            return;
         }
-        return null;
     }
 
     private void deselect() {
@@ -355,36 +357,40 @@ public class BattleView {
     }
 
     private void drawHub() {
-        endTurn.relocate(1200, 600);
-        graveyard.relocate(1200, 500);
-        endTurn.setPadding(new Insets(10, 10, 10, 10));
-
-        endTurn.relocate(1200, 600);
+        endTurn.relocate(1200, 500);
+        graveyard.relocate(1200, 700);
+        endTurn.relocate(1200, 620);
         try {
-            BackgroundImage backgroundImage = new BackgroundImage(new Image(new FileInputStream("src/assets/resources/ui/button_end_turn_mine_glow@2x.png")),
-                    BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(100, 100, false, false, true, true));
-            endTurn.setBackground(new Background(backgroundImage));
-
-            BackgroundImage backgroundImag = new BackgroundImage(new Image(new FileInputStream("src/assets/resources/ui/button_end_turn_mine_glow@2x.png")),
-                    BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, new BackgroundSize(100, 100, false, false, true, true));
-            graveyard.setBackground(new Background(backgroundImag));
-            ImageView endTurnImage = new ImageView(new Image(new FileInputStream("src/assets/resources/ui/button_end_turn_mine_glow@2x.png")));
+            endTurnImage = new ImageView(new Image(new FileInputStream("src/assets/resources/ui/button_end_turn_mine.png")));
             endTurnImage.setFitWidth(200);
             endTurnImage.setFitHeight(80);
+            endTurnGlow = new ImageView(new Image(new FileInputStream("src/assets/resources/ui/button_end_turn_mine_glow.png")));
+            endTurnGlow.setFitWidth(200);
+            endTurnGlow.setFitHeight(80);
             Label label = new Label("END TURN");
             label.setTextFill(Color.WHITE);
             label.setFont(Font.font(20));
-
             endTurn.getChildren().addAll(endTurnImage, label);
         } catch (Exception e) {
             View.printThrowable(e);
         }
-        pause.relocate(1300, 750);
+        try {
+            ImageView graveyardImage = new ImageView(new Image(new FileInputStream("src/assets/resources/ui/button_end_turn_enemy.png")));
+            graveyardImage.setFitWidth(200);
+            graveyardImage.setFitHeight(80);
+            Label label = new Label("GRAVEYARD");
+            label.setTextFill(Color.WHITE);
+            label.setFont(Font.font(20));
+            graveyard.getChildren().addAll(graveyardImage, label);
+        } catch (Exception e) {
+            View.printThrowable(e);
+        }
+
         drawHand();
         drawSpecialPower();
         handleChanges();
         drawInfoBars();
-        hub.getChildren().addAll(endTurn, pause, hand, manaBar, graveyard);
+        hub.getChildren().addAll(endTurn, hand, manaBar, graveyard);
     }
 
     private void drawInfoBars() {
@@ -573,9 +579,18 @@ public class BattleView {
     }
 
     private void setOnActions() {
-        endTurn.setOnMouseClicked(event -> battleMenu.endTurn());
-        pause.setOnAction(event -> pause());
-        graveyard.setOnAction(event -> graveyard());
+        endTurn.setOnMousePressed(event -> {
+            battleMenu.endTurn();
+//            endTurn.getChildren().remove(endTurnImage);
+//            if (!endTurn.getChildren().contains(endTurnGlow))
+//                endTurn.getChildren().add(endTurnGlow);
+        });
+        endTurn.setOnMouseReleased(event -> {
+//            endTurn.getChildren().remove(endTurnGlow);
+//            if (!endTurn.getChildren().contains(endTurnImage))
+//                endTurn.getChildren().add(endTurnImage);
+        });
+        graveyard.setOnMouseClicked(event -> graveyard());
         scene.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ESCAPE)
                 pause();
@@ -591,18 +606,22 @@ public class BattleView {
         pause.setResizable(false);
         Button resume = new Button("RESUME");
         resume.setOnAction(event -> pause.close());
-        Button back = new Button("BACK");
-        back.setOnAction(event -> {
-            pause.close();
-            View.back();
-        });
         Button gameInfo = new Button("GAME INFO");
         gameInfo.setOnAction(event -> battleMenu.showGameInfo());
         VBox vBox = new VBox();
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(30);
         vBox.setStyle("-fx-background-color: transparent");
-        vBox.getChildren().addAll(resume, gameInfo, back);
+        vBox.getChildren().addAll(resume, gameInfo);
+        if (match.getGameMode() == GameMode.SINGLE_PLAYER) {
+            Button back = new Button("SAVE AND BACK");
+            back.setOnAction(event -> {
+                pause.close();
+                match.saveAndExit();
+                View.back();
+            });
+            vBox.getChildren().addAll(back);
+        }
         Scene scene = new Scene(vBox, 303, 150);
         scene.getStylesheets().add("view/stylesheets/pause_menu.css");
         scene.setFill(new Color(0, 0, 0, 0.6));
