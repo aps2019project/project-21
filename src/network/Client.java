@@ -40,13 +40,14 @@ public class Client extends Application {
         }
 
         try {
-            socket = new Socket("localhost", port);
+            socket = new Socket("192.168.43.130", port);
             oos = new ObjectOutputStream(socket.getOutputStream());
             ois = new ObjectInputStream(socket.getInputStream());
+            System.out.println("connected to host.");
         } catch (IOException ex) {
             View.printThrowable(ex);
         }
-        System.out.println("connected to host.");
+
 
         Thread initializer = new Thread(Initializer::main);
         initializer.start();
