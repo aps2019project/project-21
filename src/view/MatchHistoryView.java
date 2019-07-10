@@ -15,6 +15,7 @@ import javafx.scene.text.Font;
 import json.CardMaker;
 import models.BattleAction;
 import models.Player;
+import models.match.GameMode;
 import models.match.Match;
 
 import java.io.FileInputStream;
@@ -120,7 +121,7 @@ class MatchHistoryView {
 
         int winner = -1;
         if (match.getWinner() != null) {
-            if (match.getWinner().getUsername().equals(thisName)) {
+            if (match.getWinner().equals(thisName)) {
                 winner = 1;
             } else {
                 winner = 2;
@@ -150,17 +151,24 @@ class MatchHistoryView {
         time.setFont(Font.font(18));
         time.setTextFill(Color.WHITE);
 
-        Button button = new Button("REPLAY");
-        button.relocate(650, 0);
-        button.setTextFill(Color.WHITE);
-        button.setFont(Font.font(17));
-        button.setOnAction(event -> replay(match));
 
         Rectangle rectangle = new Rectangle();
         rectangle.setWidth(800);
         rectangle.setHeight(50);
         rectangle.setFill(Color.rgb(128, 0, 255));
-        ret.getChildren().addAll(rectangle, name, imageView, time, button);
+        ret.getChildren().addAll(rectangle, name, imageView, time);
+
+        Button button = new Button("REPLAY");
+        button.relocate(650, 10);
+        button.setTextFill(Color.WHITE);
+        button.setFont(Font.font(17));
+        button.setOnAction(event -> replay(match));
+        if (match.getGameMode() == GameMode.SINGLE_PLAYER && match.getWinner() == null) {
+            button.setText("CONTINUE");
+            button.setOnAction(event -> continueMatch(match));
+        }
+        ret.getChildren().addAll(button);
+
         return ret;
     }
 
@@ -181,7 +189,7 @@ class MatchHistoryView {
 
             @Override
             public void handle(long now) {
-                if (now - last > 990000000) {
+                if (now - last > 900000000) {
                     if (ind >= battleActionList.size()) {
                         stop();
                         return;
@@ -192,6 +200,13 @@ class MatchHistoryView {
                 }
             }
         }.start();
+    }
+
+    private void continueMatch(Match match) {
+        Match.setCurrentMatch(match);
+        BattleView battleView = new BattleView();
+        match.setBattleView(battleView);
+        battleView.run();
     }
 
     private void handleButtons() {

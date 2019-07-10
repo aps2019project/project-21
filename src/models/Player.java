@@ -72,7 +72,7 @@ public class Player implements Serializable {
         for (Match match : matchHistory)
             if (match.getGameMode() == GameMode.MULTI_PLAYER)
                 if (match.getWinner() != null)
-                    if (this.username.equals(match.getWinner().username))
+                    if (this.username.equals(match.getWinner()))
                         ret++;
         return ret;
     }
@@ -82,7 +82,7 @@ public class Player implements Serializable {
         for (Match match : matchHistory)
             if (match.getGameMode() == GameMode.MULTI_PLAYER)
                 if (match.getLoser() != null)
-                    if (this.username.equals(match.getLoser().username))
+                    if (this.username.equals(match.getLoser()))
                         ret++;
         return ret;
     }
