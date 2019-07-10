@@ -42,8 +42,8 @@ public class Match implements Serializable {
     private int turn;  //  0 for player1 and 1 for player2
     private int turnCount = 1;
     private Card selectedCard;
-    private Player winner;
-    private Player loser;
+    private String winner;
+    private String loser;
     private HostBattleMenu hostBattleMenu;
     private Match initialCopy;
     private List<BattleAction> battleActions = new ArrayList<>();
@@ -545,7 +545,7 @@ public class Match implements Serializable {
         card.setCardIDInGame(cardIdInGame);
     }
 
-    private int cardNameRank(String name) {
+    private int cardNameRank(String name) {  // todo chech this, check single player replay logic cuase i didnt insert bug
         int num = 0;
         for (Card card : info[turn].getAllUsedCards())
             if (card.getName().equals(name))
@@ -647,8 +647,8 @@ public class Match implements Serializable {
 
     private void endMatch(Player winner, Player loser) {
         VoicePlay.victory();
-        this.winner = winner;
-        this.loser = loser;
+        this.winner = winner.getUsername();
+        this.loser = loser.getUsername();
         winner.addDrake(getMatchWinningPrize());
         saveMatchResults(winner, loser);
         showMatchResults();
@@ -895,20 +895,12 @@ public class Match implements Serializable {
         this.selectedCard = null;
     }
 
-    public Player getWinner() {
+    public String getWinner() {
         return winner;
     }
 
-    public Player getLoser() {
+    public String getLoser() {
         return loser;
-    }
-
-    public Player getOpp(Player player) {
-        if (players[0].getUsername().equals(player.getUsername()))
-            return players[1];
-        else if (players[1].getUsername().equals(player.getUsername()))
-            return players[0];
-        else return null;
     }
 
     public List<BattleAction> getBattleActions() {
@@ -919,8 +911,11 @@ public class Match implements Serializable {
         return gameTime;
     }
 
-    public void withdraw() {
-        endMatch(players[1 - turn], players[turn]);
+    public void withdraw(Player player) {
+        if (player.getUsername().equals(getThisTurnsPlayer().getUsername()))
+            endMatch(players[1 - turn], players[turn]);
+        else
+            endMatch(players[turn], players[1 - turn]);
     }
 
     public int getTeamOfPlayer(Player player) {

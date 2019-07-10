@@ -121,7 +121,7 @@ class MatchHistoryView {
 
         int winner = -1;
         if (match.getWinner() != null) {
-            if (match.getWinner().getUsername().equals(thisName)) {
+            if (match.getWinner().equals(thisName)) {
                 winner = 1;
             } else {
                 winner = 2;

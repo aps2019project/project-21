@@ -612,7 +612,12 @@ public class BattleView {
         vBox.setAlignment(Pos.CENTER);
         vBox.setSpacing(30);
         vBox.setStyle("-fx-background-color: transparent");
-        vBox.getChildren().addAll(resume, gameInfo);
+        Button withdraw = new Button("WITHDRAW");
+        withdraw.setOnAction(event -> {
+            match.withdraw(Player.getCurrentPlayer());
+            pause.close();
+        });
+        vBox.getChildren().addAll(resume, gameInfo, withdraw);
         if (match.getGameMode() == GameMode.SINGLE_PLAYER) {
             Button back = new Button("SAVE AND BACK");
             back.setOnAction(event -> {

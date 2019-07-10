@@ -1,5 +1,6 @@
 package network;
 
+import com.gilecode.yagson.YaGson;
 import controller.menus.HostShopMenu;
 import javafx.application.Platform;
 import javafx.util.Pair;
@@ -229,7 +230,9 @@ public class ClientHandler extends Thread {
         System.out.println("writing...");
         try {
             oos.reset();
-            oos.writeObject(request);
+            YaGson yaGson = new YaGson();
+            String json = yaGson.toJson(request);
+            oos.writeObject(json);
             oos.flush();
         } catch (IOException ex) {
             View.printThrowable(ex);
@@ -238,6 +241,9 @@ public class ClientHandler extends Thread {
 
     private Request read() throws Exception {
         System.out.println("reading...");
-        return (Request) ois.readObject();
+
+        String json = (String) ois.readObject();
+        YaGson yaGson = new YaGson();
+        return yaGson.fromJson(json, Request.class);
     }
 }

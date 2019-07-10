@@ -195,7 +195,7 @@ public class View {
     }
 
     public static void showMatchResults(Match match) {
-        popup("Player " + match.getWinner().getUsername() + " won " + match.getLoser().getUsername() + ".");
+        popup("Player " + match.getWinner() + " won " + match.getLoser() + ".");
     }
 
     static void giveGlowEffect(Node node) {
