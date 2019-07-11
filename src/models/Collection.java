@@ -226,7 +226,7 @@ public class Collection implements Serializable {
         for (Card card : deck.getAllCards()) {
             Card cardInCollection = getFreeCardByName(card.getName());
             if (cardInCollection != null)
-                CollectionMenu.getInstance().addCardToDeck(cardInCollection.getCollectionID(), newDeck.getName());
+                CollectionMenu.getInstance().addCardToDeck(cardInCollection.getCollectionID(), newDeck.getName(), cardInCollection.getName());
         }
     }
 
@@ -236,5 +236,14 @@ public class Collection implements Serializable {
             return;
         String path = CardMaker.saveToFile(deck);
         View.popup("Deck " + deckName + " saved in: " + path);
+    }
+
+    public Card getCardByName(String name) {
+        if (name == null)
+            return null;
+        for (Card c : getCards())
+            if (c.getName().equals(name))
+                return c;
+        return null;
     }
 }

@@ -5,6 +5,7 @@ import javafx.application.Platform;
 import javafx.util.Pair;
 import models.GlobalChat;
 import models.Player;
+import models.card.Card;
 import models.match.MatchRequest;
 import network.request.CreateAccountRequest;
 import network.request.LoginRequest;
@@ -103,6 +104,7 @@ public class ClientHandler extends Thread {
                         currentAuthToken = player.getAuthToken();
                         System.out.println(player.getUsername() + " logged in.");
                         Platform.runLater(Scoreboard::drawScoreboardForHost);
+                        sendCustomCards();
                     }
                 }
                 break;
@@ -129,6 +131,7 @@ public class ClientHandler extends Thread {
                     currentAuthToken = player.getAuthToken();
                     System.out.println(player.getUsername() + " created account.");
                     Platform.runLater(Scoreboard::drawScoreboardForHost);
+                    sendCustomCards();
                 }
                 break;
             case GLOBAL_CHAT_MESSAGE:
@@ -230,6 +233,16 @@ public class ClientHandler extends Thread {
         for (ClientHandler cl : clientHandlers)
             if (!currentAuthToken.equals(cl.currentAuthToken))
                 cl.write(Request.makeGlobalChatMessage(GlobalChat.getInstance()));
+    }
+
+    public static void sendCardToAll(Card c) {
+        for (ClientHandler cl : clientHandlers)
+            cl.write(Request.makeCardRequest(c));
+    }
+
+    public void sendCustomCards() {
+        for (Card custom : Card.getCustomCards())
+            write(Request.makeCardRequest(custom));
     }
 
     private void sendMessage(view.Message msg) {

@@ -47,7 +47,7 @@ public class CollectionMenu extends Menu {
         Player.getCurrentPlayer().deleteDeck(deckName);
     }
 
-    public void addCardToDeck(int collectionID, String deckName) {
+    public void addCardToDeck(int collectionID, String deckName, String cardName) {
         Deck deck = Player.getCurrentPlayer().getCollection().getDeck(deckName);
         if (deck == null) {
             View.printMessage(view.Message.NO_SUCH_DECK);
@@ -55,8 +55,11 @@ public class CollectionMenu extends Menu {
         }
         Card card = Player.getCurrentPlayer().getCollection().getCardByCollectionID(collectionID);
         if (card == null) {
-            View.printMessage(view.Message.CARD_IS_NOT_IN_COLLECTION);
-            return;
+            card = Player.getCurrentPlayer().getCollection().getCardByName(cardName);
+            if (card == null){
+                View.printMessage(view.Message.CARD_IS_NOT_IN_COLLECTION);
+                return;
+            }
         }
         if (deck.hasThisCard(card)) {
             View.printMessage(view.Message.ALREADY_IN_DECK);
@@ -71,8 +74,9 @@ public class CollectionMenu extends Menu {
             return;
         }
         if (deck.isFull()) {
-            View.printMessage(view.Message.DECK_IS_FULL);
-            return;
+            deck.removeRandom();
+//            View.printMessage(view.Message.DECK_IS_FULL);
+//            return;
         }
         if (card.getClass().equals(Hero.class)
                 && Player.getCurrentPlayer().getCollection().isThisHeroInADeck((Hero) card)) {

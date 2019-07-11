@@ -105,7 +105,7 @@ public class CardMaker {
         return gson.fromJson(json, Deck.class);
     }
 
-    public static GlobalChat globalChatReader(String path) throws IOException {
+    static GlobalChat globalChatReader(String path) throws IOException {
         String json = new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
         YaGson gson = new YaGson();
         return gson.fromJson(json, GlobalChat.class);

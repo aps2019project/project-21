@@ -41,7 +41,7 @@ public class Hero extends Attacker {
         return heroes;
     }
 
-    private static void addHero(Hero hero) {
+    static void addHero(Hero hero) {
         if (hero == null)
             return;
         heroes.add(hero);

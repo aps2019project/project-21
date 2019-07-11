@@ -1,7 +1,6 @@
 package view;
 
 import controller.menus.AccountMenu;
-import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -32,6 +31,7 @@ public class HostView {
     private Button shop = new Button("SHOP");
     private Button scoreboard = new Button("SCOREBOARD");
     private Button globalChat = new Button("GLOBAL CHAT");
+    private Button customCard = new Button("CUSTOM CARD");
 
     void run() {
         View.setScene(scene);
@@ -46,13 +46,11 @@ public class HostView {
 
         setOnActions();
 
-        handleChanges();
-
         root.getChildren().add(options);
     }
 
     private void draw() {
-        options.getChildren().addAll(shop, scoreboard, globalChat, exit);
+        options.getChildren().addAll(shop, scoreboard, globalChat, customCard, exit);
         options.relocate(150, 170);
         options.setSpacing(7);
 
@@ -75,6 +73,7 @@ public class HostView {
             GlobalChatView.setOnlineUsersName(Player.getOnlineUsersName());
             GlobalChatView.hideInputTextfield();
         });
+        customCard.setOnAction(event -> CustomCardView.getInstance().run());
     }
 
     private void setBackground() {
@@ -93,20 +92,6 @@ public class HostView {
         } catch (Exception e) {
             View.printThrowable(e);
         }
-    }
-
-    private void handleChanges() {
-        AnimationTimer handleChanges = new AnimationTimer() {
-            long last;
-
-            @Override
-            public void handle(long now) {
-                if (now - last > 100) {
-                    last = now;
-                }
-            }
-        };
-        handleChanges.start();
     }
 
     public Scene getScene() {

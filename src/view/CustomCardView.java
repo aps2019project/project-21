@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import json.CardMaker;
 import models.card.*;
 import models.card.buffs.*;
+import network.ClientHandler;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -243,7 +244,11 @@ public class CustomCardView {
             Card c = create(spc.size() > 0 ? spc.get(0) : null);
             if (tr) {
                 if (c != null) {
+                    c.setCount(10);
+                    Card.addCustomCard(c);
                     CardMaker.saveToFile(c);
+                    HostShopView.drawCards();
+                    ClientHandler.sendCardToAll(c);
 //                if (c instanceof Hero) {
 //                    Player.getCurrentPlayer().getCollection().getHeroes().add((Hero) c);
 //                    Player.getCurrentPlayer().getCollection().getCards().add(c);
@@ -363,7 +368,7 @@ public class CustomCardView {
             }
             int price = 10000;
             int spcCooldown = Integer.parseInt(spcCdown.getCharacters().toString());
-            return new Hero(name,price,hp,ap,attackRange,attackMode,spc,spcCooldown);
+            return new Hero(name, price, hp, ap, attackRange, attackMode, spc, spcCooldown);
         } catch (Exception ex) {
             View.printThrowable(ex);
             return null;

@@ -29,7 +29,7 @@ public class Minion extends Attacker {
         return minions;
     }
 
-    private static void addMinion(Minion minion) {
+    static void addMinion(Minion minion) {
         if (minion == null)
             return;
         minions.add(minion);

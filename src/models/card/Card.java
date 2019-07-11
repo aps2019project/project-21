@@ -13,6 +13,7 @@ import java.util.List;
 public class Card implements Serializable {
     private static final long serialVersionUID = 6529685098267757028L;
 
+    private static List<Card> customCards = new ArrayList<>();
     private static int cardCount = 100;
     protected String name;
     protected int id;
@@ -197,5 +198,23 @@ public class Card implements Serializable {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public static void addCustomCard(Card card) {
+        if (card == null)
+            return;
+        customCards.add(card);
+        if (card instanceof Hero)
+            Hero.addHero((Hero) card);
+        else if (card instanceof Minion)
+            Minion.addMinion((Minion) card);
+        else if (card instanceof Spell)
+            Spell.addSpell((Spell) card);
+        else if (card instanceof Usable)
+            Usable.addUsable((Usable) card);
+    }
+
+    public static List<Card> getCustomCards() {
+        return customCards;
     }
 }

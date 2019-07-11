@@ -57,6 +57,7 @@ public class CollectionView {
 
     void run() {
         View.setScene(scene);
+        drawCards();
     }
 
     {
@@ -150,7 +151,7 @@ public class CollectionView {
         tilePane.setStyle("-fx-background-color: transparent");
     }
 
-    private void drawCards() {
+    void drawCards() {
         tilePane.getChildren().clear();
         for (Card c : collection.getCards())
             CardView.showCard(c, tilePane, true, false);
@@ -211,7 +212,7 @@ public class CollectionView {
             if (selectedDeck == null || selectedCard == null)
                 return;
             CollectionMenu.getInstance().addCardToDeck(selectedCard.getCollectionID()
-                    , ((Label) selectedDeck.getChildren().get(1)).getText());
+                    , ((Label) selectedDeck.getChildren().get(1)).getText(), selectedCard.getName());
         });
         remove.setOnMouseClicked(event -> {
             if (selectedCard == null || selectedDeck == null)
@@ -229,9 +230,8 @@ public class CollectionView {
             drawDecks();
         });
         setAsMain.setOnMouseClicked(event -> {
-            if (selectedDeck != null) {
+            if (selectedDeck != null)
                 CollectionMenu.getInstance().selectDeck(((Label) selectedDeck.getChildren().get(1)).getText());
-            }
         });
         importDeck.setOnMouseClicked(event -> CollectionMenu.getInstance().importDeck(deckName.getText()));
         exportDeck.setOnMouseClicked(event -> {
@@ -243,6 +243,7 @@ public class CollectionView {
             for (Card c : collection.getCards())
                 if (c.getName().equalsIgnoreCase(search.getText())) {
                     selectedCard = c;
+                    System.out.println("found " + c.getName());
                     return;
                 }
         });

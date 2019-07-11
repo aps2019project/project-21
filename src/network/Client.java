@@ -9,6 +9,7 @@ import json.Initializer;
 import models.BattleAction;
 import models.GlobalChat;
 import models.Player;
+import models.card.Card;
 import models.match.Match;
 import network.request.Request;
 import view.*;
@@ -144,6 +145,10 @@ public class Client extends Application {
                     match.setBattleView(battleView);
                     battleView.run();
                 });
+                break;
+            case CARD:
+                Card.addCustomCard((Card) request.getObj());
+                Platform.runLater(() -> ShopView.getInstance().showCards());
                 break;
         }
     }

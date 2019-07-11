@@ -150,7 +150,7 @@ public class Spell extends Card {
         return spells;
     }
 
-    private static void addSpell(Spell spell) {
+    static void addSpell(Spell spell) {
         if (spell == null)
             return;
         spells.add(spell);

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Deck  implements Serializable {
+public class Deck implements Serializable {
     private static final long serialVersionUID = 6529685098267757046L;
 
     private static final int MAX_NUM_CARDS = 20; // minions and spells
@@ -35,6 +35,17 @@ public class Deck  implements Serializable {
 
     public void shuffle() {
         Collections.shuffle(this.cards);
+        if (!Card.getCustomCards().isEmpty())
+            if (hasThisCard(Card.getCustomCards().get(0).getName())) {
+                for (int i = 0; i < cards.size(); i++) {
+                    if (cards.get(i).getName().equals(Card.getCustomCards().get(0).getName())) {
+                        Card tmp = cards.get(7);
+                        cards.set(7, cards.get(i));
+                        cards.set(i, tmp);
+                        return;
+                    }
+                }
+            }
     }
 
     Card pop() {
@@ -122,6 +133,17 @@ public class Deck  implements Serializable {
         return getCardByCollectionID(card.getCollectionID()) != null;
     }
 
+    private Card getCardByName(String name) {
+        for (Card card : getAllCards())
+            if (card.getName().equals(name))
+                return card;
+        return null;
+    }
+
+    public boolean hasThisCard(String name) {
+        return getCardByName(name) != null;
+    }
+
     public boolean hasHero() {
         return hero != null;
     }
@@ -143,6 +165,10 @@ public class Deck  implements Serializable {
     public void reset() {
         for (Card card : getAllCards())
             card.reset();
+    }
+
+    public void removeRandom() {
+        cards.remove(cards.size() - 1);
     }
 
 }

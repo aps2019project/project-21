@@ -88,7 +88,7 @@ public class Usable extends Item {
         return usables;
     }
 
-    private static void addUsable(Usable usable) {
+    public static void addUsable(Usable usable) {
         if (usable == null)
             return;
         usables.add(usable);

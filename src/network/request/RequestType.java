@@ -24,6 +24,7 @@ public enum RequestType {
     ONLINE_MATCHES,
     WATCH_ONLINE,
     WATCH_MATCH,
+    CARD,
 
     ;
 }

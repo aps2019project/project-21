@@ -4,6 +4,7 @@ import javafx.util.Pair;
 import models.BattleAction;
 import models.GlobalChat;
 import models.Player;
+import models.card.Card;
 import models.match.Match;
 import models.match.MatchRequest;
 
@@ -160,6 +161,13 @@ public class Request implements Serializable {
         Request request = new Request();
         request.reqType = RequestType.WATCH_ONLINE;
         request.obj = names;
+        return request;
+    }
+
+    public static Request makeCardRequest(Card card) {
+        Request request = new Request();
+        request.reqType = RequestType.CARD;
+        request.obj = card;
         return request;
     }
 

@@ -656,6 +656,7 @@ public class ShopView {
 
         buySell.setOnMouseClicked(event -> {
             VoicePlay.buttonPlay();
+            CollectionView.getInstance().drawCards();
 
             if (buttonSelect == 2) {
                 if (selectedName == null) {
@@ -685,6 +686,7 @@ public class ShopView {
 
         rightButtons[0].setOnMouseClicked(event -> {
             VoicePlay.buttonPlay();
+            CollectionView.getInstance().drawCards();
 
             if (buttonSelect == 2) {
                 if (selectedName == null) {
