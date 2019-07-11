@@ -7,7 +7,7 @@ import models.card.Card;
 import models.match.GameMode;
 import models.match.Match;
 import network.ClientHandler;
-import network.message.Request;
+import network.request.Request;
 import view.HostShopView;
 
 import java.io.Serializable;

@@ -15,7 +15,7 @@ import javafx.scene.text.Font;
 import models.Player;
 import models.match.Match;
 import network.Client;
-import network.message.Request;
+import network.request.Request;
 
 import java.io.FileInputStream;
 import java.io.IOException;

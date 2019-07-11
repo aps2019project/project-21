@@ -6,9 +6,9 @@ import javafx.util.Pair;
 import models.GlobalChat;
 import models.Player;
 import models.match.MatchRequest;
-import network.message.CreateAccountRequest;
-import network.message.LoginRequest;
-import network.message.Request;
+import network.request.CreateAccountRequest;
+import network.request.LoginRequest;
+import network.request.Request;
 import view.GlobalChatView;
 import view.Scoreboard;
 import view.View;
@@ -98,6 +98,7 @@ public class ClientHandler extends Thread {
                     if (player != null) {
                         sendOnlineUsersToAll();
                         sendScoreboardToAll();
+                        write(Request.makeOnlineMatchesRequest(getOnlineMatches()));
                         write(Request.makePlayer(player));
                         currentAuthToken = player.getAuthToken();
                         System.out.println(player.getUsername() + " logged in.");
@@ -123,6 +124,7 @@ public class ClientHandler extends Thread {
                 if (player != null) {
                     sendOnlineUsersToAll();
                     sendScoreboardToAll();
+                    write(Request.makeOnlineMatchesRequest(getOnlineMatches()));
                     write(Request.makePlayer(player));
                     currentAuthToken = player.getAuthToken();
                     System.out.println(player.getUsername() + " created account.");
@@ -164,6 +166,11 @@ public class ClientHandler extends Thread {
                 sendScoreboardToAll();
                 Platform.runLater(Scoreboard::drawScoreboardForHost);
                 break;
+            case WATCH_ONLINE:
+                MatchHandler m = MatchHandler.getMatchHandlerByNames((Pair<String, String>) request.getObj());
+                if (m != null)
+                    m.addWatchingClient(this);
+                break;
             default:
                 View.err("request case not detected: " + request.getReqType());
                 break;
@@ -201,6 +208,17 @@ public class ClientHandler extends Thread {
 
     void sendScoreboardToAll() {
         sendRequestToAll(Request.makeScoreboardRequest());
+    }
+
+    void sendOnlineMatchesToAll() {
+        sendRequestToAll(Request.makeOnlineMatchesRequest(getOnlineMatches()));
+    }
+
+    private List<Pair<String, String>> getOnlineMatches() {
+        List<Pair<String, String>> matches = new ArrayList<>();
+        for (MatchHandler m : MatchHandler.getMatchHandlers())
+            matches.add(new Pair<>(m.getPlayer1().getUsername(), m.getPlayer2().getUsername()));
+        return matches;
     }
 
     private void sendRequestToAll(Request request) {

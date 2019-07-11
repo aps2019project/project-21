@@ -6,12 +6,15 @@ import models.BattleAction;
 import models.Player;
 import models.match.Match;
 import models.match.MatchRequest;
-import network.message.Request;
+import network.request.Request;
 import view.Scoreboard;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 
 public class MatchHandler extends Thread {
+    private static List<MatchHandler> matchHandlers = new ArrayList<>();
     private ClientHandler first;
     private ClientHandler second;
     private Player player1;
@@ -21,6 +24,8 @@ public class MatchHandler extends Thread {
     private int readyCount = 0;
     private Match match;
     private boolean isEnded;
+    private List<BattleAction> battleActions = new ArrayList<>();
+    private List<ClientHandler> watchingClients = new ArrayList<>();
 
     MatchHandler(ClientHandler first, ClientHandler second, MatchRequest matchRequest) {
         this.first = first;
@@ -28,6 +33,8 @@ public class MatchHandler extends Thread {
         this.matchRequest = matchRequest;
         this.player1 = first.getPlayer();
         this.player2 = second.getPlayer();
+        matchHandlers.add(this);
+        first.sendOnlineMatchesToAll();
     }
 
     @Override
@@ -73,11 +80,17 @@ public class MatchHandler extends Thread {
     void finish() {
         first.setMatchNull();
         second.setMatchNull();
+        matchHandlers.remove(this);
+        first.sendOnlineMatchesToAll();
     }
 
     private void handleAction(BattleAction battleAction) {
-        first.write(Request.makeBattleActionRequest(battleAction));
-        second.write(Request.makeBattleActionRequest(battleAction));
+        battleActions.add(battleAction);
+        Request request = Request.makeBattleActionRequest(battleAction);
+        first.write(request);
+        second.write(request);
+        for (ClientHandler clientHandler : watchingClients)
+            clientHandler.write(request);
     }
 
     private ClientHandler getOther(ClientHandler cl) {
@@ -95,7 +108,33 @@ public class MatchHandler extends Thread {
         second.write(Request.makeMatchRequest(match));
     }
 
+    static List<MatchHandler> getMatchHandlers() {
+        return matchHandlers;
+    }
+
+    Player getPlayer1() {
+        return player1;
+    }
+
+    Player getPlayer2() {
+        return player2;
+    }
+
     void addRequest(ClientHandler cl, Request request) {
         requests.add(new Pair<>(cl, request));
+    }
+
+    void addWatchingClient(ClientHandler cl) {
+        watchingClients.add(cl);
+        cl.write(Request.makeWatchMatchRequest(match));
+        for (BattleAction b : battleActions)
+            cl.write(Request.makeBattleActionRequest(b));
+    }
+
+    static MatchHandler getMatchHandlerByNames(Pair<String, String> pair) {
+        for (MatchHandler m : matchHandlers)
+            if (m.player1.getUsername().equals(pair.getKey()) && m.player2.getUsername().equals(pair.getValue()))
+                return m;
+        return null;
     }
 }

@@ -154,7 +154,7 @@ public class BattleView {
                 rect.setOnMouseDragReleased(event -> {
                     System.out.println("draggggg");
                     if (match.isAnyCardSelected())
-                        if (selectedInHand != null){
+                        if (selectedInHand != null) {
                             if (selectedInHand.getCard() instanceof Attacker) {
                                 battleMenu.insertCardIn(selectedInHand.getCard().getName(), u, v);
                                 drawAttackers();
@@ -413,7 +413,12 @@ public class BattleView {
         manaBar.getChildren().clear();
         manaBar.relocate(285, 115);
         try {
-            int mana = match.getInfo(Player.getCurrentPlayer()).getMp();
+            int mana;
+            if (match.amIInThisMatch())
+                mana = match.getInfo(Player.getCurrentPlayer()).getMp();
+            else
+                mana = match.getPlayersMatchInfo()[0].getMp();
+
             for (int i = 0; i < mana; i++) {
                 ImageView activeMana = new ImageView(new Image(new FileInputStream("src/assets/resources/ui/icon_mana@2x.png")));
                 activeMana.setFitWidth(31);
@@ -482,7 +487,11 @@ public class BattleView {
             replaceBackground.setFitHeight(replaceBackground.getFitWidth());
             outerRing.setFitWidth(replaceBackground.getFitWidth());
             outerRing.setFitHeight(replaceBackground.getFitWidth());
-            Card nextInHand = match.getInfo(Player.getCurrentPlayer()).getDeck().getCards().get(0);
+            Card nextInHand;
+            if (match.amIInThisMatch())
+                nextInHand = match.getInfo(Player.getCurrentPlayer()).getDeck().getCards().get(0);
+            else
+                nextInHand = match.getPlayersMatchInfo()[0].getDeck().getCards().get(0);
             Container co = new Container();
             co.setCard(nextInHand);
             co.setImages();
@@ -494,7 +503,11 @@ public class BattleView {
             View.printThrowable(e);
         }
 
-        PlayerMatchInfo info = match.getInfo(Player.getCurrentPlayer());
+        PlayerMatchInfo info;
+        if (match.amIInThisMatch())
+            info = match.getInfo(Player.getCurrentPlayer());
+        else
+            info = match.getPlayersMatchInfo()[0];
         for (int i = 0; i < info.getHand().getCards().size(); i++) {
             Card c = info.getHand().getCards().get(i);
             try {

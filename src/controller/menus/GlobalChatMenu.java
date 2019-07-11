@@ -3,7 +3,7 @@ package controller.menus;
 import models.GlobalChat;
 import models.Player;
 import network.Client;
-import network.message.Request;
+import network.request.Request;
 
 public class GlobalChatMenu extends Menu {
     private static final long serialVersionUID = 6529685098267757003L;

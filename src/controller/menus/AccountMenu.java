@@ -2,9 +2,9 @@ package controller.menus;
 
 import models.Player;
 import network.Client;
-import network.message.CreateAccountRequest;
-import network.message.LoginRequest;
-import network.message.Request;
+import network.request.CreateAccountRequest;
+import network.request.LoginRequest;
+import network.request.Request;
 import view.View;
 
 public class AccountMenu extends Menu {

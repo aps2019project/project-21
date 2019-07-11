@@ -10,7 +10,7 @@ import models.BattleAction;
 import models.GlobalChat;
 import models.Player;
 import models.match.Match;
-import network.message.Request;
+import network.request.Request;
 import view.*;
 
 import java.io.IOException;
@@ -40,7 +40,7 @@ public class Client extends Application {
         }
 
         try {
-            socket = new Socket("192.168.43.130", port);
+            socket = new Socket("localhost", port);
             oos = new ObjectOutputStream(socket.getOutputStream());
             ois = new ObjectInputStream(socket.getInputStream());
             System.out.println("connected to host.");
@@ -132,6 +132,18 @@ public class Client extends Application {
                 break;
             case SCOREBOARD:
                 Platform.runLater(() -> Scoreboard.drawScoreboard((List<Player>) request.getObj()));
+                break;
+            case ONLINE_MATCHES:
+                Platform.runLater(() -> Scoreboard.drawOnlineMatches((List<Pair<String, String>>) request.getObj()));
+                break;
+            case WATCH_MATCH:
+                Match match = (Match) request.getObj();
+                Platform.runLater(() -> {
+                    Match.setCurrentMatch(match);
+                    BattleView battleView = new BattleView();
+                    match.setBattleView(battleView);
+                    battleView.run();
+                });
                 break;
         }
     }

@@ -1,5 +1,6 @@
-package network.message;
+package network.request;
 
+import javafx.util.Pair;
 import models.BattleAction;
 import models.GlobalChat;
 import models.Player;
@@ -12,9 +13,9 @@ import java.util.List;
 public class Request implements Serializable {
     private static final long serialVersionUID = 6529685098267757052L;
 
-    protected String authToken;
-    protected RequestType reqType;
-    protected Object obj;
+    private String authToken;
+    RequestType reqType;
+    private Object obj;
 
     public Request() {
     }
@@ -107,6 +108,13 @@ public class Request implements Serializable {
         return request;
     }
 
+    public static Request makeWatchMatchRequest(Match match) {
+        Request request = new Request();
+        request.reqType = RequestType.WATCH_MATCH;
+        request.obj = match;
+        return request;
+    }
+
     public static Request makeOnlineUsersRequest(List<String> usernames) {
         Request request = new Request();
         request.reqType = RequestType.TAKE_ONLINE_USERS;
@@ -138,6 +146,20 @@ public class Request implements Serializable {
         Request request = new Request();
         request.reqType = RequestType.SCOREBOARD;
         request.obj = Player.getPlayersSortedForScoreboard();
+        return request;
+    }
+
+    public static Request makeOnlineMatchesRequest(List<Pair<String, String>> matches) {
+        Request request = new Request();
+        request.reqType = RequestType.ONLINE_MATCHES;
+        request.obj = matches;
+        return request;
+    }
+
+    public static Request makeWatchOnlineRequest(Pair<String, String> names) {
+        Request request = new Request();
+        request.reqType = RequestType.WATCH_ONLINE;
+        request.obj = names;
         return request;
     }
 

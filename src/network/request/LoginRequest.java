@@ -1,4 +1,4 @@
-package network.message;
+package network.request;
 
 public class LoginRequest extends Request {
     private static final long serialVersionUID = 6529685098267757051L;

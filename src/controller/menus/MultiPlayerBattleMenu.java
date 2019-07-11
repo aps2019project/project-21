@@ -3,7 +3,7 @@ package controller.menus;
 import models.BattleAction;
 import models.match.Match;
 import network.Client;
-import network.message.Request;
+import network.request.Request;
 import view.View;
 
 public class MultiPlayerBattleMenu extends BattleMenu {

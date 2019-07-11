@@ -12,7 +12,7 @@ import models.card.Card;
 import models.card.Hero;
 import models.card.Minion;
 import models.card.Spell;
-import network.message.Request;
+import network.request.Request;
 import view.View;
 
 import java.io.FileOutputStream;

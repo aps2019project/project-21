@@ -13,7 +13,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.util.Pair;
 import models.Player;
+import network.Client;
+import network.request.Request;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -25,6 +28,8 @@ public class Scoreboard {
     private static Button back = new Button("BACK");
     private static VBox scoreboard = new VBox();
     private static ScrollPane scrollPane = new ScrollPane();
+    private static VBox onlineMatches = new VBox();
+    private static ScrollPane scrollPane2 = new ScrollPane();
 
     public static void run() {
         View.setScene(scene);
@@ -39,7 +44,7 @@ public class Scoreboard {
 
         setOnActions();
 
-        root.getChildren().addAll(back, scrollPane);
+        root.getChildren().addAll(back, scrollPane, scrollPane2);
     }
 
     private static void draw() {
@@ -50,8 +55,47 @@ public class Scoreboard {
         scrollPane.setMaxWidth(400);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        scrollPane.relocate(580, 150);
+        scrollPane.relocate(330, 150);
+        scrollPane2.setContent(onlineMatches);
+        scrollPane2.setMaxHeight(600);
+        scrollPane2.setMaxWidth(400);
+        scrollPane2.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane2.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane2.relocate(830, 150);
         drawScoreboardForHost();
+    }
+
+    public static void drawOnlineMatches(List<Pair<String, String>> matches) {
+        onlineMatches.getChildren().clear();
+        onlineMatches.setSpacing(5);
+
+        HBox hBox = new HBox();
+        hBox.setSpacing(1);
+
+        Label name = new Label("PLAYER 1");
+        Label wins = new Label("PLAYER 2");
+        Label losses = new Label("WATCH");
+
+        hBox.getChildren().addAll(makeStackPane(name, 151, -1),
+                makeStackPane(wins, 100, -1), makeStackPane(losses, 100, -1));
+        scoreboard.getChildren().add(hBox);
+
+        for (Pair p : matches)
+            drawOnlineMatch(p);
+    }
+
+    private static void drawOnlineMatch(Pair<String, String> pair) {
+        HBox hBox = new HBox();
+        hBox.setSpacing(1);
+
+        Label player1 = new Label(pair.getKey());
+        Label player2 = new Label(pair.getValue());
+        Button button = new Button("WATCH");
+        button.setOnAction(event -> Client.write(Request.makeWatchOnlineRequest(pair)));
+
+        hBox.getChildren().addAll(makeStackPane(player1, 100, -1)
+                , makeStackPane(player2, 100, -1), makeStackPane(button, 100, -1));
+        onlineMatches.getChildren().add(hBox);
     }
 
     public static void drawScoreboard(List<Player> sortedPlayers) {

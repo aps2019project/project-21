@@ -13,7 +13,7 @@ import models.Item.Flag;
 import models.Player;
 import models.card.*;
 import network.Client;
-import network.message.Request;
+import network.request.Request;
 import view.*;
 
 import java.io.Serializable;
@@ -101,6 +101,11 @@ public class Match implements Serializable {
         } catch (Exception ex) {
             View.printThrowable(ex);
         }
+    }
+
+    public boolean amIInThisMatch() {
+        return players[0].getUsername().equals(Player.getCurrentPlayer().getUsername())
+                || players[1].getUsername().equals(Player.getCurrentPlayer().getUsername());
     }
 
     public void saveAndExit() {  // only for single player mode

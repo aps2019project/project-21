@@ -1,4 +1,4 @@
-package network.message;
+package network.request;
 
 public enum RequestType {
     LOGIN,
@@ -21,6 +21,9 @@ public enum RequestType {
     SELL,
     HESOYAM,
     SCOREBOARD,
+    ONLINE_MATCHES,
+    WATCH_ONLINE,
+    WATCH_MATCH,
 
     ;
 }

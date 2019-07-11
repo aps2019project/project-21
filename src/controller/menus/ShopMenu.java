@@ -4,7 +4,7 @@ import models.Item.Usable;
 import models.Player;
 import models.card.Card;
 import network.Client;
-import network.message.Request;
+import network.request.Request;
 
 import java.util.List;
 
