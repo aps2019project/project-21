@@ -12,8 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import models.Player;
 
@@ -54,8 +52,6 @@ public class MainMenuView {
     private Button volume = new Button("VOLUME");
     private Button globalChat = new Button("GLOBAL CHAT");
     private Button scoreboard = new Button("SCOREBOARD");
-    private Rectangle test = new Rectangle(100, 100);
-    private Rectangle dest = new Rectangle(100, 100);
 
     void run() {
         View.setScene(scene);
