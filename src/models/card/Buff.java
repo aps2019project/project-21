@@ -5,6 +5,8 @@ import models.match.Cell;
 import java.io.Serializable;
 
 public class Buff extends Effect  implements Serializable {
+    private static final long serialVersionUID = 6529685098267757027L;
+
     protected int duration;
     protected BuffMode buffMode;
 

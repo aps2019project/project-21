@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Spell extends Card {
+    private static final long serialVersionUID = 6529685098267757032L;
+
     private static List<Spell> spells = new ArrayList<>();
     private ApplyType applyType = ApplyType.ON_ATTACKER;
     private TargetType targetType = new TargetType();

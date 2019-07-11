@@ -8,6 +8,8 @@ import models.card.BuffMode;
  * Decreases AP of an attacker
  */
 public class WeaknessAP extends Buff {
+    private static final long serialVersionUID = 6529685098267757019L;
+
     private int value;
     private int initialAP;
 

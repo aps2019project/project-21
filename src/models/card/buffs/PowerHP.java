@@ -8,6 +8,8 @@ import models.card.BuffMode;
  * Increases HP of an attacker
  */
 public class PowerHP extends Buff {
+    private static final long serialVersionUID = 6529685098267757017L;
+
     private int value;
     private int initialHP;
 

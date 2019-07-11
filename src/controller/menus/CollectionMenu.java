@@ -8,6 +8,8 @@ import models.card.Hero;
 import view.View;
 
 public class CollectionMenu extends Menu {
+    private static final long serialVersionUID = 6529685098267757002L;
+
     private static CollectionMenu instance = new CollectionMenu();
 
     public static CollectionMenu getInstance() {

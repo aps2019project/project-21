@@ -5,6 +5,8 @@ import models.card.target_enums.*;
 import java.io.Serializable;
 
 public class TargetType  implements Serializable {
+    private static final long serialVersionUID = 6529685098267757033L;
+
     private RandomOrNot randomOrNot = RandomOrNot.NOT_RANDOM;
     private TargetAttackerRange targetAttackerRange = TargetAttackerRange.ALL_THREE;
     private CellType cellType = CellType.NONE;

@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Random;
 
 public class Collectable extends Item {
+    private static final long serialVersionUID = 6529685098267757034L;
+
     private static List<Collectable> collectables = new ArrayList<>();
 
     public Collectable(String name, TargetType targetType,

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Minion extends Attacker {
+    private static final long serialVersionUID = 6529685098267757031L;
+
     private static List<Minion> minions = new ArrayList<>();
     private boolean isCombo;
 

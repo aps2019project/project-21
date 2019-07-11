@@ -5,6 +5,8 @@ import models.match.Match;
 import view.View;
 
 public class HostBattleMenu extends Menu {
+    private static final long serialVersionUID = 6529685098267757004L;
+
     private Match match;
 
     public HostBattleMenu(Match match) {

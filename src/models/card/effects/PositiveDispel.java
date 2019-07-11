@@ -11,6 +11,8 @@ import java.util.List;
  * and removes Good Buffs for Opps
  */
 public class PositiveDispel extends Effect {
+    private static final long serialVersionUID = 6529685098267757025L;
+
     public PositiveDispel() {
         super();
     }

@@ -8,6 +8,8 @@ import models.match.PlayerMatchInfo;
  * increases mana in an info (playerMatchInfo)
  */
 public class IncreaseMana extends Buff {
+    private static final long serialVersionUID = 6529685098267757014L;
+
     private int value;
 
     public IncreaseMana(int duration, int value) {

@@ -1,6 +1,5 @@
 package network;
 
-import com.gilecode.yagson.YaGson;
 import controller.menus.HostShopMenu;
 import javafx.application.Platform;
 import javafx.util.Pair;
@@ -81,88 +80,94 @@ public class ClientHandler extends Thread {
     private void handleRequest(Request request) {
         if (request == null)
             return;
-        if (matchHandler != null)
+        if (matchHandler != null) {
             matchHandler.addRequest(this, request);
-        else
-            switch (request.getReqType()) {
-                case LOGIN:
-                    LoginRequest loginMsg = (LoginRequest) request;
-                    if (!Player.hasThisPlayer(loginMsg.getUsername())) {
-                        sendMessage(view.Message.INVALID_USERNAME);
-                        return;
-                    }
-                    if (!Player.login(loginMsg.getUsername(), loginMsg.getPassword()))
-                        sendMessage(view.Message.LOGIN_FAILED);
-                    else {
-                        Player player = Player.getPlayerByUsername(loginMsg.getUsername());
-                        if (player != null) {
-                            sendOnlineUsersToAll();
-                            sendScoreboardToAll();
-                            write(Request.makePlayer(player));
-                            currentAuthToken = player.getAuthToken();
-                            System.out.println(player.getUsername() + " logged in.");
-                            Platform.runLater(Scoreboard::drawScoreboardForHost);
-                        }
-                    }
-                    break;
-                case LOGOUT:
-                    Player.logout(request.getAuthToken());
-                    sendOnlineUsersToAll();
-                    sendScoreboardToAll();
-                    currentAuthToken = null;
-                    Platform.runLater(Scoreboard::drawScoreboardForHost);
-                    break;
-                case CREATE_ACCOUNT:
-                    CreateAccountRequest createAccountMsg = (CreateAccountRequest) request;
-                    if (Player.hasThisPlayer(createAccountMsg.getUsername())) {
-                        sendMessage(view.Message.USERNAME_IS_TAKEN);
-                        return;
-                    }
-                    Player.createAccount(createAccountMsg.getUsername(), createAccountMsg.getPassword());
-                    Player player = Player.getPlayerByUsername(createAccountMsg.getUsername());
+            return;
+        }
+        switch (request.getReqType()) {
+            case LOGIN:
+                LoginRequest loginMsg = (LoginRequest) request;
+                if (!Player.hasThisPlayer(loginMsg.getUsername())) {
+                    sendMessage(view.Message.INVALID_USERNAME);
+                    return;
+                }
+                if (!Player.login(loginMsg.getUsername(), loginMsg.getPassword()))
+                    sendMessage(view.Message.LOGIN_FAILED);
+                else {
+                    Player player = Player.getPlayerByUsername(loginMsg.getUsername());
                     if (player != null) {
                         sendOnlineUsersToAll();
                         sendScoreboardToAll();
                         write(Request.makePlayer(player));
                         currentAuthToken = player.getAuthToken();
-                        System.out.println(player.getUsername() + " created account.");
+                        System.out.println(player.getUsername() + " logged in.");
                         Platform.runLater(Scoreboard::drawScoreboardForHost);
                     }
-                    break;
-                case GLOBAL_CHAT_MESSAGE:
-                    Pair<String, String> msgPair = (Pair<String, String>) request.getObj();
-                    GlobalChat.getInstance().addMessage(msgPair);
-                    GlobalChat.save();
-                    sendGlobalChatRequestToOthers();
-                    break;
-                case MATCH_REQUEST:
-                    matchRequest = (MatchRequest) request.getObj();
-                    findMatch();
-                    break;
-                case READY:
-                    matchHandler.addRequest(this, request);
-                    break;
-                case WITHDRAW:
-                    setMatchNull();
-                    break;
-                case TAKE_ONLINE_USERS:
-                    GlobalChatView.setOnlineUsersName((List<String>) request.getObj());
-                    break;
-                case BUY:
-                    HostShopMenu.buy(getPlayer(), (String) request.getObj());
-                    break;
-                case SELL:
-                    HostShopMenu.sell(getPlayer(), Integer.parseInt((String) request.getObj()));
-                    break;
-                case HESOYAM:
-                    Player player1 = getPlayer();
-                    if (player1 != null)
-                        player1.hesoyam();
-                    break;
-                default:
-                    View.err("request case not detected.");
-                    break;
-            }
+                }
+                break;
+            case LOGOUT:
+                Player.logout(request.getAuthToken());
+                sendOnlineUsersToAll();
+                sendScoreboardToAll();
+                currentAuthToken = null;
+                Platform.runLater(Scoreboard::drawScoreboardForHost);
+                break;
+            case CREATE_ACCOUNT:
+                CreateAccountRequest createAccountMsg = (CreateAccountRequest) request;
+                if (Player.hasThisPlayer(createAccountMsg.getUsername())) {
+                    sendMessage(view.Message.USERNAME_IS_TAKEN);
+                    return;
+                }
+                Player.createAccount(createAccountMsg.getUsername(), createAccountMsg.getPassword());
+                Player player = Player.getPlayerByUsername(createAccountMsg.getUsername());
+                if (player != null) {
+                    sendOnlineUsersToAll();
+                    sendScoreboardToAll();
+                    write(Request.makePlayer(player));
+                    currentAuthToken = player.getAuthToken();
+                    System.out.println(player.getUsername() + " created account.");
+                    Platform.runLater(Scoreboard::drawScoreboardForHost);
+                }
+                break;
+            case GLOBAL_CHAT_MESSAGE:
+                Pair<String, String> msgPair = (Pair<String, String>) request.getObj();
+                GlobalChat.getInstance().addMessage(msgPair);
+                GlobalChat.save();
+                sendGlobalChatRequestToOthers();
+                break;
+            case MATCH_REQUEST:
+                matchRequest = (MatchRequest) request.getObj();
+                findMatch();
+                break;
+            case READY:
+                matchHandler.addRequest(this, request);
+                break;
+            case WITHDRAW:
+                setMatchNull();
+                break;
+            case TAKE_ONLINE_USERS:
+                GlobalChatView.setOnlineUsersName((List<String>) request.getObj());
+                break;
+            case BUY:
+                HostShopMenu.buy(getPlayer(), (String) request.getObj());
+                break;
+            case SELL:
+                HostShopMenu.sell(getPlayer(), Integer.parseInt((String) request.getObj()));
+                break;
+            case HESOYAM:
+                Player player1 = getPlayer();
+                if (player1 != null)
+                    player1.hesoyam();
+                break;
+            case PLAYER:  // receiving single player match result
+                Player.saveOldPlayer((Player) request.getObj());
+                sendScoreboardToAll();
+                Platform.runLater(Scoreboard::drawScoreboardForHost);
+                break;
+            default:
+                View.err("request case not detected: " + request.getReqType());
+                break;
+        }
     }
 
     private void findMatch() {
@@ -230,9 +235,7 @@ public class ClientHandler extends Thread {
         System.out.println("writing...");
         try {
             oos.reset();
-            YaGson yaGson = new YaGson();
-            String json = yaGson.toJson(request);
-            oos.writeObject(json);
+            oos.writeObject(request);
             oos.flush();
         } catch (IOException ex) {
             View.printThrowable(ex);
@@ -241,9 +244,6 @@ public class ClientHandler extends Thread {
 
     private Request read() throws Exception {
         System.out.println("reading...");
-
-        String json = (String) ois.readObject();
-        YaGson yaGson = new YaGson();
-        return yaGson.fromJson(json, Request.class);
+        return (Request) ois.readObject();
     }
 }

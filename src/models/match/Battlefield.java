@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Random;
 
 public class Battlefield implements Serializable {
+    private static final long serialVersionUID = 6529685098267757038L;
+
     private int width;
     private int length;
     private Cell[][] cells;

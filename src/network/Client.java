@@ -141,10 +141,7 @@ public class Client extends Application {
             if (Player.hasAnyoneLoggedIn())
                 request.setAuthToken(Player.getCurrentPlayer().getAuthToken());
             oos.reset();
-            YaGson yaGson = new YaGson();
-            String json = yaGson.toJson(request);
-            oos.writeObject(json);
-//            oos.writeObject(request);
+            oos.writeObject(request);
             oos.flush();
         } catch (IOException ex) {
             View.err("cannot write to host.");
@@ -154,9 +151,7 @@ public class Client extends Application {
     private static Request read() {
         System.out.println("reading...");
         try {
-            String json = (String) ois.readObject();
-            YaGson yaGson = new YaGson();
-            return yaGson.fromJson(json, Request.class);
+            return (Request) ois.readObject();
         } catch (Exception ex) {
             View.err("cannot read from host.");
             View.printThrowable(ex);

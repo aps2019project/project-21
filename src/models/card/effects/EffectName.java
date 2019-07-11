@@ -15,5 +15,4 @@ public enum EffectName {
     INCREASE_HP,
     POSITIVE_DISPEL,
     INCREASE_MANA,
-    GIVE_EFFECT,
 }

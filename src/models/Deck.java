@@ -13,6 +13,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class Deck  implements Serializable {
+    private static final long serialVersionUID = 6529685098267757046L;
+
     private static final int MAX_NUM_CARDS = 20; // minions and spells
     private String name;
     private List<Card> cards = new ArrayList<>();  // minions and spells

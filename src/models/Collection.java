@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Collection implements Serializable {
+    private static final long serialVersionUID = 6529685098267757045L;
+
     private List<Deck> decks = new ArrayList<>();
     private Deck mainDeck;
 

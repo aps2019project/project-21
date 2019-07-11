@@ -1,6 +1,8 @@
 package controller.menus;
 
 public abstract class BattleMenu extends Menu{
+    private static final long serialVersionUID = 6529685098267757001L;
+
     public abstract void showGameInfo();
 
     public abstract void useSpell(String spell, int x, int y);

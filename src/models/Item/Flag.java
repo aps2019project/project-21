@@ -3,6 +3,8 @@ package models.Item;
 import models.match.Cell;
 
 public class Flag extends Item {
+    private static final long serialVersionUID = 6529685098267757035L;
+
     private int holdingTime = 0;
 
     public Flag(Cell cell) {

@@ -1,7 +1,6 @@
 package view;
 
 public enum Message {
-    CARD_ID_INVALID("CARD ID INVALID"),
     NO_CARD_IS_SELECTED("NO CARD IS SELECTED"),
     USERNAME_IS_TAKEN("USERNAME ALREADY TAKEN"),
     CARD_IS_NOT_IN_COLLECTION("NO CARD OR ITEM WITH THIS NAME IS AVAILABLE"),
@@ -50,4 +49,4 @@ public enum Message {
     Message(String message) {
         this.message = message;
     }
-    }
+}

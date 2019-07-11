@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Card implements Serializable {
+    private static final long serialVersionUID = 6529685098267757028L;
+
     private static int cardCount = 100;
     protected String name;
     protected int id;

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Usable extends Item {
+    private static final long serialVersionUID = 6529685098267757037L;
+
     private static List<Usable> usables = new ArrayList<>();
 
     public Usable(String name, int price, TargetType targetType,

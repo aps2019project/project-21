@@ -1,6 +1,8 @@
 package network.message;
 
 public class CreateAccountRequest extends Request {
+    private static final long serialVersionUID = 6529685098267757050L;
+
     private String username;
     private String password;
 

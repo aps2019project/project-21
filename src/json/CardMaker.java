@@ -12,6 +12,7 @@ import models.card.Card;
 import models.card.Hero;
 import models.card.Minion;
 import models.card.Spell;
+import network.message.Request;
 import view.View;
 
 import java.io.FileOutputStream;
@@ -169,5 +170,15 @@ public class CardMaker {
             View.printThrowable(e);
             return null;
         }
+    }
+
+    public static <T> String getJson(T object) {
+        YaGson yaGson = new YaGsonBuilder().setPrettyPrinting()
+                .serializeNulls().serializeSpecialFloatingPointValues().create();
+        return yaGson.toJson(object);
+    }
+
+    public static Request requestReader(String json) {
+        return new YaGson().fromJson(json, Request.class);
     }
 }

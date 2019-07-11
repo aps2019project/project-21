@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Hero extends Attacker {
+    private static final long serialVersionUID = 6529685098267757030L;
+
     private static List<Hero> heroes = new ArrayList<>();
 
     private int primaryCooldown;

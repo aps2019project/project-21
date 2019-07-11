@@ -6,6 +6,8 @@ import network.Client;
 import network.message.Request;
 
 public class GlobalChatMenu extends Menu {
+    private static final long serialVersionUID = 6529685098267757003L;
+
     private static GlobalChatMenu instance = new GlobalChatMenu();
 
     public static GlobalChatMenu getInstance() {

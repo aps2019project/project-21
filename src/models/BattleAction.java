@@ -3,6 +3,8 @@ package models;
 import java.io.Serializable;
 
 public class BattleAction implements Serializable {
+    private static final long serialVersionUID = 6529685098267757044L;
+
     private String method;
     private String[] arguments;
 

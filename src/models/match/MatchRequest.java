@@ -3,6 +3,8 @@ package models.match;
 import java.io.Serializable;
 
 public class MatchRequest implements Serializable {
+    private static final long serialVersionUID = 6529685098267757041L;
+
     private GameMode gameMode;
     private GameType gameType;
     private GoalMode goalMode;

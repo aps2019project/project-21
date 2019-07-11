@@ -7,6 +7,8 @@ import network.message.Request;
 import view.View;
 
 public class MultiPlayerBattleMenu extends BattleMenu {
+    private static final long serialVersionUID = 6529685098267757008L;
+
     public MultiPlayerBattleMenu() {
     }
 

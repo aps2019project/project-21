@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Item extends Card {
+    private static final long serialVersionUID = 6529685098267757036L;
+
     private ApplyType applyType;
     protected List<Effect> effects = new ArrayList<>();
     protected TargetType targetType;

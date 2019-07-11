@@ -7,6 +7,8 @@ import models.card.buffs.*;
  * Gives an amount of num effects to an attacker
  */
 public class GiveEffect extends Effect {
+    private static final long serialVersionUID = 6529685098267757022L;
+
     private int duration;
     private int num;
     private int value;

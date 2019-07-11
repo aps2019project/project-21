@@ -7,6 +7,8 @@ import models.card.BuffMode;
  * Disarms an attacker
  */
 public class Disarm extends Buff {
+    private static final long serialVersionUID = 6529685098267757011L;
+
     public Disarm(int duration) {
         super(duration, BuffMode.EVIL);
     }

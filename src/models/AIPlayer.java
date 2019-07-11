@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AIPlayer extends Player {
+    private static final long serialVersionUID = 6529685098267757043L;
+
     private static List<AIPlayer> aiPlayers = new ArrayList<>();
     private int aiID; // mode
     private int winningPrize;

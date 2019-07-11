@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GlobalChat implements Serializable {
+    private static final long serialVersionUID = 6529685098267757047L;
+
     private static GlobalChat instance = new GlobalChat();
 
     public static GlobalChat getInstance() {

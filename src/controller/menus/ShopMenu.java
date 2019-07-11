@@ -9,6 +9,8 @@ import network.message.Request;
 import java.util.List;
 
 public class ShopMenu extends Menu {
+    private static final long serialVersionUID = 6529685098267757009L;
+
     public static Card search(String cardName) {
         return Card.getCardByName(cardName);
     }

@@ -8,6 +8,8 @@ import network.message.Request;
 import view.View;
 
 public class AccountMenu extends Menu {
+    private static final long serialVersionUID = 6529685098267757000L;
+
     private static AccountMenu instance = new AccountMenu();
 
     public static AccountMenu getInstance() {

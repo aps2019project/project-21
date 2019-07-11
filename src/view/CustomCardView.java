@@ -81,7 +81,7 @@ public class CustomCardView {
     }
 
     private CustomCardView() {
-        scene.getStylesheets().add("view/stylesheets/shop_view.css");
+        scene.getStylesheets().add("view/stylesheets/custom_card_view.css");
 
         setBackground();
 

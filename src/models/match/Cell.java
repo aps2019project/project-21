@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cell implements Serializable {
+    private static final long serialVersionUID = 6529685098267757039L;
 
     private int x;
     private int y;

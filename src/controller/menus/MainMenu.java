@@ -8,6 +8,8 @@ import view.Message;
 import view.View;
 
 public class MainMenu extends Menu {
+    private static final long serialVersionUID = 6529685098267757006L;
+
     private static MainMenu instance = new MainMenu();
     private MatchRequest matchRequest = new MatchRequest();
     private Player second;

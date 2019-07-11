@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Random;
 
 public class Match implements Serializable {
+    private static final long serialVersionUID = 6529685098267757040L;
+
     private static Match currentMatch;
     private static final int MOVE_RANGE = 2;
     private static final int DEFAULT_WINNING_PRIZE = 1000;
@@ -701,10 +703,6 @@ public class Match implements Serializable {
 
     private boolean isSelectedCardSpell() {
         return selectedCard instanceof Spell;
-    }
-
-    private boolean isSelectedCardCollectable() {
-        return selectedCard instanceof Collectable;
     }
 
     public Player getThisTurnsPlayer() {

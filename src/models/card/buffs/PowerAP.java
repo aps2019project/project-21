@@ -8,6 +8,8 @@ import models.card.BuffMode;
  * Increases AP of an attacker
  */
 public class PowerAP extends Buff {
+    private static final long serialVersionUID = 6529685098267757016L;
+
     private int value;
     private int initialAP;
 

@@ -8,6 +8,8 @@ import models.card.BuffMode;
  * Decreases HP of an attacker
  */
 public class WeaknessHP extends Buff {
+    private static final long serialVersionUID = 6529685098267757020L;
+
     private int value;
     private int initialHP;
 

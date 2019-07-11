@@ -16,6 +16,8 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Player implements Serializable {
+    private static final long serialVersionUID = 6529685098267757049L;
+
     private static int loginCount = 0;
     private static List<Player> players = new ArrayList<>();
     private static Player currentPlayer;

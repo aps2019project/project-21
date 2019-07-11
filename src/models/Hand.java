@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Hand  implements Serializable {
+    private static final long serialVersionUID = 6529685098267757048L;
+
     private static final int HAND_CAPACITY = 5;
 
     private List<Card> cards = new ArrayList<>();

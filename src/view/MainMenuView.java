@@ -73,32 +73,6 @@ public class MainMenuView {
 
         handleChanges();
 
-        test.relocate(500, 700);
-        test.setFill(Color.BLUE);
-        dest.relocate(500, 400);
-        dest.setFill(Color.WHITE);
-        root.getChildren().addAll(test, dest);
-
-        test.setOnMousePressed(event -> {
-            test.setMouseTransparent(true);
-            event.setDragDetect(true);
-        });
-
-        test.setOnMouseReleased(event -> {
-            test.setMouseTransparent(false);
-        });
-
-        test.setOnMouseDragged(event -> {
-            event.setDragDetect(false);
-        });
-
-        test.setOnDragDetected(event -> {
-            test.startFullDrag();
-        });
-
-        dest.setOnMouseDragReleased(event -> {
-            dest.setFill(test.getFill());
-        });
         root.getChildren().add(beforeLoginOptions);
     }
 

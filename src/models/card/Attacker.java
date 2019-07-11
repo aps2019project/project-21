@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Attacker extends Card {
+    private static final long serialVersionUID = 6529685098267757026L;
+
     private int maxHp;
     private int maxAp;
     private int hp;

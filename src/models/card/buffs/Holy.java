@@ -7,6 +7,8 @@ import models.card.BuffMode;
  * holy buff for an attacker
  */
 public class Holy extends Buff {
+    private static final long serialVersionUID = 6529685098267757013L;
+
     public Holy(int duration){
         super(duration, BuffMode.GOOD);
     }

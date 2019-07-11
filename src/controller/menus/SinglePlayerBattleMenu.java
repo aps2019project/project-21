@@ -5,6 +5,8 @@ import models.match.Match;
 import view.View;
 
 public class SinglePlayerBattleMenu extends BattleMenu {
+    private static final long serialVersionUID = 6529685098267757010L;
+
     public SinglePlayerBattleMenu() {
     }
 

@@ -10,6 +10,8 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Request implements Serializable {
+    private static final long serialVersionUID = 6529685098267757052L;
+
     protected String authToken;
     protected RequestType reqType;
     protected Object obj;

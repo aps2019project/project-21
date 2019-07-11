@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerMatchInfo implements Serializable {
+    private static final long serialVersionUID = 6529685098267757042L;
+
     private static final int MAX_MANA = 9;
 
     private int mp = 3;

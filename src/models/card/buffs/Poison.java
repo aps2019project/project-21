@@ -6,6 +6,8 @@ import models.card.*;
  * Poisons a cell or an attacker
  */
 public class Poison extends Buff {
+    private static final long serialVersionUID = 6529685098267757015L;
+
     public Poison(int duration, ActivationType activationType) {
         super(duration, BuffMode.EVIL);
         super.activationType = activationType;
