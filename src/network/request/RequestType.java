@@ -25,6 +25,7 @@ public enum RequestType {
     WATCH_ONLINE,
     WATCH_MATCH,
     CARD,
+    TIME_LIMIT,
 
     ;
 }

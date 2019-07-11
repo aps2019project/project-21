@@ -5,11 +5,13 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import models.Player;
+import network.ClientHandler;
 
 import java.io.FileInputStream;
 
@@ -32,6 +34,7 @@ public class HostView {
     private Button scoreboard = new Button("SCOREBOARD");
     private Button globalChat = new Button("GLOBAL CHAT");
     private Button customCard = new Button("CUSTOM CARD");
+    private TextField limit = new TextField();
 
     void run() {
         View.setScene(scene);
@@ -50,9 +53,10 @@ public class HostView {
     }
 
     private void draw() {
-        options.getChildren().addAll(shop, scoreboard, globalChat, customCard, exit);
+        options.getChildren().addAll(shop, scoreboard, globalChat, customCard, limit, exit);
         options.relocate(150, 170);
         options.setSpacing(7);
+        limit.setPromptText("SET END TURN TIME LIMIT");
 
         for (Node node1 : options.getChildren()) {
             if (node1 instanceof Button) {
@@ -74,6 +78,9 @@ public class HostView {
             GlobalChatView.hideInputTextfield();
         });
         customCard.setOnAction(event -> CustomCardView.getInstance().run());
+        limit.setOnAction(event -> {
+            ClientHandler.sendLimitToAll(limit.getText());
+        });
     }
 
     private void setBackground() {

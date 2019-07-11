@@ -27,6 +27,7 @@ public class Match implements Serializable {
     private static final long serialVersionUID = 6529685098267757040L;
 
     private static Match currentMatch;
+    private static int timeLimit = 10000;
     private static final int MOVE_RANGE = 2;
     private static final int DEFAULT_WINNING_PRIZE = 1000;
 
@@ -49,6 +50,7 @@ public class Match implements Serializable {
     private HostBattleMenu hostBattleMenu;
     private Match initialCopy;
     private List<BattleAction> battleActions = new ArrayList<>();
+    private long lastEndTurn;
 
     public void setPlayerOne(Player player) {
         players[0] = player;
@@ -86,6 +88,7 @@ public class Match implements Serializable {
         initiateMatch();
         hostBattleMenu = new HostBattleMenu(this);
         this.initialCopy = CardMaker.deepCopy(this, Match.class);
+        this.lastEndTurn = System.currentTimeMillis();
     }
 
     public Match getInitialCopy() {
@@ -843,6 +846,7 @@ public class Match implements Serializable {
     }
 
     public void endTurn() {
+        this.lastEndTurn = System.currentTimeMillis();
         isMatchEnded();
         prepareNextRound();
         swapTurn();
@@ -938,5 +942,17 @@ public class Match implements Serializable {
 
     public GameMode getGameMode() {
         return gameMode;
+    }
+
+    public static int getTimeLimit() {
+        return timeLimit;
+    }
+
+    public static void setTimeLimit(int timeLimit) {
+        Match.timeLimit = timeLimit;
+    }
+
+    public long getLastEndTurn() {
+        return lastEndTurn;
     }
 }

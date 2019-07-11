@@ -262,6 +262,11 @@ public class ClientHandler extends Thread {
         return clientHandlers;
     }
 
+    public static void sendLimitToAll(String limit) {
+        for (ClientHandler cl : clientHandlers)
+            cl.write(Request.makeTimeLimitRequest(limit));
+    }
+
     public void write(Request request) {
         System.out.println("writing...");
         try {

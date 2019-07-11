@@ -70,6 +70,7 @@ public class BattleView {
     private ArrayBlockingQueue<BattleAction> battleActions = new ArrayBlockingQueue<>(1000);
     private Rectangle invisible = new Rectangle(scene.getWidth(), scene.getHeight());
     private BattleMenu battleMenu;
+    private Label remainingTime = new Label();
 
     public void run() {
         View.setScene(scene);
@@ -91,6 +92,8 @@ public class BattleView {
         setOnActions();
 
         drawInvisible();
+
+        handleEndTurnLimit();
 
         root.getChildren().addAll(hub, table);
 
@@ -358,6 +361,9 @@ public class BattleView {
     }
 
     private void drawHub() {
+        remainingTime.setFont(Font.font(15));
+        remainingTime.setTextFill(Color.WHITE);
+        remainingTime.relocate(20, 20);
         endTurn.relocate(1200, 500);
         graveyard.relocate(1200, 700);
         endTurn.relocate(1200, 620);
@@ -391,7 +397,7 @@ public class BattleView {
         drawSpecialPower();
         handleChanges();
         drawInfoBars();
-        hub.getChildren().addAll(endTurn, hand, manaBar, graveyard);
+        hub.getChildren().addAll(endTurn, hand, manaBar, graveyard, remainingTime);
     }
 
     private void drawInfoBars() {
@@ -767,5 +773,23 @@ public class BattleView {
             if (!root.getChildren().contains(invisible))
                 root.getChildren().add(invisible);
         }
+    }
+
+    private void handleEndTurnLimit() {
+        new AnimationTimer() {
+            long last;
+
+            @Override
+            public void handle(long now) {
+                if (now - last > 10000) {
+                    if (System.currentTimeMillis() - match.getLastEndTurn() > Match.getTimeLimit()) {
+                        match.endTurn();
+                        turnChange();
+                    }
+                    remainingTime.setText(Long.toString(Match.getTimeLimit() - System.currentTimeMillis() + match.getLastEndTurn()));
+                    last = now;
+                }
+            }
+        }.start();
     }
 }

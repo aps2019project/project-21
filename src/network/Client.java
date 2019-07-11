@@ -150,6 +150,9 @@ public class Client extends Application {
                 Card.addCustomCard((Card) request.getObj());
                 Platform.runLater(() -> ShopView.getInstance().showCards());
                 break;
+            case TIME_LIMIT:
+                Match.setTimeLimit(Integer.parseInt((String) request.getObj()));
+                break;
         }
     }
 

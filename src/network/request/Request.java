@@ -171,6 +171,13 @@ public class Request implements Serializable {
         return request;
     }
 
+    public static Request makeTimeLimitRequest(String limit) {
+        Request request = new Request();
+        request.reqType = RequestType.TIME_LIMIT;
+        request.obj = limit;
+        return request;
+    }
+
     public Object getObj() {
         return obj;
     }
